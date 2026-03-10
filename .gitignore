@@ -13,8 +13,8 @@ data/*.json
 
 # Node
 node_modules/
-.next/
-out/
+web/.next/
+web/out/
 
 # Misc
 .DS_Store
