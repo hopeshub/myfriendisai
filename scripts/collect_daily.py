@@ -9,6 +9,7 @@ Usage:
 """
 
 import logging
+import shutil
 import sys
 from pathlib import Path
 
@@ -49,6 +50,13 @@ def main():
     snap_path = export_snapshots_json(conn=conn)
     sub_path = export_subreddits_json(conn=conn)
     logger.info("Exported: %s, %s", snap_path, sub_path)
+
+    # Copy JSON files into web/data/ for Vercel builds
+    web_data_dir = Path(__file__).parent.parent / "web" / "data"
+    web_data_dir.mkdir(parents=True, exist_ok=True)
+    shutil.copy2(snap_path, web_data_dir / "snapshots.json")
+    shutil.copy2(sub_path, web_data_dir / "subreddits.json")
+    logger.info("Copied JSON to web/data/ for frontend")
 
     conn.close()
 

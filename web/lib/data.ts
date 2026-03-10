@@ -2,8 +2,10 @@ import path from "path";
 import fs from "fs";
 import type { SubredditSummary, Snapshot } from "./types";
 
-// Data files live at project root /data/, one level above /web/
-const DATA_DIR = path.join(process.cwd(), "..", "data");
+// Data files are copied into web/data/ for Vercel compatibility.
+// The Python collector writes to the project root data/ directory,
+// and the copy step (in collect_daily.py or CI) syncs them here.
+const DATA_DIR = path.join(process.cwd(), "data");
 
 export function getSubreddits(): SubredditSummary[] {
   const file = path.join(DATA_DIR, "subreddits.json");
