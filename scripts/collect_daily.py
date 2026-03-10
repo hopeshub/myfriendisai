@@ -19,7 +19,7 @@ from src.config import load_communities
 from src.reddit_client import RedditClient
 from src.utils.rate_limiter import RateLimiter
 from src.db.schema import initialize as init_db
-from src.db.operations import export_snapshots_json, export_subreddits_json
+from src.db.operations import export_snapshots_json, export_subreddits_json, sync_subreddit_config
 from src.collector import collect_subreddit
 
 logging.basicConfig(
@@ -35,6 +35,7 @@ def main():
     logger.info("Loaded %d active communities from config", len(communities))
 
     conn = init_db()
+    sync_subreddit_config(communities, conn=conn)
     client = RedditClient(rate_limiter=RateLimiter(min_interval=6.0))
 
     results = []

@@ -11,6 +11,39 @@ from src.db.schema import DB_PATH, get_connection, initialize
 DATA_DIR = Path(__file__).parent.parent.parent / "data"
 
 
+def sync_subreddit_config(communities: list[dict], conn: Optional[sqlite3.Connection] = None) -> None:
+    """Upsert subreddit_config rows from the loaded communities list."""
+    _conn = conn or get_connection()
+    today = date.today().isoformat()
+    try:
+        for c in communities:
+            _conn.execute(
+                """
+                INSERT INTO subreddit_config (subreddit, category, tier, display_name, description, added_date, is_active)
+                VALUES (:subreddit, :category, :tier, :display_name, :description, :added_date, :is_active)
+                ON CONFLICT(subreddit) DO UPDATE SET
+                    category=excluded.category,
+                    tier=excluded.tier,
+                    display_name=excluded.display_name,
+                    description=excluded.description,
+                    is_active=excluded.is_active
+                """,
+                {
+                    "subreddit": c["subreddit"],
+                    "category": c.get("category"),
+                    "tier": c.get("tier"),
+                    "display_name": c.get("display_name"),
+                    "description": c.get("notes"),
+                    "added_date": today,
+                    "is_active": int(c.get("is_active", True)),
+                },
+            )
+        _conn.commit()
+    finally:
+        if conn is None:
+            _conn.close()
+
+
 def insert_snapshot(
     subreddit: str,
     snapshot_date: date,
