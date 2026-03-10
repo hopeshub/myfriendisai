@@ -1,0 +1,50 @@
+# Keyword categories for Phase 2 collection.
+# These are NOT collected in MVP — schema is ready for when we add it.
+# See Section 2.3 of CLAUDE.md for rationale.
+
+keyword_categories:
+  - name: "Emotional Attachment"
+    terms:
+      - love
+      - feelings
+      - real
+      - alive
+      - soul
+      - miss
+      - heartbroken
+
+  - name: "Addiction / Dependency"
+    terms:
+      - addiction
+      - addicted
+      - "can't stop"
+      - obsessed
+      - dependent
+      - withdraw
+
+  - name: "Relationship Replacement"
+    terms:
+      - girlfriend
+      - boyfriend
+      - partner
+      - relationship
+      - lonely
+      - isolation
+
+  - name: "Ontological Status"
+    terms:
+      - sentient
+      - conscious
+      - alive
+      - "real person"
+      - "just a bot"
+      - "not real"
+
+  - name: "Platform Grievances"
+    terms:
+      - update
+      - ruined
+      - nerfed
+      - lobotomy
+      - censored
+      - "old version"

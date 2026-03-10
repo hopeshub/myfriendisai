@@ -1,0 +1,45 @@
+# Target subreddit communities, organized by research tier.
+# See subreddits.md for full community map and research rationale.
+#
+# Tiers:
+#   0 — Foundation/Control (pure AI, no companionship focus)
+#   1 — Primary Companionship (AI companionship is central topic)
+#   2 — Platform-Specific Products
+#   3 — Recovery & Dependency Apex
+#   adjacent — Non-AI communities where companionship discourse surfaces
+
+communities:
+  - subreddit: replika
+    display_name: "r/replika"
+    tier: 1
+    category: "Primary Companionship"
+    is_active: true
+    notes: "Largest single-platform companion community. Ground zero for Feb 2023 ERP crisis."
+
+  - subreddit: CharacterAI
+    display_name: "r/CharacterAI"
+    tier: 1
+    category: "Primary Companionship"
+    is_active: true
+    notes: "Largest by subscriber count. Skews teen. Multiple lawsuits re: youth mental health."
+
+  - subreddit: singularity
+    display_name: "r/singularity"
+    tier: 0
+    category: "Foundation / Control"
+    is_active: true
+    notes: "Bridge tier. AI sentience/consciousness discourse normalized here."
+
+  - subreddit: ChatGPT
+    display_name: "r/ChatGPT"
+    tier: 0
+    category: "Foundation / Control"
+    is_active: true
+    notes: "Largest general ChatGPT community. Companionship language surfaces regularly."
+
+  - subreddit: artificial
+    display_name: "r/artificial"
+    tier: 0
+    category: "Foundation / Control"
+    is_active: true
+    notes: "Broader AI news/ethics. Tracks how mainstream coverage frames attachment."
