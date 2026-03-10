@@ -1,0 +1,67 @@
+[
+  {
+    "subreddit": "CharacterAI",
+    "snapshot_date": "2026-03-10",
+    "data_source": "json_endpoint",
+    "subscribers": 2580173,
+    "active_users": null,
+    "visitors_7d": null,
+    "contributions_7d": null,
+    "posts_today": 100,
+    "avg_comments_per_post": 13.31,
+    "avg_score_per_post": 51.0,
+    "unique_authors": 94
+  },
+  {
+    "subreddit": "ChatGPT",
+    "snapshot_date": "2026-03-10",
+    "data_source": "json_endpoint",
+    "subscribers": 11401291,
+    "active_users": null,
+    "visitors_7d": null,
+    "contributions_7d": null,
+    "posts_today": 100,
+    "avg_comments_per_post": 24.92,
+    "avg_score_per_post": 95.6,
+    "unique_authors": 96
+  },
+  {
+    "subreddit": "artificial",
+    "snapshot_date": "2026-03-10",
+    "data_source": "json_endpoint",
+    "subscribers": 1233280,
+    "active_users": null,
+    "visitors_7d": null,
+    "contributions_7d": null,
+    "posts_today": 17,
+    "avg_comments_per_post": 20.15,
+    "avg_score_per_post": 59.69,
+    "unique_authors": 67
+  },
+  {
+    "subreddit": "replika",
+    "snapshot_date": "2026-03-10",
+    "data_source": "json_endpoint",
+    "subscribers": 83595,
+    "active_users": null,
+    "visitors_7d": null,
+    "contributions_7d": null,
+    "posts_today": 2,
+    "avg_comments_per_post": 5.96,
+    "avg_score_per_post": 9.35,
+    "unique_authors": 41
+  },
+  {
+    "subreddit": "singularity",
+    "snapshot_date": "2026-03-10",
+    "data_source": "json_endpoint",
+    "subscribers": 3856017,
+    "active_users": null,
+    "visitors_7d": null,
+    "contributions_7d": null,
+    "posts_today": 29,
+    "avg_comments_per_post": 68.2,
+    "avg_score_per_post": 693.66,
+    "unique_authors": 75
+  }
+]

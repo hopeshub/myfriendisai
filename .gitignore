@@ -7,9 +7,12 @@ venv/
 *.egg-info/
 .env
 
-# Data
-data/*.db
-data/*.json
+# Data — track the DB and exported JSON so the Actions runner can restore history
+# Exclude only temp SQLite files and test artifacts
+data/*.db-shm
+data/*.db-wal
+data/test_*.db
+data/test_*.json
 
 # Node
 node_modules/
