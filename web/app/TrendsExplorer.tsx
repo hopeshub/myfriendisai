@@ -305,6 +305,7 @@ export default function TrendsExplorer({ themeData }: Props) {
               {visibleEvents.map((event) => (
                 <ReferenceLine
                   key={event.date}
+                  yAxisId={THEMES[0].id}
                   x={event.date}
                   stroke="#6B7280"
                   strokeDasharray="2 4"
