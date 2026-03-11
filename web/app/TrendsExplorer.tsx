@@ -134,18 +134,18 @@ export default function TrendsExplorer({ themeData }: Props) {
     return EVENTS.filter((e) => e.date >= min && e.date <= max);
   }, [chartData]);
 
-  // ── 14-day smoothed data for faint background lines ──
-  const faintChartData = useMemo(() => {
+  // ── Merge 14-day smoothed values into chart data as ${id}_faint keys ──
+  const chartDataWithFaint = useMemo(() => {
     return chartData.map((point, i) => {
-      const smoothed: Record<string, number | string> = { date: point.date };
+      const extra: Record<string, number> = {};
       for (const theme of THEMES) {
-        const window = chartData.slice(Math.max(0, i - 13), i + 1);
-        const vals = window
+        const slice = chartData.slice(Math.max(0, i - 13), i + 1);
+        const vals = slice
           .map((d) => (d as unknown as Record<string, number>)[theme.id])
           .filter((v) => v != null && !isNaN(v));
-        smoothed[theme.id] = vals.length ? vals.reduce((a, b) => a + b, 0) / vals.length : 0;
+        extra[`${theme.id}_faint`] = vals.length ? vals.reduce((a, b) => a + b, 0) / vals.length : 0;
       }
-      return smoothed;
+      return { ...point, ...extra };
     });
   }, [chartData]);
 
@@ -279,7 +279,7 @@ export default function TrendsExplorer({ themeData }: Props) {
         <div className="w-full h-[360px] sm:h-[440px]">
           <ResponsiveContainer width="100%" height="100%">
             <ComposedChart
-              data={chartData}
+              data={chartDataWithFaint}
               margin={{ top: 56, right: 16, left: 0, bottom: 8 }}
             >
               <CartesianGrid strokeDasharray="3 3" stroke="#2A2D3A" vertical={false} />
@@ -315,9 +315,11 @@ export default function TrendsExplorer({ themeData }: Props) {
               <Tooltip
                 content={({ active, payload, label }) => {
                   if (!active || !payload?.length || !label) return null;
+                  const themeIdOf = (key: string) => key.replace(/_faint$/, "") as ThemeId;
                   const entries = anyHighlighted
-                    ? payload.filter((p) => highlighted.has(p.dataKey as ThemeId))
+                    ? payload.filter((p) => highlighted.has(themeIdOf(p.dataKey as string)))
                     : [...payload]
+                        .filter((p) => !(p.dataKey as string).endsWith("_faint"))
                         .sort((a, b) => (b.value as number) - (a.value as number))
                         .slice(0, 4);
                   if (!entries.length) return null;
@@ -328,7 +330,7 @@ export default function TrendsExplorer({ themeData }: Props) {
                     >
                       <div className="text-[#94A3B8] mb-1.5">{formatXTick(label as string)}</div>
                       {entries.map((p) => {
-                        const theme = THEMES.find((t) => t.id === p.dataKey);
+                        const theme = THEMES.find((t) => t.id === themeIdOf(p.dataKey as string));
                         return (
                           <div key={p.dataKey as string} className="flex items-center gap-2 mb-0.5">
                             <span
@@ -369,8 +371,7 @@ export default function TrendsExplorer({ themeData }: Props) {
                     key={theme.id}
                     yAxisId={theme.id}
                     type="monotone"
-                    dataKey={theme.id}
-                    data={active ? undefined : faintChartData}
+                    dataKey={active ? theme.id : `${theme.id}_faint`}
                     stroke={theme.color}
                     strokeWidth={active ? 2 : 1}
                     strokeOpacity={active ? 1 : 0.1}
