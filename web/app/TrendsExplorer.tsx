@@ -19,7 +19,7 @@ const THEMES = [
   { id: "romance",       label: "Romance",       emoji: "🔞", color: "#F97316" },
   { id: "attachment",    label: "Attachment",    emoji: "🥰", color: "#3B82F6" },
   { id: "dependency",    label: "Dependency",    emoji: "🔴", color: "#EF4444" },
-  { id: "consciousness", label: "Consciousness", emoji: "🔮", color: "#A855F7" },
+  { id: "consciousness", label: "Conscious",     emoji: "🔮", color: "#A855F7" },
   { id: "therapy",       label: "Therapy",       emoji: "💊", color: "#EC4899" },
   { id: "memory",        label: "Memory",        emoji: "🧠", color: "#F59E0B" },
   { id: "realism",       label: "Realism",       emoji: "✨", color: "#06B6D4" },
@@ -214,7 +214,7 @@ export default function TrendsExplorer({ themeData }: Props) {
       </div>
 
       {/* Theme toggles */}
-      <div className="flex flex-wrap gap-2 mb-5">
+      <div className="flex flex-nowrap overflow-x-auto gap-2 mb-5">
         {THEMES.map((theme) => {
           const active = highlighted.has(theme.id);
           return (
