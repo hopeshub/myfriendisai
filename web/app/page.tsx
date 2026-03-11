@@ -46,11 +46,10 @@ function loadThemeData(): ThemeData {
       return posts > 0 ? (rawByDate[date] / posts) * 1000 : 0;
     });
 
-    result[themeId] = dates.map((date, i) => {
-      const window = dailyRates.slice(Math.max(0, i - 6), i + 1);
-      const avg = window.reduce((s, v) => s + v, 0) / window.length;
-      return { date, value: Math.round(avg * 100) / 100 };
-    });
+    result[themeId] = dates.map((date, i) => ({
+      date,
+      value: Math.round(dailyRates[i] * 100) / 100,
+    }));
   }
   return result;
 }

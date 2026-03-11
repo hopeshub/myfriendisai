@@ -126,6 +126,36 @@ export default function TrendsExplorer({ themeData }: Props) {
     return allChartData.filter((d) => d.date >= cutoffStr);
   }, [allChartData, timeRange]);
 
+  // ── Adaptive rolling window by time range ──
+  const smoothWindow = timeRange === "ALL" ? 30 : timeRange === "1Y" ? 14 : timeRange === "90D" ? 7 : 1;
+
+  // ── Apply rolling average to raw rates (centered on available data at edges) ──
+  const smoothedChartData = useMemo(() => {
+    function rollingAvg(data: typeof chartData, key: string, window: number) {
+      return data.map((_, i) => {
+        const half = Math.floor(window / 2);
+        const lo = Math.max(0, i - half);
+        const hi = Math.min(data.length - 1, i + half);
+        const slice = data.slice(lo, hi + 1);
+        const vals = slice
+          .map((d) => (d as unknown as Record<string, number>)[key])
+          .filter((v) => v != null && !isNaN(v));
+        return vals.length ? vals.reduce((a, b) => a + b, 0) / vals.length : 0;
+      });
+    }
+
+    return chartData.map((point, i) => {
+      const smoothed: Record<string, number | string> = { date: point.date };
+      for (const theme of THEMES) {
+        smoothed[theme.id] = rollingAvg(chartData, theme.id, smoothWindow)[i];
+        // Faint lines use a wider 30-day window regardless of range
+        const faintVals = rollingAvg(chartData, theme.id, 30);
+        smoothed[`${theme.id}_faint`] = faintVals[i];
+      }
+      return smoothed;
+    });
+  }, [chartData, smoothWindow]);
+
   // ── Visible events ──
   const visibleEvents = useMemo(() => {
     if (!chartData.length) return [];
@@ -134,26 +164,11 @@ export default function TrendsExplorer({ themeData }: Props) {
     return EVENTS.filter((e) => e.date >= min && e.date <= max);
   }, [chartData]);
 
-  // ── Merge 14-day smoothed values into chart data as ${id}_faint keys ──
-  const chartDataWithFaint = useMemo(() => {
-    return chartData.map((point, i) => {
-      const extra: Record<string, number> = {};
-      for (const theme of THEMES) {
-        const slice = chartData.slice(Math.max(0, i - 13), i + 1);
-        const vals = slice
-          .map((d) => (d as unknown as Record<string, number>)[theme.id])
-          .filter((v) => v != null && !isNaN(v));
-        extra[`${theme.id}_faint`] = vals.length ? vals.reduce((a, b) => a + b, 0) / vals.length : 0;
-      }
-      return { ...point, ...extra };
-    });
-  }, [chartData]);
-
-  // ── Per-theme 95th-percentile domain cap ──
+  // ── Per-theme 95th-percentile domain cap (from smoothed data) ──
   const p95Domain = useMemo(() => {
     const result: Partial<Record<ThemeId, number>> = {};
     for (const theme of THEMES) {
-      const vals = chartData
+      const vals = smoothedChartData
         .map((d) => (d as unknown as Record<string, number>)[theme.id])
         .filter((v) => v != null && !isNaN(v))
         .sort((a, b) => a - b);
@@ -161,7 +176,7 @@ export default function TrendsExplorer({ themeData }: Props) {
       result[theme.id] = vals[Math.floor(vals.length * 0.95)];
     }
     return result;
-  }, [chartData]);
+  }, [smoothedChartData]);
 
   // ── Dynamic summary ──
   const summary = useMemo(() => {
@@ -279,7 +294,7 @@ export default function TrendsExplorer({ themeData }: Props) {
         <div className="w-full h-[360px] sm:h-[440px]">
           <ResponsiveContainer width="100%" height="100%">
             <ComposedChart
-              data={chartDataWithFaint}
+              data={smoothedChartData}
               margin={{ top: 56, right: 16, left: 0, bottom: 8 }}
             >
               <CartesianGrid strokeDasharray="3 3" stroke="#2A2D3A" vertical={false} />
