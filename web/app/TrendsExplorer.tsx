@@ -129,30 +129,44 @@ export default function TrendsExplorer({ themeData }: Props) {
   // ── Adaptive rolling window by time range ──
   const smoothWindow = timeRange === "ALL" ? 30 : timeRange === "1Y" ? 14 : timeRange === "90D" ? 7 : 1;
 
-  // ── Apply rolling average to raw rates (centered on available data at edges) ──
+  // ── Apply rolling average — O(N) per theme, not O(N²) ──
   const smoothedChartData = useMemo(() => {
-    function rollingAvg(data: typeof chartData, key: string, window: number) {
-      return data.map((_, i) => {
-        const half = Math.floor(window / 2);
-        const lo = Math.max(0, i - half);
-        const hi = Math.min(data.length - 1, i + half);
-        const slice = data.slice(lo, hi + 1);
-        const vals = slice
-          .map((d) => (d as unknown as Record<string, number>)[key])
-          .filter((v) => v != null && !isNaN(v));
-        return vals.length ? vals.reduce((a, b) => a + b, 0) / vals.length : 0;
+    const n = chartData.length;
+
+    // Compute a centered rolling average for all N points in one pass
+    function rollingAvg(vals: number[], window: number): number[] {
+      const half = Math.floor(window / 2);
+      const out = new Array<number>(n);
+      let sum = 0, count = 0, lo = 0, hi = -1;
+      for (let i = 0; i < n; i++) {
+        const newHi = Math.min(n - 1, i + half);
+        while (hi < newHi) { hi++; sum += vals[hi]; count++; }
+        const newLo = Math.max(0, i - half);
+        while (lo < newLo) { sum -= vals[lo]; count--; lo++; }
+        out[i] = count > 0 ? sum / count : 0;
+      }
+      return out;
+    }
+
+    // Extract raw values per theme once, then compute both windows
+    const rows: Record<string, number[]> = {};
+    const faintRows: Record<string, number[]> = {};
+    for (const theme of THEMES) {
+      const raw = chartData.map((d) => {
+        const v = (d as unknown as Record<string, number>)[theme.id];
+        return v != null && !isNaN(v) ? v : 0;
       });
+      rows[theme.id] = smoothWindow > 1 ? rollingAvg(raw, smoothWindow) : raw;
+      faintRows[theme.id] = rollingAvg(raw, 30);
     }
 
     return chartData.map((point, i) => {
-      const smoothed: Record<string, number | string> = { date: point.date };
+      const result: Record<string, number | string> = { date: point.date };
       for (const theme of THEMES) {
-        smoothed[theme.id] = rollingAvg(chartData, theme.id, smoothWindow)[i];
-        // Faint lines use a wider 30-day window regardless of range
-        const faintVals = rollingAvg(chartData, theme.id, 30);
-        smoothed[`${theme.id}_faint`] = faintVals[i];
+        result[theme.id] = rows[theme.id][i];
+        result[`${theme.id}_faint`] = faintRows[theme.id][i];
       }
-      return smoothed;
+      return result;
     });
   }, [chartData, smoothWindow]);
 
