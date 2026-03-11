@@ -20,15 +20,9 @@ export default function RootLayout({
               href="/"
               className="text-base font-semibold tracking-tight text-foreground hover:text-primary transition-colors"
             >
-              myfriendisai.com
+              My Friend Is AI
             </Link>
             <nav className="flex gap-6 text-sm text-muted">
-              <Link
-                href="/communities"
-                className="hover:text-foreground transition-colors"
-              >
-                Communities
-              </Link>
               <Link
                 href="/about"
                 className="hover:text-foreground transition-colors"
@@ -36,7 +30,7 @@ export default function RootLayout({
                 About
               </Link>
               <a
-                href="https://github.com"
+                href="https://github.com/hopeshub/myfriendisai"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hover:text-foreground transition-colors"
@@ -51,8 +45,8 @@ export default function RootLayout({
 
         <footer className="border-t border-border mt-20">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 py-6 text-xs text-muted flex items-center justify-between">
-            <span>Updated daily from Reddit&apos;s public endpoints.</span>
-            <span>myfriendisai.com</span>
+            <span>Data from Reddit&apos;s public endpoints · ~1.8M posts · 2023–present</span>
+            <a href="/about" className="hover:text-foreground transition-colors">Methodology ↗</a>
           </div>
         </footer>
       </body>

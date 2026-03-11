@@ -2,14 +2,12 @@
 @import "tailwindcss";
 
 :root {
-  --background: #0d0b09;
-  --foreground: #f5f0eb;
-  --muted: #8a7060;
-  --border: #2e2419;
-  --card: #2a1a0e;
-  --accent: #6b3d2e;
-  --primary: #e8692a;
-  --control: #4a4540;
+  --background: #0F1117;
+  --foreground: #F8FAFC;
+  --muted: #94A3B8;
+  --border: #2A2D3A;
+  --card: #1A1D27;
+  --primary: #F97316;
 }
 
 @theme inline {
@@ -18,9 +16,7 @@
   --color-muted: var(--muted);
   --color-border: var(--border);
   --color-card: var(--card);
-  --color-accent: var(--accent);
   --color-primary: var(--primary);
-  --color-control: var(--control);
 }
 
 body {
@@ -29,21 +25,15 @@ body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
-/* Recharts overrides for dark theme */
 .recharts-cartesian-grid line {
-  stroke: #2e2419;
+  stroke: #2A2D3A;
 }
 
 .recharts-text {
-  fill: #8a7060;
-  font-size: 11px;
+  fill: #94A3B8;
+  font-size: 12px;
 }
 
 .recharts-tooltip-wrapper {
   outline: none;
-}
-
-/* Custom scrollbar for lens selector */
-.lens-scroll::-webkit-scrollbar {
-  height: 0;
 }
