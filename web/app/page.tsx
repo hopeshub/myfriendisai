@@ -8,7 +8,6 @@ const THEME_CATEGORIES: Record<string, string[]> = {
   attachment:    ["attachment_language"],
   dependency:    ["dependency_language", "withdrawal_recovery_language"],
   consciousness: ["sentience_consciousness_language"],
-  substitution:  ["substitution_language"],
   therapy:       ["therapy_language"],
   memory:        ["memory_continuity_language"],
   realism:       ["anthropomorphism_realism_language"],

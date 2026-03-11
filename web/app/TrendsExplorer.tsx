@@ -20,7 +20,6 @@ const THEMES = [
   { id: "attachment",    label: "Attachment",    color: "#3B82F6" },
   { id: "dependency",    label: "Dependency",    color: "#EF4444" },
   { id: "consciousness", label: "Consciousness", color: "#A855F7" },
-  { id: "substitution",  label: "Substitution",  color: "#22C55E" },
   { id: "therapy",       label: "Therapy",       color: "#EC4899" },
   { id: "memory",        label: "Memory",        color: "#F59E0B" },
   { id: "realism",       label: "Realism",       color: "#06B6D4" },
