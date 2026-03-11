@@ -16,13 +16,13 @@ import type { ThemeData, ThemeDataPoint } from "./page";
 // ─── Themes ────────────────────────────────────────────────────────────────
 
 const THEMES = [
-  { id: "romance",       label: "Romance",       color: "#F97316" },
-  { id: "attachment",    label: "Attachment",    color: "#3B82F6" },
-  { id: "dependency",    label: "Dependency",    color: "#EF4444" },
-  { id: "consciousness", label: "Consciousness", color: "#A855F7" },
-  { id: "therapy",       label: "Therapy",       color: "#EC4899" },
-  { id: "memory",        label: "Memory",        color: "#F59E0B" },
-  { id: "realism",       label: "Realism",       color: "#06B6D4" },
+  { id: "romance",       label: "Romance",       emoji: "🔞", color: "#F97316" },
+  { id: "attachment",    label: "Attachment",    emoji: "🥰", color: "#3B82F6" },
+  { id: "dependency",    label: "Dependency",    emoji: "🔴", color: "#EF4444" },
+  { id: "consciousness", label: "Consciousness", emoji: "🔮", color: "#A855F7" },
+  { id: "therapy",       label: "Therapy",       emoji: "💊", color: "#EC4899" },
+  { id: "memory",        label: "Memory",        emoji: "🧠", color: "#F59E0B" },
+  { id: "realism",       label: "Realism",       emoji: "✨", color: "#06B6D4" },
 ] as const;
 
 type ThemeId = typeof THEMES[number]["id"];
@@ -57,6 +57,23 @@ function formatCount(n: number): string {
 function avg(arr: ThemeDataPoint[]): number {
   if (!arr.length) return 0;
   return arr.reduce((s, e) => s + e.value, 0) / arr.length;
+}
+
+// ─── Event label ───────────────────────────────────────────────────────────
+// Custom SVG label for ReferenceLine — row controls vertical stagger
+
+function EventLabel({ viewBox, event }: { viewBox?: { x: number; y: number }; event: typeof EVENTS[number] }) {
+  if (!viewBox) return null;
+  return (
+    <text
+      x={viewBox.x + 4}
+      y={viewBox.y - 42 + event.row * 18}
+      fill="#94A3B8"
+      fontSize={10}
+    >
+      {event.label}
+    </text>
+  );
 }
 
 // ─── Component ─────────────────────────────────────────────────────────────
@@ -115,6 +132,20 @@ export default function TrendsExplorer({ themeData }: Props) {
     const min = chartData[0].date;
     const max = chartData[chartData.length - 1].date;
     return EVENTS.filter((e) => e.date >= min && e.date <= max);
+  }, [chartData]);
+
+  // ── Per-theme 95th-percentile domain cap ──
+  const p95Domain = useMemo(() => {
+    const result: Partial<Record<ThemeId, number>> = {};
+    for (const theme of THEMES) {
+      const vals = chartData
+        .map((d) => (d as unknown as Record<string, number>)[theme.id])
+        .filter((v) => v != null && !isNaN(v))
+        .sort((a, b) => a - b);
+      if (!vals.length) continue;
+      result[theme.id] = vals[Math.floor(vals.length * 0.95)];
+    }
+    return result;
   }, [chartData]);
 
   // ── Dynamic summary ──
@@ -201,7 +232,7 @@ export default function TrendsExplorer({ themeData }: Props) {
                 className="w-2 h-2 rounded-full flex-shrink-0"
                 style={{ backgroundColor: theme.color, opacity: active ? 1 : 0.35 }}
               />
-              {theme.label}
+              {theme.emoji} {theme.label}
             </button>
           );
         })}
@@ -234,7 +265,7 @@ export default function TrendsExplorer({ themeData }: Props) {
           <ResponsiveContainer width="100%" height="100%">
             <ComposedChart
               data={chartData}
-              margin={{ top: 36, right: 16, left: 0, bottom: 8 }}
+              margin={{ top: 56, right: 16, left: 0, bottom: 8 }}
             >
               <CartesianGrid strokeDasharray="3 3" stroke="#2A2D3A" vertical={false} />
 
@@ -261,6 +292,7 @@ export default function TrendsExplorer({ themeData }: Props) {
                     tickLine={false}
                     width={isVisible ? 44 : 0}
                     hide={!isVisible}
+                    domain={[0, p95Domain[theme.id] ?? "auto"]}
                   />
                 );
               })}
@@ -310,13 +342,7 @@ export default function TrendsExplorer({ themeData }: Props) {
                   stroke="#6B7280"
                   strokeDasharray="2 4"
                   strokeWidth={1}
-                  label={{
-                    value: event.label,
-                    position: "top",
-                    fill: "#94A3B8",
-                    fontSize: 10,
-                    offset: event.row === 0 ? 6 : 22,
-                  }}
+                  label={<EventLabel event={event} />}
                 />
               ))}
 
@@ -331,7 +357,7 @@ export default function TrendsExplorer({ themeData }: Props) {
                     dataKey={theme.id}
                     stroke={theme.color}
                     strokeWidth={active ? 2 : 1}
-                    strokeOpacity={active ? 1 : 0.2}
+                    strokeOpacity={active ? 1 : 0.1}
                     fill={theme.color}
                     fillOpacity={active ? 0.08 : 0}
                     dot={false}
