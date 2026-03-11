@@ -22,6 +22,7 @@ from src.utils.rate_limiter import RateLimiter
 from src.db.schema import initialize as init_db
 from src.db.operations import export_snapshots_json, export_subreddits_json, sync_subreddit_config
 from src.collector import collect_subreddit
+from src.keyword_scanner import scan_subreddit_keywords, store_keyword_counts, export_keywords_json
 
 logging.basicConfig(
     level=logging.INFO,
@@ -45,17 +46,33 @@ def main():
         result = collect_subreddit(subreddit=subreddit, client=client, conn=conn)
         results.append(result)
 
+    # Keyword scanning
+    from datetime import date as date_cls
+    today = date_cls.today()
+    logger.info("Scanning posts for keyword matches...")
+    ok_subs = [r["subreddit"] for r in results if r["status"] == "ok"]
+    for subreddit in ok_subs:
+        kw_results = scan_subreddit_keywords(subreddit, today, conn=conn)
+        store_keyword_counts(kw_results, conn=conn)
+        hits = sum(r["count"] for r in kw_results)
+        if hits > 0:
+            cats = [f"{r['category']}={r['count']}" for r in kw_results if r["count"] > 0]
+            logger.info("  r/%s: %d keyword hits (%s)", subreddit, hits, ", ".join(cats))
+    logger.info("Keyword scanning complete")
+
     # Export frontend-ready JSON
     logger.info("Exporting JSON files...")
     snap_path = export_snapshots_json(conn=conn)
     sub_path = export_subreddits_json(conn=conn)
-    logger.info("Exported: %s, %s", snap_path, sub_path)
+    kw_path = export_keywords_json(conn=conn)
+    logger.info("Exported: %s, %s, %s", snap_path, sub_path, kw_path)
 
     # Copy JSON files into web/data/ for Vercel builds
     web_data_dir = Path(__file__).parent.parent / "web" / "data"
     web_data_dir.mkdir(parents=True, exist_ok=True)
     shutil.copy2(snap_path, web_data_dir / "snapshots.json")
     shutil.copy2(sub_path, web_data_dir / "subreddits.json")
+    shutil.copy2(kw_path, web_data_dir / "keywords.json")
     logger.info("Copied JSON to web/data/ for frontend")
 
     conn.close()

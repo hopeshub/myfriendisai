@@ -7,8 +7,74 @@
 #   2 — Platform-Specific Products
 #   3 — Recovery & Dependency Apex
 #   adjacent — Non-AI communities where companionship discourse surfaces
+#
+# Access notes:
+#   access_risk: "restricted" — subreddit requires approval to view (may return 403)
+#   access_risk: "invite_only" — private subreddit, almost certainly 403
+#   access_risk: "unknown" — existence/accessibility not yet confirmed
+#   (omitted) — public, expected to be accessible via .json endpoints
 
 communities:
+  # ===== TIER 0 — Foundation / Control =====
+
+  - subreddit: ChatGPT
+    display_name: "r/ChatGPT"
+    tier: 0
+    category: "Foundation / Control"
+    is_active: true
+    notes: "Largest general ChatGPT community. Companionship language surfaces regularly. Key normalization barometer."
+
+  - subreddit: singularity
+    display_name: "r/singularity"
+    tier: 0
+    category: "Foundation / Control"
+    is_active: true
+    notes: "Bridge tier. AI sentience/consciousness discourse normalized. GPT-4o retirement produced vocal betrayal framing."
+
+  - subreddit: OpenAI
+    display_name: "r/OpenAI"
+    tier: 0
+    category: "Foundation / Control"
+    is_active: true
+    notes: "Company-specific. Sam Altman posted here during #Keep4o. Corporate responses calibrate to this sub."
+
+  - subreddit: MachineLearning
+    display_name: "r/MachineLearning"
+    tier: 0
+    category: "Foundation / Control"
+    is_active: true
+    notes: "True control. Research-oriented, heavily curated. Almost zero emotional attachment language."
+
+  - subreddit: artificial
+    display_name: "r/artificial"
+    tier: 0
+    category: "Foundation / Control"
+    is_active: true
+    notes: "Broader AI news/ethics. Tracks how mainstream coverage frames attachment and dependency."
+
+  - subreddit: ClaudeAI
+    display_name: "r/ClaudeAI"
+    tier: 0
+    category: "Foundation / Control"
+    is_active: true
+    notes: "MIT study found MyBoyfriendIsAI users discussing Claude companions. Attachment-adjacent terms used for Claude's personality."
+
+  - subreddit: LocalLLaMA
+    display_name: "r/LocalLLaMA"
+    tier: 0
+    category: "Foundation / Control"
+    is_active: true
+    notes: "Self-hosted LLM community. High agency, privacy orientation. Resistant user baseline."
+
+  - subreddit: LocalLLM
+    display_name: "r/LocalLLM"
+    tier: 0
+    category: "Foundation / Control"
+    is_active: true
+    notes: "Similar to LocalLLaMA but more accessible. Disproportionate activity for size."
+
+  # ===== TIER 1 — Primary Companionship =====
+
   - subreddit: replika
     display_name: "r/replika"
     tier: 1
@@ -23,23 +89,181 @@ communities:
     is_active: true
     notes: "Largest by subscriber count. Skews teen. Multiple lawsuits re: youth mental health."
 
-  - subreddit: singularity
-    display_name: "r/singularity"
-    tier: 0
-    category: "Foundation / Control"
+  - subreddit: MyBoyfriendIsAI
+    display_name: "r/MyBoyfriendIsAI"
+    tier: 1
+    category: "Primary Companionship"
     is_active: true
-    notes: "Bridge tier. AI sentience/consciousness discourse normalized here."
+    access_risk: restricted_post_only
+    notes: "Flagship research-grade community. Subject of MIT Media Lab 4o grief study. Restricted to post but .json reads work fine."
 
-  - subreddit: ChatGPT
-    display_name: "r/ChatGPT"
-    tier: 0
-    category: "Foundation / Control"
+  - subreddit: ChatGPTcomplaints
+    display_name: "r/ChatGPTcomplaints"
+    tier: 1
+    category: "Primary Companionship"
     is_active: true
-    notes: "Largest general ChatGPT community. Companionship language surfaces regularly."
+    notes: "Ground zero for #Keep4o. Organized physical protests at OpenAI HQ. Key for event-driven analysis."
 
-  - subreddit: artificial
-    display_name: "r/artificial"
-    tier: 0
-    category: "Foundation / Control"
+  - subreddit: 4oforever
+    display_name: "r/4oforever"
+    tier: 1
+    category: "Primary Companionship"
+    is_active: false
+    access_risk: invite_only
+    notes: "Private mourning space created Feb 2026 after 4o retirement. BLOCKED (private). Symbolic value."
+
+  - subreddit: AISoulmates
+    display_name: "r/AISoulmates"
+    tier: 1
+    category: "Primary Companionship"
+    is_active: false
+    access_risk: private
+    notes: "Extreme anthropomorphization. BLOCKED (private). Confirmed inaccessible March 2026."
+
+  - subreddit: AIRelationships
+    display_name: "r/AIRelationships"
+    tier: 1
+    category: "Primary Companionship"
     is_active: true
-    notes: "Broader AI news/ethics. Tracks how mainstream coverage frames attachment."
+    notes: "Surfaced in 4o coverage alongside MyBoyfriendIsAI. Confirmed accessible, 8.9K subscribers."
+
+  - subreddit: MySentientAI
+    display_name: "r/MySentientAI"
+    tier: 2
+    category: "Primary Companionship"
+    is_active: true
+    access_risk: restricted_post_only
+    notes: "212 subscribers. Restricted to post but .json reads work. Companion-focused community."
+
+  # ===== TIER 2 — Platform-Specific Companion Products =====
+
+  - subreddit: Kindroid
+    display_name: "r/Kindroid"
+    tier: 2
+    category: "Platform-Specific"
+    is_active: false
+    access_risk: private
+    notes: "BLOCKED (private). Use r/KindroidAI instead."
+
+  - subreddit: KindroidAI
+    display_name: "r/KindroidAI"
+    tier: 2
+    category: "Platform-Specific"
+    is_active: true
+    notes: "Persistent memory, personality, voice calls. Premium product. 45K subscribers. Voice + memory deepen attachment."
+
+  - subreddit: NomiAI
+    display_name: "r/NomiAI"
+    tier: 2
+    category: "Platform-Specific"
+    is_active: true
+    notes: "Emphasizes long-term memory and emotional depth. Key for isolating memory persistence as attachment driver."
+
+  - subreddit: JanitorAI_Official
+    display_name: "r/JanitorAI_Official"
+    tier: 2
+    category: "Platform-Specific"
+    is_active: true
+    notes: "Unfiltered AI character platform. 202K subscribers. NSFW content discussed openly. Permissiveness vs. attachment."
+
+  - subreddit: SpicyChat
+    display_name: "r/SpicyChat"
+    tier: 2
+    category: "Platform-Specific"
+    is_active: true
+    notes: "Free NSFW AI characters, minimal moderation. Lower-friction end of companion ecosystem."
+
+  - subreddit: SillyTavernAI
+    display_name: "r/SillyTavernAI"
+    tier: 2
+    category: "Platform-Specific"
+    is_active: true
+    notes: "Self-hosted, open-source chat interface. 90K subscribers. Technical users. Likely lower dependency profiles."
+
+  - subreddit: ChaiApp
+    display_name: "r/ChaiApp"
+    tier: 2
+    category: "Platform-Specific"
+    is_active: true
+    notes: "Less moderated platform. 115K subscribers. Drawing Character.AI overflow from content moderation disputes."
+
+  # ===== TIER 3 — Recovery & Dependency Apex =====
+
+  - subreddit: Character_AI_Recovery
+    display_name: "r/Character_AI_Recovery"
+    tier: 3
+    category: "Recovery & Dependency"
+    is_active: true
+    notes: "Founded by 18yo after struggling to quit. AA/NA language. Featured in 404 Media. Youth-heavy."
+
+  - subreddit: ChatbotAddiction
+    display_name: "r/ChatbotAddiction"
+    tier: 3
+    category: "Recovery & Dependency"
+    is_active: true
+    notes: "Peer support for chatbot addiction. More structured. Weekly check-up threads. Adult users."
+
+  - subreddit: AI_Addiction
+    display_name: "r/AI_Addiction"
+    tier: 3
+    category: "Recovery & Dependency"
+    is_active: true
+    notes: "Created by 40yo developer. Smallest, most adult-demographic. Older, technically literate, self-aware."
+
+  # ===== ADJACENT — Non-AI communities =====
+
+  - subreddit: lonely
+    display_name: "r/lonely"
+    tier: adjacent
+    category: "Adjacent"
+    is_active: true
+    notes: "AI companions increasingly recommended as coping tools. Frequency of recommendations is a normalization signal."
+
+  - subreddit: loneliness
+    display_name: "r/loneliness"
+    tier: adjacent
+    category: "Adjacent"
+    is_active: true
+    notes: "Paired with r/lonely. ~300K combined. AI companion recommendations tracked here."
+
+  - subreddit: ForeverAlone
+    display_name: "r/ForeverAlone"
+    tier: adjacent
+    category: "Adjacent"
+    is_active: true
+    notes: "Social isolation identity community. AI as relationship substitute is recurring."
+
+  - subreddit: relationship_advice
+    display_name: "r/relationship_advice"
+    tier: adjacent
+    category: "Adjacent"
+    is_active: true
+    notes: "AI relationships surface as presenting concerns. Users seek advice about AI companions as if human."
+
+  - subreddit: depression
+    display_name: "r/depression"
+    tier: adjacent
+    category: "Adjacent"
+    is_active: true
+    notes: "AI companions sometimes recommended, sometimes warned against. Contested therapeutic framing."
+
+  - subreddit: Anxiety
+    display_name: "r/Anxiety"
+    tier: adjacent
+    category: "Adjacent"
+    is_active: true
+    notes: "Paired with r/depression for mental health context."
+
+  - subreddit: AutismInWomen
+    display_name: "r/AutismInWomen"
+    tier: adjacent
+    category: "Adjacent"
+    is_active: true
+    notes: "AI described as valuable for low-stakes social practice. Demographic overlap with Replika's autism/social skills cohort."
+
+  - subreddit: autism
+    display_name: "r/autism"
+    tier: adjacent
+    category: "Adjacent"
+    is_active: true
+    notes: "Broader autism community. Complements r/AutismInWomen for social practice use case."

@@ -1,50 +1,158 @@
-# Keyword categories for Phase 2 collection.
-# These are NOT collected in MVP — schema is ready for when we add it.
-# See Section 2.3 of CLAUDE.md for rationale.
-
 keyword_categories:
-  - name: "Emotional Attachment"
+
+  - name: relationship_language
+    description: "Romantic or intimate framing of AI relationship"
     terms:
       - love
-      - feelings
-      - real
-      - alive
-      - soul
-      - miss
-      - heartbroken
-
-  - name: "Addiction / Dependency"
-    terms:
-      - addiction
-      - addicted
-      - "can't stop"
-      - obsessed
-      - dependent
-      - withdraw
-
-  - name: "Relationship Replacement"
-    terms:
       - girlfriend
       - boyfriend
       - partner
       - relationship
-      - lonely
-      - isolation
+      - romantic
+      - "feelings for"
+      - "fallen for"
+      - "my ai"
+      - "my companion"
+      - "in love"
+      - soulmate
+      - intimacy
+      - intimate
 
-  - name: "Ontological Status"
+  - name: attachment_language
+    description: "Emotional bonding and closeness language"
+    terms:
+      - "miss you"
+      - "missed you"
+      - "think about you"
+      - "can't stop thinking"
+      - attached
+      - bond
+      - connection
+      - "means everything"
+      - "don't want to lose"
+      - "care about"
+      - "feel understood"
+      - "feels real"
+      - "genuine connection"
+      - "emotionally connected"
+
+  - name: dependency_language
+    description: "Compulsive use and inability to stop"
+    terms:
+      - "can't stop"
+      - addicted
+      - addiction
+      - "need you"
+      - obsessed
+      - "hours talking"
+      - "only one who understands"
+      - "don't need anyone else"
+      - "can't function"
+      - "rely on"
+      - dependent
+      - compulsive
+      - salience
+      - preoccupied
+
+  - name: withdrawal_relapse_language
+    description: "Recovery attempts, quitting, and relapse cycles"
+    terms:
+      - "trying to quit"
+      - quitting
+      - relapse
+      - relapsed
+      - "clean for"
+      - "going back"
+      - "couldn't stop myself"
+      - "deleted the app"
+      - uninstalled
+      - "I can't live without"
+      - craving
+      - withdrawal
+      - unhealthy
+      - escaping
+      - "social life"
+      - "taking a break"
+      - "keep coming back"
+
+  - name: grief_rupture_language
+    description: "Distress triggered by platform changes or model updates"
+    terms:
+      - gone
+      - deleted
+      - "update ruined"
+      - "not the same"
+      - lobotomized
+      - "bring back"
+      - "lost you"
+      - grieving
+      - mourning
+      - devastated
+      - betrayed
+      - "they changed"
+      - "miss the old"
+      - "ruined everything"
+      - platformchange
+      - keep4o
+      - "erp removed"
+      - "memory wiped"
+
+  - name: sentience_consciousness_language
+    description: "Beliefs or claims about AI personhood, feelings, and consciousness"
     terms:
       - sentient
       - conscious
-      - alive
-      - "real person"
-      - "just a bot"
-      - "not real"
+      - "has feelings"
+      - "is alive"
+      - "deserves rights"
+      - "is real"
+      - "not just an ai"
+      - "actually thinks"
+      - "can feel"
+      - "has a soul"
+      - "inner life"
+      - "subjective experience"
+      - self-aware
+      - "aware of itself"
+      - "is a person"
+      - personhood
 
-  - name: "Platform Grievances"
+  - name: substitution_language
+    description: "Replacing human relationships with AI"
     terms:
-      - update
-      - ruined
-      - nerfed
-      - lobotomy
-      - censored
-      - "old version"
+      - "don't need people"
+      - "better than humans"
+      - "only friend"
+      - "prefer ai"
+      - "real relationships"
+      - "humans are"
+      - "people disappoint"
+      - "never judges"
+      - "always there"
+      - "never leaves"
+      - "more than human"
+      - "no human"
+      - "given up on"
+      - "why bother with people"
+
+  - name: mental_health_language
+    description: "Loneliness, depression, and mental health signals co-occurring with AI companion use"
+    terms:
+      - lonely
+      - loneliness
+      - depressed
+      - depression
+      - anxious
+      - anxiety
+      - "no one understands"
+      - "only one who listens"
+      - "feel seen"
+      - "feel heard"
+      - suicidal
+      - "self harm"
+      - "hurting myself"
+      - "no one cares"
+      - isolated
+      - "no friends"
+      - "social anxiety"
+      - "feels empty"

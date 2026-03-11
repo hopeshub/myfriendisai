@@ -55,6 +55,17 @@ CREATE TABLE IF NOT EXISTS keyword_hits (
     UNIQUE(subreddit, keyword, search_date)
 );
 
+CREATE TABLE IF NOT EXISTS keyword_counts (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    subreddit TEXT NOT NULL,
+    date TEXT NOT NULL,
+    category TEXT NOT NULL,
+    count INTEGER DEFAULT 0,
+    matched_terms TEXT,
+    post_sample_ids TEXT,
+    UNIQUE(subreddit, date, category)
+);
+
 CREATE TABLE IF NOT EXISTS subreddit_config (
     subreddit TEXT PRIMARY KEY,
     category TEXT NOT NULL,
