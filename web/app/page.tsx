@@ -39,8 +39,9 @@ function loadThemeData(): ThemeData {
       }
     }
 
-    // Compute daily rate (hits per 1k posts), then 7-day rolling avg
-    const dates = Object.keys(rawByDate).sort();
+    // Clip current partial month (small denominator inflates per-1k rates)
+    const currentMonth = new Date().toISOString().slice(0, 7); // "YYYY-MM"
+    const dates = Object.keys(rawByDate).sort().filter((d) => d.slice(0, 7) < currentMonth);
     const dailyRates = dates.map((date) => {
       const posts = totalPostsByDate[date] ?? 0;
       return posts > 0 ? (rawByDate[date] / posts) * 1000 : 0;
