@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { getSubreddits, getSnapshotsForSubreddit } from "@/lib/data";
+import { getSubreddits } from "@/lib/data";
 import Charts from "./Charts";
 
 const TIER_LABELS: Record<number, string> = {
@@ -10,10 +10,6 @@ const TIER_LABELS: Record<number, string> = {
   3: "Tier 3 — Recovery & Dependency",
 };
 
-function fmt(n: number | null, decimals = 0): string {
-  if (n == null) return "—";
-  return n.toLocaleString("en-US", { maximumFractionDigits: decimals });
-}
 
 export async function generateStaticParams() {
   const subreddits = getSubreddits();
@@ -29,9 +25,6 @@ export default async function SubredditPage({
   const all = getSubreddits();
   const meta = all.find((s) => s.subreddit === subreddit);
   if (!meta) notFound();
-
-  const snapshots = getSnapshotsForSubreddit(subreddit);
-  const latest = snapshots.at(-1);
 
   return (
     <div className="py-8">
@@ -60,41 +53,12 @@ export default async function SubredditPage({
         </a>
       </div>
 
-      {/* Stat row */}
-      {latest && (
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-8 p-6 bg-zinc-50 rounded-xl">
-          <div>
-            <div className="text-2xl font-semibold tabular-nums">{fmt(latest.subscribers)}</div>
-            <div className="text-xs text-zinc-400 mt-0.5">Subscribers</div>
-          </div>
-          <div>
-            <div className="text-2xl font-semibold tabular-nums">{fmt(latest.posts_today)}</div>
-            <div className="text-xs text-zinc-400 mt-0.5">Posts today</div>
-          </div>
-          <div>
-            <div className="text-2xl font-semibold tabular-nums">{fmt(latest.avg_comments_per_post, 1)}</div>
-            <div className="text-xs text-zinc-400 mt-0.5">Avg comments / post</div>
-          </div>
-          <div>
-            <div className="text-2xl font-semibold tabular-nums">{fmt(latest.avg_score_per_post, 0)}</div>
-            <div className="text-xs text-zinc-400 mt-0.5">Avg score / post</div>
-          </div>
-        </div>
-      )}
-
-      <div className="mt-8">
-        <p className="text-sm text-zinc-500 mb-1">
-          {snapshots.length} day{snapshots.length !== 1 ? "s" : ""} of data
-          {snapshots.length === 1 && " — charts will grow as daily collection runs"}
-        </p>
-        <Charts snapshots={snapshots} />
-      </div>
+      <Charts subreddit={subreddit} />
 
       <p className="mt-10 text-xs text-zinc-400 border-t border-zinc-100 pt-4">
         <strong>Subscribers</strong> — Direct (Reddit API).{" "}
         <strong>Posts/day</strong> — Inferred from posts created in past 24h.{" "}
         <strong>Avg comments / Avg score</strong> — Inferred from most recent 100 posts.
-        Last snapshot: {latest?.snapshot_date ?? "—"}.
       </p>
     </div>
   );
