@@ -1,17 +1,6 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import Link from "next/link";
 import "./globals.css";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 export const metadata: Metadata = {
   title: "My Friend Is AI",
@@ -24,41 +13,45 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-white text-zinc-900`}
-      >
-        <header className="border-b border-zinc-200">
-          <div className="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
+      <body className="antialiased">
+        <header className="border-b border-border">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
             <Link
               href="/"
-              className="text-lg font-semibold tracking-tight hover:opacity-75 transition-opacity"
+              className="text-base font-semibold tracking-tight text-foreground hover:text-primary transition-colors"
             >
-              My Friend Is AI
+              myfriendisai.com
             </Link>
-            <nav className="flex gap-6 text-sm text-zinc-500">
+            <nav className="flex gap-6 text-sm text-muted">
               <Link
                 href="/communities"
-                className="hover:text-zinc-900 transition-colors"
+                className="hover:text-foreground transition-colors"
               >
                 Communities
               </Link>
               <Link
                 href="/about"
-                className="hover:text-zinc-900 transition-colors"
+                className="hover:text-foreground transition-colors"
               >
                 About
               </Link>
+              <a
+                href="https://github.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-foreground transition-colors"
+              >
+                GitHub ↗
+              </a>
             </nav>
           </div>
         </header>
 
-        <main className="max-w-5xl mx-auto px-6 py-10">{children}</main>
+        <main>{children}</main>
 
-        <footer className="border-t border-zinc-200 mt-20">
-          <div className="max-w-5xl mx-auto px-6 py-6 text-xs text-zinc-400 flex items-center justify-between">
-            <span>
-              Data collected daily from Reddit&apos;s public .json endpoints.
-            </span>
+        <footer className="border-t border-border mt-20">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 py-6 text-xs text-muted flex items-center justify-between">
+            <span>Updated daily from Reddit&apos;s public endpoints.</span>
             <span>myfriendisai.com</span>
           </div>
         </footer>

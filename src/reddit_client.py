@@ -100,6 +100,37 @@ class RedditClient:
         data = self._get(url, params={"t": timeframe, "limit": limit})
         return data.get("data", {}).get("children", [])
 
+    def get_new_paginated(self, subreddit: str, target: int = 500) -> list[dict]:
+        """Fetch up to `target` recent posts using pagination."""
+        all_children = []
+        after = None
+        while len(all_children) < target:
+            batch_size = min(100, target - len(all_children))
+            url = f"{BASE_URL}/r/{subreddit}/new.json"
+            params = {"limit": batch_size}
+            if after:
+                params["after"] = after
+            data = self._get(url, params=params)
+            children = data.get("data", {}).get("children", [])
+            if not children:
+                break
+            all_children.extend(children)
+            after = data.get("data", {}).get("after")
+            if not after:
+                break
+        return all_children
+
+    def get_post_comments(self, subreddit: str, post_id: str, limit: int = 20) -> list[dict]:
+        """Fetch top comments for a post. Returns list of comment dicts."""
+        url = f"{BASE_URL}/r/{subreddit}/comments/{post_id}.json"
+        data = self._get(url, params={"limit": limit, "sort": "top"})
+        comments = []
+        if isinstance(data, list) and len(data) > 1:
+            for child in data[1].get("data", {}).get("children", []):
+                if child.get("kind") == "t1":
+                    comments.append(child.get("data", {}))
+        return comments
+
     def search(self, subreddit: str, query: str, timeframe: str = "day", limit: int = 100) -> list[dict]:
         """Search within a subreddit. Phase 2 only."""
         url = f"{BASE_URL}/r/{subreddit}/search.json"
