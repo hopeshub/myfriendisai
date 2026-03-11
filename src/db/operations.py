@@ -249,8 +249,8 @@ def export_keyword_trends_json(
 ) -> Path:
     """Export daily keyword category counts with 7-day rolling averages.
 
-    Reads from post_keyword_tags. Aggregates across all subreddits (no tier
-    filtering — tiers are organizational metadata, not a data filter in v1).
+    Filters to only subreddits listed as active in communities.yaml to prevent
+    keyword pollution from large general-purpose subreddits.
 
     Output format:
         {
@@ -261,18 +261,24 @@ def export_keyword_trends_json(
           ...
         }
     """
+    from src.config import load_communities
+    active_subreddits = [c["subreddit"] for c in load_communities()]
+    placeholders = ",".join("?" * len(active_subreddits))
+
     path = output_path or DATA_DIR / "keyword_trends.json"
     path.parent.mkdir(parents=True, exist_ok=True)
     _conn = conn or get_connection()
 
     try:
         rows = _conn.execute(
-            """
+            f"""
             SELECT category, post_date, COUNT(DISTINCT post_id) AS count
             FROM post_keyword_tags
+            WHERE subreddit IN ({placeholders})
             GROUP BY category, post_date
             ORDER BY category, post_date
-            """
+            """,
+            active_subreddits,
         ).fetchall()
     finally:
         if conn is None:
