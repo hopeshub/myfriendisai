@@ -280,6 +280,16 @@ def export_keyword_trends_json(
             """,
             active_subreddits,
         ).fetchall()
+        total_posts_rows = _conn.execute(
+            f"""
+            SELECT collected_date, COUNT(*) AS count
+            FROM posts
+            WHERE subreddit IN ({placeholders})
+            GROUP BY collected_date
+            ORDER BY collected_date
+            """,
+            active_subreddits,
+        ).fetchall()
     finally:
         if conn is None:
             _conn.close()
@@ -302,6 +312,12 @@ def export_keyword_trends_json(
                 "count_7d_avg": avg,
             })
         result[category] = with_avg
+
+    # Total posts per day across active subreddits (for client-side normalization)
+    result["_total_posts"] = [
+        {"date": date, "count": count}
+        for date, count in total_posts_rows
+    ]
 
     path.write_text(json.dumps(result, indent=2))
     return path
