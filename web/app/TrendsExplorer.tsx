@@ -134,6 +134,21 @@ export default function TrendsExplorer({ themeData }: Props) {
     return EVENTS.filter((e) => e.date >= min && e.date <= max);
   }, [chartData]);
 
+  // ── 14-day smoothed data for faint background lines ──
+  const faintChartData = useMemo(() => {
+    return chartData.map((point, i) => {
+      const smoothed: Record<string, number | string> = { date: point.date };
+      for (const theme of THEMES) {
+        const window = chartData.slice(Math.max(0, i - 13), i + 1);
+        const vals = window
+          .map((d) => (d as unknown as Record<string, number>)[theme.id])
+          .filter((v) => v != null && !isNaN(v));
+        smoothed[theme.id] = vals.length ? vals.reduce((a, b) => a + b, 0) / vals.length : 0;
+      }
+      return smoothed;
+    });
+  }, [chartData]);
+
   // ── Per-theme 95th-percentile domain cap ──
   const p95Domain = useMemo(() => {
     const result: Partial<Record<ThemeId, number>> = {};
@@ -355,6 +370,7 @@ export default function TrendsExplorer({ themeData }: Props) {
                     yAxisId={theme.id}
                     type="monotone"
                     dataKey={theme.id}
+                    data={active ? undefined : faintChartData}
                     stroke={theme.color}
                     strokeWidth={active ? 2 : 1}
                     strokeOpacity={active ? 1 : 0.1}
