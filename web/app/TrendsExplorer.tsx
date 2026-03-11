@@ -249,15 +249,22 @@ export default function TrendsExplorer({ themeData }: Props) {
                 minTickGap={minTickGap}
               />
 
-              <YAxis
-                tickFormatter={formatCount}
-                stroke="transparent"
-                tick={anyHighlighted ? { fill: "#94A3B8", fontSize: 12 } : false}
-                axisLine={false}
-                tickLine={false}
-                width={anyHighlighted ? 44 : 0}
-                domain={["auto", "auto"]}
-              />
+              {THEMES.map((theme) => {
+                const isVisible = anyHighlighted && theme.id === lastHighlighted && highlighted.has(theme.id);
+                return (
+                  <YAxis
+                    key={theme.id}
+                    yAxisId={theme.id}
+                    tickFormatter={formatCount}
+                    stroke="transparent"
+                    tick={isVisible ? { fill: "#94A3B8", fontSize: 12 } : false}
+                    axisLine={false}
+                    tickLine={false}
+                    width={isVisible ? 44 : 0}
+                    hide={!isVisible}
+                  />
+                );
+              })}
 
               <Tooltip
                 content={({ active, payload, label }) => {
@@ -319,6 +326,7 @@ export default function TrendsExplorer({ themeData }: Props) {
                 return (
                   <Area
                     key={theme.id}
+                    yAxisId={theme.id}
                     type="monotone"
                     dataKey={theme.id}
                     stroke={theme.color}
