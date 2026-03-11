@@ -241,3 +241,61 @@ def export_subreddits_json(
         if conn is None:
             _conn.close()
     return path
+
+
+def export_keyword_trends_json(
+    output_path: Optional[Path] = None,
+    conn: Optional[sqlite3.Connection] = None,
+) -> Path:
+    """Export daily keyword category counts with 7-day rolling averages.
+
+    Reads from post_keyword_tags. Aggregates across all subreddits (no tier
+    filtering — tiers are organizational metadata, not a data filter in v1).
+
+    Output format:
+        {
+          "category_name": [
+            {"date": "YYYY-MM-DD", "count": N, "count_7d_avg": N},
+            ...
+          ],
+          ...
+        }
+    """
+    path = output_path or DATA_DIR / "keyword_trends.json"
+    path.parent.mkdir(parents=True, exist_ok=True)
+    _conn = conn or get_connection()
+
+    try:
+        rows = _conn.execute(
+            """
+            SELECT category, post_date, COUNT(DISTINCT post_id) AS count
+            FROM post_keyword_tags
+            GROUP BY category, post_date
+            ORDER BY category, post_date
+            """
+        ).fetchall()
+    finally:
+        if conn is None:
+            _conn.close()
+
+    # Group by category, then compute 7-day rolling average
+    from collections import defaultdict
+    by_category: dict = defaultdict(list)
+    for category, post_date, count in rows:
+        by_category[category].append({"date": post_date, "count": count})
+
+    result = {}
+    for category, entries in sorted(by_category.items()):
+        with_avg = []
+        for i, entry in enumerate(entries):
+            window = [e["count"] for e in entries[max(0, i - 6): i + 1]]
+            avg = round(sum(window) / len(window), 2)
+            with_avg.append({
+                "date": entry["date"],
+                "count": entry["count"],
+                "count_7d_avg": avg,
+            })
+        result[category] = with_avg
+
+    path.write_text(json.dumps(result, indent=2))
+    return path

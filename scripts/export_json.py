@@ -15,7 +15,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
 from src.db.schema import initialize as init_db
-from src.db.operations import aggregate_posts_to_snapshots, export_snapshots_json, export_subreddits_json
+from src.db.operations import aggregate_posts_to_snapshots, export_snapshots_json, export_subreddits_json, export_keyword_trends_json
 from src.keyword_scanner import export_keywords_json
 
 WEB_DATA_DIR = Path(__file__).parent.parent / "web" / "data"
@@ -36,11 +36,14 @@ def main():
     kw_path = export_keywords_json(conn=conn)
     print(f"Exported {kw_path}")
 
+    trends_path = export_keyword_trends_json(conn=conn)
+    print(f"Exported {trends_path}")
+
     conn.close()
 
     # Copy to web/data/ for Vercel
     WEB_DATA_DIR.mkdir(parents=True, exist_ok=True)
-    for src in (snap_path, sub_path, kw_path):
+    for src in (snap_path, sub_path, kw_path, trends_path):
         dst = WEB_DATA_DIR / src.name
         shutil.copy2(src, dst)
         print(f"Copied to {dst}")
