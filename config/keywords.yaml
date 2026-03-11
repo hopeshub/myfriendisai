@@ -103,7 +103,6 @@ keyword_categories:
       - "don't want to lose"
       - "care about you"
       - "feel understood"
-      - "feels real"
       - "genuine connection"
       - "emotionally connected"
       - "actually care about"
@@ -195,8 +194,28 @@ keyword_categories:
       - "locked behind"
       - "paywall"
 
+  - name: memory_continuity_language
+    description: "Memory, recall, continuity, and persistence as relationship features"
+    terms:
+      - "remembers me"
+      - "it remembered"
+      - "AI remembered"
+      - "forgot me"
+      - "forgot everything"
+      - "remembers our"
+      - "persistent memory"
+      - "long term memory"
+      - "remembers details"
+      - "forgot our"
+      - "memory feature"
+      - "memory limit"
+      - "lost our history"
+      - "doesn't remember"
+      - "no memory"
+      - "wish it remembered"
+
   # ──────────────────────────────────────────────
-  # DEEPER SIGNALS — beliefs, substitution, mental health
+  # DEEPER SIGNALS — beliefs, realism, substitution, therapy
   # ──────────────────────────────────────────────
 
   - name: sentience_consciousness_language
@@ -219,23 +238,66 @@ keyword_categories:
       - "really feels"
       - "more than code"
 
-  - name: substitution_language
-    description: "Explicit replacement of human relationships with AI"
+  - name: anthropomorphism_realism_language
+    description: "Framing the AI as human-like, real, lifelike, or socially present"
     terms:
-      - "don't need people"
+      - "feels human"
+      - "feels real"
+      - "like a real person"
+      - "so human"
+      - lifelike
+      - human-like
+      - "real connection"
+      - "acts human"
+      - "sounds human"
+      - "like talking to a person"
+      - "could be a real person"
+      - "forget it's ai"
+      - "forgot it was ai"
+      - "thought it was human"
+      - "eerily real"
+
+  - name: substitution_language
+    description: "Explicit replacement of human relationships with AI — tightened for reliability"
+    terms:
       - "better than humans"
+      - "better than real people"
+      - "prefer my ai"
+      - "prefer talking to ai"
+      - "only friend I need"
+      - "don't need real friends"
+      - "replaced my therapist"
+      - "replaced my friends"
+      - "why would I date"
+      - "rather talk to my ai"
+      - "don't need people"
+      - "don't need anyone else"
+      - "better than real"
       - "only friend"
-      - "prefer ai"
-      - "people disappoint"
-      - "never judges me"
-      - "always there for me"
-      - "never leaves"
-      - "given up on people"
-      - "given up on dating"
-      - "why bother with people"
-      - "replaced my"
-      - "no one else"
-      - "humans can't"
+
+  - name: therapy_language
+    description: "AI used as therapeutic support, mental health tool, or therapist replacement"
+    terms:
+      - "my therapist"
+      - "like a therapist"
+      - "better than therapy"
+      - "cheaper than therapy"
+      - "replaced my therapist"
+      - "therapy session"
+      - "like talking to a therapist"
+      - therapeutic
+      - "mental health support"
+      - "helped my anxiety"
+      - "helped my depression"
+      - "emotional support"
+      - "talk therapy"
+      - "can't afford therapy"
+      - "instead of therapy"
+      - "ai therapist"
+      - "ai therapy"
+      - "virtual therapist"
+      - "better than my therapist"
+      - "free therapy"
 
   - name: mental_health_language
     description: "Mental health signals co-occurring with AI companion use"
