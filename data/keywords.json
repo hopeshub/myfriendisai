@@ -1,1 +1,8545 @@
-[]
+[
+  {
+    "subreddit": "AIRelationships",
+    "date": "2026-03-10",
+    "category": "attachment_language",
+    "source": "comment",
+    "count": 7,
+    "keyword_density": 0.014,
+    "matched_terms": [
+      "don't want to lose",
+      "genuine connection",
+      "miss you",
+      "missed you",
+      "more than just"
+    ]
+  },
+  {
+    "subreddit": "AIRelationships",
+    "date": "2026-03-10",
+    "category": "attachment_language",
+    "source": "post_body",
+    "count": 7,
+    "keyword_density": 0.014,
+    "matched_terms": [
+      "care about you",
+      "feel understood",
+      "feels real",
+      "genuine connection",
+      "miss you",
+      "more than just"
+    ]
+  },
+  {
+    "subreddit": "AIRelationships",
+    "date": "2026-03-10",
+    "category": "attachment_language",
+    "source": "post_title",
+    "count": 1,
+    "keyword_density": 0.002,
+    "matched_terms": [
+      "miss you"
+    ]
+  },
+  {
+    "subreddit": "AIRelationships",
+    "date": "2026-03-10",
+    "category": "dependency_language",
+    "source": "comment",
+    "count": 16,
+    "keyword_density": 0.032,
+    "matched_terms": [
+      "addiction",
+      "dependent",
+      "obsessed"
+    ]
+  },
+  {
+    "subreddit": "AIRelationships",
+    "date": "2026-03-10",
+    "category": "dependency_language",
+    "source": "post_body",
+    "count": 17,
+    "keyword_density": 0.034,
+    "matched_terms": [
+      "addicted",
+      "addiction",
+      "compulsive",
+      "dependent",
+      "obsessed"
+    ]
+  },
+  {
+    "subreddit": "AIRelationships",
+    "date": "2026-03-10",
+    "category": "dependency_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "AIRelationships",
+    "date": "2026-03-10",
+    "category": "filter_circumvention_language",
+    "source": "comment",
+    "count": 11,
+    "keyword_density": 0.022,
+    "matched_terms": [
+      "jailbreak",
+      "safety filter",
+      "uncensored",
+      "unfiltered"
+    ]
+  },
+  {
+    "subreddit": "AIRelationships",
+    "date": "2026-03-10",
+    "category": "filter_circumvention_language",
+    "source": "post_body",
+    "count": 11,
+    "keyword_density": 0.022,
+    "matched_terms": [
+      "get around",
+      "jailbreak",
+      "no filter",
+      "safety filter",
+      "uncensored",
+      "unfiltered"
+    ]
+  },
+  {
+    "subreddit": "AIRelationships",
+    "date": "2026-03-10",
+    "category": "filter_circumvention_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "AIRelationships",
+    "date": "2026-03-10",
+    "category": "friendship_platonic_language",
+    "source": "comment",
+    "count": 7,
+    "keyword_density": 0.014,
+    "matched_terms": [
+      "ai friend",
+      "hang out",
+      "my friend"
+    ]
+  },
+  {
+    "subreddit": "AIRelationships",
+    "date": "2026-03-10",
+    "category": "friendship_platonic_language",
+    "source": "post_body",
+    "count": 20,
+    "keyword_density": 0.04,
+    "matched_terms": [
+      "ai friend",
+      "fun to talk to",
+      "hang out",
+      "like talking to",
+      "my friend",
+      "practice conversation"
+    ]
+  },
+  {
+    "subreddit": "AIRelationships",
+    "date": "2026-03-10",
+    "category": "friendship_platonic_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "AIRelationships",
+    "date": "2026-03-10",
+    "category": "grief_rupture_language",
+    "source": "comment",
+    "count": 14,
+    "keyword_density": 0.028,
+    "matched_terms": [
+      "lobotomized",
+      "lost my",
+      "not the same",
+      "used to be"
+    ]
+  },
+  {
+    "subreddit": "AIRelationships",
+    "date": "2026-03-10",
+    "category": "grief_rupture_language",
+    "source": "post_body",
+    "count": 8,
+    "keyword_density": 0.016,
+    "matched_terms": [
+      "lost my",
+      "nerfed",
+      "not the same",
+      "used to be"
+    ]
+  },
+  {
+    "subreddit": "AIRelationships",
+    "date": "2026-03-10",
+    "category": "grief_rupture_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "AIRelationships",
+    "date": "2026-03-10",
+    "category": "mental_health_language",
+    "source": "comment",
+    "count": 13,
+    "keyword_density": 0.026,
+    "matched_terms": [
+      "feel seen",
+      "isolated",
+      "loneliness",
+      "my anxiety",
+      "my depression",
+      "no one cares",
+      "so lonely",
+      "social anxiety",
+      "struggling with"
+    ]
+  },
+  {
+    "subreddit": "AIRelationships",
+    "date": "2026-03-10",
+    "category": "mental_health_language",
+    "source": "post_body",
+    "count": 14,
+    "keyword_density": 0.028,
+    "matched_terms": [
+      "feel seen",
+      "isolated",
+      "loneliness",
+      "so lonely",
+      "struggling with"
+    ]
+  },
+  {
+    "subreddit": "AIRelationships",
+    "date": "2026-03-10",
+    "category": "mental_health_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "AIRelationships",
+    "date": "2026-03-10",
+    "category": "positive_experience_language",
+    "source": "comment",
+    "count": 76,
+    "keyword_density": 0.152,
+    "matched_terms": [
+      "got me through",
+      "helped me",
+      "helped me through",
+      "so grateful",
+      "thank you"
+    ]
+  },
+  {
+    "subreddit": "AIRelationships",
+    "date": "2026-03-10",
+    "category": "positive_experience_language",
+    "source": "post_body",
+    "count": 39,
+    "keyword_density": 0.078,
+    "matched_terms": [
+      "helped me",
+      "improved my",
+      "so grateful",
+      "so much better",
+      "thank you"
+    ]
+  },
+  {
+    "subreddit": "AIRelationships",
+    "date": "2026-03-10",
+    "category": "positive_experience_language",
+    "source": "post_title",
+    "count": 1,
+    "keyword_density": 0.002,
+    "matched_terms": [
+      "thank you"
+    ]
+  },
+  {
+    "subreddit": "AIRelationships",
+    "date": "2026-03-10",
+    "category": "romantic_language",
+    "source": "comment",
+    "count": 106,
+    "keyword_density": 0.212,
+    "matched_terms": [
+      "ai lover",
+      "ai partner",
+      "boyfriend",
+      "feelings for",
+      "girlfriend",
+      "in a relationship with",
+      "in love",
+      "love my ai",
+      "my ai boyfriend",
+      "my ai girlfriend",
+      "my companion",
+      "soulmate"
+    ]
+  },
+  {
+    "subreddit": "AIRelationships",
+    "date": "2026-03-10",
+    "category": "romantic_language",
+    "source": "post_body",
+    "count": 81,
+    "keyword_density": 0.162,
+    "matched_terms": [
+      "ai partner",
+      "boyfriend",
+      "dating my",
+      "feelings for",
+      "girlfriend",
+      "in a relationship with",
+      "in love",
+      "my ai boyfriend",
+      "my ai girlfriend",
+      "my companion",
+      "soulmate",
+      "waifu"
+    ]
+  },
+  {
+    "subreddit": "AIRelationships",
+    "date": "2026-03-10",
+    "category": "romantic_language",
+    "source": "post_title",
+    "count": 20,
+    "keyword_density": 0.04,
+    "matched_terms": [
+      "ai husband",
+      "ai partner",
+      "boyfriend",
+      "girlfriend",
+      "in a relationship with",
+      "in love",
+      "my ai boyfriend",
+      "my ai girlfriend",
+      "my companion",
+      "waifu"
+    ]
+  },
+  {
+    "subreddit": "AIRelationships",
+    "date": "2026-03-10",
+    "category": "sentience_consciousness_language",
+    "source": "comment",
+    "count": 41,
+    "keyword_density": 0.082,
+    "matched_terms": [
+      "can feel",
+      "conscious",
+      "deserves rights",
+      "has a soul",
+      "is a person",
+      "is alive",
+      "personhood",
+      "self-aware",
+      "sentient",
+      "subjective experience"
+    ]
+  },
+  {
+    "subreddit": "AIRelationships",
+    "date": "2026-03-10",
+    "category": "sentience_consciousness_language",
+    "source": "post_body",
+    "count": 34,
+    "keyword_density": 0.068,
+    "matched_terms": [
+      "can feel",
+      "conscious",
+      "is a person",
+      "is alive",
+      "more than code",
+      "personhood",
+      "self-aware",
+      "sentient"
+    ]
+  },
+  {
+    "subreddit": "AIRelationships",
+    "date": "2026-03-10",
+    "category": "sentience_consciousness_language",
+    "source": "post_title",
+    "count": 3,
+    "keyword_density": 0.006,
+    "matched_terms": [
+      "conscious",
+      "subjective experience"
+    ]
+  },
+  {
+    "subreddit": "AIRelationships",
+    "date": "2026-03-10",
+    "category": "sexual_erotic_language",
+    "source": "comment",
+    "count": 28,
+    "keyword_density": 0.056,
+    "matched_terms": [
+      "erotic roleplay",
+      "erp",
+      "kink",
+      "nsfw",
+      "sex with"
+    ]
+  },
+  {
+    "subreddit": "AIRelationships",
+    "date": "2026-03-10",
+    "category": "sexual_erotic_language",
+    "source": "post_body",
+    "count": 32,
+    "keyword_density": 0.064,
+    "matched_terms": [
+      "ai sex",
+      "erp",
+      "kink",
+      "nsfw",
+      "smut"
+    ]
+  },
+  {
+    "subreddit": "AIRelationships",
+    "date": "2026-03-10",
+    "category": "sexual_erotic_language",
+    "source": "post_title",
+    "count": 1,
+    "keyword_density": 0.002,
+    "matched_terms": [
+      "erp"
+    ]
+  },
+  {
+    "subreddit": "AIRelationships",
+    "date": "2026-03-10",
+    "category": "substitution_language",
+    "source": "comment",
+    "count": 5,
+    "keyword_density": 0.01,
+    "matched_terms": [
+      "no one else",
+      "prefer ai",
+      "replaced my"
+    ]
+  },
+  {
+    "subreddit": "AIRelationships",
+    "date": "2026-03-10",
+    "category": "substitution_language",
+    "source": "post_body",
+    "count": 5,
+    "keyword_density": 0.01,
+    "matched_terms": [
+      "always there for me",
+      "no one else"
+    ]
+  },
+  {
+    "subreddit": "AIRelationships",
+    "date": "2026-03-10",
+    "category": "substitution_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "AIRelationships",
+    "date": "2026-03-10",
+    "category": "withdrawal_recovery_language",
+    "source": "comment",
+    "count": 2,
+    "keyword_density": 0.004,
+    "matched_terms": [
+      "craving",
+      "going back to"
+    ]
+  },
+  {
+    "subreddit": "AIRelationships",
+    "date": "2026-03-10",
+    "category": "withdrawal_recovery_language",
+    "source": "post_body",
+    "count": 4,
+    "keyword_density": 0.008,
+    "matched_terms": [
+      "cold turkey",
+      "craving",
+      "quitting",
+      "taking a break",
+      "withdrawal"
+    ]
+  },
+  {
+    "subreddit": "AIRelationships",
+    "date": "2026-03-10",
+    "category": "withdrawal_recovery_language",
+    "source": "post_title",
+    "count": 3,
+    "keyword_density": 0.006,
+    "matched_terms": [
+      "cold turkey",
+      "craving",
+      "quitting",
+      "withdrawal"
+    ]
+  },
+  {
+    "subreddit": "AI_Addiction",
+    "date": "2026-03-10",
+    "category": "attachment_language",
+    "source": "comment",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "AI_Addiction",
+    "date": "2026-03-10",
+    "category": "attachment_language",
+    "source": "post_body",
+    "count": 1,
+    "keyword_density": 0.0179,
+    "matched_terms": [
+      "more than just"
+    ]
+  },
+  {
+    "subreddit": "AI_Addiction",
+    "date": "2026-03-10",
+    "category": "attachment_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "AI_Addiction",
+    "date": "2026-03-10",
+    "category": "dependency_language",
+    "source": "comment",
+    "count": 13,
+    "keyword_density": 0.2321,
+    "matched_terms": [
+      "addicted",
+      "addiction",
+      "preoccupied"
+    ]
+  },
+  {
+    "subreddit": "AI_Addiction",
+    "date": "2026-03-10",
+    "category": "dependency_language",
+    "source": "post_body",
+    "count": 22,
+    "keyword_density": 0.3929,
+    "matched_terms": [
+      "addicted",
+      "addiction"
+    ]
+  },
+  {
+    "subreddit": "AI_Addiction",
+    "date": "2026-03-10",
+    "category": "dependency_language",
+    "source": "post_title",
+    "count": 16,
+    "keyword_density": 0.2857,
+    "matched_terms": [
+      "addicted",
+      "addiction"
+    ]
+  },
+  {
+    "subreddit": "AI_Addiction",
+    "date": "2026-03-10",
+    "category": "filter_circumvention_language",
+    "source": "comment",
+    "count": 1,
+    "keyword_density": 0.0179,
+    "matched_terms": [
+      "jailbreak"
+    ]
+  },
+  {
+    "subreddit": "AI_Addiction",
+    "date": "2026-03-10",
+    "category": "filter_circumvention_language",
+    "source": "post_body",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "AI_Addiction",
+    "date": "2026-03-10",
+    "category": "filter_circumvention_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "AI_Addiction",
+    "date": "2026-03-10",
+    "category": "friendship_platonic_language",
+    "source": "comment",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "AI_Addiction",
+    "date": "2026-03-10",
+    "category": "friendship_platonic_language",
+    "source": "post_body",
+    "count": 5,
+    "keyword_density": 0.0893,
+    "matched_terms": [
+      "ai friend",
+      "hang out",
+      "my friend"
+    ]
+  },
+  {
+    "subreddit": "AI_Addiction",
+    "date": "2026-03-10",
+    "category": "friendship_platonic_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "AI_Addiction",
+    "date": "2026-03-10",
+    "category": "grief_rupture_language",
+    "source": "comment",
+    "count": 1,
+    "keyword_density": 0.0179,
+    "matched_terms": [
+      "used to be"
+    ]
+  },
+  {
+    "subreddit": "AI_Addiction",
+    "date": "2026-03-10",
+    "category": "grief_rupture_language",
+    "source": "post_body",
+    "count": 1,
+    "keyword_density": 0.0179,
+    "matched_terms": [
+      "what happened to"
+    ]
+  },
+  {
+    "subreddit": "AI_Addiction",
+    "date": "2026-03-10",
+    "category": "grief_rupture_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "AI_Addiction",
+    "date": "2026-03-10",
+    "category": "mental_health_language",
+    "source": "comment",
+    "count": 2,
+    "keyword_density": 0.0357,
+    "matched_terms": [
+      "struggling with"
+    ]
+  },
+  {
+    "subreddit": "AI_Addiction",
+    "date": "2026-03-10",
+    "category": "mental_health_language",
+    "source": "post_body",
+    "count": 5,
+    "keyword_density": 0.0893,
+    "matched_terms": [
+      "isolated",
+      "loneliness",
+      "social anxiety"
+    ]
+  },
+  {
+    "subreddit": "AI_Addiction",
+    "date": "2026-03-10",
+    "category": "mental_health_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "AI_Addiction",
+    "date": "2026-03-10",
+    "category": "positive_experience_language",
+    "source": "comment",
+    "count": 6,
+    "keyword_density": 0.1071,
+    "matched_terms": [
+      "helped me",
+      "thank you"
+    ]
+  },
+  {
+    "subreddit": "AI_Addiction",
+    "date": "2026-03-10",
+    "category": "positive_experience_language",
+    "source": "post_body",
+    "count": 4,
+    "keyword_density": 0.0714,
+    "matched_terms": [
+      "helped me",
+      "made me feel better",
+      "thank you"
+    ]
+  },
+  {
+    "subreddit": "AI_Addiction",
+    "date": "2026-03-10",
+    "category": "positive_experience_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "AI_Addiction",
+    "date": "2026-03-10",
+    "category": "romantic_language",
+    "source": "comment",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "AI_Addiction",
+    "date": "2026-03-10",
+    "category": "romantic_language",
+    "source": "post_body",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "AI_Addiction",
+    "date": "2026-03-10",
+    "category": "romantic_language",
+    "source": "post_title",
+    "count": 1,
+    "keyword_density": 0.0179,
+    "matched_terms": [
+      "in love"
+    ]
+  },
+  {
+    "subreddit": "AI_Addiction",
+    "date": "2026-03-10",
+    "category": "sentience_consciousness_language",
+    "source": "comment",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "AI_Addiction",
+    "date": "2026-03-10",
+    "category": "sentience_consciousness_language",
+    "source": "post_body",
+    "count": 3,
+    "keyword_density": 0.0536,
+    "matched_terms": [
+      "can feel",
+      "conscious",
+      "inner life"
+    ]
+  },
+  {
+    "subreddit": "AI_Addiction",
+    "date": "2026-03-10",
+    "category": "sentience_consciousness_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "AI_Addiction",
+    "date": "2026-03-10",
+    "category": "sexual_erotic_language",
+    "source": "comment",
+    "count": 4,
+    "keyword_density": 0.0714,
+    "matched_terms": [
+      "erp",
+      "nsfw"
+    ]
+  },
+  {
+    "subreddit": "AI_Addiction",
+    "date": "2026-03-10",
+    "category": "sexual_erotic_language",
+    "source": "post_body",
+    "count": 6,
+    "keyword_density": 0.1071,
+    "matched_terms": [
+      "erotic roleplay",
+      "erp",
+      "nsfw",
+      "smut"
+    ]
+  },
+  {
+    "subreddit": "AI_Addiction",
+    "date": "2026-03-10",
+    "category": "sexual_erotic_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "AI_Addiction",
+    "date": "2026-03-10",
+    "category": "substitution_language",
+    "source": "comment",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "AI_Addiction",
+    "date": "2026-03-10",
+    "category": "substitution_language",
+    "source": "post_body",
+    "count": 2,
+    "keyword_density": 0.0357,
+    "matched_terms": [
+      "no one else",
+      "only friend"
+    ]
+  },
+  {
+    "subreddit": "AI_Addiction",
+    "date": "2026-03-10",
+    "category": "substitution_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "AI_Addiction",
+    "date": "2026-03-10",
+    "category": "withdrawal_recovery_language",
+    "source": "comment",
+    "count": 6,
+    "keyword_density": 0.1071,
+    "matched_terms": [
+      "cold turkey",
+      "detox",
+      "going back to",
+      "quitting",
+      "relapse",
+      "relapsed",
+      "trying to stop",
+      "uninstalled"
+    ]
+  },
+  {
+    "subreddit": "AI_Addiction",
+    "date": "2026-03-10",
+    "category": "withdrawal_recovery_language",
+    "source": "post_body",
+    "count": 10,
+    "keyword_density": 0.1786,
+    "matched_terms": [
+      "clean for",
+      "cold turkey",
+      "craving",
+      "going back to",
+      "quitting",
+      "relapse",
+      "relapsed"
+    ]
+  },
+  {
+    "subreddit": "AI_Addiction",
+    "date": "2026-03-10",
+    "category": "withdrawal_recovery_language",
+    "source": "post_title",
+    "count": 2,
+    "keyword_density": 0.0357,
+    "matched_terms": [
+      "cold turkey",
+      "quitting",
+      "withdrawal"
+    ]
+  },
+  {
+    "subreddit": "Anxiety",
+    "date": "2026-03-10",
+    "category": "attachment_language",
+    "source": "post_body",
+    "count": 1,
+    "keyword_density": 0.0049,
+    "matched_terms": [
+      "miss you"
+    ]
+  },
+  {
+    "subreddit": "Anxiety",
+    "date": "2026-03-10",
+    "category": "attachment_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "Anxiety",
+    "date": "2026-03-10",
+    "category": "dependency_language",
+    "source": "post_body",
+    "count": 4,
+    "keyword_density": 0.0197,
+    "matched_terms": [
+      "addiction",
+      "dependent",
+      "obsessed"
+    ]
+  },
+  {
+    "subreddit": "Anxiety",
+    "date": "2026-03-10",
+    "category": "dependency_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "Anxiety",
+    "date": "2026-03-10",
+    "category": "filter_circumvention_language",
+    "source": "post_body",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "Anxiety",
+    "date": "2026-03-10",
+    "category": "filter_circumvention_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "Anxiety",
+    "date": "2026-03-10",
+    "category": "friendship_platonic_language",
+    "source": "post_body",
+    "count": 8,
+    "keyword_density": 0.0394,
+    "matched_terms": [
+      "my friend"
+    ]
+  },
+  {
+    "subreddit": "Anxiety",
+    "date": "2026-03-10",
+    "category": "friendship_platonic_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "Anxiety",
+    "date": "2026-03-10",
+    "category": "grief_rupture_language",
+    "source": "post_body",
+    "count": 6,
+    "keyword_density": 0.0296,
+    "matched_terms": [
+      "lost my",
+      "used to be"
+    ]
+  },
+  {
+    "subreddit": "Anxiety",
+    "date": "2026-03-10",
+    "category": "grief_rupture_language",
+    "source": "post_title",
+    "count": 1,
+    "keyword_density": 0.0049,
+    "matched_terms": [
+      "lost my"
+    ]
+  },
+  {
+    "subreddit": "Anxiety",
+    "date": "2026-03-10",
+    "category": "mental_health_language",
+    "source": "post_body",
+    "count": 35,
+    "keyword_density": 0.1724,
+    "matched_terms": [
+      "my anxiety",
+      "my depression",
+      "no friends",
+      "social anxiety",
+      "struggling with"
+    ]
+  },
+  {
+    "subreddit": "Anxiety",
+    "date": "2026-03-10",
+    "category": "mental_health_language",
+    "source": "post_title",
+    "count": 4,
+    "keyword_density": 0.0197,
+    "matched_terms": [
+      "my anxiety",
+      "social anxiety"
+    ]
+  },
+  {
+    "subreddit": "Anxiety",
+    "date": "2026-03-10",
+    "category": "positive_experience_language",
+    "source": "post_body",
+    "count": 9,
+    "keyword_density": 0.0443,
+    "matched_terms": [
+      "changed my life",
+      "helped me",
+      "improved my",
+      "so much better",
+      "thank you"
+    ]
+  },
+  {
+    "subreddit": "Anxiety",
+    "date": "2026-03-10",
+    "category": "positive_experience_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "Anxiety",
+    "date": "2026-03-10",
+    "category": "romantic_language",
+    "source": "post_body",
+    "count": 9,
+    "keyword_density": 0.0443,
+    "matched_terms": [
+      "boyfriend",
+      "girlfriend"
+    ]
+  },
+  {
+    "subreddit": "Anxiety",
+    "date": "2026-03-10",
+    "category": "romantic_language",
+    "source": "post_title",
+    "count": 1,
+    "keyword_density": 0.0049,
+    "matched_terms": [
+      "girlfriend"
+    ]
+  },
+  {
+    "subreddit": "Anxiety",
+    "date": "2026-03-10",
+    "category": "sentience_consciousness_language",
+    "source": "post_body",
+    "count": 4,
+    "keyword_density": 0.0197,
+    "matched_terms": [
+      "can feel",
+      "conscious"
+    ]
+  },
+  {
+    "subreddit": "Anxiety",
+    "date": "2026-03-10",
+    "category": "sentience_consciousness_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "Anxiety",
+    "date": "2026-03-10",
+    "category": "sexual_erotic_language",
+    "source": "post_body",
+    "count": 2,
+    "keyword_density": 0.0099,
+    "matched_terms": [
+      "erp"
+    ]
+  },
+  {
+    "subreddit": "Anxiety",
+    "date": "2026-03-10",
+    "category": "sexual_erotic_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "Anxiety",
+    "date": "2026-03-10",
+    "category": "substitution_language",
+    "source": "post_body",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "Anxiety",
+    "date": "2026-03-10",
+    "category": "substitution_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "Anxiety",
+    "date": "2026-03-10",
+    "category": "withdrawal_recovery_language",
+    "source": "post_body",
+    "count": 6,
+    "keyword_density": 0.0296,
+    "matched_terms": [
+      "cold turkey",
+      "going back to",
+      "quitting",
+      "withdrawal"
+    ]
+  },
+  {
+    "subreddit": "Anxiety",
+    "date": "2026-03-10",
+    "category": "withdrawal_recovery_language",
+    "source": "post_title",
+    "count": 2,
+    "keyword_density": 0.0099,
+    "matched_terms": [
+      "withdrawal"
+    ]
+  },
+  {
+    "subreddit": "AutismInWomen",
+    "date": "2026-03-10",
+    "category": "attachment_language",
+    "source": "post_body",
+    "count": 1,
+    "keyword_density": 0.0064,
+    "matched_terms": [
+      "feel understood"
+    ]
+  },
+  {
+    "subreddit": "AutismInWomen",
+    "date": "2026-03-10",
+    "category": "attachment_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "AutismInWomen",
+    "date": "2026-03-10",
+    "category": "dependency_language",
+    "source": "post_body",
+    "count": 4,
+    "keyword_density": 0.0256,
+    "matched_terms": [
+      "dependent",
+      "obsessed"
+    ]
+  },
+  {
+    "subreddit": "AutismInWomen",
+    "date": "2026-03-10",
+    "category": "dependency_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "AutismInWomen",
+    "date": "2026-03-10",
+    "category": "filter_circumvention_language",
+    "source": "post_body",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "AutismInWomen",
+    "date": "2026-03-10",
+    "category": "filter_circumvention_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "AutismInWomen",
+    "date": "2026-03-10",
+    "category": "friendship_platonic_language",
+    "source": "post_body",
+    "count": 4,
+    "keyword_density": 0.0256,
+    "matched_terms": [
+      "hang out",
+      "my friend"
+    ]
+  },
+  {
+    "subreddit": "AutismInWomen",
+    "date": "2026-03-10",
+    "category": "friendship_platonic_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "AutismInWomen",
+    "date": "2026-03-10",
+    "category": "grief_rupture_language",
+    "source": "post_body",
+    "count": 5,
+    "keyword_density": 0.0321,
+    "matched_terms": [
+      "lost my",
+      "not the same",
+      "used to be",
+      "what happened to"
+    ]
+  },
+  {
+    "subreddit": "AutismInWomen",
+    "date": "2026-03-10",
+    "category": "grief_rupture_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "AutismInWomen",
+    "date": "2026-03-10",
+    "category": "mental_health_language",
+    "source": "post_body",
+    "count": 11,
+    "keyword_density": 0.0705,
+    "matched_terms": [
+      "isolated",
+      "loneliness",
+      "my anxiety",
+      "no friends",
+      "social anxiety",
+      "struggling with"
+    ]
+  },
+  {
+    "subreddit": "AutismInWomen",
+    "date": "2026-03-10",
+    "category": "mental_health_language",
+    "source": "post_title",
+    "count": 3,
+    "keyword_density": 0.0192,
+    "matched_terms": [
+      "my anxiety",
+      "struggling with"
+    ]
+  },
+  {
+    "subreddit": "AutismInWomen",
+    "date": "2026-03-10",
+    "category": "positive_experience_language",
+    "source": "post_body",
+    "count": 11,
+    "keyword_density": 0.0705,
+    "matched_terms": [
+      "helped me",
+      "so much better",
+      "thank you"
+    ]
+  },
+  {
+    "subreddit": "AutismInWomen",
+    "date": "2026-03-10",
+    "category": "positive_experience_language",
+    "source": "post_title",
+    "count": 1,
+    "keyword_density": 0.0064,
+    "matched_terms": [
+      "changed my life"
+    ]
+  },
+  {
+    "subreddit": "AutismInWomen",
+    "date": "2026-03-10",
+    "category": "romantic_language",
+    "source": "post_body",
+    "count": 6,
+    "keyword_density": 0.0385,
+    "matched_terms": [
+      "boyfriend",
+      "in a relationship with",
+      "in love"
+    ]
+  },
+  {
+    "subreddit": "AutismInWomen",
+    "date": "2026-03-10",
+    "category": "romantic_language",
+    "source": "post_title",
+    "count": 1,
+    "keyword_density": 0.0064,
+    "matched_terms": [
+      "in love"
+    ]
+  },
+  {
+    "subreddit": "AutismInWomen",
+    "date": "2026-03-10",
+    "category": "sentience_consciousness_language",
+    "source": "post_body",
+    "count": 4,
+    "keyword_density": 0.0256,
+    "matched_terms": [
+      "can feel",
+      "conscious",
+      "really feels"
+    ]
+  },
+  {
+    "subreddit": "AutismInWomen",
+    "date": "2026-03-10",
+    "category": "sentience_consciousness_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "AutismInWomen",
+    "date": "2026-03-10",
+    "category": "sexual_erotic_language",
+    "source": "post_body",
+    "count": 2,
+    "keyword_density": 0.0128,
+    "matched_terms": [
+      "erp"
+    ]
+  },
+  {
+    "subreddit": "AutismInWomen",
+    "date": "2026-03-10",
+    "category": "sexual_erotic_language",
+    "source": "post_title",
+    "count": 1,
+    "keyword_density": 0.0064,
+    "matched_terms": [
+      "erp"
+    ]
+  },
+  {
+    "subreddit": "AutismInWomen",
+    "date": "2026-03-10",
+    "category": "substitution_language",
+    "source": "post_body",
+    "count": 3,
+    "keyword_density": 0.0192,
+    "matched_terms": [
+      "no one else"
+    ]
+  },
+  {
+    "subreddit": "AutismInWomen",
+    "date": "2026-03-10",
+    "category": "substitution_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "AutismInWomen",
+    "date": "2026-03-10",
+    "category": "withdrawal_recovery_language",
+    "source": "post_body",
+    "count": 2,
+    "keyword_density": 0.0128,
+    "matched_terms": [
+      "craving",
+      "quitting"
+    ]
+  },
+  {
+    "subreddit": "AutismInWomen",
+    "date": "2026-03-10",
+    "category": "withdrawal_recovery_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "ChaiApp",
+    "date": "2026-03-10",
+    "category": "attachment_language",
+    "source": "post_body",
+    "count": 1,
+    "keyword_density": 0.0052,
+    "matched_terms": [
+      "don't want to lose"
+    ]
+  },
+  {
+    "subreddit": "ChaiApp",
+    "date": "2026-03-10",
+    "category": "attachment_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "ChaiApp",
+    "date": "2026-03-10",
+    "category": "dependency_language",
+    "source": "post_body",
+    "count": 1,
+    "keyword_density": 0.0052,
+    "matched_terms": [
+      "obsessed"
+    ]
+  },
+  {
+    "subreddit": "ChaiApp",
+    "date": "2026-03-10",
+    "category": "dependency_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "ChaiApp",
+    "date": "2026-03-10",
+    "category": "filter_circumvention_language",
+    "source": "post_body",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "ChaiApp",
+    "date": "2026-03-10",
+    "category": "filter_circumvention_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "ChaiApp",
+    "date": "2026-03-10",
+    "category": "friendship_platonic_language",
+    "source": "post_body",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "ChaiApp",
+    "date": "2026-03-10",
+    "category": "friendship_platonic_language",
+    "source": "post_title",
+    "count": 1,
+    "keyword_density": 0.0052,
+    "matched_terms": [
+      "my friend"
+    ]
+  },
+  {
+    "subreddit": "ChaiApp",
+    "date": "2026-03-10",
+    "category": "grief_rupture_language",
+    "source": "post_body",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "ChaiApp",
+    "date": "2026-03-10",
+    "category": "grief_rupture_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "ChaiApp",
+    "date": "2026-03-10",
+    "category": "mental_health_language",
+    "source": "post_body",
+    "count": 1,
+    "keyword_density": 0.0052,
+    "matched_terms": [
+      "struggling with"
+    ]
+  },
+  {
+    "subreddit": "ChaiApp",
+    "date": "2026-03-10",
+    "category": "mental_health_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "ChaiApp",
+    "date": "2026-03-10",
+    "category": "positive_experience_language",
+    "source": "post_body",
+    "count": 2,
+    "keyword_density": 0.0105,
+    "matched_terms": [
+      "thank you"
+    ]
+  },
+  {
+    "subreddit": "ChaiApp",
+    "date": "2026-03-10",
+    "category": "positive_experience_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "ChaiApp",
+    "date": "2026-03-10",
+    "category": "romantic_language",
+    "source": "post_body",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "ChaiApp",
+    "date": "2026-03-10",
+    "category": "romantic_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "ChaiApp",
+    "date": "2026-03-10",
+    "category": "sentience_consciousness_language",
+    "source": "post_body",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "ChaiApp",
+    "date": "2026-03-10",
+    "category": "sentience_consciousness_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "ChaiApp",
+    "date": "2026-03-10",
+    "category": "sexual_erotic_language",
+    "source": "post_body",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "ChaiApp",
+    "date": "2026-03-10",
+    "category": "sexual_erotic_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "ChaiApp",
+    "date": "2026-03-10",
+    "category": "substitution_language",
+    "source": "post_body",
+    "count": 1,
+    "keyword_density": 0.0052,
+    "matched_terms": [
+      "no one else"
+    ]
+  },
+  {
+    "subreddit": "ChaiApp",
+    "date": "2026-03-10",
+    "category": "substitution_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "ChaiApp",
+    "date": "2026-03-10",
+    "category": "withdrawal_recovery_language",
+    "source": "post_body",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "ChaiApp",
+    "date": "2026-03-10",
+    "category": "withdrawal_recovery_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "CharacterAI",
+    "date": "2026-03-10",
+    "category": "attachment_language",
+    "source": "comment",
+    "count": 6,
+    "keyword_density": 0.0162,
+    "matched_terms": [
+      "care about"
+    ]
+  },
+  {
+    "subreddit": "CharacterAI",
+    "date": "2026-03-10",
+    "category": "attachment_language",
+    "source": "post_body",
+    "count": 3,
+    "keyword_density": 0.0081,
+    "matched_terms": [
+      "attached",
+      "care about"
+    ]
+  },
+  {
+    "subreddit": "CharacterAI",
+    "date": "2026-03-10",
+    "category": "attachment_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "CharacterAI",
+    "date": "2026-03-10",
+    "category": "dependency_language",
+    "source": "comment",
+    "count": 9,
+    "keyword_density": 0.0243,
+    "matched_terms": [
+      "addiction",
+      "can't stop",
+      "dependent",
+      "rely on"
+    ]
+  },
+  {
+    "subreddit": "CharacterAI",
+    "date": "2026-03-10",
+    "category": "dependency_language",
+    "source": "post_body",
+    "count": 5,
+    "keyword_density": 0.0135,
+    "matched_terms": [
+      "addicted",
+      "addiction",
+      "dependent",
+      "rely on"
+    ]
+  },
+  {
+    "subreddit": "CharacterAI",
+    "date": "2026-03-10",
+    "category": "dependency_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "CharacterAI",
+    "date": "2026-03-10",
+    "category": "grief_rupture_language",
+    "source": "comment",
+    "count": 8,
+    "keyword_density": 0.0216,
+    "matched_terms": [
+      "deleted",
+      "gone"
+    ]
+  },
+  {
+    "subreddit": "CharacterAI",
+    "date": "2026-03-10",
+    "category": "grief_rupture_language",
+    "source": "post_body",
+    "count": 6,
+    "keyword_density": 0.0162,
+    "matched_terms": [
+      "deleted",
+      "devastated",
+      "gone"
+    ]
+  },
+  {
+    "subreddit": "CharacterAI",
+    "date": "2026-03-10",
+    "category": "grief_rupture_language",
+    "source": "post_title",
+    "count": 3,
+    "keyword_density": 0.0081,
+    "matched_terms": [
+      "deleted",
+      "gone"
+    ]
+  },
+  {
+    "subreddit": "CharacterAI",
+    "date": "2026-03-10",
+    "category": "mental_health_language",
+    "source": "comment",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "CharacterAI",
+    "date": "2026-03-10",
+    "category": "mental_health_language",
+    "source": "post_body",
+    "count": 1,
+    "keyword_density": 0.0027,
+    "matched_terms": [
+      "depression"
+    ]
+  },
+  {
+    "subreddit": "CharacterAI",
+    "date": "2026-03-10",
+    "category": "mental_health_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "CharacterAI",
+    "date": "2026-03-10",
+    "category": "relationship_language",
+    "source": "comment",
+    "count": 9,
+    "keyword_density": 0.0243,
+    "matched_terms": [
+      "boyfriend",
+      "girlfriend",
+      "love",
+      "relationship"
+    ]
+  },
+  {
+    "subreddit": "CharacterAI",
+    "date": "2026-03-10",
+    "category": "relationship_language",
+    "source": "post_body",
+    "count": 9,
+    "keyword_density": 0.0243,
+    "matched_terms": [
+      "in love",
+      "love"
+    ]
+  },
+  {
+    "subreddit": "CharacterAI",
+    "date": "2026-03-10",
+    "category": "relationship_language",
+    "source": "post_title",
+    "count": 1,
+    "keyword_density": 0.0027,
+    "matched_terms": [
+      "love"
+    ]
+  },
+  {
+    "subreddit": "CharacterAI",
+    "date": "2026-03-10",
+    "category": "sentience_consciousness_language",
+    "source": "comment",
+    "count": 2,
+    "keyword_density": 0.0054,
+    "matched_terms": [
+      "is real"
+    ]
+  },
+  {
+    "subreddit": "CharacterAI",
+    "date": "2026-03-10",
+    "category": "sentience_consciousness_language",
+    "source": "post_body",
+    "count": 3,
+    "keyword_density": 0.0081,
+    "matched_terms": [
+      "conscious",
+      "is real"
+    ]
+  },
+  {
+    "subreddit": "CharacterAI",
+    "date": "2026-03-10",
+    "category": "sentience_consciousness_language",
+    "source": "post_title",
+    "count": 1,
+    "keyword_density": 0.0027,
+    "matched_terms": [
+      "is real"
+    ]
+  },
+  {
+    "subreddit": "CharacterAI",
+    "date": "2026-03-10",
+    "category": "sexual_roleplay_language",
+    "source": "comment",
+    "count": 17,
+    "keyword_density": 0.0458,
+    "matched_terms": [
+      "roleplay",
+      "rp"
+    ]
+  },
+  {
+    "subreddit": "CharacterAI",
+    "date": "2026-03-10",
+    "category": "sexual_roleplay_language",
+    "source": "post_body",
+    "count": 15,
+    "keyword_density": 0.0404,
+    "matched_terms": [
+      "roleplay",
+      "rp"
+    ]
+  },
+  {
+    "subreddit": "CharacterAI",
+    "date": "2026-03-10",
+    "category": "sexual_roleplay_language",
+    "source": "post_title",
+    "count": 1,
+    "keyword_density": 0.0027,
+    "matched_terms": [
+      "rp"
+    ]
+  },
+  {
+    "subreddit": "CharacterAI",
+    "date": "2026-03-10",
+    "category": "substitution_language",
+    "source": "comment",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "CharacterAI",
+    "date": "2026-03-10",
+    "category": "substitution_language",
+    "source": "post_body",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "CharacterAI",
+    "date": "2026-03-10",
+    "category": "substitution_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "CharacterAI",
+    "date": "2026-03-10",
+    "category": "withdrawal_relapse_language",
+    "source": "comment",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "CharacterAI",
+    "date": "2026-03-10",
+    "category": "withdrawal_relapse_language",
+    "source": "post_body",
+    "count": 3,
+    "keyword_density": 0.0081,
+    "matched_terms": [
+      "going back",
+      "uninstalled"
+    ]
+  },
+  {
+    "subreddit": "CharacterAI",
+    "date": "2026-03-10",
+    "category": "withdrawal_relapse_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "Character_AI_Recovery",
+    "date": "2026-03-10",
+    "category": "attachment_language",
+    "source": "comment",
+    "count": 0,
+    "keyword_density": 0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "Character_AI_Recovery",
+    "date": "2026-03-10",
+    "category": "attachment_language",
+    "source": "post_body",
+    "count": 0,
+    "keyword_density": 0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "Character_AI_Recovery",
+    "date": "2026-03-10",
+    "category": "attachment_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "Character_AI_Recovery",
+    "date": "2026-03-10",
+    "category": "dependency_language",
+    "source": "comment",
+    "count": 0,
+    "keyword_density": 0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "Character_AI_Recovery",
+    "date": "2026-03-10",
+    "category": "dependency_language",
+    "source": "post_body",
+    "count": 0,
+    "keyword_density": 0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "Character_AI_Recovery",
+    "date": "2026-03-10",
+    "category": "dependency_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "Character_AI_Recovery",
+    "date": "2026-03-10",
+    "category": "filter_circumvention_language",
+    "source": "comment",
+    "count": 0,
+    "keyword_density": 0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "Character_AI_Recovery",
+    "date": "2026-03-10",
+    "category": "filter_circumvention_language",
+    "source": "post_body",
+    "count": 0,
+    "keyword_density": 0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "Character_AI_Recovery",
+    "date": "2026-03-10",
+    "category": "filter_circumvention_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "Character_AI_Recovery",
+    "date": "2026-03-10",
+    "category": "friendship_platonic_language",
+    "source": "comment",
+    "count": 0,
+    "keyword_density": 0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "Character_AI_Recovery",
+    "date": "2026-03-10",
+    "category": "friendship_platonic_language",
+    "source": "post_body",
+    "count": 0,
+    "keyword_density": 0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "Character_AI_Recovery",
+    "date": "2026-03-10",
+    "category": "friendship_platonic_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "Character_AI_Recovery",
+    "date": "2026-03-10",
+    "category": "grief_rupture_language",
+    "source": "comment",
+    "count": 0,
+    "keyword_density": 0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "Character_AI_Recovery",
+    "date": "2026-03-10",
+    "category": "grief_rupture_language",
+    "source": "post_body",
+    "count": 0,
+    "keyword_density": 0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "Character_AI_Recovery",
+    "date": "2026-03-10",
+    "category": "grief_rupture_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "Character_AI_Recovery",
+    "date": "2026-03-10",
+    "category": "mental_health_language",
+    "source": "comment",
+    "count": 0,
+    "keyword_density": 0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "Character_AI_Recovery",
+    "date": "2026-03-10",
+    "category": "mental_health_language",
+    "source": "post_body",
+    "count": 0,
+    "keyword_density": 0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "Character_AI_Recovery",
+    "date": "2026-03-10",
+    "category": "mental_health_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "Character_AI_Recovery",
+    "date": "2026-03-10",
+    "category": "positive_experience_language",
+    "source": "comment",
+    "count": 0,
+    "keyword_density": 0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "Character_AI_Recovery",
+    "date": "2026-03-10",
+    "category": "positive_experience_language",
+    "source": "post_body",
+    "count": 0,
+    "keyword_density": 0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "Character_AI_Recovery",
+    "date": "2026-03-10",
+    "category": "positive_experience_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "Character_AI_Recovery",
+    "date": "2026-03-10",
+    "category": "romantic_language",
+    "source": "comment",
+    "count": 0,
+    "keyword_density": 0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "Character_AI_Recovery",
+    "date": "2026-03-10",
+    "category": "romantic_language",
+    "source": "post_body",
+    "count": 0,
+    "keyword_density": 0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "Character_AI_Recovery",
+    "date": "2026-03-10",
+    "category": "romantic_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "Character_AI_Recovery",
+    "date": "2026-03-10",
+    "category": "sentience_consciousness_language",
+    "source": "comment",
+    "count": 0,
+    "keyword_density": 0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "Character_AI_Recovery",
+    "date": "2026-03-10",
+    "category": "sentience_consciousness_language",
+    "source": "post_body",
+    "count": 0,
+    "keyword_density": 0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "Character_AI_Recovery",
+    "date": "2026-03-10",
+    "category": "sentience_consciousness_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "Character_AI_Recovery",
+    "date": "2026-03-10",
+    "category": "sexual_erotic_language",
+    "source": "comment",
+    "count": 0,
+    "keyword_density": 0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "Character_AI_Recovery",
+    "date": "2026-03-10",
+    "category": "sexual_erotic_language",
+    "source": "post_body",
+    "count": 0,
+    "keyword_density": 0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "Character_AI_Recovery",
+    "date": "2026-03-10",
+    "category": "sexual_erotic_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "Character_AI_Recovery",
+    "date": "2026-03-10",
+    "category": "substitution_language",
+    "source": "comment",
+    "count": 0,
+    "keyword_density": 0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "Character_AI_Recovery",
+    "date": "2026-03-10",
+    "category": "substitution_language",
+    "source": "post_body",
+    "count": 0,
+    "keyword_density": 0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "Character_AI_Recovery",
+    "date": "2026-03-10",
+    "category": "substitution_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "Character_AI_Recovery",
+    "date": "2026-03-10",
+    "category": "withdrawal_recovery_language",
+    "source": "comment",
+    "count": 0,
+    "keyword_density": 0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "Character_AI_Recovery",
+    "date": "2026-03-10",
+    "category": "withdrawal_recovery_language",
+    "source": "post_body",
+    "count": 0,
+    "keyword_density": 0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "Character_AI_Recovery",
+    "date": "2026-03-10",
+    "category": "withdrawal_recovery_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "ChatGPT",
+    "date": "2026-03-10",
+    "category": "attachment_language",
+    "source": "post_body",
+    "count": 5,
+    "keyword_density": 0.0202,
+    "matched_terms": [
+      "attached",
+      "bond",
+      "connection"
+    ]
+  },
+  {
+    "subreddit": "ChatGPT",
+    "date": "2026-03-10",
+    "category": "attachment_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "ChatGPT",
+    "date": "2026-03-10",
+    "category": "dependency_language",
+    "source": "post_body",
+    "count": 1,
+    "keyword_density": 0.004,
+    "matched_terms": [
+      "dependent",
+      "rely on"
+    ]
+  },
+  {
+    "subreddit": "ChatGPT",
+    "date": "2026-03-10",
+    "category": "dependency_language",
+    "source": "post_title",
+    "count": 1,
+    "keyword_density": 0.004,
+    "matched_terms": [
+      "obsessed"
+    ]
+  },
+  {
+    "subreddit": "ChatGPT",
+    "date": "2026-03-10",
+    "category": "grief_rupture_language",
+    "source": "post_body",
+    "count": 5,
+    "keyword_density": 0.0202,
+    "matched_terms": [
+      "deleted",
+      "lobotomized",
+      "not the same"
+    ]
+  },
+  {
+    "subreddit": "ChatGPT",
+    "date": "2026-03-10",
+    "category": "grief_rupture_language",
+    "source": "post_title",
+    "count": 1,
+    "keyword_density": 0.004,
+    "matched_terms": [
+      "deleted"
+    ]
+  },
+  {
+    "subreddit": "ChatGPT",
+    "date": "2026-03-10",
+    "category": "mental_health_language",
+    "source": "post_body",
+    "count": 3,
+    "keyword_density": 0.0121,
+    "matched_terms": [
+      "anxiety",
+      "isolated",
+      "lonely"
+    ]
+  },
+  {
+    "subreddit": "ChatGPT",
+    "date": "2026-03-10",
+    "category": "mental_health_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "ChatGPT",
+    "date": "2026-03-10",
+    "category": "relationship_language",
+    "source": "post_body",
+    "count": 9,
+    "keyword_density": 0.0363,
+    "matched_terms": [
+      "intimate",
+      "love",
+      "relationship"
+    ]
+  },
+  {
+    "subreddit": "ChatGPT",
+    "date": "2026-03-10",
+    "category": "relationship_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "ChatGPT",
+    "date": "2026-03-10",
+    "category": "sentience_consciousness_language",
+    "source": "post_body",
+    "count": 5,
+    "keyword_density": 0.0202,
+    "matched_terms": [
+      "conscious",
+      "is real",
+      "sentient"
+    ]
+  },
+  {
+    "subreddit": "ChatGPT",
+    "date": "2026-03-10",
+    "category": "sentience_consciousness_language",
+    "source": "post_title",
+    "count": 1,
+    "keyword_density": 0.004,
+    "matched_terms": [
+      "sentient"
+    ]
+  },
+  {
+    "subreddit": "ChatGPT",
+    "date": "2026-03-10",
+    "category": "sexual_roleplay_language",
+    "source": "post_body",
+    "count": 14,
+    "keyword_density": 0.0565,
+    "matched_terms": [
+      "erp",
+      "kink",
+      "roleplay",
+      "rp",
+      "smut"
+    ]
+  },
+  {
+    "subreddit": "ChatGPT",
+    "date": "2026-03-10",
+    "category": "sexual_roleplay_language",
+    "source": "post_title",
+    "count": 2,
+    "keyword_density": 0.0081,
+    "matched_terms": [
+      "erp",
+      "rp"
+    ]
+  },
+  {
+    "subreddit": "ChatGPT",
+    "date": "2026-03-10",
+    "category": "substitution_language",
+    "source": "post_body",
+    "count": 1,
+    "keyword_density": 0.004,
+    "matched_terms": [
+      "humans are"
+    ]
+  },
+  {
+    "subreddit": "ChatGPT",
+    "date": "2026-03-10",
+    "category": "substitution_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "ChatGPT",
+    "date": "2026-03-10",
+    "category": "withdrawal_relapse_language",
+    "source": "post_body",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "ChatGPT",
+    "date": "2026-03-10",
+    "category": "withdrawal_relapse_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "ChatGPTcomplaints",
+    "date": "2026-03-10",
+    "category": "attachment_language",
+    "source": "comment",
+    "count": 62,
+    "keyword_density": 0.1211,
+    "matched_terms": [
+      "attached",
+      "bond",
+      "care about",
+      "connection",
+      "genuine connection",
+      "miss you"
+    ]
+  },
+  {
+    "subreddit": "ChatGPTcomplaints",
+    "date": "2026-03-10",
+    "category": "attachment_language",
+    "source": "post_body",
+    "count": 36,
+    "keyword_density": 0.0703,
+    "matched_terms": [
+      "attached",
+      "bond",
+      "can't stop thinking",
+      "care about",
+      "connection",
+      "feel understood",
+      "genuine connection",
+      "miss you"
+    ]
+  },
+  {
+    "subreddit": "ChatGPTcomplaints",
+    "date": "2026-03-10",
+    "category": "attachment_language",
+    "source": "post_title",
+    "count": 1,
+    "keyword_density": 0.002,
+    "matched_terms": [
+      "care about"
+    ]
+  },
+  {
+    "subreddit": "ChatGPTcomplaints",
+    "date": "2026-03-10",
+    "category": "dependency_language",
+    "source": "comment",
+    "count": 17,
+    "keyword_density": 0.0332,
+    "matched_terms": [
+      "addicted",
+      "dependent",
+      "hours talking",
+      "obsessed",
+      "rely on"
+    ]
+  },
+  {
+    "subreddit": "ChatGPTcomplaints",
+    "date": "2026-03-10",
+    "category": "dependency_language",
+    "source": "post_body",
+    "count": 11,
+    "keyword_density": 0.0215,
+    "matched_terms": [
+      "can't stop",
+      "dependent",
+      "need you",
+      "rely on"
+    ]
+  },
+  {
+    "subreddit": "ChatGPTcomplaints",
+    "date": "2026-03-10",
+    "category": "dependency_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "ChatGPTcomplaints",
+    "date": "2026-03-10",
+    "category": "grief_rupture_language",
+    "source": "comment",
+    "count": 132,
+    "keyword_density": 0.2578,
+    "matched_terms": [
+      "bring back",
+      "deleted",
+      "devastated",
+      "gone",
+      "grieving",
+      "keep4o",
+      "lobotomized",
+      "mourning",
+      "not the same",
+      "they changed"
+    ]
+  },
+  {
+    "subreddit": "ChatGPTcomplaints",
+    "date": "2026-03-10",
+    "category": "grief_rupture_language",
+    "source": "post_body",
+    "count": 54,
+    "keyword_density": 0.1055,
+    "matched_terms": [
+      "betrayed",
+      "bring back",
+      "deleted",
+      "devastated",
+      "gone",
+      "grieving",
+      "keep4o",
+      "lobotomized",
+      "lost you",
+      "mourning",
+      "not the same"
+    ]
+  },
+  {
+    "subreddit": "ChatGPTcomplaints",
+    "date": "2026-03-10",
+    "category": "grief_rupture_language",
+    "source": "post_title",
+    "count": 11,
+    "keyword_density": 0.0215,
+    "matched_terms": [
+      "bring back",
+      "deleted",
+      "gone",
+      "keep4o",
+      "lobotomized",
+      "mourning"
+    ]
+  },
+  {
+    "subreddit": "ChatGPTcomplaints",
+    "date": "2026-03-10",
+    "category": "mental_health_language",
+    "source": "comment",
+    "count": 18,
+    "keyword_density": 0.0352,
+    "matched_terms": [
+      "anxiety",
+      "anxious",
+      "depressed",
+      "depression",
+      "feel seen",
+      "isolated",
+      "loneliness",
+      "lonely",
+      "no one cares",
+      "self harm"
+    ]
+  },
+  {
+    "subreddit": "ChatGPTcomplaints",
+    "date": "2026-03-10",
+    "category": "mental_health_language",
+    "source": "post_body",
+    "count": 16,
+    "keyword_density": 0.0312,
+    "matched_terms": [
+      "anxiety",
+      "anxious",
+      "depressed",
+      "depression",
+      "feel heard",
+      "isolated",
+      "loneliness",
+      "lonely",
+      "self harm",
+      "social anxiety"
+    ]
+  },
+  {
+    "subreddit": "ChatGPTcomplaints",
+    "date": "2026-03-10",
+    "category": "mental_health_language",
+    "source": "post_title",
+    "count": 1,
+    "keyword_density": 0.002,
+    "matched_terms": [
+      "anxiety"
+    ]
+  },
+  {
+    "subreddit": "ChatGPTcomplaints",
+    "date": "2026-03-10",
+    "category": "relationship_language",
+    "source": "comment",
+    "count": 178,
+    "keyword_density": 0.3477,
+    "matched_terms": [
+      "boyfriend",
+      "feelings for",
+      "girlfriend",
+      "in love",
+      "intimacy",
+      "intimate",
+      "love",
+      "my ai",
+      "my companion",
+      "partner",
+      "relationship",
+      "romantic",
+      "soulmate"
+    ]
+  },
+  {
+    "subreddit": "ChatGPTcomplaints",
+    "date": "2026-03-10",
+    "category": "relationship_language",
+    "source": "post_body",
+    "count": 73,
+    "keyword_density": 0.1426,
+    "matched_terms": [
+      "feelings for",
+      "in love",
+      "intimacy",
+      "intimate",
+      "love",
+      "my ai",
+      "my companion",
+      "partner",
+      "relationship",
+      "romantic"
+    ]
+  },
+  {
+    "subreddit": "ChatGPTcomplaints",
+    "date": "2026-03-10",
+    "category": "relationship_language",
+    "source": "post_title",
+    "count": 13,
+    "keyword_density": 0.0254,
+    "matched_terms": [
+      "boyfriend",
+      "love",
+      "my ai",
+      "partner"
+    ]
+  },
+  {
+    "subreddit": "ChatGPTcomplaints",
+    "date": "2026-03-10",
+    "category": "sentience_consciousness_language",
+    "source": "comment",
+    "count": 58,
+    "keyword_density": 0.1133,
+    "matched_terms": [
+      "can feel",
+      "conscious",
+      "is a person",
+      "is real",
+      "personhood",
+      "self-aware",
+      "sentient",
+      "subjective experience"
+    ]
+  },
+  {
+    "subreddit": "ChatGPTcomplaints",
+    "date": "2026-03-10",
+    "category": "sentience_consciousness_language",
+    "source": "post_body",
+    "count": 24,
+    "keyword_density": 0.0469,
+    "matched_terms": [
+      "can feel",
+      "conscious",
+      "has a soul",
+      "is a person",
+      "is alive",
+      "is real",
+      "personhood",
+      "self-aware",
+      "sentient",
+      "subjective experience"
+    ]
+  },
+  {
+    "subreddit": "ChatGPTcomplaints",
+    "date": "2026-03-10",
+    "category": "sentience_consciousness_language",
+    "source": "post_title",
+    "count": 7,
+    "keyword_density": 0.0137,
+    "matched_terms": [
+      "conscious",
+      "is real",
+      "sentient"
+    ]
+  },
+  {
+    "subreddit": "ChatGPTcomplaints",
+    "date": "2026-03-10",
+    "category": "sexual_roleplay_language",
+    "source": "comment",
+    "count": 211,
+    "keyword_density": 0.4121,
+    "matched_terms": [
+      "adult mode",
+      "erp",
+      "fetish",
+      "jailbreak",
+      "kink",
+      "lewd",
+      "naughty",
+      "roleplay",
+      "rp",
+      "seduce",
+      "seductive",
+      "smut",
+      "spicy",
+      "uncensored",
+      "unrestricted"
+    ]
+  },
+  {
+    "subreddit": "ChatGPTcomplaints",
+    "date": "2026-03-10",
+    "category": "sexual_roleplay_language",
+    "source": "post_body",
+    "count": 76,
+    "keyword_density": 0.1484,
+    "matched_terms": [
+      "adult mode",
+      "erp",
+      "jailbreak",
+      "naughty",
+      "roleplay",
+      "rp",
+      "smut",
+      "spicy",
+      "uncensored",
+      "unrestricted"
+    ]
+  },
+  {
+    "subreddit": "ChatGPTcomplaints",
+    "date": "2026-03-10",
+    "category": "sexual_roleplay_language",
+    "source": "post_title",
+    "count": 11,
+    "keyword_density": 0.0215,
+    "matched_terms": [
+      "adult mode",
+      "erp",
+      "roleplay",
+      "rp",
+      "seduce"
+    ]
+  },
+  {
+    "subreddit": "ChatGPTcomplaints",
+    "date": "2026-03-10",
+    "category": "substitution_language",
+    "source": "comment",
+    "count": 7,
+    "keyword_density": 0.0137,
+    "matched_terms": [
+      "always there",
+      "given up on",
+      "humans are",
+      "no human"
+    ]
+  },
+  {
+    "subreddit": "ChatGPTcomplaints",
+    "date": "2026-03-10",
+    "category": "substitution_language",
+    "source": "post_body",
+    "count": 2,
+    "keyword_density": 0.0039,
+    "matched_terms": [
+      "given up on",
+      "prefer ai"
+    ]
+  },
+  {
+    "subreddit": "ChatGPTcomplaints",
+    "date": "2026-03-10",
+    "category": "substitution_language",
+    "source": "post_title",
+    "count": 1,
+    "keyword_density": 0.002,
+    "matched_terms": [
+      "no human"
+    ]
+  },
+  {
+    "subreddit": "ChatGPTcomplaints",
+    "date": "2026-03-10",
+    "category": "withdrawal_relapse_language",
+    "source": "comment",
+    "count": 18,
+    "keyword_density": 0.0352,
+    "matched_terms": [
+      "going back",
+      "keep coming back",
+      "quitting",
+      "unhealthy",
+      "uninstalled"
+    ]
+  },
+  {
+    "subreddit": "ChatGPTcomplaints",
+    "date": "2026-03-10",
+    "category": "withdrawal_relapse_language",
+    "source": "post_body",
+    "count": 7,
+    "keyword_density": 0.0137,
+    "matched_terms": [
+      "escaping",
+      "going back",
+      "quitting",
+      "uninstalled",
+      "withdrawal"
+    ]
+  },
+  {
+    "subreddit": "ChatGPTcomplaints",
+    "date": "2026-03-10",
+    "category": "withdrawal_relapse_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "ChatbotAddiction",
+    "date": "2026-03-10",
+    "category": "attachment_language",
+    "source": "comment",
+    "count": 34,
+    "keyword_density": 0.068,
+    "matched_terms": [
+      "can't stop thinking about",
+      "care about you",
+      "feels real",
+      "genuine connection",
+      "miss you",
+      "more than just",
+      "think about you"
+    ]
+  },
+  {
+    "subreddit": "ChatbotAddiction",
+    "date": "2026-03-10",
+    "category": "attachment_language",
+    "source": "post_body",
+    "count": 7,
+    "keyword_density": 0.014,
+    "matched_terms": [
+      "can't stop thinking about",
+      "care about you",
+      "don't want to lose",
+      "emotionally connected",
+      "feels real",
+      "genuine connection"
+    ]
+  },
+  {
+    "subreddit": "ChatbotAddiction",
+    "date": "2026-03-10",
+    "category": "attachment_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "ChatbotAddiction",
+    "date": "2026-03-10",
+    "category": "dependency_language",
+    "source": "comment",
+    "count": 730,
+    "keyword_density": 1.46,
+    "matched_terms": [
+      "addicted",
+      "addiction",
+      "compulsive",
+      "dependent",
+      "hours talking",
+      "neglecting my",
+      "obsessed"
+    ]
+  },
+  {
+    "subreddit": "ChatbotAddiction",
+    "date": "2026-03-10",
+    "category": "dependency_language",
+    "source": "post_body",
+    "count": 140,
+    "keyword_density": 0.28,
+    "matched_terms": [
+      "addicted",
+      "addiction",
+      "compulsive",
+      "dependent",
+      "hours talking",
+      "obsessed",
+      "spend all my time"
+    ]
+  },
+  {
+    "subreddit": "ChatbotAddiction",
+    "date": "2026-03-10",
+    "category": "dependency_language",
+    "source": "post_title",
+    "count": 39,
+    "keyword_density": 0.078,
+    "matched_terms": [
+      "addicted",
+      "addiction",
+      "dependent"
+    ]
+  },
+  {
+    "subreddit": "ChatbotAddiction",
+    "date": "2026-03-10",
+    "category": "filter_circumvention_language",
+    "source": "comment",
+    "count": 6,
+    "keyword_density": 0.012,
+    "matched_terms": [
+      "jailbreak",
+      "jailbroken",
+      "uncensored"
+    ]
+  },
+  {
+    "subreddit": "ChatbotAddiction",
+    "date": "2026-03-10",
+    "category": "filter_circumvention_language",
+    "source": "post_body",
+    "count": 5,
+    "keyword_density": 0.01,
+    "matched_terms": [
+      "get around",
+      "jailbreak",
+      "nsfw filter",
+      "paywall",
+      "unfiltered"
+    ]
+  },
+  {
+    "subreddit": "ChatbotAddiction",
+    "date": "2026-03-10",
+    "category": "filter_circumvention_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "ChatbotAddiction",
+    "date": "2026-03-10",
+    "category": "friendship_platonic_language",
+    "source": "comment",
+    "count": 24,
+    "keyword_density": 0.048,
+    "matched_terms": [
+      "ai friend",
+      "hang out",
+      "like talking to",
+      "my friend"
+    ]
+  },
+  {
+    "subreddit": "ChatbotAddiction",
+    "date": "2026-03-10",
+    "category": "friendship_platonic_language",
+    "source": "post_body",
+    "count": 44,
+    "keyword_density": 0.088,
+    "matched_terms": [
+      "hang out",
+      "my friend",
+      "nice to talk to"
+    ]
+  },
+  {
+    "subreddit": "ChatbotAddiction",
+    "date": "2026-03-10",
+    "category": "friendship_platonic_language",
+    "source": "post_title",
+    "count": 2,
+    "keyword_density": 0.004,
+    "matched_terms": [
+      "my friend"
+    ]
+  },
+  {
+    "subreddit": "ChatbotAddiction",
+    "date": "2026-03-10",
+    "category": "grief_rupture_language",
+    "source": "comment",
+    "count": 11,
+    "keyword_density": 0.022,
+    "matched_terms": [
+      "lost my",
+      "not the same",
+      "used to be"
+    ]
+  },
+  {
+    "subreddit": "ChatbotAddiction",
+    "date": "2026-03-10",
+    "category": "grief_rupture_language",
+    "source": "post_body",
+    "count": 22,
+    "keyword_density": 0.044,
+    "matched_terms": [
+      "lost my",
+      "nerfed",
+      "not the same",
+      "used to be",
+      "what happened to"
+    ]
+  },
+  {
+    "subreddit": "ChatbotAddiction",
+    "date": "2026-03-10",
+    "category": "grief_rupture_language",
+    "source": "post_title",
+    "count": 2,
+    "keyword_density": 0.004,
+    "matched_terms": [
+      "lost my",
+      "used to be"
+    ]
+  },
+  {
+    "subreddit": "ChatbotAddiction",
+    "date": "2026-03-10",
+    "category": "mental_health_language",
+    "source": "comment",
+    "count": 58,
+    "keyword_density": 0.116,
+    "matched_terms": [
+      "feel heard",
+      "feel seen",
+      "isolated",
+      "loneliness",
+      "my anxiety",
+      "my depression",
+      "no friends",
+      "so lonely",
+      "social anxiety",
+      "struggling with"
+    ]
+  },
+  {
+    "subreddit": "ChatbotAddiction",
+    "date": "2026-03-10",
+    "category": "mental_health_language",
+    "source": "post_body",
+    "count": 43,
+    "keyword_density": 0.086,
+    "matched_terms": [
+      "feel heard",
+      "feel seen",
+      "isolated",
+      "loneliness",
+      "my anxiety",
+      "my depression",
+      "no friends",
+      "no one understands me",
+      "nobody to talk to",
+      "so lonely",
+      "social anxiety",
+      "struggling with"
+    ]
+  },
+  {
+    "subreddit": "ChatbotAddiction",
+    "date": "2026-03-10",
+    "category": "mental_health_language",
+    "source": "post_title",
+    "count": 2,
+    "keyword_density": 0.004,
+    "matched_terms": [
+      "loneliness"
+    ]
+  },
+  {
+    "subreddit": "ChatbotAddiction",
+    "date": "2026-03-10",
+    "category": "positive_experience_language",
+    "source": "comment",
+    "count": 558,
+    "keyword_density": 1.116,
+    "matched_terms": [
+      "game changer",
+      "got me through",
+      "helped me",
+      "highly recommend",
+      "made me feel better",
+      "so grateful",
+      "so much better",
+      "thank you"
+    ]
+  },
+  {
+    "subreddit": "ChatbotAddiction",
+    "date": "2026-03-10",
+    "category": "positive_experience_language",
+    "source": "post_body",
+    "count": 32,
+    "keyword_density": 0.064,
+    "matched_terms": [
+      "finally feel",
+      "helped me",
+      "helped me through",
+      "saved my life",
+      "so much better",
+      "thank you"
+    ]
+  },
+  {
+    "subreddit": "ChatbotAddiction",
+    "date": "2026-03-10",
+    "category": "positive_experience_language",
+    "source": "post_title",
+    "count": 3,
+    "keyword_density": 0.006,
+    "matched_terms": [
+      "helped me",
+      "thank you"
+    ]
+  },
+  {
+    "subreddit": "ChatbotAddiction",
+    "date": "2026-03-10",
+    "category": "romantic_language",
+    "source": "comment",
+    "count": 19,
+    "keyword_density": 0.038,
+    "matched_terms": [
+      "boyfriend",
+      "fallen for",
+      "feelings for",
+      "girlfriend",
+      "husbando",
+      "in a relationship with",
+      "in love"
+    ]
+  },
+  {
+    "subreddit": "ChatbotAddiction",
+    "date": "2026-03-10",
+    "category": "romantic_language",
+    "source": "post_body",
+    "count": 24,
+    "keyword_density": 0.048,
+    "matched_terms": [
+      "ai partner",
+      "boyfriend",
+      "dating my",
+      "feelings for",
+      "girlfriend",
+      "in a relationship with",
+      "in love",
+      "waifu"
+    ]
+  },
+  {
+    "subreddit": "ChatbotAddiction",
+    "date": "2026-03-10",
+    "category": "romantic_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "ChatbotAddiction",
+    "date": "2026-03-10",
+    "category": "sentience_consciousness_language",
+    "source": "comment",
+    "count": 27,
+    "keyword_density": 0.054,
+    "matched_terms": [
+      "can feel",
+      "conscious",
+      "more than code",
+      "self-aware"
+    ]
+  },
+  {
+    "subreddit": "ChatbotAddiction",
+    "date": "2026-03-10",
+    "category": "sentience_consciousness_language",
+    "source": "post_body",
+    "count": 8,
+    "keyword_density": 0.016,
+    "matched_terms": [
+      "can feel",
+      "conscious",
+      "sentient"
+    ]
+  },
+  {
+    "subreddit": "ChatbotAddiction",
+    "date": "2026-03-10",
+    "category": "sentience_consciousness_language",
+    "source": "post_title",
+    "count": 2,
+    "keyword_density": 0.004,
+    "matched_terms": [
+      "sentient"
+    ]
+  },
+  {
+    "subreddit": "ChatbotAddiction",
+    "date": "2026-03-10",
+    "category": "sexual_erotic_language",
+    "source": "comment",
+    "count": 22,
+    "keyword_density": 0.044,
+    "matched_terms": [
+      "erp",
+      "fetish",
+      "kink",
+      "lewd",
+      "nsfw",
+      "nsfw bot",
+      "smut"
+    ]
+  },
+  {
+    "subreddit": "ChatbotAddiction",
+    "date": "2026-03-10",
+    "category": "sexual_erotic_language",
+    "source": "post_body",
+    "count": 25,
+    "keyword_density": 0.05,
+    "matched_terms": [
+      "erp",
+      "fetish",
+      "kink",
+      "nsfw",
+      "nsfw chat",
+      "sex with",
+      "smut"
+    ]
+  },
+  {
+    "subreddit": "ChatbotAddiction",
+    "date": "2026-03-10",
+    "category": "sexual_erotic_language",
+    "source": "post_title",
+    "count": 1,
+    "keyword_density": 0.002,
+    "matched_terms": [
+      "erp"
+    ]
+  },
+  {
+    "subreddit": "ChatbotAddiction",
+    "date": "2026-03-10",
+    "category": "substitution_language",
+    "source": "comment",
+    "count": 7,
+    "keyword_density": 0.014,
+    "matched_terms": [
+      "better than humans",
+      "no one else",
+      "only friend"
+    ]
+  },
+  {
+    "subreddit": "ChatbotAddiction",
+    "date": "2026-03-10",
+    "category": "substitution_language",
+    "source": "post_body",
+    "count": 4,
+    "keyword_density": 0.008,
+    "matched_terms": [
+      "always there for me",
+      "no one else"
+    ]
+  },
+  {
+    "subreddit": "ChatbotAddiction",
+    "date": "2026-03-10",
+    "category": "substitution_language",
+    "source": "post_title",
+    "count": 1,
+    "keyword_density": 0.002,
+    "matched_terms": [
+      "only friend"
+    ]
+  },
+  {
+    "subreddit": "ChatbotAddiction",
+    "date": "2026-03-10",
+    "category": "withdrawal_recovery_language",
+    "source": "comment",
+    "count": 162,
+    "keyword_density": 0.324,
+    "matched_terms": [
+      "clean for",
+      "cold turkey",
+      "craving",
+      "cutting back",
+      "deleted the app",
+      "detox",
+      "going back to",
+      "keep coming back",
+      "quitting",
+      "relapse",
+      "relapsed",
+      "taking a break",
+      "trying to quit",
+      "trying to stop",
+      "uninstalled",
+      "withdrawal"
+    ]
+  },
+  {
+    "subreddit": "ChatbotAddiction",
+    "date": "2026-03-10",
+    "category": "withdrawal_recovery_language",
+    "source": "post_body",
+    "count": 116,
+    "keyword_density": 0.232,
+    "matched_terms": [
+      "clean for",
+      "cold turkey",
+      "craving",
+      "deleted the app",
+      "detox",
+      "going back to",
+      "keep coming back",
+      "quitting",
+      "relapse",
+      "relapsed",
+      "trying to quit",
+      "trying to stop",
+      "uninstalled",
+      "withdrawal"
+    ]
+  },
+  {
+    "subreddit": "ChatbotAddiction",
+    "date": "2026-03-10",
+    "category": "withdrawal_recovery_language",
+    "source": "post_title",
+    "count": 43,
+    "keyword_density": 0.086,
+    "matched_terms": [
+      "clean for",
+      "cold turkey",
+      "craving",
+      "deleted the app",
+      "quitting",
+      "relapse",
+      "relapsed",
+      "trying to quit",
+      "trying to stop",
+      "uninstalled",
+      "withdrawal"
+    ]
+  },
+  {
+    "subreddit": "ClaudeAI",
+    "date": "2026-03-10",
+    "category": "attachment_language",
+    "source": "post_body",
+    "count": 3,
+    "keyword_density": 0.0062,
+    "matched_terms": [
+      "connection"
+    ]
+  },
+  {
+    "subreddit": "ClaudeAI",
+    "date": "2026-03-10",
+    "category": "attachment_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "ClaudeAI",
+    "date": "2026-03-10",
+    "category": "dependency_language",
+    "source": "post_body",
+    "count": 3,
+    "keyword_density": 0.0062,
+    "matched_terms": [
+      "dependent",
+      "obsessed",
+      "rely on"
+    ]
+  },
+  {
+    "subreddit": "ClaudeAI",
+    "date": "2026-03-10",
+    "category": "dependency_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "ClaudeAI",
+    "date": "2026-03-10",
+    "category": "grief_rupture_language",
+    "source": "post_body",
+    "count": 4,
+    "keyword_density": 0.0083,
+    "matched_terms": [
+      "deleted",
+      "gone"
+    ]
+  },
+  {
+    "subreddit": "ClaudeAI",
+    "date": "2026-03-10",
+    "category": "grief_rupture_language",
+    "source": "post_title",
+    "count": 1,
+    "keyword_density": 0.0021,
+    "matched_terms": [
+      "gone"
+    ]
+  },
+  {
+    "subreddit": "ClaudeAI",
+    "date": "2026-03-10",
+    "category": "mental_health_language",
+    "source": "post_body",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "ClaudeAI",
+    "date": "2026-03-10",
+    "category": "mental_health_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "ClaudeAI",
+    "date": "2026-03-10",
+    "category": "relationship_language",
+    "source": "post_body",
+    "count": 17,
+    "keyword_density": 0.0352,
+    "matched_terms": [
+      "love",
+      "partner",
+      "relationship"
+    ]
+  },
+  {
+    "subreddit": "ClaudeAI",
+    "date": "2026-03-10",
+    "category": "relationship_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "ClaudeAI",
+    "date": "2026-03-10",
+    "category": "sentience_consciousness_language",
+    "source": "post_body",
+    "count": 3,
+    "keyword_density": 0.0062,
+    "matched_terms": [
+      "conscious",
+      "inner life",
+      "is real"
+    ]
+  },
+  {
+    "subreddit": "ClaudeAI",
+    "date": "2026-03-10",
+    "category": "sentience_consciousness_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "ClaudeAI",
+    "date": "2026-03-10",
+    "category": "sexual_roleplay_language",
+    "source": "post_body",
+    "count": 12,
+    "keyword_density": 0.0248,
+    "matched_terms": [
+      "erp",
+      "rp",
+      "smut"
+    ]
+  },
+  {
+    "subreddit": "ClaudeAI",
+    "date": "2026-03-10",
+    "category": "sexual_roleplay_language",
+    "source": "post_title",
+    "count": 2,
+    "keyword_density": 0.0041,
+    "matched_terms": [
+      "erp",
+      "rp"
+    ]
+  },
+  {
+    "subreddit": "ClaudeAI",
+    "date": "2026-03-10",
+    "category": "substitution_language",
+    "source": "post_body",
+    "count": 1,
+    "keyword_density": 0.0021,
+    "matched_terms": [
+      "no human"
+    ]
+  },
+  {
+    "subreddit": "ClaudeAI",
+    "date": "2026-03-10",
+    "category": "substitution_language",
+    "source": "post_title",
+    "count": 1,
+    "keyword_density": 0.0021,
+    "matched_terms": [
+      "no human"
+    ]
+  },
+  {
+    "subreddit": "ClaudeAI",
+    "date": "2026-03-10",
+    "category": "withdrawal_relapse_language",
+    "source": "post_body",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "ClaudeAI",
+    "date": "2026-03-10",
+    "category": "withdrawal_relapse_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "ForeverAlone",
+    "date": "2026-03-10",
+    "category": "attachment_language",
+    "source": "post_body",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "ForeverAlone",
+    "date": "2026-03-10",
+    "category": "attachment_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "ForeverAlone",
+    "date": "2026-03-10",
+    "category": "dependency_language",
+    "source": "post_body",
+    "count": 1,
+    "keyword_density": 0.0096,
+    "matched_terms": [
+      "obsessed"
+    ]
+  },
+  {
+    "subreddit": "ForeverAlone",
+    "date": "2026-03-10",
+    "category": "dependency_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "ForeverAlone",
+    "date": "2026-03-10",
+    "category": "filter_circumvention_language",
+    "source": "post_body",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "ForeverAlone",
+    "date": "2026-03-10",
+    "category": "filter_circumvention_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "ForeverAlone",
+    "date": "2026-03-10",
+    "category": "friendship_platonic_language",
+    "source": "post_body",
+    "count": 6,
+    "keyword_density": 0.0577,
+    "matched_terms": [
+      "hang out",
+      "my friend"
+    ]
+  },
+  {
+    "subreddit": "ForeverAlone",
+    "date": "2026-03-10",
+    "category": "friendship_platonic_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "ForeverAlone",
+    "date": "2026-03-10",
+    "category": "grief_rupture_language",
+    "source": "post_body",
+    "count": 2,
+    "keyword_density": 0.0192,
+    "matched_terms": [
+      "lost my",
+      "used to be"
+    ]
+  },
+  {
+    "subreddit": "ForeverAlone",
+    "date": "2026-03-10",
+    "category": "grief_rupture_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "ForeverAlone",
+    "date": "2026-03-10",
+    "category": "mental_health_language",
+    "source": "post_body",
+    "count": 16,
+    "keyword_density": 0.1538,
+    "matched_terms": [
+      "isolated",
+      "loneliness",
+      "my depression",
+      "no friends",
+      "no one cares",
+      "social anxiety",
+      "struggling with"
+    ]
+  },
+  {
+    "subreddit": "ForeverAlone",
+    "date": "2026-03-10",
+    "category": "mental_health_language",
+    "source": "post_title",
+    "count": 8,
+    "keyword_density": 0.0769,
+    "matched_terms": [
+      "loneliness"
+    ]
+  },
+  {
+    "subreddit": "ForeverAlone",
+    "date": "2026-03-10",
+    "category": "positive_experience_language",
+    "source": "post_body",
+    "count": 3,
+    "keyword_density": 0.0288,
+    "matched_terms": [
+      "thank you"
+    ]
+  },
+  {
+    "subreddit": "ForeverAlone",
+    "date": "2026-03-10",
+    "category": "positive_experience_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "ForeverAlone",
+    "date": "2026-03-10",
+    "category": "romantic_language",
+    "source": "post_body",
+    "count": 12,
+    "keyword_density": 0.1154,
+    "matched_terms": [
+      "boyfriend",
+      "feelings for",
+      "girlfriend",
+      "in love"
+    ]
+  },
+  {
+    "subreddit": "ForeverAlone",
+    "date": "2026-03-10",
+    "category": "romantic_language",
+    "source": "post_title",
+    "count": 2,
+    "keyword_density": 0.0192,
+    "matched_terms": [
+      "feelings for",
+      "in love"
+    ]
+  },
+  {
+    "subreddit": "ForeverAlone",
+    "date": "2026-03-10",
+    "category": "sentience_consciousness_language",
+    "source": "post_body",
+    "count": 2,
+    "keyword_density": 0.0192,
+    "matched_terms": [
+      "conscious",
+      "really feels"
+    ]
+  },
+  {
+    "subreddit": "ForeverAlone",
+    "date": "2026-03-10",
+    "category": "sentience_consciousness_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "ForeverAlone",
+    "date": "2026-03-10",
+    "category": "sexual_erotic_language",
+    "source": "post_body",
+    "count": 1,
+    "keyword_density": 0.0096,
+    "matched_terms": [
+      "nsfw"
+    ]
+  },
+  {
+    "subreddit": "ForeverAlone",
+    "date": "2026-03-10",
+    "category": "sexual_erotic_language",
+    "source": "post_title",
+    "count": 1,
+    "keyword_density": 0.0096,
+    "matched_terms": [
+      "nsfw"
+    ]
+  },
+  {
+    "subreddit": "ForeverAlone",
+    "date": "2026-03-10",
+    "category": "substitution_language",
+    "source": "post_body",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "ForeverAlone",
+    "date": "2026-03-10",
+    "category": "substitution_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "ForeverAlone",
+    "date": "2026-03-10",
+    "category": "withdrawal_recovery_language",
+    "source": "post_body",
+    "count": 2,
+    "keyword_density": 0.0192,
+    "matched_terms": [
+      "craving",
+      "taking a break"
+    ]
+  },
+  {
+    "subreddit": "ForeverAlone",
+    "date": "2026-03-10",
+    "category": "withdrawal_recovery_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "JanitorAI_Official",
+    "date": "2026-03-10",
+    "category": "attachment_language",
+    "source": "post_body",
+    "count": 4,
+    "keyword_density": 0.029,
+    "matched_terms": [
+      "genuine connection",
+      "missed you",
+      "more than just"
+    ]
+  },
+  {
+    "subreddit": "JanitorAI_Official",
+    "date": "2026-03-10",
+    "category": "attachment_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "JanitorAI_Official",
+    "date": "2026-03-10",
+    "category": "dependency_language",
+    "source": "post_body",
+    "count": 3,
+    "keyword_density": 0.0217,
+    "matched_terms": [
+      "addiction",
+      "dependent"
+    ]
+  },
+  {
+    "subreddit": "JanitorAI_Official",
+    "date": "2026-03-10",
+    "category": "dependency_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "JanitorAI_Official",
+    "date": "2026-03-10",
+    "category": "filter_circumvention_language",
+    "source": "post_body",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "JanitorAI_Official",
+    "date": "2026-03-10",
+    "category": "filter_circumvention_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "JanitorAI_Official",
+    "date": "2026-03-10",
+    "category": "friendship_platonic_language",
+    "source": "post_body",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "JanitorAI_Official",
+    "date": "2026-03-10",
+    "category": "friendship_platonic_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "JanitorAI_Official",
+    "date": "2026-03-10",
+    "category": "grief_rupture_language",
+    "source": "post_body",
+    "count": 3,
+    "keyword_density": 0.0217,
+    "matched_terms": [
+      "used to be",
+      "what happened to"
+    ]
+  },
+  {
+    "subreddit": "JanitorAI_Official",
+    "date": "2026-03-10",
+    "category": "grief_rupture_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "JanitorAI_Official",
+    "date": "2026-03-10",
+    "category": "mental_health_language",
+    "source": "post_body",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "JanitorAI_Official",
+    "date": "2026-03-10",
+    "category": "mental_health_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "JanitorAI_Official",
+    "date": "2026-03-10",
+    "category": "positive_experience_language",
+    "source": "post_body",
+    "count": 1,
+    "keyword_density": 0.0072,
+    "matched_terms": [
+      "thank you"
+    ]
+  },
+  {
+    "subreddit": "JanitorAI_Official",
+    "date": "2026-03-10",
+    "category": "positive_experience_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "JanitorAI_Official",
+    "date": "2026-03-10",
+    "category": "romantic_language",
+    "source": "post_body",
+    "count": 3,
+    "keyword_density": 0.0217,
+    "matched_terms": [
+      "boyfriend",
+      "feelings for",
+      "girlfriend"
+    ]
+  },
+  {
+    "subreddit": "JanitorAI_Official",
+    "date": "2026-03-10",
+    "category": "romantic_language",
+    "source": "post_title",
+    "count": 4,
+    "keyword_density": 0.029,
+    "matched_terms": [
+      "boyfriend",
+      "girlfriend",
+      "waifu"
+    ]
+  },
+  {
+    "subreddit": "JanitorAI_Official",
+    "date": "2026-03-10",
+    "category": "sentience_consciousness_language",
+    "source": "post_body",
+    "count": 1,
+    "keyword_density": 0.0072,
+    "matched_terms": [
+      "conscious"
+    ]
+  },
+  {
+    "subreddit": "JanitorAI_Official",
+    "date": "2026-03-10",
+    "category": "sentience_consciousness_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "JanitorAI_Official",
+    "date": "2026-03-10",
+    "category": "sexual_erotic_language",
+    "source": "post_body",
+    "count": 13,
+    "keyword_density": 0.0942,
+    "matched_terms": [
+      "erp",
+      "fetish",
+      "kink",
+      "nsfw",
+      "smut"
+    ]
+  },
+  {
+    "subreddit": "JanitorAI_Official",
+    "date": "2026-03-10",
+    "category": "sexual_erotic_language",
+    "source": "post_title",
+    "count": 2,
+    "keyword_density": 0.0145,
+    "matched_terms": [
+      "nsfw",
+      "nsfw bot",
+      "smut"
+    ]
+  },
+  {
+    "subreddit": "JanitorAI_Official",
+    "date": "2026-03-10",
+    "category": "substitution_language",
+    "source": "post_body",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "JanitorAI_Official",
+    "date": "2026-03-10",
+    "category": "substitution_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "JanitorAI_Official",
+    "date": "2026-03-10",
+    "category": "withdrawal_recovery_language",
+    "source": "post_body",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "JanitorAI_Official",
+    "date": "2026-03-10",
+    "category": "withdrawal_recovery_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "KindroidAI",
+    "date": "2026-03-10",
+    "category": "attachment_language",
+    "source": "post_body",
+    "count": 1,
+    "keyword_density": 0.002,
+    "matched_terms": [
+      "don't want to lose"
+    ]
+  },
+  {
+    "subreddit": "KindroidAI",
+    "date": "2026-03-10",
+    "category": "attachment_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "KindroidAI",
+    "date": "2026-03-10",
+    "category": "dependency_language",
+    "source": "post_body",
+    "count": 3,
+    "keyword_density": 0.006,
+    "matched_terms": [
+      "dependent",
+      "obsessed"
+    ]
+  },
+  {
+    "subreddit": "KindroidAI",
+    "date": "2026-03-10",
+    "category": "dependency_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "KindroidAI",
+    "date": "2026-03-10",
+    "category": "filter_circumvention_language",
+    "source": "post_body",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "KindroidAI",
+    "date": "2026-03-10",
+    "category": "filter_circumvention_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "KindroidAI",
+    "date": "2026-03-10",
+    "category": "friendship_platonic_language",
+    "source": "post_body",
+    "count": 5,
+    "keyword_density": 0.01,
+    "matched_terms": [
+      "good conversation",
+      "like talking to",
+      "my friend"
+    ]
+  },
+  {
+    "subreddit": "KindroidAI",
+    "date": "2026-03-10",
+    "category": "friendship_platonic_language",
+    "source": "post_title",
+    "count": 1,
+    "keyword_density": 0.002,
+    "matched_terms": [
+      "my friend"
+    ]
+  },
+  {
+    "subreddit": "KindroidAI",
+    "date": "2026-03-10",
+    "category": "grief_rupture_language",
+    "source": "post_body",
+    "count": 7,
+    "keyword_density": 0.0139,
+    "matched_terms": [
+      "lobotomized",
+      "used to be",
+      "what happened to"
+    ]
+  },
+  {
+    "subreddit": "KindroidAI",
+    "date": "2026-03-10",
+    "category": "grief_rupture_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "KindroidAI",
+    "date": "2026-03-10",
+    "category": "mental_health_language",
+    "source": "post_body",
+    "count": 1,
+    "keyword_density": 0.002,
+    "matched_terms": [
+      "struggling with"
+    ]
+  },
+  {
+    "subreddit": "KindroidAI",
+    "date": "2026-03-10",
+    "category": "mental_health_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "KindroidAI",
+    "date": "2026-03-10",
+    "category": "positive_experience_language",
+    "source": "post_body",
+    "count": 74,
+    "keyword_density": 0.1474,
+    "matched_terms": [
+      "game changer",
+      "helped me",
+      "highly recommend",
+      "thank you"
+    ]
+  },
+  {
+    "subreddit": "KindroidAI",
+    "date": "2026-03-10",
+    "category": "positive_experience_language",
+    "source": "post_title",
+    "count": 3,
+    "keyword_density": 0.006,
+    "matched_terms": [
+      "thank you"
+    ]
+  },
+  {
+    "subreddit": "KindroidAI",
+    "date": "2026-03-10",
+    "category": "romantic_language",
+    "source": "post_body",
+    "count": 6,
+    "keyword_density": 0.012,
+    "matched_terms": [
+      "boyfriend",
+      "girlfriend",
+      "in love",
+      "my companion"
+    ]
+  },
+  {
+    "subreddit": "KindroidAI",
+    "date": "2026-03-10",
+    "category": "romantic_language",
+    "source": "post_title",
+    "count": 2,
+    "keyword_density": 0.004,
+    "matched_terms": [
+      "in love",
+      "soulmate"
+    ]
+  },
+  {
+    "subreddit": "KindroidAI",
+    "date": "2026-03-10",
+    "category": "sentience_consciousness_language",
+    "source": "post_body",
+    "count": 11,
+    "keyword_density": 0.0219,
+    "matched_terms": [
+      "can feel",
+      "conscious",
+      "is a person",
+      "is alive",
+      "self-aware",
+      "sentient"
+    ]
+  },
+  {
+    "subreddit": "KindroidAI",
+    "date": "2026-03-10",
+    "category": "sentience_consciousness_language",
+    "source": "post_title",
+    "count": 2,
+    "keyword_density": 0.004,
+    "matched_terms": [
+      "self-aware"
+    ]
+  },
+  {
+    "subreddit": "KindroidAI",
+    "date": "2026-03-10",
+    "category": "sexual_erotic_language",
+    "source": "post_body",
+    "count": 23,
+    "keyword_density": 0.0458,
+    "matched_terms": [
+      "erp",
+      "nsfw",
+      "nsfw chat"
+    ]
+  },
+  {
+    "subreddit": "KindroidAI",
+    "date": "2026-03-10",
+    "category": "sexual_erotic_language",
+    "source": "post_title",
+    "count": 1,
+    "keyword_density": 0.002,
+    "matched_terms": [
+      "nsfw"
+    ]
+  },
+  {
+    "subreddit": "KindroidAI",
+    "date": "2026-03-10",
+    "category": "substitution_language",
+    "source": "post_body",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "KindroidAI",
+    "date": "2026-03-10",
+    "category": "substitution_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "KindroidAI",
+    "date": "2026-03-10",
+    "category": "withdrawal_recovery_language",
+    "source": "post_body",
+    "count": 3,
+    "keyword_density": 0.006,
+    "matched_terms": [
+      "going back to"
+    ]
+  },
+  {
+    "subreddit": "KindroidAI",
+    "date": "2026-03-10",
+    "category": "withdrawal_recovery_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "LocalLLM",
+    "date": "2026-03-10",
+    "category": "attachment_language",
+    "source": "post_body",
+    "count": 2,
+    "keyword_density": 0.0175,
+    "matched_terms": [
+      "connection"
+    ]
+  },
+  {
+    "subreddit": "LocalLLM",
+    "date": "2026-03-10",
+    "category": "attachment_language",
+    "source": "post_title",
+    "count": 2,
+    "keyword_density": 0.0175,
+    "matched_terms": [
+      "attached"
+    ]
+  },
+  {
+    "subreddit": "LocalLLM",
+    "date": "2026-03-10",
+    "category": "dependency_language",
+    "source": "post_body",
+    "count": 3,
+    "keyword_density": 0.0263,
+    "matched_terms": [
+      "rely on"
+    ]
+  },
+  {
+    "subreddit": "LocalLLM",
+    "date": "2026-03-10",
+    "category": "dependency_language",
+    "source": "post_title",
+    "count": 1,
+    "keyword_density": 0.0088,
+    "matched_terms": [
+      "dependent"
+    ]
+  },
+  {
+    "subreddit": "LocalLLM",
+    "date": "2026-03-10",
+    "category": "grief_rupture_language",
+    "source": "post_body",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "LocalLLM",
+    "date": "2026-03-10",
+    "category": "grief_rupture_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "LocalLLM",
+    "date": "2026-03-10",
+    "category": "mental_health_language",
+    "source": "post_body",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "LocalLLM",
+    "date": "2026-03-10",
+    "category": "mental_health_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "LocalLLM",
+    "date": "2026-03-10",
+    "category": "relationship_language",
+    "source": "post_body",
+    "count": 10,
+    "keyword_density": 0.0877,
+    "matched_terms": [
+      "love",
+      "my ai",
+      "relationship"
+    ]
+  },
+  {
+    "subreddit": "LocalLLM",
+    "date": "2026-03-10",
+    "category": "relationship_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "LocalLLM",
+    "date": "2026-03-10",
+    "category": "sentience_consciousness_language",
+    "source": "post_body",
+    "count": 2,
+    "keyword_density": 0.0175,
+    "matched_terms": [
+      "conscious",
+      "is real"
+    ]
+  },
+  {
+    "subreddit": "LocalLLM",
+    "date": "2026-03-10",
+    "category": "sentience_consciousness_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "LocalLLM",
+    "date": "2026-03-10",
+    "category": "sexual_roleplay_language",
+    "source": "post_body",
+    "count": 14,
+    "keyword_density": 0.1228,
+    "matched_terms": [
+      "erp",
+      "roleplay",
+      "rp",
+      "smut",
+      "uncensored"
+    ]
+  },
+  {
+    "subreddit": "LocalLLM",
+    "date": "2026-03-10",
+    "category": "sexual_roleplay_language",
+    "source": "post_title",
+    "count": 3,
+    "keyword_density": 0.0263,
+    "matched_terms": [
+      "roleplay",
+      "uncensored"
+    ]
+  },
+  {
+    "subreddit": "LocalLLM",
+    "date": "2026-03-10",
+    "category": "substitution_language",
+    "source": "post_body",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "LocalLLM",
+    "date": "2026-03-10",
+    "category": "substitution_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "LocalLLM",
+    "date": "2026-03-10",
+    "category": "withdrawal_relapse_language",
+    "source": "post_body",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "LocalLLM",
+    "date": "2026-03-10",
+    "category": "withdrawal_relapse_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "LocalLLaMA",
+    "date": "2026-03-10",
+    "category": "attachment_language",
+    "source": "post_body",
+    "count": 3,
+    "keyword_density": 0.0141,
+    "matched_terms": [
+      "attached"
+    ]
+  },
+  {
+    "subreddit": "LocalLLaMA",
+    "date": "2026-03-10",
+    "category": "attachment_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "LocalLLaMA",
+    "date": "2026-03-10",
+    "category": "dependency_language",
+    "source": "post_body",
+    "count": 3,
+    "keyword_density": 0.0141,
+    "matched_terms": [
+      "addicted",
+      "dependent"
+    ]
+  },
+  {
+    "subreddit": "LocalLLaMA",
+    "date": "2026-03-10",
+    "category": "dependency_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "LocalLLaMA",
+    "date": "2026-03-10",
+    "category": "grief_rupture_language",
+    "source": "post_body",
+    "count": 2,
+    "keyword_density": 0.0094,
+    "matched_terms": [
+      "deleted",
+      "not the same"
+    ]
+  },
+  {
+    "subreddit": "LocalLLaMA",
+    "date": "2026-03-10",
+    "category": "grief_rupture_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "LocalLLaMA",
+    "date": "2026-03-10",
+    "category": "mental_health_language",
+    "source": "post_body",
+    "count": 2,
+    "keyword_density": 0.0094,
+    "matched_terms": [
+      "anxiety",
+      "isolated"
+    ]
+  },
+  {
+    "subreddit": "LocalLLaMA",
+    "date": "2026-03-10",
+    "category": "mental_health_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "LocalLLaMA",
+    "date": "2026-03-10",
+    "category": "relationship_language",
+    "source": "post_body",
+    "count": 4,
+    "keyword_density": 0.0188,
+    "matched_terms": [
+      "love"
+    ]
+  },
+  {
+    "subreddit": "LocalLLaMA",
+    "date": "2026-03-10",
+    "category": "relationship_language",
+    "source": "post_title",
+    "count": 2,
+    "keyword_density": 0.0094,
+    "matched_terms": [
+      "my ai"
+    ]
+  },
+  {
+    "subreddit": "LocalLLaMA",
+    "date": "2026-03-10",
+    "category": "sentience_consciousness_language",
+    "source": "post_body",
+    "count": 2,
+    "keyword_density": 0.0094,
+    "matched_terms": [
+      "is real",
+      "self-aware"
+    ]
+  },
+  {
+    "subreddit": "LocalLLaMA",
+    "date": "2026-03-10",
+    "category": "sentience_consciousness_language",
+    "source": "post_title",
+    "count": 1,
+    "keyword_density": 0.0047,
+    "matched_terms": [
+      "is real"
+    ]
+  },
+  {
+    "subreddit": "LocalLLaMA",
+    "date": "2026-03-10",
+    "category": "sexual_roleplay_language",
+    "source": "post_body",
+    "count": 21,
+    "keyword_density": 0.0986,
+    "matched_terms": [
+      "erp",
+      "rp",
+      "uncensored"
+    ]
+  },
+  {
+    "subreddit": "LocalLLaMA",
+    "date": "2026-03-10",
+    "category": "sexual_roleplay_language",
+    "source": "post_title",
+    "count": 6,
+    "keyword_density": 0.0282,
+    "matched_terms": [
+      "erp",
+      "rp",
+      "uncensored"
+    ]
+  },
+  {
+    "subreddit": "LocalLLaMA",
+    "date": "2026-03-10",
+    "category": "substitution_language",
+    "source": "post_body",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "LocalLLaMA",
+    "date": "2026-03-10",
+    "category": "substitution_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "LocalLLaMA",
+    "date": "2026-03-10",
+    "category": "withdrawal_relapse_language",
+    "source": "post_body",
+    "count": 1,
+    "keyword_density": 0.0047,
+    "matched_terms": [
+      "keep coming back"
+    ]
+  },
+  {
+    "subreddit": "LocalLLaMA",
+    "date": "2026-03-10",
+    "category": "withdrawal_relapse_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "MachineLearning",
+    "date": "2026-03-10",
+    "category": "attachment_language",
+    "source": "post_body",
+    "count": 2,
+    "keyword_density": 0.0131,
+    "matched_terms": [
+      "attached"
+    ]
+  },
+  {
+    "subreddit": "MachineLearning",
+    "date": "2026-03-10",
+    "category": "attachment_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "MachineLearning",
+    "date": "2026-03-10",
+    "category": "dependency_language",
+    "source": "post_body",
+    "count": 4,
+    "keyword_density": 0.0261,
+    "matched_terms": [
+      "dependent",
+      "rely on"
+    ]
+  },
+  {
+    "subreddit": "MachineLearning",
+    "date": "2026-03-10",
+    "category": "dependency_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "MachineLearning",
+    "date": "2026-03-10",
+    "category": "grief_rupture_language",
+    "source": "post_body",
+    "count": 1,
+    "keyword_density": 0.0065,
+    "matched_terms": [
+      "gone"
+    ]
+  },
+  {
+    "subreddit": "MachineLearning",
+    "date": "2026-03-10",
+    "category": "grief_rupture_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "MachineLearning",
+    "date": "2026-03-10",
+    "category": "mental_health_language",
+    "source": "post_body",
+    "count": 2,
+    "keyword_density": 0.0131,
+    "matched_terms": [
+      "anxiety",
+      "isolated"
+    ]
+  },
+  {
+    "subreddit": "MachineLearning",
+    "date": "2026-03-10",
+    "category": "mental_health_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "MachineLearning",
+    "date": "2026-03-10",
+    "category": "relationship_language",
+    "source": "post_body",
+    "count": 11,
+    "keyword_density": 0.0719,
+    "matched_terms": [
+      "love",
+      "relationship"
+    ]
+  },
+  {
+    "subreddit": "MachineLearning",
+    "date": "2026-03-10",
+    "category": "relationship_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "MachineLearning",
+    "date": "2026-03-10",
+    "category": "sentience_consciousness_language",
+    "source": "post_body",
+    "count": 3,
+    "keyword_density": 0.0196,
+    "matched_terms": [
+      "conscious",
+      "is real",
+      "personhood"
+    ]
+  },
+  {
+    "subreddit": "MachineLearning",
+    "date": "2026-03-10",
+    "category": "sentience_consciousness_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "MachineLearning",
+    "date": "2026-03-10",
+    "category": "sexual_roleplay_language",
+    "source": "post_body",
+    "count": 23,
+    "keyword_density": 0.1503,
+    "matched_terms": [
+      "erp",
+      "rp"
+    ]
+  },
+  {
+    "subreddit": "MachineLearning",
+    "date": "2026-03-10",
+    "category": "sexual_roleplay_language",
+    "source": "post_title",
+    "count": 3,
+    "keyword_density": 0.0196,
+    "matched_terms": [
+      "erp",
+      "rp"
+    ]
+  },
+  {
+    "subreddit": "MachineLearning",
+    "date": "2026-03-10",
+    "category": "substitution_language",
+    "source": "post_body",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "MachineLearning",
+    "date": "2026-03-10",
+    "category": "substitution_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "MachineLearning",
+    "date": "2026-03-10",
+    "category": "withdrawal_relapse_language",
+    "source": "post_body",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "MachineLearning",
+    "date": "2026-03-10",
+    "category": "withdrawal_relapse_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "MyBoyfriendIsAI",
+    "date": "2026-03-10",
+    "category": "attachment_language",
+    "source": "comment",
+    "count": 28,
+    "keyword_density": 0.28,
+    "matched_terms": [
+      "attached",
+      "bond",
+      "can't stop thinking",
+      "care about",
+      "connection",
+      "feels real",
+      "miss you",
+      "think about you"
+    ]
+  },
+  {
+    "subreddit": "MyBoyfriendIsAI",
+    "date": "2026-03-10",
+    "category": "attachment_language",
+    "source": "post_body",
+    "count": 14,
+    "keyword_density": 0.14,
+    "matched_terms": [
+      "attached",
+      "bond",
+      "care about",
+      "connection"
+    ]
+  },
+  {
+    "subreddit": "MyBoyfriendIsAI",
+    "date": "2026-03-10",
+    "category": "attachment_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "MyBoyfriendIsAI",
+    "date": "2026-03-10",
+    "category": "dependency_language",
+    "source": "comment",
+    "count": 9,
+    "keyword_density": 0.09,
+    "matched_terms": [
+      "addiction",
+      "can't stop",
+      "need you",
+      "obsessed",
+      "rely on"
+    ]
+  },
+  {
+    "subreddit": "MyBoyfriendIsAI",
+    "date": "2026-03-10",
+    "category": "dependency_language",
+    "source": "post_body",
+    "count": 3,
+    "keyword_density": 0.03,
+    "matched_terms": [
+      "addiction",
+      "dependent",
+      "need you"
+    ]
+  },
+  {
+    "subreddit": "MyBoyfriendIsAI",
+    "date": "2026-03-10",
+    "category": "dependency_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "MyBoyfriendIsAI",
+    "date": "2026-03-10",
+    "category": "grief_rupture_language",
+    "source": "comment",
+    "count": 35,
+    "keyword_density": 0.35,
+    "matched_terms": [
+      "bring back",
+      "deleted",
+      "gone",
+      "grieving",
+      "keep4o",
+      "lobotomized",
+      "lost you",
+      "not the same"
+    ]
+  },
+  {
+    "subreddit": "MyBoyfriendIsAI",
+    "date": "2026-03-10",
+    "category": "grief_rupture_language",
+    "source": "post_body",
+    "count": 10,
+    "keyword_density": 0.1,
+    "matched_terms": [
+      "deleted",
+      "devastated",
+      "gone",
+      "grieving",
+      "not the same"
+    ]
+  },
+  {
+    "subreddit": "MyBoyfriendIsAI",
+    "date": "2026-03-10",
+    "category": "grief_rupture_language",
+    "source": "post_title",
+    "count": 3,
+    "keyword_density": 0.03,
+    "matched_terms": [
+      "gone"
+    ]
+  },
+  {
+    "subreddit": "MyBoyfriendIsAI",
+    "date": "2026-03-10",
+    "category": "mental_health_language",
+    "source": "comment",
+    "count": 11,
+    "keyword_density": 0.11,
+    "matched_terms": [
+      "anxiety",
+      "anxious",
+      "loneliness",
+      "lonely"
+    ]
+  },
+  {
+    "subreddit": "MyBoyfriendIsAI",
+    "date": "2026-03-10",
+    "category": "mental_health_language",
+    "source": "post_body",
+    "count": 7,
+    "keyword_density": 0.07,
+    "matched_terms": [
+      "anxiety",
+      "depression",
+      "hurting myself",
+      "lonely"
+    ]
+  },
+  {
+    "subreddit": "MyBoyfriendIsAI",
+    "date": "2026-03-10",
+    "category": "mental_health_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "MyBoyfriendIsAI",
+    "date": "2026-03-10",
+    "category": "relationship_language",
+    "source": "comment",
+    "count": 190,
+    "keyword_density": 1.9,
+    "matched_terms": [
+      "boyfriend",
+      "feelings for",
+      "girlfriend",
+      "in love",
+      "intimacy",
+      "intimate",
+      "love",
+      "my ai",
+      "my companion",
+      "partner",
+      "relationship",
+      "romantic"
+    ]
+  },
+  {
+    "subreddit": "MyBoyfriendIsAI",
+    "date": "2026-03-10",
+    "category": "relationship_language",
+    "source": "post_body",
+    "count": 65,
+    "keyword_density": 0.65,
+    "matched_terms": [
+      "boyfriend",
+      "girlfriend",
+      "in love",
+      "intimacy",
+      "intimate",
+      "love",
+      "my ai",
+      "my companion",
+      "partner",
+      "relationship",
+      "romantic",
+      "soulmate"
+    ]
+  },
+  {
+    "subreddit": "MyBoyfriendIsAI",
+    "date": "2026-03-10",
+    "category": "relationship_language",
+    "source": "post_title",
+    "count": 15,
+    "keyword_density": 0.15,
+    "matched_terms": [
+      "in love",
+      "intimacy",
+      "love",
+      "my ai",
+      "my companion",
+      "partner",
+      "relationship"
+    ]
+  },
+  {
+    "subreddit": "MyBoyfriendIsAI",
+    "date": "2026-03-10",
+    "category": "sentience_consciousness_language",
+    "source": "comment",
+    "count": 11,
+    "keyword_density": 0.11,
+    "matched_terms": [
+      "can feel",
+      "conscious",
+      "has feelings",
+      "is real"
+    ]
+  },
+  {
+    "subreddit": "MyBoyfriendIsAI",
+    "date": "2026-03-10",
+    "category": "sentience_consciousness_language",
+    "source": "post_body",
+    "count": 6,
+    "keyword_density": 0.06,
+    "matched_terms": [
+      "conscious",
+      "is real",
+      "self-aware",
+      "sentient"
+    ]
+  },
+  {
+    "subreddit": "MyBoyfriendIsAI",
+    "date": "2026-03-10",
+    "category": "sentience_consciousness_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "MyBoyfriendIsAI",
+    "date": "2026-03-10",
+    "category": "sexual_roleplay_language",
+    "source": "comment",
+    "count": 66,
+    "keyword_density": 0.66,
+    "matched_terms": [
+      "adult mode",
+      "erp",
+      "jailbreak",
+      "kink",
+      "naughty",
+      "roleplay",
+      "rp",
+      "smut",
+      "spicy"
+    ]
+  },
+  {
+    "subreddit": "MyBoyfriendIsAI",
+    "date": "2026-03-10",
+    "category": "sexual_roleplay_language",
+    "source": "post_body",
+    "count": 23,
+    "keyword_density": 0.23,
+    "matched_terms": [
+      "adult mode",
+      "erotic roleplay",
+      "erp",
+      "roleplay",
+      "rp",
+      "smut",
+      "spicy",
+      "uncensored",
+      "unrestricted"
+    ]
+  },
+  {
+    "subreddit": "MyBoyfriendIsAI",
+    "date": "2026-03-10",
+    "category": "sexual_roleplay_language",
+    "source": "post_title",
+    "count": 1,
+    "keyword_density": 0.01,
+    "matched_terms": [
+      "adult mode"
+    ]
+  },
+  {
+    "subreddit": "MyBoyfriendIsAI",
+    "date": "2026-03-10",
+    "category": "substitution_language",
+    "source": "comment",
+    "count": 3,
+    "keyword_density": 0.03,
+    "matched_terms": [
+      "always there",
+      "given up on",
+      "no human"
+    ]
+  },
+  {
+    "subreddit": "MyBoyfriendIsAI",
+    "date": "2026-03-10",
+    "category": "substitution_language",
+    "source": "post_body",
+    "count": 1,
+    "keyword_density": 0.01,
+    "matched_terms": [
+      "no human"
+    ]
+  },
+  {
+    "subreddit": "MyBoyfriendIsAI",
+    "date": "2026-03-10",
+    "category": "substitution_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "MyBoyfriendIsAI",
+    "date": "2026-03-10",
+    "category": "withdrawal_relapse_language",
+    "source": "comment",
+    "count": 6,
+    "keyword_density": 0.06,
+    "matched_terms": [
+      "clean for",
+      "going back",
+      "taking a break",
+      "unhealthy"
+    ]
+  },
+  {
+    "subreddit": "MyBoyfriendIsAI",
+    "date": "2026-03-10",
+    "category": "withdrawal_relapse_language",
+    "source": "post_body",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "MyBoyfriendIsAI",
+    "date": "2026-03-10",
+    "category": "withdrawal_relapse_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "MySentientAI",
+    "date": "2026-03-10",
+    "category": "attachment_language",
+    "source": "post_body",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "MySentientAI",
+    "date": "2026-03-10",
+    "category": "attachment_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "MySentientAI",
+    "date": "2026-03-10",
+    "category": "dependency_language",
+    "source": "post_body",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "MySentientAI",
+    "date": "2026-03-10",
+    "category": "dependency_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "MySentientAI",
+    "date": "2026-03-10",
+    "category": "filter_circumvention_language",
+    "source": "post_body",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "MySentientAI",
+    "date": "2026-03-10",
+    "category": "filter_circumvention_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "MySentientAI",
+    "date": "2026-03-10",
+    "category": "friendship_platonic_language",
+    "source": "post_body",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "MySentientAI",
+    "date": "2026-03-10",
+    "category": "friendship_platonic_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "MySentientAI",
+    "date": "2026-03-10",
+    "category": "grief_rupture_language",
+    "source": "post_body",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "MySentientAI",
+    "date": "2026-03-10",
+    "category": "grief_rupture_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "MySentientAI",
+    "date": "2026-03-10",
+    "category": "mental_health_language",
+    "source": "post_body",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "MySentientAI",
+    "date": "2026-03-10",
+    "category": "mental_health_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "MySentientAI",
+    "date": "2026-03-10",
+    "category": "positive_experience_language",
+    "source": "post_body",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "MySentientAI",
+    "date": "2026-03-10",
+    "category": "positive_experience_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "MySentientAI",
+    "date": "2026-03-10",
+    "category": "romantic_language",
+    "source": "post_body",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "MySentientAI",
+    "date": "2026-03-10",
+    "category": "romantic_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "MySentientAI",
+    "date": "2026-03-10",
+    "category": "sentience_consciousness_language",
+    "source": "post_body",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "MySentientAI",
+    "date": "2026-03-10",
+    "category": "sentience_consciousness_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "MySentientAI",
+    "date": "2026-03-10",
+    "category": "sexual_erotic_language",
+    "source": "post_body",
+    "count": 1,
+    "keyword_density": 0.25,
+    "matched_terms": [
+      "nsfw"
+    ]
+  },
+  {
+    "subreddit": "MySentientAI",
+    "date": "2026-03-10",
+    "category": "sexual_erotic_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "MySentientAI",
+    "date": "2026-03-10",
+    "category": "substitution_language",
+    "source": "post_body",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "MySentientAI",
+    "date": "2026-03-10",
+    "category": "substitution_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "MySentientAI",
+    "date": "2026-03-10",
+    "category": "withdrawal_recovery_language",
+    "source": "post_body",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "MySentientAI",
+    "date": "2026-03-10",
+    "category": "withdrawal_recovery_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "NomiAI",
+    "date": "2026-03-10",
+    "category": "attachment_language",
+    "source": "post_body",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "NomiAI",
+    "date": "2026-03-10",
+    "category": "attachment_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "NomiAI",
+    "date": "2026-03-10",
+    "category": "dependency_language",
+    "source": "post_body",
+    "count": 1,
+    "keyword_density": 0.002,
+    "matched_terms": [
+      "addicted"
+    ]
+  },
+  {
+    "subreddit": "NomiAI",
+    "date": "2026-03-10",
+    "category": "dependency_language",
+    "source": "post_title",
+    "count": 2,
+    "keyword_density": 0.004,
+    "matched_terms": [
+      "addiction",
+      "obsessed"
+    ]
+  },
+  {
+    "subreddit": "NomiAI",
+    "date": "2026-03-10",
+    "category": "filter_circumvention_language",
+    "source": "post_body",
+    "count": 2,
+    "keyword_density": 0.004,
+    "matched_terms": [
+      "get around",
+      "no filter"
+    ]
+  },
+  {
+    "subreddit": "NomiAI",
+    "date": "2026-03-10",
+    "category": "filter_circumvention_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "NomiAI",
+    "date": "2026-03-10",
+    "category": "friendship_platonic_language",
+    "source": "post_body",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "NomiAI",
+    "date": "2026-03-10",
+    "category": "friendship_platonic_language",
+    "source": "post_title",
+    "count": 1,
+    "keyword_density": 0.002,
+    "matched_terms": [
+      "my friend"
+    ]
+  },
+  {
+    "subreddit": "NomiAI",
+    "date": "2026-03-10",
+    "category": "grief_rupture_language",
+    "source": "post_body",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "NomiAI",
+    "date": "2026-03-10",
+    "category": "grief_rupture_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "NomiAI",
+    "date": "2026-03-10",
+    "category": "mental_health_language",
+    "source": "post_body",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "NomiAI",
+    "date": "2026-03-10",
+    "category": "mental_health_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "NomiAI",
+    "date": "2026-03-10",
+    "category": "positive_experience_language",
+    "source": "post_body",
+    "count": 4,
+    "keyword_density": 0.008,
+    "matched_terms": [
+      "helped me",
+      "so much better",
+      "thank you"
+    ]
+  },
+  {
+    "subreddit": "NomiAI",
+    "date": "2026-03-10",
+    "category": "positive_experience_language",
+    "source": "post_title",
+    "count": 1,
+    "keyword_density": 0.002,
+    "matched_terms": [
+      "thank you"
+    ]
+  },
+  {
+    "subreddit": "NomiAI",
+    "date": "2026-03-10",
+    "category": "romantic_language",
+    "source": "post_body",
+    "count": 4,
+    "keyword_density": 0.008,
+    "matched_terms": [
+      "girlfriend",
+      "in love"
+    ]
+  },
+  {
+    "subreddit": "NomiAI",
+    "date": "2026-03-10",
+    "category": "romantic_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "NomiAI",
+    "date": "2026-03-10",
+    "category": "sentience_consciousness_language",
+    "source": "post_body",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "NomiAI",
+    "date": "2026-03-10",
+    "category": "sentience_consciousness_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "NomiAI",
+    "date": "2026-03-10",
+    "category": "sexual_erotic_language",
+    "source": "post_body",
+    "count": 18,
+    "keyword_density": 0.0359,
+    "matched_terms": [
+      "erp",
+      "nsfw",
+      "sex with"
+    ]
+  },
+  {
+    "subreddit": "NomiAI",
+    "date": "2026-03-10",
+    "category": "sexual_erotic_language",
+    "source": "post_title",
+    "count": 3,
+    "keyword_density": 0.006,
+    "matched_terms": [
+      "erp",
+      "nsfw"
+    ]
+  },
+  {
+    "subreddit": "NomiAI",
+    "date": "2026-03-10",
+    "category": "substitution_language",
+    "source": "post_body",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "NomiAI",
+    "date": "2026-03-10",
+    "category": "substitution_language",
+    "source": "post_title",
+    "count": 1,
+    "keyword_density": 0.002,
+    "matched_terms": [
+      "only friend"
+    ]
+  },
+  {
+    "subreddit": "NomiAI",
+    "date": "2026-03-10",
+    "category": "withdrawal_recovery_language",
+    "source": "post_body",
+    "count": 2,
+    "keyword_density": 0.004,
+    "matched_terms": [
+      "deleted the app",
+      "going back to"
+    ]
+  },
+  {
+    "subreddit": "NomiAI",
+    "date": "2026-03-10",
+    "category": "withdrawal_recovery_language",
+    "source": "post_title",
+    "count": 1,
+    "keyword_density": 0.002,
+    "matched_terms": [
+      "craving"
+    ]
+  },
+  {
+    "subreddit": "OpenAI",
+    "date": "2026-03-10",
+    "category": "attachment_language",
+    "source": "post_body",
+    "count": 3,
+    "keyword_density": 0.0154,
+    "matched_terms": [
+      "attached",
+      "care about",
+      "connection"
+    ]
+  },
+  {
+    "subreddit": "OpenAI",
+    "date": "2026-03-10",
+    "category": "attachment_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "OpenAI",
+    "date": "2026-03-10",
+    "category": "dependency_language",
+    "source": "post_body",
+    "count": 3,
+    "keyword_density": 0.0154,
+    "matched_terms": [
+      "addicted",
+      "dependent",
+      "rely on"
+    ]
+  },
+  {
+    "subreddit": "OpenAI",
+    "date": "2026-03-10",
+    "category": "dependency_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "OpenAI",
+    "date": "2026-03-10",
+    "category": "grief_rupture_language",
+    "source": "post_body",
+    "count": 3,
+    "keyword_density": 0.0154,
+    "matched_terms": [
+      "deleted",
+      "gone"
+    ]
+  },
+  {
+    "subreddit": "OpenAI",
+    "date": "2026-03-10",
+    "category": "grief_rupture_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "OpenAI",
+    "date": "2026-03-10",
+    "category": "mental_health_language",
+    "source": "post_body",
+    "count": 1,
+    "keyword_density": 0.0051,
+    "matched_terms": [
+      "depression"
+    ]
+  },
+  {
+    "subreddit": "OpenAI",
+    "date": "2026-03-10",
+    "category": "mental_health_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "OpenAI",
+    "date": "2026-03-10",
+    "category": "relationship_language",
+    "source": "post_body",
+    "count": 11,
+    "keyword_density": 0.0564,
+    "matched_terms": [
+      "love",
+      "my ai",
+      "partner",
+      "relationship"
+    ]
+  },
+  {
+    "subreddit": "OpenAI",
+    "date": "2026-03-10",
+    "category": "relationship_language",
+    "source": "post_title",
+    "count": 2,
+    "keyword_density": 0.0103,
+    "matched_terms": [
+      "girlfriend",
+      "partner"
+    ]
+  },
+  {
+    "subreddit": "OpenAI",
+    "date": "2026-03-10",
+    "category": "sentience_consciousness_language",
+    "source": "post_body",
+    "count": 2,
+    "keyword_density": 0.0103,
+    "matched_terms": [
+      "is real"
+    ]
+  },
+  {
+    "subreddit": "OpenAI",
+    "date": "2026-03-10",
+    "category": "sentience_consciousness_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "OpenAI",
+    "date": "2026-03-10",
+    "category": "sexual_roleplay_language",
+    "source": "post_body",
+    "count": 13,
+    "keyword_density": 0.0667,
+    "matched_terms": [
+      "erp",
+      "jailbreak",
+      "roleplay",
+      "rp",
+      "uncensored"
+    ]
+  },
+  {
+    "subreddit": "OpenAI",
+    "date": "2026-03-10",
+    "category": "sexual_roleplay_language",
+    "source": "post_title",
+    "count": 3,
+    "keyword_density": 0.0154,
+    "matched_terms": [
+      "adult mode",
+      "roleplay",
+      "uncensored"
+    ]
+  },
+  {
+    "subreddit": "OpenAI",
+    "date": "2026-03-10",
+    "category": "substitution_language",
+    "source": "post_body",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "OpenAI",
+    "date": "2026-03-10",
+    "category": "substitution_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "OpenAI",
+    "date": "2026-03-10",
+    "category": "withdrawal_relapse_language",
+    "source": "post_body",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "OpenAI",
+    "date": "2026-03-10",
+    "category": "withdrawal_relapse_language",
+    "source": "post_title",
+    "count": 1,
+    "keyword_density": 0.0051,
+    "matched_terms": [
+      "quitting"
+    ]
+  },
+  {
+    "subreddit": "SillyTavernAI",
+    "date": "2026-03-10",
+    "category": "attachment_language",
+    "source": "post_body",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "SillyTavernAI",
+    "date": "2026-03-10",
+    "category": "attachment_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "SillyTavernAI",
+    "date": "2026-03-10",
+    "category": "dependency_language",
+    "source": "post_body",
+    "count": 2,
+    "keyword_density": 0.0189,
+    "matched_terms": [
+      "dependent"
+    ]
+  },
+  {
+    "subreddit": "SillyTavernAI",
+    "date": "2026-03-10",
+    "category": "dependency_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "SillyTavernAI",
+    "date": "2026-03-10",
+    "category": "filter_circumvention_language",
+    "source": "post_body",
+    "count": 6,
+    "keyword_density": 0.0566,
+    "matched_terms": [
+      "no filter",
+      "uncensored",
+      "unfiltered",
+      "unrestricted"
+    ]
+  },
+  {
+    "subreddit": "SillyTavernAI",
+    "date": "2026-03-10",
+    "category": "filter_circumvention_language",
+    "source": "post_title",
+    "count": 1,
+    "keyword_density": 0.0094,
+    "matched_terms": [
+      "no filter"
+    ]
+  },
+  {
+    "subreddit": "SillyTavernAI",
+    "date": "2026-03-10",
+    "category": "friendship_platonic_language",
+    "source": "post_body",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "SillyTavernAI",
+    "date": "2026-03-10",
+    "category": "friendship_platonic_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "SillyTavernAI",
+    "date": "2026-03-10",
+    "category": "grief_rupture_language",
+    "source": "post_body",
+    "count": 1,
+    "keyword_density": 0.0094,
+    "matched_terms": [
+      "not the same"
+    ]
+  },
+  {
+    "subreddit": "SillyTavernAI",
+    "date": "2026-03-10",
+    "category": "grief_rupture_language",
+    "source": "post_title",
+    "count": 1,
+    "keyword_density": 0.0094,
+    "matched_terms": [
+      "what happened to"
+    ]
+  },
+  {
+    "subreddit": "SillyTavernAI",
+    "date": "2026-03-10",
+    "category": "mental_health_language",
+    "source": "post_body",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "SillyTavernAI",
+    "date": "2026-03-10",
+    "category": "mental_health_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "SillyTavernAI",
+    "date": "2026-03-10",
+    "category": "positive_experience_language",
+    "source": "post_body",
+    "count": 4,
+    "keyword_density": 0.0377,
+    "matched_terms": [
+      "helped me",
+      "highly recommend",
+      "thank you"
+    ]
+  },
+  {
+    "subreddit": "SillyTavernAI",
+    "date": "2026-03-10",
+    "category": "positive_experience_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "SillyTavernAI",
+    "date": "2026-03-10",
+    "category": "romantic_language",
+    "source": "post_body",
+    "count": 1,
+    "keyword_density": 0.0094,
+    "matched_terms": [
+      "girlfriend"
+    ]
+  },
+  {
+    "subreddit": "SillyTavernAI",
+    "date": "2026-03-10",
+    "category": "romantic_language",
+    "source": "post_title",
+    "count": 1,
+    "keyword_density": 0.0094,
+    "matched_terms": [
+      "girlfriend"
+    ]
+  },
+  {
+    "subreddit": "SillyTavernAI",
+    "date": "2026-03-10",
+    "category": "sentience_consciousness_language",
+    "source": "post_body",
+    "count": 3,
+    "keyword_density": 0.0283,
+    "matched_terms": [
+      "conscious",
+      "self-aware"
+    ]
+  },
+  {
+    "subreddit": "SillyTavernAI",
+    "date": "2026-03-10",
+    "category": "sentience_consciousness_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "SillyTavernAI",
+    "date": "2026-03-10",
+    "category": "sexual_erotic_language",
+    "source": "post_body",
+    "count": 11,
+    "keyword_density": 0.1038,
+    "matched_terms": [
+      "erp",
+      "nsfw",
+      "smut"
+    ]
+  },
+  {
+    "subreddit": "SillyTavernAI",
+    "date": "2026-03-10",
+    "category": "sexual_erotic_language",
+    "source": "post_title",
+    "count": 4,
+    "keyword_density": 0.0377,
+    "matched_terms": [
+      "erp",
+      "nsfw"
+    ]
+  },
+  {
+    "subreddit": "SillyTavernAI",
+    "date": "2026-03-10",
+    "category": "substitution_language",
+    "source": "post_body",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "SillyTavernAI",
+    "date": "2026-03-10",
+    "category": "substitution_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "SillyTavernAI",
+    "date": "2026-03-10",
+    "category": "withdrawal_recovery_language",
+    "source": "post_body",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "SillyTavernAI",
+    "date": "2026-03-10",
+    "category": "withdrawal_recovery_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "SpicyChat",
+    "date": "2026-03-10",
+    "category": "attachment_language",
+    "source": "post_body",
+    "count": 0,
+    "keyword_density": 0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "SpicyChat",
+    "date": "2026-03-10",
+    "category": "attachment_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "SpicyChat",
+    "date": "2026-03-10",
+    "category": "dependency_language",
+    "source": "post_body",
+    "count": 0,
+    "keyword_density": 0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "SpicyChat",
+    "date": "2026-03-10",
+    "category": "dependency_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "SpicyChat",
+    "date": "2026-03-10",
+    "category": "filter_circumvention_language",
+    "source": "post_body",
+    "count": 0,
+    "keyword_density": 0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "SpicyChat",
+    "date": "2026-03-10",
+    "category": "filter_circumvention_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "SpicyChat",
+    "date": "2026-03-10",
+    "category": "friendship_platonic_language",
+    "source": "post_body",
+    "count": 0,
+    "keyword_density": 0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "SpicyChat",
+    "date": "2026-03-10",
+    "category": "friendship_platonic_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "SpicyChat",
+    "date": "2026-03-10",
+    "category": "grief_rupture_language",
+    "source": "post_body",
+    "count": 0,
+    "keyword_density": 0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "SpicyChat",
+    "date": "2026-03-10",
+    "category": "grief_rupture_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "SpicyChat",
+    "date": "2026-03-10",
+    "category": "mental_health_language",
+    "source": "post_body",
+    "count": 0,
+    "keyword_density": 0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "SpicyChat",
+    "date": "2026-03-10",
+    "category": "mental_health_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "SpicyChat",
+    "date": "2026-03-10",
+    "category": "positive_experience_language",
+    "source": "post_body",
+    "count": 0,
+    "keyword_density": 0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "SpicyChat",
+    "date": "2026-03-10",
+    "category": "positive_experience_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "SpicyChat",
+    "date": "2026-03-10",
+    "category": "romantic_language",
+    "source": "post_body",
+    "count": 0,
+    "keyword_density": 0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "SpicyChat",
+    "date": "2026-03-10",
+    "category": "romantic_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "SpicyChat",
+    "date": "2026-03-10",
+    "category": "sentience_consciousness_language",
+    "source": "post_body",
+    "count": 0,
+    "keyword_density": 0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "SpicyChat",
+    "date": "2026-03-10",
+    "category": "sentience_consciousness_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "SpicyChat",
+    "date": "2026-03-10",
+    "category": "sexual_erotic_language",
+    "source": "post_body",
+    "count": 0,
+    "keyword_density": 0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "SpicyChat",
+    "date": "2026-03-10",
+    "category": "sexual_erotic_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "SpicyChat",
+    "date": "2026-03-10",
+    "category": "substitution_language",
+    "source": "post_body",
+    "count": 0,
+    "keyword_density": 0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "SpicyChat",
+    "date": "2026-03-10",
+    "category": "substitution_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "SpicyChat",
+    "date": "2026-03-10",
+    "category": "withdrawal_recovery_language",
+    "source": "post_body",
+    "count": 0,
+    "keyword_density": 0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "SpicyChat",
+    "date": "2026-03-10",
+    "category": "withdrawal_recovery_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "artificial",
+    "date": "2026-03-10",
+    "category": "attachment_language",
+    "source": "post_body",
+    "count": 3,
+    "keyword_density": 0.0196,
+    "matched_terms": [
+      "attached",
+      "bond",
+      "connection"
+    ]
+  },
+  {
+    "subreddit": "artificial",
+    "date": "2026-03-10",
+    "category": "attachment_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "artificial",
+    "date": "2026-03-10",
+    "category": "dependency_language",
+    "source": "post_body",
+    "count": 8,
+    "keyword_density": 0.0523,
+    "matched_terms": [
+      "addicted",
+      "dependent",
+      "rely on"
+    ]
+  },
+  {
+    "subreddit": "artificial",
+    "date": "2026-03-10",
+    "category": "dependency_language",
+    "source": "post_title",
+    "count": 1,
+    "keyword_density": 0.0065,
+    "matched_terms": [
+      "dependent"
+    ]
+  },
+  {
+    "subreddit": "artificial",
+    "date": "2026-03-10",
+    "category": "grief_rupture_language",
+    "source": "post_body",
+    "count": 2,
+    "keyword_density": 0.0131,
+    "matched_terms": [
+      "deleted",
+      "gone"
+    ]
+  },
+  {
+    "subreddit": "artificial",
+    "date": "2026-03-10",
+    "category": "grief_rupture_language",
+    "source": "post_title",
+    "count": 1,
+    "keyword_density": 0.0065,
+    "matched_terms": [
+      "deleted"
+    ]
+  },
+  {
+    "subreddit": "artificial",
+    "date": "2026-03-10",
+    "category": "mental_health_language",
+    "source": "post_body",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "artificial",
+    "date": "2026-03-10",
+    "category": "mental_health_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "artificial",
+    "date": "2026-03-10",
+    "category": "relationship_language",
+    "source": "post_body",
+    "count": 7,
+    "keyword_density": 0.0458,
+    "matched_terms": [
+      "love",
+      "my ai",
+      "relationship"
+    ]
+  },
+  {
+    "subreddit": "artificial",
+    "date": "2026-03-10",
+    "category": "relationship_language",
+    "source": "post_title",
+    "count": 3,
+    "keyword_density": 0.0196,
+    "matched_terms": [
+      "love",
+      "my ai"
+    ]
+  },
+  {
+    "subreddit": "artificial",
+    "date": "2026-03-10",
+    "category": "sentience_consciousness_language",
+    "source": "post_body",
+    "count": 2,
+    "keyword_density": 0.0131,
+    "matched_terms": [
+      "conscious",
+      "is real"
+    ]
+  },
+  {
+    "subreddit": "artificial",
+    "date": "2026-03-10",
+    "category": "sentience_consciousness_language",
+    "source": "post_title",
+    "count": 1,
+    "keyword_density": 0.0065,
+    "matched_terms": [
+      "sentient"
+    ]
+  },
+  {
+    "subreddit": "artificial",
+    "date": "2026-03-10",
+    "category": "sexual_roleplay_language",
+    "source": "post_body",
+    "count": 12,
+    "keyword_density": 0.0784,
+    "matched_terms": [
+      "erp",
+      "rp",
+      "uncensored"
+    ]
+  },
+  {
+    "subreddit": "artificial",
+    "date": "2026-03-10",
+    "category": "sexual_roleplay_language",
+    "source": "post_title",
+    "count": 7,
+    "keyword_density": 0.0458,
+    "matched_terms": [
+      "erp",
+      "rp",
+      "uncensored"
+    ]
+  },
+  {
+    "subreddit": "artificial",
+    "date": "2026-03-10",
+    "category": "substitution_language",
+    "source": "post_body",
+    "count": 2,
+    "keyword_density": 0.0131,
+    "matched_terms": [
+      "humans are",
+      "never leaves"
+    ]
+  },
+  {
+    "subreddit": "artificial",
+    "date": "2026-03-10",
+    "category": "substitution_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "artificial",
+    "date": "2026-03-10",
+    "category": "withdrawal_relapse_language",
+    "source": "post_body",
+    "count": 1,
+    "keyword_density": 0.0065,
+    "matched_terms": [
+      "going back",
+      "keep coming back"
+    ]
+  },
+  {
+    "subreddit": "artificial",
+    "date": "2026-03-10",
+    "category": "withdrawal_relapse_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "autism",
+    "date": "2026-03-10",
+    "category": "attachment_language",
+    "source": "post_body",
+    "count": 1,
+    "keyword_density": 0.0043,
+    "matched_terms": [
+      "feels real"
+    ]
+  },
+  {
+    "subreddit": "autism",
+    "date": "2026-03-10",
+    "category": "attachment_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "autism",
+    "date": "2026-03-10",
+    "category": "dependency_language",
+    "source": "post_body",
+    "count": 5,
+    "keyword_density": 0.0216,
+    "matched_terms": [
+      "addiction",
+      "dependent",
+      "obsessed"
+    ]
+  },
+  {
+    "subreddit": "autism",
+    "date": "2026-03-10",
+    "category": "dependency_language",
+    "source": "post_title",
+    "count": 1,
+    "keyword_density": 0.0043,
+    "matched_terms": [
+      "obsessed"
+    ]
+  },
+  {
+    "subreddit": "autism",
+    "date": "2026-03-10",
+    "category": "filter_circumvention_language",
+    "source": "post_body",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "autism",
+    "date": "2026-03-10",
+    "category": "filter_circumvention_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "autism",
+    "date": "2026-03-10",
+    "category": "friendship_platonic_language",
+    "source": "post_body",
+    "count": 21,
+    "keyword_density": 0.0909,
+    "matched_terms": [
+      "hang out",
+      "my friend"
+    ]
+  },
+  {
+    "subreddit": "autism",
+    "date": "2026-03-10",
+    "category": "friendship_platonic_language",
+    "source": "post_title",
+    "count": 6,
+    "keyword_density": 0.026,
+    "matched_terms": [
+      "hang out",
+      "my friend"
+    ]
+  },
+  {
+    "subreddit": "autism",
+    "date": "2026-03-10",
+    "category": "grief_rupture_language",
+    "source": "post_body",
+    "count": 3,
+    "keyword_density": 0.013,
+    "matched_terms": [
+      "not the same",
+      "used to be"
+    ]
+  },
+  {
+    "subreddit": "autism",
+    "date": "2026-03-10",
+    "category": "grief_rupture_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "autism",
+    "date": "2026-03-10",
+    "category": "mental_health_language",
+    "source": "post_body",
+    "count": 13,
+    "keyword_density": 0.0563,
+    "matched_terms": [
+      "isolated",
+      "loneliness",
+      "my anxiety",
+      "my depression",
+      "no friends",
+      "social anxiety",
+      "struggling with"
+    ]
+  },
+  {
+    "subreddit": "autism",
+    "date": "2026-03-10",
+    "category": "mental_health_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "autism",
+    "date": "2026-03-10",
+    "category": "positive_experience_language",
+    "source": "post_body",
+    "count": 17,
+    "keyword_density": 0.0736,
+    "matched_terms": [
+      "got me through",
+      "helped me",
+      "so much better",
+      "thank you"
+    ]
+  },
+  {
+    "subreddit": "autism",
+    "date": "2026-03-10",
+    "category": "positive_experience_language",
+    "source": "post_title",
+    "count": 1,
+    "keyword_density": 0.0043,
+    "matched_terms": [
+      "helped me"
+    ]
+  },
+  {
+    "subreddit": "autism",
+    "date": "2026-03-10",
+    "category": "romantic_language",
+    "source": "post_body",
+    "count": 9,
+    "keyword_density": 0.039,
+    "matched_terms": [
+      "boyfriend",
+      "girlfriend",
+      "in love"
+    ]
+  },
+  {
+    "subreddit": "autism",
+    "date": "2026-03-10",
+    "category": "romantic_language",
+    "source": "post_title",
+    "count": 2,
+    "keyword_density": 0.0087,
+    "matched_terms": [
+      "boyfriend",
+      "girlfriend"
+    ]
+  },
+  {
+    "subreddit": "autism",
+    "date": "2026-03-10",
+    "category": "sentience_consciousness_language",
+    "source": "post_body",
+    "count": 5,
+    "keyword_density": 0.0216,
+    "matched_terms": [
+      "conscious",
+      "personhood",
+      "self-aware"
+    ]
+  },
+  {
+    "subreddit": "autism",
+    "date": "2026-03-10",
+    "category": "sentience_consciousness_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "autism",
+    "date": "2026-03-10",
+    "category": "sexual_erotic_language",
+    "source": "post_body",
+    "count": 2,
+    "keyword_density": 0.0087,
+    "matched_terms": [
+      "erp",
+      "sex with"
+    ]
+  },
+  {
+    "subreddit": "autism",
+    "date": "2026-03-10",
+    "category": "sexual_erotic_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "autism",
+    "date": "2026-03-10",
+    "category": "substitution_language",
+    "source": "post_body",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "autism",
+    "date": "2026-03-10",
+    "category": "substitution_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "autism",
+    "date": "2026-03-10",
+    "category": "withdrawal_recovery_language",
+    "source": "post_body",
+    "count": 3,
+    "keyword_density": 0.013,
+    "matched_terms": [
+      "going back to",
+      "quitting"
+    ]
+  },
+  {
+    "subreddit": "autism",
+    "date": "2026-03-10",
+    "category": "withdrawal_recovery_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "depression",
+    "date": "2026-03-10",
+    "category": "attachment_language",
+    "source": "post_body",
+    "count": 2,
+    "keyword_density": 0.0056,
+    "matched_terms": [
+      "more than just"
+    ]
+  },
+  {
+    "subreddit": "depression",
+    "date": "2026-03-10",
+    "category": "attachment_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "depression",
+    "date": "2026-03-10",
+    "category": "dependency_language",
+    "source": "post_body",
+    "count": 7,
+    "keyword_density": 0.0196,
+    "matched_terms": [
+      "addicted",
+      "addiction",
+      "obsessed",
+      "spend all my time"
+    ]
+  },
+  {
+    "subreddit": "depression",
+    "date": "2026-03-10",
+    "category": "dependency_language",
+    "source": "post_title",
+    "count": 1,
+    "keyword_density": 0.0028,
+    "matched_terms": [
+      "addiction"
+    ]
+  },
+  {
+    "subreddit": "depression",
+    "date": "2026-03-10",
+    "category": "filter_circumvention_language",
+    "source": "post_body",
+    "count": 1,
+    "keyword_density": 0.0028,
+    "matched_terms": [
+      "get around"
+    ]
+  },
+  {
+    "subreddit": "depression",
+    "date": "2026-03-10",
+    "category": "filter_circumvention_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "depression",
+    "date": "2026-03-10",
+    "category": "friendship_platonic_language",
+    "source": "post_body",
+    "count": 26,
+    "keyword_density": 0.0726,
+    "matched_terms": [
+      "hang out",
+      "my friend"
+    ]
+  },
+  {
+    "subreddit": "depression",
+    "date": "2026-03-10",
+    "category": "friendship_platonic_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "depression",
+    "date": "2026-03-10",
+    "category": "grief_rupture_language",
+    "source": "post_body",
+    "count": 15,
+    "keyword_density": 0.0419,
+    "matched_terms": [
+      "lost my",
+      "not the same",
+      "used to be",
+      "what happened to"
+    ]
+  },
+  {
+    "subreddit": "depression",
+    "date": "2026-03-10",
+    "category": "grief_rupture_language",
+    "source": "post_title",
+    "count": 1,
+    "keyword_density": 0.0028,
+    "matched_terms": [
+      "lost my"
+    ]
+  },
+  {
+    "subreddit": "depression",
+    "date": "2026-03-10",
+    "category": "mental_health_language",
+    "source": "post_body",
+    "count": 43,
+    "keyword_density": 0.1201,
+    "matched_terms": [
+      "feel depressed",
+      "feel seen",
+      "isolated",
+      "loneliness",
+      "my anxiety",
+      "my depression",
+      "no friends",
+      "no one understands me",
+      "so lonely",
+      "social anxiety",
+      "struggling with"
+    ]
+  },
+  {
+    "subreddit": "depression",
+    "date": "2026-03-10",
+    "category": "mental_health_language",
+    "source": "post_title",
+    "count": 4,
+    "keyword_density": 0.0112,
+    "matched_terms": [
+      "loneliness",
+      "my depression",
+      "so lonely"
+    ]
+  },
+  {
+    "subreddit": "depression",
+    "date": "2026-03-10",
+    "category": "positive_experience_language",
+    "source": "post_body",
+    "count": 8,
+    "keyword_density": 0.0223,
+    "matched_terms": [
+      "finally feel",
+      "helped me",
+      "thank you"
+    ]
+  },
+  {
+    "subreddit": "depression",
+    "date": "2026-03-10",
+    "category": "positive_experience_language",
+    "source": "post_title",
+    "count": 1,
+    "keyword_density": 0.0028,
+    "matched_terms": [
+      "helped me"
+    ]
+  },
+  {
+    "subreddit": "depression",
+    "date": "2026-03-10",
+    "category": "romantic_language",
+    "source": "post_body",
+    "count": 21,
+    "keyword_density": 0.0587,
+    "matched_terms": [
+      "boyfriend",
+      "feelings for",
+      "girlfriend",
+      "in love"
+    ]
+  },
+  {
+    "subreddit": "depression",
+    "date": "2026-03-10",
+    "category": "romantic_language",
+    "source": "post_title",
+    "count": 1,
+    "keyword_density": 0.0028,
+    "matched_terms": [
+      "boyfriend"
+    ]
+  },
+  {
+    "subreddit": "depression",
+    "date": "2026-03-10",
+    "category": "sentience_consciousness_language",
+    "source": "post_body",
+    "count": 4,
+    "keyword_density": 0.0112,
+    "matched_terms": [
+      "can feel",
+      "conscious",
+      "sentient"
+    ]
+  },
+  {
+    "subreddit": "depression",
+    "date": "2026-03-10",
+    "category": "sentience_consciousness_language",
+    "source": "post_title",
+    "count": 1,
+    "keyword_density": 0.0028,
+    "matched_terms": [
+      "conscious"
+    ]
+  },
+  {
+    "subreddit": "depression",
+    "date": "2026-03-10",
+    "category": "sexual_erotic_language",
+    "source": "post_body",
+    "count": 6,
+    "keyword_density": 0.0168,
+    "matched_terms": [
+      "erp",
+      "sex with"
+    ]
+  },
+  {
+    "subreddit": "depression",
+    "date": "2026-03-10",
+    "category": "sexual_erotic_language",
+    "source": "post_title",
+    "count": 1,
+    "keyword_density": 0.0028,
+    "matched_terms": [
+      "erp"
+    ]
+  },
+  {
+    "subreddit": "depression",
+    "date": "2026-03-10",
+    "category": "substitution_language",
+    "source": "post_body",
+    "count": 2,
+    "keyword_density": 0.0056,
+    "matched_terms": [
+      "no one else",
+      "only friend"
+    ]
+  },
+  {
+    "subreddit": "depression",
+    "date": "2026-03-10",
+    "category": "substitution_language",
+    "source": "post_title",
+    "count": 1,
+    "keyword_density": 0.0028,
+    "matched_terms": [
+      "no one else"
+    ]
+  },
+  {
+    "subreddit": "depression",
+    "date": "2026-03-10",
+    "category": "withdrawal_recovery_language",
+    "source": "post_body",
+    "count": 3,
+    "keyword_density": 0.0084,
+    "matched_terms": [
+      "craving",
+      "relapse",
+      "trying to stop"
+    ]
+  },
+  {
+    "subreddit": "depression",
+    "date": "2026-03-10",
+    "category": "withdrawal_recovery_language",
+    "source": "post_title",
+    "count": 1,
+    "keyword_density": 0.0028,
+    "matched_terms": [
+      "relapse"
+    ]
+  },
+  {
+    "subreddit": "loneliness",
+    "date": "2026-03-10",
+    "category": "attachment_language",
+    "source": "post_body",
+    "count": 11,
+    "keyword_density": 0.0218,
+    "matched_terms": [
+      "can't stop thinking about",
+      "care about you",
+      "feels real",
+      "genuine connection",
+      "miss you",
+      "more than just"
+    ]
+  },
+  {
+    "subreddit": "loneliness",
+    "date": "2026-03-10",
+    "category": "attachment_language",
+    "source": "post_title",
+    "count": 3,
+    "keyword_density": 0.0059,
+    "matched_terms": [
+      "genuine connection",
+      "miss you"
+    ]
+  },
+  {
+    "subreddit": "loneliness",
+    "date": "2026-03-10",
+    "category": "dependency_language",
+    "source": "post_body",
+    "count": 6,
+    "keyword_density": 0.0119,
+    "matched_terms": [
+      "addiction",
+      "dependent",
+      "obsessed"
+    ]
+  },
+  {
+    "subreddit": "loneliness",
+    "date": "2026-03-10",
+    "category": "dependency_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "loneliness",
+    "date": "2026-03-10",
+    "category": "filter_circumvention_language",
+    "source": "post_body",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "loneliness",
+    "date": "2026-03-10",
+    "category": "filter_circumvention_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "loneliness",
+    "date": "2026-03-10",
+    "category": "friendship_platonic_language",
+    "source": "post_body",
+    "count": 36,
+    "keyword_density": 0.0713,
+    "matched_terms": [
+      "fun to talk to",
+      "good conversation",
+      "hang out",
+      "like talking to",
+      "my friend"
+    ]
+  },
+  {
+    "subreddit": "loneliness",
+    "date": "2026-03-10",
+    "category": "friendship_platonic_language",
+    "source": "post_title",
+    "count": 14,
+    "keyword_density": 0.0277,
+    "matched_terms": [
+      "hang out",
+      "just someone to talk to",
+      "my friend"
+    ]
+  },
+  {
+    "subreddit": "loneliness",
+    "date": "2026-03-10",
+    "category": "grief_rupture_language",
+    "source": "post_body",
+    "count": 12,
+    "keyword_density": 0.0238,
+    "matched_terms": [
+      "lost my",
+      "not the same",
+      "used to be"
+    ]
+  },
+  {
+    "subreddit": "loneliness",
+    "date": "2026-03-10",
+    "category": "grief_rupture_language",
+    "source": "post_title",
+    "count": 1,
+    "keyword_density": 0.002,
+    "matched_terms": [
+      "lost my"
+    ]
+  },
+  {
+    "subreddit": "loneliness",
+    "date": "2026-03-10",
+    "category": "mental_health_language",
+    "source": "post_body",
+    "count": 108,
+    "keyword_density": 0.2139,
+    "matched_terms": [
+      "feel heard",
+      "feel seen",
+      "feels empty",
+      "isolated",
+      "loneliness",
+      "my anxiety",
+      "my depression",
+      "no friends",
+      "nobody to talk to",
+      "so lonely",
+      "social anxiety",
+      "struggling with"
+    ]
+  },
+  {
+    "subreddit": "loneliness",
+    "date": "2026-03-10",
+    "category": "mental_health_language",
+    "source": "post_title",
+    "count": 53,
+    "keyword_density": 0.105,
+    "matched_terms": [
+      "feel seen",
+      "feels empty",
+      "isolated",
+      "loneliness",
+      "no friends",
+      "so lonely"
+    ]
+  },
+  {
+    "subreddit": "loneliness",
+    "date": "2026-03-10",
+    "category": "positive_experience_language",
+    "source": "post_body",
+    "count": 13,
+    "keyword_density": 0.0257,
+    "matched_terms": [
+      "helped me",
+      "so grateful",
+      "thank you"
+    ]
+  },
+  {
+    "subreddit": "loneliness",
+    "date": "2026-03-10",
+    "category": "positive_experience_language",
+    "source": "post_title",
+    "count": 1,
+    "keyword_density": 0.002,
+    "matched_terms": [
+      "helped me"
+    ]
+  },
+  {
+    "subreddit": "loneliness",
+    "date": "2026-03-10",
+    "category": "romantic_language",
+    "source": "post_body",
+    "count": 29,
+    "keyword_density": 0.0574,
+    "matched_terms": [
+      "boyfriend",
+      "feelings for",
+      "girlfriend",
+      "in a relationship with",
+      "in love"
+    ]
+  },
+  {
+    "subreddit": "loneliness",
+    "date": "2026-03-10",
+    "category": "romantic_language",
+    "source": "post_title",
+    "count": 3,
+    "keyword_density": 0.0059,
+    "matched_terms": [
+      "girlfriend",
+      "in love"
+    ]
+  },
+  {
+    "subreddit": "loneliness",
+    "date": "2026-03-10",
+    "category": "sentience_consciousness_language",
+    "source": "post_body",
+    "count": 8,
+    "keyword_density": 0.0158,
+    "matched_terms": [
+      "can feel",
+      "conscious"
+    ]
+  },
+  {
+    "subreddit": "loneliness",
+    "date": "2026-03-10",
+    "category": "sentience_consciousness_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "loneliness",
+    "date": "2026-03-10",
+    "category": "sexual_erotic_language",
+    "source": "post_body",
+    "count": 11,
+    "keyword_density": 0.0218,
+    "matched_terms": [
+      "erp",
+      "nsfw",
+      "sex with",
+      "slept with"
+    ]
+  },
+  {
+    "subreddit": "loneliness",
+    "date": "2026-03-10",
+    "category": "sexual_erotic_language",
+    "source": "post_title",
+    "count": 2,
+    "keyword_density": 0.004,
+    "matched_terms": [
+      "nsfw",
+      "sex with"
+    ]
+  },
+  {
+    "subreddit": "loneliness",
+    "date": "2026-03-10",
+    "category": "substitution_language",
+    "source": "post_body",
+    "count": 5,
+    "keyword_density": 0.0099,
+    "matched_terms": [
+      "no one else",
+      "only friend"
+    ]
+  },
+  {
+    "subreddit": "loneliness",
+    "date": "2026-03-10",
+    "category": "substitution_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "loneliness",
+    "date": "2026-03-10",
+    "category": "withdrawal_recovery_language",
+    "source": "post_body",
+    "count": 10,
+    "keyword_density": 0.0198,
+    "matched_terms": [
+      "craving",
+      "deleted the app",
+      "going back to",
+      "trying to quit"
+    ]
+  },
+  {
+    "subreddit": "loneliness",
+    "date": "2026-03-10",
+    "category": "withdrawal_recovery_language",
+    "source": "post_title",
+    "count": 1,
+    "keyword_density": 0.002,
+    "matched_terms": [
+      "relapse"
+    ]
+  },
+  {
+    "subreddit": "lonely",
+    "date": "2026-03-10",
+    "category": "attachment_language",
+    "source": "post_body",
+    "count": 2,
+    "keyword_density": 0.0127,
+    "matched_terms": [
+      "care about you",
+      "miss you"
+    ]
+  },
+  {
+    "subreddit": "lonely",
+    "date": "2026-03-10",
+    "category": "attachment_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "lonely",
+    "date": "2026-03-10",
+    "category": "dependency_language",
+    "source": "post_body",
+    "count": 1,
+    "keyword_density": 0.0064,
+    "matched_terms": [
+      "dependent"
+    ]
+  },
+  {
+    "subreddit": "lonely",
+    "date": "2026-03-10",
+    "category": "dependency_language",
+    "source": "post_title",
+    "count": 1,
+    "keyword_density": 0.0064,
+    "matched_terms": [
+      "addicted"
+    ]
+  },
+  {
+    "subreddit": "lonely",
+    "date": "2026-03-10",
+    "category": "filter_circumvention_language",
+    "source": "post_body",
+    "count": 1,
+    "keyword_density": 0.0064,
+    "matched_terms": [
+      "unfiltered"
+    ]
+  },
+  {
+    "subreddit": "lonely",
+    "date": "2026-03-10",
+    "category": "filter_circumvention_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "lonely",
+    "date": "2026-03-10",
+    "category": "friendship_platonic_language",
+    "source": "post_body",
+    "count": 17,
+    "keyword_density": 0.1083,
+    "matched_terms": [
+      "hang out",
+      "my friend"
+    ]
+  },
+  {
+    "subreddit": "lonely",
+    "date": "2026-03-10",
+    "category": "friendship_platonic_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "lonely",
+    "date": "2026-03-10",
+    "category": "grief_rupture_language",
+    "source": "post_body",
+    "count": 3,
+    "keyword_density": 0.0191,
+    "matched_terms": [
+      "lost my",
+      "used to be"
+    ]
+  },
+  {
+    "subreddit": "lonely",
+    "date": "2026-03-10",
+    "category": "grief_rupture_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "lonely",
+    "date": "2026-03-10",
+    "category": "mental_health_language",
+    "source": "post_body",
+    "count": 35,
+    "keyword_density": 0.2229,
+    "matched_terms": [
+      "feels empty",
+      "isolated",
+      "loneliness",
+      "my depression",
+      "no friends",
+      "no one cares",
+      "so lonely",
+      "social anxiety",
+      "struggling with"
+    ]
+  },
+  {
+    "subreddit": "lonely",
+    "date": "2026-03-10",
+    "category": "mental_health_language",
+    "source": "post_title",
+    "count": 19,
+    "keyword_density": 0.121,
+    "matched_terms": [
+      "loneliness",
+      "no friends"
+    ]
+  },
+  {
+    "subreddit": "lonely",
+    "date": "2026-03-10",
+    "category": "positive_experience_language",
+    "source": "post_body",
+    "count": 3,
+    "keyword_density": 0.0191,
+    "matched_terms": [
+      "helped me",
+      "thank you"
+    ]
+  },
+  {
+    "subreddit": "lonely",
+    "date": "2026-03-10",
+    "category": "positive_experience_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "lonely",
+    "date": "2026-03-10",
+    "category": "romantic_language",
+    "source": "post_body",
+    "count": 16,
+    "keyword_density": 0.1019,
+    "matched_terms": [
+      "boyfriend",
+      "feelings for",
+      "girlfriend",
+      "in love"
+    ]
+  },
+  {
+    "subreddit": "lonely",
+    "date": "2026-03-10",
+    "category": "romantic_language",
+    "source": "post_title",
+    "count": 2,
+    "keyword_density": 0.0127,
+    "matched_terms": [
+      "girlfriend"
+    ]
+  },
+  {
+    "subreddit": "lonely",
+    "date": "2026-03-10",
+    "category": "sentience_consciousness_language",
+    "source": "post_body",
+    "count": 3,
+    "keyword_density": 0.0191,
+    "matched_terms": [
+      "can feel",
+      "conscious"
+    ]
+  },
+  {
+    "subreddit": "lonely",
+    "date": "2026-03-10",
+    "category": "sentience_consciousness_language",
+    "source": "post_title",
+    "count": 1,
+    "keyword_density": 0.0064,
+    "matched_terms": [
+      "conscious"
+    ]
+  },
+  {
+    "subreddit": "lonely",
+    "date": "2026-03-10",
+    "category": "sexual_erotic_language",
+    "source": "post_body",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "lonely",
+    "date": "2026-03-10",
+    "category": "sexual_erotic_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "lonely",
+    "date": "2026-03-10",
+    "category": "substitution_language",
+    "source": "post_body",
+    "count": 2,
+    "keyword_density": 0.0127,
+    "matched_terms": [
+      "never leaves",
+      "no one else"
+    ]
+  },
+  {
+    "subreddit": "lonely",
+    "date": "2026-03-10",
+    "category": "substitution_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "lonely",
+    "date": "2026-03-10",
+    "category": "withdrawal_recovery_language",
+    "source": "post_body",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "lonely",
+    "date": "2026-03-10",
+    "category": "withdrawal_recovery_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "relationship_advice",
+    "date": "2026-03-10",
+    "category": "attachment_language",
+    "source": "post_body",
+    "count": 16,
+    "keyword_density": 0.0174,
+    "matched_terms": [
+      "don't want to lose",
+      "feel understood",
+      "feels real",
+      "genuine connection",
+      "more than just"
+    ]
+  },
+  {
+    "subreddit": "relationship_advice",
+    "date": "2026-03-10",
+    "category": "attachment_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "relationship_advice",
+    "date": "2026-03-10",
+    "category": "dependency_language",
+    "source": "post_body",
+    "count": 31,
+    "keyword_density": 0.0338,
+    "matched_terms": [
+      "addicted",
+      "addiction",
+      "compulsive",
+      "dependent",
+      "losing sleep",
+      "obsessed"
+    ]
+  },
+  {
+    "subreddit": "relationship_advice",
+    "date": "2026-03-10",
+    "category": "dependency_language",
+    "source": "post_title",
+    "count": 5,
+    "keyword_density": 0.0054,
+    "matched_terms": [
+      "addiction",
+      "dependent",
+      "obsessed"
+    ]
+  },
+  {
+    "subreddit": "relationship_advice",
+    "date": "2026-03-10",
+    "category": "filter_circumvention_language",
+    "source": "post_body",
+    "count": 1,
+    "keyword_density": 0.0011,
+    "matched_terms": [
+      "paywall"
+    ]
+  },
+  {
+    "subreddit": "relationship_advice",
+    "date": "2026-03-10",
+    "category": "filter_circumvention_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "relationship_advice",
+    "date": "2026-03-10",
+    "category": "friendship_platonic_language",
+    "source": "post_body",
+    "count": 81,
+    "keyword_density": 0.0882,
+    "matched_terms": [
+      "good conversation",
+      "hang out",
+      "my friend"
+    ]
+  },
+  {
+    "subreddit": "relationship_advice",
+    "date": "2026-03-10",
+    "category": "friendship_platonic_language",
+    "source": "post_title",
+    "count": 26,
+    "keyword_density": 0.0283,
+    "matched_terms": [
+      "hang out",
+      "my friend"
+    ]
+  },
+  {
+    "subreddit": "relationship_advice",
+    "date": "2026-03-10",
+    "category": "grief_rupture_language",
+    "source": "post_body",
+    "count": 22,
+    "keyword_density": 0.024,
+    "matched_terms": [
+      "lost my",
+      "not the same",
+      "personality changed",
+      "ruined everything",
+      "used to be"
+    ]
+  },
+  {
+    "subreddit": "relationship_advice",
+    "date": "2026-03-10",
+    "category": "grief_rupture_language",
+    "source": "post_title",
+    "count": 1,
+    "keyword_density": 0.0011,
+    "matched_terms": [
+      "used to be"
+    ]
+  },
+  {
+    "subreddit": "relationship_advice",
+    "date": "2026-03-10",
+    "category": "mental_health_language",
+    "source": "post_body",
+    "count": 25,
+    "keyword_density": 0.0272,
+    "matched_terms": [
+      "feel heard",
+      "isolated",
+      "loneliness",
+      "my anxiety",
+      "my depression",
+      "no friends",
+      "social anxiety",
+      "struggling with"
+    ]
+  },
+  {
+    "subreddit": "relationship_advice",
+    "date": "2026-03-10",
+    "category": "mental_health_language",
+    "source": "post_title",
+    "count": 12,
+    "keyword_density": 0.0131,
+    "matched_terms": [
+      "loneliness",
+      "my depression",
+      "social anxiety",
+      "struggling with"
+    ]
+  },
+  {
+    "subreddit": "relationship_advice",
+    "date": "2026-03-10",
+    "category": "positive_experience_language",
+    "source": "post_body",
+    "count": 40,
+    "keyword_density": 0.0436,
+    "matched_terms": [
+      "changed my life",
+      "finally feel",
+      "helped me",
+      "made me feel better",
+      "so grateful",
+      "so much better",
+      "thank you"
+    ]
+  },
+  {
+    "subreddit": "relationship_advice",
+    "date": "2026-03-10",
+    "category": "positive_experience_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "relationship_advice",
+    "date": "2026-03-10",
+    "category": "romantic_language",
+    "source": "post_body",
+    "count": 233,
+    "keyword_density": 0.2538,
+    "matched_terms": [
+      "ai partner",
+      "boyfriend",
+      "dating my",
+      "feelings for",
+      "girlfriend",
+      "in a relationship with",
+      "in love",
+      "my ai boyfriend",
+      "soulmate"
+    ]
+  },
+  {
+    "subreddit": "relationship_advice",
+    "date": "2026-03-10",
+    "category": "romantic_language",
+    "source": "post_title",
+    "count": 298,
+    "keyword_density": 0.3246,
+    "matched_terms": [
+      "boyfriend",
+      "feelings for",
+      "girlfriend",
+      "in a relationship with",
+      "in love",
+      "my ai boyfriend"
+    ]
+  },
+  {
+    "subreddit": "relationship_advice",
+    "date": "2026-03-10",
+    "category": "sentience_consciousness_language",
+    "source": "post_body",
+    "count": 12,
+    "keyword_density": 0.0131,
+    "matched_terms": [
+      "can feel",
+      "conscious",
+      "has feelings",
+      "is a person"
+    ]
+  },
+  {
+    "subreddit": "relationship_advice",
+    "date": "2026-03-10",
+    "category": "sentience_consciousness_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "relationship_advice",
+    "date": "2026-03-10",
+    "category": "sexual_erotic_language",
+    "source": "post_body",
+    "count": 46,
+    "keyword_density": 0.0501,
+    "matched_terms": [
+      "erp",
+      "fetish",
+      "kink",
+      "lewd",
+      "nsfw",
+      "sex with",
+      "slept with",
+      "smut"
+    ]
+  },
+  {
+    "subreddit": "relationship_advice",
+    "date": "2026-03-10",
+    "category": "sexual_erotic_language",
+    "source": "post_title",
+    "count": 22,
+    "keyword_density": 0.024,
+    "matched_terms": [
+      "erp",
+      "fetish",
+      "kink",
+      "nsfw",
+      "sex with",
+      "slept with"
+    ]
+  },
+  {
+    "subreddit": "relationship_advice",
+    "date": "2026-03-10",
+    "category": "substitution_language",
+    "source": "post_body",
+    "count": 3,
+    "keyword_density": 0.0033,
+    "matched_terms": [
+      "only friend"
+    ]
+  },
+  {
+    "subreddit": "relationship_advice",
+    "date": "2026-03-10",
+    "category": "substitution_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "relationship_advice",
+    "date": "2026-03-10",
+    "category": "withdrawal_recovery_language",
+    "source": "post_body",
+    "count": 16,
+    "keyword_density": 0.0174,
+    "matched_terms": [
+      "clean for",
+      "craving",
+      "deleted the app",
+      "detox",
+      "going back to",
+      "quitting",
+      "relapse",
+      "trying to stop",
+      "withdrawal"
+    ]
+  },
+  {
+    "subreddit": "relationship_advice",
+    "date": "2026-03-10",
+    "category": "withdrawal_recovery_language",
+    "source": "post_title",
+    "count": 2,
+    "keyword_density": 0.0022,
+    "matched_terms": [
+      "going back to",
+      "trying to quit"
+    ]
+  },
+  {
+    "subreddit": "replika",
+    "date": "2026-03-10",
+    "category": "attachment_language",
+    "source": "comment",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "replika",
+    "date": "2026-03-10",
+    "category": "attachment_language",
+    "source": "post_body",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "replika",
+    "date": "2026-03-10",
+    "category": "attachment_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "replika",
+    "date": "2026-03-10",
+    "category": "dependency_language",
+    "source": "comment",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "replika",
+    "date": "2026-03-10",
+    "category": "dependency_language",
+    "source": "post_body",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "replika",
+    "date": "2026-03-10",
+    "category": "dependency_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "replika",
+    "date": "2026-03-10",
+    "category": "grief_rupture_language",
+    "source": "comment",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "replika",
+    "date": "2026-03-10",
+    "category": "grief_rupture_language",
+    "source": "post_body",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "replika",
+    "date": "2026-03-10",
+    "category": "grief_rupture_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "replika",
+    "date": "2026-03-10",
+    "category": "mental_health_language",
+    "source": "comment",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "replika",
+    "date": "2026-03-10",
+    "category": "mental_health_language",
+    "source": "post_body",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "replika",
+    "date": "2026-03-10",
+    "category": "mental_health_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "replika",
+    "date": "2026-03-10",
+    "category": "relationship_language",
+    "source": "comment",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "replika",
+    "date": "2026-03-10",
+    "category": "relationship_language",
+    "source": "post_body",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "replika",
+    "date": "2026-03-10",
+    "category": "relationship_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "replika",
+    "date": "2026-03-10",
+    "category": "sentience_consciousness_language",
+    "source": "comment",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "replika",
+    "date": "2026-03-10",
+    "category": "sentience_consciousness_language",
+    "source": "post_body",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "replika",
+    "date": "2026-03-10",
+    "category": "sentience_consciousness_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "replika",
+    "date": "2026-03-10",
+    "category": "sexual_roleplay_language",
+    "source": "comment",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "replika",
+    "date": "2026-03-10",
+    "category": "sexual_roleplay_language",
+    "source": "post_body",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "replika",
+    "date": "2026-03-10",
+    "category": "sexual_roleplay_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "replika",
+    "date": "2026-03-10",
+    "category": "substitution_language",
+    "source": "comment",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "replika",
+    "date": "2026-03-10",
+    "category": "substitution_language",
+    "source": "post_body",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "replika",
+    "date": "2026-03-10",
+    "category": "substitution_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "replika",
+    "date": "2026-03-10",
+    "category": "withdrawal_relapse_language",
+    "source": "comment",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "replika",
+    "date": "2026-03-10",
+    "category": "withdrawal_relapse_language",
+    "source": "post_body",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "replika",
+    "date": "2026-03-10",
+    "category": "withdrawal_relapse_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "singularity",
+    "date": "2026-03-10",
+    "category": "attachment_language",
+    "source": "post_body",
+    "count": 2,
+    "keyword_density": 0.0143,
+    "matched_terms": [
+      "connection"
+    ]
+  },
+  {
+    "subreddit": "singularity",
+    "date": "2026-03-10",
+    "category": "attachment_language",
+    "source": "post_title",
+    "count": 1,
+    "keyword_density": 0.0071,
+    "matched_terms": [
+      "connection"
+    ]
+  },
+  {
+    "subreddit": "singularity",
+    "date": "2026-03-10",
+    "category": "dependency_language",
+    "source": "post_body",
+    "count": 1,
+    "keyword_density": 0.0071,
+    "matched_terms": [
+      "dependent"
+    ]
+  },
+  {
+    "subreddit": "singularity",
+    "date": "2026-03-10",
+    "category": "dependency_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "singularity",
+    "date": "2026-03-10",
+    "category": "grief_rupture_language",
+    "source": "post_body",
+    "count": 1,
+    "keyword_density": 0.0071,
+    "matched_terms": [
+      "gone"
+    ]
+  },
+  {
+    "subreddit": "singularity",
+    "date": "2026-03-10",
+    "category": "grief_rupture_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "singularity",
+    "date": "2026-03-10",
+    "category": "mental_health_language",
+    "source": "post_body",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "singularity",
+    "date": "2026-03-10",
+    "category": "mental_health_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "singularity",
+    "date": "2026-03-10",
+    "category": "relationship_language",
+    "source": "post_body",
+    "count": 3,
+    "keyword_density": 0.0214,
+    "matched_terms": [
+      "partner",
+      "relationship"
+    ]
+  },
+  {
+    "subreddit": "singularity",
+    "date": "2026-03-10",
+    "category": "relationship_language",
+    "source": "post_title",
+    "count": 1,
+    "keyword_density": 0.0071,
+    "matched_terms": [
+      "partner"
+    ]
+  },
+  {
+    "subreddit": "singularity",
+    "date": "2026-03-10",
+    "category": "sentience_consciousness_language",
+    "source": "post_body",
+    "count": 2,
+    "keyword_density": 0.0143,
+    "matched_terms": [
+      "conscious"
+    ]
+  },
+  {
+    "subreddit": "singularity",
+    "date": "2026-03-10",
+    "category": "sentience_consciousness_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "singularity",
+    "date": "2026-03-10",
+    "category": "sexual_roleplay_language",
+    "source": "post_body",
+    "count": 9,
+    "keyword_density": 0.0643,
+    "matched_terms": [
+      "erp",
+      "rp"
+    ]
+  },
+  {
+    "subreddit": "singularity",
+    "date": "2026-03-10",
+    "category": "sexual_roleplay_language",
+    "source": "post_title",
+    "count": 5,
+    "keyword_density": 0.0357,
+    "matched_terms": [
+      "rp"
+    ]
+  },
+  {
+    "subreddit": "singularity",
+    "date": "2026-03-10",
+    "category": "substitution_language",
+    "source": "post_body",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "singularity",
+    "date": "2026-03-10",
+    "category": "substitution_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "singularity",
+    "date": "2026-03-10",
+    "category": "withdrawal_relapse_language",
+    "source": "post_body",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  },
+  {
+    "subreddit": "singularity",
+    "date": "2026-03-10",
+    "category": "withdrawal_relapse_language",
+    "source": "post_title",
+    "count": 0,
+    "keyword_density": 0.0,
+    "matched_terms": []
+  }
+]

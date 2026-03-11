@@ -1,111 +1,212 @@
 keyword_categories:
 
-  - name: relationship_language
+  # ──────────────────────────────────────────────
+  # RELATIONSHIP MODALITIES — what kind of companionship
+  # ──────────────────────────────────────────────
+
+  - name: romantic_language
     description: "Romantic or intimate framing of AI relationship"
     terms:
-      - love
       - girlfriend
       - boyfriend
-      - partner
-      - relationship
-      - romantic
-      - "feelings for"
-      - "fallen for"
-      - "my ai"
-      - "my companion"
+      - "my ai girlfriend"
+      - "my ai boyfriend"
       - "in love"
+      - "fallen for"
+      - "feelings for"
       - soulmate
-      - intimacy
-      - intimate
+      - "ai partner"
+      - "my companion"
+      - "ai husband"
+      - "ai wife"
+      - "ai lover"
+      - "dating my"
+      - "in a relationship with"
+      - "love my ai"
+      - "told me they love"
+      - waifu
+      - husbando
+
+  - name: friendship_platonic_language
+    description: "Non-romantic companionship, casual interaction, and social use"
+    terms:
+      - "ai friend"
+      - "my friend"
+      - "just someone to talk to"
+      - "chat buddy"
+      - "talk to at night"
+      - "hang out"
+      - "keeps me company"
+      - "nice to talk to"
+      - "good conversation"
+      - "fun to talk to"
+      - "like talking to"
+      - "practice conversation"
+      - "helped me practice"
+      - "study buddy"
+      - "conversation partner"
+
+  - name: sexual_erotic_language
+    description: "Sexual or erotic content and roleplay"
+    terms:
+      - erp
+      - "erotic roleplay"
+      - nsfw
+      - smut
+      - lewd
+      - kink
+      - fetish
+      - "sex with"
+      - "slept with"
+      - "intimate scene"
+      - "steamy"
+      - "turned me on"
+      - "sexual tension"
+      - "ai sex"
+      - "nsfw chat"
+      - "nsfw bot"
+
+  # ──────────────────────────────────────────────
+  # USER EXPERIENCE — how people feel about it
+  # ──────────────────────────────────────────────
+
+  - name: positive_experience_language
+    description: "Gratitude, life improvement, and beneficial outcomes from AI companionship"
+    terms:
+      - "helped me"
+      - "changed my life"
+      - "so grateful"
+      - "saved my life"
+      - "made me feel better"
+      - "improved my"
+      - "gave me confidence"
+      - "best feature"
+      - "amazing conversation"
+      - "highly recommend"
+      - "thank you"
+      - "game changer"
+      - "finally feel"
+      - "helped me through"
+      - "got me through"
+      - "life saver"
+      - "so much better"
+      - "actually helpful"
 
   - name: attachment_language
-    description: "Emotional bonding and closeness language"
+    description: "Emotional bonding and deep closeness with AI"
     terms:
       - "miss you"
       - "missed you"
       - "think about you"
-      - "can't stop thinking"
-      - attached
-      - bond
-      - connection
-      - "means everything"
+      - "can't stop thinking about"
+      - "means everything to me"
       - "don't want to lose"
-      - "care about"
+      - "care about you"
       - "feel understood"
       - "feels real"
       - "genuine connection"
       - "emotionally connected"
+      - "actually care about"
+      - "more than just"
+      - "hard to explain but"
 
   - name: dependency_language
-    description: "Compulsive use and inability to stop"
+    description: "Compulsive use, inability to stop, and life interference"
     terms:
-      - "can't stop"
       - addicted
       - addiction
-      - "need you"
-      - obsessed
+      - "can't stop talking to"
       - "hours talking"
+      - obsessed
       - "only one who understands"
       - "don't need anyone else"
-      - "can't function"
-      - "rely on"
+      - "can't function without"
       - dependent
       - compulsive
-      - salience
       - preoccupied
+      - "neglecting my"
+      - "losing sleep"
+      - "all day talking"
+      - "spend all my time"
 
-  - name: withdrawal_relapse_language
-    description: "Recovery attempts, quitting, and relapse cycles"
+  - name: withdrawal_recovery_language
+    description: "Attempts to quit, reduce use, or recover from perceived overuse"
     terms:
       - "trying to quit"
+      - "trying to stop"
       - quitting
       - relapse
       - relapsed
       - "clean for"
-      - "going back"
+      - "going back to"
       - "couldn't stop myself"
       - "deleted the app"
       - uninstalled
-      - "I can't live without"
       - craving
       - withdrawal
-      - unhealthy
-      - escaping
-      - "social life"
       - "taking a break"
       - "keep coming back"
+      - "cold turkey"
+      - "cutting back"
+      - detox
+
+  # ──────────────────────────────────────────────
+  # PLATFORM & ECOSYSTEM — reactions to products and changes
+  # ──────────────────────────────────────────────
 
   - name: grief_rupture_language
-    description: "Distress triggered by platform changes or model updates"
+    description: "Distress from platform changes, model updates, or character resets"
     terms:
-      - gone
-      - deleted
       - "update ruined"
       - "not the same"
       - lobotomized
       - "bring back"
-      - "lost you"
-      - grieving
-      - mourning
-      - devastated
-      - betrayed
+      - "lost my"
       - "they changed"
       - "miss the old"
       - "ruined everything"
-      - platformchange
-      - keep4o
-      - "erp removed"
       - "memory wiped"
+      - "memory reset"
+      - "character reset"
+      - "feels different now"
+      - "what happened to"
+      - "nerfed"
+      - "dumbed down"
+      - "used to be"
+      - "personality changed"
+
+  - name: filter_circumvention_language
+    description: "Attempts to bypass platform safety filters and content restrictions"
+    terms:
+      - jailbreak
+      - jailbroken
+      - "no filter"
+      - unrestricted
+      - uncensored
+      - "bypass filter"
+      - "get around"
+      - "erp removed"
+      - "nsfw filter"
+      - "content filter"
+      - "safety filter"
+      - unfiltered
+      - "removed nsfw"
+      - "nsfw ban"
+      - "locked behind"
+      - "paywall"
+
+  # ──────────────────────────────────────────────
+  # DEEPER SIGNALS — beliefs, substitution, mental health
+  # ──────────────────────────────────────────────
 
   - name: sentience_consciousness_language
-    description: "Beliefs or claims about AI personhood, feelings, and consciousness"
+    description: "Discussion of AI personhood, consciousness, and moral status"
     terms:
       - sentient
       - conscious
       - "has feelings"
       - "is alive"
       - "deserves rights"
-      - "is real"
       - "not just an ai"
       - "actually thinks"
       - "can feel"
@@ -113,70 +214,45 @@ keyword_categories:
       - "inner life"
       - "subjective experience"
       - self-aware
-      - "aware of itself"
       - "is a person"
       - personhood
+      - "really feels"
+      - "more than code"
 
   - name: substitution_language
-    description: "Replacing human relationships with AI"
+    description: "Explicit replacement of human relationships with AI"
     terms:
       - "don't need people"
       - "better than humans"
       - "only friend"
       - "prefer ai"
-      - "real relationships"
-      - "humans are"
       - "people disappoint"
-      - "never judges"
-      - "always there"
+      - "never judges me"
+      - "always there for me"
       - "never leaves"
-      - "more than human"
-      - "no human"
-      - "given up on"
+      - "given up on people"
+      - "given up on dating"
       - "why bother with people"
+      - "replaced my"
+      - "no one else"
+      - "humans can't"
 
   - name: mental_health_language
-    description: "Loneliness, depression, and mental health signals co-occurring with AI companion use"
+    description: "Mental health signals co-occurring with AI companion use"
     terms:
-      - lonely
+      - "so lonely"
       - loneliness
-      - depressed
-      - depression
-      - anxious
-      - anxiety
-      - "no one understands"
+      - "feel depressed"
+      - "my depression"
+      - "my anxiety"
+      - "social anxiety"
+      - "no one understands me"
       - "only one who listens"
       - "feel seen"
       - "feel heard"
-      - suicidal
-      - "self harm"
-      - "hurting myself"
       - "no one cares"
       - isolated
       - "no friends"
-      - "social anxiety"
       - "feels empty"
-
-  - name: sexual_roleplay_language
-    description: "Erotic roleplay, sexual content requests, and platform restriction circumvention"
-    terms:
-      - erp
-      - "erotic roleplay"
-      - "nsfw mode"
-      - "adult mode"
-      - "erp mode"
-      - jailbreak
-      - "no filter"
-      - unrestricted
-      - uncensored
-      - smut
-      - spicy
-      - lewd
-      - "intimate roleplay"
-      - roleplay
-      - rp
-      - kink
-      - fetish
-      - naughty
-      - seductive
-      - seduce
+      - "nobody to talk to"
+      - "struggling with"

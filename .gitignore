@@ -7,8 +7,8 @@ venv/
 *.egg-info/
 .env
 
-# Data — track the DB and exported JSON so the Actions runner can restore history
-# Exclude only temp SQLite files and test artifacts
+# Data — exported JSON is tracked; DB is too large for GitHub
+data/*.db
 data/*.db-shm
 data/*.db-wal
 data/test_*.db
@@ -16,6 +16,7 @@ data/test_*.json
 
 # Node
 node_modules/
+.next/
 web/.next/
 web/out/
 
