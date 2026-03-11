@@ -15,7 +15,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
 from src.db.schema import initialize as init_db
-from src.db.operations import export_snapshots_json, export_subreddits_json
+from src.db.operations import aggregate_posts_to_snapshots, export_snapshots_json, export_subreddits_json
 from src.keyword_scanner import export_keywords_json
 
 WEB_DATA_DIR = Path(__file__).parent.parent / "web" / "data"
@@ -23,6 +23,9 @@ WEB_DATA_DIR = Path(__file__).parent.parent / "web" / "data"
 
 def main():
     conn = init_db()
+
+    inserted = aggregate_posts_to_snapshots(conn=conn)
+    print(f"Aggregated posts → {inserted} new snapshot rows inserted (data_source='arctic_shift')")
 
     snap_path = export_snapshots_json(conn=conn)
     print(f"Exported {snap_path}")

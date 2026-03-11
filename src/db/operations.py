@@ -169,6 +169,39 @@ def get_all_snapshots_for_chart(conn: Optional[sqlite3.Connection] = None) -> li
             _conn.close()
 
 
+def aggregate_posts_to_snapshots(conn: Optional[sqlite3.Connection] = None) -> int:
+    """Compute daily aggregates from the posts table and upsert into subreddit_snapshots.
+
+    Uses INSERT OR IGNORE so real json_endpoint snapshots are never overwritten.
+    Returns the number of new rows inserted.
+    """
+    _conn = conn or get_connection()
+    try:
+        result = _conn.execute(
+            """
+            INSERT OR IGNORE INTO subreddit_snapshots
+                (subreddit, snapshot_date, data_source,
+                 posts_today, avg_comments_per_post, avg_score_per_post, unique_authors)
+            SELECT
+                subreddit,
+                collected_date                                                  AS snapshot_date,
+                'arctic_shift'                                                  AS data_source,
+                COUNT(*)                                                        AS posts_today,
+                ROUND(AVG(CASE WHEN num_comments >= 0 THEN num_comments END), 2) AS avg_comments_per_post,
+                ROUND(AVG(score), 2)                                            AS avg_score_per_post,
+                COUNT(DISTINCT CASE WHEN author != '[deleted]' THEN author END) AS unique_authors
+            FROM posts
+            WHERE data_source = 'arctic_shift'
+            GROUP BY subreddit, collected_date
+            """
+        )
+        _conn.commit()
+        return result.rowcount
+    finally:
+        if conn is None:
+            _conn.close()
+
+
 def export_snapshots_json(
     output_path: Optional[Path] = None,
     conn: Optional[sqlite3.Connection] = None,
