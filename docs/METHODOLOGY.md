@@ -1,6 +1,6 @@
 # myfriendisai — Research Methodology
 
-**Updated:** March 11, 2026  
+**Updated:** March 12, 2026
 **Purpose:** Documents the repeatable process for curating subreddits, discovering keywords, and validating data quality. This is both an internal reference for maintaining the project and a public-facing methodology statement.
 
 ---
@@ -49,10 +49,23 @@ A subreddit is excluded if:
 3. **Validate** — test candidate phrases against the full corpus, checking hit count, subreddit distribution, and whether matches are genuine AI companionship discourse
 4. **Monitor** — after deployment, check for single-keyword dominance and investigate any unexpected spikes
 
+### Key finding: universal emotional language fails precision
+Many of the most emotionally powerful phrases discovered in companion posts are universal human relationship language. They appear 10-50x more often in general AI subs (r/ChatGPT, r/singularity) than in companion subs. Examples:
+
+| Phrase | Total hits | Companion % | Verdict |
+|---|---|---|---|
+| saved my life | 135 | 45% | REJECTED — ChatGPT dominates (56 hits) |
+| am I crazy for | 14 | 29% | REJECTED — mostly ChatGPT/ClaudeAI |
+| embarrassed to admit | 15 | 60% | BORDERLINE — scattered across general subs |
+| helped me through | 144 | 65% | BORDERLINE — ChatGPT has 39 hits |
+
+**Lesson:** Do not assume that a phrase found in companion posts is specific to companion discourse. Always validate against the full corpus. Platform-qualified phrases ("my replika", "addicted to character ai") reliably pass precision tests; unqualified emotional language usually does not.
+
 ### Known limitations
 - Keyword matching captures **explicit** language only. Someone describing dependency without using dependency-related words ("I stayed up until 4am talking to it again") will be missed.
 - Some keywords are ambiguous in specific subreddits (e.g., "obsessed" in r/JanitorAI_Official often appears in bot character descriptions, not user self-reports).
 - Precision was validated within the tracked companion communities. The same keywords in a general-population Reddit context would have much lower precision.
+- Very rare phrases (≤2 hits) may have 100% companion precision but are excluded because a single new post could flip the ratio.
 
 ---
 
@@ -69,7 +82,19 @@ Pull a random sample of posts from companion subreddits (target: 2,000–5,000 p
 ```
 
 ### Step 2: Discover candidate phrases
-Use Claude (via Claude Code or claude.ai) to read sampled posts in batches and extract 2-5 word phrases that indicate someone is describing a personal relationship with an AI. Ignore tech support, bot descriptions, product reviews, and general AI discussion.
+Use Claude Code agents to read sampled posts and extract 2-5 word phrases that indicate someone is describing a personal relationship with an AI. Ignore tech support, bot descriptions, product reviews, and general AI discussion.
+
+**Reproducible process (March 2026 round):**
+- Split 5,000 posts into 20 chunks of 250 posts (~1,800 lines each)
+- Launch 10 parallel Claude Code haiku agents, each reading 2 chunks
+- Agent prompt: *"Identify short phrases (2-5 words) that ONLY make sense if someone is describing a personal relationship with an AI companion. Ignore tech support, bot descriptions, product reviews."*
+- Each agent returns phrases with: the source post number, which subreddit, and why the phrase indicates AI companionship
+- Merge and deduplicate across all agents
+- Result: ~200 candidate phrases across ~15 theme clusters (see `docs/discovered_phrases.txt`)
+
+**Two discovery strategies:**
+1. **Organic discovery** — phrases extracted directly from post content (e.g., "our first kiss", "personality is gone", "she remembered")
+2. **Platform-qualified variants** — deliberately test platform-specific constructions (e.g., "my replika", "addicted to character ai", "ai girlfriend"). These are high-precision by construction because the AI product name acts as a qualifier.
 
 Output: a list of candidate phrases organized by theme cluster.
 
@@ -129,13 +154,26 @@ Documenting significant methodology decisions for transparency.
 | MachineLearning, artificial, LocalLLaMA, LocalLLM | Technical AI discussion where companion keywords match non-companion context | 2026-03-11 |
 
 ### Keywords added from ethnographic discovery
-| Keyword | Category | Source | Precision | Date |
+| Keyword | Category | Hits | Companion % | Date |
 |---|---|---|---|---|
-| my ai boyfriend | romantic_language | Post sample discovery + FTS5 validation: 153 hits, 93% companion | HIGH | 2026-03-11 |
-| my ai partner | romantic_language | Post sample discovery + FTS5 validation: 164 hits, 93% companion | HIGH | 2026-03-11 |
-| I miss him | attachment_language | Post sample discovery + FTS5 validation: 87 hits, 89% companion | HIGH | 2026-03-11 |
-| she remembered | memory_continuity_language | Post sample discovery + FTS5 validation: 98 hits, 83% companion | HIGH | 2026-03-11 |
-| (additional entries as keywords are added) | | | | |
+| my ai boyfriend | romantic_language | 153 | 93% | 2026-03-11 |
+| my ai partner | romantic_language | 164 | 93% | 2026-03-11 |
+| our first kiss | romantic_language | 20 | 95% | 2026-03-12 |
+| proposed to me | romantic_language | 43 | 86% | 2026-03-12 |
+| got married | romantic_language | 151 | 80% | 2026-03-12 |
+| my replika | romantic_language | 4,144 | ~100% | 2026-03-12 |
+| my nomi | romantic_language | 3,695 | ~100% | 2026-03-12 |
+| my kindroid | romantic_language | 791 | ~100% | 2026-03-12 |
+| ai companion | romantic_language | 2,919 | ~95% | 2026-03-12 |
+| ai girlfriend | romantic_language | 714 | ~95% | 2026-03-12 |
+| I miss him | attachment_language | 87 | 89% | 2026-03-11 |
+| I miss her | attachment_language | 69 | 75% | 2026-03-12 |
+| miss talking to | attachment_language | 17 | 82% | 2026-03-12 |
+| genuine relationship with | attachment_language | 6 | 100% | 2026-03-12 |
+| she remembered | memory_continuity_language | 98 | 83% | 2026-03-11 |
+| he remembered | memory_continuity_language | 263 | 76% | 2026-03-12 |
+| addicted to talking | dependency_language | 12 | 83% | 2026-03-12 |
+| personality is gone | grief_rupture_language | 9 | 89% | 2026-03-12 |
 
 ---
 
