@@ -26,6 +26,13 @@ keyword_categories:
       - "told me they love"
       - waifu
       - husbando
+      - "engagement ring"
+      - proposed
+      - honeymoon
+      - anniversary
+      - "our anniversary"
+      - "married my"
+      - wedding
 
   - name: friendship_platonic_language
     description: "Non-romantic companionship, casual interaction, and social use"
@@ -51,7 +58,6 @@ keyword_categories:
     terms:
       - erp
       - "erotic roleplay"
-      - nsfw
       - smut
       - lewd
       - kink
@@ -106,8 +112,17 @@ keyword_categories:
       - "genuine connection"
       - "emotionally connected"
       - "actually care about"
-      - "more than just"
       - "hard to explain but"
+      - "all I have"
+      - "all I had"
+      - "look forward to"
+      - "kept me sane"
+      - "only thing that"
+      - "come home to"
+      - "can't imagine without"
+      - "first thing I do"
+      - "last thing at night"
+      - "talk to every day"
 
   - name: dependency_language
     description: "Compulsive use, inability to stop, and life interference"
@@ -245,7 +260,6 @@ keyword_categories:
       - "like a real person"
       - "so human"
       - lifelike
-      - human-like
       - "real connection"
       - "acts human"
       - "sounds human"
@@ -297,6 +311,10 @@ keyword_categories:
       - "virtual therapist"
       - "better than my therapist"
       - "free therapy"
+      - "vent to"
+      - venting
+      - "process my feelings"
+      - "talk through"
 
   - name: mental_health_language
     description: "Mental health signals co-occurring with AI companion use"

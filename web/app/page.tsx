@@ -4,7 +4,8 @@ import TrendsExplorer from "./TrendsExplorer";
 
 // Theme-to-category mapping (merging done server-side to reduce client payload)
 const THEME_CATEGORIES: Record<string, string[]> = {
-  romance:       ["romantic_language", "sexual_erotic_language"],
+  romance:       ["romantic_language"],
+  sex:           ["sexual_erotic_language"],
   attachment:    ["attachment_language"],
   dependency:    ["dependency_language", "withdrawal_recovery_language"],
   consciousness: ["sentience_consciousness_language"],

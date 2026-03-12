@@ -16,7 +16,8 @@ import type { ThemeData, ThemeDataPoint } from "./page";
 // ─── Themes ────────────────────────────────────────────────────────────────
 
 const THEMES = [
-  { id: "romance",       label: "Romance",       emoji: "🔞", color: "#F97316" },
+  { id: "romance",       label: "Romance",       emoji: "💕", color: "#F97316" },
+  { id: "sex",           label: "Sex / ERP",     emoji: "🔞", color: "#DC2626" },
   { id: "attachment",    label: "Attachment",    emoji: "🥰", color: "#3B82F6" },
   { id: "dependency",    label: "Dependency",    emoji: "🔴", color: "#EF4444" },
   { id: "consciousness", label: "Conscious",     emoji: "🔮", color: "#A855F7" },
