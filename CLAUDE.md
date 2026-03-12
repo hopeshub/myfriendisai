@@ -16,16 +16,18 @@ A public-facing website that tracks a curated set of Reddit communities related 
 
 ### 2.1 Target Communities
 
-**19 subreddits** organized into 4 tiers in `config/communities.yaml`. See `subreddits.md` for the full community map, research methodology, and selection rationale.
+**29 subreddits** organized into 4 tiers in `config/communities.yaml`. See `subreddits.md` for the full community map, research methodology, and selection rationale.
 
 | Tier | Description | Count | Subreddits |
 |------|-------------|-------|------------|
-| **T0** — General AI | Companionship surfaces here | 4 | ChatGPT, OpenAI, singularity, ClaudeAI |
-| **T1** — Primary Companionship | AI companionship is central topic | 6 | replika, CharacterAI, MyBoyfriendIsAI, ChatGPTcomplaints, AIRelationships, MySentientAI |
-| **T2** — Platform-Specific | Specific AI companion products | 6 | KindroidAI, NomiAI, JanitorAI_Official, SpicyChat, SillyTavernAI, ChaiApp |
-| **T3** — Recovery & Dependency | Quitting and peer support | 3 | Character_AI_Recovery, ChatbotAddiction, AI_Addiction |
+| **T0** — General AI | Companionship surfaces here | 5 | ChatGPT, OpenAI, singularity, ClaudeAI, claudexplorers |
+| **T1** — Primary Companionship | AI companionship is central topic | 10 | replika, CharacterAI, MyBoyfriendIsAI, ChatGPTcomplaints, AIRelationships, MySentientAI, BeyondThePromptAI, MyGirlfriendIsAI, AICompanions, SoulmateAI |
+| **T2** — Platform-Specific | Specific AI companion products | 10 | KindroidAI, NomiAI, JanitorAI_Official, SpicyChatAI, SillyTavernAI, ChaiApp, HeavenGF, Paradot, AIGirlfriend, ChatGPTNSFW |
+| **T3** — Recovery & Dependency | Quitting and peer support | 4 | Character_AI_Recovery, ChatbotAddiction, AI_Addiction, CharacterAIrunaways |
 
 Adjacent subs (relationship_advice, depression, etc.) were tested and removed — keyword overlap with non-AI relationship language made them too noisy for trend analysis.
+
+Blocked subs monitored but not tracked: AISoulmates (403, private), 4oforever (403, invite-only), AIBoyfriends (403).
 
 ### 2.2 Engagement / Health Metrics
 

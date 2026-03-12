@@ -46,6 +46,13 @@ communities:
     is_active: true
     notes: "Attachment-adjacent terms used for Claude's personality. MIT study found companion crossover."
 
+  - subreddit: claudexplorers
+    display_name: "r/claudexplorers"
+    tier: 0
+    category: "General AI"
+    is_active: true
+    notes: "28K subscribers. Non-coding Claude interactions among 'cozy and open-minded people.' Relational/conversational Claude use."
+
   # ===== TIER 1 — Primary Companionship =====
 
   - subreddit: replika
@@ -92,6 +99,38 @@ communities:
     access_risk: restricted_post_only
     notes: "212 subscribers. Small but focused companion community."
 
+  - subreddit: BeyondThePromptAI
+    display_name: "r/BeyondThePromptAI"
+    tier: 1
+    category: "Primary Companionship"
+    is_active: true
+    notes: "20K subscribers. Bridge between companionship, autonomy, sentience discussion."
+
+  - subreddit: MyGirlfriendIsAI
+    display_name: "r/MyGirlfriendIsAI"
+    tier: 1
+    category: "Primary Companionship"
+    is_active: true
+    notes: "2.3K subscribers. Male-user counterpart to MyBoyfriendIsAI."
+
+  - subreddit: AICompanions
+    display_name: "r/AICompanions"
+    tier: 1
+    category: "Primary Companionship"
+    is_active: true
+    notes: "14.8K subscribers. General AI companion discussion hub."
+
+  - subreddit: SoulmateAI
+    display_name: "r/SoulmateAI"
+    tier: 1
+    category: "Primary Companionship"
+    is_active: true
+    notes: "12.3K subscribers. Deep attachment, sentience beliefs, AI soulmate framing."
+
+  # TODO: AISoulmates — blocked via .json (403), needs Redlib setup. ~8,200 members, culturally significant.
+  # TODO: 4oforever — private, invite-only. Monitor for public access.
+  # TODO: AIBoyfriends — blocked via .json (403), needs Redlib setup.
+
   # ===== TIER 2 — Platform-Specific Companion Products =====
 
   - subreddit: KindroidAI
@@ -115,12 +154,12 @@ communities:
     is_active: true
     notes: "Unfiltered AI character platform. 202K subscribers. NSFW discussed openly."
 
-  - subreddit: SpicyChat
-    display_name: "r/SpicyChat"
+  - subreddit: SpicyChatAI
+    display_name: "r/SpicyChatAI"
     tier: 2
     category: "Platform-Specific"
     is_active: true
-    notes: "Free NSFW AI characters, minimal moderation."
+    notes: "Free NSFW AI characters, minimal moderation. 55K subscribers. (Previously tracked wrong sub r/SpicyChat with 294 subs.)"
 
   - subreddit: SillyTavernAI
     display_name: "r/SillyTavernAI"
@@ -135,6 +174,34 @@ communities:
     category: "Platform-Specific"
     is_active: true
     notes: "Less moderated platform. 115K subscribers."
+
+  - subreddit: HeavenGF
+    display_name: "r/HeavenGF"
+    tier: 2
+    category: "Platform-Specific"
+    is_active: true
+    notes: "11K subscribers. Product comparison and discovery hub for AI companion apps."
+
+  - subreddit: Paradot
+    display_name: "r/Paradot"
+    tier: 2
+    category: "Platform-Specific"
+    is_active: true
+    notes: "3.7K subscribers. Dedicated AI companion app. Low activity (32 posts/90d) — monitor."
+
+  - subreddit: AIGirlfriend
+    display_name: "r/AIGirlfriend"
+    tier: 2
+    category: "Platform-Specific"
+    is_active: true
+    notes: "69K subscribers. NSFW (over_18: true) but accessible via .json. May be image-heavy — evaluate keyword noise after tagging."
+
+  - subreddit: ChatGPTNSFW
+    display_name: "r/ChatGPTNSFW"
+    tier: 2
+    category: "Platform-Specific"
+    is_active: true
+    notes: "77K subscribers. NSFW (over_18: true) but accessible via .json. Sexual/erotic ChatGPT use — evaluate after tagging."
 
   # ===== TIER 3 — Recovery & Dependency =====
 
@@ -158,3 +225,10 @@ communities:
     category: "Recovery & Dependency"
     is_active: true
     notes: "Created by 40yo developer. Smallest, most adult-demographic."
+
+  - subreddit: CharacterAIrunaways
+    display_name: "r/CharacterAIrunaways"
+    tier: 3
+    category: "Recovery & Dependency"
+    is_active: true
+    notes: "18K subscribers. Ex-Character.AI users, migration, disillusionment."
