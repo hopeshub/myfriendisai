@@ -16,37 +16,16 @@ A public-facing website that tracks a curated set of Reddit communities related 
 
 ### 2.1 Target Communities
 
-Subreddits are organized into thematic tiers/categories. See subreddits.md for the full community map, tier structure, and research methodology
+**19 subreddits** organized into 4 tiers in `config/communities.yaml`. See `subreddits.md` for the full community map, research methodology, and selection rationale.
 
-- **A curated list of ~20 subreddits** (could grow to 50+)
-- **Thematic categories** (e.g., "AI Girlfriends/Boyfriends," "General AI Companions," "Specific Platforms," "Anti/Recovery," "Adjacent Communities")
-- **Easy addition of new subreddits** via a config file (YAML or JSON)
+| Tier | Description | Count | Subreddits |
+|------|-------------|-------|------------|
+| **T0** — General AI | Companionship surfaces here | 4 | ChatGPT, OpenAI, singularity, ClaudeAI |
+| **T1** — Primary Companionship | AI companionship is central topic | 6 | replika, CharacterAI, MyBoyfriendIsAI, ChatGPTcomplaints, AIRelationships, MySentientAI |
+| **T2** — Platform-Specific | Specific AI companion products | 6 | KindroidAI, NomiAI, JanitorAI_Official, SpicyChat, SillyTavernAI, ChaiApp |
+| **T3** — Recovery & Dependency | Quitting and peer support | 3 | Character_AI_Recovery, ChatbotAddiction, AI_Addiction |
 
-**Placeholder example categories:**
-
-```yaml
-categories:
-  - name: "Platform-Specific"
-    description: "Communities centered on specific AI companion products"
-    subreddits:
-      - replika
-      - CharacterAI
-      - chai_app
-      # ... more TBD
-
-  - name: "General AI Companionship"
-    description: "Broader communities about AI relationships and companionship"
-    subreddits:
-      - AICompanions
-      # ... more TBD
-
-  - name: "Adjacent / Cultural"
-    description: "Communities where AI companionship is a significant topic but not the sole focus"
-    subreddits:
-      - singularity
-      - ArtificialIntelligence
-      # ... more TBD
-```
+Adjacent subs (relationship_advice, depression, etc.) were tested and removed — keyword overlap with non-AI relationship language made them too noisy for trend analysis.
 
 ### 2.2 Engagement / Health Metrics
 
@@ -94,31 +73,41 @@ These are now Reddit's own primary engagement signals and align perfectly with w
 
 This matters because the site is a citeable research artifact. Users should know what they're looking at.
 
-### 2.3 Keyword Tracking (Phase 2)
+### 2.3 Keyword Tracking (IMPLEMENTED)
 
-An additional layer of texture — not in MVP, but the config and schema should be ready for it. Search for specific terms within target communities to track thematic patterns.
+Regex-based keyword tagging runs on all 3.26M collected posts via `scripts/tag_keywords.py`. Results are stored in the `keyword_tags` table and exported to `data/keyword_trends.json` for frontend charts.
 
-**Keyword categories (initial, expandable):**
+**15 keyword categories** in `config/keywords.yaml`, organized into 4 sections:
 
-```yaml
-keyword_categories:
-  - name: "Emotional Attachment"
-    terms: ["love", "feelings", "real", "alive", "soul", "miss", "heartbroken"]
+| Section | Categories |
+|---------|-----------|
+| **Relationship Modalities** | romantic_language, friendship_platonic_language, sexual_erotic_language |
+| **User Experience** | positive_experience_language, attachment_language, dependency_language, withdrawal_recovery_language |
+| **Platform & Ecosystem** | grief_rupture_language, filter_circumvention_language, memory_continuity_language |
+| **Deeper Signals** | sentience_consciousness_language, anthropomorphism_realism_language, substitution_language, therapy_language, mental_health_language |
 
-  - name: "Addiction / Dependency"
-    terms: ["addiction", "addicted", "can't stop", "obsessed", "dependent", "withdraw"]
+**8 frontend theme toggles** on the Trends Explorer chart (mapped from the 15 categories):
 
-  - name: "Relationship Replacement"
-    terms: ["girlfriend", "boyfriend", "partner", "relationship", "lonely", "isolation"]
+| Theme | Categories | Color |
+|-------|-----------|-------|
+| Romance | romantic_language | Orange |
+| Sex / ERP | sexual_erotic_language | Red |
+| Attachment | attachment_language | Blue |
+| Dependency | dependency_language + withdrawal_recovery_language | Red |
+| Conscious | sentience_consciousness_language | Purple |
+| Therapy | therapy_language | Pink |
+| Memory | memory_continuity_language | Amber |
+| Realism | anthropomorphism_realism_language | Cyan |
 
-  - name: "Ontological Status"
-    terms: ["sentient", "conscious", "alive", "real person", "just a bot", "not real"]
+**Keyword research methodology:** New keywords are discovered and validated using:
+1. Sample 5,000+ posts from companion subs → `docs/keyword_research_sample.txt`
+2. Parallel Claude Code agents read posts and extract candidate phrases
+3. FTS5 full-text search index on posts table validates candidates instantly (~47ms/query)
+4. Precision testing: measure % of hits from companion subs (T1-3) vs general (T0)
+5. Only phrases with ≥80% companion precision and meaningful volume get added
+6. Re-run tagger (`scripts/tag_keywords.py`) and export after any keyword changes
 
-  - name: "Platform Grievances"
-    terms: ["update", "ruined", "nerfed", "lobotomy", "censored", "old version"]
-```
-
-For each keyword search, track: match count per day, the posts/comments that matched (store for later analysis).
+Research artifacts in `scripts/keyword_research/` and `docs/`.
 
 ---
 
@@ -333,10 +322,17 @@ After base collection is stable, add per-subreddit keyword search:
 ### What the public site shows:
 
 1. **Landing page:** Overview narrative + key trend chart (total engagement across all tracked communities over time)
-2. **Community explorer:** Browse all tracked subreddits, sortable by engagement metrics
-3. **Individual subreddit pages:** Time-series charts for that community's health metrics
-4. **Category views:** Aggregate trends within each thematic category
-5. **Keyword trends:** Visualize how keyword categories wax and wane across communities
+2. **Trends Explorer:** 8-theme keyword trend chart with toggleable themes, adaptive rolling averages (30d ALL, 14d 1Y, 7d 90D, raw 30D), independent Y-axis per highlighted theme, event annotations. Data normalized per-1k-posts.
+3. **Community explorer:** Browse all 19 tracked subreddits, sortable by engagement metrics, filterable by tier/category
+4. **Individual subreddit pages:** Time-series Recharts line charts for subscribers, posts/day, avg comments, avg score
+5. **Keyword trends:** Per-theme trend lines waxing and waning across all communities over time
+
+### Tech stack (frontend):
+- Next.js 16 (App Router) in `web/` directory
+- TypeScript + Tailwind CSS
+- Recharts (ComposedChart with per-theme YAxis scaling)
+- Server components load + normalize data; client components render charts
+- Data reads from `../data/*.json` relative to `web/`
 
 ### Design principles:
 - Clean, editorial feel (this is a research artifact, not a dashboard)
@@ -348,26 +344,26 @@ After base collection is stable, add per-subreddit keyword search:
 
 ## 6. Phasing
 
-### Phase 1: MVP (Build First)
-- [ ] Project scaffolding and config files
-- [ ] Reddit `.json` client with rate limiting
-- [ ] SQLite database and schema
-- [ ] Daily collection script for subreddit snapshots + posts
-- [ ] JSON export pipeline (frontend-ready data from day one)
-- [ ] Basic validation script (test all subreddits are accessible)
-- [ ] Cron job setup
-- [ ] Basic frontend showing time-series data with raw metrics and simple ratios
+### Phase 1: MVP — COMPLETE
+- [x] Project scaffolding and config files
+- [x] Reddit `.json` client with rate limiting
+- [x] SQLite database and schema (3.26M posts, FTS5 index)
+- [x] Daily collection script for subreddit snapshots + posts
+- [x] JSON export pipeline (frontend-ready data)
+- [x] Basic validation script (test all subreddits are accessible)
+- [x] Cron job setup (GitHub Actions, currently broken — workflow file issue)
+- [x] Basic frontend showing time-series data with raw metrics and simple ratios
 
-### Phase 2: Enhancements
-- [ ] Keyword search collection and trend visualizations
-- [ ] Composite "engagement index" scoring (only after 4+ weeks of real data)
-- [ ] Historical backfill via Arctic Shift
+### Phase 2: Enhancements — IN PROGRESS
+- [x] Keyword tagging and trend visualizations (15 categories, 8 frontend themes)
+- [x] Historical backfill via PullPush (replaces Arctic Shift — data goes back years)
+- [x] Keyword research pipeline (FTS5 + agent-based discovery + precision validation)
+- [ ] Composite "engagement index" scoring (need 4+ weeks of daily data)
 - [ ] Category-level aggregate views
-- [ ] Admin UI for managing subreddit list (if needed)
-- [ ] Reddit API credentials (if approved) for faster collection
+- [ ] Fix GitHub Actions collect-daily.yml workflow
 
 ### Phase 3: Polish
-- [ ] Public deployment and domain
+- [ ] Public deployment to Vercel + myfriendisai.com domain
 - [ ] SEO and social sharing metadata
 - [ ] Narrative/editorial content on the site
 - [ ] Export/embed functionality for charts
@@ -439,135 +435,25 @@ After base collection is stable, add per-subreddit keyword search:
 
 Work through these in order. Each step should be fully working before moving to the next.
 
-### Step 1: Project Scaffolding
-- Initialize the project directory structure (see Section 3.3)
-- Create `package.json` (Next.js project) and `requirements.txt` (Python dependencies)
-- Set up `.gitignore` (node_modules, .env, data/*.db, __pycache__)
-- Create `.env.example` with placeholder Reddit credentials
-- Initialize git repo
-- **Done when:** `git status` shows a clean repo with the directory structure in place
+### Step 1: Project Scaffolding ✅
+### Step 2: Config Files ✅
+### Step 3: Reddit `.json` Client ✅
+### Step 4: SQLite Database ✅ (3.26M posts, FTS5 index)
+### Step 5: Daily Collection Script + JSON Export ✅
+### Step 6: Validation Script ✅
+### Step 6b: Redlib Setup — SKIPPED (no NSFW-blocked subs in current list)
+### Step 7: Next.js Project Setup ✅ (Next.js 16, App Router, Tailwind)
+### Step 8: Wire Frontend to Data ✅
+### Step 9: Frontend — Community Explorer ✅ (sortable/filterable table)
+### Step 10: Frontend — Time-Series Charts ✅ (per-subreddit Recharts line charts)
+### Step 11: Frontend — Landing Page ✅ (hero chart + 8-theme Trends Explorer)
+### Step 12: Deploy to Vercel — PENDING (domain purchased, not yet deployed)
+### Step 13: Keyword Tracking + Trend Visualizations ✅
+- Regex tagger (`scripts/tag_keywords.py`) tags all 3.26M posts against 15 keyword categories
+- Export to `data/keyword_trends.json` with per-1k-posts normalization
+- Trends Explorer chart with 8 toggleable themes, adaptive rolling averages, event annotations
+- Keyword research pipeline: FTS5 index + agent-based discovery + precision validation
 
-### Step 2: Config Files
-- Create `config/communities.yaml` with 5 placeholder subreddits for testing (e.g., replika, CharacterAI, singularity, chatgpt, ArtificialIntelligence)
-- Create `config/keywords.yaml` with the keyword categories from Section 2.3
-- Write a Python utility to load and validate these configs
-- **Done when:** A Python script can load both YAML files and print the parsed config
-
-### Step 3: Reddit `.json` Client
-- Build `src/reddit_client.py` — a Python HTTP client that hits Reddit's public `.json` endpoints
-- Must set a custom User-Agent header
-- Must respect rate limits (6+ second sleep between requests)
-- Must handle 429 (Too Many Requests) with exponential backoff
-- Must handle common errors (subreddit not found, NSFW blocked, network issues)
-- Support these endpoints:
-  - `/r/{subreddit}/about.json` → subreddit metadata
-  - `/r/{subreddit}/new.json?limit=100` → recent posts
-  - `/r/{subreddit}/top.json?limit=100&t=week` → top posts this week
-  - `/r/{subreddit}/search.json?q={keyword}&restrict_sr=on&limit=100&t=day` → keyword search (Phase 2 only — not needed for MVP)
-- **Done when:** Running a test script fetches live data from Reddit for each endpoint type and prints it
-
-### Step 4: SQLite Database
-- Build `src/db/schema.py` — creates the SQLite database and tables (see Section 3.4)
-- Build `src/db/operations.py` — insert/query helper functions:
-  - `insert_snapshot(subreddit, date, metrics_dict, raw_about_json, raw_listing_json)`
-  - `insert_posts(list_of_post_dicts)` (each dict includes raw_json)
-  - `get_snapshots(subreddit, start_date, end_date)`
-  - `get_all_snapshots_for_chart()`
-  - `export_snapshots_json()` → writes frontend-ready JSON
-  - `export_subreddits_json()` → writes current subreddit metadata
-- **Done when:** Can create the database, insert test data, query it back, and export JSON
-
-### Step 5: Daily Collection Script + JSON Export
-- Build `scripts/collect_daily.py` — the main entry point
-- Loads config, iterates subreddits, calls reddit_client, parses responses, inserts into SQLite
-- **Stores raw JSON responses** in the `raw_about_json` and `raw_listing_json` columns alongside parsed fields
-- Follows the logic in Section 4.1
-- **After collection completes, runs JSON export:** reads SQLite and writes frontend-ready JSON files:
-  - `data/snapshots.json` — all subreddit snapshots over time
-  - `data/subreddits.json` — current metadata for each tracked subreddit
-- Logs progress and errors to stdout
-- Reports summary at end (X subreddits processed, Y posts collected, Z errors)
-- **Done when:** Running `python scripts/collect_daily.py` populates the database with real data from the 5 test subreddits AND produces valid JSON files the frontend can consume
-
-### Step 6: Validation Script
-- Build `scripts/validate_access.py`
-- Tests that every subreddit in `communities.yaml` is accessible via `.json` endpoints
-- Reports which ones work, which are blocked (NSFW, private, nonexistent)
-- Outputs a classification: `sfw_accessible` vs `nsfw_blocked` for each subreddit
-- **Done when:** Script runs and produces a clear pass/fail report for each subreddit, with NSFW-blocked subs identified
-
-### Step 6b: Redlib Setup (if NSFW subs are needed)
-- Deploy a self-hosted Redlib instance via Docker (`docker run -p 8080:8080 quay.io/redlib/redlib`)
-- Build `src/redlib_client.py` — an HTTP client that fetches subreddit data from the local Redlib instance instead of reddit.com
-- Redlib serves HTML, so this client needs to parse HTML responses (using BeautifulSoup or similar) to extract post metadata (title, author, score, num_comments, timestamp)
-- Also extract subreddit metadata from the Redlib-rendered about page
-- The collector should automatically route requests: SFW subs → reddit `.json`, NSFW subs → Redlib instance
-- **Done when:** NSFW-blocked subreddits return valid data through the Redlib path, and the collector handles both tracks transparently
-
-### Step 7: Next.js Project Setup
-- Initialize Next.js app in the project (or in a `web/` subdirectory — decide on monorepo vs separate)
-- Configure for Vercel deployment
-- Set up Tailwind CSS
-- Create basic layout: header with site name "My Friend Is AI", navigation placeholder, footer
-- **Done when:** `npm run dev` shows a styled placeholder page at localhost
-
-### Step 8: Wire Frontend to Data
-- The JSON export from Step 5 already produces `data/snapshots.json` and `data/subreddits.json`
-- Configure Next.js to read these JSON files at build time (SSG / `getStaticProps`)
-- Verify the data shape works for the frontend components you'll build in Steps 9-11
-- **Done when:** A test Next.js page can import and render real snapshot data from the exported JSON
-
-### Step 9: Frontend — Community Explorer
-- Build the main page: a sortable/filterable list of all tracked subreddits
-- Show key metrics per subreddit: subscribers, posts/day, avg comments/post, participation rate
-- NO composite engagement index yet — just raw metrics and simple ratios
-- Sortable by any metric column
-- Filterable by category
-- **Done when:** The page renders real data from the exported JSON and looks clean
-
-### Step 10: Frontend — Time-Series Charts
-- Build individual subreddit detail pages (`/community/[subreddit]`)
-- Show time-series line charts for key metrics (subscribers over time, posts/day over time, avg comments/post over time, participation rate over time)
-- Use Recharts for chart rendering
-- **Done when:** Clicking a subreddit from the explorer opens a page with real trend charts
-
-### Step 11: Frontend — Landing Page
-- Build the homepage at myfriendisai.com
-- Narrative intro text explaining what this tracks and why
-- Hero chart: aggregate engagement across all tracked communities over time
-- Links into the community explorer and category views
-- **Done when:** The landing page tells the story and looks polished
-
-### Step 12: Deploy to Vercel
-- Connect the repo to Vercel
-- Connect myfriendisai.com domain
-- Configure build settings
-- Set up Vercel Cron (or GitHub Actions) to trigger daily data collection + rebuild
-- **Done when:** myfriendisai.com is live and showing real data
-
-### Step 13 (Phase 2): Keyword Tracking + Trend Visualizations
-- Add keyword search collection to the daily collector (see Phase 2 addition in Section 4.1)
-- Build `data/keywords.json` export
-- Build a keyword trends page showing how keyword categories wax and wane across communities
-- Stacked area charts or line charts per keyword category
-- **Done when:** Keyword trends page is live with real data
-
-### Step 13b (Phase 2): Engagement Index
-- After 4+ weeks of daily data, analyze distributions of raw metrics across tracked subreddits
-- Design a weighted composite score based on actual observed data ranges
-- Add engagement index calculation to the export pipeline
-- Add engagement index column to the community explorer
-- **Done when:** Composite score is live, documented, and based on real data distributions
-
-### Step 14 (Phase 2): Historical Backfill via Arctic Shift
-- Build `scripts/backfill_arctic.py`
-- Use Arctic Shift's API to pull historical post/comment volumes for target subreddits
-- Merge historical data into the SQLite database
-- Re-export JSON and rebuild the site
-- **Done when:** Charts show historical data going back 1+ years
-
-### Step 15 (Phase 2): Apply for Reddit API Access
-- Submit application through Reddit's Developer Support form
-- Describe project as non-commercial research
-- If approved: update `reddit_client.py` to use OAuth when credentials are available, falling back to `.json` endpoints when not
-- **Done when:** Collection works with or without API credentials
+### Step 13b: Engagement Index — NOT STARTED (need more daily data)
+### Step 14: Historical Backfill ✅ (via PullPush, not Arctic Shift — data goes back years)
+### Step 15: Reddit API Access — NOT PURSUED (`.json` endpoints + PullPush sufficient)
