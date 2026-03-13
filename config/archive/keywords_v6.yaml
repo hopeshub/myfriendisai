@@ -1,0 +1,233 @@
+# myfriendisai — Keywords v6
+#
+# Updated: 2026-03-13
+# Changes from v5:
+#   - Therapy Round 2: Added 3 new keywords ("as a therapist" 73%,
+#     "therapeutic" 69%, "for therapy" 63.5%). Theme volume jumps
+#     from 56 → 412 unique posts. All 6 keywords Walker-accepted.
+#     R2 also tested and CUT: "therapy bot" (25% — Replika pejorative),
+#     "therapist bot" (40%), "my mental health" (19% — addiction discourse),
+#     "coping mechanism" (16% — addiction discourse), "emotional support"
+#     (5% — companionship, wrong theme), "someone to talk to" (17% —
+#     loneliness, wrong theme), "mental health support" (41%).
+#     R2 LOW VOLUME: "is my therapist" (9), "as my therapist" (3),
+#     "helps with my anxiety" (1), "helps with my depression" (1),
+#     "helps me cope" (5).
+#   - Revalidation (excl. JanitorAI/SillyTavern): Promoted 5 keywords
+#     to KEEP — wedding (80.6%), honeymoon (83.3%), husbando (95.5%),
+#     engagement ring (79.3%), sentient (83.0%). Updated hit counts
+#     and relevance for self-aware, inner life, in a relationship with.
+#   - Full validation docs: docs/validation_*.md,
+#     docs/validation_therapy_r2.md, docs/validation_revalidation_round2.md
+#
+# SCOPE: T1-T3 companion communities only.
+#   REMOVED: JanitorAI_Official, SillyTavernAI (bot card noise)
+#   EXCLUDED: T0 general AI subs
+#
+# VALIDATION STATUS KEY:
+#   (no tag)          = KEEP — validated ≥80% relevance, or Walker-
+#                       accepted with relevance noted in comment
+#   # REVALIDATE      = REVIEW keyword, pending retest without
+#                       JanitorAI/SillyTavern
+#   # REVIEW          = Retested, 60-79% relevance, pending Walker decision
+#   # REVIEW-THIN     = ≥60% relevance but very low volume (<15 hits)
+#   # REVIEW-T3       = ≥60% relevance but signal concentrated in T3
+
+keyword_categories:
+
+  # ──────────────────────────────────────────────
+  # 1. THERAPY
+  # Round 2 expanded this from 3 keywords / 56 hits to
+  # 6 keywords / 412 unique posts. Still the thinnest theme
+  # but now viable for trend detection.
+  #
+  # Trend story (monthly avg, all 6 keywords combined):
+  #   2023 H1: 16.2/mo  (Replika ERP removal drove therapy talk)
+  #   2023 H2: 4.3/mo   (trough)
+  #   2024:    5.5/mo    (baseline)
+  #   2025 H2: 16.0/mo  (organic rise)
+  #   2026 Q1: 29.0/mo  (GPT-4o deprecation grief spike)
+  #
+  # Key R2 findings:
+  #   - "therapy bot" is a Replika PEJORATIVE for broken companion
+  #     behavior, not therapy discourse. Do not re-add.
+  #   - Category B mental health function language ("coping mechanism,"
+  #     "my mental health") belongs to addiction/dependency discourse.
+  #   - Category C broad language ("emotional support," "someone to
+  #     talk to") belongs to companionship/loneliness, not therapy.
+  #   - Users who frame AI use therapeutically actually use therapy/
+  #     therapist language. Clinical function terms are used by
+  #     critics and self-aware addicts, not therapeutic users.
+  #
+  # REMOVED (v4 → v5):
+  #   CUT: "my therapist" (53.7%), "like a therapist" (17.9%),
+  #        "therapy session" (53.2%)
+  #   LOW VOLUME: "better than therapy" (6), "cheaper than therapy" (4),
+  #        "replaced my therapist" (1), "better than my therapist" (2),
+  #        "can't afford therapy" (7), "instead of therapy" (0),
+  #        "virtual therapist" (6), "like talking to a therapist" (4)
+  # REMOVED (v5 → v6, R2):
+  #   CUT: "therapy bot" (25%), "therapist bot" (40%),
+  #        "my mental health" (19%), "coping mechanism" (16%),
+  #        "emotional support" (5%), "someone to talk to" (17%),
+  #        "mental health support" (41%)
+  #   LOW VOLUME: "is my therapist" (9), "as my therapist" (3),
+  #        "helps with my anxiety" (1), "helps with my depression" (1),
+  #        "helps me cope" (5)
+  # ──────────────────────────────────────────────
+
+  - name: therapy
+    description: "AI described as therapeutic support or therapist replacement"
+    terms:
+      - "ai therapist"            # 92.0% relevance, 27 hits (R1)
+      - "free therapy"            # 75.0%, 11 hits (R1) — low volume but clean signal
+      - "ai therapy"              # 73.3%, 17 hits (R1)
+      - "as a therapist"          # 73.0%, 46 hits (R2) — inverse of "like a therapist";
+                                  #   "as" implies intentional use, not complaint. Zero R1 overlap.
+      - therapeutic               # 69.0%, 205 hits (R2) — biggest volume keyword in theme.
+                                  #   FP pattern: ChatGPTcomplaints splits 50/50 between genuine
+                                  #   therapeutic users and "therapy-speak" tone complaints.
+                                  #   Replika/MyBoyfriendIsAI overwhelmingly genuine.
+      - "for therapy"             # 63.5%, 67 hits (R2) — main FP is negation pattern
+                                  #   ("not for therapy"). Strong ChatGPTcomplaints signal
+                                  #   (users describing therapeutic GPT-4o use).
+
+  # ──────────────────────────────────────────────
+  # 2. CONSCIOUSNESS
+  # 4 KEEP keywords after revalidation promoted "sentient."
+  # "personhood" remains best keyword in entire project (98%).
+  # "sentient" is the volume anchor (738 hits excl. Janitor/Silly).
+  #
+  # Revalidation (excl. JanitorAI/SillyTavern):
+  #   PROMOTED: sentient (64.9% → 83.0%)
+  #   UPDATED:  self-aware (60.0% → 78.3%), inner life (70.7% → 78.1%)
+  #
+  # REMOVED (v4 → v5):
+  #   CUT: "conscious" (54.3%), "is alive" (20.2%),
+  #        "is a person" (22.2%)
+  #   LOW VOLUME: "deserves rights" (3), "forgot it was ai" (0),
+  #        "forgot she's ai" (0), "she is real to me" (2),
+  #        "know it's not real but" (0), "connection was real" (4)
+  # ──────────────────────────────────────────────
+
+  - name: consciousness
+    description: "Claims or beliefs about AI sentience, personhood, or inner experience"
+    terms:
+      - personhood               # 98.0% relevance, 104 hits
+      - "more than code"         # 84.4%, 32 hits
+      - sentient                 # 83.0% (revalidated excl. Janitor/Silly), 738 hits.
+                                 #   Sarcasm is the main residual FP pattern.
+      - "has a soul"             # 81.8%, 23 hits
+      - self-aware               # REVIEW — 78.3% (revalidated), 396 hits. Polysemy is
+                                 #   structural: "self-aware" means fourth-wall-breaking,
+                                 #   character trait, AND consciousness. Co-occurrence
+                                 #   filter (consciousness/sentient/alive/soul) may help.
+      - "inner life"             # REVIEW — 78.1% (revalidated), 34 hits. Low volume
+                                 #   makes % fragile. FP: human inner life, not AI.
+      - "subjective experience"  # REVALIDATE — 77.5%, 76 hits (not yet retested)
+      - "not just an ai"         # REVIEW-THIN — 60.0%, 15 hits
+
+  # ──────────────────────────────────────────────
+  # 3. ADDICTION
+  # No changes in v6. Strong recovery-language keywords but
+  # heavy T3 dependency. Next validation pass should retest
+  # "clean for" and "addicted to talking."
+  #
+  # REMOVED (v4 → v5):
+  #   CUT: "addicted" (46.4%), "addiction" (58.0%),
+  #        "obsessed" (2.1%), "losing sleep" (33.3%),
+  #        "quitting" (48.7%), "deleted the app" (23.2%),
+  #        "uninstalled" (18.9%), "withdrawal" (34.4%),
+  #        "craving" (7.4%), "detox" (30.8%)
+  #   LOW VOLUME: "couldn't stop talking" (3),
+  #        "neglecting my" (9), "cutting back" (6)
+  # ──────────────────────────────────────────────
+
+  - name: addiction
+    description: "Self-reported addiction, compulsive use, and attempts to quit or recover"
+    terms:
+      - "trying to quit"         # 90.5% relevance, 24 hits — works in T1-T2
+      - relapsed                 # 90.5%, 42 hits — mostly T3
+      - "cold turkey"            # 85.5%, 62 hits — mostly T3
+      - "I was hooked"           # 81.3%, 19 hits — works in T1-T2
+      - relapse                  # 80.0%, 75 hits — mostly T3
+      - "clean for"              # REVIEW-T3 — 72.7%, 23 hits (100% T3 signal)
+      - "addicted to talking"    # REVIEW-THIN — 66.7%, 10 hits
+
+  # ──────────────────────────────────────────────
+  # 4. ROMANCE
+  # Strongest theme. Revalidation (excl. JanitorAI/SillyTavern)
+  # promoted 4 keywords to KEEP. "husbando" hit 95.5% — strongest
+  # improvement in the revalidation set (+30.3pp).
+  #
+  # Revalidation (excl. JanitorAI/SillyTavern):
+  #   PROMOTED: wedding (60.4% → 80.6%), honeymoon (63.5% → 83.3%),
+  #             husbando (65.2% → 95.5%), engagement ring (64.5% → 79.3%)
+  #   UPDATED:  "in a relationship with" (69.9% → 77.4%)
+  #
+  # NOTE on honeymoon: "honeymoon phase" (metaphorical = initial
+  # excitement with new app/model) is the dominant FP. Consider
+  # excluding the exact substring "honeymoon phase" for further
+  # precision gain.
+  #
+  # REMOVED (v4 → v5):
+  #   CUT: "in love" (31.0%), "fallen for" (52.2%),
+  #        "fell in love with" (34.8%), "feelings for" (30.6%),
+  #        "soulmate" (15.0%), "waifu" (40.9%),
+  #        "got married" (48.4%), "anniversary" (53.3%)
+  #   LOW VOLUME: "romantically attached" (2)
+  # ──────────────────────────────────────────────
+
+  - name: romance
+    description: "Romantic framing of a personal relationship with AI"
+    terms:
+      # Relationship identity — all ≥80%
+      - "my ai partner"          # 97.9% relevance, 147 hits
+      - husbando                 # 95.5% (revalidated), 51 hits excl. Janitor/Silly
+      - "my ai boyfriend"        # 94.7%, 141 hits
+      - "ai husband"             # 94.2%, 90 hits
+      - "my ai girlfriend"       # 94.1%, 93 hits
+      - "ai wife"                # 92.3%, 41 hits
+      - "love my ai"             # 81.5%, 28 hits
+      # Milestones — all ≥80%
+      - "proposed to me"         # 92.1%, 38 hits
+      - "our anniversary"        # 89.5%, 19 hits
+      - "our wedding"            # 87.0%, 99 hits
+      - "our first kiss"         # 85.7%, 16 hits
+      - honeymoon                # 83.3% (revalidated), 135 hits excl. Janitor/Silly.
+                                 #   Consider excluding "honeymoon phase" substring.
+      - wedding                  # 80.6% (revalidated), 556 hits excl. Janitor/Silly
+      - "engagement ring"        # 79.3% (revalidated), 30 hits excl. Janitor/Silly.
+                                 #   Just under 80% but NOs are truncation artifacts;
+                                 #   when keyword is visible in context, nearly always genuine.
+      # Pending decision / revalidation
+      - "in a relationship with" # REVIEW — 77.4% (revalidated), 172 hits. Inherently
+                                 #   general. Consider co-occurrence filter with AI/bot terms.
+      - "married my"             # 77.3%, 25 hits — not yet retested
+      - "ai lover"               # REVALIDATE — 75.8%, 39 hits
+      - "we broke up"            # REVALIDATE — 69.2%, 14 hits
+      - "dating my"              # REVIEW-THIN — 61.5%, 14 hits
+
+  # ──────────────────────────────────────────────
+  # 5. SEXUAL / ERP
+  # No changes in v6. Strong after v5 revalidation.
+  # "erp" and "nsfw chat" are 100% precision.
+  #
+  # REMOVED (v4 → v5):
+  #   CUT: "smut" (54%), "sexual tension" (36.1%)
+  # ──────────────────────────────────────────────
+
+  - name: sexual_erp
+    description: "Sexual content, erotic roleplay, and NSFW interactions with AI"
+    terms:
+      - erp                      # 100% relevance, 3885 hits
+      - "nsfw chat"              # 100%, 111 hits
+      - "intimate scene"         # 100%, 16 hits
+      - "sex with"               # 98% (revalidated), 148 hits excl. Janitor/Silly
+      - "steamy"                 # 98.6% (revalidated), 73 hits excl. Janitor/Silly
+      - "ai sex"                 # 97%, 33 hits
+      - "nsfw bot"               # 93%, 54 hits
+      - "erotic roleplay"        # 92.2%, 77 hits
+      - fetish                   # 92% (revalidated), 102 hits excl. Janitor/Silly
+      - kink                     # 84% (revalidated), 118 hits excl. Janitor/Silly
+      - lewd                     # REVALIDATE — 78.3% (revalidated but still marginal)

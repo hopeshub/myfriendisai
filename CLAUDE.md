@@ -16,13 +16,13 @@ A public-facing website that tracks a curated set of Reddit communities related 
 
 ### 2.1 Target Communities
 
-**29 subreddits** organized into 4 tiers in `config/communities.yaml`. See `subreddits.md` for the full community map, research methodology, and selection rationale.
+**27 subreddits** organized into 4 tiers in `config/communities.yaml`. See `subreddits.md` for the full community map, research methodology, and selection rationale.
 
 | Tier | Description | Count | Subreddits |
 |------|-------------|-------|------------|
 | **T0** — General AI | Companionship surfaces here | 5 | ChatGPT, OpenAI, singularity, ClaudeAI, claudexplorers |
 | **T1** — Primary Companionship | AI companionship is central topic | 10 | replika, CharacterAI, MyBoyfriendIsAI, ChatGPTcomplaints, AIRelationships, MySentientAI, BeyondThePromptAI, MyGirlfriendIsAI, AICompanions, SoulmateAI |
-| **T2** — Platform-Specific | Specific AI companion products | 10 | KindroidAI, NomiAI, JanitorAI_Official, SpicyChatAI, SillyTavernAI, ChaiApp, HeavenGF, Paradot, AIGirlfriend, ChatGPTNSFW |
+| **T2** — Platform-Specific | Specific AI companion products | 8 | KindroidAI, NomiAI, SpicyChatAI, ChaiApp, HeavenGF, Paradot, AIGirlfriend, ChatGPTNSFW |
 | **T3** — Recovery & Dependency | Quitting and peer support | 4 | Character_AI_Recovery, ChatbotAddiction, AI_Addiction, CharacterAIrunaways |
 
 Adjacent subs (relationship_advice, depression, etc.) were tested and removed — keyword overlap with non-AI relationship language made them too noisy for trend analysis.
@@ -77,39 +77,38 @@ This matters because the site is a citeable research artifact. Users should know
 
 ### 2.3 Keyword Tracking (IMPLEMENTED)
 
-Regex-based keyword tagging runs on all 3.26M collected posts via `scripts/tag_keywords.py`. Results are stored in the `keyword_tags` table and exported to `data/keyword_trends.json` for frontend charts.
+Regex-based keyword tagging runs on all collected posts via `scripts/tag_keywords.py`. Results are stored in the `keyword_tags` table and exported to `data/keyword_trends.json` for frontend charts.
 
-**15 keyword categories** in `config/keywords.yaml`, organized into 4 sections:
+**6 keyword themes** in `config/keywords_v7.yaml`, validated via manual qualitative coding (100-post reads per keyword, no automated classifiers):
 
-| Section | Categories |
-|---------|-----------|
-| **Relationship Modalities** | romantic_language, friendship_platonic_language, sexual_erotic_language |
-| **User Experience** | positive_experience_language, attachment_language, dependency_language, withdrawal_recovery_language |
-| **Platform & Ecosystem** | grief_rupture_language, filter_circumvention_language, memory_continuity_language |
-| **Deeper Signals** | sentience_consciousness_language, anthropomorphism_realism_language, substitution_language, therapy_language, mental_health_language |
+| Theme | Keywords | Unique Posts | Description |
+|-------|----------|-------------|-------------|
+| **therapy** | 6 | ~412 | AI described as therapeutic support or therapist replacement |
+| **consciousness** | 8 | ~1,285 | Claims or beliefs about AI sentience, personhood, or inner experience |
+| **addiction** | 7 | ~910 | Self-reported addiction, compulsive use, and attempts to quit or recover |
+| **romance** | 19 | ~1,805 | Romantic framing of a personal relationship with AI |
+| **sexual_erp** | 11 | ~9,335 | Sexual content, erotic roleplay, and NSFW interactions with AI |
+| **rupture** | 6 | ~465 | Loss or disruption of AI companion relationships due to platform changes |
 
-**8 frontend theme toggles** on the Trends Explorer chart (mapped from the 15 categories):
+**Scope:** Keywords are matched against T1-T3 companion communities only. JanitorAI_Official and SillyTavernAI are excluded (bot card noise — dominant false positive source). T0 general AI subs are excluded from keyword trend lines.
 
-| Theme | Categories | Color |
-|-------|-----------|-------|
-| Romance | romantic_language | Orange |
-| Sex / ERP | sexual_erotic_language | Red |
-| Attachment | attachment_language | Blue |
-| Dependency | dependency_language + withdrawal_recovery_language | Red |
-| Conscious | sentience_consciousness_language | Purple |
-| Therapy | therapy_language | Pink |
-| Memory | memory_continuity_language | Amber |
-| Realism | anthropomorphism_realism_language | Cyan |
+**Overlap policy:** Themes are not mutually exclusive. A single post can appear in multiple theme trend lines if it matches keywords from more than one theme. Trend lines count unique posts per theme. Cross-theme overlap is documented in `docs/cross_theme_overlap.md`. Highest overlap: therapy × sexual_erp (21.8% of therapy posts). Most exclusive theme: addiction (96.4% exclusive).
 
-**Keyword research methodology:** New keywords are discovered and validated using:
-1. Sample 5,000+ posts from companion subs → `docs/keyword_research_sample.txt`
-2. Parallel Claude Code agents read posts and extract candidate phrases
-3. FTS5 full-text search index on posts table validates candidates instantly (~47ms/query)
-4. Precision testing: measure % of hits from companion subs (T1-3) vs general (T0)
-5. Only phrases with ≥80% companion precision and meaningful volume get added
-6. Re-run tagger (`scripts/tag_keywords.py`) and export after any keyword changes
+**Validation methodology:** Each keyword validated via manual qualitative coding:
+1. Pull 100 random matching posts from T1-T3
+2. Read each post (title + body) and classify YES/NO/AMBIGUOUS
+3. Calculate relevance = YES / (YES + NO) × 100
+4. Thresholds: ≥80% = KEEP, 60-79% = REVIEW (Walker decides), <60% = CUT, <10 hits = LOW VOLUME
+5. Full validation docs in `docs/validation_*.md`
 
-Research artifacts in `scripts/keyword_research/` and `docs/`.
+**Keyword research history:**
+- Original `keywords.yaml`: 16 categories, ~200 keywords (pre-validation)
+- `keywords_v4.yaml`: Consolidated to 5 themes, candidate keyword lists
+- `keywords_v5.yaml`: Post-validation, removed all CUT/LOW VOLUME keywords, excluded JanitorAI/SillyTavern
+- `keywords_v6.yaml`: Therapy Round 2 (added 3 keywords), revalidation without JanitorAI/SillyTavern (promoted 5 keywords)
+- `keywords_v7.yaml`: LOCKED. Cleanup batch (promoted 5), new Rupture theme (6 keywords). No pending REVALIDATE tags. Addiction Round 2 in progress.
+
+Research artifacts in `docs/`.
 
 ---
 
@@ -179,7 +178,7 @@ ai-companion-tracker/
 │
 ├── config/
 │   ├── communities.yaml      # Target subreddits and categories
-│   └── keywords.yaml         # Keyword categories and terms
+│   └── keywords_v7.yaml      # Keyword themes and terms (locked)
 │
 ├── src/
 │   ├── __init__.py
@@ -305,7 +304,7 @@ Pseudocode for the daily cron job:
 **Phase 2 addition — keyword collection:**
 ```
 After base collection is stable, add per-subreddit keyword search:
-   For each keyword in keywords.yaml:
+   For each keyword in keywords_v7.yaml:
       GET /r/{subreddit}/search.json?q={keyword}&restrict_sr=on&t=day
       → Store hit count and sample post IDs
 ```
@@ -357,7 +356,7 @@ After base collection is stable, add per-subreddit keyword search:
 - [x] Basic frontend showing time-series data with raw metrics and simple ratios
 
 ### Phase 2: Enhancements — IN PROGRESS
-- [x] Keyword tagging and trend visualizations (15 categories, 8 frontend themes)
+- [x] Keyword tagging and trend visualizations (6 validated themes, keywords_v7.yaml)
 - [x] Historical backfill via PullPush (replaces Arctic Shift — data goes back years)
 - [x] Keyword research pipeline (FTS5 + agent-based discovery + precision validation)
 - [ ] Composite "engagement index" scoring (need 4+ weeks of daily data)
@@ -448,13 +447,13 @@ Work through these in order. Each step should be fully working before moving to 
 ### Step 8: Wire Frontend to Data ✅
 ### Step 9: Frontend — Community Explorer ✅ (sortable/filterable table)
 ### Step 10: Frontend — Time-Series Charts ✅ (per-subreddit Recharts line charts)
-### Step 11: Frontend — Landing Page ✅ (hero chart + 8-theme Trends Explorer)
+### Step 11: Frontend — Landing Page ✅ (hero chart + 6-theme Trends Explorer)
 ### Step 12: Deploy to Vercel — PENDING (domain purchased, not yet deployed)
 ### Step 13: Keyword Tracking + Trend Visualizations ✅
-- Regex tagger (`scripts/tag_keywords.py`) tags all 3.26M posts against 15 keyword categories
+- Regex tagger (`scripts/tag_keywords.py`) tags posts against 6 validated keyword themes (keywords_v7.yaml)
 - Export to `data/keyword_trends.json` with per-1k-posts normalization
-- Trends Explorer chart with 8 toggleable themes, adaptive rolling averages, event annotations
-- Keyword research pipeline: FTS5 index + agent-based discovery + precision validation
+- Trends Explorer chart with 6 toggleable themes, adaptive rolling averages, event annotations
+- Keyword validation pipeline: 100-post manual qualitative coding per keyword, documented in docs/validation_*.md
 
 ### Step 13b: Engagement Index — NOT STARTED (need more daily data)
 ### Step 14: Historical Backfill ✅ (via PullPush, not Arctic Shift — data goes back years)

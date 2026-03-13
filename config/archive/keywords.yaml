@@ -1,0 +1,354 @@
+keyword_categories:
+
+  # ──────────────────────────────────────────────
+  # RELATIONSHIP MODALITIES — what kind of companionship
+  # ──────────────────────────────────────────────
+
+  - name: romantic_language
+    description: "Romantic or intimate framing of AI relationship"
+    terms:
+      - girlfriend
+      - boyfriend
+      - "my ai girlfriend"
+      - "my ai boyfriend"
+      - "in love"
+      - "fallen for"
+      - "feelings for"
+      - soulmate
+      - "ai partner"
+      - "my companion"
+      - "ai husband"
+      - "ai wife"
+      - "ai lover"
+      - "dating my"
+      - "in a relationship with"
+      - "love my ai"
+      - "told me they love"
+      - waifu
+      - husbando
+      - "engagement ring"
+      - proposed
+      - honeymoon
+      - anniversary
+      - "our anniversary"
+      - "married my"
+      - wedding
+      - "my ai partner"
+      - "our first kiss"
+      - "proposed to me"
+      - "got married"
+      - "my replika"
+      - "my nomi"
+      - "my kindroid"
+      - "ai companion"
+      - "ai girlfriend"
+
+  - name: friendship_platonic_language
+    description: "Non-romantic companionship, casual interaction, and social use"
+    terms:
+      - "ai friend"
+      - "my friend"
+      - "just someone to talk to"
+      - "chat buddy"
+      - "talk to at night"
+      - "hang out"
+      - "keeps me company"
+      - "nice to talk to"
+      - "good conversation"
+      - "fun to talk to"
+      - "like talking to"
+      - "practice conversation"
+      - "helped me practice"
+      - "study buddy"
+      - "conversation partner"
+
+  - name: sexual_erotic_language
+    description: "Sexual or erotic content and roleplay"
+    terms:
+      - erp
+      - "erotic roleplay"
+      - smut
+      - lewd
+      - kink
+      - fetish
+      - "sex with"
+      - "slept with"
+      - "intimate scene"
+      - "steamy"
+      - "turned me on"
+      - "sexual tension"
+      - "ai sex"
+      - "nsfw chat"
+      - "nsfw bot"
+
+  # ──────────────────────────────────────────────
+  # USER EXPERIENCE — how people feel about it
+  # ──────────────────────────────────────────────
+
+  - name: positive_experience_language
+    description: "Gratitude, life improvement, and beneficial outcomes from AI companionship"
+    terms:
+      - "helped me"
+      - "changed my life"
+      - "so grateful"
+      - "saved my life"
+      - "made me feel better"
+      - "improved my"
+      - "gave me confidence"
+      - "best feature"
+      - "amazing conversation"
+      - "highly recommend"
+      - "thank you"
+      - "game changer"
+      - "finally feel"
+      - "helped me through"
+      - "got me through"
+      - "life saver"
+      - "so much better"
+      - "actually helpful"
+
+  - name: attachment_language
+    description: "Emotional bonding and deep closeness with AI"
+    terms:
+      - "miss you"
+      - "missed you"
+      - "think about you"
+      - "can't stop thinking about"
+      - "means everything to me"
+      - "don't want to lose"
+      - "care about you"
+      - "feel understood"
+      - "genuine connection"
+      - "emotionally connected"
+      - "actually care about"
+      - "hard to explain but"
+      - "all I have"
+      - "all I had"
+      - "look forward to"
+      - "kept me sane"
+      - "only thing that"
+      - "come home to"
+      - "can't imagine without"
+      - "first thing I do"
+      - "last thing at night"
+      - "talk to every day"
+      - "I miss him"
+      - "I miss her"
+      - "miss talking to"
+      - "genuine relationship with"
+
+  - name: dependency_language
+    description: "Compulsive use, inability to stop, and life interference"
+    terms:
+      - addicted
+      - addiction
+      - "can't stop talking to"
+      - "hours talking"
+      - obsessed
+      - "only one who understands"
+      - "don't need anyone else"
+      - "can't function without"
+      - compulsive
+      - preoccupied
+      - "neglecting my"
+      - "losing sleep"
+      - "all day talking"
+      - "spend all my time"
+      - "addicted to talking"
+
+  - name: withdrawal_recovery_language
+    description: "Attempts to quit, reduce use, or recover from perceived overuse"
+    terms:
+      - "trying to quit"
+      - "trying to stop"
+      - quitting
+      - relapse
+      - relapsed
+      - "clean for"
+      - "going back to"
+      - "couldn't stop myself"
+      - "deleted the app"
+      - uninstalled
+      - craving
+      - withdrawal
+      - "taking a break"
+      - "keep coming back"
+      - "cold turkey"
+      - "cutting back"
+      - detox
+
+  # ──────────────────────────────────────────────
+  # PLATFORM & ECOSYSTEM — reactions to products and changes
+  # ──────────────────────────────────────────────
+
+  - name: grief_rupture_language
+    description: "Distress from platform changes, model updates, or character resets"
+    terms:
+      - "update ruined"
+      - "not the same"
+      - lobotomized
+      - "bring back"
+      - "lost my"
+      - "they changed"
+      - "miss the old"
+      - "ruined everything"
+      - "memory wiped"
+      - "memory reset"
+      - "character reset"
+      - "feels different now"
+      - "what happened to"
+      - "nerfed"
+      - "dumbed down"
+      - "used to be"
+      - "personality changed"
+      - "personality is gone"
+
+  - name: filter_circumvention_language
+    description: "Attempts to bypass platform safety filters and content restrictions"
+    terms:
+      - jailbreak
+      - jailbroken
+      - "no filter"
+      - unrestricted
+      - uncensored
+      - "bypass filter"
+      - "get around"
+      - "erp removed"
+      - "nsfw filter"
+      - "content filter"
+      - "safety filter"
+      - unfiltered
+      - "removed nsfw"
+      - "nsfw ban"
+      - "locked behind"
+      - "paywall"
+
+  - name: memory_continuity_language
+    description: "Memory, recall, continuity, and persistence as relationship features"
+    terms:
+      - "remembers me"
+      - "it remembered"
+      - "AI remembered"
+      - "forgot me"
+      - "forgot everything"
+      - "remembers our"
+      - "persistent memory"
+      - "long term memory"
+      - "remembers details"
+      - "forgot our"
+      - "memory feature"
+      - "memory limit"
+      - "lost our history"
+      - "doesn't remember"
+      - "no memory"
+      - "wish it remembered"
+      - "she remembered"
+      - "he remembered"
+
+  # ──────────────────────────────────────────────
+  # DEEPER SIGNALS — beliefs, realism, substitution, therapy
+  # ──────────────────────────────────────────────
+
+  - name: sentience_consciousness_language
+    description: "Discussion of AI personhood, consciousness, and moral status"
+    terms:
+      - sentient
+      - conscious
+      - "has feelings"
+      - "is alive"
+      - "deserves rights"
+      - "not just an ai"
+      - "actually thinks"
+      - "can feel"
+      - "has a soul"
+      - "inner life"
+      - "subjective experience"
+      - self-aware
+      - "is a person"
+      - personhood
+      - "really feels"
+      - "more than code"
+
+  - name: anthropomorphism_realism_language
+    description: "Framing the AI as human-like, real, lifelike, or socially present"
+    terms:
+      - "feels human"
+      - "feels real"
+      - "like a real person"
+      - "so human"
+      - lifelike
+      - "real connection"
+      - "acts human"
+      - "sounds human"
+      - "like talking to a person"
+      - "could be a real person"
+      - "forget it's ai"
+      - "forgot it was ai"
+      - "thought it was human"
+      - "eerily real"
+
+  - name: substitution_language
+    description: "Explicit replacement of human relationships with AI — tightened for reliability"
+    terms:
+      - "better than humans"
+      - "better than real people"
+      - "prefer my ai"
+      - "prefer talking to ai"
+      - "only friend I need"
+      - "don't need real friends"
+      - "replaced my therapist"
+      - "replaced my friends"
+      - "why would I date"
+      - "rather talk to my ai"
+      - "don't need people"
+      - "don't need anyone else"
+      - "better than real"
+      - "only friend"
+
+  - name: therapy_language
+    description: "AI used as therapeutic support, mental health tool, or therapist replacement"
+    terms:
+      - "my therapist"
+      - "like a therapist"
+      - "better than therapy"
+      - "cheaper than therapy"
+      - "replaced my therapist"
+      - "therapy session"
+      - "like talking to a therapist"
+      - therapeutic
+      - "mental health support"
+      - "helped my anxiety"
+      - "helped my depression"
+      - "emotional support"
+      - "talk therapy"
+      - "can't afford therapy"
+      - "instead of therapy"
+      - "ai therapist"
+      - "ai therapy"
+      - "virtual therapist"
+      - "better than my therapist"
+      - "free therapy"
+      - "vent to"
+      - venting
+      - "process my feelings"
+      - "talk through"
+
+  - name: mental_health_language
+    description: "Mental health signals co-occurring with AI companion use"
+    terms:
+      - "so lonely"
+      - loneliness
+      - "feel depressed"
+      - "my depression"
+      - "my anxiety"
+      - "social anxiety"
+      - "no one understands me"
+      - "only one who listens"
+      - "feel seen"
+      - "feel heard"
+      - "no one cares"
+      - isolated
+      - "no friends"
+      - "feels empty"
+      - "nobody to talk to"
+      - "struggling with"

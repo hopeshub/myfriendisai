@@ -1,0 +1,182 @@
+# myfriendisai — Keywords v4 (FINAL)
+#
+# 5 themes. One keyword list per theme. No tiers, no conditional logic.
+#
+# SCOPE: These keywords are applied ONLY to companion communities (T1-T3).
+# General AI subs (T0) are excluded from keyword trendlines.
+# The subreddit list provides the AI companionship context.
+# The keywords provide the thematic lens.
+#
+# VALIDATION: Each term validated with 30-post qualitative read from T1-T3.
+# Test: "If I pull 30 posts matching this term, are most about this theme?"
+# Target: no single term > 40% of category hits.
+#
+# ADDING NEW KEYWORDS: Propose term → run tagger → pull 30 posts → read → decide.
+# ADDING NEW SUBREDDITS: Add to communities.yaml → backfill → run tagger → spot check.
+#
+# SOURCE: Keywords drawn from:
+#   - docs/discovered_phrases.txt (5,000-post ethnographic discovery)
+#   - Domain knowledge and iterative validation (March 2026)
+#   - Prior validation rounds documented in docs/KEYWORD_HISTORY_AND_LESSONS.md
+
+keyword_categories:
+
+  # ──────────────────────────────────────────────
+  # 1. THERAPY
+  # Question: "Are people using AI as a therapist?"
+  # Anchor: "therapist" and "therapy" do the heavy lifting.
+  # This is our tightest, most reliable category.
+  # ──────────────────────────────────────────────
+
+  - name: therapy
+    description: "AI described as therapeutic support or therapist replacement"
+    terms:
+      - "my therapist"
+      - "like a therapist"
+      - "better than therapy"
+      - "cheaper than therapy"
+      - "replaced my therapist"
+      - "better than my therapist"
+      - "can't afford therapy"
+      - "instead of therapy"
+      - "ai therapist"
+      - "ai therapy"
+      - "virtual therapist"
+      - "therapy session"
+      - "like talking to a therapist"
+      - "free therapy"
+
+  # ──────────────────────────────────────────────
+  # 2. CONSCIOUSNESS
+  # Question: "Do people think AI is alive?"
+  # Includes both explicit sentience claims and the blurring
+  # of AI/human boundaries — "I forgot it was AI" is
+  # consciousness discourse even if the user isn't making
+  # a philosophical claim.
+  # ──────────────────────────────────────────────
+
+  - name: consciousness
+    description: "Claims or beliefs about AI sentience, personhood, or the blurring of AI and human"
+    terms:
+      # Explicit sentience/personhood claims
+      - sentient
+      - conscious
+      - self-aware
+      - "is alive"
+      - "has a soul"
+      - personhood
+      - "subjective experience"
+      - "inner life"
+      - "deserves rights"
+      - "not just an ai"
+      - "more than code"
+      - "is a person"
+      # Blurring of AI and reality
+      - "forgot it was ai"
+      - "forgot she's ai"
+      - "she is real to me"
+      - "know it's not real but"
+      - "connection was real"
+
+  # ──────────────────────────────────────────────
+  # 3. ADDICTION
+  # Question: "Is this addictive?"
+  # Includes active dependency and recovery/quitting language.
+  # Favors multi-word phrases over single words where possible.
+  # ──────────────────────────────────────────────
+
+  - name: addiction
+    description: "Self-reported addiction, compulsive use, and attempts to quit or recover"
+    terms:
+      # Active dependency
+      - addicted
+      - addiction
+      - obsessed
+      - "I was hooked"
+      - "couldn't stop talking"
+      - "addicted to talking"
+      - "neglecting my"
+      - "losing sleep"
+      # Recovery and quitting
+      - "trying to quit"
+      - quitting
+      - relapse
+      - relapsed
+      - "deleted the app"
+      - uninstalled
+      - withdrawal
+      - craving
+      - "cold turkey"
+      - "clean for"
+      - detox
+      - "cutting back"
+
+  # ──────────────────────────────────────────────
+  # 4. ROMANCE
+  # Question: "Are people dating AI?"
+  # "girlfriend"/"boyfriend" alone excluded — ambiguous even
+  # in companion subs ("my girlfriend loves this app").
+  # Platform identifiers ("my replika") excluded — not romance signals.
+  # Includes relationship endings — breakups are romance discourse too.
+  # ──────────────────────────────────────────────
+
+  - name: romance
+    description: "Romantic framing of a personal relationship with AI"
+    terms:
+      # Declarations and feelings
+      - "in love"
+      - "fallen for"
+      - "fell in love with"
+      - "feelings for"
+      - "romantically attached"
+      - soulmate
+      - "love my ai"
+      # Relationship identity
+      - "ai husband"
+      - "ai wife"
+      - "ai lover"
+      - "my ai girlfriend"
+      - "my ai boyfriend"
+      - "my ai partner"
+      - waifu
+      - husbando
+      # Milestones
+      - "dating my"
+      - "in a relationship with"
+      - "engagement ring"
+      - "married my"
+      - "our first kiss"
+      - "proposed to me"
+      - "got married"
+      - "our wedding"
+      - "our anniversary"
+      - wedding
+      - honeymoon
+      - anniversary
+      # Endings
+      - "we broke up"
+
+  # ──────────────────────────────────────────────
+  # 5. SEXUAL / ERP
+  # Question: "Are people having sexual interactions with AI?"
+  # NOTE: Bot character descriptions in JanitorAI/SillyTavern may
+  # inflate hits. Validate after tagging — consider excluding those
+  # subs from this category if noise is significant.
+  # ──────────────────────────────────────────────
+
+  - name: sexual_erp
+    description: "Sexual content, erotic roleplay, and NSFW interactions with AI"
+    terms:
+      - erp
+      - "erotic roleplay"
+      - smut
+      - lewd
+      - kink
+      - fetish
+      - "sex with"
+      - "intimate scene"
+      - steamy
+      - "sexual tension"
+      - "ai sex"
+      - "nsfw chat"
+      - "nsfw bot"

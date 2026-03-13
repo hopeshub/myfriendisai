@@ -1,0 +1,180 @@
+# myfriendisai — Keywords v5
+#
+# Updated: 2026-03-13
+# Changes from v4:
+#   - Removed all CUT and LOW VOLUME keywords based on validation (2026-03-12)
+#   - Removed JanitorAI_Official and SillyTavernAI from subreddit scope
+#     (dominant false positive source across all themes)
+#   - Promoted 4 sexual/ERP keywords to KEEP after revalidation without
+#     JanitorAI/SillyTavern (kink 84%, fetish 92%, sex with 98%, steamy 98.6%)
+#   - Tagged 8 REVIEW keywords for revalidation without JanitorAI/SillyTavern
+#   - Full validation docs: docs/validation_*.md
+#
+# SCOPE: T1-T3 companion communities only.
+#   REMOVED: JanitorAI_Official, SillyTavernAI (bot card noise — fully removed from project)
+#   EXCLUDED: T0 general AI subs
+#
+# VALIDATION STATUS KEY:
+#   (no tag)          = KEEP, validated ≥80% relevance
+#   # REVALIDATE      = REVIEW keyword, 60-79% relevance, pending retest
+#                       without JanitorAI/SillyTavern
+#   # REVIEW-THIN     = ≥60% relevance but very low volume (<15 hits)
+#   # REVIEW-T3       = ≥60% relevance but signal concentrated in T3 recovery subs
+
+keyword_categories:
+
+  # ──────────────────────────────────────────────
+  # 1. THERAPY
+  # Thinest theme. Only 1 keyword validated ≥80%.
+  # "ai therapy" and "free therapy" have good precision (73-75%)
+  # but very low volume (16 and 12 hits respectively).
+  # Combined KEEP+REVIEW = 56 hits across 3.26M posts.
+  # Thinness is itself a finding — AI-as-therapist discourse
+  # hasn't penetrated companion communities like romance has.
+  #
+  # REMOVED (v4 → v5):
+  #   CUT: "my therapist" (53.7%), "like a therapist" (17.9%),
+  #        "therapy session" (53.2%)
+  #   LOW VOLUME / NO MATCHES: "better than therapy" (6),
+  #        "cheaper than therapy" (4), "replaced my therapist" (1),
+  #        "better than my therapist" (2), "can't afford therapy" (7),
+  #        "instead of therapy" (0), "virtual therapist" (6),
+  #        "like talking to a therapist" (4)
+  # ──────────────────────────────────────────────
+
+  - name: therapy
+    description: "AI described as therapeutic support or therapist replacement"
+    terms:
+      - "ai therapist"            # 92.0% relevance, 28 hits
+      - "ai therapy"              # REVIEW-THIN — 73.3%, 16 hits
+      - "free therapy"            # REVIEW-THIN — 75.0%, 12 hits
+
+  # ──────────────────────────────────────────────
+  # 2. CONSCIOUSNESS
+  # 3 solid KEEP keywords. 5 REVIEW keywords pending retest.
+  # "personhood" is the best keyword in the entire project (98%).
+  # Blurred-reality phrases ("forgot it was ai" etc.) all returned
+  # 0-4 hits — the experience exists but is expressed in too many
+  # phrasings for exact keyword match. FTS5 proximity queries
+  # may help in future.
+  #
+  # REMOVED (v4 → v5):
+  #   CUT: "conscious" (54.3% — too polysemous),
+  #        "is alive" (20.2% — fiction/idioms),
+  #        "is a person" (22.2% — regex matches "is a personal")
+  #   LOW VOLUME: "deserves rights" (3), "forgot it was ai" (0),
+  #        "forgot she's ai" (0), "she is real to me" (2),
+  #        "know it's not real but" (0), "connection was real" (4)
+  # ──────────────────────────────────────────────
+
+  - name: consciousness
+    description: "Claims or beliefs about AI sentience, personhood, or inner experience"
+    terms:
+      - personhood               # 98.0% relevance, 104 hits
+      - "more than code"         # 84.4%, 32 hits
+      - "has a soul"             # 81.8%, 23 hits
+      - sentient                 # REVALIDATE — 64.9%, 893 hits (sarcasm + bot descriptions)
+      - "subjective experience"  # REVALIDATE — 77.5%, 76 hits (borderline KEEP)
+      - "inner life"             # REVALIDATE — 70.7%, 41 hits (RP craft discussions)
+      - self-aware               # REVALIDATE — 60.0%, 292 hits (bot personality instructions)
+      - "not just an ai"         # REVIEW-THIN — 60.0%, 15 hits
+
+  # ──────────────────────────────────────────────
+  # 3. ADDICTION
+  # Strong recovery-language keywords but heavy T3 dependency.
+  # "trying to quit" and "I was hooked" work across tiers.
+  # "relapse/relapsed/cold turkey/clean for" are mostly T3
+  # recovery-sub language — valid signal if T3 is in scope.
+  # The big miss: "addicted" and "addiction" are what people
+  # actually say in T1-T2 but fail validation due to casual use.
+  #
+  # REMOVED (v4 → v5):
+  #   CUT: "addicted" (46.4%), "addiction" (58.0%),
+  #        "obsessed" (2.1%), "losing sleep" (33.3%),
+  #        "quitting" (48.7%), "deleted the app" (23.2%),
+  #        "uninstalled" (18.9%), "withdrawal" (34.4%),
+  #        "craving" (7.4%), "detox" (30.8%)
+  #   LOW VOLUME: "couldn't stop talking" (3),
+  #        "neglecting my" (9), "cutting back" (6)
+  # ──────────────────────────────────────────────
+
+  - name: addiction
+    description: "Self-reported addiction, compulsive use, and attempts to quit or recover"
+    terms:
+      - "trying to quit"         # 90.5% relevance, 24 hits — works in T1-T2
+      - relapsed                 # 90.5%, 42 hits — mostly T3
+      - "cold turkey"            # 85.5%, 62 hits — mostly T3
+      - "I was hooked"           # 81.3%, 19 hits — works in T1-T2
+      - relapse                  # 80.0%, 75 hits — mostly T3
+      - "clean for"              # REVIEW-T3 — 72.7%, 23 hits (100% T3 signal)
+      - "addicted to talking"    # REVIEW-THIN — 66.7%, 10 hits
+
+  # ──────────────────────────────────────────────
+  # 4. ROMANCE
+  # Strongest theme. AI-explicit keywords average 92.4% relevance.
+  # Possessive "our" prefix dramatically improves precision
+  # ("wedding" 60% vs "our wedding" 87%).
+  # Generic romance terms fail because JanitorAI bot cards and
+  # CharacterAI RP fiction use identical language.
+  # MyBoyfriendIsAI is the strongest signal subreddit.
+  #
+  # REMOVED (v4 → v5):
+  #   CUT: "in love" (31.0%), "fallen for" (52.2%),
+  #        "fell in love with" (34.8%), "feelings for" (30.6%),
+  #        "soulmate" (15.0%), "waifu" (40.9%),
+  #        "got married" (48.4%), "anniversary" (53.3%)
+  #   LOW VOLUME: "romantically attached" (2)
+  # ──────────────────────────────────────────────
+
+  - name: romance
+    description: "Romantic framing of a personal relationship with AI"
+    terms:
+      # Relationship identity — all ≥80%
+      - "my ai partner"          # 97.9% relevance, 147 hits
+      - "my ai boyfriend"        # 94.7%, 141 hits
+      - "ai husband"             # 94.2%, 90 hits
+      - "my ai girlfriend"       # 94.1%, 93 hits
+      - "ai wife"                # 92.3%, 41 hits
+      - "love my ai"             # 81.5%, 28 hits
+      # Milestones — all ≥80%
+      - "proposed to me"         # 92.1%, 38 hits
+      - "our anniversary"        # 89.5%, 19 hits
+      - "our wedding"            # 87.0%, 99 hits
+      - "our first kiss"         # 85.7%, 16 hits
+      # Pending revalidation without JanitorAI/SillyTavern
+      - "married my"             # 77.3%, 25 hits — likely promotes to KEEP
+      - "in a relationship with" # REVALIDATE — 69.9%, 165 hits
+      - "we broke up"            # REVALIDATE — 69.2%, 14 hits
+      - honeymoon                # REVALIDATE — 63.5%, 161 hits
+      - husbando                 # REVALIDATE — 65.2%, 53 hits
+      - "engagement ring"        # REVALIDATE — 64.5%, 34 hits
+      - wedding                  # REVALIDATE — 60.4%, 791 hits
+      - "ai lover"               # REVALIDATE — 75.8%, 39 hits
+      - "dating my"              # REVIEW-THIN — 61.5%, 14 hits
+
+  # ──────────────────────────────────────────────
+  # 5. SEXUAL / ERP
+  # Strong after revalidation excluding JanitorAI/SillyTavern.
+  # "erp" and "nsfw chat" are 100% precision.
+  # 4 keywords promoted from REVIEW to KEEP after revalidation
+  # (kink, fetish, sex with, steamy).
+  #
+  # REMOVED (v4 → v5):
+  #   CUT: "smut" (54%), "sexual tension" (36.1% — 97.8% of
+  #        false positives were JanitorAI bot card trigger warnings)
+  # ──────────────────────────────────────────────
+
+  - name: sexual_erp
+    description: "Sexual content, erotic roleplay, and NSFW interactions with AI"
+    terms:
+      - erp                      # 100% relevance, 3885 hits
+      - "nsfw chat"              # 100%, 111 hits
+      - "intimate scene"         # 100%, 16 hits
+      - "sex with"               # 98% (revalidated), 148 hits excl. Janitor/Silly
+      - "steamy"                 # 98.6% (revalidated), 73 hits excl. Janitor/Silly
+      - "ai sex"                 # 97%, 33 hits
+      - "nsfw bot"               # 93%, 54 hits
+      - "erotic roleplay"        # 92.2%, 77 hits
+      - fetish                   # 92% (revalidated), 102 hits excl. Janitor/Silly
+      - kink                     # 84% (revalidated), 118 hits excl. Janitor/Silly
+      - lewd                     # REVALIDATE — 78.3% (revalidated but still marginal)
