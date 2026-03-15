@@ -9,7 +9,7 @@ import {
   Tooltip,
   ResponsiveContainer,
   CartesianGrid,
-  Customized,
+  ReferenceLine,
 } from "recharts";
 import type { ThemeData } from "./page";
 
@@ -29,12 +29,12 @@ type ThemeId = typeof THEMES[number]["id"];
 // ─── Events ────────────────────────────────────────────────────────────────
 
 const EVENTS = [
-  { date: "2023-02-01", label: "Replika ERP removal" },
-  { date: "2024-05-01", label: "4o launches" },
-  { date: "2025-04-01", label: "4o sycophancy update" },
-  { date: "2025-08-01", label: "4o first retirement" },
-  { date: "2026-01-01", label: "4o retirement announced" },
-  { date: "2026-02-01", label: "4o permanently retired" },
+  { date: "2023-02-01", label: "Replika ERP removal",   row: 0 },
+  { date: "2024-05-01", label: "4o launches",            row: 0 },
+  { date: "2025-04-01", label: "4o sycophancy update",  row: 0 },
+  { date: "2025-08-01", label: "4o first retirement",   row: 1 },
+  { date: "2026-01-01", label: "4o retirement announced", row: 2 },
+  { date: "2026-02-01", label: "4o permanently retired", row: 3 },
 ];
 
 // ─── Helpers ───────────────────────────────────────────────────────────────
@@ -52,81 +52,29 @@ function toMonth(dateStr: string): string {
   return dateStr.slice(0, 7) + "-01";
 }
 
-// ─── Event annotations (rendered via Customized for reliable positioning) ──
+// ─── Event label ───────────────────────────────────────────────────────────
 
-function EventAnnotations(props: any) {
-  const { xAxisMap, offset } = props;
-  if (!xAxisMap || !offset) return null;
-
-  const xAxis = Object.values(xAxisMap)[0] as any;
-  if (!xAxis?.scale) return null;
-
-  const chartTop = offset.top ?? 0;
-  const chartBottom = (offset.top ?? 0) + (offset.height ?? 300);
-  const chartRight = (offset.left ?? 0) + (offset.width ?? 700);
-
-  // Resolve pixel x for each visible event
-  const rendered: { x: number; label: string; yOffset: number }[] = [];
-
-  for (const event of (props.events ?? [])) {
-    let x: number;
-    try {
-      x = xAxis.scale(event.date);
-      if (x == null || isNaN(x)) continue;
-    } catch {
-      continue;
-    }
-
-    // Stagger: check against already-placed labels
-    let yOffset = 0;
-    for (const prev of rendered) {
-      const hGap = Math.abs(x - prev.x);
-      // Labels are ~120px wide; if events are within 140px, check vertical
-      if (hGap < 140 && Math.abs(yOffset - prev.yOffset) < 18) {
-        yOffset = prev.yOffset + 22;
-      }
-    }
-
-    rendered.push({ x, label: event.label, yOffset });
-  }
-
+function EventLabel({
+  viewBox,
+  label,
+  row,
+}: {
+  viewBox?: { x: number; y: number };
+  label: string;
+  row: number;
+}) {
+  if (!viewBox) return null;
+  // Always anchor to the right of the line — simple, predictable
   return (
-    <g>
-      {rendered.map((evt) => {
-        // Anchor left if label would overflow right edge
-        const labelWidth = evt.label.length * 5.5 + 8;
-        const anchorLeft = evt.x + labelWidth > chartRight;
-        const textX = anchorLeft ? evt.x - 4 : evt.x + 4;
-        const anchor = anchorLeft ? "end" : "start";
-        const labelY = chartTop + 14 + evt.yOffset;
-
-        return (
-          <g key={evt.label}>
-            {/* Dashed vertical line */}
-            <line
-              x1={evt.x}
-              y1={chartTop}
-              x2={evt.x}
-              y2={chartBottom}
-              stroke="#6B7280"
-              strokeDasharray="2 4"
-              strokeWidth={1}
-            />
-            {/* Label */}
-            <title>{evt.label}</title>
-            <text
-              x={textX}
-              y={labelY}
-              fill="#94A3B8"
-              fontSize={10}
-              textAnchor={anchor}
-            >
-              {evt.label}
-            </text>
-          </g>
-        );
-      })}
-    </g>
+    <text
+      x={viewBox.x + 4}
+      y={14 + row * 14}
+      fill="#94A3B8"
+      fontSize={9}
+      textAnchor="start"
+    >
+      {label}
+    </text>
   );
 }
 
@@ -419,8 +367,18 @@ export default function TrendsExplorer({ themeData }: Props) {
                 cursor={{ stroke: "#2A2D3A", strokeWidth: 1 }}
               />
 
-              {/* Event annotations — uses Customized for reliable pixel positions */}
-              <Customized component={EventAnnotations} events={visibleEvents} />
+              {/* Event annotations */}
+              {visibleEvents.map((event) => (
+                <ReferenceLine
+                  key={event.date}
+                  yAxisId="index"
+                  x={event.date}
+                  stroke="#6B7280"
+                  strokeDasharray="2 4"
+                  strokeWidth={1}
+                  label={<EventLabel label={event.label} row={event.row} />}
+                />
+              ))}
 
               {/* Theme lines */}
               {THEMES.map((theme) => {
