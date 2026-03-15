@@ -17,12 +17,12 @@ import { useBreakpoint } from "./useBreakpoint";
 // ─── Themes ────────────────────────────────────────────────────────────────
 
 const THEMES = [
-  { id: "therapy",       label: "Therapy",        emoji: "💊", color: "#EC4899" },
-  { id: "consciousness", label: "Consciousness",  emoji: "🔮", color: "#A855F7" },
-  { id: "addiction",     label: "Addiction",       emoji: "🔁", color: "#EF4444" },
-  { id: "romance",       label: "Romance",        emoji: "💕", color: "#F97316" },
-  { id: "sexual_erp",    label: "Sex / ERP",      emoji: "🔞", color: "#DC2626" },
-  { id: "rupture",       label: "Rupture",        emoji: "💔", color: "#06B6D4" },
+  { id: "therapy",       label: "Therapy",        emoji: "💊", color: "#FFEB3B" },
+  { id: "consciousness", label: "Consciousness",  emoji: "🧠", color: "#F3B5B8" },
+  { id: "addiction",     label: "Addiction",       emoji: "💉", color: "#f1f5f6" },
+  { id: "romance",       label: "Romance",        emoji: "💕", color: "#ef6dab" },
+  { id: "sexual_erp",    label: "Sex / ERP",      emoji: "🔞", color: "#FFFFFF" },
+  { id: "rupture",       label: "Rupture",        emoji: "💔", color: "#FF0000" },
 ] as const;
 
 type ThemeId = typeof THEMES[number]["id"];
