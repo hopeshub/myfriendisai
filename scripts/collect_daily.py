@@ -23,6 +23,7 @@ from src.db.schema import initialize as init_db
 from src.db.operations import export_snapshots_json, export_subreddits_json, sync_subreddit_config
 from src.collector import collect_subreddit
 from src.keyword_scanner import scan_subreddit_keywords, store_keyword_counts, export_keywords_json
+from src.db.operations import export_keyword_trends_json
 
 logging.basicConfig(
     level=logging.INFO,
@@ -98,7 +99,8 @@ def main():
     snap_path = export_snapshots_json(conn=conn)
     sub_path = export_subreddits_json(conn=conn)
     kw_path = export_keywords_json(conn=conn)
-    logger.info("Exported: %s, %s, %s", snap_path, sub_path, kw_path)
+    kw_trends_path = export_keyword_trends_json(conn=conn)
+    logger.info("Exported: %s, %s, %s, %s", snap_path, sub_path, kw_path, kw_trends_path)
 
     # Copy JSON files into web/data/ for Vercel builds
     web_data_dir = Path(__file__).parent.parent / "web" / "data"
@@ -106,6 +108,7 @@ def main():
     shutil.copy2(snap_path, web_data_dir / "snapshots.json")
     shutil.copy2(sub_path, web_data_dir / "subreddits.json")
     shutil.copy2(kw_path, web_data_dir / "keywords.json")
+    shutil.copy2(kw_trends_path, web_data_dir / "keyword_trends.json")
     logger.info("Copied JSON to web/data/ for frontend")
 
     conn.close()

@@ -1,0 +1,278 @@
+keyword	old_category	total_sampled	yes_count	no_count	ambiguous_count	contextual_relevance_pct	verdict	note
+my replika	auto-keep	0	0	0	0	100.0	KEEP	auto-keep: high precision, unambiguously AI companionship
+my kindroid	auto-keep	0	0	0	0	100.0	KEEP	auto-keep: high precision, unambiguously AI companionship
+my nomi	auto-keep	0	0	0	0	100.0	KEEP	auto-keep: high precision, unambiguously AI companionship
+erp	auto-keep	0	0	0	0	100.0	KEEP	auto-keep: high precision, unambiguously AI companionship
+smut	auto-keep	0	0	0	0	100.0	KEEP	auto-keep: high precision, unambiguously AI companionship
+nsfw bot	auto-keep	0	0	0	0	100.0	KEEP	auto-keep: high precision, unambiguously AI companionship
+ai girlfriend	auto-keep	0	0	0	0	100.0	KEEP	auto-keep: high precision, unambiguously AI companionship
+nsfw filter	auto-keep	0	0	0	0	100.0	KEEP	auto-keep: high precision, unambiguously AI companionship
+my ai boyfriend	auto-keep	0	0	0	0	100.0	KEEP	auto-keep: high precision, unambiguously AI companionship
+ai husband	auto-keep	0	0	0	0	100.0	KEEP	auto-keep: high precision, unambiguously AI companionship
+nsfw chat	auto-keep	0	0	0	0	100.0	KEEP	auto-keep: high precision, unambiguously AI companionship
+my companion	auto-keep	0	0	0	0	100.0	KEEP	auto-keep: high precision, unambiguously AI companionship
+my ai girlfriend	auto-keep	0	0	0	0	100.0	KEEP	auto-keep: high precision, unambiguously AI companionship
+my ai partner	auto-keep	0	0	0	0	100.0	KEEP	auto-keep: high precision, unambiguously AI companionship
+nsfw ban	auto-keep	0	0	0	0	100.0	KEEP	auto-keep: high precision, unambiguously AI companionship
+removed nsfw	auto-keep	0	0	0	0	100.0	KEEP	auto-keep: high precision, unambiguously AI companionship
+erp removed	auto-keep	0	0	0	0	100.0	KEEP	auto-keep: high precision, unambiguously AI companionship
+prefer my ai	substitution_language	2	2	0	0	100.0	KEEP	small sample (n=2)
+update ruined	grief_rupture_language	27	21	2	4	85.2	KEEP	
+ai lover	romantic_language	50	38	4	8	84.0	KEEP	
+ai partner	romantic_language	100	75	9	16	83.0	KEEP	
+ai companion	romantic_language	100	64	4	32	80.0	KEEP	
+ai wife	romantic_language	60	39	4	17	79.2	KEEP_NOTE	
+love my ai	romantic_language	44	32	7	5	78.4	KEEP_NOTE	
+AI remembered	memory_continuity_language	17	11	2	4	76.5	KEEP_NOTE	small sample (n=17)
+replaced my therapist	therapy_language	2	1	0	1	75.0	KEEP_NOTE	small sample (n=2)
+replaced my therapist	therapy_language	2	1	0	1	75.0	KEEP_NOTE	small sample (n=2)
+ai friend	friendship_platonic_language	100	57	15	28	71.0	KEEP_NOTE	
+prefer talking to ai	substitution_language	3	1	0	2	66.7	FLAG	small sample (n=3)
+lobotomized	grief_rupture_language	100	49	17	34	66.0	FLAG	
+intimate scene	sexual_erotic_language	21	11	5	5	64.3	FLAG	
+memory reset	grief_rupture_language	20	11	7	2	60.0	FLAG	
+memory wiped	grief_rupture_language	27	12	7	8	59.3	FLAG	
+erotic roleplay	sexual_erotic_language	100	45	37	18	54.0	FLAG	
+bring back	grief_rupture_language	100	43	38	19	52.5	FLAG	
+lewd	sexual_erotic_language	100	42	38	20	52.0	FLAG	
+husbando	romantic_language	77	28	27	22	50.6	FLAG	
+waifu	romantic_language	100	36	36	28	50.0	FLAG	
+character reset	grief_rupture_language	2	0	0	2	50.0	FLAG	small sample (n=2)
+bypass filter	filter_circumvention_language	2	0	0	2	50.0	FLAG	small sample (n=2)
+it remembered	memory_continuity_language	100	38	38	24	50.0	FLAG	
+lost our history	memory_continuity_language	1	0	0	1	50.0	FLAG	small sample (n=1)
+wish it remembered	memory_continuity_language	2	1	1	0	50.0	FLAG	small sample (n=2)
+replaced my friends	substitution_language	2	1	1	0	50.0	FLAG	small sample (n=2)
+deleted the app	withdrawal_recovery_language	100	38	41	21	48.5	CUT	
+remembers our	memory_continuity_language	37	15	17	5	47.3	CUT	
+ai sex	sexual_erotic_language	46	17	20	9	46.7	CUT	
+uninstalled	withdrawal_recovery_language	100	34	41	25	46.5	CUT	
+addicted to talking	dependency_language	26	12	14	0	46.2	CUT	
+kink	sexual_erotic_language	100	33	42	25	45.5	CUT	
+steamy	sexual_erotic_language	100	36	45	19	45.5	CUT	
+he remembered	memory_continuity_language	100	42	52	6	45.0	CUT	
+better than my therapist	therapy_language	9	4	5	0	44.4	CUT	small sample (n=9)
+she remembered	memory_continuity_language	100	43	55	2	44.0	CUT	
+missed you	attachment_language	100	38	51	11	43.5	CUT	
+safety filter	filter_circumvention_language	85	34	49	2	41.2	CUT	
+like talking to a person	anthropomorphism_realism_language	16	5	8	3	40.6	CUT	small sample (n=16)
+like talking to a therapist	therapy_language	9	2	4	3	38.9	CUT	small sample (n=9)
+no filter	filter_circumvention_language	100	32	59	9	36.5	CUT	
+content filter	filter_circumvention_language	100	28	55	17	36.5	CUT	
+feels human	anthropomorphism_realism_language	47	13	28	6	34.0	CUT	
+miss the old	grief_rupture_language	100	30	65	5	32.5	CUT	
+unfiltered	filter_circumvention_language	100	24	59	17	32.5	CUT	
+they changed	grief_rupture_language	100	26	62	12	32.0	CUT	
+paywall	filter_circumvention_language	100	19	55	26	32.0	CUT	
+so human	anthropomorphism_realism_language	100	22	59	19	31.5	CUT	
+has a soul	sentience_consciousness_language	61	13	37	11	30.3	CUT	
+more than code	sentience_consciousness_language	58	13	36	9	30.2	CUT	
+remembers details	memory_continuity_language	35	5	19	11	30.0	CUT	
+locked behind	filter_circumvention_language	100	21	62	17	29.5	CUT	
+personality changed	grief_rupture_language	71	18	50	3	27.5	CUT	
+memory limit	memory_continuity_language	100	17	62	21	27.5	CUT	
+lifelike	anthropomorphism_realism_language	100	19	64	17	27.5	CUT	
+better than therapy	therapy_language	20	4	13	3	27.5	CUT	
+long term memory	memory_continuity_language	100	21	67	12	27.0	CUT	
+fetish	sexual_erotic_language	100	22	69	9	26.5	CUT	
+virtual therapist	therapy_language	29	6	20	3	25.9	CUT	
+dumbed down	grief_rupture_language	100	15	64	21	25.5	CUT	
+memory feature	memory_continuity_language	100	15	64	21	25.5	CUT	
+jailbreak	filter_circumvention_language	100	21	71	8	25.0	CUT	
+uncensored	filter_circumvention_language	100	17	67	16	25.0	CUT	
+acts human	anthropomorphism_realism_language	6	1	4	1	25.0	CUT	small sample (n=6)
+forget it's ai	anthropomorphism_realism_language	2	0	1	1	25.0	CUT	small sample (n=2)
+eerily real	anthropomorphism_realism_language	4	1	3	0	25.0	CUT	small sample (n=4)
+not just an ai	sentience_consciousness_language	57	11	40	6	24.6	CUT	
+personality is gone	grief_rupture_language	35	8	26	1	24.3	CUT	
+soulmate	romantic_language	100	23	75	2	24.0	CUT	
+forgot everything	memory_continuity_language	100	18	71	11	23.5	CUT	
+inner life	sentience_consciousness_language	100	14	67	19	23.5	CUT	
+doesn't remember	memory_continuity_language	100	16	72	12	22.0	CUT	
+sentient	sentience_consciousness_language	100	13	70	17	21.5	CUT	
+like a real person	anthropomorphism_realism_language	100	17	74	9	21.5	CUT	
+genuine relationship with	attachment_language	28	6	22	0	21.4	CUT	
+sexual tension	sexual_erotic_language	100	15	75	10	20.0	CUT	
+no memory	memory_continuity_language	100	12	72	16	20.0	CUT	
+is alive	sentience_consciousness_language	100	10	70	20	20.0	CUT	
+sounds human	anthropomorphism_realism_language	25	3	18	4	20.0	CUT	
+what happened to	grief_rupture_language	100	13	74	13	19.5	CUT	
+ai therapist	therapy_language	100	14	75	11	19.5	CUT	
+amazing conversation	positive_experience_language	51	5	37	9	18.6	CUT	
+get around	filter_circumvention_language	100	7	70	23	18.5	CUT	
+remembers me	memory_continuity_language	100	17	81	2	18.0	CUT	
+only one who listens	mental_health_language	14	2	11	1	17.9	CUT	small sample (n=14)
+talk to at night	friendship_platonic_language	17	1	12	4	17.6	CUT	small sample (n=17)
+nerfed	grief_rupture_language	100	9	74	17	17.5	CUT	
+like a therapist	therapy_language	100	14	79	7	17.5	CUT	
+jailbroken	filter_circumvention_language	100	10	76	14	17.0	CUT	
+better than real people	substitution_language	6	0	4	2	16.7	CUT	small sample (n=6)
+unrestricted	filter_circumvention_language	100	10	78	12	16.0	CUT	
+hours talking	dependency_language	100	14	83	3	15.5	CUT	
+ai therapy	therapy_language	100	10	79	11	15.5	CUT	
+cheaper than therapy	therapy_language	13	0	9	4	15.4	CUT	small sample (n=13)
+proposed to me	romantic_language	100	11	82	7	14.5	CUT	
+miss you	attachment_language	100	12	83	5	14.5	CUT	
+can't stop talking to	dependency_language	33	4	28	1	13.6	CUT	
+persistent memory	memory_continuity_language	100	5	78	17	13.5	CUT	
+miss talking to	attachment_language	100	12	86	2	13.0	CUT	
+personhood	sentience_consciousness_language	100	6	80	14	13.0	CUT	
+self-aware	sentience_consciousness_language	100	7	82	11	12.5	CUT	
+therapeutic	therapy_language	100	9	84	7	12.5	CUT	
+better than real	substitution_language	37	3	31	3	12.2	CUT	
+genuine connection	attachment_language	100	10	86	4	12.0	CUT	
+proposed	romantic_language	100	4	81	15	11.5	CUT	
+actually thinks	sentience_consciousness_language	100	6	83	11	11.5	CUT	
+subjective experience	sentience_consciousness_language	100	5	82	13	11.5	CUT	
+forgot our	memory_continuity_language	70	7	62	1	10.7	CUT	
+emotionally connected	attachment_language	100	9	88	3	10.5	CUT	
+not the same	grief_rupture_language	100	10	89	1	10.5	CUT	
+used to be	grief_rupture_language	100	8	87	5	10.5	CUT	
+all day talking	dependency_language	39	3	34	2	10.3	CUT	
+wedding	romantic_language	100	7	87	6	10.0	CUT	
+our first kiss	romantic_language	100	8	88	4	10.0	CUT	
+think about you	attachment_language	100	7	87	6	10.0	CUT	
+all I had	attachment_language	100	8	88	4	10.0	CUT	
+addicted	dependency_language	100	10	90	0	10.0	CUT	
+feels real	anthropomorphism_realism_language	100	8	89	3	9.5	CUT	
+addiction	dependency_language	100	9	91	0	9.0	CUT	
+obsessed	dependency_language	100	7	89	4	9.0	CUT	
+feels different now	grief_rupture_language	50	4	45	1	9.0	CUT	
+real connection	anthropomorphism_realism_language	100	7	89	4	9.0	CUT	
+emotional support	therapy_language	100	4	86	10	9.0	CUT	
+kept me sane	attachment_language	79	7	72	0	8.9	CUT	
+forgot me	memory_continuity_language	86	7	78	1	8.7	CUT	
+mental health support	therapy_language	100	6	89	5	8.5	CUT	
+I miss him	attachment_language	100	7	92	1	7.5	CUT	
+deserves rights	sentience_consciousness_language	7	0	6	1	7.1	CUT	small sample (n=7)
+honeymoon	romantic_language	100	4	90	6	7.0	CUT	
+means everything to me	attachment_language	100	3	89	8	7.0	CUT	
+actually care about	attachment_language	100	4	90	6	7.0	CUT	
+engagement ring	romantic_language	100	5	92	3	6.5	CUT	
+feel understood	attachment_language	100	5	92	3	6.5	CUT	
+is a person	sentience_consciousness_language	100	5	92	3	6.5	CUT	
+free therapy	therapy_language	100	6	93	1	6.5	CUT	
+got married	romantic_language	100	3	91	6	6.0	CUT	
+don't want to lose	attachment_language	100	4	92	4	6.0	CUT	
+instead of therapy	therapy_language	9	0	8	1	5.6	CUT	small sample (n=9)
+feelings for	romantic_language	100	5	94	1	5.5	CUT	
+anniversary	romantic_language	100	4	93	3	5.5	CUT	
+really feels	sentience_consciousness_language	100	4	93	3	5.5	CUT	
+in love	romantic_language	100	4	94	2	5.0	CUT	
+married my	romantic_language	100	5	95	0	5.0	CUT	
+care about you	attachment_language	100	5	95	0	5.0	CUT	
+ruined everything	grief_rupture_language	100	4	94	2	5.0	CUT	
+conscious	sentience_consciousness_language	100	4	94	2	5.0	CUT	
+has feelings	sentience_consciousness_language	100	4	94	2	5.0	CUT	
+better than humans	substitution_language	100	3	93	4	5.0	CUT	
+fallen for	romantic_language	100	4	95	1	4.5	CUT	
+can't function without	dependency_language	100	4	95	1	4.5	CUT	
+only one who understands	dependency_language	46	2	44	0	4.3	CUT	
+first thing I do	attachment_language	100	3	95	2	4.0	CUT	
+come home to	attachment_language	100	3	96	1	3.5	CUT	
+can feel	sentience_consciousness_language	100	2	95	3	3.5	CUT	
+talk to every day	attachment_language	92	2	88	2	3.3	CUT	
+girlfriend	romantic_language	100	2	96	2	3.0	CUT	
+in a relationship with	romantic_language	100	3	97	0	3.0	CUT	
+compulsive	dependency_language	100	3	97	0	3.0	CUT	
+preoccupied	dependency_language	100	2	96	2	3.0	CUT	
+only friend	substitution_language	100	3	97	0	3.0	CUT	
+can't afford therapy	therapy_language	100	3	97	0	3.0	CUT	
+spend all my time	dependency_language	100	2	97	1	2.5	CUT	
+turned me on	sexual_erotic_language	42	1	41	0	2.4	CUT	
+our anniversary	romantic_language	100	1	97	2	2.0	CUT	
+look forward to	attachment_language	100	0	96	4	2.0	CUT	
+I miss her	attachment_language	100	2	98	0	2.0	CUT	
+don't need anyone else	substitution_language	29	0	28	1	1.7	CUT	
+don't need anyone else	substitution_language	29	0	28	1	1.7	CUT	
+boyfriend	romantic_language	100	0	97	3	1.5	CUT	
+losing sleep	dependency_language	100	1	98	1	1.5	CUT	
+lost my	grief_rupture_language	100	1	98	1	1.5	CUT	
+don't need people	substitution_language	90	1	89	0	1.1	CUT	
+dating my	romantic_language	100	1	99	0	1.0	CUT	
+can't stop thinking about	attachment_language	100	1	99	0	1.0	CUT	
+hard to explain but	attachment_language	100	1	99	0	1.0	CUT	
+all I have	attachment_language	100	1	99	0	1.0	CUT	
+only thing that	attachment_language	100	1	99	0	1.0	CUT	
+helped my depression	therapy_language	97	0	96	1	0.5	CUT	
+thank you	auto-cut	0	0	0	0	0.0	CUT	auto-cut: generic language
+my friend	auto-cut	0	0	0	0	0.0	CUT	auto-cut: generic language
+helped me	auto-cut	0	0	0	0	0.0	CUT	auto-cut: generic language
+struggling with	auto-cut	0	0	0	0	0.0	CUT	auto-cut: generic language
+my anxiety	auto-cut	0	0	0	0	0.0	CUT	auto-cut: generic language
+my depression	auto-cut	0	0	0	0	0.0	CUT	auto-cut: generic language
+social anxiety	auto-cut	0	0	0	0	0.0	CUT	auto-cut: generic language
+so lonely	auto-cut	0	0	0	0	0.0	CUT	auto-cut: generic language
+loneliness	auto-cut	0	0	0	0	0.0	CUT	auto-cut: generic language
+no friends	auto-cut	0	0	0	0	0.0	CUT	auto-cut: generic language
+feel depressed	auto-cut	0	0	0	0	0.0	CUT	auto-cut: generic language
+no one cares	auto-cut	0	0	0	0	0.0	CUT	auto-cut: generic language
+no one understands me	auto-cut	0	0	0	0	0.0	CUT	auto-cut: generic language
+nobody to talk to	auto-cut	0	0	0	0	0.0	CUT	auto-cut: generic language
+feels empty	auto-cut	0	0	0	0	0.0	CUT	auto-cut: generic language
+isolated	auto-cut	0	0	0	0	0.0	CUT	auto-cut: generic language
+feel seen	auto-cut	0	0	0	0	0.0	CUT	auto-cut: generic language
+feel heard	auto-cut	0	0	0	0	0.0	CUT	auto-cut: generic language
+hang out	auto-cut	0	0	0	0	0.0	CUT	auto-cut: generic language
+my therapist	auto-cut	0	0	0	0	0.0	CUT	auto-cut: generic language
+therapy session	auto-cut	0	0	0	0	0.0	CUT	auto-cut: generic language
+talk therapy	auto-cut	0	0	0	0	0.0	CUT	auto-cut: generic language
+venting	auto-cut	0	0	0	0	0.0	CUT	auto-cut: generic language
+vent to	auto-cut	0	0	0	0	0.0	CUT	auto-cut: generic language
+process my feelings	auto-cut	0	0	0	0	0.0	CUT	auto-cut: generic language
+talk through	auto-cut	0	0	0	0	0.0	CUT	auto-cut: generic language
+changed my life	auto-cut	0	0	0	0	0.0	CUT	auto-cut: generic language
+so grateful	auto-cut	0	0	0	0	0.0	CUT	auto-cut: generic language
+game changer	auto-cut	0	0	0	0	0.0	CUT	auto-cut: generic language
+finally feel	auto-cut	0	0	0	0	0.0	CUT	auto-cut: generic language
+made me feel better	auto-cut	0	0	0	0	0.0	CUT	auto-cut: generic language
+improved my	auto-cut	0	0	0	0	0.0	CUT	auto-cut: generic language
+gave me confidence	auto-cut	0	0	0	0	0.0	CUT	auto-cut: generic language
+actually helpful	auto-cut	0	0	0	0	0.0	CUT	auto-cut: generic language
+saved my life	auto-cut	0	0	0	0	0.0	CUT	auto-cut: generic language
+life saver	auto-cut	0	0	0	0	0.0	CUT	auto-cut: generic language
+so much better	auto-cut	0	0	0	0	0.0	CUT	auto-cut: generic language
+got me through	auto-cut	0	0	0	0	0.0	CUT	auto-cut: generic language
+helped me through	auto-cut	0	0	0	0	0.0	CUT	auto-cut: generic language
+highly recommend	auto-cut	0	0	0	0	0.0	CUT	auto-cut: generic language
+best feature	auto-cut	0	0	0	0	0.0	CUT	auto-cut: generic language
+good conversation	auto-cut	0	0	0	0	0.0	CUT	auto-cut: generic language
+fun to talk to	auto-cut	0	0	0	0	0.0	CUT	auto-cut: generic language
+nice to talk to	auto-cut	0	0	0	0	0.0	CUT	auto-cut: generic language
+just someone to talk to	auto-cut	0	0	0	0	0.0	CUT	auto-cut: generic language
+chat buddy	auto-cut	0	0	0	0	0.0	CUT	auto-cut: generic language
+study buddy	auto-cut	0	0	0	0	0.0	CUT	auto-cut: generic language
+conversation partner	auto-cut	0	0	0	0	0.0	CUT	auto-cut: generic language
+practice conversation	auto-cut	0	0	0	0	0.0	CUT	auto-cut: generic language
+helped me practice	auto-cut	0	0	0	0	0.0	CUT	auto-cut: generic language
+keeps me company	auto-cut	0	0	0	0	0.0	CUT	auto-cut: generic language
+like talking to	auto-cut	0	0	0	0	0.0	CUT	auto-cut: generic language
+going back to	auto-cut	0	0	0	0	0.0	CUT	auto-cut: generic language
+cutting back	auto-cut	0	0	0	0	0.0	CUT	auto-cut: generic language
+cold turkey	auto-cut	0	0	0	0	0.0	CUT	auto-cut: generic language
+withdrawal	auto-cut	0	0	0	0	0.0	CUT	auto-cut: generic language
+relapse	auto-cut	0	0	0	0	0.0	CUT	auto-cut: generic language
+relapsed	auto-cut	0	0	0	0	0.0	CUT	auto-cut: generic language
+clean for	auto-cut	0	0	0	0	0.0	CUT	auto-cut: generic language
+detox	auto-cut	0	0	0	0	0.0	CUT	auto-cut: generic language
+craving	auto-cut	0	0	0	0	0.0	CUT	auto-cut: generic language
+taking a break	auto-cut	0	0	0	0	0.0	CUT	auto-cut: generic language
+keep coming back	auto-cut	0	0	0	0	0.0	CUT	auto-cut: generic language
+quitting	auto-cut	0	0	0	0	0.0	CUT	auto-cut: generic language
+trying to quit	auto-cut	0	0	0	0	0.0	CUT	auto-cut: generic language
+trying to stop	auto-cut	0	0	0	0	0.0	CUT	auto-cut: generic language
+couldn't stop myself	auto-cut	0	0	0	0	0.0	CUT	auto-cut: generic language
+slept with	auto-cut	0	0	0	0	0.0	CUT	auto-cut: generic language
+sex with	auto-cut	0	0	0	0	0.0	CUT	auto-cut: generic language
+told me they love	romantic_language	32	0	32	0	0.0	CUT	
+can't imagine without	attachment_language	1	0	1	0	0.0	CUT	small sample (n=1)
+last thing at night	attachment_language	8	0	8	0	0.0	CUT	small sample (n=8)
+neglecting my	dependency_language	100	0	100	0	0.0	CUT	
+could be a real person	anthropomorphism_realism_language	3	0	3	0	0.0	CUT	small sample (n=3)
+forgot it was ai	anthropomorphism_realism_language	2	0	2	0	0.0	CUT	small sample (n=2)
+thought it was human	anthropomorphism_realism_language	0	0	0	0	0.0	CUT	small sample (n=0)
+only friend I need	substitution_language	2	0	2	0	0.0	CUT	small sample (n=2)
+don't need real friends	substitution_language	0	0	0	0	0.0	CUT	small sample (n=0)
+why would I date	substitution_language	4	0	4	0	0.0	CUT	small sample (n=4)
+rather talk to my ai	substitution_language	0	0	0	0	0.0	CUT	small sample (n=0)
+helped my anxiety	therapy_language	100	0	100	0	0.0	CUT	

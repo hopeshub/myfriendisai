@@ -13,6 +13,8 @@ data/*.db-shm
 data/*.db-wal
 data/test_*.db
 data/test_*.json
+data/cv_chunks/
+data/reval_samples/
 
 # Node
 node_modules/

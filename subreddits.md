@@ -71,9 +71,7 @@ Subreddits for specific companion products. Higher signal-to-noise than Tier 1. 
 |---|---|---|---|---|
 | **r/Kindroid** | Small | Moderate | Public | "Personal AI aligned to you." Persistent memory, personality, voice calls. Premium product with high-committed user base. Good for studying how voice + memory deepen attachment. |
 | **r/NomiAI** | Small | Moderate | Public | Emphasizes long-term memory and emotional depth. Users report strong bonds. Key for isolating memory persistence as an attachment driver. |
-| **r/JanitorAI** | Medium | High | Public | Unfiltered AI character platform, multiple backends. NSFW content discussed openly. Natural experiment in permissiveness vs. attachment. |
 | **r/SpicyChat** | Small–Med | Moderate | Public | Free NSFW AI characters, minimal moderation. Lower-friction, less-regulated end of companion ecosystem. |
-| **r/SillyTavern** | Medium | High | Public | Self-hosted, open-source chat interface. Technical users with high agency. Likely lower dependency profiles than closed-platform communities. |
 | **r/Chai_app** | ~15K | Moderate | Public | Less moderated platform drawing Character.AI overflow from content moderation disputes. |
 
 ---

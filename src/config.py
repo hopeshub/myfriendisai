@@ -28,8 +28,20 @@ def load_communities():
     return [c for c in communities if c.get("is_active", True)]
 
 
+def load_keyword_communities():
+    """Load communities eligible for keyword trend calculations.
+
+    Filters to T1-T3 subs only (excludes T0 general AI subs) and
+    respects the exclude_from_keywords flag (e.g. bot-listing-heavy subs).
+    """
+    return [
+        c for c in load_communities()
+        if c.get("tier", 0) >= 1 and not c.get("exclude_from_keywords", False)
+    ]
+
+
 def load_keywords():
-    path = CONFIG_DIR / "keywords.yaml"
+    path = CONFIG_DIR / "keywords_v8.yaml"
     with open(path) as f:
         data = yaml.safe_load(f)
 

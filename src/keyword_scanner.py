@@ -229,12 +229,18 @@ def export_keywords_json(
     output_path=None,
     conn: Optional[sqlite3.Connection] = None,
 ):
-    """Export keyword_counts table to JSON with keyword_density normalization."""
+    """Export keyword_counts table to JSON with keyword_density normalization.
+
+    Filters to T1-T3 companion subs only (excludes T0 and bot-listing subs).
+    """
     from pathlib import Path
     from src.db.operations import DATA_DIR
+    from src.config import load_keyword_communities
 
     path = output_path or DATA_DIR / "keywords.json"
     path.parent.mkdir(parents=True, exist_ok=True)
+
+    keyword_subs = {c["subreddit"] for c in load_keyword_communities()}
 
     _conn = conn or get_connection()
     try:
@@ -256,6 +262,8 @@ def export_keywords_json(
 
         data = []
         for r in rows:
+            if r["subreddit"] not in keyword_subs:
+                continue
             total = post_counts.get((r["subreddit"], r["date"]), 0)
             density = round(r["count"] / total, 4) if total > 0 else 0
             data.append({

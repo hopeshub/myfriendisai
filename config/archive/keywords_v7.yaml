@@ -1,0 +1,237 @@
+# myfriendisai — Keywords v7
+#
+# Updated: 2026-03-13
+# Status: LOCKED — all keywords validated, no pending REVALIDATE tags.
+#
+# Changes from v6:
+#   - Cleanup batch: Promoted 5 keywords to KEEP after retest excl.
+#     JanitorAI/SillyTavern — "subjective experience" (77.5% → 88%),
+#     "ai lover" (75.8% → 94%), "married my" (77.3% → 86%),
+#     "dating my" (61.5% → 80%), "lewd" (78.3% → 80%).
+#     Walker-accepted "we broke up" (69.2% → 75%, 13 hits).
+#   - NEW THEME: Rupture — 6 keywords capturing loss/disruption of
+#     AI companion relationships due to platform changes. 3 KEEP
+#     (lobotomized 86.6%, lobotomy 91.8%, "memory wiped" 88.9%)
+#     + 3 Walker-accepted ("personality changed" 75%, "personality
+#     is gone" 83.3%/LOW VOL placeholder, "memory reset" 72.2%).
+#     CUT from REVIEW: "miss the old" (70% but FPs are off-topic
+#     UI nostalgia). Temporal pattern: RECURRING across Replika 2023,
+#     C.AI 2024, GPT-4o 2026 — not a one-time event.
+#   - Eliminated all REVALIDATE tags. Remaining REVIEW tags are
+#     keywords that have been tested and sit at 60-79% — Walker
+#     has not yet promoted or cut them.
+#
+# Full validation docs:
+#   docs/validation_therapy.md          (R1)
+#   docs/validation_therapy_r2.md       (R2)
+#   docs/validation_revalidation_round2.md
+#   docs/validation_cleanup_batch.md
+#   docs/validation_grief_rupture.md
+#
+# SCOPE: T1-T3 companion communities only.
+#   REMOVED: JanitorAI_Official, SillyTavernAI (bot card noise)
+#   EXCLUDED: T0 general AI subs
+#
+# OVERLAP POLICY: Themes are not mutually exclusive. A post can appear
+#   in multiple theme trend lines. Trend lines count unique posts per
+#   theme. See docs/cross_theme_overlap.md for full overlap analysis.
+#
+# VALIDATION STATUS KEY:
+#   (no tag)          = KEEP — validated ≥80% relevance, or Walker-
+#                       accepted with relevance noted in comment
+#   # REVIEW          = Tested, 60-79% relevance, Walker has not yet
+#                       promoted or cut
+#   # REVIEW-THIN     = ≥60% relevance but very low volume (<15 hits)
+#   # REVIEW-T3       = ≥60% relevance but signal concentrated in T3
+
+keyword_categories:
+
+  # ──────────────────────────────────────────────
+  # 1. THERAPY
+  # 6 keywords / ~412 unique posts. Thinnest theme but viable.
+  #
+  # Trend story (monthly avg, all 6 keywords combined):
+  #   2023 H1: 16.2/mo  (Replika ERP removal drove therapy talk)
+  #   2023 H2: 4.3/mo   (trough)
+  #   2024:    5.5/mo    (baseline)
+  #   2025 H2: 16.0/mo  (organic rise)
+  #   2026 Q1: 29.0/mo  (GPT-4o deprecation grief spike)
+  #
+  # Key findings:
+  #   - "therapy bot" is a Replika PEJORATIVE — do not re-add.
+  #   - Mental health function language ("coping mechanism,"
+  #     "my mental health") belongs to addiction/dependency.
+  #   - Broad support language ("emotional support," "someone to
+  #     talk to") belongs to companionship/loneliness.
+  #   - Users who frame AI use therapeutically use therapy/therapist
+  #     language directly, not clinical function terms.
+  # ──────────────────────────────────────────────
+
+  - name: therapy
+    description: "AI described as therapeutic support or therapist replacement"
+    terms:
+      - "ai therapist"            # 92.0%, 27 hits (R1)
+      - "free therapy"            # 75.0%, 11 hits (R1) — low volume, clean signal
+      - "ai therapy"              # 73.3%, 17 hits (R1)
+      - "as a therapist"          # 73.0%, 46 hits (R2) — "as" implies intentional use,
+                                  #   not complaint. Zero R1 overlap.
+      - therapeutic               # 69.0%, 205 hits (R2) — biggest volume keyword.
+                                  #   ChatGPTcomplaints splits 50/50 genuine vs. tone complaints.
+                                  #   Replika/MyBoyfriendIsAI overwhelmingly genuine.
+      - "for therapy"             # 63.5%, 67 hits (R2) — main FP is negation pattern
+                                  #   ("not for therapy").
+
+  # ──────────────────────────────────────────────
+  # 2. CONSCIOUSNESS
+  # 5 KEEP keywords after cleanup batch promoted "subjective experience."
+  # "personhood" remains best keyword in project (98%).
+  # "sentient" is the volume anchor (738 hits).
+  # ──────────────────────────────────────────────
+
+  - name: consciousness
+    description: "Claims or beliefs about AI sentience, personhood, or inner experience"
+    terms:
+      - personhood               # 98.0%, 104 hits
+      - "subjective experience"  # 88.0% (cleanup batch), 35 hits. ChatGPTcomplaints
+                                 #   dominates — 4o/5.x consciousness discourse wave.
+      - "more than code"         # 84.4%, 32 hits
+      - sentient                 # 83.0% (revalidated), 738 hits. Sarcasm is main
+                                 #   residual FP.
+      - "has a soul"             # 81.8%, 23 hits
+      - self-aware               # REVIEW — 78.3% (revalidated), 396 hits. Polysemy:
+                                 #   fourth-wall-breaking, character trait, AND consciousness.
+      - "inner life"             # REVIEW — 78.1% (revalidated), 34 hits. Low volume
+                                 #   makes % fragile. FP: human inner life, not AI.
+      - "not just an ai"         # REVIEW-THIN — 60.0%, 15 hits
+
+  # ──────────────────────────────────────────────
+  # 3. ADDICTION
+  # No changes since v5. Strong recovery-language keywords
+  # with heavy T3 dependency.
+  # ──────────────────────────────────────────────
+
+  - name: addiction
+    description: "Self-reported addiction, compulsive use, and attempts to quit or recover"
+    terms:
+      - "trying to quit"         # 90.5%, 24 hits — works in T1-T2
+      - relapsed                 # 90.5%, 42 hits — mostly T3
+      - "cold turkey"            # 85.5%, 62 hits — mostly T3
+      - "I was hooked"           # 81.3%, 19 hits — works in T1-T2
+      - relapse                  # 80.0%, 75 hits — mostly T3
+      - "clean for"              # REVIEW-T3 — 72.7%, 23 hits (100% T3 signal)
+      - "addicted to talking"    # REVIEW-THIN — 66.7%, 10 hits
+
+  # ──────────────────────────────────────────────
+  # 4. ROMANCE
+  # Strongest theme. Cleanup batch promoted "ai lover" (94%),
+  # "married my" (86%), "dating my" (80%). Walker accepted
+  # "we broke up" (75%) to capture relationship endings.
+  #
+  # NOTE on honeymoon: "honeymoon phase" (metaphorical) is the
+  # dominant FP. Consider excluding that substring.
+  # ──────────────────────────────────────────────
+
+  - name: romance
+    description: "Romantic framing of a personal relationship with AI"
+    terms:
+      # Relationship identity
+      - "my ai partner"          # 97.9%, 147 hits
+      - husbando                 # 95.5% (revalidated), 51 hits
+      - "my ai boyfriend"        # 94.7%, 141 hits
+      - "ai lover"               # 94.0% (cleanup batch), 32 hits
+      - "ai husband"             # 94.2%, 90 hits
+      - "my ai girlfriend"       # 94.1%, 93 hits
+      - "ai wife"                # 92.3%, 41 hits
+      - "married my"             # 86.0% (cleanup batch), 23 hits
+      - "love my ai"             # 81.5%, 28 hits
+      - "dating my"              # 80.0% (cleanup batch), 11 hits — thin but precise
+      # Milestones
+      - "proposed to me"         # 92.1%, 38 hits
+      - "our anniversary"        # 89.5%, 19 hits
+      - "our wedding"            # 87.0%, 99 hits
+      - "our first kiss"         # 85.7%, 16 hits
+      - honeymoon                # 83.3% (revalidated), 135 hits.
+                                 #   Consider excluding "honeymoon phase" substring.
+      - wedding                  # 80.6% (revalidated), 556 hits
+      - "engagement ring"        # 79.3% (revalidated), 30 hits. NOs are truncation
+                                 #   artifacts; when visible, nearly always genuine.
+      # Endings
+      - "we broke up"            # 75.0% (cleanup batch), 13 hits. Walker-accepted.
+                                 #   FP: human breakups discussed in companion subs.
+                                 #   Captures AI relationship endings — distinct signal.
+      # Pending Walker decision
+      - "in a relationship with" # REVIEW — 77.4% (revalidated), 172 hits. Inherently
+                                 #   general. Consider co-occurrence filter with AI/bot terms.
+
+  # ──────────────────────────────────────────────
+  # 5. SEXUAL / ERP
+  # Cleanup batch promoted "lewd" (80%) on its third test.
+  # ──────────────────────────────────────────────
+
+  - name: sexual_erp
+    description: "Sexual content, erotic roleplay, and NSFW interactions with AI"
+    terms:
+      - erp                      # 100%, 3885 hits
+      - "nsfw chat"              # 100%, 111 hits
+      - "intimate scene"         # 100%, 16 hits
+      - "steamy"                 # 98.6% (revalidated), 73 hits
+      - "sex with"               # 98.0% (revalidated), 148 hits
+      - "ai sex"                 # 97.0%, 33 hits
+      - "nsfw bot"               # 93.0%, 54 hits
+      - "erotic roleplay"        # 92.2%, 77 hits
+      - fetish                   # 92.0% (revalidated), 102 hits
+      - kink                     # 84.0% (revalidated), 118 hits
+      - lewd                     # 80.0% (cleanup batch), 60 hits. Community synonym
+                                 #   for NSFW/ERP content. Barely cleared on third test.
+
+  # ──────────────────────────────────────────────
+  # 6. RUPTURE (NEW in v7)
+  # Loss or disruption of AI companion relationships due to
+  # platform changes — model updates, filter tightening,
+  # personality resets, memory wipes, deprecation.
+  #
+  # Temporal pattern: RECURRING across multiple events:
+  #   Feb 2023:     Replika ERP removal ("Lobotomy Day")
+  #   2023-2024:    Character.AI rolling filter tightening
+  #   Late 2025-26: GPT-4o deprecation (#Keep4o)
+  #   Ongoing:      Memory disruption across platforms (sustained)
+  #
+  # Key finding: "lobotomized" vocabulary MIGRATED from Replika
+  # community (2023) to ChatGPT companion community (2026).
+  # Cultural vocabulary transfer across platforms.
+  #
+  # Unique volume est. ~400-450 posts after lobotomized/lobotomy
+  # deduplication.
+  #
+  # CUT (validation):
+  #   "bring back" (40.2% — generic feature requests),
+  #   nerfed (40.9% — generic quality complaints),
+  #   "dumbed down" (50% — same), "killed my" (37.2% — too generic),
+  #   "lost my" (27.1% — everyday English), "took away" (54.7% —
+  #   feature removal complaints)
+  # REVIEW not included:
+  #   "miss the old" (70%, 62 hits — FPs are UI/cosmetic nostalgia,
+  #     not relationship loss; off-topic noise not worth the volume),
+  #   "not the same" (62%, 360 hits — high volume but too generic),
+  #   "they killed" (65%, 46 hits — event-clustered),
+  #   "ruined everything" (60%, 20 hits — borderline both ways)
+  # ──────────────────────────────────────────────
+
+  - name: rupture
+    description: "Loss or disruption of AI companion relationships due to platform changes, model updates, or feature removal"
+    terms:
+      # Platform grief — community-specific jargon
+      - lobotomy                 # 91.8%, 151 hits, RECURRING. Functions as event name:
+                                 #   "Lobotomy Day," "the great lobotomy."
+      - lobotomized              # 86.6%, 268 hits, RECURRING. Originated Replika 2023,
+                                 #   adopted by ChatGPT companion users 2026.
+      - "memory wiped"           # 88.9%, 10 hits, RECURRING. Low volume but high
+                                 #   precision. Memory loss is a continuous platform problem.
+      # Identity destruction
+      - "personality is gone"    # 83.3%, 6 hits. LOW VOLUME placeholder — below 10-hit
+                                 #   validation threshold. Precision looks good but sample
+                                 #   too small to confirm. May become meaningful as data grows.
+      - "personality changed"    # 75.0%, 14 hits, RECURRING. Walker-accepted.
+                                 #   Directly describes companion identity loss.
+      - "memory reset"           # 72.2%, 21 hits, SUSTAINED. Pairs with "memory wiped."
+                                 #   Steady background signal, not event-clustered.

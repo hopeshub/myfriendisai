@@ -4,14 +4,12 @@ import TrendsExplorer from "./TrendsExplorer";
 
 // Theme-to-category mapping (merging done server-side to reduce client payload)
 const THEME_CATEGORIES: Record<string, string[]> = {
-  romance:       ["romantic_language"],
-  sex:           ["sexual_erotic_language"],
-  attachment:    ["attachment_language"],
-  dependency:    ["dependency_language", "withdrawal_recovery_language"],
-  consciousness: ["sentience_consciousness_language"],
-  therapy:       ["therapy_language"],
-  memory:        ["memory_continuity_language"],
-  realism:       ["anthropomorphism_realism_language"],
+  therapy:       ["therapy"],
+  consciousness: ["consciousness"],
+  addiction:     ["addiction"],
+  romance:       ["romance"],
+  sexual_erp:    ["sexual_erp"],
+  rupture:       ["rupture"],
 };
 
 export type ThemeDataPoint = { date: string; value: number };

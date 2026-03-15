@@ -16,14 +16,12 @@ import type { ThemeData, ThemeDataPoint } from "./page";
 // ─── Themes ────────────────────────────────────────────────────────────────
 
 const THEMES = [
-  { id: "romance",       label: "Romance",       emoji: "💕", color: "#F97316" },
-  { id: "sex",           label: "Sex / ERP",     emoji: "🔞", color: "#DC2626" },
-  { id: "attachment",    label: "Attachment",    emoji: "🥰", color: "#3B82F6" },
-  { id: "dependency",    label: "Dependency",    emoji: "🔴", color: "#EF4444" },
-  { id: "consciousness", label: "Conscious",     emoji: "🔮", color: "#A855F7" },
   { id: "therapy",       label: "Therapy",       emoji: "💊", color: "#EC4899" },
-  { id: "memory",        label: "Memory",        emoji: "🧠", color: "#F59E0B" },
-  { id: "realism",       label: "Realism",       emoji: "✨", color: "#06B6D4" },
+  { id: "consciousness", label: "Conscious",     emoji: "🔮", color: "#A855F7" },
+  { id: "addiction",     label: "Addiction",     emoji: "🔁", color: "#EF4444" },
+  { id: "romance",       label: "Romance",       emoji: "💕", color: "#F97316" },
+  { id: "sexual_erp",    label: "Sex / ERP",     emoji: "🔞", color: "#DC2626" },
+  { id: "rupture",       label: "Rupture",       emoji: "💔", color: "#06B6D4" },
 ] as const;
 
 type ThemeId = typeof THEMES[number]["id"];

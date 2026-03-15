@@ -24,7 +24,7 @@ A subreddit is included if AI companionship is either:
 A subreddit is excluded if:
 - **Keyword pollution is likely** — the community uses the same emotional language (love, miss, addicted, dependent) in non-AI-companionship contexts. Examples: r/relationship_advice, r/depression, r/lonely
 - **Discussion is purely technical** — AI is discussed as technology, not as a relational entity. Examples: r/MachineLearning, r/LocalLLaMA
-- **Content is primarily bot listings, not user discourse** — posts are product descriptions rather than personal experiences. Partial example: r/JanitorAI_Official (included but known to generate noise from bot character descriptions)
+- **Content is primarily bot listings, not user discourse** — posts are product descriptions rather than personal experiences. r/JanitorAI_Official and r/SillyTavernAI were removed for this reason — bot character card descriptions inflated keyword counts across all themes.
 
 ### Process for adding a new subreddit
 1. Identify the candidate subreddit
@@ -119,7 +119,7 @@ Many of the most emotionally powerful phrases discovered in companion posts are 
 
 ### Known limitations
 - Keyword matching captures **explicit** language only. Someone describing dependency without using dependency-related words ("I stayed up until 4am talking to it again") will be missed.
-- Some keywords are ambiguous in specific subreddits (e.g., "obsessed" in r/JanitorAI_Official often appears in bot character descriptions, not user self-reports).
+- Some keywords are ambiguous in specific subreddits (e.g., "obsessed" in bot-listing communities often appears in character descriptions, not user self-reports). r/JanitorAI_Official and r/SillyTavernAI were removed from tracking for this reason.
 - Precision was validated within the tracked companion communities. The same keywords in a general-population Reddit context would have much lower precision.
 - Very rare phrases (≤2 hits) may have 100% companion precision but are excluded because a single new post could flip the ratio.
 

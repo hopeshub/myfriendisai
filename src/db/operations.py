@@ -249,8 +249,9 @@ def export_keyword_trends_json(
 ) -> Path:
     """Export daily keyword category counts with 7-day rolling averages.
 
-    Filters to only subreddits listed as active in communities.yaml to prevent
-    keyword pollution from large general-purpose subreddits.
+    Filters to T1-T3 companion subs only (excludes T0 general AI subs and
+    bot-listing-heavy subs like JanitorAI/SillyTavern). The subreddit context
+    provides the AI companionship filter; keywords capture thematic dimensions.
 
     Output format:
         {
@@ -261,8 +262,8 @@ def export_keyword_trends_json(
           ...
         }
     """
-    from src.config import load_communities
-    active_subreddits = [c["subreddit"] for c in load_communities()]
+    from src.config import load_keyword_communities
+    active_subreddits = [c["subreddit"] for c in load_keyword_communities()]
     placeholders = ",".join("?" * len(active_subreddits))
 
     path = output_path or DATA_DIR / "keyword_trends.json"

@@ -39,7 +39,7 @@ We require **≥ 80% companion precision** for a keyword to enter production. Th
 The validation process is effective at filtering out:
 
 - **Universal emotional language.** Phrases like "helped me," "so grateful," "game changer," "struggling with" — these sound like they'd be relevant, but they appear in general AI contexts (thanking ChatGPT for help with homework, recommending a tool) at rates that make them useless as companion-specific signals.
-- **Technical discussion masquerading as relational language.** A word like "dependent" sounds like it should track dependency on AI companions. In practice, it mostly matches people in r/ChatGPT discussing tool dependency in a professional context, or bot character descriptions in r/JanitorAI_Official. It fails the precision test.
+- **Technical discussion masquerading as relational language.** A word like "dependent" sounds like it should track dependency on AI companions. In practice, it mostly matches people in r/ChatGPT discussing tool dependency in a professional context, or bot character descriptions in bot-listing communities. It fails the precision test.
 - **Platform feature discussion vs. personal experience.** "Memory" could mean someone grieving that their AI companion forgot them, or someone in r/OpenAI discussing the memory feature as a product capability. The precision test catches this: general subs dominate the hits for vague feature language, while companion subs dominate for emotionally specific versions like "forgot everything" or "she remembered."
 
 ## What This Cannot Catch

@@ -147,26 +147,12 @@ communities:
     is_active: true
     notes: "Emphasizes long-term memory and emotional depth."
 
-  - subreddit: JanitorAI_Official
-    display_name: "r/JanitorAI_Official"
-    tier: 2
-    category: "Platform-Specific"
-    is_active: true
-    notes: "Unfiltered AI character platform. 202K subscribers. NSFW discussed openly."
-
   - subreddit: SpicyChatAI
     display_name: "r/SpicyChatAI"
     tier: 2
     category: "Platform-Specific"
     is_active: true
     notes: "Free NSFW AI characters, minimal moderation. 55K subscribers. (Previously tracked wrong sub r/SpicyChat with 294 subs.)"
-
-  - subreddit: SillyTavernAI
-    display_name: "r/SillyTavernAI"
-    tier: 2
-    category: "Platform-Specific"
-    is_active: true
-    notes: "Self-hosted, open-source chat interface. 90K subscribers. Technical users."
 
   - subreddit: ChaiApp
     display_name: "r/ChaiApp"
