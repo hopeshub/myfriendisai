@@ -97,60 +97,54 @@ export default function TrendsExplorer({ themeData }: Props) {
     setSelected(selected === id ? null : id);
   }
 
-  // ── Monthly aggregation + indexing ──
-  // Sum daily counts per calendar month per theme, then scale to 0-100
-  const { indexedMonthlyData, peakMonths } = useMemo(() => {
+  // ── Monthly aggregation (raw counts) ──
+  const allMonthlyRaw = useMemo(() => {
     const monthlyRaw: Record<string, Record<string, number>> = {};
-
     for (const theme of THEMES) {
-      const entries = themeData[theme.id] ?? [];
-      const byMonth: Record<string, number> = {};
-      for (const pt of entries) {
+      for (const pt of themeData[theme.id] ?? []) {
         const m = toMonth(pt.date);
-        byMonth[m] = (byMonth[m] ?? 0) + pt.value;
-      }
-      for (const [m, count] of Object.entries(byMonth)) {
         if (!monthlyRaw[m]) monthlyRaw[m] = {};
-        monthlyRaw[m][theme.id] = count;
+        monthlyRaw[m][theme.id] = (monthlyRaw[m][theme.id] ?? 0) + pt.value;
       }
     }
-
-    // Find peak month per theme
-    const peaks: Partial<Record<ThemeId, { month: string; count: number }>> = {};
-    for (const theme of THEMES) {
-      let peakMonth = "";
-      let peakCount = 0;
-      for (const [m, vals] of Object.entries(monthlyRaw)) {
-        const c = vals[theme.id] ?? 0;
-        if (c > peakCount) { peakCount = c; peakMonth = m; }
-      }
-      if (peakCount > 0) peaks[theme.id] = { month: peakMonth, count: peakCount };
-    }
-
-    // Build indexed chart data
-    const months = Object.keys(monthlyRaw).sort();
-    const data = months.map((m) => {
-      const row: Record<string, number | string> = { date: m };
-      for (const theme of THEMES) {
-        const raw = monthlyRaw[m]?.[theme.id] ?? 0;
-        const peak = peaks[theme.id]?.count ?? 1;
-        row[theme.id] = (raw / peak) * 100;
-      }
-      return row;
-    });
-
-    return { indexedMonthlyData: data, peakMonths: peaks };
+    return Object.keys(monthlyRaw)
+      .sort()
+      .map((m) => ({ date: m, ...monthlyRaw[m] }) as Record<string, number | string>);
   }, [themeData]);
 
-  // ── Time range filter ──
-  const chartData = useMemo(() => {
-    if (timeRange === "ALL") return indexedMonthlyData;
+  // ── Time range filter (on raw counts) ──
+  const filteredRaw = useMemo(() => {
+    if (timeRange === "ALL") return allMonthlyRaw;
     const monthsBack = timeRange === "1Y" ? 12 : 6;
     const cutoff = new Date();
     cutoff.setMonth(cutoff.getMonth() - monthsBack);
     const cutoffStr = cutoff.toISOString().slice(0, 7) + "-01";
-    return indexedMonthlyData.filter((d) => (d.date as string) >= cutoffStr);
-  }, [indexedMonthlyData, timeRange]);
+    return allMonthlyRaw.filter((d) => (d.date as string) >= cutoffStr);
+  }, [allMonthlyRaw, timeRange]);
+
+  // ── Index 0-100 relative to peak within visible range ──
+  const { chartData, peakMonths } = useMemo(() => {
+    const peaks: Partial<Record<ThemeId, { month: string; count: number }>> = {};
+    for (const theme of THEMES) {
+      let peakMonth = "";
+      let peakCount = 0;
+      for (const row of filteredRaw) {
+        const c = (row[theme.id] as number) ?? 0;
+        if (c > peakCount) { peakCount = c; peakMonth = row.date as string; }
+      }
+      if (peakCount > 0) peaks[theme.id] = { month: peakMonth, count: peakCount };
+    }
+    const data = filteredRaw.map((row) => {
+      const out: Record<string, number | string> = { date: row.date };
+      for (const theme of THEMES) {
+        const raw = (row[theme.id] as number) ?? 0;
+        const peak = peaks[theme.id]?.count ?? 1;
+        out[theme.id] = (raw / peak) * 100;
+      }
+      return out;
+    });
+    return { chartData: data, peakMonths: peaks };
+  }, [filteredRaw]);
 
   // ── Visible events with stagger offsets ──
   const visibleEvents = useMemo(() => {
@@ -184,15 +178,15 @@ export default function TrendsExplorer({ themeData }: Props) {
 
   // ── Date range for subtitle ──
   const dateRange = useMemo(() => {
-    if (!indexedMonthlyData.length) return { start: "", end: "", count: 0 };
-    const first = indexedMonthlyData[0].date as string;
-    const last = indexedMonthlyData[indexedMonthlyData.length - 1].date as string;
+    if (!allMonthlyRaw.length) return { start: "", end: "", count: 0 };
+    const first = allMonthlyRaw[0].date as string;
+    const last = allMonthlyRaw[allMonthlyRaw.length - 1].date as string;
     return {
       start: formatMonthTick(first),
       end: formatMonthTick(last),
       count: THEMES.length,
     };
-  }, [indexedMonthlyData]);
+  }, [allMonthlyRaw]);
 
   // ── Subtitle logic ──
   const summary = useMemo(() => {
