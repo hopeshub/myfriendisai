@@ -20,7 +20,7 @@ const THEMES = [
   { id: "therapy",       label: "Therapy",        emoji: "💊", color: "#FFEB3B" },
   { id: "consciousness", label: "Consciousness",  emoji: "🧠", color: "#A855F7" },
   { id: "addiction",     label: "Addiction",       emoji: "💉", color: "#8899AA" },
-  { id: "romance",       label: "Romance",        emoji: "💕", color: "#ef6dab" },
+  { id: "romance",       label: "Romance",        emoji: "💕", color: "#FF69B4" },
   { id: "sexual_erp",    label: "Sex / ERP",      emoji: "🔞", color: "#FFFFFF" },
   { id: "rupture",       label: "Rupture",        emoji: "💔", color: "#CC3333" },
 ] as const;
