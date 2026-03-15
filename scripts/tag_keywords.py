@@ -20,7 +20,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
 from src.db.schema import get_connection, initialize as init_db
-from src.config import load_keywords
+from src.config import load_keywords, load_keyword_communities
 
 logging.basicConfig(
     level=logging.INFO,
@@ -104,12 +104,17 @@ def main():
     )
     logger.info("  %d posts already tagged, will skip", len(tagged_ids))
 
+    # Only tag posts from T1-T3 keyword-eligible subreddits
+    keyword_subs = [c["subreddit"] for c in load_keyword_communities()]
+    logger.info("Keyword-eligible subreddits (T1-T3): %d", len(keyword_subs))
+
     # Build post query
-    query = "SELECT id, subreddit, title, selftext, collected_date FROM posts WHERE 1=1"
-    params: list = []
+    placeholders = ",".join("?" for _ in keyword_subs)
+    query = f"SELECT id, subreddit, title, selftext, collected_date FROM posts WHERE subreddit IN ({placeholders})"
+    params: list = list(keyword_subs)
     if args.subreddit:
-        query += " AND subreddit = ?"
-        params.append(args.subreddit)
+        query = "SELECT id, subreddit, title, selftext, collected_date FROM posts WHERE subreddit = ?"
+        params = [args.subreddit]
     if args.since:
         query += " AND collected_date >= ?"
         params.append(args.since)
