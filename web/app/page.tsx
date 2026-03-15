@@ -38,17 +38,13 @@ function loadThemeData(): ThemeData {
       }
     }
 
-    // Clip current partial month (small denominator inflates per-1k rates)
+    // Clip current partial month
     const currentMonth = new Date().toISOString().slice(0, 7); // "YYYY-MM"
     const dates = Object.keys(rawByDate).sort().filter((d) => d.slice(0, 7) < currentMonth);
-    const dailyRates = dates.map((date) => {
-      const posts = totalPostsByDate[date] ?? 0;
-      return posts > 0 ? (rawByDate[date] / posts) * 1000 : 0;
-    });
 
-    result[themeId] = dates.map((date, i) => ({
+    result[themeId] = dates.map((date) => ({
       date,
-      value: Math.round(dailyRates[i] * 100) / 100,
+      value: rawByDate[date],
     }));
   }
   return result;

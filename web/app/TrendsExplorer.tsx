@@ -49,8 +49,7 @@ function formatXTick(dateStr: string): string {
 }
 
 function formatCount(n: number): string {
-  if (n >= 10) return n.toFixed(1);
-  return n.toFixed(2);
+  return Math.round(n).toString();
 }
 
 function avg(arr: ThemeDataPoint[]): number {
@@ -126,7 +125,7 @@ export default function TrendsExplorer({ themeData }: Props) {
   }, [allChartData, timeRange]);
 
   // ── Adaptive rolling window by time range ──
-  const smoothWindow = timeRange === "ALL" ? 30 : timeRange === "1Y" ? 14 : timeRange === "90D" ? 7 : 1;
+  const smoothWindow = timeRange === "ALL" ? 7 : timeRange === "1Y" ? 7 : timeRange === "90D" ? 7 : 1;
 
   // ── Apply rolling average — O(N) per theme, not O(N²) ──
   const smoothedChartData = useMemo(() => {
@@ -220,7 +219,7 @@ export default function TrendsExplorer({ themeData }: Props) {
     const pct = Math.round(((last30 - first30) / first30) * 100);
     const dir = pct >= 0 ? "increased" : "decreased";
     return {
-      text: `${activeTheme.label} language has ${dir} ${Math.abs(pct)}% since early 2023 (normalized per 1k posts).`,
+      text: `${activeTheme.label} language has ${dir} ${Math.abs(pct)}% since early 2023 (7-day rolling average).`,
       themeName: activeTheme.label,
       themeColor: activeTheme.color,
     };
@@ -336,7 +335,7 @@ export default function TrendsExplorer({ themeData }: Props) {
                     width={isVisible ? 52 : 0}
                     hide={!isVisible}
                     domain={[0, p95Domain[theme.id] ?? "auto"]}
-                    label={isVisible ? { value: "per 1k", angle: -90, position: "insideLeft", fill: "#94A3B8", fontSize: 10, dx: 10 } : undefined}
+                    label={isVisible ? { value: "posts/day", angle: -90, position: "insideLeft", fill: "#94A3B8", fontSize: 10, dx: 10 } : undefined}
                   />
                 );
               })}
