@@ -353,7 +353,7 @@ export default function TrendsExplorer({ themeData }: Props) {
                   label={{
                     value: event.label,
                     position: "insideTopLeft",
-                    angle: -90,
+                    angle: -60,
                     fill: "#94A3B8",
                     fontSize: 9,
                     offset: 6,
