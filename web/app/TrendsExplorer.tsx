@@ -29,12 +29,12 @@ type ThemeId = typeof THEMES[number]["id"];
 // ─── Events ────────────────────────────────────────────────────────────────
 
 const EVENTS = [
-  { date: "2023-02-01", label: "Replika removes ERP",        row: 0 },
-  { date: "2024-05-01", label: "GPT-4o launches",             row: 1 },
-  { date: "2025-04-01", label: "GPT-4o sycophancy update",   row: 0 },
-  { date: "2025-08-01", label: "GPT-4o first retirement",    row: 1 },
-  { date: "2026-01-01", label: "4o retirement announced",    row: 0 },
-  { date: "2026-02-01", label: "GPT-4o permanently retired", row: 1 },
+  { date: "2023-02-01", label: "Replika ERP removal" },
+  { date: "2024-05-01", label: "4o launches" },
+  { date: "2025-04-01", label: "4o sycophancy update" },
+  { date: "2025-08-01", label: "4o first retirement" },
+  { date: "2026-01-01", label: "4o retirement announced" },
+  { date: "2026-02-01", label: "4o permanently retired" },
 ];
 
 // ─── Helpers ───────────────────────────────────────────────────────────────
@@ -52,38 +52,33 @@ function toMonth(dateStr: string): string {
   return dateStr.slice(0, 7) + "-01";
 }
 
-function truncate(s: string, max: number): string {
-  return s.length > max ? s.slice(0, max - 1) + "…" : s;
-}
-
 // ─── Event label ───────────────────────────────────────────────────────────
 
 function EventLabel({
   viewBox,
-  event,
+  label,
   anchorLeft,
-  chartWidth,
+  yOffset,
 }: {
   viewBox?: { x: number; y: number };
-  event: typeof EVENTS[number];
+  label: string;
   anchorLeft: boolean;
-  chartWidth: number;
+  yOffset: number;
 }) {
   if (!viewBox) return null;
-  const text = truncate(event.label, 30);
   const x = anchorLeft ? viewBox.x - 4 : viewBox.x + 4;
   const anchor = anchorLeft ? "end" : "start";
   return (
     <g>
-      <title>{event.label}</title>
+      <title>{label}</title>
       <text
         x={x}
-        y={viewBox.y - 42 + event.row * 20}
+        y={viewBox.y - 42 + yOffset}
         fill="#94A3B8"
         fontSize={10}
         textAnchor={anchor}
       >
-        {text}
+        {label}
       </text>
     </g>
   );
@@ -157,12 +152,34 @@ export default function TrendsExplorer({ themeData }: Props) {
     return indexedMonthlyData.filter((d) => (d.date as string) >= cutoffStr);
   }, [indexedMonthlyData, timeRange]);
 
-  // ── Visible events ──
+  // ── Visible events with stagger offsets ──
   const visibleEvents = useMemo(() => {
     if (!chartData.length) return [];
     const min = chartData[0].date as string;
     const max = chartData[chartData.length - 1].date as string;
-    return EVENTS.filter((e) => e.date >= min && e.date <= max);
+    const filtered = EVENTS.filter((e) => e.date >= min && e.date <= max);
+    const total = chartData.length;
+
+    // Estimate x-pixel fraction for each event, then stagger labels within 60px
+    const events = filtered.map((e) => {
+      const idx = chartData.findIndex((d) => (d.date as string) >= e.date);
+      const frac = idx >= 0 ? idx / Math.max(total - 1, 1) : 1;
+      const nearRightEdge = frac > 0.8;
+      return { ...e, frac, nearRightEdge, yOffset: 0 };
+    });
+
+    // Stagger: if two events are within ~60px equivalent (roughly 8% of chart width),
+    // push the second one down by 16px per collision
+    for (let i = 1; i < events.length; i++) {
+      for (let j = i - 1; j >= 0; j--) {
+        const pxGap = Math.abs(events[i].frac - events[j].frac) * (chartRef.current?.clientWidth ?? 800);
+        if (pxGap < 60 && Math.abs(events[i].yOffset - events[j].yOffset) < 14) {
+          events[i].yOffset = events[j].yOffset + 16;
+        }
+      }
+    }
+
+    return events;
   }, [chartData]);
 
   // ── Date range for subtitle ──
@@ -235,9 +252,6 @@ export default function TrendsExplorer({ themeData }: Props) {
 
     return { text: `Tracking ${activeTheme.label} discourse.`, themeName: activeTheme.label, themeColor: activeTheme.color };
   }, [selected, themeData, dateRange, peakMonths]);
-
-  // ── Chart width for event label positioning ──
-  const chartWidth = chartRef.current?.clientWidth ?? 800;
 
   const minTickGap = timeRange === "6M" ? 40 : 60;
 
@@ -388,11 +402,7 @@ export default function TrendsExplorer({ themeData }: Props) {
               />
 
               {/* Event annotations */}
-              {visibleEvents.map((event) => {
-                const totalMonths = chartData.length;
-                const eventIdx = chartData.findIndex((d) => (d.date as string) >= event.date);
-                const nearRightEdge = eventIdx >= 0 && eventIdx > totalMonths * 0.8;
-                return (
+              {visibleEvents.map((event) => (
                   <ReferenceLine
                     key={event.date}
                     yAxisId="index"
@@ -402,14 +412,13 @@ export default function TrendsExplorer({ themeData }: Props) {
                     strokeWidth={1}
                     label={
                       <EventLabel
-                        event={event}
-                        anchorLeft={nearRightEdge}
-                        chartWidth={chartWidth}
+                        label={event.label}
+                        anchorLeft={event.nearRightEdge}
+                        yOffset={event.yOffset}
                       />
                     }
                   />
-                );
-              })}
+              ))}
 
               {/* Theme lines */}
               {THEMES.map((theme) => {
