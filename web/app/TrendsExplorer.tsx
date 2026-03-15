@@ -40,7 +40,7 @@ const EVENTS = [
 
 // ─── Helpers ───────────────────────────────────────────────────────────────
 
-type TimeRange = "6M" | "1Y" | "ALL";
+type TimeRange = "6M" | "1Y" | "2Y" | "ALL";
 
 const MONTH_NAMES = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
 
@@ -92,7 +92,7 @@ export default function TrendsExplorer({ themeData }: Props) {
   // ── Time range filter (on raw counts) ──
   const filteredRaw = useMemo(() => {
     if (timeRange === "ALL") return allMonthlyRaw;
-    const monthsBack = timeRange === "1Y" ? 12 : 6;
+    const monthsBack = timeRange === "2Y" ? 24 : timeRange === "1Y" ? 12 : 6;
     const cutoff = new Date();
     cutoff.setMonth(cutoff.getMonth() - monthsBack);
     const cutoffStr = cutoff.toISOString().slice(0, 7) + "-01";
@@ -303,7 +303,7 @@ export default function TrendsExplorer({ themeData }: Props) {
 
       {/* Time range selector — full width on mobile */}
       <div className="flex gap-1 mb-6">
-        {(["6M", "1Y", "ALL"] as TimeRange[]).map((range) => (
+        {(["6M", "1Y", "2Y", "ALL"] as TimeRange[]).map((range) => (
           <button
             key={range}
             onClick={() => setTimeRange(range)}
