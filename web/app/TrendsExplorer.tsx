@@ -29,12 +29,12 @@ type ThemeId = typeof THEMES[number]["id"];
 // ─── Events ────────────────────────────────────────────────────────────────
 
 const EVENTS = [
-  { date: "2023-02-01", label: "Replika ERP removal",   row: 0 },
-  { date: "2024-05-01", label: "4o launches",            row: 0 },
-  { date: "2025-04-01", label: "4o sycophancy update",  row: 0 },
-  { date: "2025-08-01", label: "4o first retirement",   row: 1 },
-  { date: "2026-01-01", label: "4o retirement announced", row: 2 },
-  { date: "2026-02-01", label: "4o permanently retired", row: 3 },
+  { date: "2023-02-01", label: "Replika ERP ban" },
+  { date: "2024-05-01", label: "4o launches" },
+  { date: "2025-04-01", label: "Sycophancy fix" },
+  { date: "2025-08-01", label: "4o 1st sunset" },
+  { date: "2026-01-01", label: "4o sunset ann." },
+  { date: "2026-02-01", label: "4o retired" },
 ];
 
 // ─── Helpers ───────────────────────────────────────────────────────────────
@@ -50,32 +50,6 @@ function formatMonthTick(dateStr: string): string {
 
 function toMonth(dateStr: string): string {
   return dateStr.slice(0, 7) + "-01";
-}
-
-// ─── Event label ───────────────────────────────────────────────────────────
-
-function EventLabel({
-  viewBox,
-  label,
-  row,
-}: {
-  viewBox?: { x: number; y: number };
-  label: string;
-  row: number;
-}) {
-  if (!viewBox) return null;
-  // Always anchor to the right of the line — simple, predictable
-  return (
-    <text
-      x={viewBox.x + 4}
-      y={14 + row * 14}
-      fill="#94A3B8"
-      fontSize={9}
-      textAnchor="start"
-    >
-      {label}
-    </text>
-  );
 }
 
 // ─── Component ─────────────────────────────────────────────────────────────
@@ -301,7 +275,7 @@ export default function TrendsExplorer({ themeData }: Props) {
           <ResponsiveContainer width="100%" height="100%">
             <ComposedChart
               data={chartData}
-              margin={{ top: 56, right: 16, left: 0, bottom: 8 }}
+              margin={{ top: 80, right: 16, left: 0, bottom: 8 }}
             >
               <CartesianGrid
                 strokeDasharray="3 3"
@@ -376,7 +350,14 @@ export default function TrendsExplorer({ themeData }: Props) {
                   stroke="#6B7280"
                   strokeDasharray="2 4"
                   strokeWidth={1}
-                  label={<EventLabel label={event.label} row={event.row} />}
+                  label={{
+                    value: event.label,
+                    position: "insideTopLeft",
+                    angle: -90,
+                    fill: "#94A3B8",
+                    fontSize: 9,
+                    offset: 6,
+                  }}
                 />
               ))}
 
