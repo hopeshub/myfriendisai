@@ -153,22 +153,22 @@ export default function TrendsExplorer({ themeData }: Props) {
     const max = chartData[chartData.length - 1].date as string;
     const filtered = EVENTS.filter((e) => e.date >= min && e.date <= max);
     const total = chartData.length;
+    const w = chartRef.current?.clientWidth ?? 800;
 
-    // Estimate x-pixel fraction for each event, then stagger labels within 60px
     const events = filtered.map((e) => {
       const idx = chartData.findIndex((d) => (d.date as string) >= e.date);
       const frac = idx >= 0 ? idx / Math.max(total - 1, 1) : 1;
-      const nearRightEdge = frac > 0.8;
+      // Anchor left if label text would overflow right edge (~120px for longest label)
+      const nearRightEdge = (1 - frac) * w < 130;
       return { ...e, frac, nearRightEdge, yOffset: 0 };
     });
 
-    // Stagger: if two events are within ~60px equivalent (roughly 8% of chart width),
-    // push the second one down by 16px per collision
+    // Stagger: if two events are within 60px, alternate vertical slots (0, 20, 40...)
     for (let i = 1; i < events.length; i++) {
       for (let j = i - 1; j >= 0; j--) {
-        const pxGap = Math.abs(events[i].frac - events[j].frac) * (chartRef.current?.clientWidth ?? 800);
-        if (pxGap < 60 && Math.abs(events[i].yOffset - events[j].yOffset) < 14) {
-          events[i].yOffset = events[j].yOffset + 16;
+        const pxGap = Math.abs(events[i].frac - events[j].frac) * w;
+        if (pxGap < 60 && Math.abs(events[i].yOffset - events[j].yOffset) < 18) {
+          events[i].yOffset = events[j].yOffset + 20;
         }
       }
     }
