@@ -45,7 +45,7 @@ const MONTH_NAMES = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct"
 
 function formatMonthTick(dateStr: string): string {
   const d = new Date(dateStr + "T00:00:00Z");
-  return `${MONTH_NAMES[d.getUTCMonth()]} '${d.getUTCFullYear().toString().slice(2)}`;
+  return `${MONTH_NAMES[d.getUTCMonth()]} ${d.getUTCFullYear()}`;
 }
 
 function toMonth(dateStr: string): string {
