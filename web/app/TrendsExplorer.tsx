@@ -29,15 +29,13 @@ type ThemeId = typeof THEMES[number]["id"];
 // ─── Events ────────────────────────────────────────────────────────────────
 
 const EVENTS = [
-  { id: 1, date: "2023-02-01", label: "Replika ERP removal" },
-  { id: 2, date: "2024-05-01", label: "4o launches" },
-  { id: 3, date: "2025-08-01", label: "Sycophancy fix" },
-  { id: 4, date: "2025-10-01", label: "4o first sunset" },
-  { id: 5, date: "2026-01-01", label: "4o sunset announced" },
-  { id: 6, date: "2026-02-01", label: "4o permanently retired" },
+  { date: "2023-02-01", label: "Replika ERP ban" },
+  { date: "2024-05-01", label: "4o launches" },
+  { date: "2025-04-01", label: "Sycophancy fix" },
+  { date: "2025-08-01", label: "4o 1st sunset" },
+  { date: "2026-01-01", label: "4o sunset ann." },
+  { date: "2026-02-01", label: "4o retired" },
 ];
-
-const CIRCLED_NUMBERS = ["①", "②", "③", "④", "⑤", "⑥", "⑦", "⑧", "⑨"];
 
 // ─── Helpers ───────────────────────────────────────────────────────────────
 
@@ -52,30 +50,6 @@ function formatMonthTick(dateStr: string): string {
 
 function toMonth(dateStr: string): string {
   return dateStr.slice(0, 7) + "-01";
-}
-
-// ─── Event marker (numbered circle at top of reference line) ────────────
-
-function EventMarker({
-  viewBox,
-  id,
-  yOffset,
-}: {
-  viewBox?: { x: number; y: number };
-  id: number;
-  yOffset: number;
-}) {
-  if (!viewBox) return null;
-  const cx = viewBox.x;
-  const cy = viewBox.y + 12 + yOffset;
-  return (
-    <g>
-      <circle cx={cx} cy={cy} r={10} fill="#1A1D27" fillOpacity={0.9} stroke="#94A3B8" strokeWidth={1} />
-      <text x={cx} y={cy} textAnchor="middle" dominantBaseline="central" fill="#F8FAFC" fontSize={11}>
-        {id}
-      </text>
-    </g>
-  );
 }
 
 // ─── Component ─────────────────────────────────────────────────────────────
@@ -140,27 +114,12 @@ export default function TrendsExplorer({ themeData }: Props) {
     return { chartData: data, peakMonths: peaks };
   }, [filteredRaw]);
 
-  // ── Visible events (filtered by current time range, with offset for close pairs) ──
+  // ── Visible events (filtered by current time range) ──
   const visibleEvents = useMemo(() => {
     if (!chartData.length) return [];
     const min = chartData[0].date as string;
     const max = chartData[chartData.length - 1].date as string;
-    const filtered = EVENTS.filter((e) => e.date >= min && e.date <= max);
-    const totalMonths = chartData.length;
-    return filtered.map((event, i, arr) => {
-      let yOffset = 0;
-      if (i > 0) {
-        const prev = new Date(arr[i - 1].date);
-        const curr = new Date(event.date);
-        const monthsDiff =
-          (curr.getFullYear() - prev.getFullYear()) * 12 +
-          curr.getMonth() - prev.getMonth();
-        if (monthsDiff <= 2 && totalMonths > 12) {
-          yOffset = 24;
-        }
-      }
-      return { ...event, yOffset };
-    });
+    return EVENTS.filter((e) => e.date >= min && e.date <= max);
   }, [chartData]);
 
   // ── Date range for subtitle ──
@@ -316,7 +275,7 @@ export default function TrendsExplorer({ themeData }: Props) {
           <ResponsiveContainer width="100%" height="100%">
             <ComposedChart
               data={chartData}
-              margin={{ top: 24, right: 16, left: 0, bottom: 8 }}
+              margin={{ top: 80, right: 16, left: 0, bottom: 8 }}
             >
               <CartesianGrid
                 strokeDasharray="3 3"
@@ -382,7 +341,7 @@ export default function TrendsExplorer({ themeData }: Props) {
                 cursor={{ stroke: "#2A2D3A", strokeWidth: 1 }}
               />
 
-              {/* Event annotations — numbered circles */}
+              {/* Event annotations */}
               {visibleEvents.map((event) => (
                 <ReferenceLine
                   key={event.date}
@@ -391,7 +350,14 @@ export default function TrendsExplorer({ themeData }: Props) {
                   stroke="#6B7280"
                   strokeDasharray="2 4"
                   strokeWidth={1}
-                  label={<EventMarker id={event.id} yOffset={event.yOffset} />}
+                  label={{
+                    value: event.label,
+                    position: "insideTopLeft",
+                    angle: -90,
+                    fill: "#94A3B8",
+                    fontSize: 9,
+                    offset: 6,
+                  }}
                 />
               ))}
 
@@ -418,20 +384,6 @@ export default function TrendsExplorer({ themeData }: Props) {
             </ComposedChart>
           </ResponsiveContainer>
         </div>
-
-        {/* Event legend */}
-        {visibleEvents.length > 0 && (
-          <div className="mt-4 text-[13px] text-[#94A3B8] leading-relaxed">
-            {visibleEvents.map((event, i) => (
-              <span key={event.id}>
-                {CIRCLED_NUMBERS[event.id - 1]} {event.label}
-                {i < visibleEvents.length - 1 && (
-                  <span className="mx-1.5 text-[#4A4D5A]">&middot;</span>
-                )}
-              </span>
-            ))}
-          </div>
-        )}
       </div>
     </div>
   );
