@@ -17,7 +17,7 @@ import { useBreakpoint } from "./useBreakpoint";
 // ─── Themes ────────────────────────────────────────────────────────────────
 
 const THEMES = [
-  { id: "therapy",       label: "Therapy",        emoji: "💊", color: "#FFEB3B" },
+  { id: "therapy",       label: "Therapy",        emoji: "🫂", color: "#3B82F6" },
   { id: "consciousness", label: "Consciousness",  emoji: "🧠", color: "#A855F7" },
   { id: "addiction",     label: "Addiction",       emoji: "💉", color: "#8899AA" },
   { id: "romance",       label: "Romance",        emoji: "💕", color: "#FF69B4" },
