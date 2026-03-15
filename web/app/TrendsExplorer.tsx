@@ -57,19 +57,15 @@ function toMonth(dateStr: string): string {
 function EventLabel({
   viewBox,
   label,
-  chartRight,
+  anchorLeft,
   yOffset,
 }: {
-  viewBox?: { x: number; y: number; width?: number; height?: number };
+  viewBox?: { x: number; y: number };
   label: string;
-  chartRight: number;
+  anchorLeft: boolean;
   yOffset: number;
 }) {
   if (!viewBox) return null;
-  // Estimate label width (~5.5px per char at fontSize 10)
-  const labelWidth = label.length * 5.5 + 8;
-  // Anchor left if label would overflow the right edge of the chart
-  const anchorLeft = viewBox.x + labelWidth > chartRight;
   const x = anchorLeft ? viewBox.x - 4 : viewBox.x + 4;
   const anchor = anchorLeft ? "end" : "start";
   return (
@@ -156,17 +152,23 @@ export default function TrendsExplorer({ themeData }: Props) {
     const min = chartData[0].date as string;
     const max = chartData[chartData.length - 1].date as string;
     const filtered = EVENTS.filter((e) => e.date >= min && e.date <= max);
+    const total = chartData.length;
 
     const events = filtered.map((e) => {
       const idx = chartData.findIndex((d) => (d.date as string) >= e.date);
-      return { ...e, idx: idx >= 0 ? idx : chartData.length - 1, yOffset: 0 };
+      const i = idx >= 0 ? idx : total - 1;
+      // Anchor left if event is in the last 30% of visible data
+      const anchorLeft = i > total * 0.7;
+      return { ...e, idx: i, anchorLeft, yOffset: 0 };
     });
 
-    // Stagger: if two events are within 3 data points, offset by 22px
+    // Labels are ~120px wide. On ALL view each month ≈ 20px.
+    // Stagger events within 8 data points (~160px) to prevent
+    // label text from overlapping horizontally.
     for (let i = 1; i < events.length; i++) {
       for (let j = i - 1; j >= 0; j--) {
         const idxGap = Math.abs(events[i].idx - events[j].idx);
-        if (idxGap <= 3 && Math.abs(events[i].yOffset - events[j].yOffset) < 20) {
+        if (idxGap <= 8 && Math.abs(events[i].yOffset - events[j].yOffset) < 20) {
           events[i].yOffset = events[j].yOffset + 22;
         }
       }
@@ -406,7 +408,7 @@ export default function TrendsExplorer({ themeData }: Props) {
                     label={
                       <EventLabel
                         label={event.label}
-                        chartRight={(chartRef.current?.clientWidth ?? 800) - 16}
+                        anchorLeft={event.anchorLeft}
                         yOffset={event.yOffset}
                       />
                     }
