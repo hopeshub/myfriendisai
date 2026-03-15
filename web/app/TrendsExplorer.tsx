@@ -22,7 +22,7 @@ const THEMES = [
   { id: "addiction",     label: "Addiction",       emoji: "💊", color: "#fd7112" },
   { id: "romance",       label: "Romance",        emoji: "💕", color: "#FF69B4" },
   { id: "sexual_erp",    label: "Sex / ERP",      emoji: "🔞", color: "#dc2625" },
-  { id: "rupture",       label: "Rupture",        emoji: "💔", color: "#22C55E" },
+  { id: "rupture",       label: "Rupture",        emoji: "🥀", color: "#22C55E" },
 ] as const;
 
 type ThemeId = typeof THEMES[number]["id"];
