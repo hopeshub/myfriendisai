@@ -176,18 +176,20 @@ export default function TrendsExplorer({ themeData }: Props) {
     return EVENTS.filter((e) => e.date >= min && e.date <= max);
   }, [chartData]);
 
-  // ── Per-theme 95th-percentile domain cap (from smoothed data) ──
-  const p95Domain = useMemo(() => {
-    const result: Partial<Record<ThemeId, number>> = {};
+  // ── Per-theme p99 domain cap + peak tracking (from smoothed data) ──
+  const { domainCap, peakValue } = useMemo(() => {
+    const cap: Partial<Record<ThemeId, number>> = {};
+    const peak: Partial<Record<ThemeId, number>> = {};
     for (const theme of THEMES) {
       const vals = smoothedChartData
         .map((d) => (d as unknown as Record<string, number>)[theme.id])
         .filter((v) => v != null && !isNaN(v))
         .sort((a, b) => a - b);
       if (!vals.length) continue;
-      result[theme.id] = vals[Math.floor(vals.length * 0.95)];
+      cap[theme.id] = vals[Math.floor(vals.length * 0.99)];
+      peak[theme.id] = vals[vals.length - 1]; // max
     }
-    return result;
+    return { domainCap: cap, peakValue: peak };
   }, [smoothedChartData]);
 
   // ── Dynamic summary ──
@@ -361,7 +363,7 @@ export default function TrendsExplorer({ themeData }: Props) {
                     tickLine={false}
                     width={isVisible ? 52 : 0}
                     hide={!isVisible}
-                    domain={[0, p95Domain[theme.id] ?? "auto"]}
+                    domain={[0, domainCap[theme.id] ?? "auto"]}
                     label={isVisible ? { value: "posts/day", angle: -90, position: "insideLeft", fill: "#94A3B8", fontSize: 10, dx: 10 } : undefined}
                   />
                 );
@@ -385,7 +387,11 @@ export default function TrendsExplorer({ themeData }: Props) {
                     >
                       <div className="text-[#94A3B8] mb-1.5">{formatXTick(label as string)}</div>
                       {entries.map((p) => {
-                        const theme = THEMES.find((t) => t.id === themeIdOf(p.dataKey as string));
+                        const tid = themeIdOf(p.dataKey as string);
+                        const theme = THEMES.find((t) => t.id === tid);
+                        const val = p.value as number;
+                        const cap = domainCap[tid];
+                        const isClipped = cap != null && val > cap;
                         return (
                           <div key={p.dataKey as string} className="flex items-center gap-2 mb-0.5">
                             <span
@@ -394,7 +400,7 @@ export default function TrendsExplorer({ themeData }: Props) {
                             />
                             <span style={{ color: "#94A3B8" }}>{theme?.label}</span>
                             <span className="text-[#F8FAFC] font-medium ml-auto pl-4">
-                              {formatCount(p.value as number)}
+                              {formatCount(val)}{isClipped ? " (clipped)" : ""}
                             </span>
                           </div>
                         );
@@ -417,6 +423,32 @@ export default function TrendsExplorer({ themeData }: Props) {
                   label={<EventLabel event={event} />}
                 />
               ))}
+
+              {/* Clipped-peak cap line — shows actual peak when data exceeds y-axis */}
+              {THEMES.map((theme) => {
+                if (!highlighted.has(theme.id)) return null;
+                const cap = domainCap[theme.id];
+                const peak = peakValue[theme.id];
+                if (cap == null || peak == null || peak <= cap) return null;
+                return (
+                  <ReferenceLine
+                    key={`cap-${theme.id}`}
+                    yAxisId={theme.id}
+                    y={cap}
+                    stroke={theme.color}
+                    strokeDasharray="4 4"
+                    strokeOpacity={0.4}
+                    strokeWidth={1}
+                    label={{
+                      value: `peak: ${formatCount(peak)}`,
+                      position: "right",
+                      fill: theme.color,
+                      fontSize: 10,
+                      opacity: 0.7,
+                    }}
+                  />
+                );
+              })}
 
               {/* Theme lines — faint when not highlighted, full when highlighted */}
               {THEMES.map((theme) => {
