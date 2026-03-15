@@ -275,7 +275,7 @@ export default function TrendsExplorer({ themeData }: Props) {
           <ResponsiveContainer width="100%" height="100%">
             <ComposedChart
               data={chartData}
-              margin={{ top: 80, right: 16, left: 0, bottom: 8 }}
+              margin={{ top: 80, right: 64, left: 0, bottom: 8 }}
             >
               <CartesianGrid
                 strokeDasharray="3 3"
