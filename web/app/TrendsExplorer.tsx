@@ -191,6 +191,7 @@ export default function TrendsExplorer({ themeData }: Props) {
   }, [smoothedChartData]);
 
   // ── Dynamic summary ──
+  // Compare trailing 90-day avg to same 90-day window one year ago
   const summary = useMemo(() => {
     const activeTheme =
       lastHighlighted && highlighted.has(lastHighlighted)
@@ -206,23 +207,49 @@ export default function TrendsExplorer({ themeData }: Props) {
     }
 
     const entries = themeData[activeTheme.id] ?? [];
-    if (entries.length < 60) {
+    if (entries.length < 90) {
       return { text: `Tracking ${activeTheme.label} discourse across Reddit.`, themeName: activeTheme.label, themeColor: activeTheme.color };
     }
 
-    const first30 = avg(entries.slice(0, 30));
-    const last30 = avg(entries.slice(-30));
-    if (first30 === 0) {
-      return { text: `${activeTheme.label} language is tracked from 2023 to today.`, themeName: activeTheme.label, themeColor: activeTheme.color };
+    // Build date→value lookup
+    const byDate: Record<string, number> = {};
+    for (const e of entries) byDate[e.date] = e.value;
+
+    // Trailing 90 days and same period last year
+    const sorted = entries.map((e) => e.date).sort();
+    const latest = sorted[sorted.length - 1];
+    const d = new Date(latest + "T00:00:00Z");
+    const cutoff90 = new Date(d);
+    cutoff90.setUTCDate(cutoff90.getUTCDate() - 90);
+    const cutoff90Str = cutoff90.toISOString().split("T")[0];
+
+    const priorEnd = new Date(d);
+    priorEnd.setUTCFullYear(priorEnd.getUTCFullYear() - 1);
+    const priorStart = new Date(priorEnd);
+    priorStart.setUTCDate(priorStart.getUTCDate() - 90);
+    const priorEndStr = priorEnd.toISOString().split("T")[0];
+    const priorStartStr = priorStart.toISOString().split("T")[0];
+
+    const recent = entries.filter((e) => e.date > cutoff90Str && e.date <= latest);
+    const prior = entries.filter((e) => e.date > priorStartStr && e.date <= priorEndStr);
+
+    const recentAvg = recent.length > 0 ? recent.reduce((s, e) => s + e.value, 0) / recent.length : 0;
+    const priorAvg = prior.length > 0 ? prior.reduce((s, e) => s + e.value, 0) / prior.length : 0;
+
+    if (priorAvg === 0 || prior.length < 30) {
+      return { text: `Tracking ${activeTheme.label} discourse across Reddit.`, themeName: activeTheme.label, themeColor: activeTheme.color };
     }
 
-    const pct = Math.round(((last30 - first30) / first30) * 100);
-    const dir = pct >= 0 ? "increased" : "decreased";
-    return {
-      text: `${activeTheme.label} language has ${dir} ${Math.abs(pct)}% since early 2023 (7-day rolling average).`,
-      themeName: activeTheme.label,
-      themeColor: activeTheme.color,
-    };
+    const pct = Math.round(((recentAvg - priorAvg) / priorAvg) * 100);
+    let text: string;
+    if (Math.abs(pct) < 10) {
+      text = `${activeTheme.label} language has been stable compared to the same period last year.`;
+    } else {
+      const dir = pct > 0 ? "up" : "down";
+      text = `${activeTheme.label} language is ${dir} ${Math.abs(pct)}% compared to the same period last year.`;
+    }
+
+    return { text, themeName: activeTheme.label, themeColor: activeTheme.color };
   }, [lastHighlighted, highlighted, themeData]);
 
   const anyHighlighted = highlighted.size > 0;
