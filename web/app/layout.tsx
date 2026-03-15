@@ -13,6 +13,9 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
+      <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+      </head>
       <body className="antialiased">
         <header className="border-b border-border">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
@@ -44,7 +47,7 @@ export default function RootLayout({
         <main>{children}</main>
 
         <footer className="border-t border-border mt-20">
-          <div className="max-w-6xl mx-auto px-4 sm:px-6 py-6 text-xs text-muted flex items-center justify-between">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 py-6 text-xs text-muted flex flex-col sm:flex-row items-start sm:items-center justify-between gap-1 sm:gap-0">
             <span>Data from Reddit&apos;s public endpoints · ~1.8M posts · 2023–present</span>
             <a href="/about" className="hover:text-foreground transition-colors">Methodology ↗</a>
           </div>

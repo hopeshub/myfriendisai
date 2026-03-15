@@ -12,6 +12,7 @@ import {
   ReferenceLine,
 } from "recharts";
 import type { ThemeData } from "./page";
+import { useBreakpoint } from "./useBreakpoint";
 
 // ─── Themes ────────────────────────────────────────────────────────────────
 
@@ -48,6 +49,12 @@ function formatMonthTick(dateStr: string): string {
   return `${MONTH_NAMES[d.getUTCMonth()]} ${d.getUTCFullYear()}`;
 }
 
+function formatMonthTickShort(dateStr: string): string {
+  const d = new Date(dateStr + "T00:00:00Z");
+  const yr = String(d.getUTCFullYear()).slice(2);
+  return `${MONTH_NAMES[d.getUTCMonth()]} '${yr}`;
+}
+
 function toMonth(dateStr: string): string {
   return dateStr.slice(0, 7) + "-01";
 }
@@ -59,7 +66,9 @@ type Props = { themeData: ThemeData };
 export default function TrendsExplorer({ themeData }: Props) {
   const [selected, setSelected] = useState<ThemeId | null>(null);
   const [timeRange, setTimeRange] = useState<TimeRange>("ALL");
+  const [eventsExpanded, setEventsExpanded] = useState(false);
   const chartRef = useRef<HTMLDivElement>(null);
+  const bp = useBreakpoint();
 
   function toggleTheme(id: ThemeId) {
     setSelected(selected === id ? null : id);
@@ -139,7 +148,6 @@ export default function TrendsExplorer({ themeData }: Props) {
     const activeTheme = selected ? THEMES.find((t) => t.id === selected) ?? null : null;
 
     if (!activeTheme) {
-      // Count subreddits from themeData (unique dates tells us it's active)
       return {
         text: `Tracking AI companion discourse across ${dateRange.count} themes, ${dateRange.start} to ${dateRange.end}.`,
         themeName: null,
@@ -193,16 +201,62 @@ export default function TrendsExplorer({ themeData }: Props) {
     return { text: `Tracking ${activeTheme.label} discourse.`, themeName: activeTheme.label, themeColor: activeTheme.color };
   }, [selected, themeData, dateRange, peakMonths]);
 
-  const minTickGap = timeRange === "6M" ? 40 : 60;
+  // ── Responsive chart config ──
+  const chartConfig = useMemo(() => {
+    if (bp === "mobile") {
+      return {
+        height: 280,
+        margin: { top: 10, right: 8, bottom: 30, left: 8 },
+        xTickCount: 4,
+        minTickGap: 30,
+        strokeActive: 2.5,
+        strokeInactive: 1.5,
+        yAxisWidth: 0,
+        showYAxis: false,
+        eventLabelAngle: 0,
+        showEventLabels: false,
+        tickFormatter: formatMonthTickShort,
+      };
+    }
+    if (bp === "tablet") {
+      return {
+        height: 360,
+        margin: { top: 80, right: 20, bottom: 30, left: 40 },
+        xTickCount: 6,
+        minTickGap: 40,
+        strokeActive: 2.5,
+        strokeInactive: 1.5,
+        yAxisWidth: 32,
+        showYAxis: true,
+        eventLabelAngle: -45,
+        showEventLabels: true,
+        tickFormatter: formatMonthTickShort,
+      };
+    }
+    // desktop
+    return {
+      height: 440,
+      margin: { top: 100, right: 64, bottom: 8, left: 0 },
+      xTickCount: 8,
+      minTickGap: timeRange === "6M" ? 40 : 60,
+      strokeActive: 2.5,
+      strokeInactive: 1.5,
+      yAxisWidth: 32,
+      showYAxis: true,
+      eventLabelAngle: -60,
+      showEventLabels: true,
+      tickFormatter: formatMonthTick,
+    };
+  }, [bp, timeRange]);
 
   return (
-    <div className="max-w-5xl mx-auto px-4 sm:px-6 py-10">
+    <div className="max-w-5xl mx-auto px-4 sm:px-6 py-6 sm:py-10">
       {/* Headline + dynamic summary */}
-      <div className="mb-8">
-        <h1 className="text-2xl sm:text-3xl font-bold text-[#F8FAFC] mb-2">
+      <div className="mb-6 sm:mb-8">
+        <h1 className="text-[22px] sm:text-2xl lg:text-3xl font-bold text-[#F8FAFC] mb-2">
           How are people talking about AI companions?
         </h1>
-        <p className="text-base text-[#94A3B8]">
+        <p className="text-sm sm:text-base text-[#94A3B8] line-clamp-2 sm:line-clamp-none">
           {summary.themeName && summary.themeColor ? (
             <>
               {summary.text.split(summary.themeName).map((part, i, arr) =>
@@ -222,15 +276,15 @@ export default function TrendsExplorer({ themeData }: Props) {
         </p>
       </div>
 
-      {/* Theme toggles */}
-      <div className="flex flex-nowrap overflow-x-auto gap-2 mb-5">
+      {/* Theme toggles — 2x3 grid on mobile, flex-wrap on tablet, flex-row on desktop */}
+      <div className="grid grid-cols-2 sm:flex sm:flex-wrap lg:flex-nowrap gap-2 sm:gap-3 lg:gap-4 mb-5">
         {THEMES.map((theme) => {
           const active = selected === theme.id;
           return (
             <button
               key={theme.id}
               onClick={() => toggleTheme(theme.id)}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-semibold transition-all"
+              className="flex items-center justify-center sm:justify-start gap-1.5 h-11 sm:h-11 lg:h-9 px-3 sm:px-4 rounded-full text-sm font-semibold transition-all"
               style={{
                 border: `1px solid ${active ? theme.color : "#2A2D3A"}`,
                 backgroundColor: active ? `${theme.color}20` : "transparent",
@@ -247,13 +301,13 @@ export default function TrendsExplorer({ themeData }: Props) {
         })}
       </div>
 
-      {/* Time range selector */}
+      {/* Time range selector — full width on mobile */}
       <div className="flex gap-1 mb-6">
         {(["6M", "1Y", "ALL"] as TimeRange[]).map((range) => (
           <button
             key={range}
             onClick={() => setTimeRange(range)}
-            className="px-3 py-1 text-xs font-medium rounded-md transition-colors"
+            className="flex-1 sm:flex-none h-11 sm:h-auto px-3 py-1 text-xs font-medium rounded-md transition-colors"
             style={{
               backgroundColor: timeRange === range ? "#1A1D27" : "transparent",
               color: timeRange === range ? "#F8FAFC" : "#94A3B8",
@@ -268,14 +322,14 @@ export default function TrendsExplorer({ themeData }: Props) {
       {/* Chart */}
       <div
         ref={chartRef}
-        className="rounded-xl border p-4 sm:p-6"
+        className="rounded-xl border p-2 sm:p-4 lg:p-6"
         style={{ backgroundColor: "#1A1D27", borderColor: "#2A2D3A" }}
       >
-        <div className="w-full h-[360px] sm:h-[440px] overflow-hidden">
+        <div className="w-full overflow-hidden" style={{ height: chartConfig.height }}>
           <ResponsiveContainer width="100%" height="100%">
             <ComposedChart
               data={chartData}
-              margin={{ top: 100, right: 64, left: 0, bottom: 8 }}
+              margin={chartConfig.margin}
             >
               <CartesianGrid
                 strokeDasharray="3 3"
@@ -286,25 +340,37 @@ export default function TrendsExplorer({ themeData }: Props) {
 
               <XAxis
                 dataKey="date"
-                tickFormatter={formatMonthTick}
+                tickFormatter={chartConfig.tickFormatter}
                 stroke="#2A2D3A"
-                tick={{ fill: "#94A3B8", fontSize: 12 }}
+                tick={{ fill: "#94A3B8", fontSize: bp === "mobile" ? 10 : 12 }}
                 tickLine={false}
                 axisLine={{ stroke: "#2A2D3A" }}
-                minTickGap={minTickGap}
+                minTickGap={chartConfig.minTickGap}
               />
 
-              <YAxis
-                yAxisId="index"
-                domain={[0, 100]}
-                ticks={[25, 50, 75, 100]}
-                tickFormatter={(v) => String(v)}
-                stroke="transparent"
-                tick={{ fill: "#94A3B8", fontSize: 12 }}
-                axisLine={false}
-                tickLine={false}
-                width={32}
-              />
+              {chartConfig.showYAxis && (
+                <YAxis
+                  yAxisId="index"
+                  domain={[0, 100]}
+                  ticks={[25, 50, 75, 100]}
+                  tickFormatter={(v) => String(v)}
+                  stroke="transparent"
+                  tick={{ fill: "#94A3B8", fontSize: 12 }}
+                  axisLine={false}
+                  tickLine={false}
+                  width={chartConfig.yAxisWidth}
+                />
+              )}
+
+              {/* Hidden YAxis for mobile (needed for line yAxisId reference) */}
+              {!chartConfig.showYAxis && (
+                <YAxis
+                  yAxisId="index"
+                  domain={[0, 100]}
+                  hide
+                  width={0}
+                />
+              )}
 
               <Tooltip
                 content={({ active, payload, label }) => {
@@ -341,7 +407,7 @@ export default function TrendsExplorer({ themeData }: Props) {
                 cursor={{ stroke: "#2A2D3A", strokeWidth: 1 }}
               />
 
-              {/* Event annotations */}
+              {/* Event annotations — lines only on mobile, lines + labels on tablet/desktop */}
               {visibleEvents.map((event) => (
                 <ReferenceLine
                   key={event.date}
@@ -350,14 +416,14 @@ export default function TrendsExplorer({ themeData }: Props) {
                   stroke="#6B7280"
                   strokeDasharray="2 4"
                   strokeWidth={1}
-                  label={{
+                  label={chartConfig.showEventLabels ? {
                     value: event.label,
                     position: "insideTopLeft",
-                    angle: -60,
+                    angle: chartConfig.eventLabelAngle,
                     fill: "#94A3B8",
                     fontSize: 9,
                     offset: 6,
-                  }}
+                  } : undefined}
                 />
               ))}
 
@@ -372,7 +438,7 @@ export default function TrendsExplorer({ themeData }: Props) {
                     type="monotone"
                     dataKey={theme.id}
                     stroke={theme.color}
-                    strokeWidth={isSelected ? 2.5 : 1.5}
+                    strokeWidth={isSelected ? chartConfig.strokeActive : chartConfig.strokeInactive}
                     strokeOpacity={isFaded ? 0.2 : 1}
                     dot={false}
                     activeDot={!isFaded ? { r: 3, fill: theme.color, stroke: "none" } : false}
@@ -385,6 +451,46 @@ export default function TrendsExplorer({ themeData }: Props) {
           </ResponsiveContainer>
         </div>
       </div>
+
+      {/* Mobile event list — expandable below chart */}
+      {bp === "mobile" && visibleEvents.length > 0 && (
+        <div className="mt-3">
+          {!eventsExpanded ? (
+            <button
+              onClick={() => setEventsExpanded(true)}
+              className="text-xs text-[#94A3B8] hover:text-[#F8FAFC] transition-colors"
+            >
+              View events ({visibleEvents.length})
+            </button>
+          ) : (
+            <div
+              className="rounded-lg p-3 text-xs"
+              style={{ backgroundColor: "#1A1D27", border: "1px solid #2A2D3A" }}
+            >
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-[#94A3B8] font-medium">Events</span>
+                <button
+                  onClick={() => setEventsExpanded(false)}
+                  className="text-[#94A3B8] hover:text-[#F8FAFC] transition-colors text-xs"
+                >
+                  Close
+                </button>
+              </div>
+              <div className="space-y-1.5 max-h-40 overflow-y-auto">
+                {visibleEvents.map((event) => (
+                  <div key={event.date} className="flex gap-2 text-[#94A3B8]">
+                    <span className="text-[#F8FAFC] whitespace-nowrap">
+                      {formatMonthTickShort(event.date)}
+                    </span>
+                    <span>&mdash;</span>
+                    <span>{event.label}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 }
