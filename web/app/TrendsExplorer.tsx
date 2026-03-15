@@ -29,11 +29,11 @@ type ThemeId = typeof THEMES[number]["id"];
 // ─── Events ────────────────────────────────────────────────────────────────
 
 const EVENTS = [
-  { date: "2023-02-01", label: "Replika ERP ban" },
+  { date: "2023-02-01", label: "Replika ERP removal" },
   { date: "2024-05-01", label: "4o launches" },
-  { date: "2025-04-01", label: "Sycophancy fix" },
+  { date: "2025-04-01", label: "Sycophancy update" },
   { date: "2025-08-01", label: "4o 1st sunset" },
-  { date: "2026-01-01", label: "4o sunset ann." },
+  { date: "2026-01-01", label: "4o 2nd sunset" },
   { date: "2026-02-01", label: "4o retired" },
 ];
 
