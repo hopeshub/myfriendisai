@@ -19,9 +19,9 @@ import { useBreakpoint } from "./useBreakpoint";
 const THEMES = [
   { id: "therapy",       label: "Therapy",        emoji: "🫂", color: "#3B82F6" },
   { id: "consciousness", label: "Consciousness",  emoji: "🧠", color: "#A855F7" },
-  { id: "addiction",     label: "Addiction",       emoji: "💉", color: "#8899AA" },
+  { id: "addiction",     label: "Addiction",       emoji: "💊", color: "#fd7112" },
   { id: "romance",       label: "Romance",        emoji: "💕", color: "#FF69B4" },
-  { id: "sexual_erp",    label: "Sex / ERP",      emoji: "🔞", color: "#FFFFFF" },
+  { id: "sexual_erp",    label: "Sex / ERP",      emoji: "🔞", color: "#dc2625" },
   { id: "rupture",       label: "Rupture",        emoji: "💔", color: "#CC3333" },
 ] as const;
 
