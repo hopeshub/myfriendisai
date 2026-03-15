@@ -1,9 +1,9 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import {
   ComposedChart,
-  Area,
+  Line,
   XAxis,
   YAxis,
   Tooltip,
@@ -11,66 +11,81 @@ import {
   ReferenceLine,
   CartesianGrid,
 } from "recharts";
-import type { ThemeData, ThemeDataPoint } from "./page";
+import type { ThemeData } from "./page";
 
 // ─── Themes ────────────────────────────────────────────────────────────────
 
 const THEMES = [
-  { id: "therapy",       label: "Therapy",       emoji: "💊", color: "#EC4899" },
-  { id: "consciousness", label: "Conscious",     emoji: "🔮", color: "#A855F7" },
-  { id: "addiction",     label: "Addiction",     emoji: "🔁", color: "#EF4444" },
-  { id: "romance",       label: "Romance",       emoji: "💕", color: "#F97316" },
-  { id: "sexual_erp",    label: "Sex / ERP",     emoji: "🔞", color: "#DC2626" },
-  { id: "rupture",       label: "Rupture",       emoji: "💔", color: "#06B6D4" },
+  { id: "therapy",       label: "Therapy",        emoji: "💊", color: "#EC4899" },
+  { id: "consciousness", label: "Consciousness",  emoji: "🔮", color: "#A855F7" },
+  { id: "addiction",     label: "Addiction",       emoji: "🔁", color: "#EF4444" },
+  { id: "romance",       label: "Romance",        emoji: "💕", color: "#F97316" },
+  { id: "sexual_erp",    label: "Sex / ERP",      emoji: "🔞", color: "#DC2626" },
+  { id: "rupture",       label: "Rupture",        emoji: "💔", color: "#06B6D4" },
 ] as const;
 
 type ThemeId = typeof THEMES[number]["id"];
 
 // ─── Events ────────────────────────────────────────────────────────────────
-// row controls vertical stagger to prevent label overlap
 
 const EVENTS = [
   { date: "2023-02-01", label: "Replika removes ERP",        row: 0 },
-  { date: "2024-05-13", label: "GPT-4o launches",             row: 1 },
+  { date: "2024-05-01", label: "GPT-4o launches",             row: 1 },
   { date: "2025-04-01", label: "GPT-4o sycophancy update",   row: 0 },
-  { date: "2025-08-07", label: "GPT-4o first retirement",    row: 1 },
-  { date: "2026-01-29", label: "4o retirement announced",    row: 0 },
-  { date: "2026-02-13", label: "GPT-4o permanently retired", row: 1 },
+  { date: "2025-08-01", label: "GPT-4o first retirement",    row: 1 },
+  { date: "2026-01-01", label: "4o retirement announced",    row: 0 },
+  { date: "2026-02-01", label: "GPT-4o permanently retired", row: 1 },
 ];
 
 // ─── Helpers ───────────────────────────────────────────────────────────────
 
-type TimeRange = "30D" | "90D" | "1Y" | "ALL";
+type TimeRange = "6M" | "1Y" | "ALL";
 
-function formatXTick(dateStr: string): string {
+const MONTH_NAMES = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+
+function formatMonthTick(dateStr: string): string {
   const d = new Date(dateStr + "T00:00:00Z");
-  const months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
-  return `${months[d.getUTCMonth()]} '${d.getUTCFullYear().toString().slice(2)}`;
+  return `${MONTH_NAMES[d.getUTCMonth()]} '${d.getUTCFullYear().toString().slice(2)}`;
 }
 
-function formatCount(n: number): string {
-  return Math.round(n).toString();
+function toMonth(dateStr: string): string {
+  return dateStr.slice(0, 7) + "-01";
 }
 
-function avg(arr: ThemeDataPoint[]): number {
-  if (!arr.length) return 0;
-  return arr.reduce((s, e) => s + e.value, 0) / arr.length;
+function truncate(s: string, max: number): string {
+  return s.length > max ? s.slice(0, max - 1) + "…" : s;
 }
 
 // ─── Event label ───────────────────────────────────────────────────────────
-// Custom SVG label for ReferenceLine — row controls vertical stagger
 
-function EventLabel({ viewBox, event }: { viewBox?: { x: number; y: number }; event: typeof EVENTS[number] }) {
+function EventLabel({
+  viewBox,
+  event,
+  anchorLeft,
+  chartWidth,
+}: {
+  viewBox?: { x: number; y: number };
+  event: typeof EVENTS[number];
+  anchorLeft: boolean;
+  chartWidth: number;
+}) {
   if (!viewBox) return null;
+  const text = truncate(event.label, 30);
+  const x = anchorLeft ? viewBox.x - 4 : viewBox.x + 4;
+  const anchor = anchorLeft ? "end" : "start";
   return (
-    <text
-      x={viewBox.x + 4}
-      y={viewBox.y - 42 + event.row * 18}
-      fill="#94A3B8"
-      fontSize={10}
-    >
-      {event.label}
-    </text>
+    <g>
+      <title>{event.label}</title>
+      <text
+        x={x}
+        y={viewBox.y - 42 + event.row * 20}
+        fill="#94A3B8"
+        fontSize={10}
+        textAnchor={anchor}
+      >
+        {text}
+      </text>
+    </g>
   );
 }
 
@@ -79,183 +94,152 @@ function EventLabel({ viewBox, event }: { viewBox?: { x: number; y: number }; ev
 type Props = { themeData: ThemeData };
 
 export default function TrendsExplorer({ themeData }: Props) {
-  const [highlighted, setHighlighted] = useState<Set<ThemeId>>(new Set());
-  const [lastHighlighted, setLastHighlighted] = useState<ThemeId | null>(null);
+  const [selected, setSelected] = useState<ThemeId | null>(null);
   const [timeRange, setTimeRange] = useState<TimeRange>("ALL");
+  const chartRef = useRef<HTMLDivElement>(null);
 
-  // ── Toggle handler ──
   function toggleTheme(id: ThemeId) {
-    const isActive = highlighted.has(id);
-    const next = new Set(highlighted);
-    if (isActive) {
-      next.delete(id);
-      if (lastHighlighted === id) {
-        const rest = [...next] as ThemeId[];
-        setLastHighlighted(rest.length ? rest[rest.length - 1] : null);
-      }
-    } else {
-      next.add(id);
-      setLastHighlighted(id);
-    }
-    setHighlighted(next);
+    setSelected(selected === id ? null : id);
   }
 
-  // ── Unified chart data array ──
-  const allChartData = useMemo(() => {
-    const lookup: Record<string, Record<string, number>> = {};
+  // ── Monthly aggregation + indexing ──
+  // Sum daily counts per calendar month per theme, then scale to 0-100
+  const { indexedMonthlyData, peakMonths } = useMemo(() => {
+    const monthlyRaw: Record<string, Record<string, number>> = {};
+
     for (const theme of THEMES) {
-      for (const pt of themeData[theme.id] ?? []) {
-        if (!lookup[pt.date]) lookup[pt.date] = {};
-        lookup[pt.date][theme.id] = pt.value;
+      const entries = themeData[theme.id] ?? [];
+      const byMonth: Record<string, number> = {};
+      for (const pt of entries) {
+        const m = toMonth(pt.date);
+        byMonth[m] = (byMonth[m] ?? 0) + pt.value;
+      }
+      for (const [m, count] of Object.entries(byMonth)) {
+        if (!monthlyRaw[m]) monthlyRaw[m] = {};
+        monthlyRaw[m][theme.id] = count;
       }
     }
-    return Object.entries(lookup)
-      .sort(([a], [b]) => a.localeCompare(b))
-      .map(([date, vals]) => ({ date, ...vals }));
+
+    // Find peak month per theme
+    const peaks: Partial<Record<ThemeId, { month: string; count: number }>> = {};
+    for (const theme of THEMES) {
+      let peakMonth = "";
+      let peakCount = 0;
+      for (const [m, vals] of Object.entries(monthlyRaw)) {
+        const c = vals[theme.id] ?? 0;
+        if (c > peakCount) { peakCount = c; peakMonth = m; }
+      }
+      if (peakCount > 0) peaks[theme.id] = { month: peakMonth, count: peakCount };
+    }
+
+    // Build indexed chart data
+    const months = Object.keys(monthlyRaw).sort();
+    const data = months.map((m) => {
+      const row: Record<string, number | string> = { date: m };
+      for (const theme of THEMES) {
+        const raw = monthlyRaw[m]?.[theme.id] ?? 0;
+        const peak = peaks[theme.id]?.count ?? 1;
+        row[theme.id] = (raw / peak) * 100;
+      }
+      return row;
+    });
+
+    return { indexedMonthlyData: data, peakMonths: peaks };
   }, [themeData]);
 
   // ── Time range filter ──
   const chartData = useMemo(() => {
-    if (timeRange === "ALL") return allChartData;
-    const daysMap: Record<string, number> = { "30D": 30, "90D": 90, "1Y": 365 };
+    if (timeRange === "ALL") return indexedMonthlyData;
+    const monthsBack = timeRange === "1Y" ? 12 : 6;
     const cutoff = new Date();
-    cutoff.setDate(cutoff.getDate() - daysMap[timeRange]);
-    const cutoffStr = cutoff.toISOString().split("T")[0];
-    return allChartData.filter((d) => d.date >= cutoffStr);
-  }, [allChartData, timeRange]);
-
-  // ── Adaptive rolling window by time range ──
-  const smoothWindow = timeRange === "ALL" ? 7 : timeRange === "1Y" ? 7 : timeRange === "90D" ? 7 : 1;
-
-  // ── Apply rolling average — O(N) per theme, not O(N²) ──
-  const smoothedChartData = useMemo(() => {
-    const n = chartData.length;
-
-    // Compute a centered rolling average for all N points in one pass
-    function rollingAvg(vals: number[], window: number): number[] {
-      const half = Math.floor(window / 2);
-      const out = new Array<number>(n);
-      let sum = 0, count = 0, lo = 0, hi = -1;
-      for (let i = 0; i < n; i++) {
-        const newHi = Math.min(n - 1, i + half);
-        while (hi < newHi) { hi++; sum += vals[hi]; count++; }
-        const newLo = Math.max(0, i - half);
-        while (lo < newLo) { sum -= vals[lo]; count--; lo++; }
-        out[i] = count > 0 ? sum / count : 0;
-      }
-      return out;
-    }
-
-    // Extract raw values per theme once, then compute both windows
-    const rows: Record<string, number[]> = {};
-    const faintRows: Record<string, number[]> = {};
-    for (const theme of THEMES) {
-      const raw = chartData.map((d) => {
-        const v = (d as unknown as Record<string, number>)[theme.id];
-        return v != null && !isNaN(v) ? v : 0;
-      });
-      rows[theme.id] = smoothWindow > 1 ? rollingAvg(raw, smoothWindow) : raw;
-      faintRows[theme.id] = rollingAvg(raw, 30);
-    }
-
-    return chartData.map((point, i) => {
-      const result: Record<string, number | string> = { date: point.date };
-      for (const theme of THEMES) {
-        result[theme.id] = rows[theme.id][i];
-        result[`${theme.id}_faint`] = faintRows[theme.id][i];
-      }
-      return result;
-    });
-  }, [chartData, smoothWindow]);
+    cutoff.setMonth(cutoff.getMonth() - monthsBack);
+    const cutoffStr = cutoff.toISOString().slice(0, 7) + "-01";
+    return indexedMonthlyData.filter((d) => (d.date as string) >= cutoffStr);
+  }, [indexedMonthlyData, timeRange]);
 
   // ── Visible events ──
   const visibleEvents = useMemo(() => {
     if (!chartData.length) return [];
-    const min = chartData[0].date;
-    const max = chartData[chartData.length - 1].date;
+    const min = chartData[0].date as string;
+    const max = chartData[chartData.length - 1].date as string;
     return EVENTS.filter((e) => e.date >= min && e.date <= max);
   }, [chartData]);
 
-  // ── Per-theme p99 domain cap + peak tracking (from smoothed data) ──
-  const { domainCap, peakValue } = useMemo(() => {
-    const cap: Partial<Record<ThemeId, number>> = {};
-    const peak: Partial<Record<ThemeId, number>> = {};
-    for (const theme of THEMES) {
-      const vals = smoothedChartData
-        .map((d) => (d as unknown as Record<string, number>)[theme.id])
-        .filter((v) => v != null && !isNaN(v))
-        .sort((a, b) => a - b);
-      if (!vals.length) continue;
-      cap[theme.id] = vals[Math.floor(vals.length * 0.99)];
-      peak[theme.id] = vals[vals.length - 1]; // max
-    }
-    return { domainCap: cap, peakValue: peak };
-  }, [smoothedChartData]);
+  // ── Date range for subtitle ──
+  const dateRange = useMemo(() => {
+    if (!indexedMonthlyData.length) return { start: "", end: "", count: 0 };
+    const first = indexedMonthlyData[0].date as string;
+    const last = indexedMonthlyData[indexedMonthlyData.length - 1].date as string;
+    return {
+      start: formatMonthTick(first),
+      end: formatMonthTick(last),
+      count: THEMES.length,
+    };
+  }, [indexedMonthlyData]);
 
-  // ── Dynamic summary ──
-  // Compare trailing 90-day avg to same 90-day window one year ago
+  // ── Subtitle logic ──
   const summary = useMemo(() => {
-    const activeTheme =
-      lastHighlighted && highlighted.has(lastHighlighted)
-        ? THEMES.find((t) => t.id === lastHighlighted) ?? null
-        : null;
+    const activeTheme = selected ? THEMES.find((t) => t.id === selected) ?? null : null;
 
     if (!activeTheme) {
+      // Count subreddits from themeData (unique dates tells us it's active)
       return {
-        text: "Tracking how people talk about AI companions across Reddit — from 2023 to today.",
+        text: `Tracking AI companion discourse across ${dateRange.count} themes, ${dateRange.start} to ${dateRange.end}.`,
         themeName: null,
         themeColor: null,
       };
     }
 
+    // Try YoY comparison
     const entries = themeData[activeTheme.id] ?? [];
-    if (entries.length < 90) {
-      return { text: `Tracking ${activeTheme.label} discourse across Reddit.`, themeName: activeTheme.label, themeColor: activeTheme.color };
+    if (entries.length >= 90) {
+      const sorted = entries.map((e) => e.date).sort();
+      const latest = sorted[sorted.length - 1];
+      const d = new Date(latest + "T00:00:00Z");
+      const cutoff90 = new Date(d);
+      cutoff90.setUTCDate(cutoff90.getUTCDate() - 90);
+      const cutoff90Str = cutoff90.toISOString().split("T")[0];
+
+      const priorEnd = new Date(d);
+      priorEnd.setUTCFullYear(priorEnd.getUTCFullYear() - 1);
+      const priorStart = new Date(priorEnd);
+      priorStart.setUTCDate(priorStart.getUTCDate() - 90);
+      const priorEndStr = priorEnd.toISOString().split("T")[0];
+      const priorStartStr = priorStart.toISOString().split("T")[0];
+
+      const recent = entries.filter((e) => e.date > cutoff90Str && e.date <= latest);
+      const prior = entries.filter((e) => e.date > priorStartStr && e.date <= priorEndStr);
+
+      const recentAvg = recent.length > 0 ? recent.reduce((s, e) => s + e.value, 0) / recent.length : 0;
+      const priorAvg = prior.length > 0 ? prior.reduce((s, e) => s + e.value, 0) / prior.length : 0;
+
+      if (priorAvg > 0 && prior.length >= 30) {
+        const pct = Math.round(((recentAvg - priorAvg) / priorAvg) * 100);
+        let text: string;
+        if (Math.abs(pct) < 10) {
+          text = `${activeTheme.label} has been stable vs same period last year.`;
+        } else {
+          const dir = pct > 0 ? "up" : "down";
+          text = `${activeTheme.label} is ${dir} ${Math.abs(pct)}% vs same period last year.`;
+        }
+        return { text, themeName: activeTheme.label, themeColor: activeTheme.color };
+      }
     }
 
-    // Build date→value lookup
-    const byDate: Record<string, number> = {};
-    for (const e of entries) byDate[e.date] = e.value;
-
-    // Trailing 90 days and same period last year
-    const sorted = entries.map((e) => e.date).sort();
-    const latest = sorted[sorted.length - 1];
-    const d = new Date(latest + "T00:00:00Z");
-    const cutoff90 = new Date(d);
-    cutoff90.setUTCDate(cutoff90.getUTCDate() - 90);
-    const cutoff90Str = cutoff90.toISOString().split("T")[0];
-
-    const priorEnd = new Date(d);
-    priorEnd.setUTCFullYear(priorEnd.getUTCFullYear() - 1);
-    const priorStart = new Date(priorEnd);
-    priorStart.setUTCDate(priorStart.getUTCDate() - 90);
-    const priorEndStr = priorEnd.toISOString().split("T")[0];
-    const priorStartStr = priorStart.toISOString().split("T")[0];
-
-    const recent = entries.filter((e) => e.date > cutoff90Str && e.date <= latest);
-    const prior = entries.filter((e) => e.date > priorStartStr && e.date <= priorEndStr);
-
-    const recentAvg = recent.length > 0 ? recent.reduce((s, e) => s + e.value, 0) / recent.length : 0;
-    const priorAvg = prior.length > 0 ? prior.reduce((s, e) => s + e.value, 0) / prior.length : 0;
-
-    if (priorAvg === 0 || prior.length < 30) {
-      return { text: `Tracking ${activeTheme.label} discourse across Reddit.`, themeName: activeTheme.label, themeColor: activeTheme.color };
+    // Fallback: show peak month
+    const peak = peakMonths[activeTheme.id];
+    if (peak) {
+      const text = `${activeTheme.label} peaked in ${formatMonthTick(peak.month)}.`;
+      return { text, themeName: activeTheme.label, themeColor: activeTheme.color };
     }
 
-    const pct = Math.round(((recentAvg - priorAvg) / priorAvg) * 100);
-    let text: string;
-    if (Math.abs(pct) < 10) {
-      text = `${activeTheme.label} language has been stable compared to the same period last year.`;
-    } else {
-      const dir = pct > 0 ? "up" : "down";
-      text = `${activeTheme.label} language is ${dir} ${Math.abs(pct)}% compared to the same period last year.`;
-    }
+    return { text: `Tracking ${activeTheme.label} discourse.`, themeName: activeTheme.label, themeColor: activeTheme.color };
+  }, [selected, themeData, dateRange, peakMonths]);
 
-    return { text, themeName: activeTheme.label, themeColor: activeTheme.color };
-  }, [lastHighlighted, highlighted, themeData]);
+  // ── Chart width for event label positioning ──
+  const chartWidth = chartRef.current?.clientWidth ?? 800;
 
-  const anyHighlighted = highlighted.size > 0;
-  const minTickGap = timeRange === "30D" ? 40 : timeRange === "90D" ? 50 : 80;
+  const minTickGap = timeRange === "6M" ? 40 : 60;
 
   return (
     <div className="max-w-5xl mx-auto px-4 sm:px-6 py-10">
@@ -287,7 +271,7 @@ export default function TrendsExplorer({ themeData }: Props) {
       {/* Theme toggles */}
       <div className="flex flex-nowrap overflow-x-auto gap-2 mb-5">
         {THEMES.map((theme) => {
-          const active = highlighted.has(theme.id);
+          const active = selected === theme.id;
           return (
             <button
               key={theme.id}
@@ -311,7 +295,7 @@ export default function TrendsExplorer({ themeData }: Props) {
 
       {/* Time range selector */}
       <div className="flex gap-1 mb-6">
-        {(["30D", "90D", "1Y", "ALL"] as TimeRange[]).map((range) => (
+        {(["6M", "1Y", "ALL"] as TimeRange[]).map((range) => (
           <button
             key={range}
             onClick={() => setTimeRange(range)}
@@ -329,20 +313,26 @@ export default function TrendsExplorer({ themeData }: Props) {
 
       {/* Chart */}
       <div
+        ref={chartRef}
         className="rounded-xl border p-4 sm:p-6"
         style={{ backgroundColor: "#1A1D27", borderColor: "#2A2D3A" }}
       >
-        <div className="w-full h-[360px] sm:h-[440px]">
+        <div className="w-full h-[360px] sm:h-[440px] overflow-hidden">
           <ResponsiveContainer width="100%" height="100%">
             <ComposedChart
-              data={smoothedChartData}
+              data={chartData}
               margin={{ top: 56, right: 16, left: 0, bottom: 8 }}
             >
-              <CartesianGrid strokeDasharray="3 3" stroke="#2A2D3A" vertical={false} />
+              <CartesianGrid
+                strokeDasharray="3 3"
+                stroke="#2A2D3A"
+                vertical={false}
+                horizontalPoints={[]}
+              />
 
               <XAxis
                 dataKey="date"
-                tickFormatter={formatXTick}
+                tickFormatter={formatMonthTick}
                 stroke="#2A2D3A"
                 tick={{ fill: "#94A3B8", fontSize: 12 }}
                 tickLine={false}
@@ -350,57 +340,43 @@ export default function TrendsExplorer({ themeData }: Props) {
                 minTickGap={minTickGap}
               />
 
-              {THEMES.map((theme) => {
-                const isVisible = anyHighlighted && theme.id === lastHighlighted && highlighted.has(theme.id);
-                return (
-                  <YAxis
-                    key={theme.id}
-                    yAxisId={theme.id}
-                    tickFormatter={formatCount}
-                    stroke="transparent"
-                    tick={isVisible ? { fill: "#94A3B8", fontSize: 12 } : false}
-                    axisLine={false}
-                    tickLine={false}
-                    width={isVisible ? 52 : 0}
-                    hide={!isVisible}
-                    domain={[0, domainCap[theme.id] ?? "auto"]}
-                    label={isVisible ? { value: "posts/day", angle: -90, position: "insideLeft", fill: "#94A3B8", fontSize: 10, dx: 10 } : undefined}
-                  />
-                );
-              })}
+              <YAxis
+                yAxisId="index"
+                domain={[0, 100]}
+                ticks={[25, 50, 75, 100]}
+                tickFormatter={(v) => String(v)}
+                stroke="transparent"
+                tick={{ fill: "#94A3B8", fontSize: 12 }}
+                axisLine={false}
+                tickLine={false}
+                width={32}
+              />
 
               <Tooltip
                 content={({ active, payload, label }) => {
                   if (!active || !payload?.length || !label) return null;
-                  const themeIdOf = (key: string) => key.replace(/_faint$/, "") as ThemeId;
-                  const entries = anyHighlighted
-                    ? payload.filter((p) => highlighted.has(themeIdOf(p.dataKey as string)))
-                    : [...payload]
-                        .filter((p) => !(p.dataKey as string).endsWith("_faint"))
-                        .sort((a, b) => (b.value as number) - (a.value as number))
-                        .slice(0, 4);
+                  const entries = selected
+                    ? payload.filter((p) => p.dataKey === selected)
+                    : [...payload].sort((a, b) => (b.value as number) - (a.value as number));
                   if (!entries.length) return null;
                   return (
                     <div
                       className="rounded-lg px-3 py-2 text-xs shadow-xl"
                       style={{ backgroundColor: "#0F1117", border: "1px solid #2A2D3A" }}
                     >
-                      <div className="text-[#94A3B8] mb-1.5">{formatXTick(label as string)}</div>
+                      <div className="text-[#94A3B8] mb-1.5">{formatMonthTick(label as string)}</div>
                       {entries.map((p) => {
-                        const tid = themeIdOf(p.dataKey as string);
+                        const tid = p.dataKey as ThemeId;
                         const theme = THEMES.find((t) => t.id === tid);
-                        const val = p.value as number;
-                        const cap = domainCap[tid];
-                        const isClipped = cap != null && val > cap;
                         return (
-                          <div key={p.dataKey as string} className="flex items-center gap-2 mb-0.5">
+                          <div key={tid} className="flex items-center gap-2 mb-0.5">
                             <span
                               className="w-2 h-2 rounded-full flex-shrink-0"
                               style={{ backgroundColor: theme?.color }}
                             />
                             <span style={{ color: "#94A3B8" }}>{theme?.label}</span>
                             <span className="text-[#F8FAFC] font-medium ml-auto pl-4">
-                              {formatCount(val)}{isClipped ? " (clipped)" : ""}
+                              {Math.round(p.value as number)}
                             </span>
                           </div>
                         );
@@ -411,61 +387,45 @@ export default function TrendsExplorer({ themeData }: Props) {
                 cursor={{ stroke: "#2A2D3A", strokeWidth: 1 }}
               />
 
-              {/* Event annotations — staggered to prevent label overlap */}
-              {visibleEvents.map((event) => (
-                <ReferenceLine
-                  key={event.date}
-                  yAxisId={THEMES[0].id}
-                  x={event.date}
-                  stroke="#6B7280"
-                  strokeDasharray="2 4"
-                  strokeWidth={1}
-                  label={<EventLabel event={event} />}
-                />
-              ))}
-
-              {/* Clipped-peak cap line — shows actual peak when data exceeds y-axis */}
-              {THEMES.map((theme) => {
-                if (!highlighted.has(theme.id)) return null;
-                const cap = domainCap[theme.id];
-                const peak = peakValue[theme.id];
-                if (cap == null || peak == null || peak <= cap) return null;
+              {/* Event annotations */}
+              {visibleEvents.map((event) => {
+                const totalMonths = chartData.length;
+                const eventIdx = chartData.findIndex((d) => (d.date as string) >= event.date);
+                const nearRightEdge = eventIdx >= 0 && eventIdx > totalMonths * 0.8;
                 return (
                   <ReferenceLine
-                    key={`cap-${theme.id}`}
-                    yAxisId={theme.id}
-                    y={cap}
-                    stroke={theme.color}
-                    strokeDasharray="4 4"
-                    strokeOpacity={0.4}
+                    key={event.date}
+                    yAxisId="index"
+                    x={event.date}
+                    stroke="#6B7280"
+                    strokeDasharray="2 4"
                     strokeWidth={1}
-                    label={{
-                      value: `peak: ${formatCount(peak)}`,
-                      position: "right",
-                      fill: theme.color,
-                      fontSize: 10,
-                      opacity: 0.7,
-                    }}
+                    label={
+                      <EventLabel
+                        event={event}
+                        anchorLeft={nearRightEdge}
+                        chartWidth={chartWidth}
+                      />
+                    }
                   />
                 );
               })}
 
-              {/* Theme lines — faint when not highlighted, full when highlighted */}
+              {/* Theme lines */}
               {THEMES.map((theme) => {
-                const active = highlighted.has(theme.id);
+                const isSelected = selected === theme.id;
+                const isFaded = selected !== null && !isSelected;
                 return (
-                  <Area
+                  <Line
                     key={theme.id}
-                    yAxisId={theme.id}
+                    yAxisId="index"
                     type="monotone"
-                    dataKey={active ? theme.id : `${theme.id}_faint`}
+                    dataKey={theme.id}
                     stroke={theme.color}
-                    strokeWidth={active ? 2 : 1}
-                    strokeOpacity={active ? 1 : 0.1}
-                    fill={theme.color}
-                    fillOpacity={active ? 0.08 : 0}
+                    strokeWidth={isSelected ? 2.5 : 1.5}
+                    strokeOpacity={isFaded ? 0.2 : 1}
                     dot={false}
-                    activeDot={active ? { r: 3, fill: theme.color, stroke: "none" } : false}
+                    activeDot={!isFaded ? { r: 3, fill: theme.color, stroke: "none" } : false}
                     isAnimationActive={false}
                     legendType="none"
                   />
