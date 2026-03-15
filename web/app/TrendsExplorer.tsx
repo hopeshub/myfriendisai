@@ -8,8 +8,8 @@ import {
   YAxis,
   Tooltip,
   ResponsiveContainer,
-  ReferenceLine,
   CartesianGrid,
+  Customized,
 } from "recharts";
 import type { ThemeData } from "./page";
 
@@ -52,34 +52,80 @@ function toMonth(dateStr: string): string {
   return dateStr.slice(0, 7) + "-01";
 }
 
-// ─── Event label ───────────────────────────────────────────────────────────
+// ─── Event annotations (rendered via Customized for reliable positioning) ──
 
-function EventLabel({
-  viewBox,
-  label,
-  anchorLeft,
-  yOffset,
-}: {
-  viewBox?: { x: number; y: number };
-  label: string;
-  anchorLeft: boolean;
-  yOffset: number;
-}) {
-  if (!viewBox) return null;
-  const x = anchorLeft ? viewBox.x - 4 : viewBox.x + 4;
-  const anchor = anchorLeft ? "end" : "start";
+function EventAnnotations(props: any) {
+  const { xAxisMap, offset } = props;
+  if (!xAxisMap || !offset) return null;
+
+  const xAxis = Object.values(xAxisMap)[0] as any;
+  if (!xAxis?.scale) return null;
+
+  const chartTop = offset.top ?? 0;
+  const chartBottom = (offset.top ?? 0) + (offset.height ?? 300);
+  const chartRight = (offset.left ?? 0) + (offset.width ?? 700);
+
+  // Resolve pixel x for each visible event
+  const rendered: { x: number; label: string; yOffset: number }[] = [];
+
+  for (const event of (props.events ?? [])) {
+    let x: number;
+    try {
+      x = xAxis.scale(event.date);
+      if (x == null || isNaN(x)) continue;
+    } catch {
+      continue;
+    }
+
+    // Stagger: check against already-placed labels
+    let yOffset = 0;
+    for (const prev of rendered) {
+      const hGap = Math.abs(x - prev.x);
+      // Labels are ~120px wide; if events are within 140px, check vertical
+      if (hGap < 140 && Math.abs(yOffset - prev.yOffset) < 18) {
+        yOffset = prev.yOffset + 22;
+      }
+    }
+
+    rendered.push({ x, label: event.label, yOffset });
+  }
+
   return (
     <g>
-      <title>{label}</title>
-      <text
-        x={x}
-        y={viewBox.y - 42 + yOffset}
-        fill="#94A3B8"
-        fontSize={10}
-        textAnchor={anchor}
-      >
-        {label}
-      </text>
+      {rendered.map((evt) => {
+        // Anchor left if label would overflow right edge
+        const labelWidth = evt.label.length * 5.5 + 8;
+        const anchorLeft = evt.x + labelWidth > chartRight;
+        const textX = anchorLeft ? evt.x - 4 : evt.x + 4;
+        const anchor = anchorLeft ? "end" : "start";
+        const labelY = chartTop + 14 + evt.yOffset;
+
+        return (
+          <g key={evt.label}>
+            {/* Dashed vertical line */}
+            <line
+              x1={evt.x}
+              y1={chartTop}
+              x2={evt.x}
+              y2={chartBottom}
+              stroke="#6B7280"
+              strokeDasharray="2 4"
+              strokeWidth={1}
+            />
+            {/* Label */}
+            <title>{evt.label}</title>
+            <text
+              x={textX}
+              y={labelY}
+              fill="#94A3B8"
+              fontSize={10}
+              textAnchor={anchor}
+            >
+              {evt.label}
+            </text>
+          </g>
+        );
+      })}
     </g>
   );
 }
@@ -146,35 +192,12 @@ export default function TrendsExplorer({ themeData }: Props) {
     return { chartData: data, peakMonths: peaks };
   }, [filteredRaw]);
 
-  // ── Visible events with stagger offsets ──
+  // ── Visible events (filtered by current time range) ──
   const visibleEvents = useMemo(() => {
     if (!chartData.length) return [];
     const min = chartData[0].date as string;
     const max = chartData[chartData.length - 1].date as string;
-    const filtered = EVENTS.filter((e) => e.date >= min && e.date <= max);
-    const total = chartData.length;
-
-    const events = filtered.map((e) => {
-      const idx = chartData.findIndex((d) => (d.date as string) >= e.date);
-      const i = idx >= 0 ? idx : total - 1;
-      // Anchor left if event is in the last 30% of visible data
-      const anchorLeft = i > total * 0.7;
-      return { ...e, idx: i, anchorLeft, yOffset: 0 };
-    });
-
-    // Labels are ~120px wide. On ALL view each month ≈ 20px.
-    // Stagger events within 8 data points (~160px) to prevent
-    // label text from overlapping horizontally.
-    for (let i = 1; i < events.length; i++) {
-      for (let j = i - 1; j >= 0; j--) {
-        const idxGap = Math.abs(events[i].idx - events[j].idx);
-        if (idxGap <= 8 && Math.abs(events[i].yOffset - events[j].yOffset) < 20) {
-          events[i].yOffset = events[j].yOffset + 22;
-        }
-      }
-    }
-
-    return events;
+    return EVENTS.filter((e) => e.date >= min && e.date <= max);
   }, [chartData]);
 
   // ── Date range for subtitle ──
@@ -396,24 +419,8 @@ export default function TrendsExplorer({ themeData }: Props) {
                 cursor={{ stroke: "#2A2D3A", strokeWidth: 1 }}
               />
 
-              {/* Event annotations */}
-              {visibleEvents.map((event) => (
-                  <ReferenceLine
-                    key={event.date}
-                    yAxisId="index"
-                    x={event.date}
-                    stroke="#6B7280"
-                    strokeDasharray="2 4"
-                    strokeWidth={1}
-                    label={
-                      <EventLabel
-                        label={event.label}
-                        anchorLeft={event.anchorLeft}
-                        yOffset={event.yOffset}
-                      />
-                    }
-                  />
-              ))}
+              {/* Event annotations — uses Customized for reliable pixel positions */}
+              <Customized component={EventAnnotations} events={visibleEvents} />
 
               {/* Theme lines */}
               {THEMES.map((theme) => {
