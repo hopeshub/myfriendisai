@@ -1,6 +1,7 @@
 import fs from "fs";
 import path from "path";
 import TrendsExplorer from "./TrendsExplorer";
+import type { KeywordDetailsData } from "./TransparencyPanel";
 
 // Theme-to-category mapping (merging done server-side to reduce client payload)
 const THEME_CATEGORIES: Record<string, string[]> = {
@@ -56,7 +57,16 @@ function loadThemeData(): ThemeData {
   return result;
 }
 
+function loadKeywordDetails(): KeywordDetailsData {
+  const filePath = path.join(process.cwd(), "data", "keyword_details.json");
+  if (!fs.existsSync(filePath)) return {};
+  return JSON.parse(fs.readFileSync(filePath, "utf8"));
+}
+
 export default function Home() {
   const themeData = loadThemeData();
-  return <TrendsExplorer themeData={themeData} />;
+  const keywordDetails = loadKeywordDetails();
+  return (
+    <TrendsExplorer themeData={themeData} keywordDetails={keywordDetails} />
+  );
 }

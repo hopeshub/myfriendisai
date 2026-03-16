@@ -64,3 +64,32 @@ body {
     box-shadow: 0 0 12px color-mix(in srgb, var(--card-color) 25%, transparent);
   }
 }
+
+/* Transparency panel animations */
+@keyframes slideUp {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+
+.panel-animate {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 200ms ease-out;
+}
+
+.panel-animate.open {
+  grid-template-rows: 1fr;
+}
+
+.panel-animate > div {
+  overflow: hidden;
+}
+
+.panel-animate .panel-content {
+  opacity: 0;
+  transition: opacity 150ms ease 50ms;
+}
+
+.panel-animate.open .panel-content {
+  opacity: 1;
+}

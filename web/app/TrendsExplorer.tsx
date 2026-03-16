@@ -14,6 +14,8 @@ import {
 } from "recharts";
 import type { ThemeData } from "./page";
 import { useBreakpoint } from "./useBreakpoint";
+import TransparencyPanel from "./TransparencyPanel";
+import type { KeywordDetailsData } from "./TransparencyPanel";
 
 // ─── Themes ────────────────────────────────────────────────────────────────
 
@@ -134,10 +136,11 @@ function Sparkline({
 
 // ─── Component ─────────────────────────────────────────────────────────────
 
-type Props = { themeData: ThemeData };
+type Props = { themeData: ThemeData; keywordDetails: KeywordDetailsData };
 
-export default function TrendsExplorer({ themeData }: Props) {
+export default function TrendsExplorer({ themeData, keywordDetails }: Props) {
   const [selected, setSelected] = useState<Set<ThemeId>>(new Set());
+  const [detailPanel, setDetailPanel] = useState<ThemeId | null>(null);
   const [timeRange, setTimeRange] = useState<TimeRange>("1Y");
   const [chartMode, setChartMode] = useState<ChartMode>("absolute");
   const [autoSwitched, setAutoSwitched] = useState(false);
@@ -590,7 +593,12 @@ export default function TrendsExplorer({ themeData }: Props) {
           return (
             <button
               key={card.id}
-              onClick={() => toggleTheme(card.id as ThemeId)}
+              onClick={() => {
+                toggleTheme(card.id as ThemeId);
+                setDetailPanel((prev) =>
+                  prev === (card.id as ThemeId) ? null : (card.id as ThemeId),
+                );
+              }}
               aria-pressed={isActive}
               aria-label={`${card.label}: ${card.value.toFixed(1)} mentions per 1000 posts`}
               className="metric-card text-left rounded-lg cursor-pointer"
@@ -635,6 +643,51 @@ export default function TrendsExplorer({ themeData }: Props) {
           );
         })}
       </div>
+
+      {/* Transparency panel */}
+      {(() => {
+        const panelTheme = detailPanel
+          ? THEMES.find((t) => t.id === detailPanel)
+          : null;
+        const panelData = detailPanel
+          ? keywordDetails[detailPanel]
+          : null;
+        if (!panelTheme || !panelData) {
+          return (
+            <div className="panel-animate">
+              <div />
+            </div>
+          );
+        }
+        if (bp === "mobile") {
+          return (
+            <TransparencyPanel
+              themeId={panelTheme.id}
+              themeLabel={panelTheme.label}
+              themeColor={panelTheme.color}
+              data={panelData}
+              breakpoint={bp}
+              onClose={() => setDetailPanel(null)}
+            />
+          );
+        }
+        return (
+          <div className="panel-animate open">
+            <div>
+              <div className="panel-content">
+                <TransparencyPanel
+                  themeId={panelTheme.id}
+                  themeLabel={panelTheme.label}
+                  themeColor={panelTheme.color}
+                  data={panelData}
+                  breakpoint={bp}
+                  onClose={() => setDetailPanel(null)}
+                />
+              </div>
+            </div>
+          </div>
+        );
+      })()}
 
       {/* Explainer */}
       <p
