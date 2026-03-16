@@ -95,7 +95,7 @@ def build_keyword_details(db: sqlite3.Connection, categories: dict) -> dict:
                 ).fetchone()
                 hits = row[0] if row else 0
 
-            # Sample 3 recent post titles
+            # Sample 3 recent post titles (exclude SpicyChatAI — mostly promotional)
             sample_posts = db.execute(
                 """SELECT DISTINCT p.title, pkt.subreddit, pkt.post_date, p.id
                    FROM post_keyword_tags pkt
@@ -103,6 +103,7 @@ def build_keyword_details(db: sqlite3.Connection, categories: dict) -> dict:
                    WHERE pkt.category = ? AND LOWER(pkt.matched_term) = LOWER(?)
                      AND p.title IS NOT NULL
                      AND p.title NOT IN ('[deleted]', '[removed]', '')
+                     AND pkt.subreddit != 'SpicyChatAI'
                      AND pkt.post_date >= ?
                    ORDER BY pkt.post_date DESC
                    LIMIT 3""",
@@ -118,6 +119,7 @@ def build_keyword_details(db: sqlite3.Connection, categories: dict) -> dict:
                        WHERE pkt.category = ? AND LOWER(pkt.matched_term) = LOWER(?)
                          AND p.title IS NOT NULL
                          AND p.title NOT IN ('[deleted]', '[removed]', '')
+                         AND pkt.subreddit != 'SpicyChatAI'
                        ORDER BY pkt.post_date DESC
                        LIMIT ?""",
                     (cat_name, term, 3 - len(sample_posts)),
