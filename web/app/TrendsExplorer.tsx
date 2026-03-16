@@ -680,51 +680,78 @@ export default function TrendsExplorer({ themeData }: Props) {
               )}
 
               <Tooltip
-                content={({ active, payload, label }) => {
+                content={({ active, payload, label, coordinate }) => {
                   if (!active || !payload?.length || !label) return null;
-                  const entries =
+
+                  // Filter to selected themes, or use all if none selected
+                  const candidates =
                     selected.size > 0
                       ? payload.filter((p) =>
                           selected.has(p.dataKey as ThemeId),
                         )
-                      : [...payload].sort(
-                          (a, b) => (b.value as number) - (a.value as number),
-                        );
-                  if (!entries.length) return null;
+                      : payload;
+                  if (!candidates.length) return null;
+
+                  // Find the single closest theme to cursor Y
+                  const cursorY = coordinate?.y ?? 0;
+                  const chartHeight =
+                    chartConfig.height -
+                    chartConfig.margin.top -
+                    chartConfig.margin.bottom;
+                  const yMax =
+                    chartMode === "relative"
+                      ? 100
+                      : Math.max(
+                          ...chartData.flatMap((row) =>
+                            THEMES.map(
+                              (t) => (row[t.id] as number) ?? 0,
+                            ),
+                          ),
+                        ) || 1;
+                  const relY = cursorY - chartConfig.margin.top;
+
+                  let closest = candidates[0];
+                  let closestDist = Infinity;
+                  for (const p of candidates) {
+                    const val = (p.value as number) ?? 0;
+                    const pixelY =
+                      chartHeight - (val / yMax) * chartHeight;
+                    const dist = Math.abs(relY - pixelY);
+                    if (dist < closestDist) {
+                      closestDist = dist;
+                      closest = p;
+                    }
+                  }
+
+                  const tid = closest.dataKey as ThemeId;
+                  const theme = THEMES.find((t) => t.id === tid);
+                  if (!theme) return null;
+
                   return (
                     <div
-                      className="rounded-lg px-3 py-2 text-xs shadow-xl"
+                      className="rounded-lg px-3 py-1.5 text-xs shadow-xl"
                       style={{
                         backgroundColor: "#0F1117",
                         border: "1px solid #2A2D3A",
                       }}
                     >
-                      <div className="text-[#94A3B8] mb-1.5">
+                      <div className="text-[#94A3B8] mb-1">
                         {formatMonthTick(label as string)}
                       </div>
-                      {entries.map((p) => {
-                        const tid = p.dataKey as ThemeId;
-                        const theme = THEMES.find((t) => t.id === tid);
-                        return (
-                          <div
-                            key={tid}
-                            className="flex items-center gap-2 mb-0.5"
-                          >
-                            <span
-                              className="w-2 h-2 rounded-full flex-shrink-0"
-                              style={{ backgroundColor: theme?.color }}
-                            />
-                            <span style={{ color: "#94A3B8" }}>
-                              {theme?.label}
-                            </span>
-                            <span className="text-[#F8FAFC] font-medium ml-auto pl-4">
-                              {chartMode === "absolute"
-                                ? `${(p.value as number).toFixed(1)} per 1k`
-                                : `${Math.round(p.value as number)}% of peak`}
-                            </span>
-                          </div>
-                        );
-                      })}
+                      <div className="flex items-center gap-2">
+                        <span
+                          className="w-2 h-2 rounded-full flex-shrink-0"
+                          style={{ backgroundColor: theme.color }}
+                        />
+                        <span style={{ color: "#94A3B8" }}>
+                          {theme.label}
+                        </span>
+                        <span className="text-[#F8FAFC] font-medium ml-auto pl-4">
+                          {chartMode === "absolute"
+                            ? `${(closest.value as number).toFixed(1)} per 1k`
+                            : `${Math.round(closest.value as number)}% of peak`}
+                        </span>
+                      </div>
                     </div>
                   );
                 }}

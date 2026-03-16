@@ -17,7 +17,7 @@ const CHANGELOG = [
     date: "March 15, 2026",
     title: "Keyword expansion (discovery batch)",
     items: [
-      "Added 16 validated keywords across all 6 themes via co-occurrence analysis",
+      "Added 16 validated keywords across all six themes via co-occurrence analysis",
       "Addiction: chatbot addiction, almost relapsed, finally deleted, the craving, so addictive",
       "Consciousness: sapience, tulpa, lemoine, soulbonder",
       "Sexual/ERP: erps, erping",
@@ -104,8 +104,7 @@ export default function About() {
           Tracking how people talk about AI companions
         </h1>
         <p style={{ fontSize: 16, color: "#94A3B8" }}>
-          A longitudinal research tracker documenting AI companionship discourse
-          on Reddit.
+          Tracking AI companion discourse on Reddit across six themes.
         </p>
       </div>
 
