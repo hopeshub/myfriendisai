@@ -364,7 +364,7 @@ export default function TrendsExplorer({ themeData }: Props) {
 
     if (!activeTheme) {
       return {
-        text: "Tracking how people talk about AI companions across 27 Reddit communities, from January 2023 to present.",
+        text: "Tracking how people talk about AI companionship across 27 Reddit communities, from January 2023 to present.",
         themeName: null,
         themeColor: null,
       };
@@ -456,12 +456,12 @@ export default function TrendsExplorer({ themeData }: Props) {
     if (bp === "tablet") {
       return {
         height: 360,
-        margin: { top: 80, right: 20, bottom: 30, left: 40 },
+        margin: { top: 80, right: 20, bottom: 30, left: 24 },
         xTickCount: 6,
         minTickGap: 40,
         strokeActive: 2.5,
         strokeInactive: 1.5,
-        yAxisWidth: 32,
+        yAxisWidth: 44,
         showYAxis: true,
         eventLabelAngle: -45,
         showEventLabels: true,
@@ -470,12 +470,12 @@ export default function TrendsExplorer({ themeData }: Props) {
     }
     return {
       height: 440,
-      margin: { top: 100, right: 64, bottom: 8, left: 16 },
+      margin: { top: 100, right: 64, bottom: 8, left: 24 },
       xTickCount: 8,
       minTickGap: timeRange === "6M" ? 40 : 60,
       strokeActive: 2,
       strokeInactive: 1,
-      yAxisWidth: 32,
+      yAxisWidth: 44,
       showYAxis: true,
       eventLabelAngle: -60,
       showEventLabels: true,
@@ -491,7 +491,7 @@ export default function TrendsExplorer({ themeData }: Props) {
       {/* Headline + dynamic summary */}
       <div className="mb-6 sm:mb-8">
         <h1 className="text-[22px] sm:text-2xl lg:text-3xl font-bold text-[#F8FAFC] mb-2">
-          How are people talking about AI companions?
+          How are people talking about AI companionship?
         </h1>
         <p className="text-sm sm:text-base text-[#94A3B8] line-clamp-2 sm:line-clamp-none">
           {summary.themeName && summary.themeColor ? (
@@ -705,6 +705,18 @@ export default function TrendsExplorer({ themeData }: Props) {
                   axisLine={false}
                   tickLine={false}
                   width={chartConfig.yAxisWidth}
+                  label={
+                    chartMode === "absolute"
+                      ? {
+                          value: "mentions per 1k posts",
+                          angle: -90,
+                          position: "left",
+                          fill: "#94A3B8",
+                          fontSize: 11,
+                          dx: -4,
+                        }
+                      : undefined
+                  }
                 />
               )}
 
