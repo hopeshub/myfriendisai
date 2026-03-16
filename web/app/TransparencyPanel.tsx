@@ -83,12 +83,12 @@ function pickSamples(keywords: KeywordEntry[]): SamplePost[] {
 // ─── Section header style ─────────────────────────────────────────────────
 
 const sectionHeaderStyle: React.CSSProperties = {
-  fontSize: 12,
+  fontSize: 11,
   fontWeight: 500,
   textTransform: "uppercase",
   letterSpacing: "0.05em",
   color: "#64748B",
-  marginBottom: 12,
+  marginBottom: 8,
 };
 
 // ─── Sections ─────────────────────────────────────────────────────────────
@@ -108,7 +108,7 @@ function KeywordsSection({
   return (
     <div>
       <div style={sectionHeaderStyle}>Tracked keywords</div>
-      <div className="space-y-2">
+      <div className="space-y-1.5">
         {visible.map((kw) => (
           <div key={kw.term}>
             <div className="flex items-baseline justify-between mb-0.5">
@@ -165,7 +165,7 @@ function CommunitiesSection({
   return (
     <div>
       <div style={sectionHeaderStyle}>Top communities</div>
-      <div className="space-y-2.5">
+      <div className="space-y-2">
         {visible.map((sub) => (
           <div key={sub.name}>
             <div className="flex items-baseline justify-between mb-0.5">
@@ -213,7 +213,7 @@ function SamplePostsSection({ samples }: { samples: SamplePost[] }) {
         {samples.map((sp, i) => (
           <div
             key={i}
-            className="py-2.5"
+            className="py-2"
             style={i > 0 ? { borderTop: "0.5px solid #1E293B" } : undefined}
           >
             <a
@@ -258,7 +258,7 @@ export default function TransparencyPanel({
     >
       {/* Header — sticky at top */}
       <div
-        className="flex items-center justify-between px-5 py-4 flex-shrink-0"
+        className="flex items-center justify-between px-5 py-3 flex-shrink-0"
         style={{ borderBottom: "0.5px solid #1E293B" }}
       >
         <span className="text-[15px] font-medium" style={{ color: themeColor }}>
@@ -275,14 +275,14 @@ export default function TransparencyPanel({
       </div>
 
       {/* Scrollable content */}
-      <div className="flex-1 overflow-y-auto px-5 py-5 space-y-7">
+      <div className="flex-1 overflow-y-auto px-5 py-4 space-y-5">
         <KeywordsSection keywords={data.keywords} color={themeColor} />
         <CommunitiesSection subreddits={data.subreddits} color={themeColor} />
         <SamplePostsSection samples={samples} />
 
         {/* Footer */}
         <div
-          className="text-[11px] pt-3"
+          className="text-[11px] pt-2"
           style={{ color: "#64748B", borderTop: "0.5px solid #1E293B" }}
         >
           {data.keywords.length} keywords across{" "}
