@@ -59,6 +59,17 @@ function formatMonthTickShort(dateStr: string): string {
   return `${MONTH_NAMES[d.getUTCMonth()]} '${yr}`;
 }
 
+/** Round up to a clean axis max (matches typical charting library behavior) */
+function niceMax(v: number): number {
+  if (v <= 0) return 10;
+  const exp = Math.pow(10, Math.floor(Math.log10(v)));
+  const frac = v / exp;
+  if (frac <= 1) return exp;
+  if (frac <= 2) return 2 * exp;
+  if (frac <= 5) return 5 * exp;
+  return 10 * exp;
+}
+
 function toMonth(dateStr: string): string {
   return dateStr.slice(0, 7) + "-01";
 }
@@ -298,6 +309,19 @@ export default function TrendsExplorer({ themeData }: Props) {
     });
     return { chartData: data, peakMonths: peaks };
   }, [filteredRaw, filteredAbsolute, chartMode]);
+
+  // ── Y-axis domain max (explicit so tooltip pixel math matches the chart) ──
+  const yDomainMax = useMemo(() => {
+    if (chartMode === "relative") return 100;
+    let max = 0;
+    for (const row of chartData) {
+      for (const theme of THEMES) {
+        const v = (row[theme.id] as number) ?? 0;
+        if (v > max) max = v;
+      }
+    }
+    return niceMax(max);
+  }, [chartMode, chartData]);
 
   // ── Visible events ──
   const visibleEvents = useMemo(() => {
@@ -645,9 +669,7 @@ export default function TrendsExplorer({ themeData }: Props) {
               {chartConfig.showYAxis && (
                 <YAxis
                   yAxisId="index"
-                  domain={
-                    chartMode === "absolute" ? [0, "auto"] : [0, 100]
-                  }
+                  domain={[0, yDomainMax]}
                   ticks={
                     chartMode === "relative"
                       ? [25, 50, 75, 100]
@@ -682,9 +704,7 @@ export default function TrendsExplorer({ themeData }: Props) {
               {!chartConfig.showYAxis && (
                 <YAxis
                   yAxisId="index"
-                  domain={
-                    chartMode === "absolute" ? [0, "auto"] : [0, 100]
-                  }
+                  domain={[0, yDomainMax]}
                   hide
                   width={0}
                 />
@@ -715,23 +735,13 @@ export default function TrendsExplorer({ themeData }: Props) {
                     chartConfig.height -
                     chartConfig.margin.top -
                     chartConfig.margin.bottom;
-                  const yMax =
-                    chartMode === "relative"
-                      ? 100
-                      : Math.max(
-                          ...chartData.flatMap((row) =>
-                            THEMES.map(
-                              (t) => (row[t.id] as number) ?? 0,
-                            ),
-                          ),
-                        ) || 1;
 
                   let closest = candidates[0];
                   let closestDist = Infinity;
                   for (const p of candidates) {
                     const val = (p.value as number) ?? 0;
                     const pixelY =
-                      plotHeight - (val / yMax) * plotHeight;
+                      plotHeight - (val / yDomainMax) * plotHeight;
                     const dist = Math.abs(cursorY - pixelY);
                     if (dist < closestDist) {
                       closestDist = dist;
