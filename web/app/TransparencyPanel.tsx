@@ -25,9 +25,9 @@ export type KeywordDetailsData = Record<string, CategoryDetail>;
 type Props = {
   themeId: string;
   themeLabel: string;
+  themeEmoji: string;
   themeColor: string;
   data: CategoryDetail;
-  breakpoint: "mobile" | "tablet" | "desktop";
   onClose: () => void;
 };
 
@@ -51,7 +51,6 @@ function truncate(str: string, max: number): string {
 function pickSamples(keywords: KeywordEntry[]): SamplePost[] {
   const samples: SamplePost[] = [];
   const seen = new Set<string>();
-  // First pass: one per keyword
   for (const kw of keywords) {
     if (samples.length >= 3) break;
     for (const sp of kw.sample_posts) {
@@ -62,7 +61,6 @@ function pickSamples(keywords: KeywordEntry[]): SamplePost[] {
       }
     }
   }
-  // Second pass: fill remaining from any keyword
   if (samples.length < 3) {
     for (const kw of keywords) {
       for (const sp of kw.sample_posts) {
@@ -78,9 +76,9 @@ function pickSamples(keywords: KeywordEntry[]): SamplePost[] {
   return samples;
 }
 
-// ─── Subcomponents ────────────────────────────────────────────────────────
+// ─── Sections ─────────────────────────────────────────────────────────────
 
-function KeywordsColumn({
+function KeywordsSection({
   keywords,
   color,
 }: {
@@ -108,11 +106,11 @@ function KeywordsColumn({
         {visible.map((kw) => (
           <div key={kw.term}>
             <div className="flex items-baseline justify-between mb-0.5">
-              <span className="text-[14px]" style={{ color }}>
+              <span className="text-[13px]" style={{ color }}>
                 {kw.term}
               </span>
               <span
-                className="text-[13px] ml-2 flex-shrink-0"
+                className="text-[12px] ml-2 flex-shrink-0"
                 style={{ color: "#94A3B8" }}
               >
                 {kw.hits.toLocaleString()}
@@ -120,12 +118,12 @@ function KeywordsColumn({
             </div>
             <div
               className="rounded-full"
-              style={{ height: 6, backgroundColor: "#0F1117" }}
+              style={{ height: 5, backgroundColor: "#0F1117" }}
             >
               <div
                 className="rounded-full"
                 style={{
-                  height: 6,
+                  height: 5,
                   width: `${(kw.hits / maxHits) * 100}%`,
                   backgroundColor: color,
                   opacity: 0.3,
@@ -141,16 +139,14 @@ function KeywordsColumn({
           className="text-[12px] mt-2 hover:text-foreground transition-colors"
           style={{ color: "#64748B" }}
         >
-          {expanded
-            ? "Show fewer"
-            : `Show all ${keywords.length} keywords`}
+          {expanded ? "Show fewer" : `Show all ${keywords.length} keywords`}
         </button>
       )}
     </div>
   );
 }
 
-function CommunitiesColumn({
+function CommunitiesSection({
   subreddits,
   color,
 }: {
@@ -212,7 +208,7 @@ function CommunitiesColumn({
   );
 }
 
-function SamplePostsColumn({ samples }: { samples: SamplePost[] }) {
+function SamplePostsSection({ samples }: { samples: SamplePost[] }) {
   return (
     <div>
       <div
@@ -230,14 +226,10 @@ function SamplePostsColumn({ samples }: { samples: SamplePost[] }) {
           <div
             key={i}
             className="py-2.5"
-            style={
-              i > 0
-                ? { borderTop: "0.5px solid #1E293B" }
-                : undefined
-            }
+            style={i > 0 ? { borderTop: "0.5px solid #1E293B" } : undefined}
           >
             <div className="text-[13px]" style={{ color: "#CBD5E1" }}>
-              {truncate(sp.title, 80)}
+              {truncate(sp.title, 100)}
             </div>
             <div className="text-[11px] mt-1" style={{ color: "#64748B" }}>
               r/{sp.subreddit} &middot; {formatDate(sp.date)}
@@ -249,163 +241,71 @@ function SamplePostsColumn({ samples }: { samples: SamplePost[] }) {
   );
 }
 
-function PanelFooter({ data }: { data: CategoryDetail }) {
-  return (
-    <div
-      className="text-[11px] mt-4 pt-3"
-      style={{ color: "#64748B", borderTop: "0.5px solid #1E293B" }}
-    >
-      Showing {data.keywords.length} keywords across{" "}
-      {data.subreddits.length} communities &middot;{" "}
-      {data.unique_posts.toLocaleString()} total posts matched &middot; All
-      keywords validated at &ge;80% precision
-    </div>
-  );
-}
-
-// ─── Panel content (shared between desktop/tablet inline and mobile drawer) ─
-
-function PanelContent({
-  data,
-  color,
-  breakpoint,
-}: {
-  data: CategoryDetail;
-  color: string;
-  breakpoint: "mobile" | "tablet" | "desktop";
-}) {
-  const samples = pickSamples(data.keywords);
-
-  if (breakpoint === "mobile") {
-    return (
-      <div className="space-y-6">
-        <KeywordsColumn keywords={data.keywords} color={color} />
-        <CommunitiesColumn subreddits={data.subreddits} color={color} />
-        <SamplePostsColumn samples={samples} />
-        <PanelFooter data={data} />
-      </div>
-    );
-  }
-
-  if (breakpoint === "tablet") {
-    return (
-      <>
-        <div className="grid grid-cols-2 gap-6">
-          <div className="space-y-6">
-            <KeywordsColumn keywords={data.keywords} color={color} />
-            <CommunitiesColumn subreddits={data.subreddits} color={color} />
-          </div>
-          <SamplePostsColumn samples={samples} />
-        </div>
-        <PanelFooter data={data} />
-      </>
-    );
-  }
-
-  // Desktop: three columns
-  return (
-    <>
-      <div className="grid grid-cols-3 gap-6">
-        <KeywordsColumn keywords={data.keywords} color={color} />
-        <CommunitiesColumn subreddits={data.subreddits} color={color} />
-        <SamplePostsColumn samples={samples} />
-      </div>
-      <PanelFooter data={data} />
-    </>
-  );
-}
-
-// ─── Main component ───────────────────────────────────────────────────────
+// ─── Main component: right-edge slide-out panel ───────────────────────────
 
 export default function TransparencyPanel({
-  themeId,
   themeLabel,
+  themeEmoji,
   themeColor,
   data,
-  breakpoint,
   onClose,
 }: Props) {
-  // Mobile: bottom drawer with overlay
-  if (breakpoint === "mobile") {
-    return (
-      <div className="fixed inset-0 z-50">
-        {/* Backdrop */}
+  const samples = pickSamples(data.keywords);
+
+  return (
+    <div className="fixed inset-0 z-50">
+      {/* Backdrop */}
+      <div
+        className="absolute inset-0 side-panel-backdrop"
+        style={{ backgroundColor: "rgba(0,0,0,0.35)" }}
+        onClick={onClose}
+      />
+
+      {/* Panel */}
+      <div
+        className="side-panel absolute top-0 right-0 bottom-0 flex flex-col"
+        style={{
+          width: "min(400px, 100vw)",
+          backgroundColor: "#1A1D27",
+          borderLeft: `3px solid ${themeColor}`,
+          boxShadow: "-8px 0 24px rgba(0,0,0,0.4)",
+        }}
+      >
+        {/* Header */}
         <div
-          className="absolute inset-0"
-          style={{ backgroundColor: "rgba(0,0,0,0.4)" }}
-          onClick={onClose}
-        />
-        {/* Drawer */}
-        <div
-          className="absolute bottom-0 left-0 right-0 rounded-t-xl overflow-y-auto"
-          style={{
-            backgroundColor: "#1A1D27",
-            borderTop: "1px solid #2A2D3A",
-            borderLeft: `3px solid ${themeColor}`,
-            maxHeight: "70vh",
-            animation: "slideUp 200ms ease-out",
-          }}
+          className="flex items-center justify-between px-5 py-4 flex-shrink-0"
+          style={{ borderBottom: "0.5px solid #1E293B" }}
         >
-          {/* Fixed header */}
-          <div
-            className="sticky top-0 flex items-center justify-between px-4 py-3 z-10"
-            style={{
-              backgroundColor: "#1A1D27",
-              borderBottom: "0.5px solid #1E293B",
-            }}
+          <span className="text-[15px] font-medium" style={{ color: themeColor }}>
+            {themeEmoji} {themeLabel}
+          </span>
+          <button
+            onClick={onClose}
+            className="text-[20px] leading-none w-8 h-8 flex items-center justify-center rounded hover:text-foreground transition-colors"
+            style={{ color: "#64748B" }}
+            aria-label="Close panel"
           >
-            <span
-              className="text-[14px] font-medium"
-              style={{ color: themeColor }}
-            >
-              {themeLabel}
-            </span>
-            <button
-              onClick={onClose}
-              className="text-[18px] leading-none px-1 hover:text-foreground transition-colors"
-              style={{ color: "#64748B" }}
-              aria-label="Close panel"
-            >
-              &times;
-            </button>
-          </div>
-          <div className="px-4 py-4">
-            <PanelContent
-              data={data}
-              color={themeColor}
-              breakpoint={breakpoint}
-            />
+            &times;
+          </button>
+        </div>
+
+        {/* Scrollable content */}
+        <div className="flex-1 overflow-y-auto px-5 py-5 space-y-7">
+          <KeywordsSection keywords={data.keywords} color={themeColor} />
+          <CommunitiesSection subreddits={data.subreddits} color={themeColor} />
+          <SamplePostsSection samples={samples} />
+
+          {/* Footer */}
+          <div
+            className="text-[11px] pt-3"
+            style={{ color: "#64748B", borderTop: "0.5px solid #1E293B" }}
+          >
+            {data.keywords.length} keywords across{" "}
+            {data.subreddits.length} communities &middot;{" "}
+            {data.unique_posts.toLocaleString()} posts matched &middot; All
+            keywords validated at &ge;80% precision
           </div>
         </div>
-      </div>
-    );
-  }
-
-  // Desktop / Tablet: inline panel
-  return (
-    <div
-      className="rounded-lg overflow-hidden mb-4"
-      style={{
-        backgroundColor: "#1A1D27",
-        border: "0.5px solid #2A2D3A",
-        borderLeft: `3px solid ${themeColor}`,
-      }}
-    >
-      <div className="relative px-5 py-4" style={{ maxHeight: breakpoint === "tablet" ? 400 : 320, overflowY: "auto" }}>
-        {/* Close button */}
-        <button
-          onClick={onClose}
-          className="absolute top-3 right-3 text-[16px] leading-none px-1 hover:text-foreground transition-colors"
-          style={{ color: "#64748B" }}
-          aria-label="Close panel"
-        >
-          &times;
-        </button>
-        <PanelContent
-          data={data}
-          color={themeColor}
-          breakpoint={breakpoint}
-        />
       </div>
     </div>
   );

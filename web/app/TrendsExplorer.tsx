@@ -589,6 +589,7 @@ export default function TrendsExplorer({ themeData, keywordDetails }: Props) {
         {metricCards.map((card) => {
           const isActive = selected.has(card.id as ThemeId);
           const dimmed = selected.size > 0 && !isActive;
+          const isPanelActive = detailPanel === card.id;
 
           return (
             <button
@@ -603,10 +604,13 @@ export default function TrendsExplorer({ themeData, keywordDetails }: Props) {
               aria-label={`${card.label}: ${card.value.toFixed(1)} mentions per 1000 posts`}
               className="metric-card text-left rounded-lg cursor-pointer"
               style={{
-                backgroundColor: "#1A1D27",
+                backgroundColor: isPanelActive ? "#1F2233" : "#1A1D27",
                 borderLeft: `3px solid ${card.color}`,
                 padding: "12px 10px",
                 opacity: dimmed ? 0.5 : 1,
+                boxShadow: isPanelActive
+                  ? `0 0 16px color-mix(in srgb, ${card.color} 30%, transparent)`
+                  : undefined,
                 "--card-color": card.color,
               } as React.CSSProperties}
             >
@@ -644,7 +648,7 @@ export default function TrendsExplorer({ themeData, keywordDetails }: Props) {
         })}
       </div>
 
-      {/* Transparency panel */}
+      {/* Side panel (rendered as fixed overlay, doesn't push content) */}
       {(() => {
         const panelTheme = detailPanel
           ? THEMES.find((t) => t.id === detailPanel)
@@ -652,40 +656,16 @@ export default function TrendsExplorer({ themeData, keywordDetails }: Props) {
         const panelData = detailPanel
           ? keywordDetails[detailPanel]
           : null;
-        if (!panelTheme || !panelData) {
-          return (
-            <div className="panel-animate">
-              <div />
-            </div>
-          );
-        }
-        if (bp === "mobile") {
-          return (
-            <TransparencyPanel
-              themeId={panelTheme.id}
-              themeLabel={panelTheme.label}
-              themeColor={panelTheme.color}
-              data={panelData}
-              breakpoint={bp}
-              onClose={() => setDetailPanel(null)}
-            />
-          );
-        }
+        if (!panelTheme || !panelData) return null;
         return (
-          <div className="panel-animate open">
-            <div>
-              <div className="panel-content">
-                <TransparencyPanel
-                  themeId={panelTheme.id}
-                  themeLabel={panelTheme.label}
-                  themeColor={panelTheme.color}
-                  data={panelData}
-                  breakpoint={bp}
-                  onClose={() => setDetailPanel(null)}
-                />
-              </div>
-            </div>
-          </div>
+          <TransparencyPanel
+            themeId={panelTheme.id}
+            themeLabel={panelTheme.label}
+            themeEmoji={panelTheme.emoji}
+            themeColor={panelTheme.color}
+            data={panelData}
+            onClose={() => setDetailPanel(null)}
+          />
         );
       })()}
 
