@@ -10,6 +10,7 @@ Outputs a report for manual review — does NOT modify keywords.yaml or any data
 import sqlite3
 import re
 import random
+import sys
 import yaml
 from collections import Counter, defaultdict
 from pathlib import Path
@@ -42,6 +43,16 @@ STOP_WORDS.update([
     "amp", "nbsp", "edit", "update", "tldr", "tl", "dr",
 ])
 
+# Precompile regexes
+RE_URL = re.compile(r'https?://\S+')
+RE_MARKDOWN = re.compile(r'[*_~`#>\[\]()]')
+RE_BOILERPLATE = re.compile(r'\b(edit|update|tldr|tl;dr)\s*:?')
+RE_WHITESPACE = re.compile(r'\s+')
+RE_TOKEN_SPLIT = re.compile(r'[\s\-/]+')
+RE_PUNCT_STRIP = re.compile(r'^[^\w]+|[^\w]+$')
+RE_DIGITS = re.compile(r'^[\d]+$')
+
+
 # ── Helpers ─────────────────────────────────────────────────────────────
 
 def load_existing_keywords():
@@ -57,7 +68,6 @@ def load_existing_keywords():
             terms.add(t)
         existing[cat["name"]] = terms
 
-    # Also build a flat set of all terms across all categories
     all_terms = set()
     for terms in existing.values():
         all_terms.update(terms)
@@ -70,75 +80,158 @@ def clean_text(text):
     if not text:
         return ""
     text = text.lower()
-    # Strip URLs
-    text = re.sub(r'https?://\S+', ' ', text)
-    # Strip markdown formatting
-    text = re.sub(r'[*_~`#>\[\]()]', ' ', text)
-    # Strip Reddit boilerplate
-    text = re.sub(r'\b(edit|update|tldr|tl;dr)\s*:?', ' ', text)
-    # Collapse whitespace
-    text = re.sub(r'\s+', ' ', text).strip()
+    text = RE_URL.sub(' ', text)
+    text = RE_MARKDOWN.sub(' ', text)
+    text = RE_BOILERPLATE.sub(' ', text)
+    text = RE_WHITESPACE.sub(' ', text).strip()
     return text
 
 
 def tokenize(text):
     """Split into word tokens, removing punctuation-only and number-only tokens."""
-    tokens = re.split(r'[\s\-/]+', text)
-    # Also split on punctuation boundaries
+    tokens = RE_TOKEN_SPLIT.split(text)
     refined = []
     for t in tokens:
-        # Remove leading/trailing punctuation
-        t = re.sub(r'^[^\w]+|[^\w]+$', '', t)
-        if t and not re.match(r'^[\d]+$', t) and len(t) > 1:
+        t = RE_PUNCT_STRIP.sub('', t)
+        if t and not RE_DIGITS.match(t) and len(t) > 1:
             refined.append(t)
     return refined
 
 
-def extract_ngrams(tokens, stop_words):
-    """Extract unigrams, bigrams, trigrams from token list."""
-    uni = Counter()
-    bi = Counter()
-    tri = Counter()
-
-    filtered = [t for t in tokens if t not in stop_words]
-    uni.update(filtered)
-
-    # Bigrams — at least one non-stopword
-    for i in range(len(tokens) - 1):
-        if tokens[i] not in stop_words or tokens[i+1] not in stop_words:
-            bi[(tokens[i], tokens[i+1])] += 1
-
-    # Trigrams — at least one non-stopword
-    for i in range(len(tokens) - 2):
-        if (tokens[i] not in stop_words or tokens[i+1] not in stop_words
-                or tokens[i+2] not in stop_words):
-            tri[(tokens[i], tokens[i+1], tokens[i+2])] += 1
-
-    return uni, bi, tri
-
-
 def ngram_to_str(ngram):
-    """Convert ngram tuple to string."""
     if isinstance(ngram, str):
         return ngram
     return " ".join(ngram)
 
 
+def process_corpus_counts_only(conn, post_ids, label=""):
+    """Process a corpus returning only ngram counts (no per-post tracking).
+    Processes in batches to limit memory. Used for general corpus."""
+    total_uni = Counter()
+    total_bi = Counter()
+    total_tri = Counter()
+    total_tokens = 0
+    cur = conn.cursor()
+
+    for batch_start in range(0, len(post_ids), BATCH_SIZE):
+        batch = post_ids[batch_start:batch_start + BATCH_SIZE]
+        placeholders = ",".join("?" * len(batch))
+        cur.execute(
+            f"SELECT title, selftext FROM posts WHERE id IN ({placeholders})",
+            batch
+        )
+        for row in cur.fetchall():
+            raw = (row[0] or "") + " " + (row[1] or "")
+            text = clean_text(raw)
+            tokens = tokenize(text)
+            total_tokens += len(tokens)
+
+            # Unigrams
+            filtered = [t for t in tokens if t not in STOP_WORDS]
+            for t in filtered:
+                total_uni[t] += 1
+
+            # Bigrams
+            for i in range(len(tokens) - 1):
+                if tokens[i] not in STOP_WORDS or tokens[i+1] not in STOP_WORDS:
+                    total_bi[(tokens[i], tokens[i+1])] += 1
+
+            # Trigrams
+            for i in range(len(tokens) - 2):
+                if (tokens[i] not in STOP_WORDS or tokens[i+1] not in STOP_WORDS
+                        or tokens[i+2] not in STOP_WORDS):
+                    total_tri[(tokens[i], tokens[i+1], tokens[i+2])] += 1
+
+        done = min(batch_start + BATCH_SIZE, len(post_ids))
+        print(f"  {label} processed {done:,}/{len(post_ids):,} posts, {total_tokens:,} tokens so far")
+
+    return {"uni": total_uni, "bi": total_bi, "tri": total_tri, "total_tokens": total_tokens}
+
+
+def process_matched_corpus(conn, post_ids):
+    """Process matched corpus — returns counts AND per-post sets for unique post counting."""
+    total_uni = Counter()
+    total_bi = Counter()
+    total_tri = Counter()
+    total_tokens = 0
+    post_sets_uni = defaultdict(set)
+    post_sets_bi = defaultdict(set)
+    post_sets_tri = defaultdict(set)
+    cur = conn.cursor()
+
+    for batch_start in range(0, len(post_ids), BATCH_SIZE):
+        batch = post_ids[batch_start:batch_start + BATCH_SIZE]
+        placeholders = ",".join("?" * len(batch))
+        cur.execute(
+            f"SELECT id, title, selftext FROM posts WHERE id IN ({placeholders})",
+            batch
+        )
+        for row in cur.fetchall():
+            pid = row[0]
+            raw = (row[1] or "") + " " + (row[2] or "")
+            text = clean_text(raw)
+            tokens = tokenize(text)
+            total_tokens += len(tokens)
+
+            # Unigrams
+            seen_uni = set()
+            for t in tokens:
+                if t not in STOP_WORDS:
+                    total_uni[t] += 1
+                    if t not in seen_uni:
+                        post_sets_uni[t].add(pid)
+                        seen_uni.add(t)
+
+            # Bigrams
+            seen_bi = set()
+            for i in range(len(tokens) - 1):
+                if tokens[i] not in STOP_WORDS or tokens[i+1] not in STOP_WORDS:
+                    bg = (tokens[i], tokens[i+1])
+                    total_bi[bg] += 1
+                    if bg not in seen_bi:
+                        post_sets_bi[bg].add(pid)
+                        seen_bi.add(bg)
+
+            # Trigrams
+            seen_tri = set()
+            for i in range(len(tokens) - 2):
+                if (tokens[i] not in STOP_WORDS or tokens[i+1] not in STOP_WORDS
+                        or tokens[i+2] not in STOP_WORDS):
+                    tg = (tokens[i], tokens[i+1], tokens[i+2])
+                    total_tri[tg] += 1
+                    if tg not in seen_tri:
+                        post_sets_tri[tg].add(pid)
+                        seen_tri.add(tg)
+
+    return {
+        "uni": total_uni, "bi": total_bi, "tri": total_tri,
+        "total_tokens": total_tokens,
+        "post_sets_uni": post_sets_uni,
+        "post_sets_bi": post_sets_bi,
+        "post_sets_tri": post_sets_tri,
+    }
+
+
 # ── Main ────────────────────────────────────────────────────────────────
 
 def main():
-    print("Loading existing keywords...")
+    print("=" * 60)
+    print("Keyword Discovery — Co-occurrence Analysis")
+    print("=" * 60)
+    sys.stdout.flush()
+
+    print("\nLoading existing keywords...")
     existing_by_cat, all_existing = load_existing_keywords()
+    print(f"  {len(all_existing)} existing keywords across {len(existing_by_cat)} categories")
 
     conn = sqlite3.connect(str(DB_PATH))
-    conn.row_factory = sqlite3.Row
     cur = conn.cursor()
 
     # ── Step 1: Build corpora ──────────────────────────────────────────
 
-    print("Building matched corpus per category...")
+    print("\nBuilding matched corpus per category...")
+    sys.stdout.flush()
 
-    # Get matched post IDs per category
     matched_posts_per_cat = {}
     all_matched_ids = set()
 
@@ -147,105 +240,72 @@ def main():
             "SELECT DISTINCT post_id FROM post_keyword_tags WHERE category = ?",
             (cat,)
         )
-        ids = [r["post_id"] for r in cur.fetchall()]
+        ids = [r[0] for r in cur.fetchall()]
         matched_posts_per_cat[cat] = ids
         all_matched_ids.update(ids)
         print(f"  {cat}: {len(ids)} matched posts")
 
-    # Get general corpus (posts not matching any category)
-    print(f"Sampling {GENERAL_SAMPLE_SIZE} general (non-matching) posts...")
-    # Use a deterministic seed for reproducibility
-    placeholders = ",".join("?" * len(all_matched_ids)) if all_matched_ids else "'__none__'"
+    # Sample general corpus efficiently — use rowid sampling instead of ORDER BY RANDOM()
+    print(f"\nSampling {GENERAL_SAMPLE_SIZE:,} general (non-matching) posts...")
+    sys.stdout.flush()
 
-    # Since all_matched_ids could be large, use a subquery instead
-    cur.execute("""
-        SELECT id FROM posts
-        WHERE id NOT IN (SELECT DISTINCT post_id FROM post_keyword_tags)
-        ORDER BY RANDOM()
-        LIMIT ?
-    """, (GENERAL_SAMPLE_SIZE,))
-    general_ids = [r["id"] for r in cur.fetchall()]
-    print(f"  General corpus: {len(general_ids)} posts")
+    # Get total post count and min/max rowid for efficient sampling
+    cur.execute("SELECT MIN(rowid), MAX(rowid), COUNT(*) FROM posts")
+    min_rowid, max_rowid, total_posts = cur.fetchone()
+    print(f"  Total posts: {total_posts:,}, rowid range: {min_rowid}-{max_rowid}")
 
-    # ── Step 2 & 3: Process each category ──────────────────────────────
+    # Generate random rowids, oversample to account for gaps and matched-post exclusions
+    random.seed(42)
+    oversample = int(GENERAL_SAMPLE_SIZE * 1.5)
+    candidate_rowids = random.sample(range(min_rowid, max_rowid + 1), min(oversample, max_rowid - min_rowid + 1))
 
-    def fetch_post_texts(post_ids):
-        """Fetch title + selftext for a list of post IDs, in batches."""
-        texts = {}
-        for i in range(0, len(post_ids), BATCH_SIZE):
-            batch = post_ids[i:i+BATCH_SIZE]
-            placeholders = ",".join("?" * len(batch))
-            cur.execute(
-                f"SELECT id, title, selftext FROM posts WHERE id IN ({placeholders})",
-                batch
-            )
-            for r in cur.fetchall():
-                raw = (r["title"] or "") + " " + (r["selftext"] or "")
-                texts[r["id"]] = clean_text(raw)
-        return texts
+    # Fetch IDs for these rowids, excluding matched posts
+    general_ids = []
+    for batch_start in range(0, len(candidate_rowids), BATCH_SIZE):
+        batch = candidate_rowids[batch_start:batch_start + BATCH_SIZE]
+        placeholders = ",".join("?" * len(batch))
+        cur.execute(
+            f"SELECT id FROM posts WHERE rowid IN ({placeholders})",
+            batch
+        )
+        for r in cur.fetchall():
+            if r[0] not in all_matched_ids:
+                general_ids.append(r[0])
+                if len(general_ids) >= GENERAL_SAMPLE_SIZE:
+                    break
+        if len(general_ids) >= GENERAL_SAMPLE_SIZE:
+            break
 
-    def process_corpus(texts_dict):
-        """Tokenize and extract ngrams from a dict of {id: text}. Returns ngram counts + per-post sets."""
-        total_uni = Counter()
-        total_bi = Counter()
-        total_tri = Counter()
-        total_tokens = 0
-        # Track which posts each ngram appears in
-        post_sets_uni = defaultdict(set)
-        post_sets_bi = defaultdict(set)
-        post_sets_tri = defaultdict(set)
+    general_ids = general_ids[:GENERAL_SAMPLE_SIZE]
+    print(f"  General corpus: {len(general_ids):,} posts")
+    sys.stdout.flush()
 
-        for pid, text in texts_dict.items():
-            tokens = tokenize(text)
-            total_tokens += len(tokens)
+    # ── Step 2 & 3: Process corpora ────────────────────────────────────
 
-            uni, bi, tri = extract_ngrams(tokens, STOP_WORDS)
-
-            total_uni += uni
-            total_bi += bi
-            total_tri += tri
-
-            for u in set(t for t in tokens if t not in STOP_WORDS):
-                post_sets_uni[u].add(pid)
-            for i in range(len(tokens) - 1):
-                if tokens[i] not in STOP_WORDS or tokens[i+1] not in STOP_WORDS:
-                    post_sets_bi[(tokens[i], tokens[i+1])].add(pid)
-            for i in range(len(tokens) - 2):
-                if (tokens[i] not in STOP_WORDS or tokens[i+1] not in STOP_WORDS
-                        or tokens[i+2] not in STOP_WORDS):
-                    post_sets_tri[(tokens[i], tokens[i+1], tokens[i+2])].add(pid)
-
-        return {
-            "uni": total_uni, "bi": total_bi, "tri": total_tri,
-            "total_tokens": total_tokens,
-            "post_sets_uni": post_sets_uni,
-            "post_sets_bi": post_sets_bi,
-            "post_sets_tri": post_sets_tri,
-        }
-
-    # Process general corpus once
-    print("Processing general corpus...")
-    general_texts = fetch_post_texts(general_ids)
-    general_data = process_corpus(general_texts)
-    print(f"  General corpus tokens: {general_data['total_tokens']:,}")
+    print("\nProcessing general corpus...")
+    sys.stdout.flush()
+    general_data = process_corpus_counts_only(conn, general_ids, label="General")
+    print(f"  General corpus: {general_data['total_tokens']:,} tokens")
+    sys.stdout.flush()
 
     # Process each category
     category_results = {}
 
     for cat in CATEGORIES:
-        print(f"\nProcessing category: {cat} ({len(matched_posts_per_cat[cat])} posts)...")
-        matched_texts = fetch_post_texts(matched_posts_per_cat[cat])
-        matched_data = process_corpus(matched_texts)
+        n_posts = len(matched_posts_per_cat[cat])
+        print(f"\nProcessing category: {cat} ({n_posts} posts)...")
+        sys.stdout.flush()
+        matched_data = process_matched_corpus(conn, matched_posts_per_cat[cat])
         print(f"  Matched tokens: {matched_data['total_tokens']:,}")
 
         # Calculate overrepresentation for all ngram types
         candidates = []
         existing_terms = existing_by_cat.get(cat, set()) | all_existing
 
-        for ngram_type, label in [("uni", "post_sets_uni"), ("bi", "post_sets_bi"), ("tri", "post_sets_tri")]:
+        for ngram_type, ps_key in [("uni", "post_sets_uni"), ("bi", "post_sets_bi"), ("tri", "post_sets_tri")]:
             matched_counts = matched_data[ngram_type]
             general_counts = general_data[ngram_type]
-            post_sets = matched_data[label]
+            post_sets = matched_data[ps_key]
             matched_total = matched_data["total_tokens"]
             general_total = general_data["total_tokens"]
 
@@ -260,9 +320,8 @@ def main():
                 if isinstance(ngram, str) and len(ngram) <= 2:
                     continue
 
-                unique_posts = len(post_sets.get(ngram if isinstance(ngram, tuple) else ngram, set()))
+                unique_posts = len(post_sets.get(ngram, set()))
 
-                # Minimum post threshold
                 if unique_posts < MIN_MATCHED_POSTS:
                     continue
 
@@ -270,7 +329,6 @@ def main():
                 general_count = general_counts.get(ngram, 0)
                 freq_general = general_count / general_total if general_total > 0 else 0
 
-                # Avoid division by zero — if not in general corpus, treat as very high ratio
                 if freq_general == 0:
                     if count >= MIN_MATCHED_POSTS:
                         ratio = 999.0
@@ -290,12 +348,11 @@ def main():
                     "unique_posts": unique_posts,
                 })
 
-        # Sort by ratio descending, take top 50
         candidates.sort(key=lambda x: x["ratio"], reverse=True)
         candidates = candidates[:TOP_N]
         category_results[cat] = candidates
-
         print(f"  Found {len(candidates)} candidates")
+        sys.stdout.flush()
 
     # ── Step 5: Cross-category check ───────────────────────────────────
 
@@ -309,56 +366,64 @@ def main():
         ngram: cats for ngram, cats in ngram_categories.items() if len(cats) > 1
     }
     print(f"  {len(cross_category)} n-grams appear in multiple categories")
+    sys.stdout.flush()
 
     # ── Step 6: Sample contexts ────────────────────────────────────────
 
     print("\nFetching sample contexts for top 20 per category...")
+    sys.stdout.flush()
     category_contexts = {}
 
     for cat in CATEGORIES:
         candidates = category_results[cat][:CONTEXT_TOP_N]
         contexts = {}
 
+        # Pre-fetch a sample of matched post texts for this category
+        matched_ids = matched_posts_per_cat[cat]
+        random.seed(42)
+        sample_size = min(len(matched_ids), 2000)
+        sample_ids = random.sample(matched_ids, sample_size)
+
+        # Fetch texts for sample
+        sample_texts = {}
+        for batch_start in range(0, len(sample_ids), BATCH_SIZE):
+            batch = sample_ids[batch_start:batch_start + BATCH_SIZE]
+            placeholders = ",".join("?" * len(batch))
+            cur.execute(
+                f"SELECT id, title, selftext FROM posts WHERE id IN ({placeholders})",
+                batch
+            )
+            for r in cur.fetchall():
+                raw = (r[1] or "") + " " + (r[2] or "")
+                sample_texts[r[0]] = raw
+
         for cand in candidates:
             ngram = cand["ngram"]
-            # Search for posts containing this ngram in the matched set
-            matched_ids = matched_posts_per_cat[cat]
-
-            # Sample from matched posts
-            random.seed(42)  # Reproducible
-            sample_ids = random.sample(matched_ids, min(len(matched_ids), 500))
-
-            placeholders = ",".join("?" * len(sample_ids))
-            cur.execute(
-                f"""SELECT id, title, selftext FROM posts
-                    WHERE id IN ({placeholders})""",
-                sample_ids
-            )
-
             examples = []
-            for r in cur.fetchall():
-                text = (r["title"] or "") + " " + (r["selftext"] or "")
+
+            # Search in pre-fetched sample
+            for pid, text in sample_texts.items():
                 if ngram.lower() in text.lower():
                     excerpt = clean_text(text)[:200]
                     examples.append(excerpt)
                     if len(examples) >= CONTEXT_EXAMPLES:
                         break
 
-            # If we didn't find enough in the sample, search more broadly
+            # If not enough, try FTS
             if len(examples) < CONTEXT_EXAMPLES:
-                # Use FTS to find more
                 try:
+                    matched_set = set(matched_ids)
                     fts_query = ngram.replace('"', '""')
                     cur.execute(
-                        f"""SELECT p.id, p.title, p.selftext FROM posts_fts fts
-                            JOIN posts p ON p.id = fts.rowid
-                            WHERE posts_fts MATCH ?
-                            LIMIT 50""",
+                        """SELECT p.id, p.title, p.selftext FROM posts_fts fts
+                           JOIN posts p ON p.rowid = fts.rowid
+                           WHERE posts_fts MATCH ?
+                           LIMIT 100""",
                         (f'"{fts_query}"',)
                     )
                     for r in cur.fetchall():
-                        if r["id"] in set(matched_ids):
-                            text = (r["title"] or "") + " " + (r["selftext"] or "")
+                        if r[0] in matched_set:
+                            text = (r[1] or "") + " " + (r[2] or "")
                             if ngram.lower() in text.lower():
                                 excerpt = clean_text(text)[:200]
                                 if excerpt not in examples:
@@ -366,11 +431,13 @@ def main():
                                     if len(examples) >= CONTEXT_EXAMPLES:
                                         break
                 except Exception:
-                    pass  # FTS might not match all ngrams
+                    pass
 
             contexts[ngram] = examples
 
         category_contexts[cat] = contexts
+        print(f"  {cat}: contexts fetched for {len(contexts)} candidates")
+        sys.stdout.flush()
 
     # ── Output report ──────────────────────────────────────────────────
 
@@ -418,7 +485,6 @@ def main():
                 lines.append(f'#### {i}. "{ngram}"\n')
                 if examples:
                     for ex in examples:
-                        # Escape markdown pipe characters
                         ex_clean = ex.replace("|", "\\|")
                         lines.append(f'- "{ex_clean}"')
                 else:

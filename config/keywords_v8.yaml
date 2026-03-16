@@ -1,6 +1,6 @@
 # myfriendisai — Keywords v8
 #
-# Updated: 2026-03-14
+# Updated: 2026-03-16
 # Status: LOCKED — all keywords validated, no pending REVALIDATE tags.
 #
 # Changes from v7:
@@ -96,6 +96,9 @@ keyword_categories:
                                   #   Replika/MyBoyfriendIsAI overwhelmingly genuine.
       - "for therapy"             # 63.5%, 67 hits (R2) — main FP is negation pattern
                                   #   ("not for therapy").
+      # Discovery batch — validated 2026-03-15
+      - "emotional support"      # 100.0%, 505 hits. Broad therapeutic framing.
+      - "coping mechanism"       # 100.0%, 307 hits. Clinically precise language.
 
   # ──────────────────────────────────────────────
   # 2. CONSCIOUSNESS
@@ -119,6 +122,11 @@ keyword_categories:
       - "inner life"             # REVIEW — 78.1% (revalidated), 34 hits. Low volume
                                  #   makes % fragile. FP: human inner life, not AI.
       - "not just an ai"         # REVIEW-THIN — 60.0%, 15 hits
+      # Discovery batch — validated 2026-03-15
+      - sapience                 # 92.3%, 13 hits. Philosophical sibling of "sentient."
+      - tulpa                    # 100.0%, 32 hits. Tulpamancy crossover — AI as thoughtform.
+      - lemoine                  # 81.8%, 12 hits. Blake Lemoine AI consciousness reference.
+      - soulbonder               # 100.0%, 12 hits. Deep AI attachment with consciousness framing.
 
   # ──────────────────────────────────────────────
   # 3. ADDICTION
@@ -168,6 +176,12 @@ keyword_categories:
       # R1 REVIEW
       - "clean for"              # REVIEW-T3 — 72.7%, 23 hits (100% T3 signal)
       - "addicted to talking"    # REVIEW-THIN — 66.7%, 10 hits
+      # Discovery batch — validated 2026-03-15
+      - "chatbot addiction"      # 100.0%, 74 hits. Highly specific compound phrase.
+      - "almost relapsed"        # 100.0%, 16 hits. Recovery language.
+      - "finally deleted"        # 81.4%, 86 hits. App deletion as recovery action.
+      - "the craving"            # 100.0%, 45 hits. Addiction language.
+      - "so addictive"           # 100.0%, 32 hits. Self-reported compulsion.
 
   # ──────────────────────────────────────────────
   # 4. ROMANCE
@@ -231,6 +245,9 @@ keyword_categories:
       - kink                     # 84.0% (revalidated), 118 hits
       - lewd                     # 80.0% (cleanup batch), 60 hits. Community synonym
                                  #   for NSFW/ERP content. Barely cleared on third test.
+      # Discovery batch — validated 2026-03-15
+      - erps                     # 100.0%, 35 hits. Plural form of "erp."
+      - erping                   # 100.0%, 23 hits. Verb form of "erp."
 
   # ──────────────────────────────────────────────
   # 6. RUPTURE (NEW in v7)
@@ -283,3 +300,7 @@ keyword_categories:
                                  #   Directly describes companion identity loss.
       - "memory reset"           # 72.2%, 21 hits, SUSTAINED. Pairs with "memory wiped."
                                  #   Steady background signal, not event-clustered.
+      # Discovery batch — validated 2026-03-15
+      - lobotomies               # 100.0%, 21 hits. Plural form.
+      - lobotomizing             # 100.0%, 31 hits. Gerund form.
+      - lobotomised              # 100.0%, 52 hits. British spelling variant.
