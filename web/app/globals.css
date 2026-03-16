@@ -38,6 +38,18 @@ body {
   outline: none;
 }
 
+.recharts-wrapper,
+.recharts-wrapper svg,
+.recharts-surface {
+  outline: none !important;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.recharts-wrapper:focus,
+.recharts-wrapper *:focus {
+  outline: none !important;
+}
+
 .metric-card {
   transition: transform 0.15s ease, background-color 0.15s ease, box-shadow 0.15s ease;
 }

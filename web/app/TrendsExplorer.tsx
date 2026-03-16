@@ -458,7 +458,7 @@ export default function TrendsExplorer({ themeData }: Props) {
     }
     return {
       height: 440,
-      margin: { top: 100, right: 64, bottom: 8, left: 0 },
+      margin: { top: 100, right: 64, bottom: 8, left: 16 },
       xTickCount: 8,
       minTickGap: timeRange === "6M" ? 40 : 60,
       strokeActive: 2,
@@ -630,23 +630,23 @@ export default function TrendsExplorer({ themeData }: Props) {
         className="text-center"
         style={{ fontSize: 12, color: "#64748B", marginTop: 8, marginBottom: 16 }}
       >
-        Each theme tracks validated keywords — mention rates reflect how distinctive each
-        theme&apos;s vocabulary is, not how prevalent the topic is overall.
-        {" "}
+        Each theme tracks validated keywords. Mention rates reflect how
+        distinctive each theme&apos;s vocabulary is, not necessarily how
+        prevalent the topic is overall. See{" "}
         <a
           href="/about"
           className="underline underline-offset-2 hover:text-foreground transition-colors"
           style={{ color: "#64748B" }}
         >
-          See About for methodology
+          About
         </a>
-        .
+        {" "}for methodology.
       </p>
 
       {/* Chart */}
       <div
         ref={chartRef}
-        className="rounded-xl border p-0 sm:p-4 lg:p-6"
+        className="rounded-xl border p-0 sm:p-4 lg:p-6 outline-none"
         style={{ backgroundColor: "#1A1D27", borderColor: "#2A2D3A" }}
       >
         <div
@@ -710,11 +710,10 @@ export default function TrendsExplorer({ themeData }: Props) {
                       chartMode === "absolute"
                         ? "per 1k posts"
                         : "% of peak",
-                    angle: -90,
-                    position: "insideLeft",
+                    position: "insideTopLeft",
                     fill: "#94A3B8",
                     fontSize: 10,
-                    offset: 4,
+                    offset: 8,
                   }}
                 />
               )}
