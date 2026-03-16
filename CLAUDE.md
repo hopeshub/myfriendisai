@@ -79,7 +79,7 @@ This matters because the site is a citeable research artifact. Users should know
 
 Regex-based keyword tagging runs on all collected posts via `scripts/tag_keywords.py`. Results are stored in the `keyword_tags` table and exported to `data/keyword_trends.json` for frontend charts.
 
-**6 keyword themes** in `config/keywords_v7.yaml`, validated via manual qualitative coding (100-post reads per keyword, no automated classifiers):
+**6 keyword themes** in `config/keywords_v8.yaml`, validated via manual qualitative coding (100-post reads per keyword, no automated classifiers):
 
 | Theme | Keywords | Unique Posts | Description |
 |-------|----------|-------------|-------------|
@@ -106,7 +106,7 @@ Regex-based keyword tagging runs on all collected posts via `scripts/tag_keyword
 - `keywords_v4.yaml`: Consolidated to 5 themes, candidate keyword lists
 - `keywords_v5.yaml`: Post-validation, removed all CUT/LOW VOLUME keywords, excluded JanitorAI/SillyTavern
 - `keywords_v6.yaml`: Therapy Round 2 (added 3 keywords), revalidation without JanitorAI/SillyTavern (promoted 5 keywords)
-- `keywords_v7.yaml`: LOCKED. Cleanup batch (promoted 5), new Rupture theme (6 keywords). No pending REVALIDATE tags. Addiction Round 2 in progress.
+- `keywords_v8.yaml`: LOCKED. Cleanup batch (promoted 5), new Rupture theme (6 keywords). No pending REVALIDATE tags. Addiction Round 2 in progress.
 
 Research artifacts in `docs/`.
 
@@ -178,7 +178,7 @@ ai-companion-tracker/
 │
 ├── config/
 │   ├── communities.yaml      # Target subreddits and categories
-│   └── keywords_v7.yaml      # Keyword themes and terms (locked)
+│   └── keywords_v8.yaml      # Keyword themes and terms (locked)
 │
 ├── src/
 │   ├── __init__.py
@@ -304,7 +304,7 @@ Pseudocode for the daily cron job:
 **Phase 2 addition — keyword collection:**
 ```
 After base collection is stable, add per-subreddit keyword search:
-   For each keyword in keywords_v7.yaml:
+   For each keyword in keywords_v8.yaml:
       GET /r/{subreddit}/search.json?q={keyword}&restrict_sr=on&t=day
       → Store hit count and sample post IDs
 ```
@@ -323,7 +323,7 @@ After base collection is stable, add per-subreddit keyword search:
 ### What the public site shows:
 
 1. **Landing page:** Overview narrative + key trend chart (total engagement across all tracked communities over time)
-2. **Trends Explorer:** 8-theme keyword trend chart with toggleable themes, adaptive rolling averages (30d ALL, 14d 1Y, 7d 90D, raw 30D), independent Y-axis per highlighted theme, event annotations. Data normalized per-1k-posts.
+2. **Trends Explorer:** 6-theme keyword trend chart with toggleable metric cards, absolute/relative mode toggle, nearest-line tooltip, event annotations. Data normalized per-1k-posts.
 3. **Community explorer:** Browse all 19 tracked subreddits, sortable by engagement metrics, filterable by tier/category
 4. **Individual subreddit pages:** Time-series Recharts line charts for subscribers, posts/day, avg comments, avg score
 5. **Keyword trends:** Per-theme trend lines waxing and waning across all communities over time
@@ -356,7 +356,7 @@ After base collection is stable, add per-subreddit keyword search:
 - [x] Basic frontend showing time-series data with raw metrics and simple ratios
 
 ### Phase 2: Enhancements — IN PROGRESS
-- [x] Keyword tagging and trend visualizations (6 validated themes, keywords_v7.yaml)
+- [x] Keyword tagging and trend visualizations (6 validated themes, keywords_v8.yaml)
 - [x] Historical backfill via PullPush (replaces Arctic Shift — data goes back years)
 - [x] Keyword research pipeline (FTS5 + agent-based discovery + precision validation)
 - [ ] Composite "engagement index" scoring (need 4+ weeks of daily data)
@@ -364,7 +364,7 @@ After base collection is stable, add per-subreddit keyword search:
 - [ ] Fix GitHub Actions collect-daily.yml workflow
 
 ### Phase 3: Polish
-- [ ] Public deployment to Vercel + myfriendisai.com domain
+- [x] Public deployment to Vercel + myfriendisai.com domain
 - [ ] SEO and social sharing metadata
 - [ ] Narrative/editorial content on the site
 - [ ] Export/embed functionality for charts
@@ -448,9 +448,9 @@ Work through these in order. Each step should be fully working before moving to 
 ### Step 9: Frontend — Community Explorer ✅ (sortable/filterable table)
 ### Step 10: Frontend — Time-Series Charts ✅ (per-subreddit Recharts line charts)
 ### Step 11: Frontend — Landing Page ✅ (hero chart + 6-theme Trends Explorer)
-### Step 12: Deploy to Vercel — PENDING (domain purchased, not yet deployed)
+### Step 12: Deploy to Vercel ✅ (live at myfriendisai.com)
 ### Step 13: Keyword Tracking + Trend Visualizations ✅
-- Regex tagger (`scripts/tag_keywords.py`) tags posts against 6 validated keyword themes (keywords_v7.yaml)
+- Regex tagger (`scripts/tag_keywords.py`) tags posts against 6 validated keyword themes (keywords_v8.yaml)
 - Export to `data/keyword_trends.json` with per-1k-posts normalization
 - Trends Explorer chart with 6 toggleable themes, adaptive rolling averages, event annotations
 - Keyword validation pipeline: 100-post manual qualitative coding per keyword, documented in docs/validation_*.md

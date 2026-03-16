@@ -52,7 +52,7 @@ const CHANGELOG = [
     title: "Subreddit corpus finalized at 27 active communities",
     items: [
       "Expanded from 19 to 29 communities, then deactivated 2 (JanitorAI_Official, SillyTavernAI excluded from keyword matching due to bot-card pollution)",
-      "Tier structure: 4 general AI (T0), 6 primary companionship (T1), 11 platform-specific (T2), 6 recovery/dependency (T3)",
+      "Tier structure: 5 general AI (T0), 10 primary companionship (T1), 8 platform-specific (T2), 4 recovery/dependency (T3)",
     ],
     recent: false,
   },
