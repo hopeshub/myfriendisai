@@ -48,7 +48,7 @@ export default function RootLayout({
 
         <footer className="border-t border-border mt-20">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 py-6 text-xs text-muted flex flex-col sm:flex-row items-start sm:items-center justify-between gap-1 sm:gap-0">
-            <span>Data from Reddit&apos;s public endpoints · ~1.8M posts · 2023–present</span>
+            <span>Data from Reddit&apos;s public endpoints · ~3.7M posts · 2023–present</span>
             <a href="/about" className="hover:text-foreground transition-colors">Methodology ↗</a>
           </div>
         </footer>
