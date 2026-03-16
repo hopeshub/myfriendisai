@@ -76,6 +76,14 @@ function downsample(data: number[], maxPoints: number): number[] {
   return result;
 }
 
+/** Clip values above p95 so outlier spikes don't flatten the sparkline */
+function clipOutliers(data: number[]): number[] {
+  if (data.length < 5) return data;
+  const sorted = [...data].sort((a, b) => a - b);
+  const p95 = sorted[Math.floor(sorted.length * 0.95)];
+  return data.map((v) => Math.min(v, p95));
+}
+
 // ─── Sparkline ─────────────────────────────────────────────────────────────
 
 function Sparkline({
@@ -150,7 +158,7 @@ export default function TrendsExplorer({ themeData }: Props) {
       return {
         ...theme,
         value: Math.round(avgValue),
-        sparklineData: downsample(hitsPerKValues, 60),
+        sparklineData: downsample(clipOutliers(hitsPerKValues), 60),
       };
     }).sort((a, b) => b.value - a.value);
   }, [themeData, cutoffDate]);
@@ -461,7 +469,7 @@ export default function TrendsExplorer({ themeData }: Props) {
               >
                 hits / 1k posts
               </div>
-              <div className="mt-1.5">
+              <div className="mt-1.5 pointer-events-none">
                 <Sparkline
                   data={card.sparklineData}
                   color={card.color}
