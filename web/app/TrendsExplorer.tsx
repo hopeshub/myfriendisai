@@ -632,7 +632,7 @@ export default function TrendsExplorer({ themeData }: Props) {
       >
         Each theme tracks validated keywords. Mention rates reflect how
         distinctive each theme&apos;s vocabulary is, not necessarily how
-        prevalent the topic is overall. See{" "}
+        prevalent the topic is overall.{" "}
         <a
           href="/about"
           className="underline underline-offset-2 hover:text-foreground transition-colors"
@@ -640,7 +640,6 @@ export default function TrendsExplorer({ themeData }: Props) {
         >
           About
         </a>
-        {" "}for methodology.
       </p>
 
       {/* Chart */}
