@@ -119,8 +119,10 @@ type Props = { themeData: ThemeData };
 
 export default function TrendsExplorer({ themeData }: Props) {
   const [selected, setSelected] = useState<Set<ThemeId>>(new Set());
-  const [timeRange, setTimeRange] = useState<TimeRange>("ALL");
+  const [timeRange, setTimeRange] = useState<TimeRange>("1Y");
   const [chartMode, setChartMode] = useState<ChartMode>("absolute");
+  const [autoSwitched, setAutoSwitched] = useState(false);
+  const userModeRef = useRef<ChartMode>("absolute");
   const [eventsExpanded, setEventsExpanded] = useState(false);
   const chartRef = useRef<HTMLDivElement>(null);
   const bp = useBreakpoint();
@@ -481,7 +483,16 @@ export default function TrendsExplorer({ themeData }: Props) {
           {(["6M", "1Y", "2Y", "ALL"] as TimeRange[]).map((range) => (
             <button
               key={range}
-              onClick={() => setTimeRange(range)}
+              onClick={() => {
+                setTimeRange(range);
+                if (range === "ALL" && userModeRef.current === "absolute") {
+                  setChartMode("relative");
+                  setAutoSwitched(true);
+                } else if (range !== "ALL" && autoSwitched) {
+                  setChartMode(userModeRef.current);
+                  setAutoSwitched(false);
+                }
+              }}
               className="flex-1 sm:flex-none h-11 sm:h-auto px-3 py-1 text-xs font-medium rounded-md transition-colors"
               style={{
                 backgroundColor: timeRange === range ? "#1A1D27" : "transparent",
@@ -494,21 +505,32 @@ export default function TrendsExplorer({ themeData }: Props) {
           ))}
         </div>
         <div className="hidden sm:block flex-1" />
-        <div className="grid grid-cols-2 sm:flex gap-1">
-          {(["absolute", "relative"] as ChartMode[]).map((mode) => (
-            <button
-              key={mode}
-              onClick={() => setChartMode(mode)}
-              className="h-11 sm:h-auto px-3 py-1 text-xs font-medium rounded-md transition-colors"
-              style={{
-                backgroundColor: chartMode === mode ? "#1A1D27" : "transparent",
-                color: chartMode === mode ? "#F8FAFC" : "#94A3B8",
-                border: `1px solid ${chartMode === mode ? "#2A2D3A" : "transparent"}`,
-              }}
-            >
-              {mode === "absolute" ? "Absolute" : "Relative"}
-            </button>
-          ))}
+        <div className="flex flex-col items-end gap-1">
+          <div className="grid grid-cols-2 sm:flex gap-1">
+            {(["absolute", "relative"] as ChartMode[]).map((mode) => (
+              <button
+                key={mode}
+                onClick={() => {
+                  setChartMode(mode);
+                  userModeRef.current = mode;
+                  setAutoSwitched(false);
+                }}
+                className="h-11 sm:h-auto px-3 py-1 text-xs font-medium rounded-md transition-colors"
+                style={{
+                  backgroundColor: chartMode === mode ? "#1A1D27" : "transparent",
+                  color: chartMode === mode ? "#F8FAFC" : "#94A3B8",
+                  border: `1px solid ${chartMode === mode ? "#2A2D3A" : "transparent"}`,
+                }}
+              >
+                {mode === "absolute" ? "Absolute" : "Relative"}
+              </button>
+            ))}
+          </div>
+          {autoSwitched && (
+            <span className="text-[10px]" style={{ color: "#94A3B8" }}>
+              Showing relative scale for full timeline
+            </span>
+          )}
         </div>
       </div>
 
