@@ -59,15 +59,24 @@ function formatMonthTickShort(dateStr: string): string {
   return `${MONTH_NAMES[d.getUTCMonth()]} '${yr}`;
 }
 
-/** Round up to a clean axis max (matches typical charting library behavior) */
-function niceMax(v: number): number {
-  if (v <= 0) return 10;
-  const exp = Math.pow(10, Math.floor(Math.log10(v)));
-  const frac = v / exp;
-  if (frac <= 1) return exp;
-  if (frac <= 2) return 2 * exp;
-  if (frac <= 5) return 5 * exp;
-  return 10 * exp;
+/** Compute a clean axis max and evenly spaced ticks for a given data max */
+function niceAxis(dataMax: number): { max: number; ticks: number[] } {
+  if (dataMax <= 0) return { max: 10, ticks: [2, 4, 6, 8, 10] };
+  // Pick a nice step size that yields 4-6 ticks
+  const rough = dataMax / 5;
+  const exp = Math.pow(10, Math.floor(Math.log10(rough)));
+  const frac = rough / exp;
+  let step: number;
+  if (frac <= 1) step = exp;
+  else if (frac <= 2) step = 2 * exp;
+  else if (frac <= 5) step = 5 * exp;
+  else step = 10 * exp;
+  const max = Math.ceil(dataMax / step) * step;
+  const ticks: number[] = [];
+  for (let v = step; v <= max; v += step) {
+    ticks.push(Math.round(v * 1000) / 1000);
+  }
+  return { max, ticks };
 }
 
 function toMonth(dateStr: string): string {
@@ -310,18 +319,21 @@ export default function TrendsExplorer({ themeData }: Props) {
     return { chartData: data, peakMonths: peaks };
   }, [filteredRaw, filteredAbsolute, chartMode]);
 
-  // ── Y-axis domain max (explicit so tooltip pixel math matches the chart) ──
-  const yDomainMax = useMemo(() => {
-    if (chartMode === "relative") return 100;
-    let max = 0;
+  // ── Y-axis config (explicit so tooltip pixel math matches the chart) ──
+  const yAxisConfig = useMemo(() => {
+    if (chartMode === "relative")
+      return { max: 100, ticks: [25, 50, 75, 100] };
+    let dataMax = 0;
     for (const row of chartData) {
       for (const theme of THEMES) {
         const v = (row[theme.id] as number) ?? 0;
-        if (v > max) max = v;
+        if (v > dataMax) dataMax = v;
       }
     }
-    return niceMax(max);
+    return niceAxis(dataMax);
   }, [chartMode, chartData]);
+
+  const yDomainMax = yAxisConfig.max;
 
   // ── Visible events ──
   const visibleEvents = useMemo(() => {
@@ -632,14 +644,7 @@ export default function TrendsExplorer({ themeData }: Props) {
       >
         Each theme tracks validated keywords. Mention rates reflect how
         distinctive each theme&apos;s vocabulary is, not necessarily how
-        prevalent the topic is overall.{" "}
-        <a
-          href="/about"
-          className="underline underline-offset-2 hover:text-foreground transition-colors"
-          style={{ color: "#64748B" }}
-        >
-          About
-        </a>
+        prevalent the topic is overall.
       </p>
 
       {/* Chart */}
@@ -687,14 +692,10 @@ export default function TrendsExplorer({ themeData }: Props) {
                 <YAxis
                   yAxisId="index"
                   domain={[0, yDomainMax]}
-                  ticks={
-                    chartMode === "relative"
-                      ? [25, 50, 75, 100]
-                      : undefined
-                  }
+                  ticks={yAxisConfig.ticks}
                   tickFormatter={(v: number) =>
                     chartMode === "absolute"
-                      ? v < 10
+                      ? v < 10 && v !== Math.floor(v)
                         ? v.toFixed(1)
                         : String(Math.round(v))
                       : String(v)
@@ -704,16 +705,6 @@ export default function TrendsExplorer({ themeData }: Props) {
                   axisLine={false}
                   tickLine={false}
                   width={chartConfig.yAxisWidth}
-                  label={{
-                    value:
-                      chartMode === "absolute"
-                        ? "per 1k posts"
-                        : "% of peak",
-                    position: "insideTopLeft",
-                    fill: "#94A3B8",
-                    fontSize: 10,
-                    offset: 8,
-                  }}
                 />
               )}
 
