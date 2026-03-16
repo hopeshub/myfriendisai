@@ -97,7 +97,7 @@ def build_keyword_details(db: sqlite3.Connection, categories: dict) -> dict:
 
             # Sample 3 recent post titles
             sample_posts = db.execute(
-                """SELECT DISTINCT p.title, pkt.subreddit, pkt.post_date
+                """SELECT DISTINCT p.title, pkt.subreddit, pkt.post_date, p.id
                    FROM post_keyword_tags pkt
                    JOIN posts p ON pkt.post_id = p.id
                    WHERE pkt.category = ? AND LOWER(pkt.matched_term) = LOWER(?)
@@ -112,7 +112,7 @@ def build_keyword_details(db: sqlite3.Connection, categories: dict) -> dict:
             # Fall back to older posts if not enough recent ones
             if len(sample_posts) < 3:
                 older = db.execute(
-                    """SELECT DISTINCT p.title, pkt.subreddit, pkt.post_date
+                    """SELECT DISTINCT p.title, pkt.subreddit, pkt.post_date, p.id
                        FROM post_keyword_tags pkt
                        JOIN posts p ON pkt.post_id = p.id
                        WHERE pkt.category = ? AND LOWER(pkt.matched_term) = LOWER(?)
@@ -139,6 +139,7 @@ def build_keyword_details(db: sqlite3.Connection, categories: dict) -> dict:
                             "title": sp[0],
                             "subreddit": sp[1],
                             "date": sp[2],
+                            "id": sp[3],
                         }
                         for sp in sample_posts
                     ],

@@ -4,7 +4,7 @@ import { useState } from "react";
 
 // ─── Types ────────────────────────────────────────────────────────────────
 
-type SamplePost = { title: string; subreddit: string; date: string };
+type SamplePost = { title: string; subreddit: string; date: string; id: string };
 type KeywordEntry = {
   term: string;
   hits: number;
@@ -47,6 +47,10 @@ function truncate(str: string, max: number): string {
   return str.length > max ? str.slice(0, max).trimEnd() + "\u2026" : str;
 }
 
+function redditUrl(postId: string): string {
+  return `https://www.reddit.com/comments/${postId}`;
+}
+
 /** Pick up to 3 diverse sample posts, one from each keyword where possible */
 function pickSamples(keywords: KeywordEntry[]): SamplePost[] {
   const samples: SamplePost[] = [];
@@ -76,6 +80,17 @@ function pickSamples(keywords: KeywordEntry[]): SamplePost[] {
   return samples;
 }
 
+// ─── Section header style ─────────────────────────────────────────────────
+
+const sectionHeaderStyle: React.CSSProperties = {
+  fontSize: 12,
+  fontWeight: 500,
+  textTransform: "uppercase",
+  letterSpacing: "0.05em",
+  color: "#64748B",
+  marginBottom: 12,
+};
+
 // ─── Sections ─────────────────────────────────────────────────────────────
 
 function KeywordsSection({
@@ -92,16 +107,7 @@ function KeywordsSection({
 
   return (
     <div>
-      <div
-        className="text-[12px] font-medium mb-3"
-        style={{
-          textTransform: "uppercase",
-          letterSpacing: "0.05em",
-          color: "#64748B",
-        }}
-      >
-        Tracked keywords
-      </div>
+      <div style={sectionHeaderStyle}>Tracked keywords</div>
       <div className="space-y-2">
         {visible.map((kw) => (
           <div key={kw.term}>
@@ -158,16 +164,7 @@ function CommunitiesSection({
 
   return (
     <div>
-      <div
-        className="text-[12px] font-medium mb-3"
-        style={{
-          textTransform: "uppercase",
-          letterSpacing: "0.05em",
-          color: "#64748B",
-        }}
-      >
-        Top communities
-      </div>
+      <div style={sectionHeaderStyle}>Top communities</div>
       <div className="space-y-2.5">
         {visible.map((sub) => (
           <div key={sub.name}>
@@ -211,16 +208,7 @@ function CommunitiesSection({
 function SamplePostsSection({ samples }: { samples: SamplePost[] }) {
   return (
     <div>
-      <div
-        className="text-[12px] font-medium mb-3"
-        style={{
-          textTransform: "uppercase",
-          letterSpacing: "0.05em",
-          color: "#64748B",
-        }}
-      >
-        Example posts
-      </div>
+      <div style={sectionHeaderStyle}>Example posts</div>
       <div>
         {samples.map((sp, i) => (
           <div
@@ -228,9 +216,15 @@ function SamplePostsSection({ samples }: { samples: SamplePost[] }) {
             className="py-2.5"
             style={i > 0 ? { borderTop: "0.5px solid #1E293B" } : undefined}
           >
-            <div className="text-[13px]" style={{ color: "#CBD5E1" }}>
+            <a
+              href={redditUrl(sp.id)}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[13px] hover:underline underline-offset-2 transition-colors"
+              style={{ color: "#CBD5E1" }}
+            >
               {truncate(sp.title, 100)}
-            </div>
+            </a>
             <div className="text-[11px] mt-1" style={{ color: "#64748B" }}>
               r/{sp.subreddit} &middot; {formatDate(sp.date)}
             </div>
@@ -241,7 +235,7 @@ function SamplePostsSection({ samples }: { samples: SamplePost[] }) {
   );
 }
 
-// ─── Main component: right-edge slide-out panel ───────────────────────────
+// ─── Main component: right-edge side panel ────────────────────────────────
 
 export default function TransparencyPanel({
   themeLabel,
@@ -253,58 +247,48 @@ export default function TransparencyPanel({
   const samples = pickSamples(data.keywords);
 
   return (
-    <div className="fixed inset-0 z-50">
-      {/* Backdrop */}
+    <div
+      className="side-panel fixed top-0 right-0 bottom-0 flex flex-col z-40"
+      style={{
+        width: "min(400px, 100vw)",
+        backgroundColor: "#1A1D27",
+        borderLeft: `3px solid ${themeColor}`,
+        boxShadow: "-8px 0 24px rgba(0,0,0,0.4)",
+      }}
+    >
+      {/* Header — sticky at top */}
       <div
-        className="absolute inset-0 side-panel-backdrop"
-        style={{ backgroundColor: "rgba(0,0,0,0.35)" }}
-        onClick={onClose}
-      />
-
-      {/* Panel */}
-      <div
-        className="side-panel absolute top-0 right-0 bottom-0 flex flex-col"
-        style={{
-          width: "min(400px, 100vw)",
-          backgroundColor: "#1A1D27",
-          borderLeft: `3px solid ${themeColor}`,
-          boxShadow: "-8px 0 24px rgba(0,0,0,0.4)",
-        }}
+        className="flex items-center justify-between px-5 py-4 flex-shrink-0"
+        style={{ borderBottom: "0.5px solid #1E293B" }}
       >
-        {/* Header */}
-        <div
-          className="flex items-center justify-between px-5 py-4 flex-shrink-0"
-          style={{ borderBottom: "0.5px solid #1E293B" }}
+        <span className="text-[15px] font-medium" style={{ color: themeColor }}>
+          {themeEmoji} {themeLabel}
+        </span>
+        <button
+          onClick={onClose}
+          className="text-[20px] leading-none w-8 h-8 flex items-center justify-center rounded hover:text-foreground transition-colors"
+          style={{ color: "#64748B" }}
+          aria-label="Close panel"
         >
-          <span className="text-[15px] font-medium" style={{ color: themeColor }}>
-            {themeEmoji} {themeLabel}
-          </span>
-          <button
-            onClick={onClose}
-            className="text-[20px] leading-none w-8 h-8 flex items-center justify-center rounded hover:text-foreground transition-colors"
-            style={{ color: "#64748B" }}
-            aria-label="Close panel"
-          >
-            &times;
-          </button>
-        </div>
+          &times;
+        </button>
+      </div>
 
-        {/* Scrollable content */}
-        <div className="flex-1 overflow-y-auto px-5 py-5 space-y-7">
-          <KeywordsSection keywords={data.keywords} color={themeColor} />
-          <CommunitiesSection subreddits={data.subreddits} color={themeColor} />
-          <SamplePostsSection samples={samples} />
+      {/* Scrollable content */}
+      <div className="flex-1 overflow-y-auto px-5 py-5 space-y-7">
+        <KeywordsSection keywords={data.keywords} color={themeColor} />
+        <CommunitiesSection subreddits={data.subreddits} color={themeColor} />
+        <SamplePostsSection samples={samples} />
 
-          {/* Footer */}
-          <div
-            className="text-[11px] pt-3"
-            style={{ color: "#64748B", borderTop: "0.5px solid #1E293B" }}
-          >
-            {data.keywords.length} keywords across{" "}
-            {data.subreddits.length} communities &middot;{" "}
-            {data.unique_posts.toLocaleString()} posts matched &middot; All
-            keywords validated at &ge;80% precision
-          </div>
+        {/* Footer */}
+        <div
+          className="text-[11px] pt-3"
+          style={{ color: "#64748B", borderTop: "0.5px solid #1E293B" }}
+        >
+          {data.keywords.length} keywords across{" "}
+          {data.subreddits.length} communities &middot;{" "}
+          {data.unique_posts.toLocaleString()} posts matched &middot; All
+          keywords validated at &ge;80% precision
         </div>
       </div>
     </div>

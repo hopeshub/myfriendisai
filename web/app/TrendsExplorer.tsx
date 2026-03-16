@@ -488,8 +488,18 @@ export default function TrendsExplorer({ themeData, keywordDetails }: Props) {
   // ── Sparkline height by breakpoint ──
   const sparklineHeight = bp === "mobile" ? 20 : 24;
 
+  const panelOpen = detailPanel !== null;
+  const panelWidth = bp === "mobile" ? 0 : 400;
+
   return (
-    <div className="max-w-5xl mx-auto px-4 sm:px-6 py-6 sm:py-10">
+    <>
+    <div
+      className="max-w-5xl mx-auto px-4 sm:px-6 py-6 sm:py-10"
+      style={{
+        marginRight: panelOpen && bp !== "mobile" ? panelWidth : undefined,
+        transition: "margin-right 250ms ease",
+      }}
+    >
       {/* Headline + dynamic summary */}
       <div className="mb-6 sm:mb-8">
         <h1 className="text-[22px] sm:text-2xl lg:text-3xl font-bold text-[#F8FAFC] mb-2">
@@ -647,27 +657,6 @@ export default function TrendsExplorer({ themeData, keywordDetails }: Props) {
           );
         })}
       </div>
-
-      {/* Side panel (rendered as fixed overlay, doesn't push content) */}
-      {(() => {
-        const panelTheme = detailPanel
-          ? THEMES.find((t) => t.id === detailPanel)
-          : null;
-        const panelData = detailPanel
-          ? keywordDetails[detailPanel]
-          : null;
-        if (!panelTheme || !panelData) return null;
-        return (
-          <TransparencyPanel
-            themeId={panelTheme.id}
-            themeLabel={panelTheme.label}
-            themeEmoji={panelTheme.emoji}
-            themeColor={panelTheme.color}
-            data={panelData}
-            onClose={() => setDetailPanel(null)}
-          />
-        );
-      })()}
 
       {/* Explainer */}
       <p
@@ -944,5 +933,27 @@ export default function TrendsExplorer({ themeData, keywordDetails }: Props) {
         </div>
       )}
     </div>
+
+    {/* Side panel — fixed position, full viewport height */}
+    {(() => {
+      const panelTheme = detailPanel
+        ? THEMES.find((t) => t.id === detailPanel)
+        : null;
+      const panelData = detailPanel
+        ? keywordDetails[detailPanel]
+        : null;
+      if (!panelTheme || !panelData) return null;
+      return (
+        <TransparencyPanel
+          themeId={panelTheme.id}
+          themeLabel={panelTheme.label}
+          themeEmoji={panelTheme.emoji}
+          themeColor={panelTheme.color}
+          data={panelData}
+          onClose={() => setDetailPanel(null)}
+        />
+      );
+    })()}
+    </>
   );
 }
