@@ -507,18 +507,9 @@ export default function TrendsExplorer({ themeData, keywordDetails }: Props) {
   // ── Sparkline height by breakpoint ──
   const sparklineHeight = bp === "mobile" ? 20 : 24;
 
-  const panelOpen = detailPanel !== null;
-  const panelWidth = bp === "mobile" ? 0 : 400;
-
   return (
     <>
-    <div
-      className="max-w-5xl mx-auto px-4 sm:px-6 py-6 sm:py-10"
-      style={{
-        marginRight: panelOpen && bp !== "mobile" ? panelWidth : undefined,
-        transition: "margin-right 250ms ease",
-      }}
-    >
+    <div className="max-w-5xl mx-auto px-4 sm:px-6 py-6 sm:py-10">
       {/* Headline + dynamic summary */}
       <div className="mb-6 sm:mb-8">
         <h1 className="text-[22px] sm:text-2xl lg:text-3xl font-bold text-[#F8FAFC] mb-2">
