@@ -42,6 +42,7 @@ const EVENTS = [
 // ─── Helpers ───────────────────────────────────────────────────────────────
 
 type TimeRange = "6M" | "1Y" | "2Y" | "ALL";
+type ChartMode = "absolute" | "relative";
 
 const MONTH_NAMES = [
   "Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec",
@@ -119,6 +120,7 @@ type Props = { themeData: ThemeData };
 export default function TrendsExplorer({ themeData }: Props) {
   const [selected, setSelected] = useState<Set<ThemeId>>(new Set());
   const [timeRange, setTimeRange] = useState<TimeRange>("ALL");
+  const [chartMode, setChartMode] = useState<ChartMode>("absolute");
   const [eventsExpanded, setEventsExpanded] = useState(false);
   const chartRef = useRef<HTMLDivElement>(null);
   const bp = useBreakpoint();
@@ -141,46 +143,50 @@ export default function TrendsExplorer({ themeData }: Props) {
     return cutoff.toISOString().split("T")[0];
   }, [timeRange]);
 
-  // ── Stable card order: always sorted by ALL-time average (largest → smallest) ──
-  const allTimeOrder = useMemo(() => {
-    const order = THEMES.map((theme) => {
-      const points = themeData[theme.id] ?? [];
-      const hitsPerKValues = points.map((p) => p.hitsPerK);
-      const avg =
-        hitsPerKValues.length > 0
-          ? hitsPerKValues.reduce((s, v) => s + v, 0) / hitsPerKValues.length
-          : 0;
-      return { id: theme.id, avg };
-    })
-      .sort((a, b) => b.avg - a.avg)
-      .map((t) => t.id);
-    return order;
+  // ── 90-day cutoff for metric card values ──
+  const last90Cutoff = useMemo(() => {
+    let latestDate = "";
+    for (const theme of THEMES) {
+      const pts = themeData[theme.id] ?? [];
+      for (const p of pts) {
+        if (p.date > latestDate) latestDate = p.date;
+      }
+    }
+    if (!latestDate) return "";
+    const d = new Date(latestDate + "T00:00:00Z");
+    d.setUTCDate(d.getUTCDate() - 90);
+    return d.toISOString().split("T")[0];
   }, [themeData]);
 
-  // ── Metric card data (display values for current time range, stable order) ──
+  // ── Metric card data (value = 90-day avg hitsPerK, sparkline = selected time range) ──
   const metricCards = useMemo(() => {
     const cards = THEMES.map((theme) => {
       const points = themeData[theme.id] ?? [];
+
+      // 90-day average for the display value (always, regardless of time range)
+      const recent = last90Cutoff
+        ? points.filter((p) => p.date >= last90Cutoff)
+        : points;
+      const recentHpk = recent.map((p) => p.hitsPerK);
+      const avgValue =
+        recentHpk.length > 0
+          ? recentHpk.reduce((s, v) => s + v, 0) / recentHpk.length
+          : 0;
+
+      // Sparkline uses the selected time range
       const filtered = cutoffDate
         ? points.filter((p) => p.date >= cutoffDate)
         : points;
-
-      const hitsPerKValues = filtered.map((p) => p.hitsPerK);
-      const avgValue =
-        hitsPerKValues.length > 0
-          ? hitsPerKValues.reduce((s, v) => s + v, 0) / hitsPerKValues.length
-          : 0;
+      const sparkHpk = filtered.map((p) => p.hitsPerK);
 
       return {
         ...theme,
-        value: Math.round(avgValue),
-        sparklineData: downsample(clipOutliers(hitsPerKValues), 60),
+        value: Math.round(avgValue * 10) / 10,
+        sparklineData: downsample(clipOutliers(sparkHpk), 60),
       };
     });
-    return cards.sort(
-      (a, b) => allTimeOrder.indexOf(a.id) - allTimeOrder.indexOf(b.id),
-    );
-  }, [themeData, cutoffDate, allTimeOrder]);
+    return cards.sort((a, b) => b.value - a.value);
+  }, [themeData, cutoffDate, last90Cutoff]);
 
   // ── Monthly aggregation (raw counts) ──
   const allMonthlyRaw = useMemo(() => {
@@ -199,6 +205,34 @@ export default function TrendsExplorer({ themeData }: Props) {
       );
   }, [themeData]);
 
+  // ── Monthly aggregation (absolute: average hitsPerK per month) ──
+  const allMonthlyAbsolute = useMemo(() => {
+    const monthly: Record<
+      string,
+      Record<string, { sum: number; count: number }>
+    > = {};
+    for (const theme of THEMES) {
+      for (const pt of themeData[theme.id] ?? []) {
+        const m = toMonth(pt.date);
+        if (!monthly[m]) monthly[m] = {};
+        if (!monthly[m][theme.id])
+          monthly[m][theme.id] = { sum: 0, count: 0 };
+        monthly[m][theme.id].sum += pt.hitsPerK;
+        monthly[m][theme.id].count += 1;
+      }
+    }
+    return Object.keys(monthly)
+      .sort()
+      .map((m) => {
+        const row: Record<string, number | string> = { date: m };
+        for (const theme of THEMES) {
+          const d = monthly[m]?.[theme.id];
+          row[theme.id] = d ? d.sum / d.count : 0;
+        }
+        return row;
+      });
+  }, [themeData]);
+
   // ── Time range filter (on raw counts) ──
   const filteredRaw = useMemo(() => {
     if (timeRange === "ALL") return allMonthlyRaw;
@@ -209,8 +243,19 @@ export default function TrendsExplorer({ themeData }: Props) {
     return allMonthlyRaw.filter((d) => (d.date as string) >= cutoffStr);
   }, [allMonthlyRaw, timeRange]);
 
-  // ── Index 0-100 relative to peak within visible range ──
+  // ── Time range filter (on absolute hitsPerK) ──
+  const filteredAbsolute = useMemo(() => {
+    if (timeRange === "ALL") return allMonthlyAbsolute;
+    const monthsBack = timeRange === "2Y" ? 24 : timeRange === "1Y" ? 12 : 6;
+    const cutoff = new Date();
+    cutoff.setMonth(cutoff.getMonth() - monthsBack);
+    const cutoffStr = cutoff.toISOString().slice(0, 7) + "-01";
+    return allMonthlyAbsolute.filter((d) => (d.date as string) >= cutoffStr);
+  }, [allMonthlyAbsolute, timeRange]);
+
+  // ── Chart data: absolute (hitsPerK) or relative (% of peak) ──
   const { chartData, peakMonths } = useMemo(() => {
+    // Always compute peaks from raw data (used by summary)
     const peaks: Partial<Record<ThemeId, { month: string; count: number }>> = {};
     for (const theme of THEMES) {
       let peakMonth = "";
@@ -225,6 +270,19 @@ export default function TrendsExplorer({ themeData }: Props) {
       if (peakCount > 0)
         peaks[theme.id] = { month: peakMonth, count: peakCount };
     }
+
+    if (chartMode === "absolute") {
+      const data = filteredAbsolute.map((row) => {
+        const out: Record<string, number | string> = { date: row.date };
+        for (const theme of THEMES) {
+          out[theme.id] = (row[theme.id] as number) ?? 0;
+        }
+        return out;
+      });
+      return { chartData: data, peakMonths: peaks };
+    }
+
+    // Relative mode — normalize each theme to its own peak = 100
     const data = filteredRaw.map((row) => {
       const out: Record<string, number | string> = { date: row.date };
       for (const theme of THEMES) {
@@ -235,7 +293,7 @@ export default function TrendsExplorer({ themeData }: Props) {
       return out;
     });
     return { chartData: data, peakMonths: peaks };
-  }, [filteredRaw]);
+  }, [filteredRaw, filteredAbsolute, chartMode]);
 
   // ── Visible events ──
   const visibleEvents = useMemo(() => {
@@ -417,22 +475,41 @@ export default function TrendsExplorer({ themeData }: Props) {
         </p>
       </div>
 
-      {/* Time range selector */}
-      <div className="flex gap-1 mb-4">
-        {(["6M", "1Y", "2Y", "ALL"] as TimeRange[]).map((range) => (
-          <button
-            key={range}
-            onClick={() => setTimeRange(range)}
-            className="flex-1 sm:flex-none h-11 sm:h-auto px-3 py-1 text-xs font-medium rounded-md transition-colors"
-            style={{
-              backgroundColor: timeRange === range ? "#1A1D27" : "transparent",
-              color: timeRange === range ? "#F8FAFC" : "#94A3B8",
-              border: `1px solid ${timeRange === range ? "#2A2D3A" : "transparent"}`,
-            }}
-          >
-            {range}
-          </button>
-        ))}
+      {/* Time range selector + chart mode toggle */}
+      <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-0 mb-4">
+        <div className="flex gap-1">
+          {(["6M", "1Y", "2Y", "ALL"] as TimeRange[]).map((range) => (
+            <button
+              key={range}
+              onClick={() => setTimeRange(range)}
+              className="flex-1 sm:flex-none h-11 sm:h-auto px-3 py-1 text-xs font-medium rounded-md transition-colors"
+              style={{
+                backgroundColor: timeRange === range ? "#1A1D27" : "transparent",
+                color: timeRange === range ? "#F8FAFC" : "#94A3B8",
+                border: `1px solid ${timeRange === range ? "#2A2D3A" : "transparent"}`,
+              }}
+            >
+              {range}
+            </button>
+          ))}
+        </div>
+        <div className="hidden sm:block flex-1" />
+        <div className="grid grid-cols-2 sm:flex gap-1">
+          {(["absolute", "relative"] as ChartMode[]).map((mode) => (
+            <button
+              key={mode}
+              onClick={() => setChartMode(mode)}
+              className="h-11 sm:h-auto px-3 py-1 text-xs font-medium rounded-md transition-colors"
+              style={{
+                backgroundColor: chartMode === mode ? "#1A1D27" : "transparent",
+                color: chartMode === mode ? "#F8FAFC" : "#94A3B8",
+                border: `1px solid ${chartMode === mode ? "#2A2D3A" : "transparent"}`,
+              }}
+            >
+              {mode === "absolute" ? "Absolute" : "Relative"}
+            </button>
+          ))}
+        </div>
       </div>
 
       {/* Metric cards */}
@@ -456,7 +533,7 @@ export default function TrendsExplorer({ themeData }: Props) {
               key={card.id}
               onClick={() => toggleTheme(card.id as ThemeId)}
               aria-pressed={isActive}
-              aria-label={`${card.label}: ${card.value} hits per 1000 posts`}
+              aria-label={`${card.label}: ${card.value.toFixed(1)} hits per 1000 posts`}
               className="metric-card text-left rounded-lg cursor-pointer"
               style={{
                 backgroundColor: "#1A1D27",
@@ -480,7 +557,7 @@ export default function TrendsExplorer({ themeData }: Props) {
                   fontVariantNumeric: "tabular-nums",
                 }}
               >
-                {card.value}
+                {card.value.toFixed(1)}
               </div>
               <div
                 className="text-[10px] leading-tight"
@@ -535,21 +612,46 @@ export default function TrendsExplorer({ themeData }: Props) {
               {chartConfig.showYAxis && (
                 <YAxis
                   yAxisId="index"
-                  domain={[0, 100]}
-                  ticks={[25, 50, 75, 100]}
-                  tickFormatter={(v) => String(v)}
+                  domain={
+                    chartMode === "absolute" ? [0, "auto"] : [0, 100]
+                  }
+                  ticks={
+                    chartMode === "relative"
+                      ? [25, 50, 75, 100]
+                      : undefined
+                  }
+                  tickFormatter={(v: number) =>
+                    chartMode === "absolute"
+                      ? v < 10
+                        ? v.toFixed(1)
+                        : String(Math.round(v))
+                      : String(v)
+                  }
                   stroke="transparent"
                   tick={{ fill: "#94A3B8", fontSize: 12 }}
                   axisLine={false}
                   tickLine={false}
                   width={chartConfig.yAxisWidth}
+                  label={{
+                    value:
+                      chartMode === "absolute"
+                        ? "per 1k posts"
+                        : "% of peak",
+                    angle: -90,
+                    position: "insideLeft",
+                    fill: "#94A3B8",
+                    fontSize: 10,
+                    offset: 4,
+                  }}
                 />
               )}
 
               {!chartConfig.showYAxis && (
                 <YAxis
                   yAxisId="index"
-                  domain={[0, 100]}
+                  domain={
+                    chartMode === "absolute" ? [0, "auto"] : [0, 100]
+                  }
                   hide
                   width={0}
                 />
@@ -594,7 +696,9 @@ export default function TrendsExplorer({ themeData }: Props) {
                               {theme?.label}
                             </span>
                             <span className="text-[#F8FAFC] font-medium ml-auto pl-4">
-                              {Math.round(p.value as number)}
+                              {chartMode === "absolute"
+                                ? `${(p.value as number).toFixed(1)} per 1k`
+                                : `${Math.round(p.value as number)}% of peak`}
                             </span>
                           </div>
                         );
