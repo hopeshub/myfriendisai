@@ -125,6 +125,7 @@ export default function TrendsExplorer({ themeData }: Props) {
   const userModeRef = useRef<ChartMode>("absolute");
   const [eventsExpanded, setEventsExpanded] = useState(false);
   const chartRef = useRef<HTMLDivElement>(null);
+  const mouseYRef = useRef<number>(0);
   const bp = useBreakpoint();
 
   function toggleTheme(id: ThemeId) {
@@ -610,7 +611,16 @@ export default function TrendsExplorer({ themeData }: Props) {
           style={{ height: chartConfig.height }}
         >
           <ResponsiveContainer width="100%" height="100%">
-            <ComposedChart data={chartData} margin={chartConfig.margin}>
+            <ComposedChart
+              data={chartData}
+              margin={chartConfig.margin}
+              onMouseMove={(_state, event) => {
+                if (!event || !chartRef.current) return;
+                const rect = chartRef.current.getBoundingClientRect();
+                mouseYRef.current =
+                  event.clientY - rect.top - chartConfig.margin.top;
+              }}
+            >
               <CartesianGrid
                 strokeDasharray="3 3"
                 stroke="#2A2D3A"
@@ -680,7 +690,7 @@ export default function TrendsExplorer({ themeData }: Props) {
               )}
 
               <Tooltip
-                content={({ active, payload, label, coordinate }) => {
+                content={({ active, payload, label }) => {
                   if (!active || !payload?.length || !label) return null;
 
                   // Filter to selected themes, or use all if none selected
@@ -693,8 +703,8 @@ export default function TrendsExplorer({ themeData }: Props) {
                   if (!candidates.length) return null;
 
                   // Find the single closest theme to cursor Y
-                  const cursorY = coordinate?.y ?? 0;
-                  const chartHeight =
+                  const cursorY = mouseYRef.current;
+                  const plotHeight =
                     chartConfig.height -
                     chartConfig.margin.top -
                     chartConfig.margin.bottom;
@@ -708,15 +718,15 @@ export default function TrendsExplorer({ themeData }: Props) {
                             ),
                           ),
                         ) || 1;
-                  const relY = cursorY - chartConfig.margin.top;
 
                   let closest = candidates[0];
                   let closestDist = Infinity;
                   for (const p of candidates) {
                     const val = (p.value as number) ?? 0;
+                    // chartY is relative to plot area top, so high values = small Y
                     const pixelY =
-                      chartHeight - (val / yMax) * chartHeight;
-                    const dist = Math.abs(relY - pixelY);
+                      plotHeight - (val / yMax) * plotHeight;
+                    const dist = Math.abs(cursorY - pixelY);
                     if (dist < closestDist) {
                       closestDist = dist;
                       closest = p;
