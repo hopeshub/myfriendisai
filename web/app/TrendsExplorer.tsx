@@ -18,11 +18,11 @@ import { useBreakpoint } from "./useBreakpoint";
 // ─── Themes ────────────────────────────────────────────────────────────────
 
 const THEMES = [
-  { id: "therapy",       label: "Therapy",        emoji: "🫂", color: "#3B82F6" },
-  { id: "consciousness", label: "Consciousness",  emoji: "🧠", color: "#A855F7" },
-  { id: "addiction",     label: "Addiction",       emoji: "💊", color: "#fd7112" },
   { id: "romance",       label: "Romance",        emoji: "💕", color: "#FF69B4" },
   { id: "sexual_erp",    label: "Sex / ERP",      emoji: "🔞", color: "#dc2625" },
+  { id: "consciousness", label: "Consciousness",  emoji: "🧠", color: "#A855F7" },
+  { id: "therapy",       label: "Therapy",        emoji: "🫂", color: "#3B82F6" },
+  { id: "addiction",     label: "Addiction",       emoji: "💊", color: "#fd7112" },
   { id: "rupture",       label: "Rupture",        emoji: "🥀", color: "#22C55E" },
 ] as const;
 
@@ -200,7 +200,7 @@ export default function TrendsExplorer({ themeData }: Props) {
         sparklineData: downsample(clipOutliers(sparkHpk), 60),
       };
     });
-    return cards.sort((a, b) => b.value - a.value);
+    return cards;
   }, [themeData, cutoffDate, last90Cutoff]);
 
   // ── Monthly aggregation (raw counts) ──
@@ -352,7 +352,7 @@ export default function TrendsExplorer({ themeData }: Props) {
 
     if (!activeTheme) {
       return {
-        text: `Tracking AI companion discourse across ${dateRange.count} themes, ${dateRange.start} to ${dateRange.end}.`,
+        text: "Tracking how people talk about AI companions across 27 Reddit communities, from January 2023 to present.",
         themeName: null,
         themeColor: null,
       };
@@ -581,7 +581,7 @@ export default function TrendsExplorer({ themeData }: Props) {
               key={card.id}
               onClick={() => toggleTheme(card.id as ThemeId)}
               aria-pressed={isActive}
-              aria-label={`${card.label}: ${card.value.toFixed(1)} hits per 1000 posts`}
+              aria-label={`${card.label}: ${card.value.toFixed(1)} mentions per 1000 posts`}
               className="metric-card text-left rounded-lg cursor-pointer"
               style={{
                 backgroundColor: "#1A1D27",
@@ -611,7 +611,7 @@ export default function TrendsExplorer({ themeData }: Props) {
                 className="text-[10px] leading-tight"
                 style={{ color: "#94A3B8" }}
               >
-                hits / 1k posts
+                mentions / 1k posts
               </div>
               <div className="mt-1.5 pointer-events-none">
                 <Sparkline
@@ -624,6 +624,24 @@ export default function TrendsExplorer({ themeData }: Props) {
           );
         })}
       </div>
+
+      {/* Explainer */}
+      <p
+        className="text-center"
+        style={{ fontSize: 12, color: "#64748B", marginTop: 8, marginBottom: 16 }}
+      >
+        Each theme tracks validated keywords — mention rates reflect how distinctive each
+        theme&apos;s vocabulary is, not how prevalent the topic is overall.
+        {" "}
+        <a
+          href="/about"
+          className="underline underline-offset-2 hover:text-foreground transition-colors"
+          style={{ color: "#64748B" }}
+        >
+          See About for methodology
+        </a>
+        .
+      </p>
 
       {/* Chart */}
       <div

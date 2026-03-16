@@ -168,10 +168,53 @@ export default function About() {
               .
             </p>
             <p>
-              The chart shows how often these validated terms appear per 1,000
-              posts, using a 7-day rolling average to smooth daily noise. Because
+              The chart shows how often these validated terms are mentioned per
+              1,000 posts, using a 7-day rolling average to smooth daily noise. Because
               we normalize to post volume, the trends reflect changes in how
               people talk &mdash; not just growth in the communities themselves.
+            </p>
+          </div>
+        </section>
+
+        {/* Why hit rates don't compare */}
+        <section style={sectionStyle}>
+          <h2 style={sectionHeaderStyle}>
+            Why mention rates don&apos;t compare across themes
+          </h2>
+          <div className="space-y-4" style={bodyStyle}>
+            <p>
+              A theme&apos;s mention rate reflects how often people use
+              distinctive, validated language for that topic &mdash; not how
+              prevalent the topic is overall.
+            </p>
+            <p>
+              Some themes have highly specific vocabulary. When someone describes
+              AI addiction, they borrow clinical recovery language:
+              &ldquo;relapse,&rdquo; &ldquo;cold turkey,&rdquo; &ldquo;chatbot
+              addiction.&rdquo; These terms are rare outside that context and
+              validate at near-perfect precision. The keyword net catches most of
+              what&apos;s there.
+            </p>
+            <p>
+              Other themes are expressed through everyday language. When someone
+              is in a romantic relationship with their AI, they say &ldquo;I
+              love him,&rdquo; &ldquo;my boyfriend,&rdquo; &ldquo;we went on a
+              date&rdquo; &mdash; words that are indistinguishable from how
+              people talk about human relationships. These fail precision
+              validation because they can&apos;t be reliably attributed to AI
+              companionship. Only highly specific phrases like &ldquo;our
+              wedding&rdquo; or &ldquo;my AI partner&rdquo; survive, meaning the
+              keyword net captures only a fraction of the actual romance
+              discourse.
+            </p>
+            <p>
+              The result: addiction may show a higher mention rate than romance,
+              but that reflects vocabulary distinctiveness, not phenomenon size.
+              Each theme&apos;s trend line is meaningful over time &mdash; a
+              spike or decline in a theme tells you something real about how that
+              conversation is changing. But comparing mention rates between
+              themes does not tell you which topic is &ldquo;bigger&rdquo; or
+              more important.
             </p>
           </div>
         </section>
