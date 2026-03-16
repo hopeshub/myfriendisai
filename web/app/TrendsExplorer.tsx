@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
   ComposedChart,
   Line,
@@ -149,7 +149,26 @@ export default function TrendsExplorer({ themeData, keywordDetails }: Props) {
   const chartRef = useRef<HTMLDivElement>(null);
   const mouseYRef = useRef<number>(0);
   const [nearestTheme, setNearestTheme] = useState<ThemeId | null>(null);
+  const panelRef = useRef<HTMLDivElement>(null);
+  const cardRowRef = useRef<HTMLDivElement>(null);
   const bp = useBreakpoint();
+
+  // Close panel when clicking outside (but not on cards, which have their own handler)
+  const handleClickOutside = useCallback(
+    (e: MouseEvent) => {
+      if (!detailPanel) return;
+      const target = e.target as Node;
+      if (panelRef.current?.contains(target)) return;
+      if (cardRowRef.current?.contains(target)) return;
+      setDetailPanel(null);
+    },
+    [detailPanel],
+  );
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [handleClickOutside]);
 
   function toggleTheme(id: ThemeId) {
     setSelected((prev) => {
@@ -586,6 +605,7 @@ export default function TrendsExplorer({ themeData, keywordDetails }: Props) {
 
       {/* Metric cards */}
       <div
+        ref={cardRowRef}
         className="grid gap-[6px] sm:gap-2 mb-5"
         style={{
           gridTemplateColumns:
@@ -944,14 +964,16 @@ export default function TrendsExplorer({ themeData, keywordDetails }: Props) {
         : null;
       if (!panelTheme || !panelData) return null;
       return (
-        <TransparencyPanel
-          themeId={panelTheme.id}
-          themeLabel={panelTheme.label}
-          themeEmoji={panelTheme.emoji}
-          themeColor={panelTheme.color}
-          data={panelData}
-          onClose={() => setDetailPanel(null)}
-        />
+        <div ref={panelRef}>
+          <TransparencyPanel
+            themeId={panelTheme.id}
+            themeLabel={panelTheme.label}
+            themeEmoji={panelTheme.emoji}
+            themeColor={panelTheme.color}
+            data={panelData}
+            onClose={() => setDetailPanel(null)}
+          />
+        </div>
       );
     })()}
     </>
