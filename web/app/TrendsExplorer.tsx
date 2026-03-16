@@ -126,6 +126,7 @@ export default function TrendsExplorer({ themeData }: Props) {
   const [eventsExpanded, setEventsExpanded] = useState(false);
   const chartRef = useRef<HTMLDivElement>(null);
   const mouseYRef = useRef<number>(0);
+  const [nearestTheme, setNearestTheme] = useState<ThemeId | null>(null);
   const bp = useBreakpoint();
 
   function toggleTheme(id: ThemeId) {
@@ -691,7 +692,10 @@ export default function TrendsExplorer({ themeData }: Props) {
 
               <Tooltip
                 content={({ active, payload, label }) => {
-                  if (!active || !payload?.length || !label) return null;
+                  if (!active || !payload?.length || !label) {
+                    if (nearestTheme !== null) setNearestTheme(null);
+                    return null;
+                  }
 
                   // Filter to selected themes, or use all if none selected
                   const candidates =
@@ -700,7 +704,10 @@ export default function TrendsExplorer({ themeData }: Props) {
                           selected.has(p.dataKey as ThemeId),
                         )
                       : payload;
-                  if (!candidates.length) return null;
+                  if (!candidates.length) {
+                    if (nearestTheme !== null) setNearestTheme(null);
+                    return null;
+                  }
 
                   // Find the single closest theme to cursor Y
                   const cursorY = mouseYRef.current;
@@ -723,7 +730,6 @@ export default function TrendsExplorer({ themeData }: Props) {
                   let closestDist = Infinity;
                   for (const p of candidates) {
                     const val = (p.value as number) ?? 0;
-                    // chartY is relative to plot area top, so high values = small Y
                     const pixelY =
                       plotHeight - (val / yMax) * plotHeight;
                     const dist = Math.abs(cursorY - pixelY);
@@ -737,35 +743,36 @@ export default function TrendsExplorer({ themeData }: Props) {
                   const theme = THEMES.find((t) => t.id === tid);
                   if (!theme) return null;
 
+                  if (nearestTheme !== tid) setNearestTheme(tid);
+
+                  const val =
+                    chartMode === "absolute"
+                      ? `${(closest.value as number).toFixed(1)} per 1k`
+                      : `${Math.round(closest.value as number)}% of peak`;
+
                   return (
                     <div
-                      className="rounded-lg px-3 py-1.5 text-xs shadow-xl"
+                      className="rounded-md px-2.5 py-1.5 text-xs shadow-xl whitespace-nowrap"
                       style={{
                         backgroundColor: "#0F1117",
                         border: "1px solid #2A2D3A",
                       }}
                     >
-                      <div className="text-[#94A3B8] mb-1">
+                      <span style={{ color: "#94A3B8" }}>
                         {formatMonthTick(label as string)}
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <span
-                          className="w-2 h-2 rounded-full flex-shrink-0"
-                          style={{ backgroundColor: theme.color }}
-                        />
-                        <span style={{ color: "#94A3B8" }}>
-                          {theme.label}
-                        </span>
-                        <span className="text-[#F8FAFC] font-medium ml-auto pl-4">
-                          {chartMode === "absolute"
-                            ? `${(closest.value as number).toFixed(1)} per 1k`
-                            : `${Math.round(closest.value as number)}% of peak`}
-                        </span>
-                      </div>
+                      </span>
+                      <span style={{ color: "#94A3B8" }}>{" \u00B7 "}</span>
+                      <span style={{ color: theme.color }}>
+                        {theme.label}
+                      </span>
+                      <span style={{ color: "#94A3B8" }}>{" \u00B7 "}</span>
+                      <span className="text-[#F8FAFC] font-medium">
+                        {val}
+                      </span>
                     </div>
                   );
                 }}
-                cursor={{ stroke: "#2A2D3A", strokeWidth: 1 }}
+                cursor={false}
               />
 
               {/* Event annotations */}
@@ -803,6 +810,7 @@ export default function TrendsExplorer({ themeData }: Props) {
                     ? 0.2
                     : 1
                   : 0.2;
+                const isNearest = nearestTheme === theme.id;
                 return (
                   <Line
                     key={theme.id}
@@ -818,8 +826,8 @@ export default function TrendsExplorer({ themeData }: Props) {
                     strokeOpacity={opacity}
                     dot={false}
                     activeDot={
-                      !isFaded
-                        ? { r: 3, fill: theme.color, stroke: "none" }
+                      isNearest
+                        ? { r: 4, fill: theme.color, stroke: "#0F1117", strokeWidth: 2 }
                         : false
                     }
                     isAnimationActive={false}
