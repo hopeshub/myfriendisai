@@ -4,6 +4,7 @@ import { useMemo, useRef, useState } from "react";
 import {
   ComposedChart,
   Line,
+  LineChart,
   XAxis,
   YAxis,
   Tooltip,
@@ -25,7 +26,7 @@ const THEMES = [
   { id: "rupture",       label: "Rupture",        emoji: "🥀", color: "#22C55E" },
 ] as const;
 
-type ThemeId = typeof THEMES[number]["id"];
+type ThemeId = (typeof THEMES)[number]["id"];
 
 // ─── Events ────────────────────────────────────────────────────────────────
 
@@ -42,7 +43,9 @@ const EVENTS = [
 
 type TimeRange = "6M" | "1Y" | "2Y" | "ALL";
 
-const MONTH_NAMES = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+const MONTH_NAMES = [
+  "Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec",
+];
 
 function formatMonthTick(dateStr: string): string {
   const d = new Date(dateStr + "T00:00:00Z");
@@ -59,20 +62,98 @@ function toMonth(dateStr: string): string {
   return dateStr.slice(0, 7) + "-01";
 }
 
+function downsample(data: number[], maxPoints: number): number[] {
+  if (data.length <= maxPoints) return data;
+  const step = data.length / maxPoints;
+  const result: number[] = [];
+  for (let i = 0; i < maxPoints; i++) {
+    const start = Math.floor(i * step);
+    const end = Math.floor((i + 1) * step);
+    let sum = 0;
+    for (let j = start; j < end; j++) sum += data[j];
+    result.push(sum / (end - start));
+  }
+  return result;
+}
+
+// ─── Sparkline ─────────────────────────────────────────────────────────────
+
+function Sparkline({
+  data,
+  color,
+  height,
+}: {
+  data: number[];
+  color: string;
+  height: number;
+}) {
+  const chartData = data.map((v, i) => ({ v, i }));
+  return (
+    <ResponsiveContainer width="100%" height={height}>
+      <LineChart data={chartData}>
+        <Line
+          type="monotone"
+          dataKey="v"
+          stroke={color}
+          strokeWidth={1.2}
+          dot={false}
+          isAnimationActive={false}
+        />
+      </LineChart>
+    </ResponsiveContainer>
+  );
+}
+
 // ─── Component ─────────────────────────────────────────────────────────────
 
 type Props = { themeData: ThemeData };
 
 export default function TrendsExplorer({ themeData }: Props) {
-  const [selected, setSelected] = useState<ThemeId | null>(null);
+  const [selected, setSelected] = useState<Set<ThemeId>>(new Set());
   const [timeRange, setTimeRange] = useState<TimeRange>("ALL");
   const [eventsExpanded, setEventsExpanded] = useState(false);
   const chartRef = useRef<HTMLDivElement>(null);
   const bp = useBreakpoint();
 
   function toggleTheme(id: ThemeId) {
-    setSelected(selected === id ? null : id);
+    setSelected((prev) => {
+      const next = new Set(prev);
+      if (next.has(id)) next.delete(id);
+      else next.add(id);
+      return next;
+    });
   }
+
+  // ── Time range cutoff ──
+  const cutoffDate = useMemo(() => {
+    if (timeRange === "ALL") return null;
+    const monthsBack = timeRange === "2Y" ? 24 : timeRange === "1Y" ? 12 : 6;
+    const cutoff = new Date();
+    cutoff.setMonth(cutoff.getMonth() - monthsBack);
+    return cutoff.toISOString().split("T")[0];
+  }, [timeRange]);
+
+  // ── Metric card data (sorted by value descending) ──
+  const metricCards = useMemo(() => {
+    return THEMES.map((theme) => {
+      const points = themeData[theme.id] ?? [];
+      const filtered = cutoffDate
+        ? points.filter((p) => p.date >= cutoffDate)
+        : points;
+
+      const hitsPerKValues = filtered.map((p) => p.hitsPerK);
+      const avgValue =
+        hitsPerKValues.length > 0
+          ? hitsPerKValues.reduce((s, v) => s + v, 0) / hitsPerKValues.length
+          : 0;
+
+      return {
+        ...theme,
+        value: Math.round(avgValue),
+        sparklineData: downsample(hitsPerKValues, 60),
+      };
+    }).sort((a, b) => b.value - a.value);
+  }, [themeData, cutoffDate]);
 
   // ── Monthly aggregation (raw counts) ──
   const allMonthlyRaw = useMemo(() => {
@@ -86,7 +167,9 @@ export default function TrendsExplorer({ themeData }: Props) {
     }
     return Object.keys(monthlyRaw)
       .sort()
-      .map((m) => ({ date: m, ...monthlyRaw[m] }) as Record<string, number | string>);
+      .map(
+        (m) => ({ date: m, ...monthlyRaw[m] }) as Record<string, number | string>,
+      );
   }, [themeData]);
 
   // ── Time range filter (on raw counts) ──
@@ -107,9 +190,13 @@ export default function TrendsExplorer({ themeData }: Props) {
       let peakCount = 0;
       for (const row of filteredRaw) {
         const c = (row[theme.id] as number) ?? 0;
-        if (c > peakCount) { peakCount = c; peakMonth = row.date as string; }
+        if (c > peakCount) {
+          peakCount = c;
+          peakMonth = row.date as string;
+        }
       }
-      if (peakCount > 0) peaks[theme.id] = { month: peakMonth, count: peakCount };
+      if (peakCount > 0)
+        peaks[theme.id] = { month: peakMonth, count: peakCount };
     }
     const data = filteredRaw.map((row) => {
       const out: Record<string, number | string> = { date: row.date };
@@ -123,7 +210,7 @@ export default function TrendsExplorer({ themeData }: Props) {
     return { chartData: data, peakMonths: peaks };
   }, [filteredRaw]);
 
-  // ── Visible events (filtered by current time range) ──
+  // ── Visible events ──
   const visibleEvents = useMemo(() => {
     if (!chartData.length) return [];
     const min = chartData[0].date as string;
@@ -143,9 +230,12 @@ export default function TrendsExplorer({ themeData }: Props) {
     };
   }, [allMonthlyRaw]);
 
-  // ── Subtitle logic ──
+  // ── Subtitle logic (show single-theme summary when exactly one selected) ──
   const summary = useMemo(() => {
-    const activeTheme = selected ? THEMES.find((t) => t.id === selected) ?? null : null;
+    const activeId = selected.size === 1 ? [...selected][0] : null;
+    const activeTheme = activeId
+      ? THEMES.find((t) => t.id === activeId) ?? null
+      : null;
 
     if (!activeTheme) {
       return {
@@ -155,7 +245,6 @@ export default function TrendsExplorer({ themeData }: Props) {
       };
     }
 
-    // Try YoY comparison
     const entries = themeData[activeTheme.id] ?? [];
     if (entries.length >= 90) {
       const sorted = entries.map((e) => e.date).sort();
@@ -172,11 +261,21 @@ export default function TrendsExplorer({ themeData }: Props) {
       const priorEndStr = priorEnd.toISOString().split("T")[0];
       const priorStartStr = priorStart.toISOString().split("T")[0];
 
-      const recent = entries.filter((e) => e.date > cutoff90Str && e.date <= latest);
-      const prior = entries.filter((e) => e.date > priorStartStr && e.date <= priorEndStr);
+      const recent = entries.filter(
+        (e) => e.date > cutoff90Str && e.date <= latest,
+      );
+      const prior = entries.filter(
+        (e) => e.date > priorStartStr && e.date <= priorEndStr,
+      );
 
-      const recentAvg = recent.length > 0 ? recent.reduce((s, e) => s + e.value, 0) / recent.length : 0;
-      const priorAvg = prior.length > 0 ? prior.reduce((s, e) => s + e.value, 0) / prior.length : 0;
+      const recentAvg =
+        recent.length > 0
+          ? recent.reduce((s, e) => s + e.value, 0) / recent.length
+          : 0;
+      const priorAvg =
+        prior.length > 0
+          ? prior.reduce((s, e) => s + e.value, 0) / prior.length
+          : 0;
 
       if (priorAvg > 0 && prior.length >= 30) {
         const pct = Math.round(((recentAvg - priorAvg) / priorAvg) * 100);
@@ -187,18 +286,29 @@ export default function TrendsExplorer({ themeData }: Props) {
           const dir = pct > 0 ? "up" : "down";
           text = `${activeTheme.label} is ${dir} ${Math.abs(pct)}% vs same period last year.`;
         }
-        return { text, themeName: activeTheme.label, themeColor: activeTheme.color };
+        return {
+          text,
+          themeName: activeTheme.label,
+          themeColor: activeTheme.color,
+        };
       }
     }
 
-    // Fallback: show peak month
     const peak = peakMonths[activeTheme.id];
     if (peak) {
       const text = `${activeTheme.label} peaked in ${formatMonthTick(peak.month)}.`;
-      return { text, themeName: activeTheme.label, themeColor: activeTheme.color };
+      return {
+        text,
+        themeName: activeTheme.label,
+        themeColor: activeTheme.color,
+      };
     }
 
-    return { text: `Tracking ${activeTheme.label} discourse.`, themeName: activeTheme.label, themeColor: activeTheme.color };
+    return {
+      text: `Tracking ${activeTheme.label} discourse.`,
+      themeName: activeTheme.label,
+      themeColor: activeTheme.color,
+    };
   }, [selected, themeData, dateRange, peakMonths]);
 
   // ── Responsive chart config ──
@@ -233,14 +343,13 @@ export default function TrendsExplorer({ themeData }: Props) {
         tickFormatter: formatMonthTickShort,
       };
     }
-    // desktop
     return {
       height: 440,
       margin: { top: 100, right: 64, bottom: 8, left: 0 },
       xTickCount: 8,
       minTickGap: timeRange === "6M" ? 40 : 60,
-      strokeActive: 2.5,
-      strokeInactive: 1.5,
+      strokeActive: 2,
+      strokeInactive: 1,
       yAxisWidth: 32,
       showYAxis: true,
       eventLabelAngle: -60,
@@ -248,6 +357,9 @@ export default function TrendsExplorer({ themeData }: Props) {
       tickFormatter: formatMonthTick,
     };
   }, [bp, timeRange]);
+
+  // ── Sparkline height by breakpoint ──
+  const sparklineHeight = bp === "mobile" ? 20 : 24;
 
   return (
     <div className="max-w-5xl mx-auto px-4 sm:px-6 py-6 sm:py-10">
@@ -263,11 +375,13 @@ export default function TrendsExplorer({ themeData }: Props) {
                 i < arr.length - 1 ? (
                   <span key={i}>
                     {part}
-                    <span style={{ color: summary.themeColor! }}>{summary.themeName}</span>
+                    <span style={{ color: summary.themeColor! }}>
+                      {summary.themeName}
+                    </span>
                   </span>
                 ) : (
                   <span key={i}>{part}</span>
-                )
+                ),
               )}
             </>
           ) : (
@@ -276,33 +390,8 @@ export default function TrendsExplorer({ themeData }: Props) {
         </p>
       </div>
 
-      {/* Theme toggles — 2x3 grid on mobile, flex-wrap on tablet, flex-row on desktop */}
-      <div className="grid grid-cols-2 sm:flex sm:flex-wrap lg:flex-nowrap gap-2 sm:gap-3 lg:gap-4 mb-5">
-        {THEMES.map((theme) => {
-          const active = selected === theme.id;
-          return (
-            <button
-              key={theme.id}
-              onClick={() => toggleTheme(theme.id)}
-              className="flex items-center justify-center sm:justify-start gap-1.5 h-11 sm:h-11 lg:h-9 px-3 sm:px-4 rounded-full text-sm font-semibold transition-all"
-              style={{
-                border: `1px solid ${active ? theme.color : "#2A2D3A"}`,
-                backgroundColor: active ? `${theme.color}20` : "transparent",
-                color: active ? theme.color : "#94A3B8",
-              }}
-            >
-              <span
-                className="w-2 h-2 rounded-full flex-shrink-0"
-                style={{ backgroundColor: theme.color, opacity: active ? 1 : 0.35 }}
-              />
-              {theme.emoji} {theme.label}
-            </button>
-          );
-        })}
-      </div>
-
-      {/* Time range selector — full width on mobile */}
-      <div className="flex gap-1 mb-6">
+      {/* Time range selector */}
+      <div className="flex gap-1 mb-4">
         {(["6M", "1Y", "2Y", "ALL"] as TimeRange[]).map((range) => (
           <button
             key={range}
@@ -319,18 +408,83 @@ export default function TrendsExplorer({ themeData }: Props) {
         ))}
       </div>
 
+      {/* Metric cards */}
+      <div
+        className="grid gap-[6px] sm:gap-2 mb-5"
+        style={{
+          gridTemplateColumns:
+            bp === "mobile"
+              ? "repeat(2, 1fr)"
+              : bp === "tablet"
+                ? "repeat(3, 1fr)"
+                : "repeat(6, 1fr)",
+        }}
+      >
+        {metricCards.map((card) => {
+          const isActive = selected.has(card.id as ThemeId);
+          const dimmed = selected.size > 0 && !isActive;
+
+          return (
+            <button
+              key={card.id}
+              onClick={() => toggleTheme(card.id as ThemeId)}
+              aria-pressed={isActive}
+              aria-label={`${card.label}: ${card.value} hits per 1000 posts`}
+              className="metric-card text-left rounded-lg cursor-pointer"
+              style={{
+                backgroundColor: "#1A1D27",
+                borderLeft: `3px solid ${card.color}`,
+                padding: "12px 10px",
+                opacity: dimmed ? 0.5 : 1,
+                "--card-color": card.color,
+              } as React.CSSProperties}
+            >
+              <div
+                className="text-[11px] leading-tight flex items-center gap-1"
+                style={{ color: "#94A3B8" }}
+              >
+                <span>{card.emoji}</span>
+                <span>{card.label}</span>
+              </div>
+              <div
+                className="text-[18px] sm:text-[20px] font-medium leading-tight mt-0.5"
+                style={{
+                  color: card.color,
+                  fontVariantNumeric: "tabular-nums",
+                }}
+              >
+                {card.value}
+              </div>
+              <div
+                className="text-[10px] leading-tight"
+                style={{ color: "#94A3B8" }}
+              >
+                hits / 1k posts
+              </div>
+              <div className="mt-1.5">
+                <Sparkline
+                  data={card.sparklineData}
+                  color={card.color}
+                  height={sparklineHeight}
+                />
+              </div>
+            </button>
+          );
+        })}
+      </div>
+
       {/* Chart */}
       <div
         ref={chartRef}
-        className="rounded-xl border p-2 sm:p-4 lg:p-6"
+        className="rounded-xl border p-0 sm:p-4 lg:p-6"
         style={{ backgroundColor: "#1A1D27", borderColor: "#2A2D3A" }}
       >
-        <div className="w-full overflow-hidden" style={{ height: chartConfig.height }}>
+        <div
+          className="w-full overflow-hidden"
+          style={{ height: chartConfig.height }}
+        >
           <ResponsiveContainer width="100%" height="100%">
-            <ComposedChart
-              data={chartData}
-              margin={chartConfig.margin}
-            >
+            <ComposedChart data={chartData} margin={chartConfig.margin}>
               <CartesianGrid
                 strokeDasharray="3 3"
                 stroke="#2A2D3A"
@@ -342,7 +496,10 @@ export default function TrendsExplorer({ themeData }: Props) {
                 dataKey="date"
                 tickFormatter={chartConfig.tickFormatter}
                 stroke="#2A2D3A"
-                tick={{ fill: "#94A3B8", fontSize: bp === "mobile" ? 10 : 12 }}
+                tick={{
+                  fill: "#94A3B8",
+                  fontSize: bp === "mobile" ? 10 : 12,
+                }}
                 tickLine={false}
                 axisLine={{ stroke: "#2A2D3A" }}
                 minTickGap={chartConfig.minTickGap}
@@ -362,7 +519,6 @@ export default function TrendsExplorer({ themeData }: Props) {
                 />
               )}
 
-              {/* Hidden YAxis for mobile (needed for line yAxisId reference) */}
               {!chartConfig.showYAxis && (
                 <YAxis
                   yAxisId="index"
@@ -375,26 +531,41 @@ export default function TrendsExplorer({ themeData }: Props) {
               <Tooltip
                 content={({ active, payload, label }) => {
                   if (!active || !payload?.length || !label) return null;
-                  const entries = selected
-                    ? payload.filter((p) => p.dataKey === selected)
-                    : [...payload].sort((a, b) => (b.value as number) - (a.value as number));
+                  const entries =
+                    selected.size > 0
+                      ? payload.filter((p) =>
+                          selected.has(p.dataKey as ThemeId),
+                        )
+                      : [...payload].sort(
+                          (a, b) => (b.value as number) - (a.value as number),
+                        );
                   if (!entries.length) return null;
                   return (
                     <div
                       className="rounded-lg px-3 py-2 text-xs shadow-xl"
-                      style={{ backgroundColor: "#0F1117", border: "1px solid #2A2D3A" }}
+                      style={{
+                        backgroundColor: "#0F1117",
+                        border: "1px solid #2A2D3A",
+                      }}
                     >
-                      <div className="text-[#94A3B8] mb-1.5">{formatMonthTick(label as string)}</div>
+                      <div className="text-[#94A3B8] mb-1.5">
+                        {formatMonthTick(label as string)}
+                      </div>
                       {entries.map((p) => {
                         const tid = p.dataKey as ThemeId;
                         const theme = THEMES.find((t) => t.id === tid);
                         return (
-                          <div key={tid} className="flex items-center gap-2 mb-0.5">
+                          <div
+                            key={tid}
+                            className="flex items-center gap-2 mb-0.5"
+                          >
                             <span
                               className="w-2 h-2 rounded-full flex-shrink-0"
                               style={{ backgroundColor: theme?.color }}
                             />
-                            <span style={{ color: "#94A3B8" }}>{theme?.label}</span>
+                            <span style={{ color: "#94A3B8" }}>
+                              {theme?.label}
+                            </span>
                             <span className="text-[#F8FAFC] font-medium ml-auto pl-4">
                               {Math.round(p.value as number)}
                             </span>
@@ -407,7 +578,7 @@ export default function TrendsExplorer({ themeData }: Props) {
                 cursor={{ stroke: "#2A2D3A", strokeWidth: 1 }}
               />
 
-              {/* Event annotations — lines only on mobile, lines + labels on tablet/desktop */}
+              {/* Event annotations */}
               {visibleEvents.map((event) => (
                 <ReferenceLine
                   key={event.date}
@@ -416,21 +587,32 @@ export default function TrendsExplorer({ themeData }: Props) {
                   stroke="#6B7280"
                   strokeDasharray="2 4"
                   strokeWidth={1}
-                  label={chartConfig.showEventLabels ? {
-                    value: event.label,
-                    position: "insideTopLeft",
-                    angle: chartConfig.eventLabelAngle,
-                    fill: "#94A3B8",
-                    fontSize: 9,
-                    offset: 6,
-                  } : undefined}
+                  label={
+                    chartConfig.showEventLabels
+                      ? {
+                          value: event.label,
+                          position: "insideTopLeft",
+                          angle: chartConfig.eventLabelAngle,
+                          fill: "#94A3B8",
+                          fontSize: 9,
+                          offset: 6,
+                        }
+                      : undefined
+                  }
                 />
               ))}
 
               {/* Theme lines */}
               {THEMES.map((theme) => {
-                const isSelected = selected === theme.id;
-                const isFaded = selected !== null && !isSelected;
+                const isSelected = selected.has(theme.id);
+                const hasSelection = selected.size > 0;
+                const isFaded = hasSelection && !isSelected;
+                // Default (no selection): all lines faint at 20% per FRONTEND_DESIGN_SPEC
+                const opacity = hasSelection
+                  ? isFaded
+                    ? 0.2
+                    : 1
+                  : 0.2;
                 return (
                   <Line
                     key={theme.id}
@@ -438,10 +620,18 @@ export default function TrendsExplorer({ themeData }: Props) {
                     type="monotone"
                     dataKey={theme.id}
                     stroke={theme.color}
-                    strokeWidth={isSelected ? chartConfig.strokeActive : chartConfig.strokeInactive}
-                    strokeOpacity={isFaded ? 0.2 : 1}
+                    strokeWidth={
+                      isSelected
+                        ? chartConfig.strokeActive
+                        : chartConfig.strokeInactive
+                    }
+                    strokeOpacity={opacity}
                     dot={false}
-                    activeDot={!isFaded ? { r: 3, fill: theme.color, stroke: "none" } : false}
+                    activeDot={
+                      !isFaded
+                        ? { r: 3, fill: theme.color, stroke: "none" }
+                        : false
+                    }
                     isAnimationActive={false}
                     legendType="none"
                   />
@@ -452,7 +642,7 @@ export default function TrendsExplorer({ themeData }: Props) {
         </div>
       </div>
 
-      {/* Mobile event list — expandable below chart */}
+      {/* Mobile event list */}
       {bp === "mobile" && visibleEvents.length > 0 && (
         <div className="mt-3">
           {!eventsExpanded ? (
@@ -465,7 +655,10 @@ export default function TrendsExplorer({ themeData }: Props) {
           ) : (
             <div
               className="rounded-lg p-3 text-xs"
-              style={{ backgroundColor: "#1A1D27", border: "1px solid #2A2D3A" }}
+              style={{
+                backgroundColor: "#1A1D27",
+                border: "1px solid #2A2D3A",
+              }}
             >
               <div className="flex items-center justify-between mb-2">
                 <span className="text-[#94A3B8] font-medium">Events</span>

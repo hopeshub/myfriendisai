@@ -12,11 +12,16 @@ DATA_DIR = Path(__file__).parent.parent.parent / "data"
 
 
 def sync_subreddit_config(communities: list[dict], conn: Optional[sqlite3.Connection] = None) -> None:
-    """Upsert subreddit_config rows from the loaded communities list."""
+    """Upsert subreddit_config rows from the loaded communities list.
+
+    Also deactivates any subreddits in the DB that are no longer in the config.
+    """
     _conn = conn or get_connection()
     today = date.today().isoformat()
+    active_subs = set()
     try:
         for c in communities:
+            active_subs.add(c["subreddit"])
             _conn.execute(
                 """
                 INSERT INTO subreddit_config (subreddit, category, tier, display_name, description, added_date, is_active)
@@ -37,6 +42,13 @@ def sync_subreddit_config(communities: list[dict], conn: Optional[sqlite3.Connec
                     "added_date": today,
                     "is_active": int(c.get("is_active", True)),
                 },
+            )
+        # Deactivate subreddits no longer in the config
+        if active_subs:
+            placeholders = ",".join("?" * len(active_subs))
+            _conn.execute(
+                f"UPDATE subreddit_config SET is_active = 0 WHERE subreddit NOT IN ({placeholders}) AND is_active = 1",
+                list(active_subs),
             )
         _conn.commit()
     finally:
@@ -151,16 +163,17 @@ def get_snapshots(
 
 
 def get_all_snapshots_for_chart(conn: Optional[sqlite3.Connection] = None) -> list[dict]:
-    """Return all snapshots, ordered by subreddit + date. Excludes raw JSON blobs."""
+    """Return snapshots for active subreddits, ordered by subreddit + date. Excludes raw JSON blobs."""
     _conn = conn or get_connection()
     try:
         rows = _conn.execute(
             """
-            SELECT subreddit, snapshot_date, data_source, subscribers, active_users,
-                   visitors_7d, contributions_7d, posts_today, avg_comments_per_post,
-                   avg_score_per_post, unique_authors
-            FROM subreddit_snapshots
-            ORDER BY subreddit ASC, snapshot_date ASC
+            SELECT s.subreddit, s.snapshot_date, s.data_source, s.subscribers, s.active_users,
+                   s.visitors_7d, s.contributions_7d, s.posts_today, s.avg_comments_per_post,
+                   s.avg_score_per_post, s.unique_authors
+            FROM subreddit_snapshots s
+            INNER JOIN subreddit_config c ON c.subreddit = s.subreddit AND c.is_active = 1
+            ORDER BY s.subreddit ASC, s.snapshot_date ASC
             """
         ).fetchall()
         return [dict(r) for r in rows]
@@ -218,7 +231,7 @@ def export_subreddits_json(
     output_path: Optional[Path] = None,
     conn: Optional[sqlite3.Connection] = None,
 ) -> Path:
-    """Write frontend-ready subreddit metadata JSON (latest snapshot per subreddit)."""
+    """Write frontend-ready subreddit metadata JSON (latest snapshot per active subreddit)."""
     path = output_path or DATA_DIR / "subreddits.json"
     path.parent.mkdir(parents=True, exist_ok=True)
     _conn = conn or get_connection()
@@ -229,7 +242,7 @@ def export_subreddits_json(
                    s.posts_today, s.avg_comments_per_post, s.avg_score_per_post,
                    s.unique_authors, c.category, c.tier, c.display_name
             FROM subreddit_snapshots s
-            LEFT JOIN subreddit_config c ON c.subreddit = s.subreddit
+            INNER JOIN subreddit_config c ON c.subreddit = s.subreddit AND c.is_active = 1
             WHERE s.snapshot_date = (
                 SELECT MAX(snapshot_date) FROM subreddit_snapshots WHERE subreddit = s.subreddit
             )

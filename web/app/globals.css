@@ -37,3 +37,18 @@ body {
 .recharts-tooltip-wrapper {
   outline: none;
 }
+
+.metric-card {
+  transition: transform 0.15s ease, background-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.metric-card:active {
+  transform: scale(0.96);
+}
+
+@media (hover: hover) {
+  .metric-card:hover {
+    background-color: #1F2233 !important;
+    box-shadow: 0 0 12px color-mix(in srgb, var(--card-color) 25%, transparent);
+  }
+}

@@ -1,0 +1,22 @@
+# Large files not needed for the web build
+data/*.db
+data/*.db-shm
+data/*.db-wal
+data/test_*.db
+data/test_*.json
+data/cv_chunks/
+data/reval_samples/
+
+# Python / scripts not needed for frontend
+.venv
+src/
+scripts/
+analysis/
+config/
+docs/
+*.py
+requirements.txt
+
+# Dev artifacts
+.git
+__pycache__

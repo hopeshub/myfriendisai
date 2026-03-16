@@ -12,7 +12,7 @@ const THEME_CATEGORIES: Record<string, string[]> = {
   rupture:       ["rupture"],
 };
 
-export type ThemeDataPoint = { date: string; value: number };
+export type ThemeDataPoint = { date: string; value: number; hitsPerK: number };
 export type ThemeData = Record<string, ThemeDataPoint[]>;
 
 function loadThemeData(): ThemeData {
@@ -30,11 +30,13 @@ function loadThemeData(): ThemeData {
 
   const result: ThemeData = {};
   for (const [themeId, categories] of Object.entries(THEME_CATEGORIES)) {
-    // Sum raw daily hits across merged categories
-    const rawByDate: Record<string, number> = {};
+    // Sum raw daily hits and 7-day averages across merged categories
+    const rawByDate: Record<string, { count: number; avg: number }> = {};
     for (const cat of categories) {
       for (const e of raw[cat] ?? []) {
-        rawByDate[e.date] = (rawByDate[e.date] ?? 0) + e.count;
+        if (!rawByDate[e.date]) rawByDate[e.date] = { count: 0, avg: 0 };
+        rawByDate[e.date].count += e.count;
+        rawByDate[e.date].avg += e.count_7d_avg ?? e.count;
       }
     }
 
@@ -42,10 +44,14 @@ function loadThemeData(): ThemeData {
     const currentMonth = new Date().toISOString().slice(0, 7); // "YYYY-MM"
     const dates = Object.keys(rawByDate).sort().filter((d) => d.slice(0, 7) < currentMonth);
 
-    result[themeId] = dates.map((date) => ({
-      date,
-      value: rawByDate[date],
-    }));
+    result[themeId] = dates.map((date) => {
+      const total = totalPostsByDate[date] ?? 0;
+      return {
+        date,
+        value: rawByDate[date].count,
+        hitsPerK: total > 0 ? (rawByDate[date].avg / total) * 1000 : 0,
+      };
+    });
   }
   return result;
 }
