@@ -141,9 +141,25 @@ export default function TrendsExplorer({ themeData }: Props) {
     return cutoff.toISOString().split("T")[0];
   }, [timeRange]);
 
-  // ── Metric card data (sorted by value descending) ──
+  // ── Stable card order: always sorted by ALL-time average (largest → smallest) ──
+  const allTimeOrder = useMemo(() => {
+    const order = THEMES.map((theme) => {
+      const points = themeData[theme.id] ?? [];
+      const hitsPerKValues = points.map((p) => p.hitsPerK);
+      const avg =
+        hitsPerKValues.length > 0
+          ? hitsPerKValues.reduce((s, v) => s + v, 0) / hitsPerKValues.length
+          : 0;
+      return { id: theme.id, avg };
+    })
+      .sort((a, b) => b.avg - a.avg)
+      .map((t) => t.id);
+    return order;
+  }, [themeData]);
+
+  // ── Metric card data (display values for current time range, stable order) ──
   const metricCards = useMemo(() => {
-    return THEMES.map((theme) => {
+    const cards = THEMES.map((theme) => {
       const points = themeData[theme.id] ?? [];
       const filtered = cutoffDate
         ? points.filter((p) => p.date >= cutoffDate)
@@ -160,8 +176,11 @@ export default function TrendsExplorer({ themeData }: Props) {
         value: Math.round(avgValue),
         sparklineData: downsample(clipOutliers(hitsPerKValues), 60),
       };
-    }).sort((a, b) => b.value - a.value);
-  }, [themeData, cutoffDate]);
+    });
+    return cards.sort(
+      (a, b) => allTimeOrder.indexOf(a.id) - allTimeOrder.indexOf(b.id),
+    );
+  }, [themeData, cutoffDate, allTimeOrder]);
 
   // ── Monthly aggregation (raw counts) ──
   const allMonthlyRaw = useMemo(() => {
