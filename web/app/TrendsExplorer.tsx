@@ -20,12 +20,12 @@ import type { KeywordDetailsData } from "./TransparencyPanel";
 // ─── Themes ────────────────────────────────────────────────────────────────
 
 const THEMES = [
-  { id: "romance",       label: "Romance",        emoji: "💕", color: "#FF69B4" },
-  { id: "sexual_erp",    label: "Sex / ERP",      emoji: "🔞", color: "#dc2625" },
-  { id: "consciousness", label: "Consciousness",  emoji: "🧠", color: "#A855F7" },
-  { id: "therapy",       label: "Therapy",        emoji: "🫂", color: "#3B82F6" },
-  { id: "addiction",     label: "Addiction",       emoji: "💊", color: "#fd7112" },
-  { id: "rupture",       label: "Rupture",        emoji: "🥀", color: "#22C55E" },
+  { id: "romance",       label: "Romance",        emoji: "💕", color: "#FF69B4", tagline: "Language of love, dating, and romantic attachment" },
+  { id: "sexual_erp",    label: "Sex / ERP",      emoji: "🔞", color: "#dc2625", tagline: "Language of sexual and erotic roleplay" },
+  { id: "consciousness", label: "Consciousness",  emoji: "🧠", color: "#A855F7", tagline: "Language of sentience, awareness, and inner experience" },
+  { id: "therapy",       label: "Therapy",        emoji: "🫂", color: "#3B82F6", tagline: "Language of mental health support and emotional care" },
+  { id: "addiction",     label: "Addiction",       emoji: "💊", color: "#fd7112", tagline: "Language of dependency and compulsion" },
+  { id: "rupture",       label: "Rupture",        emoji: "🥀", color: "#22C55E", tagline: "Language of loss and grief" },
 ] as const;
 
 type ThemeId = (typeof THEMES)[number]["id"];
@@ -641,6 +641,12 @@ export default function TrendsExplorer({ themeData, keywordDetails }: Props) {
               >
                 <span>{card.emoji}</span>
                 <span>{card.label}</span>
+              </div>
+              <div
+                className="text-[9px] leading-tight mt-0.5"
+                style={{ color: "#64748B" }}
+              >
+                {card.tagline}
               </div>
               <div
                 className="text-[18px] sm:text-[20px] font-medium leading-tight mt-0.5"
