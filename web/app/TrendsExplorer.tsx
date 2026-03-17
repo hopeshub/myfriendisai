@@ -643,12 +643,6 @@ export default function TrendsExplorer({ themeData, keywordDetails }: Props) {
                 <span>{card.label}</span>
               </div>
               <div
-                className="text-[9px] leading-tight mt-0.5"
-                style={{ color: "#64748B" }}
-              >
-                {card.tagline}
-              </div>
-              <div
                 className="text-[18px] sm:text-[20px] font-medium leading-tight mt-0.5"
                 style={{
                   color: card.color,
@@ -966,6 +960,7 @@ export default function TrendsExplorer({ themeData, keywordDetails }: Props) {
             themeId={panelTheme.id}
             themeLabel={panelTheme.label}
             themeEmoji={panelTheme.emoji}
+            themeTagline={panelTheme.tagline}
             themeColor={panelTheme.color}
             data={panelData}
             onClose={() => setDetailPanel(null)}

@@ -26,6 +26,7 @@ type Props = {
   themeId: string;
   themeLabel: string;
   themeEmoji: string;
+  themeTagline: string;
   themeColor: string;
   data: CategoryDetail;
   onClose: () => void;
@@ -240,6 +241,7 @@ function SamplePostsSection({ samples }: { samples: SamplePost[] }) {
 export default function TransparencyPanel({
   themeLabel,
   themeEmoji,
+  themeTagline,
   themeColor,
   data,
   onClose,
@@ -261,9 +263,14 @@ export default function TransparencyPanel({
         className="flex items-center justify-between px-5 py-3 flex-shrink-0"
         style={{ borderBottom: "0.5px solid #1E293B" }}
       >
-        <span className="text-[15px] font-medium" style={{ color: themeColor }}>
-          {themeEmoji} {themeLabel}
-        </span>
+        <div>
+          <div className="text-[15px] font-medium" style={{ color: themeColor }}>
+            {themeEmoji} {themeLabel}
+          </div>
+          <div className="text-[11px] mt-0.5" style={{ color: "#64748B" }}>
+            {themeTagline}
+          </div>
+        </div>
         <button
           onClick={onClose}
           className="text-[20px] leading-none w-8 h-8 flex items-center justify-center rounded hover:text-foreground transition-colors"
