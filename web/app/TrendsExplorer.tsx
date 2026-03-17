@@ -342,14 +342,15 @@ export default function TrendsExplorer({ themeData, keywordDetails }: Props) {
 
   // ── Y-axis config (explicit so tooltip pixel math matches the chart) ──
   const yAxisConfig = useMemo(() => {
-    if (chartMode === "relative")
-      return { max: 100, ticks: [25, 50, 75, 100] };
     let dataMax = 0;
     for (const row of chartData) {
       for (const theme of THEMES) {
         const v = (row[theme.id] as number) ?? 0;
         if (v > dataMax) dataMax = v;
       }
+    }
+    if (chartMode === "relative") {
+      return niceAxis(Math.max(dataMax, 10));
     }
     return niceAxis(dataMax);
   }, [chartMode, chartData]);
@@ -726,29 +727,23 @@ export default function TrendsExplorer({ themeData, keywordDetails }: Props) {
                   domain={[0, yDomainMax]}
                   ticks={yAxisConfig.ticks}
                   tickFormatter={(v: number) =>
-                    chartMode === "absolute"
-                      ? v < 10 && v !== Math.floor(v)
-                        ? v.toFixed(1)
-                        : String(Math.round(v))
-                      : String(v)
+                    v < 10 && v !== Math.floor(v)
+                      ? v.toFixed(1)
+                      : String(Math.round(v))
                   }
                   stroke="transparent"
                   tick={{ fill: "#94A3B8", fontSize: 12 }}
                   axisLine={false}
                   tickLine={false}
                   width={chartConfig.yAxisWidth}
-                  label={
-                    chartMode === "absolute"
-                      ? {
-                          value: "mentions per 1k posts",
-                          angle: -90,
-                          position: "left",
-                          fill: "#94A3B8",
-                          fontSize: 11,
-                          dx: -4,
-                        }
-                      : undefined
-                  }
+                  label={{
+                    value: chartMode === "absolute" ? "mentions per 1k posts" : "% of peak",
+                    angle: -90,
+                    position: "left" as const,
+                    fill: "#94A3B8",
+                    fontSize: 11,
+                    dx: -4,
+                  }}
                 />
               )}
 
