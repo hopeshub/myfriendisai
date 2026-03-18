@@ -284,11 +284,24 @@ def export_keyword_trends_json(
     _conn = conn or get_connection()
 
     try:
+        # Post+comment metric (all sources — the new default)
         rows = _conn.execute(
             f"""
             SELECT category, post_date, COUNT(DISTINCT post_id) AS count
             FROM post_keyword_tags
             WHERE subreddit IN ({placeholders})
+            GROUP BY category, post_date
+            ORDER BY category, post_date
+            """,
+            active_subreddits,
+        ).fetchall()
+        # Post-only metric (control — preserves historical continuity)
+        rows_post_only = _conn.execute(
+            f"""
+            SELECT category, post_date, COUNT(DISTINCT post_id) AS count
+            FROM post_keyword_tags
+            WHERE subreddit IN ({placeholders})
+              AND source = 'post'
             GROUP BY category, post_date
             ORDER BY category, post_date
             """,
@@ -308,11 +321,20 @@ def export_keyword_trends_json(
         if conn is None:
             _conn.close()
 
+    # Build post-only lookup: (category, date) → count
+    post_only_lookup = {}
+    for category, post_date, count in rows_post_only:
+        post_only_lookup[(category, post_date)] = count
+
     # Group by category, then compute 7-day rolling average
     from collections import defaultdict
     by_category: dict = defaultdict(list)
     for category, post_date, count in rows:
-        by_category[category].append({"date": post_date, "count": count})
+        by_category[category].append({
+            "date": post_date,
+            "count": count,
+            "count_post_only": post_only_lookup.get((category, post_date), 0),
+        })
 
     result = {}
     for category, entries in sorted(by_category.items()):
@@ -320,10 +342,14 @@ def export_keyword_trends_json(
         for i, entry in enumerate(entries):
             window = [e["count"] for e in entries[max(0, i - 6): i + 1]]
             avg = round(sum(window) / len(window), 2)
+            window_po = [e["count_post_only"] for e in entries[max(0, i - 6): i + 1]]
+            avg_po = round(sum(window_po) / len(window_po), 2)
             with_avg.append({
                 "date": entry["date"],
                 "count": entry["count"],
                 "count_7d_avg": avg,
+                "count_post_only": entry["count_post_only"],
+                "count_post_only_7d_avg": avg_po,
             })
         result[category] = with_avg
 

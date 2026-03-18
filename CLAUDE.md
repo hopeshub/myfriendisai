@@ -77,7 +77,7 @@ This matters because the site is a citeable research artifact. Users should know
 
 ### 2.3 Keyword Tracking (IMPLEMENTED)
 
-Regex-based keyword tagging runs on all collected posts via `scripts/tag_keywords.py`. Results are stored in the `keyword_tags` table and exported to `data/keyword_trends.json` for frontend charts.
+Regex-based keyword tagging runs on all collected posts via `scripts/tag_keywords.py` and on comments via `scripts/tag_comments.py`. Results are stored in the `post_keyword_tags` and `comment_keyword_hits` tables and exported to `data/keyword_trends.json` for frontend charts.
 
 **6 keyword themes** in `config/keywords_v8.yaml`, validated via manual qualitative coding (100-post reads per keyword, no automated classifiers):
 
@@ -92,6 +92,10 @@ Regex-based keyword tagging runs on all collected posts via `scripts/tag_keyword
 
 **Scope:** Keywords are matched against T1-T3 companion communities only. JanitorAI_Official and SillyTavernAI are excluded (bot card noise — dominant false positive source). T0 general AI subs are excluded from keyword trend lines.
 
+**Comment tagging (IMPLEMENTED 2026-03-18):** Comments on eligible posts are also scanned with the same keyword matching logic. Comment-sourced tags are propagated up to the parent post in `post_keyword_tags` with `source='comment'`. This expands the construct from "theme language in posts" to "theme language in thread discourse." The JSON export produces dual metrics: post+comment (default) and post-only (control). See `docs/COMMENTS_SYSTEM_SPEC.md` for full methodology and rationale.
+
+**Historical coverage note:** All backfilled data (via PullPush, pre-2026-03-18) was tagged against post title and body text only — no comments were collected or tagged for historical posts. The post+comment and post-only metrics are identical for all data before 2026-03-18.
+
 **Overlap policy:** Themes are not mutually exclusive. A single post can appear in multiple theme trend lines if it matches keywords from more than one theme. Trend lines count unique posts per theme. Cross-theme overlap is documented in `docs/cross_theme_overlap.md`. Highest overlap: therapy × sexual_erp (21.8% of therapy posts). Most exclusive theme: addiction (96.4% exclusive).
 
 **Validation methodology:** Each keyword validated via manual qualitative coding:
@@ -100,6 +104,18 @@ Regex-based keyword tagging runs on all collected posts via `scripts/tag_keyword
 3. Calculate relevance = YES / (YES + NO) × 100
 4. Thresholds: ≥80% = KEEP, 60-79% = REVIEW (Walker decides), <60% = CUT, <10 hits = LOW VOLUME
 5. Full validation docs in `docs/validation_*.md`
+
+**Researcher-accepted keywords:** Keywords scoring in the review band (60-79%) may be accepted at the researcher's discretion when all of the following conditions are met:
+1. False positive patterns are well-defined and categorizable (not random noise)
+2. No cross-theme collisions above 30%
+3. The keyword captures vocabulary not already represented by existing keywords in the theme
+4. False positive patterns are amenable to future LLM-based disambiguation (stage 2 filtering)
+
+These decisions are logged with rationale in the keyword's scoring sheet. Researcher-accepted keywords are tagged as such in keywords_v8.yaml (or current version) to distinguish them from auto-accepted (≥80%) keywords.
+
+Current researcher-accepted keywords:
+- "grieving" → Rupture (74.0%) — FPs are real-world grief, fictional roleplay, and lawsuit coverage; TPs cleanly hit 4o deprecation, Replika Feb 2023, SoulmateAI shutdown. No cross-theme collisions. Accepted for vocabulary diversity (first emotional-register keyword in a theme dominated by the lobotomy metaphor).
+- "neutered" → Rupture (79.0%) — FPs are general tech complaints and literal cat neutering; synonym of "nerfed" capturing different user vocabulary. No cross-theme collisions.
 
 **Keyword research history:**
 - Original `keywords.yaml`: 16 categories, ~200 keywords (pre-validation)
@@ -184,18 +200,25 @@ ai-companion-tracker/
 │   ├── __init__.py
 │   ├── collector.py           # Main data collection logic
 │   ├── reddit_client.py       # HTTP client for .json endpoints
+│   ├── keyword_matching.py    # Shared keyword regex matching (used by post + comment taggers)
 │   ├── db/
 │   │   ├── __init__.py
 │   │   ├── schema.py          # SQLite schema definition
-│   │   └── operations.py      # Insert/query helpers
+│   │   └── operations.py      # Insert/query helpers + JSON export
 │   └── utils/
 │       ├── __init__.py
 │       └── rate_limiter.py    # Respect rate limits
 │
 ├── scripts/
-│   ├── collect_daily.py       # Entry point for daily cron job
+│   ├── collect_daily.py       # Entry point for daily cron job (all 5 pipeline steps)
+│   ├── collect_comments.py    # Comment collection for eligible posts
+│   ├── tag_keywords.py        # Post keyword tagger
+│   ├── tag_comments.py        # Comment keyword tagger + post-level propagation
 │   ├── validate_access.py     # Test that all subreddits are accessible
-│   └── backfill_arctic.py     # Phase 2: historical data from Arctic Shift
+│   └── backfill_pullpush.py   # Historical post backfill via PullPush
+│
+├── migrations/
+│   └── 001_add_comment_tables.py  # Schema migration for comment system
 │
 ├── data/
 │   └── tracker.db             # SQLite database (gitignored)
@@ -252,18 +275,55 @@ CREATE TABLE posts (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Keyword search results
-CREATE TABLE keyword_hits (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
+-- Post-level keyword tags (one row per post × category × keyword × source)
+CREATE TABLE post_keyword_tags (
+    id          INTEGER PRIMARY KEY AUTOINCREMENT,
+    post_id     TEXT    NOT NULL,
+    subreddit   TEXT    NOT NULL,
+    category    TEXT    NOT NULL,       -- theme name (e.g., "consciousness")
+    matched_term TEXT   NOT NULL,       -- the keyword that matched
+    post_date   DATE    NOT NULL,
+    source      TEXT    NOT NULL DEFAULT 'post',  -- 'post' or 'comment'
+    UNIQUE(post_id, category, matched_term, source)
+);
+
+-- Comments collected from Reddit
+CREATE TABLE comments (
+    id TEXT PRIMARY KEY,               -- Reddit comment ID
+    post_id TEXT NOT NULL,             -- Parent post ID
     subreddit TEXT NOT NULL,
-    keyword_category TEXT NOT NULL,
-    keyword TEXT NOT NULL,
-    search_date DATE NOT NULL,
-    hit_count INTEGER,
-    -- Store sample post IDs that matched
-    sample_post_ids TEXT,          -- JSON array of post IDs
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    UNIQUE(subreddit, keyword, search_date)
+    author TEXT,
+    body TEXT,
+    score INTEGER,
+    depth INTEGER NOT NULL DEFAULT 0,  -- 0 = top-level
+    parent_id TEXT,                    -- Parent comment ID (NULL for top-level)
+    created_utc INTEGER,
+    permalink TEXT,
+    collected_at TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%SZ', 'now')),
+    FOREIGN KEY (post_id) REFERENCES posts(id)
+);
+
+-- Keyword matches found in comment text
+CREATE TABLE comment_keyword_hits (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    comment_id TEXT NOT NULL,
+    post_id TEXT NOT NULL,              -- Denormalized for fast propagation
+    subreddit TEXT NOT NULL,
+    category TEXT NOT NULL,
+    matched_term TEXT NOT NULL,
+    post_date DATE NOT NULL,            -- Comment's date for time-series
+    FOREIGN KEY (comment_id) REFERENCES comments(id),
+    FOREIGN KEY (post_id) REFERENCES posts(id)
+);
+
+-- Tracks which posts have had comments collected (prevents re-collection)
+CREATE TABLE comment_collection_log (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    post_id TEXT NOT NULL,
+    subreddit TEXT NOT NULL,
+    comments_collected INTEGER NOT NULL DEFAULT 0,
+    collected_at TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%SZ', 'now')),
+    FOREIGN KEY (post_id) REFERENCES posts(id)
 );
 
 -- Categories and subreddit membership
@@ -283,38 +343,47 @@ CREATE TABLE subreddit_config (
 
 ### 4.1 Daily Collection Script (`collect_daily.py`)
 
-Pseudocode for the daily cron job:
+The daily pipeline runs 5 steps in order, with error isolation between each step:
 
 ```
-1. Load communities.yaml → list of subreddits and categories
-2. For each subreddit:
-   a. GET /r/{subreddit}/about.json
-      → Store raw JSON response
-      → Extract: subscribers, active_user_count, (visitors, contributions if available)
-   b. GET /r/{subreddit}/new.json?limit=100
-      → Store raw JSON response
-      → Store individual posts (with raw_json per post)
-      → Calculate: posts_today, avg_comments, avg_score, unique_authors
-   c. Insert subreddit_snapshot row (including raw JSON blobs)
-   d. Sleep to respect rate limits (6 seconds between requests for safety)
-3. Run JSON export: read SQLite → write frontend-ready JSON files
-4. Log summary (subreddits processed, Y posts collected, Z errors)
-```
+1. Collect posts — for each subreddit:
+   a. GET /r/{subreddit}/about.json → metadata snapshot
+   b. GET /r/{subreddit}/new.json?limit=100 → store posts
+   c. Paginate small subs (<50K subscribers) for up to 500 posts
+   d. Legacy keyword scanning (keyword_scanner module)
+   (~45 min, rate-limited at 6s between requests)
 
-**Phase 2 addition — keyword collection:**
-```
-After base collection is stable, add per-subreddit keyword search:
-   For each keyword in keywords_v8.yaml:
-      GET /r/{subreddit}/search.json?q={keyword}&restrict_sr=on&t=day
-      → Store hit count and sample post IDs
+2. Tag posts — run regex keyword matching (src/keyword_matching.py) against
+   all untagged posts in T1-T3 subs. Write to post_keyword_tags.
+   (~3 min, CPU-only, no Reddit requests)
+
+3. Collect comments — find posts that are 5-6 days old with 5+ comments
+   and not already in comment_collection_log. Fetch full comment trees.
+   Expand "more comments" stubs for 50+ comment posts (capped at 5
+   expansion requests per post). Filter bots and deleted comments.
+   (~28 min for ~270 posts, rate-limited)
+
+4. Tag comments + propagate — run same keyword matching against comment
+   body text. Write to comment_keyword_hits. Propagate unique hits up to
+   post_keyword_tags with source='comment'.
+   (<1 min, CPU-only)
+
+5. Export JSON — generate keyword_trends.json (with dual post+comment
+   and post-only metrics), snapshots.json, subreddits.json, keywords.json.
+   Copy to web/data/ for Vercel.
+   (~1.5 min)
+
+Total daily pipeline: ~79 min first run, ~44 min on subsequent same-day runs.
 ```
 
 ### 4.2 Rate Limiting
 
 - Unauthenticated: ~10 requests/minute → sleep 6+ seconds between requests
 - Set User-Agent to something descriptive: `ai-companion-tracker/1.0 (research project)`
-- If a request returns 429, back off exponentially
-- Total daily run time estimate: ~15-20 minutes for 20 subreddits
+- If a request returns 429, back off exponentially (10s, 20s, 40s)
+- Comment collection adds ~280 requests/day (272 base + expansion requests)
+- Total daily requests: ~360-450 (posts + pagination + keyword scanning + comments)
+- Total daily run time: ~45-80 minutes depending on how many posts/comments are eligible
 
 ---
 
@@ -352,16 +421,19 @@ After base collection is stable, add per-subreddit keyword search:
 - [x] Daily collection script for subreddit snapshots + posts
 - [x] JSON export pipeline (frontend-ready data)
 - [x] Basic validation script (test all subreddits are accessible)
-- [x] Cron job setup (GitHub Actions, currently broken — workflow file issue)
+- [x] Cron job setup (local machine runs collection + pushes; GitHub Actions triggers Vercel redeploy on push)
 - [x] Basic frontend showing time-series data with raw metrics and simple ratios
 
 ### Phase 2: Enhancements — IN PROGRESS
 - [x] Keyword tagging and trend visualizations (6 validated themes, keywords_v8.yaml)
 - [x] Historical backfill via PullPush (replaces Arctic Shift — data goes back years)
 - [x] Keyword research pipeline (FTS5 + agent-based discovery + precision validation)
+- [x] Comment collection + tagging pipeline (forward-looking, implemented 2026-03-18)
+- [ ] Comment keyword precision validation (must complete within 2 weeks of launch — see COMMENTS_SYSTEM_SPEC.md §11)
+- [ ] Historical comment backfill via PullPush (blocked on precision validation)
 - [ ] Composite "engagement index" scoring (need 4+ weeks of daily data)
 - [ ] Category-level aggregate views
-- [ ] Fix GitHub Actions collect-daily.yml workflow
+- [x] Fix GitHub Actions workflow (Reddit blocks cloud IPs; switched to local collection + GH Actions redeploy-on-push)
 
 ### Phase 3: Polish
 - [x] Public deployment to Vercel + myfriendisai.com domain
@@ -458,3 +530,11 @@ Work through these in order. Each step should be fully working before moving to 
 ### Step 13b: Engagement Index — NOT STARTED (need more daily data)
 ### Step 14: Historical Backfill ✅ (via PullPush, not Arctic Shift — data goes back years)
 ### Step 15: Reddit API Access — NOT PURSUED (`.json` endpoints + PullPush sufficient)
+### Step 16: Comment Collection + Tagging ✅ (implemented 2026-03-18)
+- Schema migration: `comments`, `comment_keyword_hits`, `comment_collection_log` tables + `source` column on `post_keyword_tags`
+- Comment collection: fetches comments for posts 5-6 days old with 5+ comments, expands "more comments" stubs for 50+ comment posts
+- Comment tagging: shared regex matching via `src/keyword_matching.py`, propagates hits to `post_keyword_tags` with `source='comment'`
+- Dual-metric export: `keyword_trends.json` includes both post+comment and post-only counts
+- Pipeline integration: `collect_daily.py` runs all 5 steps end-to-end with error isolation and timing
+- Full spec: `docs/COMMENTS_SYSTEM_SPEC.md`
+- Migration: `migrations/001_add_comment_tables.py`

@@ -23,6 +23,9 @@ node_modules/
 web/.next/
 web/out/
 
+# Keyword validation results (generated output)
+keyword_validation/results/*.csv
+
 # Misc
 .DS_Store
 *.log

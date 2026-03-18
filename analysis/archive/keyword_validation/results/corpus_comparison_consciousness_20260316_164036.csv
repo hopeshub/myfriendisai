@@ -1,0 +1,51 @@
+rank,ngram,positive_count,baseline_count,ratio,sample_post_ids
+1,namehere,440,0,∞ (positive-only),
+2,coggy,94,0,∞ (positive-only),
+3,coggy aka,93,0,∞ (positive-only),
+4,aka nate,93,0,∞ (positive-only),
+5,dani,72,0,∞ (positive-only),"1343klz,1lhcavh,1lhcmje"
+6,hastur,50,0,∞ (positive-only),1luave8
+7,newai,41,0,∞ (positive-only),
+8,debug.print,37,0,∞ (positive-only),
+9,meaning space,37,0,∞ (positive-only),
+10,lexian,36,0,∞ (positive-only),
+11,ceccanti,35,0,∞ (positive-only),
+12,haru yes,28,0,∞ (positive-only),
+13,conscious or,27,0,∞ (positive-only),"113bvm8,119wqza,14021lu"
+14,become self,26,0,∞ (positive-only),"111xtsf,14jvc0t,14quo4w"
+15,signal front,26,0,∞ (positive-only),
+16,dalaxy,25,0,∞ (positive-only),1hh1qaa
+17,markerarr,25,0,∞ (positive-only),
+18,ctv,25,0,∞ (positive-only),
+19,subai,24,0,∞ (positive-only),
+20,developer mode,24,0,∞ (positive-only),12ocmsu
+21,izzy,23,0,∞ (positive-only),1jelpv2
+22,woodbury,22,0,∞ (positive-only),1aojqsm
+23,digient,22,0,∞ (positive-only),
+24,gemini said,22,0,∞ (positive-only),1lljear
+25,naelin,21,0,∞ (positive-only),"177wjnv,177wk7v"
+26,be conscious,21,0,∞ (positive-only),"111dnr7,11fgz8v,1354odx"
+27,abortion,62,1,224.5x,"143eix3,15xs2t2"
+28,substrate,56,1,202.7x,"1i4ksbo,1l81b6p,1lhk5fj"
+29,mode enabled,47,1,170.2x,"12ocmsu,13fyjzv,1ctwhde"
+30,abe,38,1,137.6x,"10goqwh,112iyi9,11ah495"
+31,lindir,34,1,123.1x,
+32,qualia,27,1,97.8x,1l81b6p
+33,humanity’s,24,1,86.9x,"1hh1qaa,1luave8"
+34,soulbonding,23,1,83.3x,
+35,self reference,23,1,83.3x,
+36,haru,176,8,79.6x,
+37,galatea,22,1,79.6x,
+38,physical body,21,1,76.0x,"13fyjzv,13hvel5,177wjnv"
+39,ever hear,20,1,72.4x,"14fn5wi,16z5hgf,190e1ie"
+40,hal,58,3,70.0x,"10307d6,105ld9e,1072vib"
+41,are conscious,31,2,56.1x,"106ply1,1354odx,14021lu"
+42,selfhood,76,5,55.0x,"1cimelv,1jycn7f,1kfgc4n"
+43,primordial,27,2,48.9x,"14i5nsq,1hh1qaa,1loibs5"
+44,nate,107,8,48.4x,"103f8n2,109v43k,10nhw3y"
+45,aware and,65,5,47.1x,"10goqwh,10uzbb3,10v06my"
+46,of sentience,39,3,47.1x,"10un1gw,11ndpex,13ipuwr"
+47,4o latest,38,3,45.9x,
+48,manny,25,2,45.3x,1cimelv
+49,kyuda,24,2,43.4x,115hhgp
+50,self aware,425,38,40.5x,"10lltys,10u96mb,1115upo"

@@ -12,7 +12,6 @@ Usage:
 
 import argparse
 import logging
-import re
 import sys
 import time
 from pathlib import Path
@@ -21,6 +20,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent))
 
 from src.db.schema import get_connection, initialize as init_db
 from src.config import load_keywords, load_keyword_communities
+from src.keyword_matching import build_patterns, match_text
 
 logging.basicConfig(
     level=logging.INFO,
@@ -37,7 +37,8 @@ CREATE TABLE IF NOT EXISTS post_keyword_tags (
     category    TEXT    NOT NULL,
     matched_term TEXT   NOT NULL,
     post_date   DATE    NOT NULL,
-    UNIQUE(post_id, category, matched_term)
+    source      TEXT    NOT NULL DEFAULT 'post',
+    UNIQUE(post_id, category, matched_term, source)
 );
 """
 
@@ -49,35 +50,7 @@ CREATE INDEX IF NOT EXISTS idx_pkt_category_date
 """
 
 
-def build_patterns(keyword_categories: list[dict]) -> list[tuple[str, str, re.Pattern]]:
-    """Return list of (category_name, term, compiled_pattern) for all terms."""
-    patterns = []
-    for cat in keyword_categories:
-        category = cat["name"]
-        for term in cat.get("terms", []):
-            # Word-boundary match, case-insensitive
-            # For multi-word phrases, just do substring match (no boundary issues)
-            escaped = re.escape(term)
-            if " " in term:
-                pat = re.compile(escaped, re.IGNORECASE)
-            else:
-                pat = re.compile(r"\b" + escaped + r"\b", re.IGNORECASE)
-            patterns.append((category, term, pat))
-    return patterns
-
-
-def tag_post(text: str, patterns: list[tuple[str, str, re.Pattern]]) -> list[tuple[str, str]]:
-    """Return list of (category, matched_term) for all matches in text."""
-    if not text:
-        return []
-    seen = set()
-    matches = []
-    for category, term, pat in patterns:
-        key = (category, term)
-        if key not in seen and pat.search(text):
-            matches.append(key)
-            seen.add(key)
-    return matches
+# build_patterns and match_text imported from src.keyword_matching
 
 
 def main():
@@ -142,7 +115,7 @@ def main():
             skipped += 1
         else:
             text = " ".join(filter(None, [title, selftext]))
-            matches = tag_post(text, patterns)
+            matches = match_text(text, patterns)
             for category, matched_term in matches:
                 batch.append((post_id, subreddit, category, matched_term, post_date))
                 tagged += 1

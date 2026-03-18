@@ -1,12 +1,14 @@
 #!/usr/bin/env python3
 """Pull a random sample of posts for a candidate keyword and assess precision.
 
-Interactive mode (default): prompts the user for y/n/s on each post.
+Interactive mode (default): prompts the user for y/n/a on each post.
 Auto mode (--auto): uses Claude Haiku to classify each post.
+Dump mode (--dump): writes sampled posts to a file for offline review.
 
 Usage:
     python precision_sampler.py --keyword "intimate" --theme "sexual_erp" --sample-size 20
     python precision_sampler.py --keyword "ai therapist" --theme therapy --auto
+    python precision_sampler.py --keyword "selfhood" --theme consciousness --dump
 """
 
 import argparse
@@ -18,7 +20,10 @@ from datetime import datetime
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
-from utils import get_conn, pull_matching_posts, highlight_snippet, count_keyword_hits, load_all_theme_keywords
+from utils import (
+    get_conn, pull_matching_posts, highlight_snippet, count_keyword_hits,
+    load_all_theme_keywords, update_candidate,
+)
 
 RESULTS_DIR = Path(__file__).parent.parent / "results"
 
@@ -62,7 +67,9 @@ Is this post genuinely about the theme "{theme}" ({theme_desc})?
 Respond with EXACTLY one line in this format:
 YES: <one-sentence reason>
 or
-NO: <one-sentence reason>"""
+NO: <one-sentence reason>
+or
+AMBIGUOUS: <one-sentence reason why it's unclear>"""
 
     response = client.messages.create(
         model="claude-haiku-4-5-20251001",
@@ -80,6 +87,9 @@ def main():
     parser.add_argument("--sample-size", type=int, default=20, help="Number of posts to sample")
     parser.add_argument("--auto", action="store_true", help="Use Claude Haiku for classification instead of interactive prompts")
     parser.add_argument("--dump", action="store_true", help="Dump sampled posts to a file in results/ instead of prompting")
+    parser.add_argument("--source", default="manual",
+                        choices=["corpus_comparison", "emergence_monitor", "ethnographic", "manual"],
+                        help="How this keyword was discovered (for candidates.csv logging)")
     args = parser.parse_args()
 
     client = None
@@ -117,6 +127,7 @@ def main():
             f.write(f"Total hits in T1-T3: {total_hits}\n")
             f.write(f"Sample size: {len(posts)}\n")
             f.write(f"Date: {datetime.now().strftime('%Y-%m-%d %H:%M')}\n")
+            f.write(f"Scoring: y=yes, n=no, a=ambiguous (half-credit in precision)\n")
             f.write("=" * 70 + "\n")
             for i, post in enumerate(posts, 1):
                 title = post.get("title", "") or "(no title)"
@@ -143,7 +154,7 @@ def main():
 
     y_count = 0
     n_count = 0
-    skip_count = 0
+    amb_count = 0
 
     for i, post in enumerate(posts, 1):
         title = post.get("title", "") or ""
@@ -162,40 +173,45 @@ def main():
             try:
                 result = auto_classify_precision(post, args.keyword, args.theme, client)
                 print(f"  → {result}")
-                if result.upper().startswith("YES"):
+                upper = result.upper()
+                if upper.startswith("YES"):
                     y_count += 1
-                elif result.upper().startswith("NO"):
+                elif upper.startswith("NO"):
                     n_count += 1
+                elif upper.startswith("AMB"):
+                    amb_count += 1
                 else:
-                    skip_count += 1
-                    print(f"  (unclear response, counting as skip)")
+                    amb_count += 1
+                    print(f"  (unclear response, counting as ambiguous)")
                 time.sleep(0.2)
             except Exception as e:
                 print(f"  → ERROR: {e}")
-                skip_count += 1
+                amb_count += 1
         else:
             print()
             while True:
-                response = input(f"Is this post about [{args.theme}]? (y/n/s to skip): ").strip().lower()
-                if response in ("y", "n", "s"):
+                response = input(f"Is this post about [{args.theme}]? (y/n/a for ambiguous): ").strip().lower()
+                if response in ("y", "n", "a"):
                     break
-                print("  Please enter y, n, or s")
+                print("  Please enter y, n, or a")
 
             if response == "y":
                 y_count += 1
             elif response == "n":
                 n_count += 1
             else:
-                skip_count += 1
+                amb_count += 1
 
-    # Results
-    judged = y_count + n_count
-    precision = (y_count / judged * 100) if judged > 0 else 0
+    # Results — ambiguous counts as half-credit, included in denominator
+    total_judged = y_count + n_count + amb_count
+    precision = ((y_count + amb_count * 0.5) / total_judged * 100) if total_judged > 0 else 0
+    ambiguity_rate = (amb_count / total_judged * 100) if total_judged > 0 else 0
 
     print("\n" + "=" * 60)
     print(f"Results for '{args.keyword}' → {args.theme}")
-    print(f"  YES: {y_count}  |  NO: {n_count}  |  Skipped: {skip_count}")
-    print(f"  Precision: {precision:.1f}% ({y_count}/{judged})")
+    print(f"  YES: {y_count}  |  NO: {n_count}  |  Ambiguous: {amb_count}")
+    print(f"  Precision: {precision:.1f}% ({y_count} + {amb_count}×0.5 = {y_count + amb_count * 0.5:.1f} / {total_judged})")
+    print(f"  Ambiguity rate: {amb_count}/{total_judged} ({ambiguity_rate:.1f}%)")
     print(f"  Total hits: {total_hits}")
     print(f"  Mode: {mode_label}")
     print("=" * 60)
@@ -209,13 +225,33 @@ def main():
         writer = csv.writer(f)
         if write_header:
             writer.writerow(["keyword", "theme", "date", "sample_size", "precision_score",
-                             "y_count", "n_count", "skip_count", "total_hits", "mode"])
+                             "y_count", "n_count", "ambiguous_count", "ambiguity_rate",
+                             "total_hits", "mode"])
         writer.writerow([
             args.keyword, args.theme, datetime.now().strftime("%Y-%m-%d"),
-            len(posts), f"{precision:.1f}", y_count, n_count, skip_count, total_hits, mode_label
+            len(posts), f"{precision:.1f}", y_count, n_count, amb_count,
+            f"{ambiguity_rate:.1f}", total_hits, mode_label
         ])
 
     print(f"Logged to {log_path}")
+
+    # Auto-log to candidates.csv
+    if precision >= 80:
+        auto_status = "validated"
+    elif precision >= 60:
+        auto_status = "testing"
+    else:
+        auto_status = "rejected"
+
+    update_candidate(args.keyword, args.theme, {
+        "source_method": args.source,
+        "discovery_date": datetime.now().strftime("%Y-%m-%d"),
+        "precision_score": f"{precision:.1f}",
+        "ambiguity_rate": f"{ambiguity_rate:.1f}",
+        "status": auto_status,
+    })
+    print(f"Updated candidates.csv → status: {auto_status}")
+
     conn.close()
 
 

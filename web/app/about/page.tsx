@@ -151,12 +151,13 @@ export default function About() {
               For each of the six themes, we maintain a curated list of keywords
               and phrases &mdash; terms like &ldquo;lobotomized,&rdquo;
               &ldquo;chatbot addiction,&rdquo; &ldquo;emotional support,&rdquo;
-              &ldquo;sentient.&rdquo; Every keyword went through a validation
-              process: we sampled up to 100 posts matching each term, classified
-              whether the match genuinely reflected the theme in context, and
-              required at least 80% precision before including it. Keywords that
-              didn&apos;t clear that threshold were cut, regardless of volume.
-              The full keyword list and precision scores are published in our{" "}
+              &ldquo;sentient.&rdquo; Keywords are validated through manual
+              scoring of 100-post samples. Keywords scoring 80% or above are
+              automatically accepted. Keywords in the 60&ndash;79% range may be
+              accepted at Hopes&apos; discretion when false positive patterns
+              are well-defined and the keyword adds meaningful vocabulary
+              diversity to the theme. All validation decisions are documented
+              and available on{" "}
               <a
                 href="https://github.com/hopeshub/myfriendisai"
                 target="_blank"

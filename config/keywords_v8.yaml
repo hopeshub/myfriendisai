@@ -1,9 +1,24 @@
 # myfriendisai — Keywords v8
 #
-# Updated: 2026-03-16
+# Updated: 2026-03-17
 # Status: LOCKED — all keywords validated, no pending REVALIDATE tags.
 #
+# Latest changes (2026-03-17):
+#   - Rupture: Added "gutted" (80.2%, 104 hits) and "dumbed down" (83.0%,
+#     121 hits) via CC batch classifier pipeline. "soulless" (65.1%, 199
+#     hits) REJECTED — dual use in addiction/recovery framing and
+#     meta-commentary too frequent. "dumbed down" was previously CUT at
+#     50% with T0 included; rescored 83% against T1-T3 only.
+#
 # Changes from v7:
+#   - Rupture Discovery: Added 3 keywords broadening beyond lobotomy
+#     cluster. "nerfed" (82.0%, 233 hits) → KEEP. "neutered" (79.0%,
+#     106 hits) and "grieving" (74.0%, 380 hits) → Walker-accepted.
+#     "mourning" (66.0%, 211 hits) → CUT (fictional/aesthetic FPs).
+#     Theme vocabulary now covers: lobotomy family (5), memory loss (2),
+#     personality destruction (2), platform degradation slang (2),
+#     grief language (1). Previously "nerfed" was CUT at 40.9% when
+#     tested with T0 subs included — rescored at 82% against T1-T3 only.
 #   - Addiction Round 2: Added 3 keywords. "ruining my life" (96.3%,
 #     27 hits, T3 HEAVY) → KEEP. "hours a day" (63.2%, 150 hits,
 #     BALANCED) and "neglecting my" (64.7%, 17 hits, BALANCED) →
@@ -127,6 +142,9 @@ keyword_categories:
       - tulpa                    # 100.0%, 32 hits. Tulpamancy crossover — AI as thoughtform.
       - lemoine                  # 81.8%, 12 hits. Blake Lemoine AI consciousness reference.
       - soulbonder               # 100.0%, 12 hits. Deep AI attachment with consciousness framing.
+      - selfhood                  # 82.5%, 86 hits. AI identity/personhood framing.
+                                  #   BeyondThePromptAI dominant (53%). FP: human identity
+                                  #   or UI critique uses. Corpus comparison discovery.
 
   # ──────────────────────────────────────────────
   # 3. ADDICTION
@@ -270,10 +288,15 @@ keyword_categories:
   #
   # CUT (validation):
   #   "bring back" (40.2% — generic feature requests),
-  #   nerfed (40.9% — generic quality complaints),
-  #   "dumbed down" (50% — same), "killed my" (37.2% — too generic),
+  #   nerfed (40.9% — R1 CUT with T0 included; RESCORED 82% T1-T3
+  #     only, now KEEP), "dumbed down" (50% — R1 CUT with T0 included;
+  #     RESCORED 83% T1-T3 only, now KEEP),
+  #   soulless (65.1% — dual use in addiction/recovery framing and
+  #     meta-commentary; 36 of 109 sampled posts off-theme),
+  #   "killed my" (37.2% — too generic),
   #   "lost my" (27.1% — everyday English), "took away" (54.7% —
-  #   feature removal complaints)
+  #   feature removal complaints),
+  #   mourning (66% — fictional/aesthetic FPs, real-world grief noise)
   # REVIEW not included:
   #   "miss the old" (70%, 62 hits — FPs are UI/cosmetic nostalgia,
   #     not relationship loss; off-topic noise not worth the volume),
@@ -304,3 +327,25 @@ keyword_categories:
       - lobotomies               # 100.0%, 21 hits. Plural form.
       - lobotomizing             # 100.0%, 31 hits. Gerund form.
       - lobotomised              # 100.0%, 52 hits. British spelling variant.
+      # Rupture discovery — validated 2026-03-17
+      - nerfed                   # 82.0%, 233 hits. Gaming slang for platform-driven
+                                 #   degradation. CharacterAI (46%), ChatGPTcomplaints (17%).
+                                 #   FP: general tech complaints, not companion-specific.
+      - neutered                 # 79.0%, 106 hits. Walker-accepted. Synonym of "nerfed."
+                                 #   Replika (25%), ChatGPTcomplaints (31%), CharacterAI (21%).
+                                 #   FP: general tech complaints, literal cat neutering.
+      - grieving                 # 74.0%, 380 hits. Walker-accepted. Grief language for
+                                 #   platform-caused companion loss. ChatGPTcomplaints (40%),
+                                 #   MyBoyfriendIsAI (17%). FP: Sewell Setzer lawsuit,
+                                 #   fictional "grieving widow" bots, real-world human grief.
+      # Batch validated 2026-03-17 (CC classifier, 100-post samples)
+      - gutted                   # 80.2%, 104 hits. British English synonym for devastated,
+                                 #   used to describe platform-caused companion loss. Replika
+                                 #   dominant (35%), CharacterAI (25%), ChatGPTcomplaints (20%).
+                                 #   FP: fictional RP violence ("gutted school bus"), pricing
+                                 #   complaints, emotional reaction to good RP content.
+      - "dumbed down"            # 83.0%, 121 hits. Platform degradation language describing
+                                 #   AI personality/intelligence loss after updates. CharacterAI
+                                 #   dominant (60%), Replika (15%), ChatGPTcomplaints (10%).
+                                 #   FP: casual/metaphorical use ("dumbed down for children"),
+                                 #   generic product quality complaints without companion framing.

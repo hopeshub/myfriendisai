@@ -1,71 +1,20 @@
-name: Daily Reddit Collection
+name: Deploy after data update
 
 on:
-  schedule:
-    # Run at 07:00 UTC daily (after local cron at 06:00 UTC, as a backup)
-    - cron: '0 7 * * *'
+  push:
+    branches: [main]
+    paths:
+      - 'data/*.json'
+      - 'web/data/*.json'
   workflow_dispatch: # Allow manual trigger
 
-permissions:
-  contents: write
-
 jobs:
-  collect:
+  deploy:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 5
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.12'
-          cache: 'pip'
-
-      - name: Install dependencies
-        run: pip install requests PyYAML
-
-      - name: Check if local cron already ran
-        id: check
-        run: |
-          TODAY=$(date -u +%Y-%m-%d)
-          if python3 -c "
-          import json, sys
-          data = json.load(open('data/snapshots.json'))
-          today_entries = [e for e in data if e['snapshot_date'] == '$TODAY']
-          print(f'Found {len(today_entries)} entries for $TODAY')
-          sys.exit(0 if len(today_entries) >= 20 else 1)
-          " 2>/dev/null; then
-            echo "skip=true" >> "$GITHUB_OUTPUT"
-            echo "Local cron already collected today's data. Skipping."
-          else
-            echo "skip=false" >> "$GITHUB_OUTPUT"
-            echo "No data for today yet. Running collection."
-          fi
-
-      - name: Collect Reddit data
-        if: steps.check.outputs.skip != 'true'
-        run: python scripts/collect_daily_gh.py
-
-      - name: Commit and push
-        if: steps.check.outputs.skip != 'true'
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data/*.json web/data/*.json
-          if git diff --cached --quiet; then
-            echo "No changes to commit."
-          else
-            git commit -m "Daily collection $(date -u +%Y-%m-%d)
-
-          Automated Reddit data collection via GitHub Actions."
-            git push
-          fi
-
       - name: Trigger Vercel redeploy
-        if: steps.check.outputs.skip != 'true'
         env:
           DEPLOY_HOOK: ${{ secrets.VERCEL_DEPLOY_HOOK_URL }}
         run: |

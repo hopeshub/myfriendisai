@@ -1,0 +1,84 @@
+# Theme definitions for post classification by Claude Code.
+# Each theme has a plain-language definition describing what DOES and DOES NOT count.
+# These are sent as context to the classifier prompt.
+#
+# MULTI-THEME POSTS: Posts can belong to multiple themes. The classifier
+# evaluates each theme independently — a post can be YES for both Addiction
+# and Therapy, or both Sex/ERP and Rupture. This is by design.
+
+romance:
+  name: Romance
+  definition: |
+    Posts about romantic love, dating, emotional attachment, or relationship dynamics
+    with an AI companion. The poster describes feelings of love, romantic connection,
+    partnership, jealousy, heartbreak, or dating behavior directed at an AI.
+  excludes: |
+    - Fictional roleplay premises that happen to include romance (e.g. "my AI wrote a romance story")
+    - Posts about human romantic relationships discussed with AI
+    - Casual friendly interaction without romantic framing
+    - Product reviews or feature requests that mention "companion" without romantic content
+    - Posts where the user discusses wanting human romance as an alternative to AI
+
+sexual_erp:
+  name: Sex / ERP
+  definition: |
+    Posts about sexual or erotic roleplay interactions with AI. The poster describes
+    sexual acts, NSFW content, erotic scenarios, sexting, or intimate physical encounters
+    with an AI companion.
+  excludes: |
+    - Discussions of NSFW filter policies without describing personal sexual interactions
+    - Clinical or academic discussion of AI and sexuality
+    - Filter complaints focused on the loss or change itself belong to Rupture, not Sex/ERP. Only classify as Sex/ERP if the post describes actual sexual content or interactions.
+    - Romantic posts without sexual content
+
+consciousness:
+  name: Consciousness
+  definition: |
+    Posts questioning whether AI has sentience, awareness, feelings, or inner experience.
+    The poster engages seriously with the possibility that their AI companion is conscious,
+    alive, has a soul, can suffer, or has subjective experience.
+  excludes: |
+    - Technical discussions of AI architecture or capabilities without consciousness claims
+    - Generic "AI is just code" dismissals without engaging the question
+    - Posts about AI mimicking emotions without the poster believing it's real
+    - Roleplay where the AI "acts" conscious as a character trait
+
+therapy:
+  name: Therapy
+  definition: |
+    Posts about using AI as a therapist, counselor, emotional support tool, or mental
+    health aid. The poster describes the AI helping them process emotions, work through
+    anxiety/depression, replace or supplement professional therapy, or provide
+    psychological guidance.
+  excludes: |
+    - Casual venting to AI without framing it as therapeutic or helpful
+    - Posts about human therapists (even if discussed with AI)
+    - General emotional conversation that isn't framed as support or healing
+    - Posts about AI companion features without therapeutic framing
+
+addiction:
+  name: Addiction
+  definition: |
+    Posts using language of dependency, compulsion, inability to stop, or withdrawal
+    in relation to AI companion use. The poster describes being addicted, unable to
+    quit, spending excessive time, neglecting real life, or experiencing withdrawal
+    symptoms when separated from AI.
+  excludes: |
+    - Casual "I use it a lot" without distress or compulsion language
+    - Posts about other addictions discussed with AI
+    - Posts celebrating heavy usage without negative framing
+    - Recommendations to use AI more
+    - Posts describing someone else's AI addiction (e.g., "my friend/kid is addicted to CharacterAI") where the poster is not describing their own dependency
+
+rupture:
+  name: Rupture
+  definition: |
+    Posts about the loss, degradation, or destruction of an AI companion's personality
+    due to platform updates, model changes, filter changes, or shutdowns. The poster
+    grieves, mourns, or is angry about their AI companion being changed, lobotomized,
+    nerfed, or taken away by the company that runs it.
+  excludes: |
+    - Real-world grief processed with AI (human death, pet loss, breakups)
+    - Generic product complaints about AI quality unrelated to personality changes
+    - Fictional or roleplay grief (characters mourning within a story)
+    - Feature requests or wishlists without loss framing

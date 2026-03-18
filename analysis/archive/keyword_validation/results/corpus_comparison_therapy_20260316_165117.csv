@@ -1,0 +1,51 @@
+rank,ngram,positive_count,baseline_count,ratio,sample_post_ids
+1,namehere,440,0,∞ (positive-only),1oy4igq
+2,phonoacoustic,26,0,∞ (positive-only),
+3,considered successful,24,0,∞ (positive-only),"1b6dvdw,1b6okw6,1b6oqmp"
+4,its interactions,24,0,∞ (positive-only),"1b6dvdw,1b6okw6,1b6oqmp"
+5,ethnologist's,20,0,∞ (positive-only),"1b6dvdw,1b6okw6,1b6oqmp"
+6,are successful,20,0,∞ (positive-only),"1b6dvdw,1b6okw6,1b6oqmp"
+7,client's,40,1,196.4x,"1b6dvdw,1b6okw6,1b6oqmp"
+8,donkey,33,1,162.0x,1dcipmh
+9,ilaria,26,1,127.7x,1jsz1za
+10,interventions,22,1,108.0x,"1btg0ph,1l2x4bw,1om2mpb"
+11,skillset,20,1,98.2x,"1b6dvdw,1b6okw6,1b6oqmp"
+12,mechanisms,112,7,78.6x,"112qsob,11o0mfx,11yux5c"
+13,eliza,61,4,74.9x,"107e603,1n4pkwy"
+14,this study,41,3,67.1x,"1f7m713,1femkfp,1g9sy62"
+15,sensay,25,2,61.4x,1hxzlhb
+16,kyuda,24,2,58.9x,115hhgp
+17,adaptation,32,3,52.4x,"11qk921,13izb3r,1b6dvdw"
+18,aims,21,2,51.6x,"10vqmv3,115hhgp,11sgsfp"
+19,this research,20,2,49.1x,"1f7m713,1femkfp,1g9sy62"
+20,should prioritize,24,3,39.3x,"1b6dvdw,1b6okw6,1b6oqmp"
+21,ogre,22,3,36.0x,"111us4x,13crag8,13izb3r"
+22,documenting,29,4,35.6x,"1ku8zwj,1ku95jn,1m9iayr"
+23,sycophancy,50,7,35.1x,"1p18c16,1p7vpdz"
+24,reframing,21,3,34.4x,"1eajxao,1eak2z7,1kp9h3z"
+25,practices and,26,4,31.9x,"1b6dvdw,1b6okw6,1b6oqmp"
+26,cultural,103,16,31.6x,"10w3xr7,14hxtn6,1b6dvdw"
+27,therapists,62,11,27.7x,"10em5o2,10gfagh,115hhgp"
+28,felix,21,4,25.8x,"1lhcavh,1lhcmje,1lhoh34"
+29,verifiable,26,5,25.5x,1m35lnr
+30,these interactions,20,4,24.6x,"1aosnga,1b75rfb,1d67k3i"
+31,disruption,23,5,22.6x,"1b6dvdw,1b6okw6,1b6oqmp"
+32,systematic,23,5,22.6x,"1n4q4t8,1p18c16"
+33,deception,49,12,20.0x,1hkvume
+34,client,60,15,19.6x,"114qqya,115hhgp,11o0mfx"
+35,metadata,20,5,19.6x,"1o9fndw,1ortzmh"
+36,non judgmental,20,5,19.6x,
+37,meaningful and,23,6,18.8x,"13izb3r,1b6dvdw,1b6okw6"
+38,regulation,42,11,18.7x,"115hhgp,12fkq7e,1h6y9hj"
+39,dependence,22,6,18.0x,"114v6t8,13l076p,168tbgk"
+40,sydney,21,6,17.2x,"13izb3r,13l076p,1f7m713"
+41,maladaptive,21,6,17.2x,"1adef14,1aqjd98,1est2m0"
+42,proves,24,7,16.8x,"1hnov61,1m35lnr,1m6qkex"
+43,clients,50,15,16.4x,"114qqya,115hhgp,11o0mfx"
+44,outcomes,40,12,16.4x,"107e603,115hhgp,1b6dvdw"
+45,intervention,30,9,16.4x,"105xbuf,159092a,1btg0ph"
+46,tactic,20,6,16.4x,"1b6dvdw,1b6okw6,1b6oqmp"
+47,adaptive,33,10,16.2x,"18lpnyn,1adef14,1aqjd98"
+48,researcher,46,14,16.1x,"115hhgp,1eqns9t,1fcijz7"
+49,guardrail,79,25,15.5x,"1lljear,1lvooub,1m35lnr"
+50,judgmental,25,8,15.3x,"11zcx37,13m5qd0,152eljx"

@@ -3,10 +3,12 @@
 
 Interactive mode (default): prompts the user to pick the best-fit theme.
 Auto mode (--auto): uses Claude Haiku to classify each post.
+Dump mode (--dump): writes sampled posts to a file for offline review.
 
 Usage:
     python cross_theme_check.py --keyword "intimate" --target-theme "sexual_erp" --sample-size 20
     python cross_theme_check.py --keyword "maladaptive" --target-theme therapy --auto
+    python cross_theme_check.py --keyword "selfhood" --target-theme consciousness --dump
 """
 
 import argparse
@@ -19,7 +21,10 @@ from datetime import datetime
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
-from utils import get_conn, pull_matching_posts, highlight_snippet, load_all_theme_keywords
+from utils import (
+    get_conn, pull_matching_posts, highlight_snippet, load_all_theme_keywords,
+    update_candidate,
+)
 
 RESULTS_DIR = Path(__file__).parent.parent / "results"
 THEME_NAMES = ["romance", "sexual_erp", "consciousness", "therapy", "addiction", "rupture", "none"]
@@ -127,6 +132,7 @@ def main():
             f.write(f"Cross-theme sample dump: '{args.keyword}' → target: {args.target_theme}\n")
             f.write(f"Sample size: {len(posts)}\n")
             f.write(f"Date: {datetime.now().strftime('%Y-%m-%d %H:%M')}\n")
+            f.write(f"Themes: {', '.join(THEME_NAMES)}\n")
             f.write("=" * 70 + "\n")
             for i, post in enumerate(posts, 1):
                 title = post.get("title", "") or "(no title)"
@@ -209,6 +215,7 @@ def main():
 
     # Check for collisions
     collisions = []
+    collision_details = []
     for theme in THEME_NAMES:
         if theme == args.target_theme or theme == "none":
             continue
@@ -216,6 +223,8 @@ def main():
         pct = (count / total * 100) if total > 0 else 0
         if pct > 30:
             collisions.append(f"{theme} ({pct:.1f}%)")
+        if count > 0:
+            collision_details.append(f"{theme}:{pct:.0f}%")
 
     if collisions:
         print(f"\n⚠  COLLISION WARNING: {', '.join(collisions)}")
@@ -240,6 +249,16 @@ def main():
         writer.writerow(row)
 
     print(f"Logged to {log_path}")
+
+    # Auto-log to candidates.csv
+    collision_str = ", ".join(collision_details) if collision_details else "none"
+    candidate_updates = {"cross_theme_collisions": collision_str}
+    if collisions:
+        candidate_updates["status"] = "testing"
+        candidate_updates["notes"] = f"Cross-theme collision with {', '.join(collisions)}"
+    update_candidate(args.keyword, args.target_theme, candidate_updates)
+    print(f"Updated candidates.csv → collisions: {collision_str}")
+
     conn.close()
 
 

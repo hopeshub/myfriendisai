@@ -1,0 +1,12 @@
+candidate,target_theme,source_method,discovery_date,raw_count,precision_score,ambiguity_rate,ai_qualified,cross_theme_collisions,concentration_flag,status,notes
+selfhood,consciousness,corpus_comparison,2026-03-16,86,82.5,5.0,,none,both,validated,
+substrate,consciousness,corpus_comparison,2026-03-16,78,64.7,16.7,,none,top_two_dominant,rejected,"Walker rejected. Full corpus scored (78/78). 64.7% precision, 16.7% ambiguity. FP: generic tech jargon for platform/infrastructure."
+reframing,therapy,corpus_comparison,2026-03-16,66,13.6,9.1,,none,single_sub_dominant,rejected,
+maladaptive,therapy,corpus_comparison,2026-03-16,107,5.0,4.0,,"Addiction:52%,None:40%",both,rejected,
+grieving,rupture,manual,2026-03-16,380,74.0,6.0,,none,none,validated,"Walker accepted at 74%. FP patterns: Sewell Setzer lawsuit (4), fictional grieving-widow bots (8), real-world human grief (4). No cross-theme collisions."
+mourning,rupture,manual,2026-03-16,211,66.0,6.0,,none,none,rejected,"Walker rejected. 66% precision. FP: KindroidAI image prompts, fictional mourning attire, real-world grief, addiction self-deletion."
+nerfed,rupture,manual,2026-03-16,233,82.0,8.0,,none,none,validated,
+neutered,rupture,manual,2026-03-16,106,79.0,7.0,,none,none,validated,"Walker accepted at 79%. FP patterns: general tech complaints (9), literal cat neutering (2), figurative/non-platform use (3). Synonym of nerfed — different users, same complaint."
+gutted,rupture,manual,2026-03-17,104,80.2,,,none,none,active,"CC classifier 100-post sample. FP: fictional RP violence, pricing complaints."
+dumbed down,rupture,manual,2026-03-17,121,83.0,,,none,none,active,CC classifier 100-post sample. Previously CUT at 50% with T0. FP: casual/metaphorical use.
+soulless,rupture,manual,2026-03-17,199,65.1,,,none,none,rejected,"CC classifier 100-post sample. 65.1% precision. FP: addiction/recovery framing, meta-commentary, generic insult."
