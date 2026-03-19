@@ -114,10 +114,10 @@ def _step_tag_posts(conn):
 
     keyword_subs = [c["subreddit"] for c in load_keyword_communities()]
     placeholders = ",".join("?" for _ in keyword_subs)
-    query = f"SELECT id, subreddit, title, selftext, collected_date FROM posts WHERE subreddit IN ({placeholders}) ORDER BY collected_date ASC"
+    query = f"SELECT id, subreddit, title, selftext, date(created_utc, 'unixepoch') AS post_date FROM posts WHERE subreddit IN ({placeholders}) ORDER BY post_date ASC"
 
     total_posts = conn.execute(
-        query.replace("SELECT id, subreddit, title, selftext, collected_date", "SELECT COUNT(*)"),
+        query.replace("SELECT id, subreddit, title, selftext, date(created_utc, 'unixepoch') AS post_date", "SELECT COUNT(*)"),
         keyword_subs,
     ).fetchone()[0]
 

@@ -309,11 +309,12 @@ def export_keyword_trends_json(
         ).fetchall()
         total_posts_rows = _conn.execute(
             f"""
-            SELECT collected_date, COUNT(*) AS count
+            SELECT date(created_utc, 'unixepoch') AS post_date, COUNT(*) AS count
             FROM posts
             WHERE subreddit IN ({placeholders})
-            GROUP BY collected_date
-            ORDER BY collected_date
+              AND created_utc IS NOT NULL
+            GROUP BY post_date
+            ORDER BY post_date
             """,
             active_subreddits,
         ).fetchall()

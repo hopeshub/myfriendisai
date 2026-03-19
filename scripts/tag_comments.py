@@ -157,13 +157,13 @@ def propagate_to_posts(conn=None):
     """
     _conn = conn or init_db()
 
-    # Get all distinct comment-level hits with the post's date
-    # Use the post's collected_date (not the comment's date) for post_date,
-    # since the post is the unit of analysis for trend lines
+    # Get all distinct comment-level hits with the post's actual date
+    # Use date(created_utc) (not collected_date) for post_date,
+    # since collected_date can differ from actual post date for paginated/backfilled posts
     rows = _conn.execute(
         """
         SELECT DISTINCT ckh.post_id, ckh.category, ckh.matched_term,
-               c.subreddit, p.collected_date
+               c.subreddit, date(p.created_utc, 'unixepoch')
         FROM comment_keyword_hits ckh
         JOIN comments c ON c.id = ckh.comment_id
         JOIN posts p ON p.id = ckh.post_id

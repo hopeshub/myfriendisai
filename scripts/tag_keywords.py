@@ -83,18 +83,18 @@ def main():
 
     # Build post query
     placeholders = ",".join("?" for _ in keyword_subs)
-    query = f"SELECT id, subreddit, title, selftext, collected_date FROM posts WHERE subreddit IN ({placeholders})"
+    query = f"SELECT id, subreddit, title, selftext, date(created_utc, 'unixepoch') AS post_date FROM posts WHERE subreddit IN ({placeholders})"
     params: list = list(keyword_subs)
     if args.subreddit:
-        query = "SELECT id, subreddit, title, selftext, collected_date FROM posts WHERE subreddit = ?"
+        query = "SELECT id, subreddit, title, selftext, date(created_utc, 'unixepoch') AS post_date FROM posts WHERE subreddit = ?"
         params = [args.subreddit]
     if args.since:
-        query += " AND collected_date >= ?"
+        query += " AND date(created_utc, 'unixepoch') >= ?"
         params.append(args.since)
-    query += " ORDER BY collected_date ASC"
+    query += " ORDER BY post_date ASC"
 
     total_posts = conn.execute(
-        query.replace("SELECT id, subreddit, title, selftext, collected_date", "SELECT COUNT(*)"),
+        query.replace("SELECT id, subreddit, title, selftext, date(created_utc, 'unixepoch') AS post_date", "SELECT COUNT(*)"),
         params,
     ).fetchone()[0]
     logger.info("Posts to scan: %d", total_posts)
