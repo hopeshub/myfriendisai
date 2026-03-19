@@ -46,20 +46,29 @@ def _step_collect_posts(communities, client, conn):
         result = collect_subreddit(subreddit=subreddit, client=client, conn=conn)
         results.append(result)
 
-    # Pagination for small subs
+    # Pagination for small subs — only if we haven't paginated them before.
+    # Without this guard, adding a new small sub dumps its entire history
+    # (500 posts spanning months) in one batch, distorting daily counts.
+    already_paginated = set(
+        r[0] for r in conn.execute(
+            "SELECT DISTINCT subreddit FROM posts WHERE data_source = 'json_endpoint' GROUP BY subreddit HAVING COUNT(*) > 100"
+        ).fetchall()
+    )
     for community in communities:
         subreddit = community["subreddit"]
+        if subreddit in already_paginated:
+            continue
         row = conn.execute(
             "SELECT subscribers FROM subreddit_snapshots WHERE subreddit = ? ORDER BY snapshot_date DESC LIMIT 1",
             (subreddit,),
         ).fetchone()
         if row and row["subscribers"] and row["subscribers"] < 50000:
-            logger.info("  r/%s: small sub (%d subs), paginating up to 500 posts...", subreddit, row["subscribers"])
+            logger.info("  r/%s: small sub (%d subs), first-time pagination up to 500 posts...", subreddit, row["subscribers"])
             try:
-                from src.collector import _parse_posts
+                from src.collector import _parse_posts, _normalize_subreddit
                 from src.db.operations import insert_posts
                 extra_children = client.get_new_paginated(subreddit, target=500)
-                extra_posts = _parse_posts(extra_children)
+                extra_posts = _normalize_subreddit(_parse_posts(extra_children), subreddit)
                 new_count = insert_posts(extra_posts, conn=conn)
                 if new_count > 0:
                     logger.info("  r/%s: %d additional posts from pagination", subreddit, new_count)

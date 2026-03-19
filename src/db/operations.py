@@ -355,10 +355,25 @@ def export_keyword_trends_json(
         result[category] = with_avg
 
     # Total posts per day across active subreddits (for client-side normalization)
-    result["_total_posts"] = [
+    total_posts_list = [
         {"date": date, "count": count}
         for date, count in total_posts_rows
     ]
+    result["_total_posts"] = total_posts_list
+
+    # Data quality check: warn if any recent day has abnormal post count
+    import logging
+    _logger = logging.getLogger(__name__)
+    recent = [e for e in total_posts_list if e["date"] >= "2026-01-01"]
+    if recent:
+        counts = [e["count"] for e in recent]
+        median = sorted(counts)[len(counts) // 2]
+        for e in recent[-30:]:
+            if e["count"] > median * 3:
+                _logger.warning(
+                    "DATA QUALITY: %s has %d posts (%.1fx median %d) — possible batch collection artifact",
+                    e["date"], e["count"], e["count"] / median, median,
+                )
 
     path.write_text(json.dumps(result, indent=2))
     return path

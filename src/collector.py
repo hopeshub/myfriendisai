@@ -62,6 +62,18 @@ def _calc_metrics(about_data: dict, new_children: list[dict]) -> dict:
     }
 
 
+def _normalize_subreddit(posts: list[dict], canonical_name: str) -> list[dict]:
+    """Ensure all posts use the canonical subreddit name from config.
+
+    Reddit's API sometimes returns different capitalization than what's
+    in communities.yaml, which creates split data in the database.
+    """
+    for p in posts:
+        if p.get("subreddit", "").lower() == canonical_name.lower():
+            p["subreddit"] = canonical_name
+    return posts
+
+
 def collect_subreddit(
     subreddit: str,
     client: RedditClient,
@@ -92,7 +104,7 @@ def collect_subreddit(
             conn=conn,
         )
 
-        posts = _parse_posts(new_children)
+        posts = _normalize_subreddit(_parse_posts(new_children), subreddit)
         result["posts_inserted"] = db_ops.insert_posts(posts, conn=conn)
 
         logger.info(
