@@ -342,17 +342,32 @@ export default function TrendsExplorer({ themeData, keywordDetails }: Props) {
 
   // ── Y-axis config (explicit so tooltip pixel math matches the chart) ──
   const yAxisConfig = useMemo(() => {
-    let dataMax = 0;
+    if (chartMode === "relative") {
+      let dataMax = 0;
+      for (const row of chartData) {
+        for (const theme of THEMES) {
+          const v = (row[theme.id] as number) ?? 0;
+          if (v > dataMax) dataMax = v;
+        }
+      }
+      return niceAxis(Math.max(dataMax, 10));
+    }
+    // Absolute mode: use p95 of all values to set the Y-axis ceiling,
+    // so a single outlier spike (e.g., Replika ERP Feb 2023) doesn't
+    // flatten the entire chart.
+    const allValues: number[] = [];
     for (const row of chartData) {
       for (const theme of THEMES) {
         const v = (row[theme.id] as number) ?? 0;
-        if (v > dataMax) dataMax = v;
+        if (v > 0) allValues.push(v);
       }
     }
-    if (chartMode === "relative") {
-      return niceAxis(Math.max(dataMax, 10));
-    }
-    return niceAxis(dataMax);
+    if (allValues.length === 0) return niceAxis(10);
+    allValues.sort((a, b) => a - b);
+    const p99 = allValues[Math.floor(allValues.length * 0.99)];
+    // Use p99 so extreme spikes (e.g., Replika ERP crisis) don't flatten
+    // the rest of the chart, but normal peaks are still fully visible
+    return niceAxis(Math.max(p99, 10));
   }, [chartMode, chartData]);
 
   const yDomainMax = yAxisConfig.max;
@@ -725,6 +740,7 @@ export default function TrendsExplorer({ themeData, keywordDetails }: Props) {
                 <YAxis
                   yAxisId="index"
                   domain={[0, yDomainMax]}
+                  allowDataOverflow
                   ticks={yAxisConfig.ticks}
                   tickFormatter={(v: number) =>
                     v < 10 && v !== Math.floor(v)
@@ -751,6 +767,7 @@ export default function TrendsExplorer({ themeData, keywordDetails }: Props) {
                 <YAxis
                   yAxisId="index"
                   domain={[0, yDomainMax]}
+                  allowDataOverflow
                   hide
                   width={0}
                 />
