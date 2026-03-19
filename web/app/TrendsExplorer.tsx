@@ -143,8 +143,6 @@ export default function TrendsExplorer({ themeData, keywordDetails }: Props) {
   const [detailPanel, setDetailPanel] = useState<ThemeId | null>(null);
   const [timeRange, setTimeRange] = useState<TimeRange>("1Y");
   const [chartMode, setChartMode] = useState<ChartMode>("absolute");
-  const [autoSwitched, setAutoSwitched] = useState(false);
-  const userModeRef = useRef<ChartMode>("absolute");
   const [eventsExpanded, setEventsExpanded] = useState(false);
   const chartRef = useRef<HTMLDivElement>(null);
   const mouseYRef = useRef<number>(0);
@@ -561,13 +559,6 @@ export default function TrendsExplorer({ themeData, keywordDetails }: Props) {
               key={range}
               onClick={() => {
                 setTimeRange(range);
-                if (range === "ALL" && userModeRef.current === "absolute") {
-                  setChartMode("relative");
-                  setAutoSwitched(true);
-                } else if (range !== "ALL" && autoSwitched) {
-                  setChartMode(userModeRef.current);
-                  setAutoSwitched(false);
-                }
               }}
               className="flex-1 sm:flex-none h-11 sm:h-auto px-3 py-1 text-xs font-medium rounded-md transition-colors"
               style={{
@@ -588,8 +579,6 @@ export default function TrendsExplorer({ themeData, keywordDetails }: Props) {
                 key={mode}
                 onClick={() => {
                   setChartMode(mode);
-                  userModeRef.current = mode;
-                  setAutoSwitched(false);
                 }}
                 className="h-11 sm:h-auto px-3 py-1 text-xs font-medium rounded-md transition-colors"
                 style={{
@@ -602,11 +591,6 @@ export default function TrendsExplorer({ themeData, keywordDetails }: Props) {
               </button>
             ))}
           </div>
-          {autoSwitched && (
-            <span className="text-[10px]" style={{ color: "#94A3B8" }}>
-              Showing relative scale for full timeline
-            </span>
-          )}
         </div>
       </div>
 
