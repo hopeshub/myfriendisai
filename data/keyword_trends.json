@@ -9944,22 +9944,22 @@
     },
     {
       "date": "2026-03-14",
-      "count": 3,
-      "count_7d_avg": 3.86,
+      "count": 5,
+      "count_7d_avg": 4.14,
       "count_post_only": 3,
       "count_post_only_7d_avg": 3.43
     },
     {
       "date": "2026-03-17",
       "count": 2,
-      "count_7d_avg": 3.57,
+      "count_7d_avg": 3.86,
       "count_post_only": 2,
       "count_post_only_7d_avg": 3.14
     },
     {
       "date": "2026-03-18",
       "count": 1,
-      "count_7d_avg": 3.14,
+      "count_7d_avg": 3.43,
       "count_post_only": 1,
       "count_post_only_7d_avg": 2.71
     }
@@ -33255,22 +33255,22 @@
     },
     {
       "date": "2026-03-14",
-      "count": 4,
-      "count_7d_avg": 2.0,
+      "count": 8,
+      "count_7d_avg": 2.57,
       "count_post_only": 4,
       "count_post_only_7d_avg": 1.86
     },
     {
       "date": "2026-03-16",
       "count": 2,
-      "count_7d_avg": 2.14,
+      "count_7d_avg": 2.71,
       "count_post_only": 2,
       "count_post_only_7d_avg": 2.0
     },
     {
       "date": "2026-03-17",
       "count": 3,
-      "count_7d_avg": 2.43,
+      "count_7d_avg": 3.0,
       "count_post_only": 3,
       "count_post_only_7d_avg": 2.29
     }
@@ -37966,7 +37966,11 @@
     },
     {
       "date": "2026-03-18",
-      "count": 612
+      "count": 625
+    },
+    {
+      "date": "2026-03-19",
+      "count": 180
     }
   ]
 }
