@@ -570,7 +570,7 @@ export default function TrendsExplorer({ themeData, keywordDetails }: Props) {
               onClick={() => {
                 setTimeRange(range);
               }}
-              className="flex-1 sm:flex-none h-11 sm:h-auto px-3 py-1 text-xs font-medium rounded-md transition-colors"
+              className="flex-1 sm:flex-none h-11 sm:h-auto px-3 py-1 text-sm sm:text-xs font-medium rounded-md transition-colors"
               style={{
                 backgroundColor: timeRange === range ? "#1A1D27" : "transparent",
                 color: timeRange === range ? "#F8FAFC" : "#94A3B8",
@@ -590,7 +590,7 @@ export default function TrendsExplorer({ themeData, keywordDetails }: Props) {
                 onClick={() => {
                   setChartMode(mode);
                 }}
-                className="h-11 sm:h-auto px-3 py-1 text-xs font-medium rounded-md transition-colors"
+                className="h-11 sm:h-auto px-3 py-1 text-sm sm:text-xs font-medium rounded-md transition-colors"
                 style={{
                   backgroundColor: chartMode === mode ? "#1A1D27" : "transparent",
                   color: chartMode === mode ? "#F8FAFC" : "#94A3B8",
@@ -603,6 +603,9 @@ export default function TrendsExplorer({ themeData, keywordDetails }: Props) {
           </div>
         </div>
       </div>
+
+      {/* Cards + explainer + chart wrapper — flex column for mobile reorder */}
+      <div className={isMobileStrip ? "flex flex-col" : ""}>
 
       {/* Metric cards */}
       <div
@@ -657,7 +660,7 @@ export default function TrendsExplorer({ themeData, keywordDetails }: Props) {
               } as React.CSSProperties}
             >
               <div
-                className="text-[11px] leading-tight flex items-center gap-1"
+                className={`${isMobileStrip ? "text-[14px]" : "text-[11px]"} leading-tight flex items-center gap-1`}
                 style={{ color: "#94A3B8" }}
               >
                 <span>{card.emoji}</span>
@@ -692,10 +695,16 @@ export default function TrendsExplorer({ themeData, keywordDetails }: Props) {
         })}
       </div>
 
-      {/* Explainer */}
+      {/* Explainer — order 2 on mobile so it appears after chart */}
       <p
         className="text-center"
-        style={{ fontSize: 12, color: "#64748B", marginTop: 8, marginBottom: 16 }}
+        style={{
+          fontSize: isMobileStrip ? 14 : 12,
+          color: "#64748B",
+          marginTop: 8,
+          marginBottom: 16,
+          ...(isMobileStrip ? { order: 2 } : {}),
+        }}
       >
         Each theme tracks validated keywords. Mention rates reflect how
         distinctive each theme&apos;s vocabulary is, not necessarily how
@@ -706,7 +715,11 @@ export default function TrendsExplorer({ themeData, keywordDetails }: Props) {
       <div
         ref={chartRef}
         className="rounded-xl border p-0 sm:p-4 lg:p-6 outline-none"
-        style={{ backgroundColor: "#1A1D27", borderColor: "#2A2D3A" }}
+        style={{
+          backgroundColor: "#1A1D27",
+          borderColor: "#2A2D3A",
+          ...(isMobileStrip ? { order: 1 } : {}),
+        }}
       >
         <div
           className="w-full overflow-hidden"
@@ -922,7 +935,7 @@ export default function TrendsExplorer({ themeData, keywordDetails }: Props) {
 
       {/* Mobile event list */}
       {bp === "mobile" && visibleEvents.length > 0 && (
-        <div className="mt-3">
+        <div className="mt-3" style={isMobileStrip ? { order: 3 } : undefined}>
           {!eventsExpanded ? (
             <button
               onClick={() => setEventsExpanded(true)}
@@ -962,6 +975,8 @@ export default function TrendsExplorer({ themeData, keywordDetails }: Props) {
           )}
         </div>
       )}
+
+      </div>{/* end cards+explainer+chart wrapper */}
     </div>
 
     {/* Side panel — fixed position, full viewport height */}

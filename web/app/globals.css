@@ -65,6 +65,17 @@ body {
   }
 }
 
+/* Mobile: prevent horizontal page scroll, enforce font floor */
+@media (max-width: 768px) {
+  html, body {
+    overflow-x: hidden;
+  }
+
+  footer {
+    font-size: 14px;
+  }
+}
+
 /* Mobile card scroll strip */
 .mobile-card-strip {
   overflow-x: auto;
