@@ -233,6 +233,22 @@ def _step_export(conn):
     _atomic_copy(meta_path, web_data_dir / "site_meta.json")
     logger.info("Copied JSON to web/data/ for frontend")
 
+    # Export keyword details (transparency panel data)
+    import subprocess
+    detail_result = subprocess.run(
+        [sys.executable, str(Path(__file__).parent / "export_keyword_details.py")],
+        capture_output=True, text=True,
+    )
+    if detail_result.returncode == 0:
+        # Copy to data/ as well
+        detail_src = web_data_dir / "keyword_details.json"
+        detail_dst = data_dir / "keyword_details.json"
+        if detail_src.exists():
+            _atomic_copy(detail_src, detail_dst)
+        logger.info("Exported keyword_details.json")
+    else:
+        logger.error("keyword_details export failed: %s", detail_result.stderr)
+
 
 def main():
     # Acquire lockfile to prevent overlapping runs
