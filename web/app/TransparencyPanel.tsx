@@ -304,7 +304,7 @@ export default function TransparencyPanel({
           {data.keywords.length} keywords across{" "}
           {data.subreddits.length} communities &middot;{" "}
           {data.unique_posts.toLocaleString()} posts matched &middot; All
-          keywords validated at &ge;80% precision
+          keywords manually validated
         </div>
       </div>
     </div>

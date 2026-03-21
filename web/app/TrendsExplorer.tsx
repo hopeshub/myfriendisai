@@ -212,13 +212,15 @@ export default function TrendsExplorer({ themeData, keywordDetails }: Props) {
       const points = themeData[theme.id] ?? [];
 
       // 90-day average for the display value (always, regardless of time range)
+      // Divide by calendar days (90), not days-with-hits, to match YoY methodology
+      const CARD_WINDOW = 90;
       const recent = last90Cutoff
         ? points.filter((p) => p.date >= last90Cutoff)
         : points;
       const recentHpk = recent.map((p) => p.hitsPerK);
       const avgValue =
         recentHpk.length > 0
-          ? recentHpk.reduce((s, v) => s + v, 0) / recentHpk.length
+          ? recentHpk.reduce((s, v) => s + v, 0) / CARD_WINDOW
           : 0;
 
       // Sparkline uses the selected time range
