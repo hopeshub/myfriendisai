@@ -397,22 +397,13 @@ export default function TrendsExplorer({ themeData, keywordDetails }: Props) {
     };
   }, [allMonthlyRaw]);
 
-  // ── Subtitle logic (show single-theme summary when exactly one selected) ──
-  const summary = useMemo(() => {
-    const activeId = selected.size === 1 ? [...selected][0] : null;
-    const activeTheme = activeId
-      ? THEMES.find((t) => t.id === activeId) ?? null
-      : null;
-
-    if (!activeTheme) {
-      return {
-        text: "Tracking how people talk about AI companionship across 27 Reddit communities, from January 2023 to present.",
-        themeName: null,
-        themeColor: null,
-      };
-    }
-
-    const entries = themeData[activeTheme.id] ?? [];
+  // ── Per-theme YoY summary helper ──
+  function themeSummary(theme: typeof THEMES[number]): {
+    text: string;
+    themeName: string;
+    themeColor: string;
+  } {
+    const entries = themeData[theme.id] ?? [];
     if (entries.length >= 90) {
       const sorted = entries.map((e) => e.date).sort();
       const latest = sorted[sorted.length - 1];
@@ -449,40 +440,58 @@ export default function TrendsExplorer({ themeData, keywordDetails }: Props) {
         const priorRate = Math.round(priorAvg * 10) / 10;
         let text: string;
         if (Math.abs(pct) < 10) {
-          text = `${activeTheme.label} has been stable vs same period last year.`;
+          text = `${theme.label} has been stable vs same period last year.`;
         } else if (Math.abs(pct) > 100) {
-          // Large changes: show actual rates for context instead of a misleading percentage
           const dir = pct > 0 ? "rose" : "fell";
           const from = pct > 0 ? priorRate : recentRate;
           const to = pct > 0 ? recentRate : priorRate;
-          text = `${activeTheme.label} ${dir} from ${from} to ${to} mentions per 1k posts vs same period last year.`;
+          text = `${theme.label} ${dir} from ${from} to ${to} mentions per 1k posts vs same period last year.`;
         } else {
           const dir = pct > 0 ? "up" : "down";
-          text = `${activeTheme.label} is ${dir} ${Math.abs(pct)}% vs same period last year.`;
+          text = `${theme.label} is ${dir} ${Math.abs(pct)}% vs same period last year.`;
         }
-        return {
-          text,
-          themeName: activeTheme.label,
-          themeColor: activeTheme.color,
-        };
+        return { text, themeName: theme.label, themeColor: theme.color };
       }
     }
 
-    const peak = peakMonths[activeTheme.id];
+    const peak = peakMonths[theme.id];
     if (peak) {
-      const text = `${activeTheme.label} peaked in ${formatMonthTick(peak.month)}.`;
       return {
-        text,
-        themeName: activeTheme.label,
-        themeColor: activeTheme.color,
+        text: `${theme.label} peaked in ${formatMonthTick(peak.month)}.`,
+        themeName: theme.label,
+        themeColor: theme.color,
       };
     }
 
     return {
-      text: `Tracking ${activeTheme.label} discourse.`,
-      themeName: activeTheme.label,
-      themeColor: activeTheme.color,
+      text: `Tracking ${theme.label} discourse.`,
+      themeName: theme.label,
+      themeColor: theme.color,
     };
+  }
+
+  // ── Subtitle logic: stacked summaries for 1-3 selected themes ──
+  type SummaryLine = { text: string; themeName: string | null; themeColor: string | null };
+  const summaries: SummaryLine[] = useMemo(() => {
+    if (selected.size === 0) {
+      return [{
+        text: "Tracking how people talk about AI companionship across 27 Reddit communities, from January 2023 to present.",
+        themeName: null,
+        themeColor: null,
+      }];
+    }
+
+    if (selected.size > 3) {
+      return [{
+        text: `Showing ${selected.size} of 6 themes.`,
+        themeName: null,
+        themeColor: null,
+      }];
+    }
+
+    // 1-3 themes: generate a summary line for each
+    const activeThemes = THEMES.filter((t) => selected.has(t.id));
+    return activeThemes.map((t) => themeSummary(t));
   }, [selected, themeData, dateRange, peakMonths]);
 
   // ── Responsive chart config ──
@@ -563,26 +572,30 @@ export default function TrendsExplorer({ themeData, keywordDetails }: Props) {
         <h1 className="text-[22px] sm:text-2xl lg:text-3xl font-bold text-[#F8FAFC] mb-1">
           How are people talking about AI companionship?
         </h1>
-        <p className="text-sm sm:text-base text-[#94A3B8] line-clamp-2 sm:line-clamp-none">
-          {summary.themeName && summary.themeColor ? (
-            <>
-              {summary.text.split(summary.themeName).map((part, i, arr) =>
-                i < arr.length - 1 ? (
-                  <span key={i}>
-                    {part}
-                    <span style={{ color: summary.themeColor! }}>
-                      {summary.themeName}
-                    </span>
-                  </span>
-                ) : (
-                  <span key={i}>{part}</span>
-                ),
+        <div className="space-y-0.5">
+          {summaries.map((line, idx) => (
+            <p key={idx} className="text-sm sm:text-base text-[#94A3B8] line-clamp-2 sm:line-clamp-none">
+              {line.themeName && line.themeColor ? (
+                <>
+                  {line.text.split(line.themeName).map((part, i, arr) =>
+                    i < arr.length - 1 ? (
+                      <span key={i}>
+                        {part}
+                        <span style={{ color: line.themeColor! }}>
+                          {line.themeName}
+                        </span>
+                      </span>
+                    ) : (
+                      <span key={i}>{part}</span>
+                    ),
+                  )}
+                </>
+              ) : (
+                line.text
               )}
-            </>
-          ) : (
-            summary.text
-          )}
-        </p>
+            </p>
+          ))}
+        </div>
       </div>
 
       {/* Time range selector + chart mode toggle */}
