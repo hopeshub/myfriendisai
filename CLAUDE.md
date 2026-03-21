@@ -434,73 +434,31 @@ Single breakpoint at **≤768px**. Desktop layout unchanged. Key decisions:
 - [x] Cron job setup (local machine runs collection + pushes; GitHub Actions triggers Vercel redeploy on push)
 - [x] Basic frontend showing time-series data with raw metrics and simple ratios
 
-### Phase 2: Enhancements — IN PROGRESS
+### Phase 2: Enhancements — COMPLETE
 - [x] Keyword tagging and trend visualizations (6 validated themes, keywords_v8.yaml)
 - [x] Historical backfill via PullPush (replaces Arctic Shift — data goes back years)
 - [x] Keyword research pipeline (FTS5 + agent-based discovery + precision validation)
 - [x] Comment collection + tagging pipeline (forward-looking, implemented 2026-03-18)
-- [ ] Comment keyword precision validation (must complete within 2 weeks of launch — see COMMENTS_SYSTEM_SPEC.md §11)
-- [ ] Historical comment backfill via PullPush (blocked on precision validation)
-- [ ] Composite "engagement index" scoring (need 4+ weeks of daily data)
-- [ ] Category-level aggregate views
 - [x] Fix GitHub Actions workflow (Reddit blocks cloud IPs; switched to local collection + GH Actions redeploy-on-push)
 
-### Phase 3: Polish
+### Phase 3: Polish — COMPLETE
 - [x] Public deployment to Vercel + myfriendisai.com domain
 - [x] Mobile responsive design (horizontal card strip, layout reorder, chart optimization, bottom sheet detail panel)
-- [ ] SEO and social sharing metadata
-- [ ] Narrative/editorial content on the site
-- [ ] Export/embed functionality for charts
+- [x] SEO and social sharing metadata (OG image, Twitter cards, sitemap, robots.txt)
+- [x] Accessibility fixes (focus styles, ARIA attributes, color contrast, focus trap)
+
+### Future work
+- Comment keyword precision validation
+- Composite "engagement index" scoring (need more daily data)
+- Narrative/editorial content
+- Export/embed functionality for charts
 
 ---
 
 ## 7. Open Questions
 
-- **Subreddit list:** Walker is developing the full list and categorization separately
-- **Visitors/Contributions via .json:** Need to verify if Reddit's new metrics are exposed in the public `.json` endpoint or only on the rendered page. If not in `.json`, we may need to scrape the page or compute proxies from post data.
-- **NSFW subreddits — DETAILED FINDINGS (March 2026):**
-
-  **The problem:** Since mid-2023, Reddit's API has completely blocked NSFW posts and comments from third-party access. This applies to the OAuth API AND the unauthenticated `.json` endpoints — they share the same backend. Reddit also requires login to even VIEW NSFW subreddits in a browser (since 2022). Roughly 20% of all Reddit communities are flagged NSFW.
-
-  **Two types of NSFW to distinguish:**
-  1. **Subreddit-level NSFW** — The entire subreddit is tagged as `over_18: true`. Hitting `r/{subreddit}/about.json` or `r/{subreddit}/new.json` unauthenticated will likely return a 403 Forbidden or a login-required redirect. This is a hard block.
-  2. **Post-level NSFW** — Individual posts within a non-NSFW subreddit are marked `over_18: true`. The subreddit itself is still accessible, but these specific posts may be filtered from unauthenticated `.json` responses.
-
-  **Impact on this project:** Most of the core AI companion subreddits (r/replika, r/CharacterAI, r/chai_app, etc.) are NOT flagged as NSFW at the subreddit level — they are SFW communities that may contain some NSFW-tagged posts. These should be fully accessible via `.json` endpoints. However, some niche or adult-oriented AI companion communities (AI girlfriend NSFW subs, etc.) may be subreddit-level NSFW and completely inaccessible without authentication.
-
-  **Mitigation strategy — TWO VIABLE SOLUTIONS:**
-
-  **Step 6 (validate_access.py) is critical.** This script must test every target subreddit's `.json` endpoint BEFORE we rely on it. Any subreddit returning 403 gets flagged as NSFW-blocked and routed to an alternative data source.
-
-  **Solution A: Self-hosted Redlib instance (for ongoing daily collection of NSFW subs)**
-  Redlib (https://github.com/redlib-org/redlib) is an open-source alternative Reddit frontend written in Rust. It works by spoofing the official Reddit Android app's OAuth tokens and HTTP headers — Reddit's servers think the requests are coming from the official app and serve full content, including NSFW subreddits.
-  - Deploy via Docker (lightweight, ~50MB RAM)
-  - Our Python collector routes NSFW subreddit requests through our Redlib instance instead of reddit.com
-  - Redlib returns HTML, not JSON, so we'd need to parse the HTML or use Redlib's internal data format
-  - Gray area legally — Reddit doesn't approve but it's accessing public data
-  - Reddit periodically tries to block Redlib instances; self-hosting reduces this risk vs. using public instances
-  - For our low-volume use case (~20 requests/day for NSFW subs), this is very stable
-
-  **Solution B: Arctic Shift (for historical data + NSFW subreddit data)**
-  Arctic Shift's archive explicitly includes NSFW content — their search interface has an NSFW toggle filter, confirming the data is there. Their metadata dumps include subscriber counts and NSFW flags for 22 million subreddits.
-  - Use Arctic Shift's API for aggregation queries (post/comment frequency per subreddit over time)
-  - Use their data dumps for full historical backfill
-  - Works for NSFW subs that the `.json` endpoint blocks
-  - Limitation: Arctic Shift data may lag behind real-time by days/weeks depending on their ingestion pipeline
-
-  **Recommended architecture — two-track collector:**
-  ```
-  For each subreddit in config:
-    if subreddit is SFW (accessible via .json):
-      → collect from reddit.com/.json endpoints (primary, simple, reliable)
-    if subreddit is NSFW (403 from .json):
-      → collect from self-hosted Redlib instance (daily snapshots)
-      → use Arctic Shift API for historical backfill and as fallback
-  ```
-
-  **For post-level NSFW within accessible subreddits:** We still get the subreddit metadata and most posts. Individual NSFW posts may be filtered, which means our comment/engagement counts could undercount slightly. This is acceptable for trend analysis.
-- **Hosting:** Vercel
-- **Domain:** myfriendisai.com (purchased)
+- **NSFW subreddits:** Reddit blocks NSFW content via `.json` endpoints (403). All 27 currently tracked subreddits are SFW at the subreddit level, so this is not an active issue. If NSFW subs are added in the future, a self-hosted Redlib instance or Arctic Shift archives can provide access.
+- **Post-level NSFW:** Individual NSFW posts within accessible subreddits may be filtered from responses, causing slight undercounting. Acceptable for trend analysis.
 
 ---
 
@@ -515,37 +473,3 @@ Single breakpoint at **≤768px**. Desktop layout unchanged. Key decisions:
 
 ---
 
-## 9. Ordered Build Tasklist
-
-Work through these in order. Each step should be fully working before moving to the next.
-
-### Step 1: Project Scaffolding ✅
-### Step 2: Config Files ✅
-### Step 3: Reddit `.json` Client ✅
-### Step 4: SQLite Database ✅ (3.26M posts, FTS5 index)
-### Step 5: Daily Collection Script + JSON Export ✅
-### Step 6: Validation Script ✅
-### Step 6b: Redlib Setup — SKIPPED (no NSFW-blocked subs in current list)
-### Step 7: Next.js Project Setup ✅ (Next.js 16, App Router, Tailwind)
-### Step 8: Wire Frontend to Data ✅
-### Step 9: Frontend — Community Explorer ✅ (sortable/filterable table)
-### Step 10: Frontend — Time-Series Charts ✅ (per-subreddit Recharts line charts)
-### Step 11: Frontend — Landing Page ✅ (hero chart + 6-theme Trends Explorer)
-### Step 12: Deploy to Vercel ✅ (live at myfriendisai.com)
-### Step 13: Keyword Tracking + Trend Visualizations ✅
-- Regex tagger (`scripts/tag_keywords.py`) tags posts against 6 validated keyword themes (keywords_v8.yaml)
-- Export to `data/keyword_trends.json` with per-1k-posts normalization
-- Trends Explorer chart with 6 toggleable themes, adaptive rolling averages, event annotations
-- Keyword validation pipeline: 100-post manual qualitative coding per keyword, documented in docs/validation_*.md
-
-### Step 13b: Engagement Index — NOT STARTED (need more daily data)
-### Step 14: Historical Backfill ✅ (via PullPush, not Arctic Shift — data goes back years)
-### Step 15: Reddit API Access — NOT PURSUED (`.json` endpoints + PullPush sufficient)
-### Step 16: Comment Collection + Tagging ✅ (implemented 2026-03-18)
-- Schema migration: `comments`, `comment_keyword_hits`, `comment_collection_log` tables + `source` column on `post_keyword_tags`
-- Comment collection: fetches comments for posts 5-6 days old with 5+ comments, expands "more comments" stubs for 50+ comment posts
-- Comment tagging: shared regex matching via `src/keyword_matching.py`, propagates hits to `post_keyword_tags` with `source='comment'`
-- Dual-metric export: `keyword_trends.json` includes both post+comment and post-only counts
-- Pipeline integration: `collect_daily.py` runs all 5 steps end-to-end with error isolation and timing
-- Full spec: `docs/COMMENTS_SYSTEM_SPEC.md`
-- Migration: `migrations/001_add_comment_tables.py`
