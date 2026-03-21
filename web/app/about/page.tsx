@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { readFileSync } from "fs";
+import { join } from "path";
 
 export const metadata: Metadata = {
   title: "About — My Friend Is AI",
@@ -6,8 +8,18 @@ export const metadata: Metadata = {
     "Methodology, data sources, and changelog for the AI companionship community tracker.",
 };
 
+function getPostCount(): string {
+  try {
+    const raw = readFileSync(join(process.cwd(), "data", "site_meta.json"), "utf-8");
+    const meta = JSON.parse(raw) as { total_posts: number };
+    return `~${(meta.total_posts / 1_000_000).toFixed(1)}M`;
+  } catch {
+    return "~3.8M";
+  }
+}
+
 const STATS = [
-  { value: "3.7M", label: "posts in corpus" },
+  { value: getPostCount(), label: "posts in corpus" },
   { value: "27", label: "tracked communities" },
   { value: "80%", label: "minimum precision threshold" },
 ];

@@ -22,7 +22,7 @@ from src.config import load_communities, load_keywords, load_keyword_communities
 from src.reddit_client import RedditClient
 from src.utils.rate_limiter import RateLimiter
 from src.db.schema import initialize as init_db
-from src.db.operations import export_snapshots_json, export_subreddits_json, sync_subreddit_config
+from src.db.operations import export_snapshots_json, export_subreddits_json, export_site_meta_json, sync_subreddit_config
 from src.collector import collect_subreddit
 from src.keyword_scanner import scan_subreddit_keywords, store_keyword_counts, export_keywords_json
 from src.db.operations import export_keyword_trends_json
@@ -189,7 +189,8 @@ def _step_export(conn):
     sub_path = export_subreddits_json(conn=conn)
     kw_path = export_keywords_json(conn=conn)
     kw_trends_path = export_keyword_trends_json(conn=conn)
-    logger.info("Exported: %s, %s, %s, %s", snap_path, sub_path, kw_path, kw_trends_path)
+    meta_path = export_site_meta_json(conn=conn)
+    logger.info("Exported: %s, %s, %s, %s, %s", snap_path, sub_path, kw_path, kw_trends_path, meta_path)
 
     web_data_dir = Path(__file__).parent.parent / "web" / "data"
     web_data_dir.mkdir(parents=True, exist_ok=True)
@@ -197,6 +198,7 @@ def _step_export(conn):
     shutil.copy2(sub_path, web_data_dir / "subreddits.json")
     shutil.copy2(kw_path, web_data_dir / "keywords.json")
     shutil.copy2(kw_trends_path, web_data_dir / "keyword_trends.json")
+    shutil.copy2(meta_path, web_data_dir / "site_meta.json")
     logger.info("Copied JSON to web/data/ for frontend")
 
 

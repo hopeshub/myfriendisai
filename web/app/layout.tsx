@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { readFileSync } from "fs";
+import { join } from "path";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -8,9 +10,25 @@ export const metadata: Metadata = {
     "Tracking the growth and cultural dynamics of AI companionship communities on Reddit.",
 };
 
+function getSiteMeta() {
+  try {
+    const raw = readFileSync(join(process.cwd(), "data", "site_meta.json"), "utf-8");
+    return JSON.parse(raw) as { total_posts: number; date_start: string; date_end: string };
+  } catch {
+    return { total_posts: 3800000, date_start: "2023-01-01", date_end: "2026-03-21" };
+  }
+}
+
+function formatPostCount(n: number): string {
+  return `~${(n / 1_000_000).toFixed(1)}M`;
+}
+
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
+  const meta = getSiteMeta();
+  const startYear = meta.date_start.slice(0, 4);
+
   return (
     <html lang="en">
       <head>
@@ -47,9 +65,8 @@ export default function RootLayout({
         <main>{children}</main>
 
         <footer className="border-t border-border mt-20">
-          <div className="max-w-6xl mx-auto px-4 sm:px-6 py-6 text-xs text-muted flex flex-col sm:flex-row items-start sm:items-center justify-between gap-1 sm:gap-0">
-            <span>Data from Reddit&apos;s public endpoints · ~3.7M posts · 2023–present</span>
-            <a href="/about" className="hover:text-foreground transition-colors">Methodology ↗</a>
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 py-6 text-xs text-muted">
+            <span>Data from Reddit&apos;s public endpoints · {formatPostCount(meta.total_posts)} posts · {startYear}–present</span>
           </div>
         </footer>
       </body>

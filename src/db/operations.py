@@ -215,6 +215,31 @@ def aggregate_posts_to_snapshots(conn: Optional[sqlite3.Connection] = None) -> i
             _conn.close()
 
 
+def export_site_meta_json(
+    output_path: Optional[Path] = None,
+    conn: Optional[sqlite3.Connection] = None,
+) -> Path:
+    """Write site metadata JSON (total posts, date range, etc.)."""
+    path = output_path or DATA_DIR / "site_meta.json"
+    path.parent.mkdir(parents=True, exist_ok=True)
+    _conn = conn or get_connection()
+    try:
+        total_posts = _conn.execute("SELECT COUNT(*) FROM posts").fetchone()[0]
+        date_range = _conn.execute(
+            "SELECT MIN(date(created_utc, 'unixepoch')), MAX(date(created_utc, 'unixepoch')) FROM posts"
+        ).fetchone()
+        meta = {
+            "total_posts": total_posts,
+            "date_start": date_range[0] if date_range else None,
+            "date_end": date_range[1] if date_range else None,
+        }
+        path.write_text(json.dumps(meta, indent=2))
+    finally:
+        if conn is None:
+            _conn.close()
+    return path
+
+
 def export_snapshots_json(
     output_path: Optional[Path] = None,
     conn: Optional[sqlite3.Connection] = None,
