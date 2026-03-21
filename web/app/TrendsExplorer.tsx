@@ -150,6 +150,16 @@ export default function TrendsExplorer({ themeData, keywordDetails }: Props) {
   const panelRef = useRef<HTMLDivElement>(null);
   const cardRowRef = useRef<HTMLDivElement>(null);
   const bp = useBreakpoint();
+  const [isMobileStrip, setIsMobileStrip] = useState(false);
+
+  useEffect(() => {
+    function checkMobile() {
+      setIsMobileStrip(window.innerWidth <= 768);
+    }
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   // Close panel when clicking outside (but not on cards, which have their own handler)
   const handleClickOutside = useCallback(
@@ -597,15 +607,23 @@ export default function TrendsExplorer({ themeData, keywordDetails }: Props) {
       {/* Metric cards */}
       <div
         ref={cardRowRef}
-        className="grid gap-[6px] sm:gap-2 mb-5"
-        style={{
-          gridTemplateColumns:
-            bp === "mobile"
-              ? "repeat(2, 1fr)"
-              : bp === "tablet"
-                ? "repeat(3, 1fr)"
-                : "repeat(6, 1fr)",
-        }}
+        className={
+          isMobileStrip
+            ? "mobile-card-strip flex gap-2 mb-5"
+            : "grid gap-[6px] sm:gap-2 mb-5"
+        }
+        style={
+          isMobileStrip
+            ? undefined
+            : {
+                gridTemplateColumns:
+                  bp === "mobile"
+                    ? "repeat(2, 1fr)"
+                    : bp === "tablet"
+                      ? "repeat(3, 1fr)"
+                      : "repeat(6, 1fr)",
+              }
+        }
       >
         {metricCards.map((card) => {
           const isActive = selected.has(card.id as ThemeId);
@@ -633,6 +651,9 @@ export default function TrendsExplorer({ themeData, keywordDetails }: Props) {
                   ? `0 0 16px color-mix(in srgb, ${card.color} 30%, transparent)`
                   : undefined,
                 "--card-color": card.color,
+                ...(isMobileStrip
+                  ? { width: 140, flexShrink: 0, scrollSnapAlign: "start" as const }
+                  : {}),
               } as React.CSSProperties}
             >
               <div
@@ -651,12 +672,14 @@ export default function TrendsExplorer({ themeData, keywordDetails }: Props) {
               >
                 {card.value.toFixed(1)}
               </div>
-              <div
-                className="text-[10px] leading-tight"
-                style={{ color: "#94A3B8" }}
-              >
-                mentions / 1k posts
-              </div>
+              {!isMobileStrip && (
+                <div
+                  className="text-[10px] leading-tight"
+                  style={{ color: "#94A3B8" }}
+                >
+                  mentions / 1k posts
+                </div>
+              )}
               <div className="mt-1.5 pointer-events-none">
                 <Sparkline
                   data={card.sparklineData}
