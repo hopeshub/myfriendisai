@@ -433,14 +433,13 @@ export default function TrendsExplorer({ themeData, keywordDetails }: Props) {
         (e) => e.date > priorStartStr && e.date <= priorEndStr,
       );
 
+      // Use per-1k-posts rate and divide by calendar days (90) to avoid
+      // sparse-data bias — days with zero hits are treated as zero, not skipped.
+      const WINDOW_DAYS = 90;
       const recentAvg =
-        recent.length > 0
-          ? recent.reduce((s, e) => s + e.value, 0) / recent.length
-          : 0;
+        recent.reduce((s, e) => s + e.hitsPerK, 0) / WINDOW_DAYS;
       const priorAvg =
-        prior.length > 0
-          ? prior.reduce((s, e) => s + e.value, 0) / prior.length
-          : 0;
+        prior.reduce((s, e) => s + e.hitsPerK, 0) / WINDOW_DAYS;
 
       if (priorAvg > 0 && prior.length >= 30) {
         const pct = Math.round(((recentAvg - priorAvg) / priorAvg) * 100);
