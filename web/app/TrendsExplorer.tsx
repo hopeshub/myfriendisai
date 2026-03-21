@@ -548,10 +548,10 @@ export default function TrendsExplorer({ themeData, keywordDetails }: Props) {
 
   return (
     <>
-    <div className="max-w-5xl mx-auto px-4 sm:px-6 py-6 sm:py-10">
+    <div className="max-w-5xl mx-auto px-4 sm:px-6 py-4 sm:py-6">
       {/* Headline + dynamic summary */}
       <div className="mb-6 sm:mb-8">
-        <h1 className="text-[22px] sm:text-2xl lg:text-3xl font-bold text-[#F8FAFC] mb-2">
+        <h1 className="text-[22px] sm:text-2xl lg:text-3xl font-bold text-[#F8FAFC] mb-1">
           How are people talking about AI companionship?
         </h1>
         <p className="text-sm sm:text-base text-[#94A3B8] line-clamp-2 sm:line-clamp-none">

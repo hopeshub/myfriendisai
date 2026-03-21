@@ -59,7 +59,7 @@ export default function RootLayout({
           <div className="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
             <Link
               href="/"
-              className="text-base tracking-tight hover:text-primary transition-colors"
+              className="text-lg tracking-tight hover:text-primary transition-colors"
               style={{ fontFamily: "'JetBrains Mono', 'Fira Code', 'SF Mono', Consolas, monospace" }}
             >
               <span style={{ fontWeight: 300, color: "rgba(255,255,255,0.6)" }}>My Friend Is</span>
