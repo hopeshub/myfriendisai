@@ -418,7 +418,7 @@ Single breakpoint at **≤768px**. Desktop layout unchanged. Key decisions:
 - **Chart:** 8px padding, abbreviated event labels at 640-768px, labels hidden below 640px (expandable list instead)
 - **Font floor:** 14px minimum on all text (except chart axis labels)
 - **Touch targets:** All buttons ≥44px tap height
-- Spec: `docs/MOBILE_RESPONSIVE_SPEC.md`. Implementation prompts: `docs/CC_PROMPT_PHASE{1-4}.md`
+- Spec: `docs/archive/MOBILE_RESPONSIVE_SPEC.md`. Implementation prompts: `docs/archive/CC_PROMPT_PHASE{1-4}.md`
 
 ---
 
