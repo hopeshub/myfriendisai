@@ -6,6 +6,11 @@ export const metadata: Metadata = {
   title: "About — My Friend Is AI",
   description:
     "Methodology, data sources, and changelog for the AI companionship community tracker.",
+  openGraph: {
+    title: "About — My Friend Is AI",
+    description:
+      "How we track AI companion discourse: keyword validation methodology, data sources, and project changelog.",
+  },
 };
 
 function getPostCount(): string {

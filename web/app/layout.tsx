@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     locale: "en_US",
   },
   twitter: {
-    card: "summary",
+    card: "summary_large_image",
     title: "My Friend Is AI",
     description:
       "Tracking AI companion discourse on Reddit across six themes.",

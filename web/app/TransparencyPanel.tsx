@@ -173,9 +173,15 @@ export function CommunitiesSection({
         {visible.map((sub) => (
           <div key={sub.name}>
             <div className="flex items-baseline justify-between mb-0.5">
-              <span className="text-[13px]" style={{ color: "#CBD5E1" }}>
+              <a
+                href={`https://www.reddit.com/r/${sub.name}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[13px] hover:underline underline-offset-2 transition-colors"
+                style={{ color: "#CBD5E1" }}
+              >
                 r/{sub.name}
-              </span>
+              </a>
               <span
                 className="text-[12px] ml-2 flex-shrink-0"
                 style={{ color: "#94A3B8" }}
