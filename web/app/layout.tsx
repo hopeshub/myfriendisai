@@ -8,6 +8,26 @@ export const metadata: Metadata = {
   title: "My Friend Is AI",
   description:
     "Tracking the growth and cultural dynamics of AI companionship communities on Reddit.",
+  metadataBase: new URL("https://myfriendisai.com"),
+  openGraph: {
+    title: "My Friend Is AI",
+    description:
+      "Tracking AI companion discourse on Reddit across six themes — romance, addiction, consciousness, therapy, rupture, and sexual roleplay.",
+    url: "https://myfriendisai.com",
+    siteName: "My Friend Is AI",
+    type: "website",
+    locale: "en_US",
+  },
+  twitter: {
+    card: "summary",
+    title: "My Friend Is AI",
+    description:
+      "Tracking AI companion discourse on Reddit across six themes.",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 function getSiteMeta() {

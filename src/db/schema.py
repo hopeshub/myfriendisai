@@ -82,6 +82,79 @@ CREATE TABLE IF NOT EXISTS subreddit_config (
     added_date DATE NOT NULL,
     is_active BOOLEAN DEFAULT 1
 );
+
+CREATE TABLE IF NOT EXISTS post_keyword_tags (
+    id          INTEGER PRIMARY KEY AUTOINCREMENT,
+    post_id     TEXT    NOT NULL,
+    subreddit   TEXT    NOT NULL,
+    category    TEXT    NOT NULL,
+    matched_term TEXT   NOT NULL,
+    post_date   DATE    NOT NULL,
+    source      TEXT    NOT NULL DEFAULT 'post',
+    UNIQUE(post_id, category, matched_term, source)
+);
+
+CREATE TABLE IF NOT EXISTS comments (
+    id TEXT PRIMARY KEY,
+    post_id TEXT NOT NULL,
+    subreddit TEXT NOT NULL,
+    author TEXT,
+    body TEXT,
+    score INTEGER,
+    depth INTEGER NOT NULL DEFAULT 0,
+    parent_id TEXT,
+    created_utc INTEGER,
+    permalink TEXT,
+    collected_at TEXT NOT NULL
+        DEFAULT (strftime('%Y-%m-%dT%H:%M:%SZ', 'now')),
+    FOREIGN KEY (post_id) REFERENCES posts(id)
+);
+
+CREATE INDEX IF NOT EXISTS idx_comments_post_id
+    ON comments(post_id);
+
+CREATE INDEX IF NOT EXISTS idx_comments_subreddit_created
+    ON comments(subreddit, created_utc);
+
+CREATE TABLE IF NOT EXISTS comment_keyword_hits (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    comment_id TEXT NOT NULL,
+    post_id TEXT NOT NULL,
+    subreddit TEXT NOT NULL,
+    category TEXT NOT NULL,
+    matched_term TEXT NOT NULL,
+    post_date DATE NOT NULL,
+    FOREIGN KEY (comment_id) REFERENCES comments(id),
+    FOREIGN KEY (post_id) REFERENCES posts(id)
+);
+
+CREATE INDEX IF NOT EXISTS idx_comment_hits_post_id
+    ON comment_keyword_hits(post_id);
+
+CREATE INDEX IF NOT EXISTS idx_comment_hits_keyword
+    ON comment_keyword_hits(category, matched_term);
+
+CREATE UNIQUE INDEX IF NOT EXISTS idx_comment_hits_unique
+    ON comment_keyword_hits(comment_id, category, matched_term);
+
+CREATE TABLE IF NOT EXISTS comment_collection_log (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    post_id TEXT NOT NULL,
+    subreddit TEXT NOT NULL,
+    comments_collected INTEGER NOT NULL DEFAULT 0,
+    collected_at TEXT NOT NULL
+        DEFAULT (strftime('%Y-%m-%dT%H:%M:%SZ', 'now')),
+    FOREIGN KEY (post_id) REFERENCES posts(id)
+);
+
+CREATE UNIQUE INDEX IF NOT EXISTS idx_comment_log_post
+    ON comment_collection_log(post_id);
+
+CREATE INDEX IF NOT EXISTS idx_pkt_subreddit_date
+    ON post_keyword_tags(subreddit, post_date);
+
+CREATE INDEX IF NOT EXISTS idx_pkt_category_date
+    ON post_keyword_tags(category, post_date);
 """
 
 

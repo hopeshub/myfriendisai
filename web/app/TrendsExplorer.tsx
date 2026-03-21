@@ -150,17 +150,10 @@ export default function TrendsExplorer({ themeData, keywordDetails }: Props) {
   const [nearestTheme, setNearestTheme] = useState<ThemeId | null>(null);
   const panelRef = useRef<HTMLDivElement>(null);
   const cardRowRef = useRef<HTMLDivElement>(null);
-  const bp = useBreakpoint();
-  const [isMobileStrip, setIsMobileStrip] = useState(false);
-
-  useEffect(() => {
-    function checkMobile() {
-      setIsMobileStrip(window.innerWidth <= 768);
-    }
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
-  }, []);
+  const { bp: rawBp, isMobileStrip: rawMobileStrip } = useBreakpoint();
+  // Default to desktop during SSR/hydration to avoid layout flash
+  const bp = rawBp ?? "desktop";
+  const isMobileStrip = rawMobileStrip ?? false;
 
   // Close panel when clicking outside (but not on cards, which have their own handler)
   const handleClickOutside = useCallback(
@@ -592,6 +585,8 @@ export default function TrendsExplorer({ themeData, keywordDetails }: Props) {
               onClick={() => {
                 setTimeRange(range);
               }}
+              aria-pressed={timeRange === range}
+              aria-label={`Show ${range === "ALL" ? "all time" : `last ${range}`}`}
               className="flex-1 sm:flex-none h-11 sm:h-auto px-3 py-1 text-sm sm:text-xs font-medium rounded-md transition-colors"
               style={{
                 backgroundColor: timeRange === range ? "#1A1D27" : "transparent",
@@ -612,6 +607,8 @@ export default function TrendsExplorer({ themeData, keywordDetails }: Props) {
                 onClick={() => {
                   setChartMode(mode);
                 }}
+                aria-pressed={chartMode === mode}
+                aria-label={`${mode === "absolute" ? "Absolute" : "Relative"} chart mode`}
                 className="h-11 sm:h-auto px-3 py-1 text-sm sm:text-xs font-medium rounded-md transition-colors"
                 style={{
                   backgroundColor: chartMode === mode ? "#1A1D27" : "transparent",
@@ -722,7 +719,7 @@ export default function TrendsExplorer({ themeData, keywordDetails }: Props) {
         className="text-center"
         style={{
           fontSize: isMobileStrip ? 14 : 12,
-          color: "#64748B",
+          color: "#8293A6",
           marginTop: 8,
           marginBottom: 16,
           ...(isMobileStrip ? { order: 2 } : {}),

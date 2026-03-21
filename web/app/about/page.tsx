@@ -89,7 +89,7 @@ const sectionHeaderStyle: React.CSSProperties = {
   fontWeight: 500,
   textTransform: "uppercase",
   letterSpacing: "0.05em",
-  color: "#64748B",
+  color: "#8293A6",
   marginBottom: 16,
 };
 
@@ -114,7 +114,7 @@ export default function About() {
             fontSize: 12,
             textTransform: "uppercase",
             letterSpacing: "0.05em",
-            color: "#64748B",
+            color: "#8293A6",
             marginBottom: 8,
           }}
         >

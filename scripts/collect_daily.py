@@ -9,7 +9,9 @@ Usage:
     python scripts/collect_daily.py
 """
 
+import fcntl
 import logging
+import os
 import shutil
 import sys
 import time
@@ -183,26 +185,75 @@ def _step_tag_comments(conn):
     return {**tag_stats, **prop_stats}
 
 
+def _atomic_copy(src: Path, dst: Path):
+    """Copy src to dst atomically: write to .tmp then rename."""
+    tmp = dst.with_suffix(dst.suffix + ".tmp")
+    shutil.copy2(src, tmp)
+    os.replace(str(tmp), str(dst))
+
+
 def _step_export(conn):
-    """Step 5+6: Export JSON and copy to web/data/."""
-    snap_path = export_snapshots_json(conn=conn)
-    sub_path = export_subreddits_json(conn=conn)
-    kw_path = export_keywords_json(conn=conn)
-    kw_trends_path = export_keyword_trends_json(conn=conn)
-    meta_path = export_site_meta_json(conn=conn)
+    """Step 5+6: Export JSON and copy to web/data/.
+
+    Exports to .tmp files first, then renames atomically so production
+    JSON files are never left in a corrupt/partial state.
+    """
+    # Export to data/ via tmp files
+    data_dir = Path(__file__).parent.parent / "data"
+
+    snap_path = export_snapshots_json(output_path=data_dir / "snapshots.json.tmp", conn=conn)
+    os.replace(str(snap_path), str(data_dir / "snapshots.json"))
+    snap_path = data_dir / "snapshots.json"
+
+    sub_path = export_subreddits_json(output_path=data_dir / "subreddits.json.tmp", conn=conn)
+    os.replace(str(sub_path), str(data_dir / "subreddits.json"))
+    sub_path = data_dir / "subreddits.json"
+
+    kw_path = export_keywords_json(output_path=data_dir / "keywords.json.tmp", conn=conn)
+    os.replace(str(kw_path), str(data_dir / "keywords.json"))
+    kw_path = data_dir / "keywords.json"
+
+    kw_trends_path = export_keyword_trends_json(output_path=data_dir / "keyword_trends.json.tmp", conn=conn)
+    os.replace(str(kw_trends_path), str(data_dir / "keyword_trends.json"))
+    kw_trends_path = data_dir / "keyword_trends.json"
+
+    meta_path = export_site_meta_json(output_path=data_dir / "site_meta.json.tmp", conn=conn)
+    os.replace(str(meta_path), str(data_dir / "site_meta.json"))
+    meta_path = data_dir / "site_meta.json"
+
     logger.info("Exported: %s, %s, %s, %s, %s", snap_path, sub_path, kw_path, kw_trends_path, meta_path)
 
+    # Copy to web/data/ atomically
     web_data_dir = Path(__file__).parent.parent / "web" / "data"
     web_data_dir.mkdir(parents=True, exist_ok=True)
-    shutil.copy2(snap_path, web_data_dir / "snapshots.json")
-    shutil.copy2(sub_path, web_data_dir / "subreddits.json")
-    shutil.copy2(kw_path, web_data_dir / "keywords.json")
-    shutil.copy2(kw_trends_path, web_data_dir / "keyword_trends.json")
-    shutil.copy2(meta_path, web_data_dir / "site_meta.json")
+    _atomic_copy(snap_path, web_data_dir / "snapshots.json")
+    _atomic_copy(sub_path, web_data_dir / "subreddits.json")
+    _atomic_copy(kw_path, web_data_dir / "keywords.json")
+    _atomic_copy(kw_trends_path, web_data_dir / "keyword_trends.json")
+    _atomic_copy(meta_path, web_data_dir / "site_meta.json")
     logger.info("Copied JSON to web/data/ for frontend")
 
 
 def main():
+    # Acquire lockfile to prevent overlapping runs
+    lock_path = Path(__file__).parent.parent / "data" / ".collect_daily.lock"
+    lock_path.parent.mkdir(parents=True, exist_ok=True)
+    lock_fd = open(lock_path, "w")
+    try:
+        fcntl.flock(lock_fd, fcntl.LOCK_EX | fcntl.LOCK_NB)
+    except OSError:
+        logger.error("Another instance of collect_daily.py is already running (lockfile: %s)", lock_path)
+        lock_fd.close()
+        return 1
+
+    try:
+        return _main_inner()
+    finally:
+        fcntl.flock(lock_fd, fcntl.LOCK_UN)
+        lock_fd.close()
+
+
+def _main_inner():
     pipeline_start = time.time()
     communities = load_communities()
     logger.info("Loaded %d active communities from config", len(communities))

@@ -91,7 +91,7 @@ export const sectionHeaderStyle: React.CSSProperties = {
   fontWeight: 500,
   textTransform: "uppercase",
   letterSpacing: "0.05em",
-  color: "#64748B",
+  color: "#8293A6",
   marginBottom: 8,
 };
 
@@ -147,7 +147,7 @@ export function KeywordsSection({
         <button
           onClick={() => setExpanded(!expanded)}
           className="text-[12px] mt-2 hover:text-foreground transition-colors"
-          style={{ color: "#64748B" }}
+          style={{ color: "#8293A6" }}
         >
           {expanded ? "Show fewer" : `Show all ${keywords.length} keywords`}
         </button>
@@ -201,7 +201,7 @@ export function CommunitiesSection({
         ))}
       </div>
       {remaining > 0 && (
-        <div className="text-[12px] mt-2" style={{ color: "#64748B" }}>
+        <div className="text-[12px] mt-2" style={{ color: "#8293A6" }}>
           and {remaining} more communities
         </div>
       )}
@@ -229,7 +229,7 @@ export function SamplePostsSection({ samples }: { samples: SamplePost[] }) {
             >
               {truncate(sp.title, 100)}
             </a>
-            <div className="text-[11px] mt-1" style={{ color: "#64748B" }}>
+            <div className="text-[11px] mt-1" style={{ color: "#8293A6" }}>
               r/{sp.subreddit} &middot; {formatDate(sp.date)}
             </div>
           </div>
@@ -270,14 +270,14 @@ export default function TransparencyPanel({
           <div className="text-[15px] font-medium" style={{ color: themeColor }}>
             {themeEmoji} {themeLabel}
           </div>
-          <div className="text-[11px] mt-0.5" style={{ color: "#64748B" }}>
+          <div className="text-[11px] mt-0.5" style={{ color: "#8293A6" }}>
             {themeTagline}
           </div>
         </div>
         <button
           onClick={onClose}
           className="text-[20px] leading-none w-8 h-8 flex items-center justify-center rounded hover:text-foreground transition-colors"
-          style={{ color: "#64748B" }}
+          style={{ color: "#8293A6" }}
           aria-label="Close panel"
         >
           &times;
@@ -293,7 +293,7 @@ export default function TransparencyPanel({
         {/* Footer */}
         <div
           className="text-[11px] pt-2"
-          style={{ color: "#64748B", borderTop: "0.5px solid #1E293B" }}
+          style={{ color: "#8293A6", borderTop: "0.5px solid #1E293B" }}
         >
           {data.keywords.length} keywords across{" "}
           {data.subreddits.length} communities &middot;{" "}

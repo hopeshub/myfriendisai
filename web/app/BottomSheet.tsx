@@ -40,6 +40,7 @@ export default function BottomSheet({
   const dragStartHeight = useRef(SHEET_DEFAULT);
   const sheetRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
+  const handleCloseRef = useRef<() => void>(() => {});
 
   // Reset state when opening
   useEffect(() => {
@@ -60,6 +61,41 @@ export default function BottomSheet({
     }
   }, [isOpen]);
 
+  // Close on Escape key
+  useEffect(() => {
+    if (!isOpen) return;
+    function onKey(e: KeyboardEvent) {
+      if (e.key === "Escape") handleCloseRef.current();
+    }
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [isOpen]);
+
+  // Focus trap: cycle focus within the sheet
+  useEffect(() => {
+    if (!isOpen || !sheetRef.current) return;
+    const sheet = sheetRef.current;
+    const focusable = sheet.querySelectorAll<HTMLElement>(
+      'button, a[href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+    );
+    if (focusable.length > 0) focusable[0].focus();
+
+    function trapFocus(e: KeyboardEvent) {
+      if (e.key !== "Tab" || focusable.length === 0) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    }
+    document.addEventListener("keydown", trapFocus);
+    return () => document.removeEventListener("keydown", trapFocus);
+  }, [isOpen]);
+
   const handleClose = useCallback(() => {
     setIsClosing(true);
     setTimeout(() => {
@@ -67,6 +103,7 @@ export default function BottomSheet({
       setIsClosing(false);
     }, 300);
   }, [onClose]);
+  handleCloseRef.current = handleClose;
 
   // --- Touch gesture handling on the drag handle ---
   const handleTouchStart = useCallback(
@@ -131,6 +168,9 @@ export default function BottomSheet({
       {/* Sheet */}
       <div
         ref={sheetRef}
+        role="dialog"
+        aria-modal="true"
+        aria-label={`${themeEmoji} ${themeLabel} details`}
         style={{
           position: "fixed",
           bottom: 0,
@@ -188,7 +228,7 @@ export default function BottomSheet({
               </div>
               <div
                 className="text-[12px] mt-0.5"
-                style={{ color: "#64748B" }}
+                style={{ color: "#8293A6" }}
               >
                 {themeTagline}
               </div>
@@ -196,7 +236,7 @@ export default function BottomSheet({
             <button
               onClick={handleClose}
               className="text-[20px] leading-none w-8 h-8 flex items-center justify-center rounded hover:text-foreground transition-colors flex-shrink-0"
-              style={{ color: "#64748B" }}
+              style={{ color: "#8293A6" }}
               aria-label="Close panel"
             >
               &times;
@@ -225,7 +265,7 @@ export default function BottomSheet({
           {/* Footer */}
           <div
             className="text-[11px] pt-2"
-            style={{ color: "#64748B", borderTop: "0.5px solid #1E293B" }}
+            style={{ color: "#8293A6", borderTop: "0.5px solid #1E293B" }}
           >
             {data.keywords.length} keywords across{" "}
             {data.subreddits.length} communities &middot;{" "}

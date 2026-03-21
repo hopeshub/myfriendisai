@@ -109,17 +109,17 @@ export default function CommunitiesTable({ subreddits }: { subreddits: Subreddit
           <thead>
             <tr className="text-xs uppercase tracking-wide border-b border-zinc-200">
               <th className="pb-3 pr-4 font-medium text-zinc-400">Community</th>
-              <th className="pb-3 pr-4 font-medium text-zinc-400">Tier</th>
+              <th className="pb-3 pr-4 font-medium text-zinc-400 hidden sm:table-cell">Tier</th>
               <th className="pb-3 pr-4 font-medium text-right">
                 <SortButton label="Subscribers" sortKey="subscribers" current={sort} onSort={handleSort} />
               </th>
               <th className="pb-3 pr-4 font-medium text-right">
                 <SortButton label="Posts/day" sortKey="posts_today" current={sort} onSort={handleSort} />
               </th>
-              <th className="pb-3 pr-4 font-medium text-right">
+              <th className="pb-3 pr-4 font-medium text-right hidden md:table-cell">
                 <SortButton label="Avg comments" sortKey="avg_comments_per_post" current={sort} onSort={handleSort} />
               </th>
-              <th className="pb-3 font-medium text-right">
+              <th className="pb-3 font-medium text-right hidden md:table-cell">
                 <SortButton label="Avg score" sortKey="avg_score_per_post" current={sort} onSort={handleSort} />
               </th>
             </tr>
@@ -138,13 +138,13 @@ export default function CommunitiesTable({ subreddits }: { subreddits: Subreddit
                     <div className="text-xs text-zinc-400 mt-0.5">{s.category}</div>
                   )}
                 </td>
-                <td className="py-3 pr-4">
+                <td className="py-3 pr-4 hidden sm:table-cell">
                   <TierBadge tier={s.tier} />
                 </td>
                 <td className="py-3 pr-4 text-sm tabular-nums text-right">{fmt(s.subscribers)}</td>
                 <td className="py-3 pr-4 text-sm tabular-nums text-right">{fmt(s.posts_today)}</td>
-                <td className="py-3 pr-4 text-sm tabular-nums text-right">{fmt(s.avg_comments_per_post, 1)}</td>
-                <td className="py-3 text-sm tabular-nums text-right">{fmt(s.avg_score_per_post, 0)}</td>
+                <td className="py-3 pr-4 text-sm tabular-nums text-right hidden md:table-cell">{fmt(s.avg_comments_per_post, 1)}</td>
+                <td className="py-3 text-sm tabular-nums text-right hidden md:table-cell">{fmt(s.avg_score_per_post, 0)}</td>
               </tr>
             ))}
           </tbody>
