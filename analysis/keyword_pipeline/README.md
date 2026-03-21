@@ -1,6 +1,6 @@
 # Keyword Validation Pipeline
 
-A tool for validating keyword candidates for the myfriendisai project. Walker identifies candidate keywords from reading AI companion subreddits. This pipeline tests them quickly.
+A tool for validating keyword candidates for the myfriendisai project. The researcher identifies candidate keywords from reading AI companion subreddits. This pipeline tests them quickly.
 
 ## How it works
 
@@ -48,5 +48,5 @@ Classifications are cached in the `llm_classifications` table in tracker.db. Pos
 
 ## Acceptance criteria
 - 80%+ precision: auto-accept
-- 60-79% precision: review band — accept at Walker's discretion if FP patterns are well-defined and the keyword adds vocabulary diversity (see methodology in CLAUDE.md)
+- 60-79% precision: review band — accept at The researcher's discretion if FP patterns are well-defined and the keyword adds vocabulary diversity (see methodology in CLAUDE.md)
 - Below 60%: reject

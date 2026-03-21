@@ -4,7 +4,7 @@
 For each keyword, pulls up to 100 random posts from keyword-eligible subs,
 reads them, and classifies whether each post matches the assigned theme.
 
-Uses content heuristics tuned per-theme. Walker spot-checks results.
+Uses content heuristics tuned per-theme. Researcher spot-checks results.
 """
 
 import json

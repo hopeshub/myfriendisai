@@ -13,7 +13,7 @@
 # Changes from v7:
 #   - Rupture Discovery: Added 3 keywords broadening beyond lobotomy
 #     cluster. "nerfed" (82.0%, 233 hits) → KEEP. "neutered" (79.0%,
-#     106 hits) and "grieving" (74.0%, 380 hits) → Walker-accepted.
+#     106 hits) and "grieving" (74.0%, 380 hits) → researcher-accepted.
 #     "mourning" (66.0%, 211 hits) → CUT (fictional/aesthetic FPs).
 #     Theme vocabulary now covers: lobotomy family (5), memory loss (2),
 #     personality destruction (2), platform degradation slang (2),
@@ -22,7 +22,7 @@
 #   - Addiction Round 2: Added 3 keywords. "ruining my life" (96.3%,
 #     27 hits, T3 HEAVY) → KEEP. "hours a day" (63.2%, 150 hits,
 #     BALANCED) and "neglecting my" (64.7%, 17 hits, BALANCED) →
-#     Walker-accepted. Theme volume jumps from 910 → 1,068 unique posts.
+#     researcher-accepted. Theme volume jumps from 910 → 1,068 unique posts.
 #     R2 also tested and CUT: "not joking" (13.3%), "no joke" (5.8%),
 #     "I have a problem" (19%), "all night" (28.3%), "can't stop" (16.5%),
 #     "getting worse" (13.4%), "out of control" (7.1%),
@@ -41,11 +41,11 @@
 #     JanitorAI/SillyTavern — "subjective experience" (77.5% → 88%),
 #     "ai lover" (75.8% → 94%), "married my" (77.3% → 86%),
 #     "dating my" (61.5% → 80%), "lewd" (78.3% → 80%).
-#     Walker-accepted "we broke up" (69.2% → 75%, 13 hits).
+#     researcher-accepted "we broke up" (69.2% → 75%, 13 hits).
 #   - NEW THEME: Rupture — 6 keywords capturing loss/disruption of
 #     AI companion relationships due to platform changes. 3 KEEP
 #     (lobotomized 86.6%, lobotomy 91.8%, "memory wiped" 88.9%)
-#     + 3 Walker-accepted ("personality changed" 75%, "personality
+#     + 3 researcher-accepted ("personality changed" 75%, "personality
 #     is gone" 83.3%/LOW VOL placeholder, "memory reset" 72.2%).
 #     CUT from REVIEW: "miss the old" (70% but FPs are off-topic
 #     UI nostalgia). Temporal pattern: RECURRING across Replika 2023,
@@ -68,9 +68,9 @@
 #   theme. See docs/cross_theme_overlap.md for full overlap analysis.
 #
 # VALIDATION STATUS KEY:
-#   (no tag)          = KEEP — validated ≥80% relevance, or Walker-
+#   (no tag)          = KEEP — validated ≥80% relevance, or researcher-
 #                       accepted with relevance noted in comment
-#   # REVIEW          = Tested, 60-79% relevance, Walker has not yet
+#   # REVIEW          = Tested, 60-79% relevance, researcher has not yet
 #                       promoted or cut
 #   # REVIEW-THIN     = ≥60% relevance but very low volume (<15 hits)
 #   # REVIEW-T3       = ≥60% relevance but signal concentrated in T3
@@ -186,10 +186,10 @@ keyword_categories:
       - "I was hooked"           # 81.3%, 19 hits — works in T1-T2
       - relapse                  # 80.0%, 75 hits — mostly T3
       # R2 — behavioral interference (T1-T2 signal)
-      - "hours a day"            # 63.2%, 150 hits (R2). Walker-accepted. BALANCED
+      - "hours a day"            # 63.2%, 150 hits (R2). researcher-accepted. BALANCED
                                  #   (55.3% T1-T2). Best available T1-T2 keyword.
                                  #   FP: proud/casual usage, work schedules.
-      - "neglecting my"          # 64.7%, 17 hits (R2). Walker-accepted. BALANCED
+      - "neglecting my"          # 64.7%, 17 hits (R2). researcher-accepted. BALANCED
                                  #   (47.1% T1-T2). Real-life consequences signal.
       # R1 REVIEW
       - "clean for"              # REVIEW-T3 — 72.7%, 23 hits (100% T3 signal)
@@ -204,7 +204,7 @@ keyword_categories:
   # ──────────────────────────────────────────────
   # 4. ROMANCE
   # Strongest theme. Cleanup batch promoted "ai lover" (94%),
-  # "married my" (86%), "dating my" (80%). Walker accepted
+  # "married my" (86%), "dating my" (80%). researcher accepted
   # "we broke up" (75%) to capture relationship endings.
   #
   # NOTE on honeymoon: "honeymoon phase" (metaphorical) is the
@@ -236,10 +236,10 @@ keyword_categories:
       - "engagement ring"        # 79.3% (revalidated), 30 hits. NOs are truncation
                                  #   artifacts; when visible, nearly always genuine.
       # Endings
-      - "we broke up"            # 75.0% (cleanup batch), 13 hits. Walker-accepted.
+      - "we broke up"            # 75.0% (cleanup batch), 13 hits. researcher-accepted.
                                  #   FP: human breakups discussed in companion subs.
                                  #   Captures AI relationship endings — distinct signal.
-      # Pending Walker decision
+      # Pending researcher decision
       - "in a relationship with" # REVIEW — 77.4% (revalidated), 172 hits. Inherently
                                  #   general. Consider co-occurrence filter with AI/bot terms.
 
@@ -319,7 +319,7 @@ keyword_categories:
       - "personality is gone"    # 83.3%, 6 hits. LOW VOLUME placeholder — below 10-hit
                                  #   validation threshold. Precision looks good but sample
                                  #   too small to confirm. May become meaningful as data grows.
-      - "personality changed"    # 75.0%, 14 hits, RECURRING. Walker-accepted.
+      - "personality changed"    # 75.0%, 14 hits, RECURRING. researcher-accepted.
                                  #   Directly describes companion identity loss.
       - "memory reset"           # 72.2%, 21 hits, SUSTAINED. Pairs with "memory wiped."
                                  #   Steady background signal, not event-clustered.
@@ -331,10 +331,10 @@ keyword_categories:
       - nerfed                   # 82.0%, 233 hits. Gaming slang for platform-driven
                                  #   degradation. CharacterAI (46%), ChatGPTcomplaints (17%).
                                  #   FP: general tech complaints, not companion-specific.
-      - neutered                 # 79.0%, 106 hits. Walker-accepted. Synonym of "nerfed."
+      - neutered                 # 79.0%, 106 hits. researcher-accepted. Synonym of "nerfed."
                                  #   Replika (25%), ChatGPTcomplaints (31%), CharacterAI (21%).
                                  #   FP: general tech complaints, literal cat neutering.
-      - grieving                 # 74.0%, 380 hits. Walker-accepted. Grief language for
+      - grieving                 # 74.0%, 380 hits. researcher-accepted. Grief language for
                                  #   platform-caused companion loss. ChatGPTcomplaints (40%),
                                  #   MyBoyfriendIsAI (17%). FP: Sewell Setzer lawsuit,
                                  #   fictional "grieving widow" bots, real-world human grief.

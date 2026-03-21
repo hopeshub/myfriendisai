@@ -3,6 +3,7 @@ import Link from "next/link";
 import { readFileSync } from "fs";
 import { join } from "path";
 import { GeistSans } from "geist/font/sans";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -92,6 +93,7 @@ export default function RootLayout({
             <span>Data from Reddit&apos;s public endpoints · {formatPostCount(meta.total_posts)} posts · {startYear}–present</span>
           </div>
         </footer>
+        <Analytics />
       </body>
     </html>
   );

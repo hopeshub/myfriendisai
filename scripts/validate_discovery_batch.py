@@ -5,7 +5,7 @@ For each candidate:
 1. FTS5 search for matching posts in T1-T3 subs (excl JanitorAI, SillyTavern)
 2. Sample up to 100 posts
 3. Classify YES/NO per theme-specific heuristics
-4. Calculate precision, apply thresholds: >=80% PROMOTE, 70-79% WALKER CALL, <70% CUT
+4. Calculate precision, apply thresholds: >=80% PROMOTE, 70-79% RESEARCHER CALL, <70% CUT
 5. Write results to docs/validation_discovery_batch.md
 """
 
@@ -365,7 +365,7 @@ def validate_all():
         elif precision >= 80:
             verdict = "PROMOTE"
         elif precision >= 70:
-            verdict = "WALKER CALL"
+            verdict = "RESEARCHER CALL"
         else:
             verdict = "CUT"
 
@@ -400,7 +400,7 @@ def write_report(results):
         f.write("**Date:** 2026-03-15\n")
         f.write(f"**Scope:** T1-T3 companion subs ({len(KW_SUBS)} subs, excludes T0 + JanitorAI_Official + SillyTavernAI)\n")
         f.write("**Method:** Up to 100-post random sample per keyword, heuristic classification per theme\n")
-        f.write("**Thresholds:** ≥80% = PROMOTE, 70-79% = WALKER CALL, <70% = CUT, <10 hits = LOW VOLUME\n\n")
+        f.write("**Thresholds:** ≥80% = PROMOTE, 70-79% = RESEARCHER CALL, <70% = CUT, <10 hits = LOW VOLUME\n\n")
         f.write("---\n\n")
 
         # Group by category
@@ -466,7 +466,7 @@ def write_report(results):
         f.write("## RECOMMENDATIONS\n\n")
 
         promote = [r for r in results if r["verdict"] == "PROMOTE"]
-        walker = [r for r in results if r["verdict"] == "WALKER CALL"]
+        researcher_call = [r for r in results if r["verdict"] == "RESEARCHER CALL"]
         cut = [r for r in results if r["verdict"] == "CUT"]
         low_vol = [r for r in results if r["verdict"] == "LOW VOLUME"]
 
@@ -476,9 +476,9 @@ def write_report(results):
                 f.write(f"- **\"{r['candidate']}\"** → {r['category']} ({r['precision']}%, {r['total_hits']} hits)\n")
             f.write("\n")
 
-        if walker:
-            f.write("### WALKER CALL — needs human decision\n\n")
-            for r in walker:
+        if researcher_call:
+            f.write("### RESEARCHER CALL — needs human decision\n\n")
+            for r in researcher_call:
                 f.write(f"- **\"{r['candidate']}\"** → {r['category']} ({r['precision']}%, {r['total_hits']} hits)\n")
             f.write("\n")
 
