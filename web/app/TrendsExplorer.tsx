@@ -599,7 +599,7 @@ export default function TrendsExplorer({ themeData, keywordDetails }: Props) {
       </div>
 
       {/* Time range selector + chart mode toggle */}
-      <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-0 mb-4">
+      <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-0 mb-2">
         <div className="flex gap-1">
           {(["6M", "1Y", "2Y", "ALL"] as TimeRange[]).map((range) => (
             <button
@@ -657,31 +657,13 @@ export default function TrendsExplorer({ themeData, keywordDetails }: Props) {
         </div>
       </div>
 
-      {/* Cards + explainer + chart wrapper — flex column for mobile reorder */}
-      <div className={isMobileStrip ? "flex flex-col" : ""}>
-
-      {/* Interaction hint — hidden once a theme is selected */}
-      {selected.size === 0 && !detailPanel && (
-        <p
-          className="text-center"
-          style={{
-            fontSize: isMobileStrip ? 13 : 11,
-            color: "#94A3B8",
-            marginBottom: 8,
-            opacity: 0.7,
-          }}
-        >
-          Select a theme to explore
-        </p>
-      )}
-
       {/* Metric cards */}
       <div
         ref={cardRowRef}
         className={
           isMobileStrip
-            ? "mobile-card-strip flex gap-2 mb-5"
-            : "grid gap-[6px] sm:gap-2 mb-5"
+            ? "mobile-card-strip flex gap-2 mb-2"
+            : "grid gap-[6px] sm:gap-2 mb-2"
         }
         style={
           isMobileStrip
@@ -763,21 +745,6 @@ export default function TrendsExplorer({ themeData, keywordDetails }: Props) {
         })}
       </div>
 
-      {/* Explainer — order 2 on mobile so it appears after chart */}
-      <p
-        className="text-center"
-        style={{
-          fontSize: isMobileStrip ? 14 : 12,
-          color: "#8293A6",
-          marginTop: 8,
-          marginBottom: 16,
-          ...(isMobileStrip ? { order: 2 } : {}),
-        }}
-      >
-        Each theme tracks validated keywords. Mention rates reflect how
-        distinctive each theme&apos;s vocabulary is, not necessarily how
-        prevalent the topic is overall.
-      </p>
 
       {/* Chart */}
       <div
@@ -786,7 +753,6 @@ export default function TrendsExplorer({ themeData, keywordDetails }: Props) {
         style={{
           backgroundColor: "#1A1D27",
           borderColor: "#2A2D3A",
-          ...(isMobileStrip ? { order: 1 } : {}),
         }}
       >
         <div
@@ -1003,9 +969,24 @@ export default function TrendsExplorer({ themeData, keywordDetails }: Props) {
         </div>
       </div>
 
+      {/* Methodology note — below chart on all viewports */}
+      <p
+        className="text-center"
+        style={{
+          fontSize: isMobileStrip ? 14 : 12,
+          color: "#8293A6",
+          marginTop: 12,
+          marginBottom: 8,
+        }}
+      >
+        Each theme tracks validated keywords. Mention rates reflect how
+        distinctive each theme&apos;s vocabulary is, not necessarily how
+        prevalent the topic is overall.
+      </p>
+
       {/* Mobile event list */}
       {bp === "mobile" && visibleEvents.length > 0 && (
-        <div className="mt-3" style={isMobileStrip ? { order: 3 } : undefined}>
+        <div className="mt-3">
           {!eventsExpanded ? (
             <button
               onClick={() => setEventsExpanded(true)}
@@ -1046,7 +1027,6 @@ export default function TrendsExplorer({ themeData, keywordDetails }: Props) {
         </div>
       )}
 
-      </div>{/* end cards+explainer+chart wrapper */}
     </div>
 
     {/* Detail panel — sidebar on desktop, bottom sheet on mobile */}
