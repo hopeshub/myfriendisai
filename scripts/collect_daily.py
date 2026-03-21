@@ -228,7 +228,6 @@ def _step_export(conn):
     web_data_dir.mkdir(parents=True, exist_ok=True)
     _atomic_copy(snap_path, web_data_dir / "snapshots.json")
     _atomic_copy(sub_path, web_data_dir / "subreddits.json")
-    _atomic_copy(kw_path, web_data_dir / "keywords.json")
     _atomic_copy(kw_trends_path, web_data_dir / "keyword_trends.json")
     _atomic_copy(meta_path, web_data_dir / "site_meta.json")
     logger.info("Copied JSON to web/data/ for frontend")
