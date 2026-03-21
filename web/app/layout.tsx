@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { readFileSync } from "fs";
 import { join } from "path";
+import { GeistSans } from "geist/font/sans";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -59,8 +60,7 @@ export default function RootLayout({
           <div className="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
             <Link
               href="/"
-              className="text-lg tracking-tight hover:text-primary transition-colors"
-              style={{ fontFamily: "'JetBrains Mono', 'Fira Code', 'SF Mono', Consolas, monospace" }}
+              className={`text-lg tracking-tight hover:text-primary transition-colors ${GeistSans.className}`}
             >
               <span style={{ fontWeight: 300, color: "rgba(255,255,255,0.6)" }}>My Friend Is</span>
               {" "}
