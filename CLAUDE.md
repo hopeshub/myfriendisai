@@ -392,7 +392,7 @@ Total daily pipeline: ~79 min first run, ~44 min on subsequent same-day runs.
 ### What the public site shows:
 
 1. **Landing page:** Overview narrative + key trend chart (total engagement across all tracked communities over time)
-2. **Trends Explorer:** 6-theme keyword trend chart with toggleable metric cards, absolute/relative mode toggle, nearest-line tooltip, event annotations. Data normalized per-1k-posts.
+2. **Trends Explorer:** 6-theme keyword trend chart with toggleable metric cards, absolute/relative mode toggle, nearest-line tooltip, event annotations. Data normalized per-1k-posts. YoY headline uses calendar-day averaging of hitsPerK; changes >100% show actual rates ("rose from X to Y per 1k") instead of percentages to provide base-rate context.
 3. **Community explorer:** Browse all 19 tracked subreddits, sortable by engagement metrics, filterable by tier/category
 4. **Individual subreddit pages:** Time-series Recharts line charts for subscribers, posts/day, avg comments, avg score
 5. **Keyword trends:** Per-theme trend lines waxing and waning across all communities over time

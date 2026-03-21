@@ -32,10 +32,11 @@ const STATS = [
 const CHANGELOG = [
   {
     date: "March 21, 2026",
-    title: "Year-over-year comparison methodology fix",
+    title: "Year-over-year comparison improvements",
     items: [
       "Headline now uses per-1k-posts rate instead of raw counts, controlling for collection volume growth",
       "Averaging now divides by calendar days (90) instead of days-with-data, fixing sparse-data bias in prior-year windows",
+      "Large changes (>100%) now show actual rates instead of percentages \u2014 e.g. \u201Crose from 1.2 to 8.6 per 1k posts\u201D gives more context than a raw percentage when the base rate is small",
     ],
     recent: true,
   },

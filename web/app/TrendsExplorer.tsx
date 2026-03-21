@@ -445,9 +445,17 @@ export default function TrendsExplorer({ themeData, keywordDetails }: Props) {
 
       if (priorAvg > 0 && prior.length >= 30) {
         const pct = Math.round(((recentAvg - priorAvg) / priorAvg) * 100);
+        const recentRate = Math.round(recentAvg * 10) / 10;
+        const priorRate = Math.round(priorAvg * 10) / 10;
         let text: string;
         if (Math.abs(pct) < 10) {
           text = `${activeTheme.label} has been stable vs same period last year.`;
+        } else if (Math.abs(pct) > 100) {
+          // Large changes: show actual rates for context instead of a misleading percentage
+          const dir = pct > 0 ? "rose" : "fell";
+          const from = pct > 0 ? priorRate : recentRate;
+          const to = pct > 0 ? recentRate : priorRate;
+          text = `${activeTheme.label} ${dir} from ${from} to ${to} mentions per 1k posts vs same period last year.`;
         } else {
           const dir = pct > 0 ? "up" : "down";
           text = `${activeTheme.label} is ${dir} ${Math.abs(pct)}% vs same period last year.`;
