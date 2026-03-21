@@ -406,9 +406,19 @@ Total daily pipeline: ~79 min first run, ~44 min on subsequent same-day runs.
 
 ### Design principles:
 - Clean, editorial feel (this is a research artifact, not a dashboard)
-- Mobile-responsive
+- Mobile-responsive (single breakpoint at 768px — see below)
 - Fast loading (static generation or lightweight API calls)
 - No user accounts or interactivity needed
+
+### Mobile responsive (implemented 2026-03-21):
+Single breakpoint at **≤768px**. Desktop layout unchanged. Key decisions:
+- **Theme cards:** 2x3 grid → horizontal scroll strip with scroll-snap (140px fixed-width cards, ~2.5 visible)
+- **Layout reorder:** Methodology note moved below chart on mobile via CSS `order` (chart is primary content)
+- **Bottom sheet:** Detail panel renders as a 60dvh bottom sheet (expandable to 90dvh) instead of desktop sidebar. Drag-to-dismiss gesture on handle, backdrop tap-to-close. Uses `dvh` not `vh` for Safari URL bar.
+- **Chart:** 8px padding, abbreviated event labels at 640-768px, labels hidden below 640px (expandable list instead)
+- **Font floor:** 14px minimum on all text (except chart axis labels)
+- **Touch targets:** All buttons ≥44px tap height
+- Spec: `docs/MOBILE_RESPONSIVE_SPEC.md`. Implementation prompts: `docs/CC_PROMPT_PHASE{1-4}.md`
 
 ---
 
@@ -437,6 +447,7 @@ Total daily pipeline: ~79 min first run, ~44 min on subsequent same-day runs.
 
 ### Phase 3: Polish
 - [x] Public deployment to Vercel + myfriendisai.com domain
+- [x] Mobile responsive design (horizontal card strip, layout reorder, chart optimization, bottom sheet detail panel)
 - [ ] SEO and social sharing metadata
 - [ ] Narrative/editorial content on the site
 - [ ] Export/embed functionality for charts

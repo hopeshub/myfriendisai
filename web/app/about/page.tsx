@@ -14,6 +14,17 @@ const STATS = [
 
 const CHANGELOG = [
   {
+    date: "March 21, 2026",
+    title: "Mobile responsive redesign",
+    items: [
+      "Theme cards now scroll horizontally on phones instead of stacking in a grid",
+      "Chart appears above the fold on mobile \u2014 no more scrolling past cards to see trends",
+      "Detail panel opens as a draggable bottom sheet instead of covering the full screen",
+      "Minimum 14px font size and 44px touch targets across all interactive elements",
+    ],
+    recent: true,
+  },
+  {
     date: "March 15, 2026",
     title: "Keyword expansion (discovery batch)",
     items: [
@@ -25,7 +36,7 @@ const CHANGELOG = [
       "Therapy: emotional support, coping mechanism",
       "All keywords validated at \u226580% precision",
     ],
-    recent: true,
+    recent: false,
   },
   {
     date: "March 15, 2026",
@@ -36,7 +47,7 @@ const CHANGELOG = [
       "Conducted co-occurrence discovery analysis to surface data-driven keyword candidates",
       "Identified and excluded SpicyChat bot-building spam from 2 prolific authors",
     ],
-    recent: true,
+    recent: false,
   },
   {
     date: "March 13, 2026",
