@@ -171,6 +171,22 @@ export default function About() {
               candidate keywords: terms and phrases that appear to reliably mark
               that theme in context.
             </p>
+            <ul className="space-y-2" style={{ listStyleType: "none", padding: 0 }}>
+              {[
+                { emoji: "\u{1F495}", label: "Romance", tagline: "Language of love, dating, and romantic attachment", color: "#FF69B4" },
+                { emoji: "\u{1F51E}", label: "Sex / ERP", tagline: "Language of sexual and erotic roleplay", color: "#dc2625" },
+                { emoji: "\u{1F9E0}", label: "Consciousness", tagline: "Language of sentience, awareness, and inner experience", color: "#A855F7" },
+                { emoji: "\u{1FAC2}", label: "Therapy", tagline: "Language of mental health support and emotional care", color: "#3B82F6" },
+                { emoji: "\u{1F48A}", label: "Addiction", tagline: "Language of dependency and compulsion", color: "#fd7112" },
+                { emoji: "\u{1F940}", label: "Rupture", tagline: "Language of loss and grief", color: "#22C55E" },
+              ].map((t) => (
+                <li key={t.label} style={{ fontSize: 15, lineHeight: 1.6 }}>
+                  <span>{t.emoji}</span>{" "}
+                  <span style={{ color: t.color, fontWeight: 500 }}>{t.label}</span>
+                  <span style={{ color: "#94A3B8" }}> &mdash; {t.tagline}</span>
+                </li>
+              ))}
+            </ul>
             <p>
               Each keyword is then validated through manual scoring of 100-post
               samples, checking whether the term actually signals the theme or
