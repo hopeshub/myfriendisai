@@ -626,6 +626,21 @@ export default function TrendsExplorer({ themeData, keywordDetails }: Props) {
       {/* Cards + explainer + chart wrapper — flex column for mobile reorder */}
       <div className={isMobileStrip ? "flex flex-col" : ""}>
 
+      {/* Interaction hint — hidden once a theme is selected */}
+      {selected.size === 0 && !detailPanel && (
+        <p
+          className="text-center"
+          style={{
+            fontSize: isMobileStrip ? 13 : 11,
+            color: "#94A3B8",
+            marginBottom: 8,
+            opacity: 0.7,
+          }}
+        >
+          Select a theme to explore
+        </p>
+      )}
+
       {/* Metric cards */}
       <div
         ref={cardRowRef}
@@ -713,22 +728,6 @@ export default function TrendsExplorer({ themeData, keywordDetails }: Props) {
           );
         })}
       </div>
-
-      {/* Interaction hint — hidden once a theme is selected */}
-      {selected.size === 0 && !detailPanel && (
-        <p
-          className="text-center"
-          style={{
-            fontSize: isMobileStrip ? 13 : 11,
-            color: "#94A3B8",
-            marginTop: -8,
-            marginBottom: 8,
-            opacity: 0.7,
-          }}
-        >
-          Select a theme to explore
-        </p>
-      )}
 
       {/* Explainer — order 2 on mobile so it appears after chart */}
       <p
