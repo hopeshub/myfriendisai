@@ -621,6 +621,18 @@ export default function TrendsExplorer({ themeData, keywordDetails }: Props) {
           ))}
         </div>
         <div className="hidden sm:block flex-1" />
+        {selected.size >= 2 && (
+          <button
+            onClick={() => {
+              setSelected(new Set());
+              setDetailPanel(null);
+            }}
+            className="h-11 sm:h-auto px-3 py-1 text-sm sm:text-xs font-medium rounded-md transition-colors"
+            style={{ color: "#94A3B8", border: "1px solid #2A2D3A" }}
+          >
+            Clear
+          </button>
+        )}
         <div className="flex flex-col items-end gap-1">
           <div className="grid grid-cols-2 sm:flex gap-1">
             {(["absolute", "relative"] as ChartMode[]).map((mode) => (
