@@ -83,7 +83,10 @@ function pickSamples(keywords: KeywordEntry[]): SamplePost[] {
 
 // ─── Section header style ─────────────────────────────────────────────────
 
-const sectionHeaderStyle: React.CSSProperties = {
+export { pickSamples };
+export type { KeywordEntry, SamplePost, SubredditEntry };
+
+export const sectionHeaderStyle: React.CSSProperties = {
   fontSize: 11,
   fontWeight: 500,
   textTransform: "uppercase",
@@ -94,7 +97,7 @@ const sectionHeaderStyle: React.CSSProperties = {
 
 // ─── Sections ─────────────────────────────────────────────────────────────
 
-function KeywordsSection({
+export function KeywordsSection({
   keywords,
   color,
 }: {
@@ -153,7 +156,7 @@ function KeywordsSection({
   );
 }
 
-function CommunitiesSection({
+export function CommunitiesSection({
   subreddits,
   color,
 }: {
@@ -206,7 +209,7 @@ function CommunitiesSection({
   );
 }
 
-function SamplePostsSection({ samples }: { samples: SamplePost[] }) {
+export function SamplePostsSection({ samples }: { samples: SamplePost[] }) {
   return (
     <div>
       <div style={sectionHeaderStyle}>Example posts</div>

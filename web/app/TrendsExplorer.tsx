@@ -16,6 +16,7 @@ import type { ThemeData } from "./page";
 import { useBreakpoint } from "./useBreakpoint";
 import TransparencyPanel from "./TransparencyPanel";
 import type { KeywordDetailsData } from "./TransparencyPanel";
+import BottomSheet from "./BottomSheet";
 
 // ─── Themes ────────────────────────────────────────────────────────────────
 
@@ -33,11 +34,11 @@ type ThemeId = (typeof THEMES)[number]["id"];
 // ─── Events ────────────────────────────────────────────────────────────────
 
 const EVENTS = [
-  { date: "2023-02-01", label: "Replika ERP removal" },
-  { date: "2024-05-01", label: "4o launches" },
-  { date: "2025-04-01", label: "Sycophancy update" },
-  { date: "2025-08-01", label: "4o 1st sunset" },
-  { date: "2026-02-01", label: "4o retired" },
+  { date: "2023-02-01", label: "Replika ERP removal", shortLabel: "Replika ERP" },
+  { date: "2024-05-01", label: "4o launches", shortLabel: "4o launch" },
+  { date: "2025-04-01", label: "Sycophancy update", shortLabel: "Syco. update" },
+  { date: "2025-08-01", label: "4o 1st sunset", shortLabel: "4o sunset" },
+  { date: "2026-02-01", label: "4o retired", shortLabel: "4o ret." },
 ];
 
 // ─── Helpers ───────────────────────────────────────────────────────────────
@@ -165,12 +166,13 @@ export default function TrendsExplorer({ themeData, keywordDetails }: Props) {
   const handleClickOutside = useCallback(
     (e: MouseEvent) => {
       if (!detailPanel) return;
+      if (isMobileStrip) return; // BottomSheet handles its own dismissal
       const target = e.target as Node;
       if (panelRef.current?.contains(target)) return;
       if (cardRowRef.current?.contains(target)) return;
       setDetailPanel(null);
     },
-    [detailPanel],
+    [detailPanel, isMobileStrip],
   );
 
   useEffect(() => {
@@ -495,10 +497,28 @@ export default function TrendsExplorer({ themeData, keywordDetails }: Props) {
         showYAxis: false,
         eventLabelAngle: 0,
         showEventLabels: false,
+        useShortEventLabels: false,
         tickFormatter: formatMonthTickShort,
       };
     }
     if (bp === "tablet") {
+      // 640-768px: abbreviated event labels, tighter layout
+      if (isMobileStrip) {
+        return {
+          height: 320,
+          margin: { top: 60, right: 12, bottom: 30, left: 12 },
+          xTickCount: 5,
+          minTickGap: 40,
+          strokeActive: 2.5,
+          strokeInactive: 1.5,
+          yAxisWidth: 40,
+          showYAxis: true,
+          eventLabelAngle: -45,
+          showEventLabels: true,
+          useShortEventLabels: true,
+          tickFormatter: formatMonthTickShort,
+        };
+      }
       return {
         height: 360,
         margin: { top: 80, right: 20, bottom: 30, left: 24 },
@@ -510,6 +530,7 @@ export default function TrendsExplorer({ themeData, keywordDetails }: Props) {
         showYAxis: true,
         eventLabelAngle: -45,
         showEventLabels: true,
+        useShortEventLabels: false,
         tickFormatter: formatMonthTickShort,
       };
     }
@@ -524,9 +545,10 @@ export default function TrendsExplorer({ themeData, keywordDetails }: Props) {
       showYAxis: true,
       eventLabelAngle: -60,
       showEventLabels: true,
+      useShortEventLabels: false,
       tickFormatter: formatMonthTick,
     };
-  }, [bp, timeRange]);
+  }, [bp, isMobileStrip, timeRange]);
 
   // ── Sparkline height by breakpoint ──
   const sparklineHeight = bp === "mobile" ? 20 : 24;
@@ -714,7 +736,7 @@ export default function TrendsExplorer({ themeData, keywordDetails }: Props) {
       {/* Chart */}
       <div
         ref={chartRef}
-        className="rounded-xl border p-0 sm:p-4 lg:p-6 outline-none"
+        className="rounded-xl border p-2 sm:p-4 lg:p-6 outline-none"
         style={{
           backgroundColor: "#1A1D27",
           borderColor: "#2A2D3A",
@@ -880,11 +902,13 @@ export default function TrendsExplorer({ themeData, keywordDetails }: Props) {
                   label={
                     chartConfig.showEventLabels
                       ? {
-                          value: event.label,
+                          value: chartConfig.useShortEventLabels
+                            ? event.shortLabel
+                            : event.label,
                           position: "insideTopLeft",
                           angle: chartConfig.eventLabelAngle,
                           fill: "#94A3B8",
-                          fontSize: 9,
+                          fontSize: chartConfig.useShortEventLabels ? 8 : 9,
                           offset: 6,
                         }
                       : undefined
@@ -979,7 +1003,7 @@ export default function TrendsExplorer({ themeData, keywordDetails }: Props) {
       </div>{/* end cards+explainer+chart wrapper */}
     </div>
 
-    {/* Side panel — fixed position, full viewport height */}
+    {/* Detail panel — sidebar on desktop, bottom sheet on mobile */}
     {(() => {
       const panelTheme = detailPanel
         ? THEMES.find((t) => t.id === detailPanel)
@@ -987,6 +1011,26 @@ export default function TrendsExplorer({ themeData, keywordDetails }: Props) {
       const panelData = detailPanel
         ? keywordDetails[detailPanel]
         : null;
+
+      if (isMobileStrip) {
+        // Bottom sheet on mobile — always render so close animation works
+        if (!panelTheme || !panelData) {
+          return null;
+        }
+        return (
+          <BottomSheet
+            isOpen={!!detailPanel}
+            themeLabel={panelTheme.label}
+            themeEmoji={panelTheme.emoji}
+            themeTagline={panelTheme.tagline}
+            themeColor={panelTheme.color}
+            data={panelData}
+            onClose={() => setDetailPanel(null)}
+          />
+        );
+      }
+
+      // Desktop sidebar
       if (!panelTheme || !panelData) return null;
       return (
         <div ref={panelRef}>
