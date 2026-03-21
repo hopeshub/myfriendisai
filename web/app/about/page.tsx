@@ -153,22 +153,20 @@ export default function About() {
           <h2 style={sectionHeaderStyle}>How this works</h2>
           <div className="space-y-4" style={bodyStyle}>
             <p>
-              We track 27 Reddit communities where people discuss AI companions
-              &mdash; from large platforms like r/CharacterAI and r/replika to
-              recovery communities like r/ChatbotAddiction. Our corpus spans
-              January 2023 to present and contains over 3.7 million posts.
+              Themes emerge from direct observation of how people talk in these
+              communities &mdash; patterns in language that signal recurring
+              concerns, experiences, and framings. For each theme, we identify
+              candidate keywords: terms and phrases that appear to reliably mark
+              that theme in context.
             </p>
             <p>
-              For each of the six themes, we maintain a curated list of keywords
-              and phrases &mdash; terms like &ldquo;lobotomized,&rdquo;
-              &ldquo;chatbot addiction,&rdquo; &ldquo;emotional support,&rdquo;
-              &ldquo;sentient.&rdquo; Keywords are validated through manual
-              scoring of 100-post samples. Keywords scoring 80% or above are
-              automatically accepted. Keywords in the 60&ndash;79% range may be
-              accepted at Hopes&apos; discretion when false positive patterns
-              are well-defined and the keyword adds meaningful vocabulary
-              diversity to the theme. All validation decisions are documented
-              and available on{" "}
+              Each keyword is then validated through manual scoring of 100-post
+              samples, checking whether the term actually signals the theme or
+              just happens to co-occur. Keywords scoring 80% precision or above
+              are accepted. Keywords in the 60&ndash;79% range may be accepted
+              when false positive patterns are well-defined and the keyword adds
+              meaningful vocabulary diversity. All validation decisions are
+              documented and available on the{" "}
               <a
                 href="https://github.com/hopeshub/myfriendisai"
                 target="_blank"
