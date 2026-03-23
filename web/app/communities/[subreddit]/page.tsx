@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { getSubreddits } from "@/lib/data";
@@ -10,6 +11,24 @@ const TIER_LABELS: Record<number, string> = {
   3: "Tier 3 — Recovery & Dependency",
 };
 
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ subreddit: string }>;
+}): Promise<Metadata> {
+  const { subreddit } = await params;
+  const all = getSubreddits();
+  const meta = all.find((s) => s.subreddit === subreddit);
+  const tierLabel = meta?.tier != null ? TIER_LABELS[meta.tier] : "";
+  return {
+    title: `r/${subreddit} — My Friend Is AI`,
+    description: `Engagement trends for r/${subreddit}${tierLabel ? ` (${tierLabel})` : ""} — subscribers, posts per day, and comment activity over time.`,
+    openGraph: {
+      title: `r/${subreddit} — My Friend Is AI`,
+      description: `Engagement trends for r/${subreddit} on Reddit.`,
+    },
+  };
+}
 
 export async function generateStaticParams() {
   const subreddits = getSubreddits();

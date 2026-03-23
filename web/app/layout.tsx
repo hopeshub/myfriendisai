@@ -2,9 +2,16 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { readFileSync } from "fs";
 import { join } from "path";
+import { Inter } from "next/font/google";
 import { GeistSans } from "geist/font/sans";
 import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
+
+const inter = Inter({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "My Friend Is AI",
@@ -56,7 +63,7 @@ export default function RootLayout({
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
       </head>
-      <body className="antialiased">
+      <body className={`antialiased ${inter.className}`}>
         <header className="border-b border-border">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
             <Link
@@ -89,7 +96,7 @@ export default function RootLayout({
         <main>{children}</main>
 
         <footer className="border-t border-border mt-20">
-          <div className="max-w-6xl mx-auto px-4 sm:px-6 py-6 text-xs text-muted">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 py-6 text-sm text-muted">
             <span>Data from Reddit&apos;s public endpoints · {formatPostCount(meta.total_posts)} posts · {startYear}–present</span>
           </div>
         </footer>

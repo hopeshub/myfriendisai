@@ -1,5 +1,17 @@
+import type { Metadata } from "next";
 import { getSubreddits } from "@/lib/data";
 import CommunitiesTable from "./CommunitiesTable";
+
+export const metadata: Metadata = {
+  title: "Communities — My Friend Is AI",
+  description:
+    "Browse 27 Reddit communities tracked for AI companionship trends — sortable by subscribers, posts per day, and engagement metrics.",
+  openGraph: {
+    title: "Communities — My Friend Is AI",
+    description:
+      "Browse 27 Reddit communities tracked for AI companionship trends.",
+  },
+};
 
 export default function Communities() {
   const subreddits = getSubreddits();
