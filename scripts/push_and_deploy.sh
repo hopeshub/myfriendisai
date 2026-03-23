@@ -1,6 +1,7 @@
 #!/bin/bash
 # Push updated data files to GitHub and deploy to Vercel.
-# Called by cron after collect_daily.py finishes.
+# Called by run_collect.sh after collection finishes, or manually.
+# Vercel auto-deploys on push via GitHub integration — no CLI deploy needed.
 
 set -e
 
@@ -20,19 +21,15 @@ fi
 echo "Running pre-deploy validation..."
 .venv/bin/python scripts/validate_deploy.py
 if [ $? -ne 0 ]; then
-    echo "VALIDATION FAILED — aborting deploy. Check logs/push_deploy.log"
+    echo "VALIDATION FAILED — aborting deploy. Check logs"
     exit 1
 fi
 
-# Stage and commit data files only
-git add data/*.json web/data/*.json
+# Stage and commit data files + status.json
+git add data/*.json web/data/*.json web/public/status.json
 git commit -m "Daily data update $(date -u '+%Y-%m-%d')"
 
-# Push to GitHub
+# Push to GitHub (triggers Vercel auto-deploy via GitHub integration)
 git push
-
-# Deploy to Vercel
-cd web
-vercel --prod --yes 2>&1 | tail -3
 
 echo "=== Push & deploy finished at $(date -u '+%Y-%m-%d %H:%M:%S UTC') ==="
