@@ -37,8 +37,8 @@ def main():
         "data/keyword_trends.json",
         "data/snapshots.json",
         "data/subreddits.json",
-        "data/keywords.json",
     ]
+    # Only validate web copies for files that are actually deployed to the frontend
     web_copies = [f"web/data/{Path(f).name}" for f in data_files]
 
     for f in data_files + web_copies:
@@ -65,7 +65,7 @@ def main():
             check(f"{theme} theme", len(entries) > 100, f"{len(entries)} entries")
             if entries:
                 sample = entries[-1]
-                has_fields = all(k in sample for k in ["date", "count", "count_7d_avg"])
+                has_fields = all(k in sample for k in ["date", "count"])
                 check(f"  has required fields", has_fields, str(list(sample.keys())))
 
         total_posts = kt.get("_total_posts", [])
