@@ -32,3 +32,4 @@ keyword_validation/results/*.csv
 logs/
 .vercel
 web/.vercel
+data/.collect_daily.lock

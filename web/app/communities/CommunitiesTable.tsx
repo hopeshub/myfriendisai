@@ -60,8 +60,6 @@ function SortButton({
   );
 }
 
-const CATEGORIES = ["All", "Foundation / Control", "Primary Companionship", "Platform-Specific", "Recovery & Dependency", "Adjacent"];
-
 export default function CommunitiesTable({ subreddits }: { subreddits: SubredditSummary[] }) {
   const [sort, setSort] = useState<{ key: SortKey; asc: boolean }>({
     key: "subscribers",

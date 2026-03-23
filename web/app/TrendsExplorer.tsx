@@ -398,11 +398,11 @@ export default function TrendsExplorer({ themeData, keywordDetails }: Props) {
   }, [allMonthlyRaw]);
 
   // ── Per-theme YoY summary helper ──
-  function themeSummary(theme: typeof THEMES[number]): {
+  const themeSummary = useCallback((theme: typeof THEMES[number]): {
     text: string;
     themeName: string;
     themeColor: string;
-  } {
+  } => {
     const entries = themeData[theme.id] ?? [];
     if (entries.length >= 90) {
       const sorted = entries.map((e) => e.date).sort();
@@ -468,7 +468,7 @@ export default function TrendsExplorer({ themeData, keywordDetails }: Props) {
       themeName: theme.label,
       themeColor: theme.color,
     };
-  }
+  }, [themeData, peakMonths]);
 
   // ── Subtitle logic: stacked summaries for 1-3 selected themes ──
   type SummaryLine = { text: string; themeName: string | null; themeColor: string | null };
@@ -492,7 +492,7 @@ export default function TrendsExplorer({ themeData, keywordDetails }: Props) {
     // 1-3 themes: generate a summary line for each
     const activeThemes = THEMES.filter((t) => selected.has(t.id));
     return activeThemes.map((t) => themeSummary(t));
-  }, [selected, themeData, dateRange, peakMonths]);
+  }, [selected, themeSummary]);
 
   // ── Responsive chart config ──
   const chartConfig = useMemo(() => {

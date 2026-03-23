@@ -102,7 +102,7 @@ Regex-based keyword tagging runs on all collected posts via `scripts/tag_keyword
 1. Pull 100 random matching posts from T1-T3
 2. Read each post (title + body) and classify YES/NO/AMBIGUOUS
 3. Calculate relevance = YES / (YES + NO) × 100
-4. Thresholds: ≥80% = KEEP, 60-79% = REVIEW (Hopes decides), <60% = CUT, <10 hits = LOW VOLUME
+4. Thresholds: ≥80% = KEEP, 60-79% = REVIEW (researcher decides), <60% = CUT, <10 hits = LOW VOLUME
 5. Full validation docs in `docs/validation_*.md`
 
 **Researcher-accepted keywords:** Keywords scoring in the review band (60-79%) may be accepted at the researcher's discretion when all of the following conditions are met:

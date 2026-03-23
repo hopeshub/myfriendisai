@@ -103,7 +103,9 @@ export default function BottomSheet({
       setIsClosing(false);
     }, 300);
   }, [onClose]);
-  handleCloseRef.current = handleClose;
+  useEffect(() => {
+    handleCloseRef.current = handleClose;
+  }, [handleClose]);
 
   // --- Touch gesture handling on the drag handle ---
   const handleTouchStart = useCallback(

@@ -3157,13 +3157,13 @@
     },
     {
       "date": "2026-03-17",
-      "count": 1,
-      "count_7d_avg": 4.29
+      "count": 3,
+      "count_7d_avg": 4.57
     },
     {
       "date": "2026-03-18",
       "count": 3,
-      "count_7d_avg": 3.86
+      "count_7d_avg": 4.14
     }
   ],
   "consciousness": [
@@ -7114,13 +7114,13 @@
     },
     {
       "date": "2026-03-17",
-      "count": 2,
-      "count_7d_avg": 4.0
+      "count": 3,
+      "count_7d_avg": 4.14
     },
     {
       "date": "2026-03-18",
       "count": 1,
-      "count_7d_avg": 3.43
+      "count_7d_avg": 3.57
     }
   ],
   "romance": [
@@ -11686,13 +11686,13 @@
     },
     {
       "date": "2026-03-16",
-      "count": 3,
-      "count_7d_avg": 4.0
+      "count": 4,
+      "count_7d_avg": 4.14
     },
     {
       "date": "2026-03-17",
-      "count": 1,
-      "count_7d_avg": 3.71
+      "count": 2,
+      "count_7d_avg": 4.0
     }
   ],
   "rupture": [
@@ -15083,13 +15083,13 @@
     },
     {
       "date": "2026-03-17",
-      "count": 3,
-      "count_7d_avg": 9.0
+      "count": 4,
+      "count_7d_avg": 9.14
     },
     {
       "date": "2026-03-18",
       "count": 1,
-      "count_7d_avg": 7.57
+      "count_7d_avg": 7.71
     }
   ],
   "sexual_erp": [
@@ -20405,18 +20405,18 @@
     },
     {
       "date": "2026-03-16",
-      "count": 3,
-      "count_7d_avg": 4.14
+      "count": 4,
+      "count_7d_avg": 4.29
     },
     {
       "date": "2026-03-17",
-      "count": 2,
-      "count_7d_avg": 4.14
+      "count": 4,
+      "count_7d_avg": 4.57
     },
     {
       "date": "2026-03-18",
       "count": 1,
-      "count_7d_avg": 4.14
+      "count_7d_avg": 4.57
     }
   ],
   "therapy": [
@@ -23782,8 +23782,8 @@
     },
     {
       "date": "2026-03-17",
-      "count": 3,
-      "count_7d_avg": 3.43
+      "count": 5,
+      "count_7d_avg": 3.71
     }
   ],
   "_total_posts": [
@@ -28485,11 +28485,15 @@
     },
     {
       "date": "2026-03-20",
-      "count": 427
+      "count": 428
     },
     {
       "date": "2026-03-21",
-      "count": 229
+      "count": 303
+    },
+    {
+      "date": "2026-03-22",
+      "count": 202
     }
   ]
 }
