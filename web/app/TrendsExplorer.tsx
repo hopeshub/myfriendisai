@@ -621,39 +621,51 @@ export default function TrendsExplorer({ themeData, keywordDetails }: Props) {
           ))}
         </div>
         <div className="hidden sm:block flex-1" />
+        {/* Desktop: Clear button in its own slot */}
         {selected.size >= 2 && (
           <button
             onClick={() => {
               setSelected(new Set());
               setDetailPanel(null);
             }}
-            className="h-11 sm:h-auto px-3 py-1 text-sm sm:text-xs font-medium rounded-md transition-colors"
+            className="hidden sm:block px-3 py-1 text-xs font-medium rounded-md transition-colors"
             style={{ color: "#94A3B8", border: "1px solid #2A2D3A" }}
           >
             Clear
           </button>
         )}
-        <div className="flex flex-col items-end gap-1">
-          <div className="grid grid-cols-2 sm:flex gap-1">
-            {(["absolute", "relative"] as ChartMode[]).map((mode) => (
-              <button
-                key={mode}
-                onClick={() => {
-                  setChartMode(mode);
-                }}
-                aria-pressed={chartMode === mode}
-                aria-label={`${mode === "absolute" ? "Absolute" : "Relative"} chart mode`}
-                className="h-11 sm:h-auto px-3 py-1 text-sm sm:text-xs font-medium rounded-md transition-colors"
-                style={{
-                  backgroundColor: chartMode === mode ? "#1A1D27" : "transparent",
-                  color: chartMode === mode ? "#F8FAFC" : "#94A3B8",
-                  border: `1px solid ${chartMode === mode ? "#2A2D3A" : "transparent"}`,
-                }}
-              >
-                {mode === "absolute" ? "Absolute" : "Relative"}
-              </button>
-            ))}
-          </div>
+        <div className="flex items-center gap-1">
+          {/* Mobile: Clear button inline with mode toggle */}
+          {selected.size >= 2 && (
+            <button
+              onClick={() => {
+                setSelected(new Set());
+                setDetailPanel(null);
+              }}
+              className="sm:hidden h-11 px-3 py-1 text-sm font-medium rounded-md transition-colors"
+              style={{ color: "#94A3B8", border: "1px solid #2A2D3A" }}
+            >
+              Clear
+            </button>
+          )}
+          {(["absolute", "relative"] as ChartMode[]).map((mode) => (
+            <button
+              key={mode}
+              onClick={() => {
+                setChartMode(mode);
+              }}
+              aria-pressed={chartMode === mode}
+              aria-label={`${mode === "absolute" ? "Absolute" : "Relative"} chart mode`}
+              className="h-11 sm:h-auto px-3 py-1 text-sm sm:text-xs font-medium rounded-md transition-colors"
+              style={{
+                backgroundColor: chartMode === mode ? "#1A1D27" : "transparent",
+                color: chartMode === mode ? "#F8FAFC" : "#94A3B8",
+                border: `1px solid ${chartMode === mode ? "#2A2D3A" : "transparent"}`,
+              }}
+            >
+              {mode === "absolute" ? "Absolute" : "Relative"}
+            </button>
+          ))}
         </div>
       </div>
 
