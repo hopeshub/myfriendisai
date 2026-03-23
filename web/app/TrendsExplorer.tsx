@@ -634,7 +634,7 @@ export default function TrendsExplorer({ themeData, keywordDetails }: Props) {
             Clear
           </button>
         )}
-        <div className="flex items-center gap-1">
+        <div className="flex items-center gap-1 ml-auto sm:ml-0">
           {/* Mobile: Clear button inline with mode toggle */}
           {selected.size >= 2 && (
             <button
