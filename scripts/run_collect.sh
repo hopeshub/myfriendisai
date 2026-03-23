@@ -13,6 +13,10 @@ STATUS_FILE="$PROJECT_DIR/web/public/status.json"
 
 export PATH="/opt/homebrew/bin:$PATH"
 
+# Prevent macOS from sleeping during the pipeline (can take 3-5 hours).
+# -s = prevent sleep even on AC power; -w $$ = release when this script exits.
+caffeinate -s -w $$ &
+
 mkdir -p "$LOG_DIR"
 
 # Rotate: keep last run's log as .prev
