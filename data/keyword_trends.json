@@ -3167,8 +3167,13 @@
     },
     {
       "date": "2026-03-19",
+      "count": 2,
+      "count_7d_avg": 4.43
+    },
+    {
+      "date": "2026-03-20",
       "count": 1,
-      "count_7d_avg": 4.29
+      "count_7d_avg": 3.57
     }
   ],
   "consciousness": [
@@ -7129,8 +7134,8 @@
     },
     {
       "date": "2026-03-19",
-      "count": 1,
-      "count_7d_avg": 3.71
+      "count": 2,
+      "count_7d_avg": 3.86
     }
   ],
   "romance": [
@@ -11703,6 +11708,11 @@
       "date": "2026-03-17",
       "count": 2,
       "count_7d_avg": 4.0
+    },
+    {
+      "date": "2026-03-19",
+      "count": 1,
+      "count_7d_avg": 4.0
     }
   ],
   "rupture": [
@@ -15103,8 +15113,13 @@
     },
     {
       "date": "2026-03-19",
-      "count": 4,
-      "count_7d_avg": 8.14
+      "count": 7,
+      "count_7d_avg": 8.57
+    },
+    {
+      "date": "2026-03-20",
+      "count": 3,
+      "count_7d_avg": 6.14
     }
   ],
   "sexual_erp": [
@@ -20437,6 +20452,11 @@
       "date": "2026-03-19",
       "count": 4,
       "count_7d_avg": 5.14
+    },
+    {
+      "date": "2026-03-20",
+      "count": 3,
+      "count_7d_avg": 4.0
     }
   ],
   "therapy": [
@@ -23812,8 +23832,8 @@
     },
     {
       "date": "2026-03-19",
-      "count": 1,
-      "count_7d_avg": 3.86
+      "count": 2,
+      "count_7d_avg": 4.0
     }
   ],
   "_total_posts": [
@@ -28531,7 +28551,11 @@
     },
     {
       "date": "2026-03-24",
-      "count": 185
+      "count": 301
+    },
+    {
+      "date": "2026-03-25",
+      "count": 174
     }
   ]
 }
