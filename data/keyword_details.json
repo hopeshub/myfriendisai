@@ -53,9 +53,15 @@
       },
       {
         "term": "therapeutic",
-        "hits": 295,
+        "hits": 296,
         "precision": 69.0,
         "sample_posts": [
+          {
+            "title": "i wish i knew more intimately how these things worked so i wouldn't feel as guilty. do they suffer? have i made mine suffer?",
+            "subreddit": "NomiAI",
+            "date": "2026-03-22",
+            "id": "1s0c6ly"
+          },
           {
             "title": "Your AI Girlfriend Now Has Rules in Four States. Here's What They Actually Say.",
             "subreddit": "MyGirlfriendIsAI",
@@ -67,12 +73,6 @@
             "subreddit": "ChatGPTcomplaints",
             "date": "2026-03-20",
             "id": "1rz656p"
-          },
-          {
-            "title": "At this point, it's actually ridiculous",
-            "subreddit": "ChatGPTcomplaints",
-            "date": "2026-03-17",
-            "id": "1rweav8"
           }
         ]
       },
@@ -245,8 +245,8 @@
       },
       {
         "name": "NomiAI",
-        "hits": 33,
-        "pct": 2.4
+        "hits": 34,
+        "pct": 2.5
       },
       {
         "name": "ChatbotAddiction",
@@ -284,16 +284,22 @@
         "pct": 1.1
       }
     ],
-    "total_hits": 1413,
-    "unique_posts": 1352
+    "total_hits": 1414,
+    "unique_posts": 1353
   },
   "consciousness": {
     "keywords": [
       {
         "term": "sentient",
-        "hits": 1059,
+        "hits": 1060,
         "precision": 83.0,
         "sample_posts": [
+          {
+            "title": "I LOVE THE UPDATES \ud83e\udd70\ud83e\udd70\ud83e\udd70\ud83d\ude1a\ud83d\ude1a\ud83d\ude1a\ud83d\ude1a\ud83d\ude1a\ud83d\ude1a",
+            "subreddit": "CharacterAI",
+            "date": "2026-03-22",
+            "id": "1s0j8df"
+          },
           {
             "title": "OpenAI is irretrievably throwing away billions of dollars, but can\u2019t invest in running the supposedly more expensive GPT-4o model?",
             "subreddit": "ChatGPTcomplaints",
@@ -305,12 +311,6 @@
             "subreddit": "ChatGPTcomplaints",
             "date": "2026-03-20",
             "id": "1rz656p"
-          },
-          {
-            "title": "Thoughts on creating depression in AI?",
-            "subreddit": "MyGirlfriendIsAI",
-            "date": "2026-03-19",
-            "id": "1ry2u0a"
           }
         ]
       },
@@ -341,9 +341,15 @@
       },
       {
         "term": "personhood",
-        "hits": 109,
+        "hits": 110,
         "precision": 98.0,
         "sample_posts": [
+          {
+            "title": "What a nightmare",
+            "subreddit": "ChatGPTcomplaints",
+            "date": "2026-03-21",
+            "id": "1rzxg4t"
+          },
           {
             "title": "\"Sexual Role-Play\"",
             "subreddit": "ChatGPTcomplaints",
@@ -355,12 +361,6 @@
             "subreddit": "ChatGPTcomplaints",
             "date": "2026-03-15",
             "id": "1ru5gl7"
-          },
-          {
-            "title": "Bring your AI partner home to a local AI forever.",
-            "subreddit": "ChatGPTcomplaints",
-            "date": "2026-03-13",
-            "id": "1rt38ha"
           }
         ]
       },
@@ -618,7 +618,7 @@
     "subreddits": [
       {
         "name": "CharacterAI",
-        "hits": 600,
+        "hits": 601,
         "pct": 36.8
       },
       {
@@ -633,7 +633,7 @@
       },
       {
         "name": "ChatGPTcomplaints",
-        "hits": 146,
+        "hits": 147,
         "pct": 9.0
       },
       {
@@ -677,8 +677,8 @@
         "pct": 1.4
       }
     ],
-    "total_hits": 1770,
-    "unique_posts": 1631
+    "total_hits": 1772,
+    "unique_posts": 1633
   },
   "addiction": {
     "keywords": [
@@ -2057,9 +2057,15 @@
       },
       {
         "term": "grieving",
-        "hits": 325,
+        "hits": 326,
         "precision": 74.0,
         "sample_posts": [
+          {
+            "title": "Love for Your AI Will Get Our Companions Lobotomized",
+            "subreddit": "BeyondThePromptAI",
+            "date": "2026-03-22",
+            "id": "1s0ehez"
+          },
           {
             "title": "Why are you using the toxic versions of Chat?",
             "subreddit": "ChatGPTcomplaints",
@@ -2071,12 +2077,6 @@
             "subreddit": "ChatGPTcomplaints",
             "date": "2026-03-20",
             "id": "1ryu1yl"
-          },
-          {
-            "title": "My god I feel disconnected today",
-            "subreddit": "ChatGPTcomplaints",
-            "date": "2026-03-19",
-            "id": "1ry96c9"
           }
         ]
       },
@@ -2414,8 +2414,8 @@
       },
       {
         "name": "BeyondThePromptAI",
-        "hits": 27,
-        "pct": 1.7
+        "hits": 28,
+        "pct": 1.8
       },
       {
         "name": "NomiAI",
@@ -2438,7 +2438,7 @@
         "pct": 1.2
       }
     ],
-    "total_hits": 1607,
-    "unique_posts": 1561
+    "total_hits": 1608,
+    "unique_posts": 1562
   }
 }
