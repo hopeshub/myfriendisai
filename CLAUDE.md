@@ -176,7 +176,7 @@ This would let us backfill historical post/comment volumes for target subreddits
 | Data collection | Python 3.11+ with `requests` | Simple, no PRAW dependency needed |
 | NSFW data access | Self-hosted Redlib (Docker) | Bypasses Reddit's NSFW block for subreddit-level NSFW communities |
 | Database | SQLite (local) + JSON/API for frontend | Lightweight for collection; Vercel serves static or API |
-| Scheduling | Cron job or Vercel Cron | Daily collection trigger |
+| Scheduling | launchd (macOS) | Single daily job chains collect → push → deploy |
 | Frontend | Next.js (React) | Vercel-native, SSG for fast public site |
 | Charts | Recharts or D3 | Time-series visualization |
 | Hosting | Vercel | Free tier, fast CDN, easy deploys |
@@ -210,7 +210,10 @@ ai-companion-tracker/
 │       └── rate_limiter.py    # Respect rate limits
 │
 ├── scripts/
-│   ├── collect_daily.py       # Entry point for daily cron job (all 5 pipeline steps)
+│   ├── run_collect.sh         # launchd wrapper: runs collection → push → deploy
+│   ├── push_and_deploy.sh     # Git commit/push + Vercel deploy (called by run_collect.sh)
+│   ├── collect_daily.py       # Python collection pipeline (5 steps)
+│   ├── validate_deploy.py     # Pre-deploy data validation
 │   ├── collect_comments.py    # Comment collection for eligible posts
 │   ├── tag_keywords.py        # Post keyword tagger
 │   ├── tag_comments.py        # Comment keyword tagger + post-level propagation
@@ -341,40 +344,41 @@ CREATE TABLE subreddit_config (
 
 ## 4. Collection Logic
 
-### 4.1 Daily Collection Script (`collect_daily.py`)
+### 4.1 Daily Pipeline
 
-The daily pipeline runs 5 steps in order, with error isolation between each step:
+A single launchd job (`com.myfriendisai.collect-daily`) triggers `scripts/run_collect.sh` daily at 6am local time. The wrapper chains three stages:
 
 ```
-1. Collect posts — for each subreddit:
-   a. GET /r/{subreddit}/about.json → metadata snapshot
-   b. GET /r/{subreddit}/new.json?limit=100 → store posts
-   c. Paginate small subs (<50K subscribers) for up to 500 posts
-   d. Legacy keyword scanning (keyword_scanner module)
-   (~45 min, rate-limited at 6s between requests)
+Stage 1: Collection (collect_daily.py — 5 steps)
+  1. Collect posts — about.json + new.json for each subreddit
+  2. Tag posts — regex keyword matching on T1-T3 posts
+  3. Collect comments — posts 5-6 days old with 5+ comments
+  4. Tag comments + propagate — keyword matching on comment text
+  5. Export JSON — write to data/*.json, copy to web/data/
+  (~45-80 min typical, up to ~5 hours under heavy throttling)
 
-2. Tag posts — run regex keyword matching (src/keyword_matching.py) against
-   all untagged posts in T1-T3 subs. Write to post_keyword_tags.
-   (~3 min, CPU-only, no Reddit requests)
+Stage 2: Push & deploy (push_and_deploy.sh)
+  1. Check for data file changes (tracked + untracked)
+  2. Run pre-deploy validation (validate_deploy.py)
+  3. git add + commit data/*.json and web/data/*.json
+  4. git push (SSH to github.com)
+  5. vercel --prod --yes
+  (~2 min)
 
-3. Collect comments — find posts that are 5-6 days old with 5+ comments
-   and not already in comment_collection_log. Fetch full comment trees.
-   Expand "more comments" stubs for 50+ comment posts (capped at 5
-   expansion requests per post). Filter bots and deleted comments.
-   (~28 min for ~270 posts, rate-limited)
-
-4. Tag comments + propagate — run same keyword matching against comment
-   body text. Write to comment_keyword_hits. Propagate unique hits up to
-   post_keyword_tags with source='comment'.
-   (<1 min, CPU-only)
-
-5. Export JSON — generate keyword_trends.json (with dual post+comment
-   and post-only metrics), snapshots.json, subreddits.json, keywords.json.
-   Copy to web/data/ for Vercel.
-   (~1.5 min)
-
-Total daily pipeline: ~79 min first run, ~44 min on subsequent same-day runs.
+Stage 3: Health status
+  1. Write web/public/status.json (collection stats, push status)
+  2. macOS notification on failure
+  3. Append to logs/failures.log on failure
 ```
+
+**Key design decisions:**
+- Push runs immediately after collection (not on a fixed schedule) so there's no timing gap
+- Push failure is non-fatal — collection data is safe in SQLite regardless
+- Lock file (`data/.collect_daily.lock`, `fcntl.LOCK_EX`) prevents overlapping runs
+- No cron jobs — launchd only (cron was removed to prevent duplicate scheduling)
+
+**launchd plist:** `~/Library/LaunchAgents/com.myfriendisai.collect-daily.plist`
+**Logs:** `logs/collect_daily.log` (rotated to `.prev` each run), `logs/failures.log`
 
 ### 4.2 Rate Limiting
 
@@ -383,7 +387,19 @@ Total daily pipeline: ~79 min first run, ~44 min on subsequent same-day runs.
 - If a request returns 429, back off exponentially (10s, 20s, 40s)
 - Comment collection adds ~280 requests/day (272 base + expansion requests)
 - Total daily requests: ~360-450 (posts + pagination + keyword scanning + comments)
-- Total daily run time: ~45-80 minutes depending on how many posts/comments are eligible
+
+### 4.3 Infrastructure Requirements
+
+The pipeline runs on a local Mac that must stay available:
+- **Sleep:** disabled (`pmset sleep 0`)
+- **Auto-restart:** enabled (`pmset autorestart 1`) — recovers from power failure
+- **Auto-login:** enabled — launchd user agents don't run until login
+- **Auto macOS updates:** disabled — prevents unexpected reboots mid-collection
+- **Git remote:** SSH (`git@github.com:hopeshub/myfriendisai.git`) — HTTPS won't auth from launchd
+- **SSH key:** `~/.ssh/id_ed25519` (no passphrase, so it works in non-interactive contexts)
+- **Vercel CLI:** installed at `/opt/homebrew/bin/vercel`, in PATH for launchd via `run_collect.sh`
+
+**Verify checklist:** `docs/CC_PROMPT_VERIFY_COLLECTION.md`
 
 ---
 
