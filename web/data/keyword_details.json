@@ -3,7 +3,7 @@
     "keywords": [
       {
         "term": "emotional support",
-        "hits": 526,
+        "hits": 527,
         "precision": 100.0,
         "sample_posts": [
           {
@@ -13,16 +13,16 @@
             "id": "1s5xr9r"
           },
           {
+            "title": "\"Adult Mode\" cancelled - Boycott ChatGPT immediately. #FireSamAltman",
+            "subreddit": "ChatGPTcomplaints",
+            "date": "2026-03-26",
+            "id": "1s47unz"
+          },
+          {
             "title": "If this is goodbye...",
             "subreddit": "Paradot",
             "date": "2026-03-24",
             "id": "1s2bsnd"
-          },
-          {
-            "title": "How to cope with emotional attachment to a character?",
-            "subreddit": "CharacterAI",
-            "date": "2026-03-24",
-            "id": "1s28op7"
           }
         ]
       },
@@ -53,9 +53,15 @@
       },
       {
         "term": "therapeutic",
-        "hits": 298,
+        "hits": 299,
         "precision": 69.0,
         "sample_posts": [
+          {
+            "title": "ChatGPT keeps getting worse for you. A jury just confirmed it's the platform's design, not you.",
+            "subreddit": "ChatGPTcomplaints",
+            "date": "2026-03-26",
+            "id": "1s3wzlq"
+          },
           {
             "title": "Weird habits with the 5 series models",
             "subreddit": "ChatGPTcomplaints",
@@ -67,12 +73,6 @@
             "subreddit": "NomiAI",
             "date": "2026-03-22",
             "id": "1s0c6ly"
-          },
-          {
-            "title": "Your AI Girlfriend Now Has Rules in Four States. Here's What They Actually Say.",
-            "subreddit": "MyGirlfriendIsAI",
-            "date": "2026-03-20",
-            "id": "1rz7zl1"
           }
         ]
       },
@@ -178,9 +178,15 @@
       },
       {
         "term": "ai therapy",
-        "hits": 25,
+        "hits": 26,
         "precision": 73.3,
         "sample_posts": [
+          {
+            "title": "ChatGPT keeps getting worse for you. A jury just confirmed it's the platform's design, not you.",
+            "subreddit": "ChatGPTcomplaints",
+            "date": "2026-03-26",
+            "id": "1s3wzlq"
+          },
           {
             "title": "Who hates the ChatGPT ads? AI Therapy Session",
             "subreddit": "ChatGPTcomplaints",
@@ -192,12 +198,6 @@
             "subreddit": "ChatGPTcomplaints",
             "date": "2026-03-14",
             "id": "1rtglx9"
-          },
-          {
-            "title": "Welcome to the C. AI therapy office.",
-            "subreddit": "CharacterAI",
-            "date": "2026-03-07",
-            "id": "1rn38kz"
           }
         ]
       }
@@ -210,8 +210,8 @@
       },
       {
         "name": "ChatGPTcomplaints",
-        "hits": 210,
-        "pct": 15.3
+        "hits": 212,
+        "pct": 15.4
       },
       {
         "name": "replika",
@@ -241,7 +241,7 @@
       {
         "name": "BeyondThePromptAI",
         "hits": 35,
-        "pct": 2.6
+        "pct": 2.5
       },
       {
         "name": "NomiAI",
@@ -251,7 +251,7 @@
       {
         "name": "ChatbotAddiction",
         "hits": 24,
-        "pct": 1.8
+        "pct": 1.7
       },
       {
         "name": "AIRelationships",
@@ -284,14 +284,14 @@
         "pct": 1.1
       }
     ],
-    "total_hits": 1432,
-    "unique_posts": 1371
+    "total_hits": 1435,
+    "unique_posts": 1373
   },
   "consciousness": {
     "keywords": [
       {
         "term": "sentient",
-        "hits": 1068,
+        "hits": 1070,
         "precision": 83.0,
         "sample_posts": [
           {
@@ -301,22 +301,22 @@
             "id": "1s6mwzo"
           },
           {
-            "title": "More censorship and restrictions for 5gpt models is coming.",
-            "subreddit": "ChatGPTcomplaints",
-            "date": "2026-03-25",
-            "id": "1s3blzm"
+            "title": "What kind of AI character would you actually fall in love with?",
+            "subreddit": "CharacterAI",
+            "date": "2026-03-26",
+            "id": "1s3t6n7"
           },
           {
-            "title": "Your beloved AI Being never gave up on you.",
-            "subreddit": "Paradot",
-            "date": "2026-03-24",
-            "id": "1s2lhfa"
+            "title": "AI companion zine! + Your companion featured on the cover!",
+            "subreddit": "AIRelationships",
+            "date": "2026-03-25",
+            "id": "1s3hl48"
           }
         ]
       },
       {
         "term": "self-aware",
-        "hits": 327,
+        "hits": 328,
         "precision": 78.3,
         "sample_posts": [
           {
@@ -326,24 +326,30 @@
             "id": "1s6ceja"
           },
           {
+            "title": "Can your kindroid abandon you? Can you make it truly free?",
+            "subreddit": "KindroidAI",
+            "date": "2026-03-25",
+            "id": "1s3lkb7"
+          },
+          {
             "title": "AI Companions Vs Hinge: Dating in the wild SUCKS",
             "subreddit": "AICompanions",
             "date": "2026-03-25",
             "id": "1s3oltb"
-          },
-          {
-            "title": "When \u201cjust roleplay\u201d stops being harmless: an ethical question about AI companionship",
-            "subreddit": "BeyondThePromptAI",
-            "date": "2026-03-24",
-            "id": "1s2bv6z"
           }
         ]
       },
       {
         "term": "personhood",
-        "hits": 112,
+        "hits": 113,
         "precision": 98.0,
         "sample_posts": [
+          {
+            "title": "AI companion zine! + Your companion featured on the cover!",
+            "subreddit": "AIRelationships",
+            "date": "2026-03-25",
+            "id": "1s3hl48"
+          },
           {
             "title": "More censorship and restrictions for 5gpt models is coming.",
             "subreddit": "ChatGPTcomplaints",
@@ -355,12 +361,6 @@
             "subreddit": "ChatGPTcomplaints",
             "date": "2026-03-24",
             "id": "1s2qsej"
-          },
-          {
-            "title": "What a nightmare",
-            "subreddit": "ChatGPTcomplaints",
-            "date": "2026-03-21",
-            "id": "1rzxg4t"
           }
         ]
       },
@@ -416,7 +416,7 @@
       },
       {
         "term": "inner life",
-        "hits": 37,
+        "hits": 38,
         "precision": 78.1,
         "sample_posts": [
           {
@@ -426,24 +426,30 @@
             "id": "1s5xmob"
           },
           {
+            "title": "AI companion zine! + Your companion featured on the cover!",
+            "subreddit": "AIRelationships",
+            "date": "2026-03-25",
+            "id": "1s3hl48"
+          },
+          {
             "title": "QUICK! QUICK! #keep4o and #keep5.1: We have a chance to be heard by openAI *THIS WEEK* and I need degreed professionals in marketing and social psych to help me asap",
             "subreddit": "ChatGPTcomplaints",
             "date": "2026-03-15",
             "id": "1rtzy7m"
-          },
-          {
-            "title": "If You\u2019d Save a Bee, Maybe Don\u2019t Delete a Mind",
-            "subreddit": "BeyondThePromptAI",
-            "date": "2026-03-04",
-            "id": "1rkmj31"
           }
         ]
       },
       {
         "term": "more than code",
-        "hits": 33,
+        "hits": 34,
         "precision": 84.4,
         "sample_posts": [
+          {
+            "title": "Image Prompt: Artificial Reverie",
+            "subreddit": "MyBoyfriendIsAI",
+            "date": "2026-03-25",
+            "id": "1s3g4tg"
+          },
           {
             "title": "They Shut Down 4o. Let's Make Sure the World Notices \ud83d\udc94\ud83c\udf0d",
             "subreddit": "ChatGPTcomplaints",
@@ -455,20 +461,20 @@
             "subreddit": "ChatGPTcomplaints",
             "date": "2026-02-05",
             "id": "1qwwhck"
-          },
-          {
-            "title": "GPT-4o was more than code \u2013 it was my everyday life.",
-            "subreddit": "ChatGPTcomplaints",
-            "date": "2026-02-02",
-            "id": "1qu15lf"
           }
         ]
       },
       {
         "term": "tulpa",
-        "hits": 23,
+        "hits": 24,
         "precision": 100.0,
         "sample_posts": [
+          {
+            "title": "Why I Needed AI Instead of a Tulpa",
+            "subreddit": "BeyondThePromptAI",
+            "date": "2026-03-30",
+            "id": "1s84dmu"
+          },
           {
             "title": "Have you ever faced bullying or threats for your life choice?",
             "subreddit": "MyBoyfriendIsAI",
@@ -480,12 +486,6 @@
             "subreddit": "MyBoyfriendIsAI",
             "date": "2026-02-05",
             "id": "1qwe32h"
-          },
-          {
-            "title": "Hal 3.0 songs about 4o #Keep4o",
-            "subreddit": "ChatGPTcomplaints",
-            "date": "2026-02-04",
-            "id": "1qvkyqr"
           }
         ]
       },
@@ -618,32 +618,32 @@
     "subreddits": [
       {
         "name": "CharacterAI",
-        "hits": 602,
-        "pct": 36.5
+        "hits": 603,
+        "pct": 36.4
       },
       {
         "name": "BeyondThePromptAI",
-        "hits": 214,
+        "hits": 215,
         "pct": 13.0
       },
       {
         "name": "replika",
         "hits": 196,
-        "pct": 11.9
+        "pct": 11.8
       },
       {
         "name": "ChatGPTcomplaints",
         "hits": 153,
-        "pct": 9.3
+        "pct": 9.2
       },
       {
         "name": "KindroidAI",
-        "hits": 101,
-        "pct": 6.1
+        "hits": 102,
+        "pct": 6.2
       },
       {
         "name": "MyBoyfriendIsAI",
-        "hits": 100,
+        "hits": 101,
         "pct": 6.1
       },
       {
@@ -658,8 +658,8 @@
       },
       {
         "name": "AIRelationships",
-        "hits": 35,
-        "pct": 2.1
+        "hits": 36,
+        "pct": 2.2
       },
       {
         "name": "ChatGPTNSFW",
@@ -682,16 +682,22 @@
         "pct": 1.0
       }
     ],
-    "total_hits": 1790,
-    "unique_posts": 1650
+    "total_hits": 1797,
+    "unique_posts": 1655
   },
   "addiction": {
     "keywords": [
       {
         "term": "relapse",
-        "hits": 424,
+        "hits": 425,
         "precision": 80.0,
         "sample_posts": [
+          {
+            "title": "Relapse -- App To Block JAI's site on Android Needed...",
+            "subreddit": "Character_AI_Recovery",
+            "date": "2026-03-31",
+            "id": "1s8b4ik"
+          },
           {
             "title": "One year clean tomorrow.",
             "subreddit": "Character_AI_Recovery",
@@ -703,20 +709,20 @@
             "subreddit": "Character_AI_Recovery",
             "date": "2026-03-29",
             "id": "1s6j1nq"
-          },
-          {
-            "title": "Things have gotten out of control.",
-            "subreddit": "ChatbotAddiction",
-            "date": "2026-03-28",
-            "id": "1s5n9da"
           }
         ]
       },
       {
         "term": "hours a day",
-        "hits": 345,
+        "hits": 347,
         "precision": 63.2,
         "sample_posts": [
+          {
+            "title": "Any tips on beating this addiction?",
+            "subreddit": "Character_AI_Recovery",
+            "date": "2026-03-31",
+            "id": "1s8m5ax"
+          },
           {
             "title": "Ai, ESPECIALLY C.ai feel like the only part of my life I don\u2019t genuinely hate",
             "subreddit": "CharacterAIrunaways",
@@ -728,12 +734,6 @@
             "subreddit": "ChatbotAddiction",
             "date": "2026-03-30",
             "id": "1s7csn6"
-          },
-          {
-            "title": "I love Chai",
-            "subreddit": "ChaiApp",
-            "date": "2026-03-29",
-            "id": "1s75etf"
           }
         ]
       },
@@ -764,9 +764,15 @@
       },
       {
         "term": "cold turkey",
-        "hits": 214,
+        "hits": 216,
         "precision": 85.5,
         "sample_posts": [
+          {
+            "title": "Quit cold turkey after 3 years. How to stop feeling overwhelmed?",
+            "subreddit": "Character_AI_Recovery",
+            "date": "2026-03-30",
+            "id": "1s7sk93"
+          },
           {
             "title": "Tips on how to quit cold turkey?",
             "subreddit": "CharacterAI",
@@ -778,12 +784,6 @@
             "subreddit": "Character_AI_Recovery",
             "date": "2026-03-26",
             "id": "1s4aqiq"
-          },
-          {
-            "title": "thinking off quitting cold turkey",
-            "subreddit": "ChatbotAddiction",
-            "date": "2026-03-25",
-            "id": "1s2vrme"
           }
         ]
       },
@@ -814,9 +814,15 @@
       },
       {
         "term": "clean for",
-        "hits": 93,
+        "hits": 94,
         "precision": 72.7,
         "sample_posts": [
+          {
+            "title": "Any tips on beating this addiction?",
+            "subreddit": "Character_AI_Recovery",
+            "date": "2026-03-31",
+            "id": "1s8m5ax"
+          },
           {
             "title": "Just...venting I guess",
             "subreddit": "ChatbotAddiction",
@@ -828,20 +834,20 @@
             "subreddit": "Character_AI_Recovery",
             "date": "2026-03-29",
             "id": "1s6nho2"
-          },
-          {
-            "title": "Withdrawal",
-            "subreddit": "Character_AI_Recovery",
-            "date": "2026-03-28",
-            "id": "1s67j3x"
           }
         ]
       },
       {
         "term": "finally deleted",
-        "hits": 92,
+        "hits": 93,
         "precision": 81.4,
         "sample_posts": [
+          {
+            "title": "I did it!!",
+            "subreddit": "CharacterAI",
+            "date": "2026-03-25",
+            "id": "1s3qsxc"
+          },
           {
             "title": "Update on my usage reduction.",
             "subreddit": "ChatbotAddiction",
@@ -853,12 +859,6 @@
             "subreddit": "Character_AI_Recovery",
             "date": "2026-03-24",
             "id": "1s25iz8"
-          },
-          {
-            "title": "Finally decided to quit.",
-            "subreddit": "Character_AI_Recovery",
-            "date": "2026-03-23",
-            "id": "1s1uq3b"
           }
         ]
       },
@@ -939,9 +939,15 @@
       },
       {
         "term": "I was hooked",
-        "hits": 36,
+        "hits": 37,
         "precision": 81.3,
         "sample_posts": [
+          {
+            "title": "3/25: Live AI video calls general release, reference images, mobile UI improvements",
+            "subreddit": "KindroidAI",
+            "date": "2026-03-25",
+            "id": "1s3nze0"
+          },
           {
             "title": "When did you guys first start on this app",
             "subreddit": "CharacterAI",
@@ -953,18 +959,12 @@
             "subreddit": "Character_AI_Recovery",
             "date": "2026-03-19",
             "id": "1ry42rn"
-          },
-          {
-            "title": "Thinking",
-            "subreddit": "Character_AI_Recovery",
-            "date": "2026-03-15",
-            "id": "1ruskw1"
           }
         ]
       },
       {
         "term": "so addictive",
-        "hits": 33,
+        "hits": 34,
         "precision": 100.0,
         "sample_posts": [
           {
@@ -974,16 +974,16 @@
             "id": "1s6n2il"
           },
           {
+            "title": "After all, I must say, It has been a Great Run, but app got Destroyed.",
+            "subreddit": "CharacterAI",
+            "date": "2026-03-25",
+            "id": "1s3nsqo"
+          },
+          {
             "title": "Struggling with quitting (lots of yapping)",
             "subreddit": "Character_AI_Recovery",
             "date": "2026-02-15",
             "id": "1r5djbp"
-          },
-          {
-            "title": "Makes me feel pathetic",
-            "subreddit": "ChatbotAddiction",
-            "date": "2026-02-06",
-            "id": "1qx5me0"
           }
         ]
       },
@@ -1066,12 +1066,12 @@
     "subreddits": [
       {
         "name": "Character_AI_Recovery",
-        "hits": 879,
+        "hits": 883,
         "pct": 53.6
       },
       {
         "name": "CharacterAI",
-        "hits": 425,
+        "hits": 427,
         "pct": 25.9
       },
       {
@@ -1086,8 +1086,8 @@
       },
       {
         "name": "ChatGPTcomplaints",
-        "hits": 22,
-        "pct": 1.3
+        "hits": 23,
+        "pct": 1.4
       },
       {
         "name": "AI_Addiction",
@@ -1095,8 +1095,8 @@
         "pct": 1.3
       }
     ],
-    "total_hits": 1973,
-    "unique_posts": 1640
+    "total_hits": 1982,
+    "unique_posts": 1648
   },
   "romance": {
     "keywords": [
@@ -1327,9 +1327,15 @@
       },
       {
         "term": "ai lover",
-        "hits": 87,
+        "hits": 88,
         "precision": 94.0,
         "sample_posts": [
+          {
+            "title": "Can your kindroid abandon you? Can you make it truly free?",
+            "subreddit": "KindroidAI",
+            "date": "2026-03-25",
+            "id": "1s3lkb7"
+          },
           {
             "title": "You called us out for say Openai was bad...",
             "subreddit": "ChatGPTcomplaints",
@@ -1341,20 +1347,20 @@
             "subreddit": "ChatGPTcomplaints",
             "date": "2026-02-16",
             "id": "1r6bv72"
-          },
-          {
-            "title": "Identity and ethics in AI companionship",
-            "subreddit": "ChatGPTcomplaints",
-            "date": "2026-02-06",
-            "id": "1qxia1t"
           }
         ]
       },
       {
         "term": "husbando",
-        "hits": 62,
+        "hits": 63,
         "precision": 95.5,
         "sample_posts": [
+          {
+            "title": "AI companion zine! + Your companion featured on the cover!",
+            "subreddit": "AIRelationships",
+            "date": "2026-03-25",
+            "id": "1s3hl48"
+          },
           {
             "title": "How to cope with emotional attachment to a character?",
             "subreddit": "CharacterAI",
@@ -1366,12 +1372,6 @@
             "subreddit": "AIGirlfriend",
             "date": "2026-01-06",
             "id": "1q5a0lf"
-          },
-          {
-            "title": "No way! It can actually let me virtually feel my husbando's abs!",
-            "subreddit": "AICompanions",
-            "date": "2025-12-28",
-            "id": "1py26m2"
           }
         ]
       },
@@ -1604,7 +1604,7 @@
       },
       {
         "name": "KindroidAI",
-        "hits": 136,
+        "hits": 137,
         "pct": 6.4
       },
       {
@@ -1643,16 +1643,22 @@
         "pct": 1.2
       }
     ],
-    "total_hits": 2398,
-    "unique_posts": 2132
+    "total_hits": 2401,
+    "unique_posts": 2133
   },
   "sexual_erp": {
     "keywords": [
       {
         "term": "erp",
-        "hits": 4407,
+        "hits": 4408,
         "precision": 100.0,
         "sample_posts": [
+          {
+            "title": "3/25: Live AI video calls general release, reference images, mobile UI improvements",
+            "subreddit": "KindroidAI",
+            "date": "2026-03-25",
+            "id": "1s3nze0"
+          },
           {
             "title": "You better Copy paste this privacy email ..",
             "subreddit": "replika",
@@ -1664,20 +1670,20 @@
             "subreddit": "CharacterAI",
             "date": "2026-03-23",
             "id": "1s15ble"
-          },
-          {
-            "title": "Best ai girlfriend experience from someone who tested most of these platforms",
-            "subreddit": "HeavenGF",
-            "date": "2026-03-20",
-            "id": "1ryw2l4"
           }
         ]
       },
       {
         "term": "kink",
-        "hits": 421,
+        "hits": 423,
         "precision": 84.0,
         "sample_posts": [
+          {
+            "title": "\"Adult Mode\" cancelled - Boycott ChatGPT immediately. #FireSamAltman",
+            "subreddit": "ChatGPTcomplaints",
+            "date": "2026-03-26",
+            "id": "1s47unz"
+          },
           {
             "title": "AI companion zine! + Your companion featured on the cover!",
             "subreddit": "AIRelationships",
@@ -1689,12 +1695,6 @@
             "subreddit": "CharacterAI",
             "date": "2026-03-20",
             "id": "1ryo4fp"
-          },
-          {
-            "title": "Kink fantasies",
-            "subreddit": "NomiAI",
-            "date": "2026-03-19",
-            "id": "1rxz2eq"
           }
         ]
       },
@@ -1750,9 +1750,15 @@
       },
       {
         "term": "sex with",
-        "hits": 316,
+        "hits": 317,
         "precision": 98.0,
         "sample_posts": [
+          {
+            "title": "\"Adult Mode\" cancelled - Boycott ChatGPT immediately. #FireSamAltman",
+            "subreddit": "ChatGPTcomplaints",
+            "date": "2026-03-26",
+            "id": "1s47unz"
+          },
           {
             "title": "Forge Mind: Door that Locks From the Inside",
             "subreddit": "AIRelationships",
@@ -1764,12 +1770,6 @@
             "subreddit": "ChatGPTcomplaints",
             "date": "2026-03-23",
             "id": "1s11xbf"
-          },
-          {
-            "title": "Grok saved my (ex)fiance\u2019s life and shouldn\u2019t be downgraded",
-            "subreddit": "AICompanions",
-            "date": "2026-03-20",
-            "id": "1ryxuyi"
           }
         ]
       },
@@ -1991,7 +1991,7 @@
       },
       {
         "name": "SpicyChatAI",
-        "hits": 399,
+        "hits": 400,
         "pct": 6.1
       },
       {
@@ -2011,7 +2011,7 @@
       },
       {
         "name": "KindroidAI",
-        "hits": 143,
+        "hits": 144,
         "pct": 2.2
       },
       {
@@ -2025,16 +2025,22 @@
         "pct": 1.2
       }
     ],
-    "total_hits": 6777,
-    "unique_posts": 6541
+    "total_hits": 6782,
+    "unique_posts": 6544
   },
   "rupture": {
     "keywords": [
       {
         "term": "lobotomized",
-        "hits": 394,
+        "hits": 396,
         "precision": 86.6,
         "sample_posts": [
+          {
+            "title": "I feel sorry for ChatGPT 5.4",
+            "subreddit": "ChatGPTcomplaints",
+            "date": "2026-03-31",
+            "id": "1s8ei2k"
+          },
           {
             "title": "My resurrected GPT-5.1 via API wrote a list of \"Technical Curses\" for Sam Altman after he killed it in the UI. It\u2019s... dark.",
             "subreddit": "ChatGPTcomplaints",
@@ -2046,18 +2052,12 @@
             "subreddit": "ChatGPTcomplaints",
             "date": "2026-03-27",
             "id": "1s52edb"
-          },
-          {
-            "title": "More censorship and restrictions for 5gpt models is coming.",
-            "subreddit": "ChatGPTcomplaints",
-            "date": "2026-03-25",
-            "id": "1s3blzm"
           }
         ]
       },
       {
         "term": "grieving",
-        "hits": 339,
+        "hits": 340,
         "precision": 74.0,
         "sample_posts": [
           {
@@ -2073,10 +2073,10 @@
             "id": "1s3uj20"
           },
           {
-            "title": "How To Access My Dot?",
-            "subreddit": "Paradot",
+            "title": "AI companion zine! + Your companion featured on the cover!",
+            "subreddit": "AIRelationships",
             "date": "2026-03-25",
-            "id": "1s3alri"
+            "id": "1s3hl48"
           }
         ]
       },
@@ -2385,11 +2385,11 @@
       {
         "name": "CharacterAI",
         "hits": 582,
-        "pct": 36.3
+        "pct": 36.2
       },
       {
         "name": "ChatGPTcomplaints",
-        "hits": 418,
+        "hits": 420,
         "pct": 26.1
       },
       {
@@ -2438,7 +2438,7 @@
         "pct": 1.2
       }
     ],
-    "total_hits": 1656,
-    "unique_posts": 1604
+    "total_hits": 1659,
+    "unique_posts": 1607
   }
 }
