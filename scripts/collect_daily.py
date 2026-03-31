@@ -125,10 +125,11 @@ def _step_tag_posts(conn):
 
     keyword_subs = [c["subreddit"] for c in load_keyword_communities()]
     placeholders = ",".join("?" for _ in keyword_subs)
-    query = f"SELECT id, subreddit, title, selftext, date(created_utc, 'unixepoch') AS post_date FROM posts WHERE subreddit IN ({placeholders}) ORDER BY post_date ASC"
+    where_clause = f"FROM posts WHERE subreddit IN ({placeholders})"
+    query = f"SELECT id, subreddit, title, selftext, date(created_utc, 'unixepoch') AS post_date {where_clause} ORDER BY post_date ASC"
 
     total_posts = conn.execute(
-        query.replace("SELECT id, subreddit, title, selftext, date(created_utc, 'unixepoch') AS post_date", "SELECT COUNT(*)"),
+        f"SELECT COUNT(*) {where_clause}",
         keyword_subs,
     ).fetchone()[0]
 
@@ -228,6 +229,7 @@ def _step_export(conn):
     web_data_dir.mkdir(parents=True, exist_ok=True)
     _atomic_copy(snap_path, web_data_dir / "snapshots.json")
     _atomic_copy(sub_path, web_data_dir / "subreddits.json")
+    _atomic_copy(kw_path, web_data_dir / "keywords.json")
     _atomic_copy(kw_trends_path, web_data_dir / "keyword_trends.json")
     _atomic_copy(meta_path, web_data_dir / "site_meta.json")
     logger.info("Copied JSON to web/data/ for frontend")

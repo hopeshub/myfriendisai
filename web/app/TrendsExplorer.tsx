@@ -385,18 +385,6 @@ export default function TrendsExplorer({ themeData, keywordDetails }: Props) {
     return EVENTS.filter((e) => e.date >= min && e.date <= max);
   }, [chartData]);
 
-  // ── Date range for subtitle ──
-  const dateRange = useMemo(() => {
-    if (!allMonthlyRaw.length) return { start: "", end: "", count: 0 };
-    const first = allMonthlyRaw[0].date as string;
-    const last = allMonthlyRaw[allMonthlyRaw.length - 1].date as string;
-    return {
-      start: formatMonthTick(first),
-      end: formatMonthTick(last),
-      count: THEMES.length,
-    };
-  }, [allMonthlyRaw]);
-
   // ── Per-theme YoY summary helper ──
   const themeSummary = useCallback((theme: typeof THEMES[number]): {
     text: string;

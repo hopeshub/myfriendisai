@@ -42,10 +42,11 @@ export default function BottomSheet({
   const contentRef = useRef<HTMLDivElement>(null);
   const handleCloseRef = useRef<() => void>(() => {});
 
-  // Reset state when opening
+  // Reset state when opening — intentional setState-in-effect to sync
+  // derived state (sheet position) with the isOpen prop.
   useEffect(() => {
     if (isOpen) {
-      setSheetHeight(SHEET_DEFAULT);
+      setSheetHeight(SHEET_DEFAULT); // eslint-disable-line react-hooks/set-state-in-effect
       setDragOffset(0);
       setIsClosing(false);
     }
