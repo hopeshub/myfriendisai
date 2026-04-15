@@ -19,6 +19,9 @@ CREATE TABLE IF NOT EXISTS subreddit_snapshots (
     avg_comments_per_post REAL,
     avg_score_per_post REAL,
     unique_authors INTEGER,
+    unique_post_authors_7d INTEGER,
+    unique_comment_authors_7d INTEGER,
+    unique_contributors_7d INTEGER,
     raw_about_json TEXT,
     raw_listing_json TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -155,6 +158,9 @@ CREATE INDEX IF NOT EXISTS idx_pkt_subreddit_date
 
 CREATE INDEX IF NOT EXISTS idx_pkt_category_date
     ON post_keyword_tags(category, post_date);
+
+CREATE INDEX IF NOT EXISTS idx_posts_subreddit_created
+    ON posts(subreddit, created_utc);
 """
 
 
@@ -197,6 +203,12 @@ def _migrate(conn: sqlite3.Connection) -> None:
             PRIMARY KEY(post_id, scan_date)
         )
     """)
+
+    # Add rolling-7d contributor columns if missing (migration 002)
+    snap_cols = {row[1] for row in conn.execute("PRAGMA table_info(subreddit_snapshots)").fetchall()}
+    for col in ("unique_post_authors_7d", "unique_comment_authors_7d", "unique_contributors_7d"):
+        if col not in snap_cols:
+            conn.execute(f"ALTER TABLE subreddit_snapshots ADD COLUMN {col} INTEGER")
     conn.commit()
 
 

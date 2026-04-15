@@ -111,16 +111,16 @@ export default function Charts({ subreddit }: { subreddit: string }) {
           <div className="text-xs text-zinc-400 mt-0.5">Subscribers</div>
         </div>
         <div>
+          <div className="text-2xl font-semibold tabular-nums">{fmt(latest.unique_contributors_7d)}</div>
+          <div className="text-xs text-zinc-400 mt-0.5">Contributors / week</div>
+        </div>
+        <div>
           <div className="text-2xl font-semibold tabular-nums">{fmt(latest.posts_today)}</div>
           <div className="text-xs text-zinc-400 mt-0.5">Posts today</div>
         </div>
         <div>
           <div className="text-2xl font-semibold tabular-nums">{fmt(latest.avg_comments_per_post, 1)}</div>
           <div className="text-xs text-zinc-400 mt-0.5">Avg comments / post</div>
-        </div>
-        <div>
-          <div className="text-2xl font-semibold tabular-nums">{fmt(latest.avg_score_per_post, 0)}</div>
-          <div className="text-xs text-zinc-400 mt-0.5">Avg score / post</div>
         </div>
       </div>
 
@@ -131,6 +131,7 @@ export default function Charts({ subreddit }: { subreddit: string }) {
         </p>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-10 mt-8">
           <MetricChart data={snapshots} dataKey="subscribers" label="Subscribers" color="#18181b" />
+          <MetricChart data={snapshots} dataKey="unique_contributors_7d" label="Contributors / week (rolling 7d)" color="#e8692a" />
           <MetricChart data={snapshots} dataKey="posts_today" label="Posts / day" color="#3b82f6" />
           <MetricChart data={snapshots} dataKey="avg_comments_per_post" label="Avg comments per post" color="#8b5cf6" decimals={1} />
           <MetricChart data={snapshots} dataKey="avg_score_per_post" label="Avg score per post" color="#10b981" />

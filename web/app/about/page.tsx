@@ -31,6 +31,18 @@ const STATS = [
 
 const CHANGELOG = [
   {
+    date: "April 15, 2026",
+    title: "Weekly contributors replaces dead \u201Cactive users\u201D metric",
+    items: [
+      "Reddit removed the active_user_count field from the public API in September 2025, leaving our collector silently recording zeros",
+      "Replaced with a rolling 7-day distinct-contributor count \u2014 built from the post and comment authors we already store",
+      "Historical series backfills cleanly to 2023 for post authors; comment authors join the count from 2026-03-10 forward, when comment collection began",
+      "Surfaces on the community explorer as a sortable \u201CContributors / wk\u201D column \u2014 small companionship subs can now rank on activity instead of being buried by subscriber count",
+      "Aligns with Reddit\u2019s own September 2025 move away from subscribers toward visitors and contributions as the primary vitality signal",
+    ],
+    recent: true,
+  },
+  {
     date: "March 21, 2026",
     title: "Year-over-year comparison improvements",
     items: [

@@ -6,7 +6,7 @@ from datetime import date
 from pathlib import Path
 from typing import Optional
 
-from src.db.schema import DB_PATH, get_connection, initialize
+from src.db.schema import get_connection
 
 DATA_DIR = Path(__file__).parent.parent.parent / "data"
 
@@ -170,13 +170,123 @@ def get_all_snapshots_for_chart(conn: Optional[sqlite3.Connection] = None) -> li
             """
             SELECT s.subreddit, s.snapshot_date, s.subscribers, s.active_users,
                    s.posts_today, s.avg_comments_per_post,
-                   s.avg_score_per_post, s.unique_authors
+                   s.avg_score_per_post, s.unique_authors,
+                   s.unique_post_authors_7d, s.unique_comment_authors_7d,
+                   s.unique_contributors_7d
             FROM subreddit_snapshots s
             INNER JOIN subreddit_config c ON c.subreddit = s.subreddit AND c.is_active = 1
             ORDER BY s.subreddit ASC, s.snapshot_date ASC
             """
         ).fetchall()
         return [dict(r) for r in rows]
+    finally:
+        if conn is None:
+            _conn.close()
+
+
+def update_contributor_metrics_for_date(
+    snapshot_date: date,
+    conn: Optional[sqlite3.Connection] = None,
+) -> int:
+    """Recompute rolling-7d contributor metrics for every snapshot row on a given date.
+
+    Counts distinct post authors and comment authors within the 7-day window
+    ending on `snapshot_date` (inclusive). Both counts and their union are
+    written to the snapshot row. Deleted / null authors are excluded.
+
+    Returns the number of rows updated.
+    """
+    from datetime import datetime, time as dtime, timedelta, timezone
+
+    _conn = conn or get_connection()
+    try:
+        win_start = int(datetime.combine(
+            snapshot_date - timedelta(days=6), dtime.min, tzinfo=timezone.utc
+        ).timestamp())
+        win_end = int(datetime.combine(
+            snapshot_date + timedelta(days=1), dtime.min, tzinfo=timezone.utc
+        ).timestamp())
+
+        # Does our comments table cover this window at all?
+        min_comment_utc_row = _conn.execute("SELECT MIN(created_utc) FROM comments").fetchone()
+        min_comment_utc = min_comment_utc_row[0] if min_comment_utc_row else None
+        have_comments = min_comment_utc is not None and win_end > min_comment_utc
+
+        # Pull distinct post-authors per sub in the window
+        post_rows = _conn.execute(
+            """
+            SELECT subreddit, COUNT(DISTINCT author) AS n
+            FROM posts
+            WHERE created_utc >= ? AND created_utc < ?
+              AND author IS NOT NULL AND author != '' AND author != '[deleted]'
+            GROUP BY subreddit
+            """,
+            (win_start, win_end),
+        ).fetchall()
+        post_by_sub = {r["subreddit"]: r["n"] for r in post_rows}
+
+        # Same for comments
+        com_by_sub: dict = {}
+        contrib_by_sub: dict = {}
+        if have_comments:
+            com_rows = _conn.execute(
+                """
+                SELECT subreddit, COUNT(DISTINCT author) AS n
+                FROM comments
+                WHERE created_utc >= ? AND created_utc < ?
+                  AND author IS NOT NULL AND author != '' AND author != '[deleted]'
+                GROUP BY subreddit
+                """,
+                (win_start, win_end),
+            ).fetchall()
+            com_by_sub = {r["subreddit"]: r["n"] for r in com_rows}
+
+            # Union count (distinct post+comment authors) — needs a UNION query
+            union_rows = _conn.execute(
+                """
+                SELECT subreddit, COUNT(DISTINCT author) AS n FROM (
+                    SELECT subreddit, author FROM posts
+                    WHERE created_utc >= ? AND created_utc < ?
+                      AND author IS NOT NULL AND author != '' AND author != '[deleted]'
+                    UNION
+                    SELECT subreddit, author FROM comments
+                    WHERE created_utc >= ? AND created_utc < ?
+                      AND author IS NOT NULL AND author != '' AND author != '[deleted]'
+                )
+                GROUP BY subreddit
+                """,
+                (win_start, win_end, win_start, win_end),
+            ).fetchall()
+            contrib_by_sub = {r["subreddit"]: r["n"] for r in union_rows}
+
+        # Collect the subreddits that have a snapshot row on this date
+        snap_rows = _conn.execute(
+            "SELECT id, subreddit FROM subreddit_snapshots WHERE snapshot_date = ?",
+            (snapshot_date.isoformat(),),
+        ).fetchall()
+
+        updates = []
+        for row in snap_rows:
+            sub = row["subreddit"]
+            pc = post_by_sub.get(sub, 0)
+            if have_comments:
+                cc = com_by_sub.get(sub, 0)
+                tot = contrib_by_sub.get(sub, pc)  # fallback: if no union row, use post count
+            else:
+                cc = None
+                tot = pc
+            updates.append((pc, cc, tot, row["id"]))
+
+        _conn.executemany(
+            "UPDATE subreddit_snapshots "
+            "SET unique_post_authors_7d = ?, "
+            "    unique_comment_authors_7d = ?, "
+            "    unique_contributors_7d = ? "
+            "WHERE id = ?",
+            updates,
+        )
+        _conn.commit()
+        return len(updates)
     finally:
         if conn is None:
             _conn.close()
@@ -265,7 +375,9 @@ def export_subreddits_json(
             """
             SELECT s.subreddit, s.snapshot_date, s.subscribers, s.active_users,
                    s.posts_today, s.avg_comments_per_post, s.avg_score_per_post,
-                   s.unique_authors, c.category, c.tier, c.display_name
+                   s.unique_authors, s.unique_post_authors_7d,
+                   s.unique_comment_authors_7d, s.unique_contributors_7d,
+                   c.category, c.tier, c.display_name
             FROM subreddit_snapshots s
             INNER JOIN subreddit_config c ON c.subreddit = s.subreddit AND c.is_active = 1
             WHERE s.snapshot_date = (

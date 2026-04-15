@@ -6,7 +6,7 @@ import type { SubredditSummary } from "@/lib/types";
 
 type SortKey = keyof Pick<
   SubredditSummary,
-  "subscribers" | "posts_today" | "avg_comments_per_post" | "avg_score_per_post" | "unique_authors"
+  "subscribers" | "posts_today" | "avg_comments_per_post" | "avg_score_per_post" | "unique_authors" | "unique_contributors_7d"
 >;
 
 function fmt(n: number | null, decimals = 0): string {
@@ -112,6 +112,9 @@ export default function CommunitiesTable({ subreddits }: { subreddits: Subreddit
                 <SortButton label="Subscribers" sortKey="subscribers" current={sort} onSort={handleSort} />
               </th>
               <th className="pb-3 pr-4 font-medium text-right">
+                <SortButton label="Contributors/wk" sortKey="unique_contributors_7d" current={sort} onSort={handleSort} />
+              </th>
+              <th className="pb-3 pr-4 font-medium text-right hidden sm:table-cell">
                 <SortButton label="Posts/day" sortKey="posts_today" current={sort} onSort={handleSort} />
               </th>
               <th className="pb-3 pr-4 font-medium text-right hidden md:table-cell">
@@ -140,7 +143,8 @@ export default function CommunitiesTable({ subreddits }: { subreddits: Subreddit
                   <TierBadge tier={s.tier} />
                 </td>
                 <td className="py-3 pr-4 text-sm tabular-nums text-right">{fmt(s.subscribers)}</td>
-                <td className="py-3 pr-4 text-sm tabular-nums text-right">{fmt(s.posts_today)}</td>
+                <td className="py-3 pr-4 text-sm tabular-nums text-right">{fmt(s.unique_contributors_7d)}</td>
+                <td className="py-3 pr-4 text-sm tabular-nums text-right hidden sm:table-cell">{fmt(s.posts_today)}</td>
                 <td className="py-3 pr-4 text-sm tabular-nums text-right hidden md:table-cell">{fmt(s.avg_comments_per_post, 1)}</td>
                 <td className="py-3 text-sm tabular-nums text-right hidden md:table-cell">{fmt(s.avg_score_per_post, 0)}</td>
               </tr>
@@ -155,6 +159,8 @@ export default function CommunitiesTable({ subreddits }: { subreddits: Subreddit
 
       <p className="mt-8 text-xs text-zinc-400">
         <strong>Subscribers</strong> — Direct.{" "}
+        <strong>Contributors/wk</strong> — Derived (distinct post + comment authors over the
+        past 7 days; comment authors counted from 2026-03-10 onward).{" "}
         <strong>Posts/day</strong> — Inferred (posts in past 24h).{" "}
         <strong>Avg comments / Avg score</strong> — Inferred (sample of 100 posts).
       </p>

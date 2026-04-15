@@ -76,6 +76,9 @@ export default async function SubredditPage({
 
       <p className="mt-10 text-xs text-zinc-400 border-t border-zinc-100 pt-4">
         <strong>Subscribers</strong> — Direct (Reddit API).{" "}
+        <strong>Contributors / week</strong> — Derived: distinct authors of posts +
+        comments in the 7 days ending on the snapshot date. Historical series uses
+        post authors only; comment authors are counted from 2026-03-10 forward.{" "}
         <strong>Posts/day</strong> — Inferred from posts created in past 24h.{" "}
         <strong>Avg comments / Avg score</strong> — Inferred from most recent 100 posts.
       </p>

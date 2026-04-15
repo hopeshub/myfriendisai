@@ -24,7 +24,7 @@ from src.config import load_communities, load_keywords, load_keyword_communities
 from src.reddit_client import RedditClient
 from src.utils.rate_limiter import RateLimiter
 from src.db.schema import initialize as init_db
-from src.db.operations import export_snapshots_json, export_subreddits_json, export_site_meta_json, sync_subreddit_config
+from src.db.operations import export_snapshots_json, export_subreddits_json, export_site_meta_json, sync_subreddit_config, update_contributor_metrics_for_date
 from src.collector import collect_subreddit
 from src.keyword_scanner import scan_subreddit_keywords, store_keyword_counts, export_keywords_json
 from src.db.operations import export_keyword_trends_json
@@ -56,6 +56,7 @@ def _step_collect_posts(communities, client, conn):
             "SELECT DISTINCT subreddit FROM posts WHERE data_source = 'json_endpoint' GROUP BY subreddit HAVING COUNT(*) > 100"
         ).fetchall()
     )
+    pagination_failures = []
     for community in communities:
         subreddit = community["subreddit"]
         if subreddit in already_paginated:
@@ -75,7 +76,12 @@ def _step_collect_posts(communities, client, conn):
                 if new_count > 0:
                     logger.info("  r/%s: %d additional posts from pagination", subreddit, new_count)
             except Exception as e:
-                logger.warning("  r/%s: pagination failed: %s", subreddit, e)
+                # Record failure so the sub isn't treated as "paginated" by the
+                # next run's already_paginated check. Without this, a transient
+                # Reddit error on first-time pagination silently skips the sub
+                # forever (since a partial insert would later trip the >100 check).
+                logger.warning("  r/%s: pagination failed: %s — will retry next run", subreddit, e)
+                pagination_failures.append({"subreddit": subreddit, "error": str(e)})
 
     # Keyword scanning (legacy keyword_scanner pipeline)
     from datetime import date as date_cls
@@ -132,6 +138,7 @@ def _step_tag_posts(conn):
         f"SELECT COUNT(*) {where_clause}",
         keyword_subs,
     ).fetchone()[0]
+    logger.info("  %d posts in scope for keyword tagging", total_posts)
 
     cursor = conn.execute(query, keyword_subs)
 
@@ -186,6 +193,18 @@ def _step_tag_comments(conn):
     return {**tag_stats, **prop_stats}
 
 
+def _step_compute_contributors(conn):
+    """Step 4b: Compute rolling-7d contributor metrics for today's snapshots.
+
+    Runs after post + comment collection, so the 7d window ending today
+    reflects the freshest data available (today's posts plus newly-collected
+    comments for posts from 5-6 days ago, which fall inside the window).
+    """
+    from datetime import date as date_cls
+    rows_updated = update_contributor_metrics_for_date(date_cls.today(), conn=conn)
+    return {"rows_updated": rows_updated}
+
+
 def _atomic_copy(src: Path, dst: Path):
     """Copy src to dst atomically: write to .tmp then rename."""
     tmp = dst.with_suffix(dst.suffix + ".tmp")
@@ -224,12 +243,13 @@ def _step_export(conn):
 
     logger.info("Exported: %s, %s, %s, %s, %s", snap_path, sub_path, kw_path, kw_trends_path, meta_path)
 
-    # Copy to web/data/ atomically
+    # Copy to web/data/ atomically.
+    # Note: data/keywords.json is intentionally NOT copied — the frontend
+    # doesn't import it, and the 2.4 MB payload was dead weight on every request.
     web_data_dir = Path(__file__).parent.parent / "web" / "data"
     web_data_dir.mkdir(parents=True, exist_ok=True)
     _atomic_copy(snap_path, web_data_dir / "snapshots.json")
     _atomic_copy(sub_path, web_data_dir / "subreddits.json")
-    _atomic_copy(kw_path, web_data_dir / "keywords.json")
     _atomic_copy(kw_trends_path, web_data_dir / "keyword_trends.json")
     _atomic_copy(meta_path, web_data_dir / "site_meta.json")
     logger.info("Copied JSON to web/data/ for frontend")
@@ -248,7 +268,10 @@ def _step_export(conn):
             _atomic_copy(detail_src, detail_dst)
         logger.info("Exported keyword_details.json")
     else:
-        logger.error("keyword_details export failed: %s", detail_result.stderr)
+        # Raise so the step counts as failed — otherwise the transparency panel
+        # silently goes stale without anything surfacing the error.
+        logger.error("keyword_details export failed (rc=%d): %s", detail_result.returncode, detail_result.stderr)
+        raise RuntimeError(f"export_keyword_details.py failed with rc={detail_result.returncode}")
 
 
 def main():
@@ -280,6 +303,7 @@ def _main_inner():
     client = RedditClient(rate_limiter=RateLimiter(min_interval=6.0))
 
     step_times = {}
+    failed_steps = []
 
     # ── Step 1: Collect posts ───────────────────────────────────────────
     logger.info("=" * 60)
@@ -290,6 +314,7 @@ def _main_inner():
     except Exception as e:
         logger.error("Step 1 (post collection) failed: %s", e)
         post_stats = {"ok": 0, "errors": 0, "total": len(communities), "posts_collected": 0, "error_details": []}
+        failed_steps.append("post_collection")
     step_times["post_collection"] = time.time() - t0
 
     # ── Step 2: Tag posts ───────────────────────────────────────────────
@@ -301,6 +326,7 @@ def _main_inner():
     except Exception as e:
         logger.error("Step 2 (post tagging) failed: %s", e)
         tag_stats = {"posts_scanned": 0, "tags_added": 0}
+        failed_steps.append("post_tagging")
     step_times["post_tagging"] = time.time() - t0
 
     # ── Step 3: Collect comments ────────────────────────────────────────
@@ -312,6 +338,7 @@ def _main_inner():
     except Exception as e:
         logger.error("Step 3 (comment collection) failed: %s", e)
         comment_stats = {"comments_collected": 0, "processed": 0, "requests": 0}
+        failed_steps.append("comment_collection")
     step_times["comment_collection"] = time.time() - t0
 
     # ── Step 4: Tag comments + propagate ────────────────────────────────
@@ -323,7 +350,20 @@ def _main_inner():
     except Exception as e:
         logger.error("Step 4 (comment tagging) failed: %s", e)
         comment_tag_stats = {"total_hits": 0, "posts_newly_tagged": 0}
+        failed_steps.append("comment_tagging")
     step_times["comment_tagging"] = time.time() - t0
+
+    # ── Step 4b: Compute contributor metrics ────────────────────────────
+    logger.info("=" * 60)
+    logger.info("STEP 4b: Computing rolling-7d contributor metrics")
+    t0 = time.time()
+    try:
+        contrib_stats = _step_compute_contributors(conn)
+    except Exception as e:
+        logger.error("Step 4b (contributor metrics) failed: %s", e)
+        contrib_stats = {"rows_updated": 0}
+        failed_steps.append("contributor_metrics")
+    step_times["contributor_metrics"] = time.time() - t0
 
     # ── Step 5: Export JSON ─────────────────────────────────────────────
     logger.info("=" * 60)
@@ -333,6 +373,7 @@ def _main_inner():
         _step_export(conn)
     except Exception as e:
         logger.error("Step 5 (JSON export) failed: %s", e)
+        failed_steps.append("export")
     step_times["export"] = time.time() - t0
 
     conn.close()
@@ -364,6 +405,11 @@ def _main_inner():
         comment_tag_stats.get("posts_newly_tagged", 0),
     )
     logger.info(
+        "  4b. Contributor metrics: %.1f min (%d snapshot rows updated)",
+        step_times["contributor_metrics"] / 60,
+        contrib_stats.get("rows_updated", 0),
+    )
+    logger.info(
         "  5. JSON export:          %.1f min",
         step_times["export"] / 60,
     )
@@ -382,7 +428,12 @@ def _main_inner():
         for r in post_stats["error_details"]:
             logger.warning("  r/%s: [%s] %s", r["subreddit"], r["status"], r["error"])
 
-    return 0 if not post_stats.get("error_details") else 1
+    if failed_steps:
+        logger.error("Pipeline step(s) failed: %s", ", ".join(failed_steps))
+
+    if failed_steps or post_stats.get("error_details"):
+        return 1
+    return 0
 
 
 if __name__ == "__main__":
