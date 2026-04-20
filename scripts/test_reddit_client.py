@@ -1,13 +1,12 @@
 """Quick smoke test for the Reddit client. Fetches live data from each endpoint type."""
 
 import sys
-import json
 import logging
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
-from src.reddit_client import RedditClient, SubredditNotFound, SubredditForbidden, RedditError
+from src.reddit_client import RedditClient, SubredditNotFound
 from src.utils.rate_limiter import RateLimiter
 
 logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
@@ -40,7 +39,7 @@ if top_posts:
     print(f"  Top this week: \"{p['title'][:60]}...\"")
     print(f"  Score: {p['score']}, comments: {p['num_comments']}")
 
-print(f"\n=== Testing error handling: nonexistent subreddit ===")
+print("\n=== Testing error handling: nonexistent subreddit ===")
 try:
     client.get_about("xthissubredditdoesnotexist12345x")
     print("  ERROR: Should have raised SubredditNotFound")

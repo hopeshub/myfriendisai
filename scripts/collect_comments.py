@@ -22,7 +22,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent))
 
 from src.reddit_client import RedditClient, RedditError, SubredditForbidden, SubredditNotFound
 from src.utils.rate_limiter import RateLimiter
-from src.db.schema import get_connection, initialize as init_db
+from src.db.schema import initialize as init_db
 
 logging.basicConfig(
     level=logging.INFO,

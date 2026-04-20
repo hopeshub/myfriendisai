@@ -113,7 +113,7 @@ def main():
     lines = []
     lines.append(f"{'=' * 70}")
     lines.append(f"KEYBERT RESULTS — Top {len(ranked)} phrases from {len(posts)} posts")
-    lines.append(f"Model: all-MiniLM-L6-v2 | n-gram range: 2-5 | MMR diversity: 0.3")
+    lines.append("Model: all-MiniLM-L6-v2 | n-gram range: 2-5 | MMR diversity: 0.3")
     lines.append(f"{'=' * 70}")
     lines.append("")
     lines.append(f"{'Rank':<6} {'Posts':<8} {'Phrase'}")

@@ -18,7 +18,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
-from src.db.schema import get_connection, initialize as init_db
+from src.db.schema import initialize as init_db
 from src.config import load_keywords, load_keyword_communities
 from src.keyword_matching import build_patterns, match_text
 

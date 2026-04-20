@@ -7,7 +7,6 @@ reads them, and classifies whether each post matches the assigned theme.
 Uses content heuristics tuned per-theme. Researcher spot-checks results.
 """
 
-import json
 import re
 import sqlite3
 import sys
@@ -398,9 +397,9 @@ def main():
     report_path = Path(__file__).parent.parent / "docs" / "keyword_validation_v4.md"
     with open(report_path, "w") as f:
         f.write("# Keyword Validation Report — keywords_v4.yaml\n\n")
-        f.write(f"**Date:** 2026-03-12\n")
+        f.write("**Date:** 2026-03-12\n")
         f.write(f"**Scope:** T1-T3 companion subs only ({len(KW_SUBS)} subs, excludes T0 + JanitorAI + SillyTavern)\n")
-        f.write(f"**Method:** 100-post random sample per keyword, heuristic classification per theme\n\n")
+        f.write("**Method:** 100-post random sample per keyword, heuristic classification per theme\n\n")
 
         for theme_name in theme_order:
             results = all_results.get(theme_name, [])

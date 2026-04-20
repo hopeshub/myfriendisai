@@ -47,7 +47,7 @@ def main():
             check(f, False, "missing")
             continue
         try:
-            data = json.loads(path.read_text())
+            json.loads(path.read_text())  # parse purely to validate
             size_kb = path.stat().st_size / 1024
             check(f, True, f"{size_kb:.0f} KB")
         except json.JSONDecodeError as e:
@@ -66,7 +66,7 @@ def main():
             if entries:
                 sample = entries[-1]
                 has_fields = all(k in sample for k in ["date", "count"])
-                check(f"  has required fields", has_fields, str(list(sample.keys())))
+                check("  has required fields", has_fields, str(list(sample.keys())))
 
         total_posts = kt.get("_total_posts", [])
         check("_total_posts exists", len(total_posts) > 100, f"{len(total_posts)} entries")

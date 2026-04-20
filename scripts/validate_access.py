@@ -88,21 +88,21 @@ def print_report(results: list[dict]):
     print(f"  Errors:       {len(errors)}")
 
     if blocked:
-        print(f"\nNSFW/BLOCKED — route through Redlib or Arctic Shift:")
+        print("\nNSFW/BLOCKED — route through Redlib or Arctic Shift:")
         for r in blocked:
             print(f"  r/{r['subreddit']} (Tier {r['tier']}, {r['category']})")
 
     if not_found:
-        print(f"\nNOT FOUND — remove from config or verify subreddit name:")
+        print("\nNOT FOUND — remove from config or verify subreddit name:")
         for r in not_found:
             print(f"  r/{r['subreddit']}")
 
     if errors:
-        print(f"\nERRORS:")
+        print("\nERRORS:")
         for r in errors:
             print(f"  r/{r['subreddit']}: {r.get('error')}")
 
-    print(f"\nACCESSIBLE:")
+    print("\nACCESSIBLE:")
     for r in accessible:
         subs = f"{r['subscribers']:,}" if r.get("subscribers") else "N/A"
         nsfw_flag = " [over_18]" if r.get("over_18") else ""

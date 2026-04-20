@@ -239,22 +239,22 @@ def main():
         most_exclusive = max(theme_names, key=lambda t: exclusivity[t] / theme_counts[t] if theme_counts[t] > 0 else 0)
         least_exclusive = min(theme_names, key=lambda t: exclusivity[t] / theme_counts[t] if theme_counts[t] > 0 else 100)
 
-        lines.append(f"### Which theme pairs have the most overlap?\n")
+        lines.append("### Which theme pairs have the most overlap?\n")
         lines.append(f"**By raw count:** {top_pair_names} with {top_pair_count:,} posts in common.")
         if top_pct_pair:
             lines.append(f"\n**By % of smaller theme:** {top_pct_pair[0]} × {top_pct_pair[1]} with {top_pct_pair[3]:.1f}% overlap ({top_pct_pair[2]:,} posts).\n")
 
-        lines.append(f"### Are any themes largely redundant?\n")
+        lines.append("### Are any themes largely redundant?\n")
         lines.append("Pairs with >25% overlap of the smaller theme suggest partial redundancy. See the percentage table above.\n")
 
-        lines.append(f"### Does overlap suggest keyword movement?\n")
+        lines.append("### Does overlap suggest keyword movement?\n")
         lines.append("Keywords that cause cross-theme bleeding should be reviewed if their overlap exceeds ~30% of the smaller theme. The raw LIKE matching means short keywords like `erp`, `kink`, `wedding` may match inside longer words — verify manually if needed.\n")
 
-        lines.append(f"### Recommendation: cross-theme overlap or deduplication?\n")
+        lines.append("### Recommendation: cross-theme overlap or deduplication?\n")
         lines.append(f"- **Triple+ posts ({triple_total:,})** are a small fraction of the corpus; if cross-theme overlap is low overall, allowing it is fine.\n")
         lines.append(f"- The most exclusive theme is **{most_exclusive}** ({exclusivity[most_exclusive]/theme_counts[most_exclusive]*100:.1f}% exclusive) — its trend line is cleanest.\n")
         lines.append(f"- The least exclusive theme is **{least_exclusive}** ({exclusivity[least_exclusive]/theme_counts[least_exclusive]*100:.1f}% exclusive) — its trend line has the most cross-contamination.\n")
-        lines.append(f"- **Recommendation:** Allow cross-theme overlap in trend lines (count posts per theme independently). The themes capture distinct enough discourses that deduplication would undersell real co-occurrence patterns. Document that trend lines count unique-per-theme, not unique-across-all-themes.\n")
+        lines.append("- **Recommendation:** Allow cross-theme overlap in trend lines (count posts per theme independently). The themes capture distinct enough discourses that deduplication would undersell real co-occurrence patterns. Document that trend lines count unique-per-theme, not unique-across-all-themes.\n")
 
     output = "\n".join(lines)
     out_path = "docs/cross_theme_overlap.md"

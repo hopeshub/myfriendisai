@@ -6,7 +6,6 @@ from datetime import date, datetime, timezone
 from typing import Optional
 
 from src.reddit_client import RedditClient, SubredditNotFound, SubredditForbidden, RedditError
-from src.db import schema as db_schema
 from src.db import operations as db_ops
 
 logger = logging.getLogger(__name__)

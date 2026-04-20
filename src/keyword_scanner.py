@@ -233,7 +233,6 @@ def export_keywords_json(
 
     Filters to T1-T3 companion subs only (excludes T0 and bot-listing subs).
     """
-    from pathlib import Path
     from src.db.operations import DATA_DIR
     from src.config import load_keyword_communities
 

@@ -13,7 +13,6 @@ import re
 import sqlite3
 import sys
 from pathlib import Path
-from collections import defaultdict
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
 from src.config import load_keyword_communities

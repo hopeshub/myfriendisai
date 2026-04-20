@@ -9,7 +9,7 @@ from typing import Any
 
 import anthropic
 
-from src.config import load_communities, load_keywords
+from src.config import load_communities
 
 logger = logging.getLogger(__name__)
 

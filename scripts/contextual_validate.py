@@ -339,7 +339,6 @@ def main():
 
         # Progress
         total_posts = sum(r["total_sampled"] for r in results)
-        terms = [r["term"] for r in results]
         print(f"Chunk {chunk_num:02d}: {len(results)} keywords, {total_posts} posts evaluated")
 
     # --- Build auto-cut and auto-keep entries ---
@@ -469,37 +468,37 @@ def main():
     cut = [r for r in sampled if r["verdict"] == "CUT"]
 
     print(f"\n{'='*60}")
-    print(f"CONTEXTUAL VALIDATION SUMMARY")
+    print("CONTEXTUAL VALIDATION SUMMARY")
     print(f"{'='*60}")
     print(f"Auto-cut (generic language):     {len(auto_cut_terms)} terms")
     print(f"Auto-keep (high precision):      {len(auto_keep_terms)} terms")
     print(f"Sampled and evaluated:           {len(sampled)} terms ({sum(r['total_sampled'] for r in sampled)} posts)")
-    print(f"")
-    print(f"Sampled results:")
+    print("")
+    print("Sampled results:")
     print(f"  KEEP (≥80%):      {len(keep)} terms")
     print(f"  KEEP_NOTE (70-79%): {len(keep_note)} terms")
     print(f"  FLAG (50-69%):    {len(flag)} terms")
     print(f"  CUT (<50%):       {len(cut)} terms")
-    print(f"")
-    print(f"Total keyword verdicts:")
+    print("")
+    print("Total keyword verdicts:")
     print(f"  KEEP:      {len(auto_keep_terms) + len(keep)} terms")
     print(f"  KEEP_NOTE: {len(keep_note)} terms")
     print(f"  FLAG:      {len(flag)} terms")
     print(f"  CUT:       {len(auto_cut_terms) + len(cut)} terms")
-    print(f"")
-    print(f"Top 30 keywords by contextual relevance:")
+    print("")
+    print("Top 30 keywords by contextual relevance:")
     for r in sampled[:30]:
         note = f" ({r['note']})" if r.get("note") else ""
         print(f"  {r['contextual_relevance_pct']:5.1f}% [{r['verdict']:9s}] {r['keyword']}"
               f" (n={r['total_sampled']}, Y={r['yes_count']}, N={r['no_count']}, A={r['ambiguous_count']}){note}")
 
-    print(f"\nBottom 20 sampled keywords:")
+    print("\nBottom 20 sampled keywords:")
     for r in sampled[-20:]:
         note = f" ({r['note']})" if r.get("note") else ""
         print(f"  {r['contextual_relevance_pct']:5.1f}% [{r['verdict']:9s}] {r['keyword']}"
               f" (n={r['total_sampled']}, Y={r['yes_count']}, N={r['no_count']}, A={r['ambiguous_count']}){note}")
 
-    print(f"\nOutput files:")
+    print("\nOutput files:")
     print(f"  {detail_path}")
     print(f"  {summary_path}")
 

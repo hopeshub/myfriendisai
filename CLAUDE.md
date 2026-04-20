@@ -83,12 +83,12 @@ Regex-based keyword tagging runs on all collected posts via `scripts/tag_keyword
 
 | Theme | Keywords | Unique Posts | Description |
 |-------|----------|-------------|-------------|
-| **therapy** | 6 | ~412 | AI described as therapeutic support or therapist replacement |
-| **consciousness** | 8 | ~1,285 | Claims or beliefs about AI sentience, personhood, or inner experience |
-| **addiction** | 7 | ~910 | Self-reported addiction, compulsive use, and attempts to quit or recover |
-| **romance** | 19 | ~1,805 | Romantic framing of a personal relationship with AI |
-| **sexual_erp** | 11 | ~9,335 | Sexual content, erotic roleplay, and NSFW interactions with AI |
-| **rupture** | 6 | ~465 | Loss or disruption of AI companion relationships due to platform changes |
+| **therapy** | 8 | ~1,366 | AI described as therapeutic support or therapist replacement |
+| **consciousness** | 13 | ~1,650 | Claims or beliefs about AI sentience, personhood, or inner experience |
+| **addiction** | 15 | ~1,695 | Self-reported addiction, compulsive use, and attempts to quit or recover |
+| **romance** | 19 | ~2,126 | Romantic framing of a personal relationship with AI |
+| **sexual_erp** | 13 | ~6,515 | Sexual content, erotic roleplay, and NSFW interactions with AI |
+| **rupture** | 14 | ~1,548 | Loss or disruption of AI companion relationships due to platform changes |
 
 **Scope:** Keywords are matched against T1-T3 companion communities only. JanitorAI_Official and SillyTavernAI are excluded (bot card noise — dominant false positive source). T0 general AI subs are excluded from keyword trend lines.
 
@@ -409,7 +409,7 @@ The pipeline runs on a local Mac that must stay available:
 
 1. **Landing page:** Overview narrative + key trend chart (total engagement across all tracked communities over time)
 2. **Trends Explorer:** 6-theme keyword trend chart with toggleable metric cards, absolute/relative mode toggle, nearest-line tooltip, event annotations. Data normalized per-1k-posts. YoY headline uses calendar-day averaging of hitsPerK; changes >100% show actual rates ("rose from X to Y per 1k") instead of percentages to provide base-rate context.
-3. **Community explorer:** Browse all 19 tracked subreddits, sortable by engagement metrics, filterable by tier/category
+3. **Community explorer:** Browse all 27 tracked subreddits, sortable by engagement metrics, filterable by tier/category
 4. **Individual subreddit pages:** Time-series Recharts line charts for subscribers, posts/day, avg comments, avg score
 5. **Keyword trends:** Per-theme trend lines waxing and waning across all communities over time
 
@@ -443,7 +443,7 @@ Single breakpoint at **≤768px**. Desktop layout unchanged. Key decisions:
 ### Phase 1: MVP — COMPLETE
 - [x] Project scaffolding and config files
 - [x] Reddit `.json` client with rate limiting
-- [x] SQLite database and schema (3.26M posts, FTS5 index)
+- [x] SQLite database and schema (3.84M posts, FTS5 index)
 - [x] Daily collection script for subreddit snapshots + posts
 - [x] JSON export pipeline (frontend-ready data)
 - [x] Basic validation script (test all subreddits are accessible)

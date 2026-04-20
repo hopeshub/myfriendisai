@@ -122,5 +122,5 @@ for i, (category, phrase) in enumerate(phrases):
 
 output = "\n".join(lines)
 Path("docs/phrase_validation.txt").write_text(output)
-print(f"\nDone — saved to docs/phrase_validation.txt")
+print("\nDone — saved to docs/phrase_validation.txt")
 conn.close()
