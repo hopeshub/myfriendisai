@@ -282,7 +282,7 @@ export default function TransparencyPanel({
         </div>
         <button
           onClick={onClose}
-          className="text-[20px] leading-none w-8 h-8 flex items-center justify-center rounded hover:text-foreground transition-colors"
+          className="text-[20px] leading-none min-w-11 min-h-11 flex items-center justify-center rounded hover:text-foreground transition-colors"
           style={{ color: "#8293A6" }}
           aria-label="Close panel"
         >

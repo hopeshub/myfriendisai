@@ -20,11 +20,14 @@ import BottomSheet from "./BottomSheet";
 
 // ─── Themes ────────────────────────────────────────────────────────────────
 
+// Colors tuned so that the value text on each metric card passes WCAG AA
+// (>=4.5:1) against both the card bg (#1A1D27) and the active card bg (#1F2233).
+// Chart lines themselves need only 3:1 (non-text), which all pass.
 const THEMES = [
   { id: "romance",       label: "Romance",        emoji: "💕", color: "#FF69B4", tagline: "Language of love, dating, and romantic attachment" },
-  { id: "sexual_erp",    label: "Sex / ERP",      emoji: "🔞", color: "#dc2625", tagline: "Language of sexual and erotic roleplay" },
-  { id: "consciousness", label: "Consciousness",  emoji: "🧠", color: "#A855F7", tagline: "Language of sentience, awareness, and inner experience" },
-  { id: "therapy",       label: "Therapy",        emoji: "🫂", color: "#3B82F6", tagline: "Language of mental health support and emotional care" },
+  { id: "sexual_erp",    label: "Sex / ERP",      emoji: "🔞", color: "#f87171", tagline: "Language of sexual and erotic roleplay" },
+  { id: "consciousness", label: "Consciousness",  emoji: "🧠", color: "#C084FC", tagline: "Language of sentience, awareness, and inner experience" },
+  { id: "therapy",       label: "Therapy",        emoji: "🫂", color: "#60A5FA", tagline: "Language of mental health support and emotional care" },
   { id: "addiction",     label: "Addiction",       emoji: "💊", color: "#fd7112", tagline: "Language of dependency and compulsion" },
   { id: "rupture",       label: "Rupture",        emoji: "🥀", color: "#22C55E", tagline: "Language of loss and grief" },
 ] as const;
@@ -699,6 +702,7 @@ export default function TrendsExplorer({ themeData, keywordDetails }: Props) {
                 backgroundColor: isPanelActive ? "#1F2233" : "#1A1D27",
                 borderLeft: `3px solid ${card.color}`,
                 padding: "12px 10px",
+                minHeight: 44,
                 opacity: dimmed ? 0.5 : 1,
                 boxShadow: isPanelActive
                   ? `0 0 16px color-mix(in srgb, ${card.color} 30%, transparent)`

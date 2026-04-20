@@ -7,9 +7,9 @@ export const contentType = "image/png";
 
 const THEMES = [
   { emoji: "\u{1F495}", label: "Romance", color: "#FF69B4" },
-  { emoji: "\u{1F51E}", label: "Sex / ERP", color: "#dc2625" },
-  { emoji: "\u{1F9E0}", label: "Consciousness", color: "#A855F7" },
-  { emoji: "\u{1FAC2}", label: "Therapy", color: "#3B82F6" },
+  { emoji: "\u{1F51E}", label: "Sex / ERP", color: "#f87171" },
+  { emoji: "\u{1F9E0}", label: "Consciousness", color: "#C084FC" },
+  { emoji: "\u{1FAC2}", label: "Therapy", color: "#60A5FA" },
   { emoji: "\u{1F48A}", label: "Addiction", color: "#fd7112" },
   { emoji: "\u{1F940}", label: "Rupture", color: "#22C55E" },
 ];
