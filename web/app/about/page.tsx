@@ -31,6 +31,18 @@ const STATS = [
 
 const CHANGELOG = [
   {
+    date: "April 20, 2026",
+    title: "Multi-word keyword boundary fix and full corpus re-tag",
+    items: [
+      "Fixed a regex bug where multi-word keywords matched as substrings inside unrelated words \u2014 e.g. \u201Cdating my\u201D was being tagged inside \u201Cupdating my\u201D and \u201Cvalidating my,\u201D inflating counts with false positives",
+      "Root cause: the matcher compiled single-word terms with word boundaries but skipped boundaries on multi-word phrases; now every term uses \\b boundaries",
+      "Re-tagged the full corpus under the fixed matcher \u2014 894k posts across 22 T1\u2013T3 subreddits, plus 64k comments from the post-March-18 window",
+      "Net \u2212600 false-positive post-level tag rows. Largest reductions: romance (\u22128.3%), therapy (\u22127.3%), sexual/ERP (\u22126.6%). Consciousness and rupture were nearly unaffected because their multi-word terms don\u2019t collide with common English substrings",
+      "A precision smoke-test the same day surfaced a separate drift pattern in the romance theme: ChatGPTcomplaints posts now contain satirical scripts and press-citation threads that quote romance vocabulary in the third person. Flagged as a stage-2 filtering target; no keyword-file edits made yet",
+    ],
+    recent: true,
+  },
+  {
     date: "April 15, 2026",
     title: "Weekly contributors replaces dead \u201Cactive users\u201D metric",
     items: [

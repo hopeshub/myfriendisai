@@ -20,13 +20,8 @@ def build_patterns(keyword_categories: list[dict] = None) -> list[tuple[str, str
     for cat in keyword_categories:
         category = cat["name"]
         for term in cat.get("terms", []):
-            # Word-boundary match, case-insensitive
-            # For multi-word phrases, just do substring match (no boundary issues)
             escaped = re.escape(term)
-            if " " in term:
-                pat = re.compile(escaped, re.IGNORECASE)
-            else:
-                pat = re.compile(r"\b" + escaped + r"\b", re.IGNORECASE)
+            pat = re.compile(r"\b" + escaped + r"\b", re.IGNORECASE)
             patterns.append((category, term, pat))
     return patterns
 

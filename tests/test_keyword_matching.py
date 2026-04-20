@@ -26,11 +26,21 @@ def test_single_word_uses_word_boundary():
     assert match_text("therapistical", patterns) == []
 
 
-def test_multi_word_phrase_is_substring_match():
+def test_multi_word_phrase_uses_word_boundary():
     patterns = build_patterns([{"name": "r", "terms": ["my boyfriend"]}])
     assert match_text("I told my boyfriend about it", patterns) == [("r", "my boyfriend")]
-    # Embedded in a word: still matches (phrases don't use word boundary)
     assert match_text("with my boyfriend!", patterns) == [("r", "my boyfriend")]
+
+
+def test_multi_word_phrase_not_matched_as_substring():
+    # Regression: multi-word terms were previously compiled without \b boundaries,
+    # which made "dating my" match "updating my" / "validating my" inside other
+    # words. Word boundaries on both sides prevent this.
+    patterns = build_patterns([{"name": "r", "terms": ["dating my"]}])
+    assert match_text("I've been dating my AI", patterns) == [("r", "dating my")]
+    assert match_text("updating my profile", patterns) == []
+    assert match_text("validating my feelings", patterns) == []
+    assert match_text("invalidating my point", patterns) == []
 
 
 def test_match_is_case_insensitive():
