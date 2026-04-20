@@ -10,13 +10,23 @@ const DATA_DIR = path.join(process.cwd(), "data");
 export function getSubreddits(): SubredditSummary[] {
   const file = path.join(DATA_DIR, "subreddits.json");
   if (!fs.existsSync(file)) return [];
-  return JSON.parse(fs.readFileSync(file, "utf8")) as SubredditSummary[];
+  try {
+    return JSON.parse(fs.readFileSync(file, "utf8")) as SubredditSummary[];
+  } catch (e) {
+    console.error("Failed to parse subreddits.json:", e);
+    return [];
+  }
 }
 
 export function getSnapshots(): Snapshot[] {
   const file = path.join(DATA_DIR, "snapshots.json");
   if (!fs.existsSync(file)) return [];
-  return JSON.parse(fs.readFileSync(file, "utf8")) as Snapshot[];
+  try {
+    return JSON.parse(fs.readFileSync(file, "utf8")) as Snapshot[];
+  } catch (e) {
+    console.error("Failed to parse snapshots.json:", e);
+    return [];
+  }
 }
 
 export function getSnapshotsForSubreddit(subreddit: string): Snapshot[] {

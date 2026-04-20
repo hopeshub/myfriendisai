@@ -20,8 +20,13 @@ function loadThemeData(): ThemeData {
   const filePath = path.join(process.cwd(), "data", "keyword_trends.json");
   if (!fs.existsSync(filePath)) return {};
 
-  const raw: Record<string, Array<{ date: string; count: number; count_7d_avg?: number }>> =
-    JSON.parse(fs.readFileSync(filePath, "utf8"));
+  let raw: Record<string, Array<{ date: string; count: number; count_7d_avg?: number }>>;
+  try {
+    raw = JSON.parse(fs.readFileSync(filePath, "utf8"));
+  } catch (e) {
+    console.error("Failed to parse keyword_trends.json:", e);
+    return {};
+  }
 
   // Total posts per day for normalization
   const totalPostsByDate: Record<string, number> = {};
@@ -60,7 +65,12 @@ function loadThemeData(): ThemeData {
 function loadKeywordDetails(): KeywordDetailsData {
   const filePath = path.join(process.cwd(), "data", "keyword_details.json");
   if (!fs.existsSync(filePath)) return {};
-  return JSON.parse(fs.readFileSync(filePath, "utf8"));
+  try {
+    return JSON.parse(fs.readFileSync(filePath, "utf8"));
+  } catch (e) {
+    console.error("Failed to parse keyword_details.json:", e);
+    return {};
+  }
 }
 
 export default function Home() {

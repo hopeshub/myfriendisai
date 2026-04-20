@@ -43,8 +43,11 @@ function getSiteMeta() {
   try {
     const raw = readFileSync(join(process.cwd(), "data", "site_meta.json"), "utf-8");
     return JSON.parse(raw) as { total_posts: number; date_start: string; date_end: string };
-  } catch {
-    return { total_posts: 3800000, date_start: "2023-01-01", date_end: "2026-03-21" };
+  } catch (e) {
+    // Fallback is deliberately conservative — if you see this in prod, site_meta.json
+    // is missing or malformed and the daily export pipeline needs investigation.
+    console.error("Failed to load site_meta.json, using fallback:", e);
+    return { total_posts: 0, date_start: "2023-01-01", date_end: "" };
   }
 }
 

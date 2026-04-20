@@ -59,7 +59,19 @@ class RedditClient:
                 continue
 
             if response.status_code == 200:
-                return response.json()
+                try:
+                    return response.json()
+                except ValueError as e:
+                    # Reddit occasionally returns an HTML error/interstitial page with a 200 status.
+                    if attempt == self.max_retries - 1:
+                        raise RedditError(f"Invalid JSON response after {self.max_retries} attempts: {url}") from e
+                    logger.warning(
+                        "Invalid JSON at %s (attempt %d/%d), backing off %.0fs",
+                        url, attempt + 1, self.max_retries, backoff,
+                    )
+                    time.sleep(backoff)
+                    backoff *= 2
+                    continue
 
             if response.status_code == 404:
                 raise SubredditNotFound(f"Subreddit not found: {url}")
