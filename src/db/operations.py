@@ -403,10 +403,21 @@ def export_keyword_trends_json(
     bot-listing-heavy subs like JanitorAI/SillyTavern). The subreddit context
     provides the AI companionship filter; keywords capture thematic dimensions.
 
+    Emits both the post+comment metric (the default, all sources) and a
+    post-only control series so downstream analysis can decompose whether
+    trend shifts reflect new comment coverage or discourse changes. The two
+    are identical for all dates prior to comment collection (2026-03-18).
+
     Output format:
         {
           "category_name": [
-            {"date": "YYYY-MM-DD", "count": N, "count_7d_avg": N},
+            {
+              "date": "YYYY-MM-DD",
+              "count": N,              # post+comment (all sources)
+              "count_7d_avg": N,
+              "count_post_only": N,    # source='post' only (control)
+              "count_post_only_7d_avg": N
+            },
             ...
           ],
           ...
@@ -421,12 +432,24 @@ def export_keyword_trends_json(
     _conn = conn or get_connection()
 
     try:
-        # Post+comment metric (all sources — the new default)
+        # Post+comment metric (all sources — the default)
         rows = _conn.execute(
             f"""
             SELECT category, post_date, COUNT(DISTINCT post_id) AS count
             FROM post_keyword_tags
             WHERE subreddit IN ({placeholders})
+            GROUP BY category, post_date
+            ORDER BY category, post_date
+            """,
+            active_subreddits,
+        ).fetchall()
+        # Post-only control series (source='post' only)
+        post_only_rows = _conn.execute(
+            f"""
+            SELECT category, post_date, COUNT(DISTINCT post_id) AS count
+            FROM post_keyword_tags
+            WHERE subreddit IN ({placeholders})
+              AND source = 'post'
             GROUP BY category, post_date
             ORDER BY category, post_date
             """,
@@ -447,25 +470,34 @@ def export_keyword_trends_json(
         if conn is None:
             _conn.close()
 
-    # Group by category, then compute 7-day rolling average
     from collections import defaultdict
     by_category: dict = defaultdict(list)
     for category, post_date, count in rows:
-        by_category[category].append({
-            "date": post_date,
-            "count": count,
-        })
+        by_category[category].append({"date": post_date, "count": count})
+
+    post_only_lookup: dict = defaultdict(dict)
+    for category, post_date, count in post_only_rows:
+        post_only_lookup[category][post_date] = count
 
     result = {}
     for category, entries in sorted(by_category.items()):
         with_avg = []
+        post_only_series = post_only_lookup.get(category, {})
         for i, entry in enumerate(entries):
             window = [e["count"] for e in entries[max(0, i - 6): i + 1]]
             avg = round(sum(window) / len(window), 2)
+            # Post-only count: 0 if this category had no post-source hits on this date
+            post_only_count = post_only_series.get(entry["date"], 0)
+            post_only_window = [
+                post_only_series.get(e["date"], 0) for e in entries[max(0, i - 6): i + 1]
+            ]
+            post_only_avg = round(sum(post_only_window) / len(post_only_window), 2)
             with_avg.append({
                 "date": entry["date"],
                 "count": entry["count"],
                 "count_7d_avg": avg,
+                "count_post_only": post_only_count,
+                "count_post_only_7d_avg": post_only_avg,
             })
         result[category] = with_avg
 

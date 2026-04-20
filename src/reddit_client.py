@@ -5,6 +5,7 @@ User-Agent. Respects Reddit's ~10 req/min rate limit with exponential backoff
 on 429 responses.
 """
 
+import random
 import time
 import logging
 from typing import Optional
@@ -20,6 +21,16 @@ BASE_URL = "https://www.reddit.com"
 
 # HTTP errors that are worth retrying
 RETRYABLE_STATUS = {429, 500, 502, 503, 504}
+
+# Cap total backoff to avoid blocking launchd for hours on a persistent outage.
+MAX_BACKOFF_SECONDS = 90.0
+
+
+def _next_backoff(current: float) -> float:
+    # Exponential with ±25% jitter; clamped at MAX_BACKOFF_SECONDS so a
+    # prolonged 429 streak can't stall the whole daily pipeline.
+    jittered = current * random.uniform(0.75, 1.25)
+    return min(jittered * 2, MAX_BACKOFF_SECONDS)
 
 
 class RedditError(Exception):
@@ -55,7 +66,7 @@ class RedditClient:
                     raise RedditError(f"Network error after {self.max_retries} attempts: {e}") from e
                 logger.warning("Network error (attempt %d/%d): %s", attempt + 1, self.max_retries, e)
                 time.sleep(backoff)
-                backoff *= 2
+                backoff = _next_backoff(backoff)
                 continue
 
             if response.status_code == 200:
@@ -87,7 +98,7 @@ class RedditClient:
                     response.status_code, attempt + 1, self.max_retries, backoff
                 )
                 time.sleep(backoff)
-                backoff *= 2
+                backoff = _next_backoff(backoff)
                 continue
 
             raise RedditError(f"Unexpected HTTP {response.status_code}: {url}")

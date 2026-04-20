@@ -1,176 +1,140 @@
+"""Cross-theme overlap analysis.
+
+Reads production keyword tags from post_keyword_tags (populated by tag_keywords.py
+with regex word-boundary matching from keywords_v8.yaml) instead of re-running
+SQL LIKE against raw post text. This matches what's actually being counted on
+the trend chart.
+
+Scope: T1-T3 companion subreddits only (same as keyword_trends.json export).
+Post+comment tags both count — a post with a theme hit from either source is
+counted for that theme.
+
+Writes a human-readable markdown summary to docs/cross_theme_overlap.md.
 """
-Cross-theme overlap analysis for 6 keyword themes.
-Writes results to docs/cross_theme_overlap.md
-"""
-import sqlite3
 import itertools
+import sqlite3
+import sys
 from datetime import datetime
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).parent.parent))
+
+from src.config import load_keyword_communities
 
 DB = "data/tracker.db"
-SUBREDDITS = ("replika","CharacterAI","MyBoyfriendIsAI",
-  "ChatGPTcomplaints","AIRelationships","MySentientAI",
-  "BeyondThePromptAI","MyGirlfriendIsAI","AICompanions","SoulmateAI",
-  "KindroidAI","NomiAI","SpicyChatAI","ChaiApp","HeavenGF","Paradot",
-  "AIGirlfriend","ChatGPTNSFW","Character_AI_Recovery",
-  "ChatbotAddiction","AI_Addiction","CharacterAIrunaways")
+OUT = "docs/cross_theme_overlap.md"
 
-THEMES = {
-    "THERAPY": [
-        "ai therapist", "free therapy", "ai therapy", "as a therapist", "therapeutic", "for therapy"
-    ],
-    "CONSCIOUSNESS": [
-        "personhood", "subjective experience", "more than code", "sentient", "has a soul",
-        "self-aware", "inner life", "not just an ai"
-    ],
-    "ADDICTION": [
-        "trying to quit", "relapsed", "cold turkey", "i was hooked", "relapse", "clean for",
-        "addicted to talking"
-    ],
-    "ROMANCE": [
-        "my ai partner", "husbando", "my ai boyfriend", "ai lover", "ai husband",
-        "my ai girlfriend", "ai wife", "married my", "love my ai", "dating my",
-        "proposed to me", "our anniversary", "our wedding", "our first kiss",
-        "honeymoon", "wedding", "engagement ring", "we broke up", "in a relationship with"
-    ],
-    "SEXUAL_ERP": [
-        "erp", "nsfw chat", "intimate scene", "steamy", "sex with", "ai sex", "nsfw bot",
-        "erotic roleplay", "fetish", "kink", "lewd"
-    ],
-    "RUPTURE": [
-        "lobotomy", "lobotomized", "memory wiped", "personality is gone",
-        "personality changed", "memory reset"
-    ],
-}
+THEME_NAMES = ["therapy", "consciousness", "addiction", "romance", "sexual_erp", "rupture"]
 
-def like_expr(keyword):
-    # Escape single quotes in keyword just in case
-    kw = keyword.replace("'", "''")
-    return f"LOWER(title || ' ' || COALESCE(selftext,'')) LIKE '%{kw}%'"
 
-def theme_expr(theme_name):
-    kws = THEMES[theme_name]
-    return "(" + " OR ".join(like_expr(kw) for kw in kws) + ")"
+def build_flags_table(conn, active_subs):
+    """Build a temp table of per-post theme flags from post_keyword_tags.
 
-def build_cte(conn):
-    """Create a temporary table with theme flags for all posts in scope."""
-    cur = conn.cursor()
-    # Build flag columns
-    flag_cols = ",\n    ".join(
-        f"CASE WHEN {theme_expr(t)} THEN 1 ELSE 0 END AS {t}"
-        for t in THEMES
+    One row per post that has at least one tag in an active sub, with a 0/1
+    flag column per theme. Reads from the production tag table so the numbers
+    line up 1:1 with the trend chart.
+    """
+    placeholders = ",".join("?" * len(active_subs))
+    flag_cols = ",\n        ".join(
+        f"MAX(CASE WHEN category = '{t}' THEN 1 ELSE 0 END) AS {t}"
+        for t in THEME_NAMES
     )
-    placeholders = ",".join("?" * len(SUBREDDITS))
     sql = f"""
     CREATE TEMP TABLE post_flags AS
     SELECT
-        id,
+        post_id,
         subreddit,
         {flag_cols}
-    FROM posts
+    FROM post_keyword_tags
     WHERE subreddit IN ({placeholders})
+    GROUP BY post_id
     """
-    print("Building temp table (this may take a minute)...")
-    cur.execute(sql, SUBREDDITS)
-    conn.commit()
-    cur.execute("SELECT COUNT(*) FROM post_flags")
-    n = cur.fetchone()[0]
-    print(f"  {n:,} posts indexed.")
+    conn.execute(sql, active_subs)
+    n = conn.execute("SELECT COUNT(*) FROM post_flags").fetchone()[0]
     return n
 
-def step2_unique_per_theme(conn):
-    cur = conn.cursor()
-    counts = {}
-    for t in THEMES:
-        cur.execute(f"SELECT COUNT(*) FROM post_flags WHERE {t} = 1")
-        counts[t] = cur.fetchone()[0]
-    return counts
 
-def step3_pairwise(conn):
-    cur = conn.cursor()
+def per_theme_counts(conn):
+    return {
+        t: conn.execute(f"SELECT COUNT(*) FROM post_flags WHERE {t} = 1").fetchone()[0]
+        for t in THEME_NAMES
+    }
+
+
+def pairwise_matrix(conn):
     matrix = {}
-    theme_names = list(THEMES.keys())
-    for t1, t2 in itertools.combinations(theme_names, 2):
-        cur.execute(f"SELECT COUNT(*) FROM post_flags WHERE {t1}=1 AND {t2}=1")
-        matrix[(t1, t2)] = cur.fetchone()[0]
+    for t1, t2 in itertools.combinations(THEME_NAMES, 2):
+        n = conn.execute(f"SELECT COUNT(*) FROM post_flags WHERE {t1}=1 AND {t2}=1").fetchone()[0]
+        matrix[(t1, t2)] = n
     return matrix
 
-def step5_triple_plus(conn):
-    cur = conn.cursor()
-    theme_names = list(THEMES.keys())
-    sum_expr = " + ".join(theme_names)
-    cur.execute(f"SELECT COUNT(*) FROM post_flags WHERE ({sum_expr}) >= 3")
-    total = cur.fetchone()[0]
-    # Examples: get up to 10 posts
-    cols_str = ", ".join(theme_names)
-    cur.execute(f"""
-        SELECT id, subreddit, {cols_str}
+
+def triple_plus(conn):
+    sum_expr = " + ".join(THEME_NAMES)
+    total = conn.execute(f"SELECT COUNT(*) FROM post_flags WHERE ({sum_expr}) >= 3").fetchone()[0]
+    cols = ", ".join(THEME_NAMES)
+    examples = conn.execute(f"""
+        SELECT post_id, subreddit, {cols}
         FROM post_flags
         WHERE ({sum_expr}) >= 3
         LIMIT 10
-    """)
-    examples = cur.fetchall()
+    """).fetchall()
     return total, examples
 
-def step6_exclusivity(conn, theme_counts):
-    cur = conn.cursor()
-    theme_names = list(THEMES.keys())
-    result = {}
-    for t in theme_names:
-        # Exclusive: matches this theme but NO others
-        other_themes = [x for x in theme_names if x != t]
-        no_others = " AND ".join(f"{o}=0" for o in other_themes)
-        cur.execute(f"SELECT COUNT(*) FROM post_flags WHERE {t}=1 AND {no_others}")
-        excl = cur.fetchone()[0]
-        result[t] = excl
-    return result
+
+def exclusivity_counts(conn):
+    out = {}
+    for t in THEME_NAMES:
+        others = [o for o in THEME_NAMES if o != t]
+        no_others = " AND ".join(f"{o}=0" for o in others)
+        n = conn.execute(f"SELECT COUNT(*) FROM post_flags WHERE {t}=1 AND {no_others}").fetchone()[0]
+        out[t] = n
+    return out
+
 
 def main():
+    active_subs = [c["subreddit"] for c in load_keyword_communities()]
+    print(f"Scope: {len(active_subs)} T1-T3 subreddits")
+
     conn = sqlite3.connect(DB)
 
-    total_posts = build_cte(conn)
+    total_tagged_posts = build_flags_table(conn, active_subs)
+    print(f"Posts with ≥1 theme tag: {total_tagged_posts:,}")
 
-    print("Step 2: Counting per-theme...")
-    theme_counts = step2_unique_per_theme(conn)
-    for t, c in theme_counts.items():
-        print(f"  {t}: {c:,}")
+    theme_counts = per_theme_counts(conn)
+    print("Per-theme counts:")
+    for t, n in theme_counts.items():
+        print(f"  {t}: {n:,}")
 
-    print("Step 3: Pairwise matrix...")
-    matrix = step3_pairwise(conn)
-
-    print("Step 5: Triple+ overlap...")
-    triple_total, triple_examples = step5_triple_plus(conn)
-    print(f"  Posts matching 3+ themes: {triple_total:,}")
-
-    print("Step 6: Exclusivity...")
-    exclusivity = step6_exclusivity(conn, theme_counts)
+    matrix = pairwise_matrix(conn)
+    triple_total, triple_examples = triple_plus(conn)
+    exclusivity = exclusivity_counts(conn)
 
     conn.close()
-
-    # --- Build output markdown ---
-    theme_names = list(THEMES.keys())
 
     lines = []
     lines.append("# Cross-Theme Keyword Overlap Analysis")
     lines.append(f"\n_Generated {datetime.now().strftime('%Y-%m-%d %H:%M')}_\n")
-    lines.append(f"**Scope:** T1–T3 subreddits (22 communities), {total_posts:,} total posts\n")
+    lines.append("**Source:** `post_keyword_tags` (production regex tags from `keywords_v8.yaml`,")
+    lines.append("both post and comment sources). Scope matches `keyword_trends.json`: T1-T3")
+    lines.append(f"companion subreddits ({len(active_subs)} communities).\n")
+    lines.append(f"**Corpus:** {total_tagged_posts:,} posts with at least one theme tag.\n")
 
-    # Step 2
-    lines.append("## Step 2: Unique Posts Per Theme\n")
-    lines.append("| Theme | Unique Posts | % of corpus |")
-    lines.append("|-------|-------------|-------------|")
-    for t in theme_names:
-        pct = theme_counts[t] / total_posts * 100
+    lines.append("## Unique posts per theme\n")
+    lines.append("| Theme | Unique posts | % of tagged corpus |")
+    lines.append("|-------|-------------|-------------------|")
+    for t in THEME_NAMES:
+        pct = theme_counts[t] / total_tagged_posts * 100 if total_tagged_posts else 0
         lines.append(f"| {t} | {theme_counts[t]:,} | {pct:.2f}% |")
 
-    # Step 3
-    lines.append("\n## Step 3: Pairwise Overlap Matrix (post counts)\n")
-    header = "| | " + " | ".join(theme_names) + " |"
-    sep = "|---|" + "---|" * len(theme_names)
+    lines.append("\n## Pairwise overlap (post counts)\n")
+    header = "| | " + " | ".join(THEME_NAMES) + " |"
+    sep = "|---|" + "---|" * len(THEME_NAMES)
     lines.append(header)
     lines.append(sep)
-    for t1 in theme_names:
+    for t1 in THEME_NAMES:
         row = [f"**{t1}**"]
-        for t2 in theme_names:
+        for t2 in THEME_NAMES:
             if t1 == t2:
                 row.append("—")
             else:
@@ -178,89 +142,88 @@ def main():
                 row.append(str(matrix[key]))
         lines.append("| " + " | ".join(row) + " |")
 
-    # Step 4
-    lines.append("\n## Step 4: Overlap as % of Smaller Theme\n")
-    lines.append("| Pair | Overlap Posts | Smaller Theme | % of Smaller |")
-    lines.append("|------|--------------|---------------|-------------|")
+    lines.append("\n## Overlap as % of smaller theme\n")
+    lines.append("| Pair | Overlap | Smaller theme (n) | % of smaller |")
+    lines.append("|------|--------|-------------------|--------------|")
     for (t1, t2), overlap in sorted(matrix.items(), key=lambda x: -x[1]):
         if overlap == 0:
             continue
         smaller_t = t1 if theme_counts[t1] <= theme_counts[t2] else t2
         smaller_n = min(theme_counts[t1], theme_counts[t2])
-        pct = overlap / smaller_n * 100
+        pct = overlap / smaller_n * 100 if smaller_n else 0
         lines.append(f"| {t1} × {t2} | {overlap:,} | {smaller_t} ({smaller_n:,}) | {pct:.1f}% |")
 
-    # Step 5
-    lines.append("\n## Step 5: Triple+ Theme Overlap\n")
+    lines.append(f"\n## Triple+ overlap\n")
     lines.append(f"**{triple_total:,} posts** match 3 or more themes simultaneously.\n")
     if triple_examples:
-        lines.append("### Example Posts (up to 10)\n")
-        lines.append("| Post ID | Subreddit | Themes Matched |")
+        lines.append("### Examples (up to 10)\n")
+        lines.append("| Post ID | Subreddit | Themes matched |")
         lines.append("|---------|-----------|----------------|")
         for row in triple_examples:
-            post_id = row[0]
-            subreddit = row[1]
+            post_id, subreddit = row[0], row[1]
             flags = row[2:]
-            matched = [theme_names[i] for i, f in enumerate(flags) if f == 1]
+            matched = [THEME_NAMES[i] for i, f in enumerate(flags) if f == 1]
             lines.append(f"| {post_id} | {subreddit} | {', '.join(matched)} |")
 
-    # Step 6
-    lines.append("\n## Step 6: Theme Exclusivity\n")
-    lines.append("| Theme | Total Posts | Exclusive Posts | Exclusivity % |")
-    lines.append("|-------|------------|----------------|---------------|")
-    for t in theme_names:
+    lines.append("\n## Theme exclusivity\n")
+    lines.append("A theme is exclusive when a post matches that theme and no other.\n")
+    lines.append("| Theme | Total | Exclusive | Exclusivity % |")
+    lines.append("|-------|-------|-----------|---------------|")
+    for t in THEME_NAMES:
         total = theme_counts[t]
         excl = exclusivity[t]
-        pct = excl / total * 100 if total > 0 else 0
+        pct = excl / total * 100 if total else 0
         lines.append(f"| {t} | {total:,} | {excl:,} | {pct:.1f}% |")
 
-    # Interpretation
     lines.append("\n## Interpretation\n")
-
-    # Find most overlapping pair
     if matrix:
         top_pair = max(matrix.items(), key=lambda x: x[1])
-        top_pair_names = f"{top_pair[0][0]} × {top_pair[0][1]}"
-        top_pair_count = top_pair[1]
+        top_pair_name = f"{top_pair[0][0]} × {top_pair[0][1]}"
 
-        # Find most overlapping pair by % of smaller
         top_pct_pair = None
         top_pct = 0
         for (t1, t2), overlap in matrix.items():
             if overlap == 0:
                 continue
             smaller_n = min(theme_counts[t1], theme_counts[t2])
-            pct = overlap / smaller_n * 100
+            pct = overlap / smaller_n * 100 if smaller_n else 0
             if pct > top_pct:
                 top_pct = pct
                 top_pct_pair = (t1, t2, overlap, pct)
 
-        # Find most exclusive theme
-        most_exclusive = max(theme_names, key=lambda t: exclusivity[t] / theme_counts[t] if theme_counts[t] > 0 else 0)
-        least_exclusive = min(theme_names, key=lambda t: exclusivity[t] / theme_counts[t] if theme_counts[t] > 0 else 100)
+        most_exclusive = max(
+            THEME_NAMES,
+            key=lambda t: exclusivity[t] / theme_counts[t] if theme_counts[t] else 0,
+        )
+        least_exclusive = min(
+            THEME_NAMES,
+            key=lambda t: exclusivity[t] / theme_counts[t] if theme_counts[t] else 1,
+        )
 
-        lines.append("### Which theme pairs have the most overlap?\n")
-        lines.append(f"**By raw count:** {top_pair_names} with {top_pair_count:,} posts in common.")
+        lines.append(f"- **Highest absolute overlap:** {top_pair_name} with {top_pair[1]:,} posts in common.")
         if top_pct_pair:
-            lines.append(f"\n**By % of smaller theme:** {top_pct_pair[0]} × {top_pct_pair[1]} with {top_pct_pair[3]:.1f}% overlap ({top_pct_pair[2]:,} posts).\n")
+            lines.append(
+                f"- **Highest proportional overlap:** {top_pct_pair[0]} × {top_pct_pair[1]} "
+                f"({top_pct_pair[2]:,} posts, {top_pct_pair[3]:.1f}% of the smaller theme)."
+            )
+        lines.append(
+            f"- **Most exclusive theme:** {most_exclusive} "
+            f"({exclusivity[most_exclusive] / theme_counts[most_exclusive] * 100:.1f}% exclusive)."
+        )
+        lines.append(
+            f"- **Least exclusive theme:** {least_exclusive} "
+            f"({exclusivity[least_exclusive] / theme_counts[least_exclusive] * 100:.1f}% exclusive)."
+        )
+        lines.append(
+            f"- **Policy:** Themes are non-exclusive by design. Trend lines count unique posts "
+            f"per theme. Triple+ overlap is {triple_total / total_tagged_posts * 100:.1f}% of "
+            f"tagged posts — small enough that allowing overlap doesn't distort the chart."
+        )
 
-        lines.append("### Are any themes largely redundant?\n")
-        lines.append("Pairs with >25% overlap of the smaller theme suggest partial redundancy. See the percentage table above.\n")
+    Path(OUT).parent.mkdir(parents=True, exist_ok=True)
+    Path(OUT).write_text("\n".join(lines) + "\n")
+    print(f"\nWrote {OUT}")
 
-        lines.append("### Does overlap suggest keyword movement?\n")
-        lines.append("Keywords that cause cross-theme bleeding should be reviewed if their overlap exceeds ~30% of the smaller theme. The raw LIKE matching means short keywords like `erp`, `kink`, `wedding` may match inside longer words — verify manually if needed.\n")
-
-        lines.append("### Recommendation: cross-theme overlap or deduplication?\n")
-        lines.append(f"- **Triple+ posts ({triple_total:,})** are a small fraction of the corpus; if cross-theme overlap is low overall, allowing it is fine.\n")
-        lines.append(f"- The most exclusive theme is **{most_exclusive}** ({exclusivity[most_exclusive]/theme_counts[most_exclusive]*100:.1f}% exclusive) — its trend line is cleanest.\n")
-        lines.append(f"- The least exclusive theme is **{least_exclusive}** ({exclusivity[least_exclusive]/theme_counts[least_exclusive]*100:.1f}% exclusive) — its trend line has the most cross-contamination.\n")
-        lines.append("- **Recommendation:** Allow cross-theme overlap in trend lines (count posts per theme independently). The themes capture distinct enough discourses that deduplication would undersell real co-occurrence patterns. Document that trend lines count unique-per-theme, not unique-across-all-themes.\n")
-
-    output = "\n".join(lines)
-    out_path = "docs/cross_theme_overlap.md"
-    with open(out_path, "w") as f:
-        f.write(output)
-    print(f"\nWrote {out_path}")
 
 if __name__ == "__main__":
     main()

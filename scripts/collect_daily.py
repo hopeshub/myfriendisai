@@ -258,7 +258,7 @@ def _step_export(conn):
     import subprocess
     detail_result = subprocess.run(
         [sys.executable, str(Path(__file__).parent / "export_keyword_details.py")],
-        capture_output=True, text=True,
+        capture_output=True, text=True, timeout=600,
     )
     if detail_result.returncode == 0:
         # Copy to data/ as well
@@ -311,8 +311,8 @@ def _main_inner():
     t0 = time.time()
     try:
         post_stats = _step_collect_posts(communities, client, conn)
-    except Exception as e:
-        logger.error("Step 1 (post collection) failed: %s", e)
+    except Exception:
+        logger.exception("Step 1 (post collection) failed")
         post_stats = {"ok": 0, "errors": 0, "total": len(communities), "posts_collected": 0, "error_details": []}
         failed_steps.append("post_collection")
     step_times["post_collection"] = time.time() - t0
@@ -323,8 +323,8 @@ def _main_inner():
     t0 = time.time()
     try:
         tag_stats = _step_tag_posts(conn)
-    except Exception as e:
-        logger.error("Step 2 (post tagging) failed: %s", e)
+    except Exception:
+        logger.exception("Step 2 (post tagging) failed")
         tag_stats = {"posts_scanned": 0, "tags_added": 0}
         failed_steps.append("post_tagging")
     step_times["post_tagging"] = time.time() - t0
@@ -335,8 +335,8 @@ def _main_inner():
     t0 = time.time()
     try:
         comment_stats = _step_collect_comments(conn)
-    except Exception as e:
-        logger.error("Step 3 (comment collection) failed: %s", e)
+    except Exception:
+        logger.exception("Step 3 (comment collection) failed")
         comment_stats = {"comments_collected": 0, "processed": 0, "requests": 0}
         failed_steps.append("comment_collection")
     step_times["comment_collection"] = time.time() - t0
@@ -347,8 +347,8 @@ def _main_inner():
     t0 = time.time()
     try:
         comment_tag_stats = _step_tag_comments(conn)
-    except Exception as e:
-        logger.error("Step 4 (comment tagging) failed: %s", e)
+    except Exception:
+        logger.exception("Step 4 (comment tagging) failed")
         comment_tag_stats = {"total_hits": 0, "posts_newly_tagged": 0}
         failed_steps.append("comment_tagging")
     step_times["comment_tagging"] = time.time() - t0
@@ -359,8 +359,8 @@ def _main_inner():
     t0 = time.time()
     try:
         contrib_stats = _step_compute_contributors(conn)
-    except Exception as e:
-        logger.error("Step 4b (contributor metrics) failed: %s", e)
+    except Exception:
+        logger.exception("Step 4b (contributor metrics) failed")
         contrib_stats = {"rows_updated": 0}
         failed_steps.append("contributor_metrics")
     step_times["contributor_metrics"] = time.time() - t0
@@ -371,8 +371,8 @@ def _main_inner():
     t0 = time.time()
     try:
         _step_export(conn)
-    except Exception as e:
-        logger.error("Step 5 (JSON export) failed: %s", e)
+    except Exception:
+        logger.exception("Step 5 (JSON export) failed")
         failed_steps.append("export")
     step_times["export"] = time.time() - t0
 
