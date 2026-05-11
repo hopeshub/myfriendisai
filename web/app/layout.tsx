@@ -5,6 +5,7 @@ import { join } from "path";
 import { Inter } from "next/font/google";
 import { GeistSans } from "geist/font/sans";
 import { Analytics } from "@vercel/analytics/next";
+import StaleDataBanner from "./StaleDataBanner";
 import "./globals.css";
 
 const inter = Inter({
@@ -67,6 +68,7 @@ export default function RootLayout({
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
       </head>
       <body className={`antialiased ${inter.className}`}>
+        <StaleDataBanner />
         <header className="border-b border-border">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
             <Link

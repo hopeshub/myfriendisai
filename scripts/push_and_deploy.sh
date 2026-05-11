@@ -1,45 +1,81 @@
 #!/bin/bash
-# Push updated data files to GitHub and deploy to Vercel.
-# Called by run_collect.sh after collection finishes, or manually.
-# Vercel auto-deploys on push via GitHub integration — no CLI deploy needed.
+# Push updated data files to GitHub. Vercel auto-deploys on push.
+#
+# Failure model: commit today's data BEFORE attempting any push, so a
+# transient push failure does not strand today's snapshot on a working tree
+# that gets overwritten by tomorrow's export. Tomorrow's run will then push
+# both commits.
+#
+# Exit codes:
+#   0 = success, or no-op (nothing changed and nothing pending)
+#   1 = pre-deploy validation failed (no commit, no push)
+#   2 = git push failed (local commit may exist; next run will retry)
+#   3 = unexpected internal error
+#
+# On any failure, a "PUSH_ERR: <message>" line is emitted so run_collect.sh
+# can extract a one-liner for status.json / the stale-data banner.
 
-set -e
-
-cd /Users/walker/Projects/myfriendisai
+cd /Users/walker/Projects/myfriendisai || { echo "PUSH_ERR: cannot cd to project"; exit 3; }
 
 export PATH="/opt/homebrew/bin:$PATH"
 
+# SSH-side timeouts replace the previous `timeout 300 git push` wrapper, which
+# silently broke for 21 days because macOS does not ship `timeout` and the
+# coreutils package was not installed. These options bound any stall to a
+# minute or two without requiring an external binary.
+export GIT_SSH_COMMAND="ssh -o ConnectTimeout=30 -o ServerAliveInterval=15 -o ServerAliveCountMax=4 -o BatchMode=yes"
+
 echo "=== Push & deploy started at $(date -u '+%Y-%m-%d %H:%M:%S UTC') ==="
 
-# Push any commits left unpushed by a previous failed run before deciding
-# there's "nothing to do". Without this, a commit-succeeded-but-push-failed
-# run would hide yesterday's data behind today's no-op diff check.
-UPSTREAM_AHEAD=$(git rev-list --count '@{u}..HEAD' 2>/dev/null || echo 0)
-if [ "$UPSTREAM_AHEAD" -gt 0 ]; then
-    echo "Found $UPSTREAM_AHEAD unpushed commit(s) from a prior run — pushing first."
-    timeout 300 git push
+# Step 1: Detect whether today's run produced new data.
+# status.json is intentionally excluded from this check — it changes every
+# run regardless, and committing on status-only changes would push empty
+# updates whenever the daily collection produced no new data.
+data_changed=true
+if git diff --quiet data/*.json web/data/*.json 2>/dev/null; then
+    data_changed=false
 fi
 
-# Only commit if data files actually changed
-if git diff --quiet data/*.json web/data/*.json 2>/dev/null; then
-    echo "No data changes to commit. Skipping."
+# Step 2: If data changed, validate and commit (BEFORE any push attempt).
+if [ "$data_changed" = true ]; then
+    echo "Data files changed — running pre-deploy validation..."
+    if ! .venv/bin/python scripts/validate_deploy.py; then
+        echo "PUSH_ERR: pre-deploy validation failed"
+        echo "=== Push & deploy ABORTED (validation) ==="
+        exit 1
+    fi
+
+    git add data/*.json web/data/*.json web/public/status.json
+    if ! git commit -m "Daily data update $(date -u '+%Y-%m-%d')"; then
+        echo "PUSH_ERR: git commit failed"
+        echo "=== Push & deploy ABORTED (commit) ==="
+        exit 3
+    fi
+    echo "Committed today's data update."
+else
+    echo "No data file changes today."
+fi
+
+# Step 3: Push everything pending — including any commits stranded by a
+# previous failed run.
+UPSTREAM_AHEAD=$(git rev-list --count '@{u}..HEAD' 2>/dev/null || echo 0)
+if [ "$UPSTREAM_AHEAD" -eq 0 ]; then
+    echo "Nothing to push. Done."
+    echo "=== Push & deploy finished (no-op) ==="
     exit 0
 fi
 
-# Run pre-deploy validation
-echo "Running pre-deploy validation..."
-.venv/bin/python scripts/validate_deploy.py
-if [ $? -ne 0 ]; then
-    echo "VALIDATION FAILED — aborting deploy. Check logs"
-    exit 1
+echo "Pushing $UPSTREAM_AHEAD commit(s) to GitHub..."
+push_err_file=$(mktemp -t push_and_deploy.XXXXXX)
+if git push 2> >(tee "$push_err_file" >&2); then
+    rm -f "$push_err_file"
+    echo "=== Push & deploy finished at $(date -u '+%Y-%m-%d %H:%M:%S UTC') ==="
+    exit 0
 fi
 
-# Stage and commit data files + status.json
-git add data/*.json web/data/*.json web/public/status.json
-git commit -m "Daily data update $(date -u '+%Y-%m-%d')"
-
-# Push to GitHub (triggers Vercel auto-deploy via GitHub integration).
-# Timeout guards against launchd blocking for hours if SSH stalls.
-timeout 300 git push
-
-echo "=== Push & deploy finished at $(date -u '+%Y-%m-%d %H:%M:%S UTC') ==="
+# Surface the last few stderr lines as a single-line PUSH_ERR.
+last_lines=$(tail -n 5 "$push_err_file" 2>/dev/null | tr '\n' ' ' | sed 's/  */ /g' | sed 's/^ *//;s/ *$//')
+rm -f "$push_err_file"
+echo "PUSH_ERR: ${last_lines:-git push failed (no stderr)}"
+echo "=== Push & deploy FAILED ==="
+exit 2

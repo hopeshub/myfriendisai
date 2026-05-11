@@ -71,35 +71,56 @@ else
 fi
 
 # ── Step 3: Write health status ──
+# Status carries a consecutive-failure counter and the last error line so the
+# frontend stale-data banner can show *why* the site is stale, not just that
+# it is. last_push_error is extracted from the PUSH_ERR sentinel emitted by
+# push_and_deploy.sh.
 now=$(date -u '+%Y-%m-%dT%H:%M:%SZ')
-last_push="null"
-if [ "$push_succeeded" = true ]; then
-    last_push="\"$now\""
-elif [ -f "$STATUS_FILE" ]; then
-    # Preserve previous last_successful_push
-    prev=$("$PROJECT_DIR/.venv/bin/python" -c "
-import json
-try:
-    d = json.load(open('$STATUS_FILE'))
-    print(d.get('last_successful_push', 'null'))
-except: print('null')
-" 2>/dev/null || echo "null")
-    if [ "$prev" != "null" ]; then
-        last_push="\"$prev\""
-    fi
+collection_succeeded_bool=$([ $collect_exit -eq 0 ] && echo true || echo false)
+last_push_error=""
+if [ "$push_succeeded" = false ] && [ $collect_exit -eq 0 ]; then
+    last_push_error=$(grep "^PUSH_ERR:" "$LOG_FILE" | tail -1 | sed 's/^PUSH_ERR: //' || echo "")
 fi
 
-cat > "$STATUS_FILE" <<EOJSON
-{
-  "last_collection": "$now",
-  "posts_collected": $posts_collected,
-  "subreddits_ok": $subreddits_ok,
-  "subreddits_total": $subreddits_total,
-  "collection_succeeded": $([ $collect_exit -eq 0 ] && echo true || echo false),
-  "push_succeeded": $push_succeeded,
-  "last_successful_push": $last_push
+"$PROJECT_DIR/.venv/bin/python" - "$STATUS_FILE" "$now" "$posts_collected" "$subreddits_ok" "$subreddits_total" "$collection_succeeded_bool" "$push_succeeded" "$last_push_error" <<'EOPY'
+import json
+import sys
+
+status_path, now, posts, ok, total, collection_ok, push_ok, last_err = sys.argv[1:9]
+collection_ok = collection_ok == "true"
+push_ok = push_ok == "true"
+
+try:
+    prev = json.load(open(status_path))
+except Exception:
+    prev = {}
+
+prev_consec = int(prev.get("consecutive_push_failures") or 0)
+prev_last_push = prev.get("last_successful_push")
+
+if push_ok:
+    consec = 0
+    last_push = now
+    last_err = ""
+else:
+    consec = prev_consec + 1
+    last_push = prev_last_push
+
+out = {
+    "last_collection": now,
+    "posts_collected": int(posts),
+    "subreddits_ok": int(ok),
+    "subreddits_total": int(total),
+    "collection_succeeded": collection_ok,
+    "push_succeeded": push_ok,
+    "last_successful_push": last_push,
+    "consecutive_push_failures": consec,
+    "last_push_error": last_err or None,
 }
-EOJSON
+with open(status_path, "w") as f:
+    json.dump(out, f, indent=2)
+    f.write("\n")
+EOPY
 
 echo "Wrote status to $STATUS_FILE" >> "$LOG_FILE"
 
