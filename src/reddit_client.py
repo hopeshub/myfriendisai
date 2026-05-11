@@ -143,6 +143,44 @@ class RedditClient:
                 break
         return all_children
 
+    def get_new_until(self, subreddit: str, since_epoch: float, max_posts: int = 1000) -> list[dict]:
+        """Fetch recent posts, paginating until coverage reaches `since_epoch`.
+
+        Used by the daily collector to capture full daily volume for high-volume
+        subs (CharacterAI, etc.) that exceed Reddit's 100-post-per-listing cap.
+        Low-volume subs naturally stop after page 1 because their 100th-most-
+        recent post is already past the cutoff.
+
+        Stops when:
+          - oldest post in the latest page is older than since_epoch, OR
+          - listing is exhausted (no `after` token), OR
+          - max_posts safety cap reached
+        """
+        all_children: list[dict] = []
+        after: Optional[str] = None
+        while len(all_children) < max_posts:
+            batch_size = min(100, max_posts - len(all_children))
+            url = f"{BASE_URL}/r/{subreddit}/new.json"
+            params: dict = {"limit": batch_size}
+            if after:
+                params["after"] = after
+            data = self._get(url, params=params)
+            children = data.get("data", {}).get("children", [])
+            if not children:
+                break
+            all_children.extend(children)
+
+            oldest_ts = min(
+                (c.get("data", {}).get("created_utc") or 0) for c in children
+            )
+            if oldest_ts and oldest_ts <= since_epoch:
+                break
+
+            after = data.get("data", {}).get("after")
+            if not after:
+                break
+        return all_children
+
     def get_post_comments(self, subreddit: str, post_id: str, limit: int = 20) -> list[dict]:
         """Fetch top comments for a post. Returns list of comment dicts."""
         url = f"{BASE_URL}/r/{subreddit}/comments/{post_id}.json"

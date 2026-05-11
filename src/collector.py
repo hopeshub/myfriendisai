@@ -89,7 +89,12 @@ def collect_subreddit(
         about_data = client.get_about(subreddit)
         raw_about = json.dumps(about_data)
 
-        new_children = client.get_new(subreddit, limit=100)
+        # Paginate up to 36h back so high-volume subs (CharacterAI etc.) are
+        # not silently truncated at Reddit's 100-post-per-listing limit. Small
+        # subs hit the cutoff on page 1 and stop after a single request, so
+        # this is essentially free for low-volume communities.
+        since_epoch = datetime.now(timezone.utc).timestamp() - 36 * 3600
+        new_children = client.get_new_until(subreddit, since_epoch=since_epoch, max_posts=1000)
         raw_listing = json.dumps(new_children)
 
         metrics = _calc_metrics(about_data, new_children)
