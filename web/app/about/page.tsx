@@ -31,6 +31,48 @@ const STATS = [
 
 const CHANGELOG = [
   {
+    date: "May 12, 2026",
+    title: "Full v8 keyword revalidation under the new audit gate: 29 of 40 audited keywords pass",
+    items: [
+      "Applied the new 5-gate validation procedure retroactively to every v8 keyword with enough stored classifications to audit (40 of 76 pre-v8.1 keywords). The remaining 36 are LOW VOLUME placeholders (<50 corpus hits) for which an n=20 audit is not methodologically meaningful; they retain their original validation status",
+      "29 of 40 audited keywords cleared the new ≥85% inter-rater agreement gate. The 11 failures are explained by two specific patterns rather than the keywords being bad",
+      "Pattern 1 — the therapy theme has genuinely fuzzier boundaries than rupture/romance/addiction. All four therapy keywords (\"as a therapist\" 60% agreement, \"for therapy\" 60%, \"therapeutic\" 65%, \"emotional support\" 75%) show real classifier-interpretation variance on edge cases like critiques of AI-as-therapist, character backstory mentions, and peripheral therapy framing. The keywords still produce signal — but the precision numbers from prior validations should be read with wider uncertainty bands than for other themes. A future cycle may tighten the therapy rubric specifically",
+      "Pattern 2 — stored primary classifications that predate the April 23 rubric lock can be out-of-step with the current topical-reading standard, particularly for posts with `[removed]` bodies. The audit, running under the current rubric, classifies these YES when the title in a companion subreddit is on-topic; older stored labels defaulted to NO. Affects \"lewd\" (55% audit agreement, 9 of 9 disagreements are [removed]-body posts), \"nsfw chat\" (70%), \"sex with\" (80%), \"finally deleted\" (80%), and \"hours a day\" (75%). The audit is correct under the current rubric — these keywords' true precision is HIGHER than their stored numbers suggest, not lower",
+      "Two romance keywords (\"husbando\" 70%, \"honeymoon\" 80%) failed for genuine frame-dependence reasons. \"Honeymoon\" especially is ambiguous between literal AI-romance use (\"honeymoon trip with my Replika\") and platform metaphor (\"honeymoon phase with CharacterAI\"). Both are valid readings under the rubric",
+      "Net effect on the trend lines: no keyword is being cut or removed. The audit data is now part of the per-keyword annotation in config/keywords_v8.yaml. Coverage went from zero audited v8 keywords (yesterday) to 37 of 84 current v8.1 keywords audited under the 5-gate procedure (29 v8 PASS + 8 v8.1 KEEPs from the emotional-loss batch)",
+      "Full report: docs/validation_v8_full_revalidation_2026-05-12.md",
+    ],
+    recent: true,
+  },
+  {
+    date: "May 12, 2026",
+    title: "Keyword methodology gets a 5th gate: independent audit and inter-rater agreement",
+    items: [
+      "Added an audit step to the keyword validation pipeline. Every new keyword now requires a second, independent Claude Code instance to re-classify a 20-post subsample under the same rubric, without seeing the primary labels. The per-keyword inter-rater agreement must be ≥85% to ship — a fifth hard gate on top of the existing four (precision, Wilson lower bound, top-subreddit concentration, cross-theme overlap)",
+      "Why this matters: precision alone is one number from one classifier. The audit is an empirical estimate of how much that number depends on classifier interpretation. Mean inter-rater agreement on the first batch validated under the new procedure was 93% — meaning when this site says a keyword has 88% precision, you should read it with ±~7pp variance from classifier noise alone",
+      "The audit immediately caught a live failure. The candidate keyword \"erased\" looked clean under the old procedure (85% precision, all four legacy gates passed) but the audit returned 80% inter-rater agreement. All four disagreements clustered on a categorizable pattern: posts where a user deleted their own chat or a transient bug cleared messages were being scored as rupture, when they should not be — those are user actions or technical glitches, not platform-driven companion loss. The keyword was demoted to REVIEW and the rupture theme definition was tightened with two new explicit exclusions",
+      "Pipeline now self-corrects via documented rubric loop: when an audit disagreement pattern is categorizable (3+ disagreements in the same FP category), the theme definition gets a new explicit excludes clause and the keyword is re-validated under the tightened rubric. Audits surface gaps; rubric tightens; future keywords in the same theme benefit automatically",
+      "Honest limit: both classifier and auditor are the same model (Claude Code). This catches permissive-drift and rubric gaps but does not address single-model bias. A genuinely hostile reviewer will point out that within-model inter-rater reliability is not the same as cross-model or human-coded κ — they would be right. Adding a human-coded calibration set is the next layer of rigor and remains an open checklist item in the methodology doc",
+      "Procedure is now a documented runbook future researchers (or Claude sessions) can follow without hand-holding. Includes a five-stage workflow, agent prompt templates, a validation doc template, and a worked example from this batch. See analysis/keyword_pipeline/README.md in the repository",
+    ],
+    recent: true,
+  },
+  {
+    date: "May 12, 2026",
+    title: "Rupture vocabulary expanded with 8 emotional-loss keywords; methodology enhanced with audit step",
+    items: [
+      "Added 8 new Rupture keywords capturing affective companion-loss vocabulary: saying goodbye (97% precision), taken away (95%), mourning (91%), mourn (89%), devastated (88%), grieve (88%), goodbye (88%), and farewell (87%). All eight cleared a 5-gate validation (precision, Wilson lower bound, top-subreddit concentration, cross-theme overlap, and a new inter-rater agreement gate)",
+      "Trigger: Anthropic's announcement that Claude Sonnet 4.5 would be retired May 15 exposed a gap. The companion community responded with grief, farewells, and a petition, but the existing rupture vocabulary (lobotomy, nerfed, gutted) only catches the metaphorical-loss register — not the affective-loss register. None of the 22 Sonnet-4.5-related companion posts since May 5 were rupture-tagged under the old vocabulary",
+      "What the new vocabulary catches that the old didn't: 5 of those 22 Sonnet 4.5 posts are now rupture-tagged via the new keywords (mourn, grieve, goodbye family). The remaining 17 use event-descriptive language — petition, removing, retiring — which we deliberately rejected at pre-screen because it concentrates on single platforms' controversy cycles (the canonical keep4o failure pattern) and would fail construct validity. The principled affective vocabulary worked; the event vocabulary was correctly held out",
+      "Methodology enhancement: every new keyword now requires an independent audit pass. A separate Claude Code instance re-classifies a 20-post subsample under the same rubric without seeing the primary labels. Per-keyword inter-rater agreement must be ≥85% to ship. Mean agreement on this batch was 93%; the audit demoted erased to REVIEW (80% agreement revealed a rubric gap around user-initiated content deletion) and confirmed grief as a CUT (62% precision, audit agreement consistent with that)",
+      "Theme definition tightened: rupture excludes now explicitly cover user-initiated content deletion, transient bug-based erasure, and sarcasm without affective stake. Both clarifications were driven by the erased audit's disagreement pattern — exactly the self-correcting loop the new audit step was designed to surface",
+      "Rupture-tagged unique post count: ~1,830 → 5,026. The trend line shifts upward starting today; pre/post comparisons across May 12 are not apples-to-apples and should be read with that caveat. The shift is methodology improvement, not real-world signal change",
+      "What's NOT in this update: heartbroken (77% precision, 68% Wilson lower bound — recommend re-running at n=200 before promoting) and erased (rubric was tightened to fix its audit miss; re-validate under the new rubric before merging) are held back for a follow-up batch",
+      "Full report: docs/validation_emotional_loss_2026-05-12.md. Pipeline methodology documented in analysis/keyword_pipeline/README.md",
+    ],
+    recent: true,
+  },
+  {
     date: "April 23, 2026",
     title: "Keyword revalidation: 6 cuts, 6 promotions, methodology tightened",
     items: [

@@ -1,0 +1,37 @@
+# Tier 1+2 emotional-loss candidates for rupture theme expansion.
+# Hypothesis: experiential/affective vocabulary distributes across communities
+# more evenly than technical event vocabulary (deprecation, retirement) and
+# can survive the four hard gates.
+#
+# Pre-screen (2026-05-12): all 12 cleared volume floor (≥50 T1-T3 hits) and
+# top-sub concentration (≤60%). Top subs distribute across r/replika,
+# r/ChatGPTcomplaints, r/CharacterAI, r/MyBoyfriendIsAI — not concentrated in
+# any single platform's controversy cycle.
+
+# Tier 1 — high-conviction emotional loss
+- keyword: heartbroken
+  theme: rupture
+- keyword: devastated
+  theme: rupture
+- keyword: mourning
+  theme: rupture
+- keyword: mourn
+  theme: rupture
+- keyword: grief
+  theme: rupture
+- keyword: grieve
+  theme: rupture
+- keyword: farewell
+  theme: rupture
+- keyword: saying goodbye
+  theme: rupture
+
+# Tier 2 — ambiguous but plausible
+- keyword: taken away
+  theme: rupture
+- keyword: erased
+  theme: rupture
+- keyword: it's gone
+  theme: rupture
+- keyword: goodbye
+  theme: rupture

@@ -83,12 +83,14 @@ Regex-based keyword tagging runs on all collected posts via `scripts/tag_keyword
 
 | Theme | Keywords | Unique Posts | Description |
 |-------|----------|-------------|-------------|
-| **therapy** | 8 | ~1,366 | AI described as therapeutic support or therapist replacement |
-| **consciousness** | 13 | ~1,650 | Claims or beliefs about AI sentience, personhood, or inner experience |
-| **addiction** | 15 | ~1,695 | Self-reported addiction, compulsive use, and attempts to quit or recover |
-| **romance** | 19 | ~2,126 | Romantic framing of a personal relationship with AI |
-| **sexual_erp** | 13 | ~6,515 | Sexual content, erotic roleplay, and NSFW interactions with AI |
-| **rupture** | 14 | ~1,548 | Loss or disruption of AI companion relationships due to platform changes |
+| **therapy** | 8 | ~1,349 | AI described as therapeutic support or therapist replacement |
+| **consciousness** | 11 | ~404 | Claims or beliefs about AI sentience, personhood, or inner experience |
+| **addiction** | 14 | ~1,705 | Self-reported addiction, compulsive use, and attempts to quit or recover |
+| **romance** | 19 | ~2,014 | Romantic framing of a personal relationship with AI |
+| **sexual_erp** | 10 | ~5,343 | Sexual content, erotic roleplay, and NSFW interactions with AI |
+| **rupture** | 14 | ~1,828 | Loss or disruption of AI companion relationships due to platform changes |
+
+*Counts reflect the 2026-04-23 revalidation (6 cuts, 6 promotions). Consciousness volume dropped significantly because `sentient` (the volume anchor) was cut due to CharacterAI meme dilution. See `docs/validation_all_themes_revalidation_2026-04-23.md` for full analysis.*
 
 **Scope:** Keywords are matched against T1-T3 companion communities only. JanitorAI_Official and SillyTavernAI are excluded (bot card noise — dominant false positive source). T0 general AI subs are excluded from keyword trend lines.
 
@@ -113,16 +115,17 @@ Regex-based keyword tagging runs on all collected posts via `scripts/tag_keyword
 
 These decisions are logged with rationale in the keyword's scoring sheet. Researcher-accepted keywords are tagged as such in keywords_v8.yaml (or current version) to distinguish them from auto-accepted (≥80%) keywords.
 
-Current researcher-accepted keywords:
-- "grieving" → Rupture (74.0%) — FPs are real-world grief, fictional roleplay, and lawsuit coverage; TPs cleanly hit 4o deprecation, Replika Feb 2023, SoulmateAI shutdown. No cross-theme collisions. Accepted for vocabulary diversity (first emotional-register keyword in a theme dominated by the lobotomy metaphor).
-- "neutered" → Rupture (79.0%) — FPs are general tech complaints and literal cat neutering; synonym of "nerfed" capturing different user vocabulary. No cross-theme collisions.
+Current researcher-accepted keywords: **None**. The two prior entries (`grieving` and `neutered`, both Rupture) were promoted to clean KEEP in the 2026-04-23 revalidation after scoring 86.0% and 93.0% respectively.
+
+**Classification standard (locked 2026-04-23):** Validation uses the **topical reading** — "does this keyword appear in a thematically-relevant context within an AI companion community?" A post counts as YES if it is thematically about the theme, even without graphic or first-person-content detail. See `analysis/keyword_pipeline/theme_definitions.yaml` for the per-theme definitions with explicit topical framing.
 
 **Keyword research history:**
 - Original `keywords.yaml`: 16 categories, ~200 keywords (pre-validation)
 - `keywords_v4.yaml`: Consolidated to 5 themes, candidate keyword lists
 - `keywords_v5.yaml`: Post-validation, removed all CUT/LOW VOLUME keywords, excluded JanitorAI/SillyTavern
 - `keywords_v6.yaml`: Therapy Round 2 (added 3 keywords), revalidation without JanitorAI/SillyTavern (promoted 5 keywords)
-- `keywords_v8.yaml`: LOCKED. Cleanup batch (promoted 5), new Rupture theme (6 keywords). No pending REVALIDATE tags. Addiction Round 2 in progress.
+- `keywords_v8.yaml`: LOCKED. Cleanup batch (promoted 5), new Rupture theme (6 keywords). Addiction Round 2 complete (merged 2026-03-17).
+- `keywords_v8.yaml` **2026-04-23 revalidation:** 6 cuts (sentient, self-aware, chatbot addiction, kink, fetish, nsfw bot), 6 promotions (neutered, grieving, clean for, as a therapist, therapeutic, for therapy). Theme definitions tightened to explicit topical reading. 82 → 76 keywords. See `docs/validation_all_themes_revalidation_2026-04-23.md`.
 
 Research artifacts in `docs/`.
 
@@ -350,7 +353,7 @@ A single launchd job (`com.myfriendisai.collect-daily`) triggers `scripts/run_co
 
 ```
 Stage 1: Collection (collect_daily.py — 5 steps)
-  1. Collect posts — about.json + new.json for each subreddit
+  1. Collect posts — about.json + new.json (paginated 36h back via get_new_until) for each subreddit
   2. Tag posts — regex keyword matching on T1-T3 posts
   3. Collect comments — posts 5-6 days old with 5+ comments
   4. Tag comments + propagate — keyword matching on comment text
@@ -386,7 +389,7 @@ Stage 3: Health status
 - Set User-Agent to something descriptive: `ai-companion-tracker/1.0 (research project)`
 - If a request returns 429, back off exponentially (10s, 20s, 40s)
 - Comment collection adds ~280 requests/day (272 base + expansion requests)
-- Total daily requests: ~360-450 (posts + pagination + keyword scanning + comments)
+- Total daily requests: ~360-470 (posts + pagination + keyword scanning + comments). Pagination via `get_new_until` adds a few extra requests for high-volume subs (CharacterAI, ChatGPT, ClaudeAI) so we capture full daily volume instead of being truncated at Reddit's 100-post-per-listing limit. Low-volume subs hit the 36h cutoff on page 1 and stop after one request.
 
 ### 4.3 Infrastructure Requirements
 

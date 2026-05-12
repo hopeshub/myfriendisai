@@ -42,6 +42,7 @@ const EVENTS = [
   { date: "2025-04-01", label: "Sycophancy update", shortLabel: "Syco. update" },
   { date: "2025-08-01", label: "4o 1st sunset", shortLabel: "4o sunset" },
   { date: "2026-02-01", label: "4o retired", shortLabel: "4o ret." },
+  { date: "2026-05-12", label: "Rupture vocabulary expanded (v8.1)", shortLabel: "Rupture v8.1" },
 ];
 
 // ─── Helpers ───────────────────────────────────────────────────────────────

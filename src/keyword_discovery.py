@@ -1,4 +1,22 @@
-"""Core logic for keyword discovery: sampling, Claude API calls, precision testing."""
+"""DEPRECATED (2026-04-23): Do not use.
+
+This module calls the Anthropic API (`import anthropic` below), which violates the
+project's no-API-classifier rule. Classification must go through the CC-based
+workflow: prepare_sample.py -> CC reads and classifies inline -> parse_classifications.py.
+
+Additionally, automated keyword discovery has a documented bad track record — see
+docs/archive/KEYWORD_HISTORY_AND_LESSONS.md. Three rounds of automated validation
+all mostly failed; the keywords that survived were found by parallel CC agents
+reading real posts, not by API-based candidate generation.
+
+For new keywords: spawn parallel CC agents to read real posts from T1-T3 companion
+subs and extract candidate phrases, then run the standard 100-sample precision
+validation via the CC-classification workflow.
+
+---
+Original docstring:
+Core logic for keyword discovery: sampling, Claude API calls, precision testing.
+"""
 
 import json
 import logging

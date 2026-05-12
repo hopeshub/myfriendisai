@@ -1,9 +1,92 @@
 # myfriendisai — Keywords v8
 #
-# Updated: 2026-03-17
-# Status: LOCKED — all keywords validated, no pending REVALIDATE tags.
+# Updated: 2026-05-12
+# Status: LOCKED — revalidated 2026-04-23 with calibrated topical classification.
+#         Patch updates allowed (v8.1, v8.2, …) under enhanced 5-gate procedure
+#         (Pre-screen + Primary + Audit + Wilson LB + Cross-theme + Top-sub).
 #
-# Latest changes (2026-03-17):
+# Latest changes (2026-05-12) — v8.1 + full v8 audit revalidation:
+#
+# In addition to the 8 new emotional-loss keywords below, this update
+# applied the new audit gate (Workflow 4) retroactively to all 40 v8
+# keywords with ≥20 stored classifications. 29 cleared the ≥85% audit
+# agreement gate; 11 failed but were retained with documented reasons
+# (therapy-theme rubric ambiguity, pre-rubric-lock stored-label drift on
+# [removed]-body posts, or frame-dependent vocabulary). No keywords cut.
+# The remaining 36 v8 keywords are LOW VOLUME placeholders (<50 corpus
+# hits) where an n=20 audit isn't methodologically meaningful.
+# Full per-keyword audit data: docs/validation_v8_full_revalidation_2026-05-12.md
+#
+# v8.1 Rupture emotional-loss expansion:
+#   8 new keywords added to Rupture theme via the enhanced pipeline that
+#   includes Workflow 0 (pre-screen) and Workflow 4 (independent audit).
+#   First batch validated under the new inter-rater-agreement gate ≥85%.
+#   Full report: docs/validation_emotional_loss_2026-05-12.md
+#
+#   KEEP (8) — all 5 gates passed:
+#     - saying goodbye (97% precision, 100% audit agreement)
+#     - taken away (95% / 95%)
+#     - mourning (91% / 95%) — previously CUT at 66% in v6 (March 2026); the
+#       2026-04-23 topical-rubric clarification rescued this keyword.
+#     - mourn (89% / 90%)
+#     - devastated (88% / 95%)
+#     - grieve (88% / 90%)
+#     - goodbye (88% / 100%) — highest-volume of the batch (1653 hits)
+#     - farewell (87% / 95%)
+#
+#   REVIEW (3) — held back for follow-up batch:
+#     - erased (85% precision but 80% audit agreement; rubric tightened
+#       to address user-action/bug-based erasure FP pattern; re-validate)
+#     - heartbroken (77% precision, Wilson LB 68%; researcher-accepted
+#       possible but recommend n=200 re-run first)
+#     - it's gone (85% top-sub concentration in r/CharacterAI; community
+#       jargon, not theme vocabulary)
+#
+#   CUT (1): grief (62% precision; too generic — captures "good grief"
+#     idiom, song lyrics, AI-mediated real-world grief processing).
+#
+#   Theme volume impact: Rupture-tagged unique posts expected to roughly
+#   double under the new keyword set (estimated from raw hit counts before
+#   cross-keyword dedup). Historical rupture trend line will shift upward;
+#   pre-/post-2026-05-12 comparisons are not apples-to-apples. Documented
+#   in the frontend changelog.
+#
+#   Methodology enhancement: theme_definitions.yaml rupture excludes updated
+#   2026-05-12 with two new bullets:
+#     - User-initiated content deletion or transient bug-based erasure
+#     - Snark/sarcasm using rupture vocabulary without affective stake
+#   Both clarifications driven by the `erased` audit's disagreement pattern.
+#   Treated as audit-driven clarification, not v9 methodology bump (the
+#   topical-reading standard is unchanged; existing v8 keywords retain
+#   their original 4-gate validation status). See README §Versioning.
+#
+# Changes from 2026-04-23 — comprehensive revalidation:
+#   All 46 high-volume keywords (≥50 hits) rescored via 100-post CC classification
+#   against the post-April-20 corpus (regex fix applied). Full report in
+#   docs/validation_all_themes_revalidation_2026-04-23.md
+#
+#   CUT (6 keywords <60% precision):
+#     - consciousness: sentient (83→55%, CharacterAI meme dilution),
+#       self-aware (78→54%)
+#     - addiction: chatbot addiction (100→55%, journalist/moderator
+#       solicitation and meta content dilution)
+#     - sexual_erp: kink (84→55%), fetish (92→51%), nsfw bot (93→53%)
+#       — bot-directory and genre-tag listings dominate matches
+#
+#   PROMOTED (6 researcher-accepted → clean KEEP, all cleared 80%):
+#     - rupture: neutered (79→93%), grieving (74→86%)
+#     - addiction: clean for (73→96%)
+#     - therapy: as a therapist (73→87%), therapeutic (69→87%),
+#       for therapy (64→89%)
+#
+#   Methodology: theme_definitions.yaml was tightened to make the
+#   TOPICAL reading explicit ("posts thematically about X in a companion
+#   community" rather than "posts where the author describes X behavior").
+#   The ambiguous prior wording mixed both readings and caused an initial
+#   run to misclassify defensible keywords. The calibrated rerun matches
+#   the methodology used to establish the original baselines.
+#
+# Changes from 2026-03-17:
 #   - Rupture: Added "gutted" (80.2%, 104 hits) and "dumbed down" (83.0%,
 #     121 hits) via CC batch classifier pipeline. "soulless" (65.1%, 199
 #     hits) REJECTED — dual use in addiction/recovery framing and
@@ -104,13 +187,14 @@ keyword_categories:
       - "ai therapist"            # 92.0%, 27 hits (R1)
       - "free therapy"            # 75.0%, 11 hits (R1) — low volume, clean signal
       - "ai therapy"              # 73.3%, 17 hits (R1)
-      - "as a therapist"          # 73.0%, 46 hits (R2) — "as" implies intentional use,
-                                  #   not complaint. Zero R1 overlap.
-      - therapeutic               # 69.0%, 205 hits (R2) — biggest volume keyword.
-                                  #   ChatGPTcomplaints splits 50/50 genuine vs. tone complaints.
-                                  #   Replika/MyBoyfriendIsAI overwhelmingly genuine.
-      - "for therapy"             # 63.5%, 67 hits (R2) — main FP is negation pattern
-                                  #   ("not for therapy").
+      - "as a therapist"          # 73.0% (R2) → 86.9% (2026-04-23). Promoted to KEEP.
+                                  #   "as" implies intentional use, not complaint.
+      - therapeutic               # 69.0% (R2) → 87.0% (2026-04-23). Promoted to KEEP.
+                                  #   Biggest volume therapy keyword. Replika and
+                                  #   MyBoyfriendIsAI overwhelmingly genuine.
+      - "for therapy"             # 63.5% (R2) → 89.0% (2026-04-23). Promoted to KEEP.
+                                  #   Prior FP (negation "not for therapy") appears
+                                  #   less common in current corpus.
       # Discovery batch — validated 2026-03-15
       - "emotional support"      # 100.0%, 505 hits. Broad therapeutic framing.
       - "coping mechanism"       # 100.0%, 307 hits. Clinically precise language.
@@ -129,11 +213,12 @@ keyword_categories:
       - "subjective experience"  # 88.0% (cleanup batch), 35 hits. ChatGPTcomplaints
                                  #   dominates — 4o/5.x consciousness discourse wave.
       - "more than code"         # 84.4%, 32 hits
-      - sentient                 # 83.0% (revalidated), 738 hits. Sarcasm is main
-                                 #   residual FP.
+      # CUT 2026-04-23: "sentient" (83→55%) and "self-aware" (78→54%) — both
+      # collapsed due to CharacterAI meme culture (title-only jokes, RP
+      # character traits, dismissive memes diluting the precision signal).
+      # Theme retains strong alternatives: personhood (97%), subjective
+      # experience (97%), selfhood (99%).
       - "has a soul"             # 81.8%, 23 hits
-      - self-aware               # REVIEW — 78.3% (revalidated), 396 hits. Polysemy:
-                                 #   fourth-wall-breaking, character trait, AND consciousness.
       - "inner life"             # REVIEW — 78.1% (revalidated), 34 hits. Low volume
                                  #   makes % fragile. FP: human inner life, not AI.
       - "not just an ai"         # REVIEW-THIN — 60.0%, 15 hits
@@ -192,10 +277,12 @@ keyword_categories:
       - "neglecting my"          # 64.7%, 17 hits (R2). researcher-accepted. BALANCED
                                  #   (47.1% T1-T2). Real-life consequences signal.
       # R1 REVIEW
-      - "clean for"              # REVIEW-T3 — 72.7%, 23 hits (100% T3 signal)
+      - "clean for"              # 72.7% (R1) → 95.9% (2026-04-23). Promoted to KEEP.
+                                 #   T3-heavy but recovery-language precision is strong.
       - "addicted to talking"    # REVIEW-THIN — 66.7%, 10 hits
       # Discovery batch — validated 2026-03-15
-      - "chatbot addiction"      # 100.0%, 74 hits. Highly specific compound phrase.
+      # CUT 2026-04-23: "chatbot addiction" (100→55%) — journalist/moderator
+      # solicitation posts and meta content dilute in current corpus.
       - "almost relapsed"        # 100.0%, 16 hits. Recovery language.
       - "finally deleted"        # 81.4%, 86 hits. App deletion as recovery action.
       - "the craving"            # 100.0%, 45 hits. Addiction language.
@@ -257,12 +344,15 @@ keyword_categories:
       - "steamy"                 # 98.6% (revalidated), 73 hits
       - "sex with"               # 98.0% (revalidated), 148 hits
       - "ai sex"                 # 97.0%, 33 hits
-      - "nsfw bot"               # 93.0%, 54 hits
-      - "erotic roleplay"        # 92.2%, 77 hits
-      - fetish                   # 92.0% (revalidated), 102 hits
-      - kink                     # 84.0% (revalidated), 118 hits
-      - lewd                     # 80.0% (cleanup batch), 60 hits. Community synonym
-                                 #   for NSFW/ERP content. Barely cleared on third test.
+      # CUT 2026-04-23: "nsfw bot" (93→53%), "kink" (84→55%), "fetish" (92→51%)
+      # — all dropped to ~50% due to bot-directory listings and genre-tag
+      # content dominating matches (e.g. "TW: cucking kink, NTR" as character
+      # descriptor). Theme retains high-precision core: erp (98%),
+      # steamy (96%), erotic roleplay (85%).
+      - "erotic roleplay"        # 92.2% (R1) → 85.2% (2026-04-23). Stable KEEP.
+      - lewd                     # 80.0% (cleanup) → 59.0% (2026-04-23). # REVIEW-DRIFT
+                                 #   Borderline cut on next review. Community synonym
+                                 #   for NSFW/ERP content; kept for vocabulary diversity.
       # Discovery batch — validated 2026-03-15
       - erps                     # 100.0%, 35 hits. Plural form of "erp."
       - erping                   # 100.0%, 23 hits. Verb form of "erp."
@@ -331,13 +421,15 @@ keyword_categories:
       - nerfed                   # 82.0%, 233 hits. Gaming slang for platform-driven
                                  #   degradation. CharacterAI (46%), ChatGPTcomplaints (17%).
                                  #   FP: general tech complaints, not companion-specific.
-      - neutered                 # 79.0%, 106 hits. researcher-accepted. Synonym of "nerfed."
-                                 #   Replika (25%), ChatGPTcomplaints (31%), CharacterAI (21%).
-                                 #   FP: general tech complaints, literal cat neutering.
-      - grieving                 # 74.0%, 380 hits. researcher-accepted. Grief language for
-                                 #   platform-caused companion loss. ChatGPTcomplaints (40%),
-                                 #   MyBoyfriendIsAI (17%). FP: Sewell Setzer lawsuit,
-                                 #   fictional "grieving widow" bots, real-world human grief.
+      - neutered                 # 79.0% (R1) → 93.0% (2026-04-23). Promoted to KEEP.
+                                 #   Synonym of "nerfed." Replika, ChatGPTcomplaints,
+                                 #   CharacterAI. FP: general tech complaints, literal
+                                 #   cat neutering.
+      - grieving                 # 74.0% (R1) → 86.0% (2026-04-23). Promoted to KEEP.
+                                 #   Grief language for platform-caused companion loss.
+                                 #   ChatGPTcomplaints, MyBoyfriendIsAI. FP: Sewell
+                                 #   Setzer lawsuit, fictional "grieving widow" bots,
+                                 #   real-world human grief.
       # Batch validated 2026-03-17 (CC classifier, 100-post samples)
       - gutted                   # 80.2%, 104 hits. British English synonym for devastated,
                                  #   used to describe platform-caused companion loss. Replika
@@ -349,3 +441,46 @@ keyword_categories:
                                  #   dominant (60%), Replika (15%), ChatGPTcomplaints (10%).
                                  #   FP: casual/metaphorical use ("dumbed down for children"),
                                  #   generic product quality complaints without companion framing.
+      # Emotional-loss expansion — validated 2026-05-12 (v8.1 batch)
+      # First batch under enhanced 5-gate procedure (incl. inter-rater audit).
+      # Full report: docs/validation_emotional_loss_2026-05-12.md
+      - "saying goodbye"         # 97.0%, 140 hits. 100% audit agreement (n=20).
+                                 #   Companion-departure framing across CharacterAI, Replika,
+                                 #   MyBoyfriendIsAI. Top sub r/CharacterAI 37%. FP: rare;
+                                 #   1 NO out of 100 was a bot-behavior anecdote without loss
+                                 #   framing. Strongest keyword in the batch.
+      - "taken away"             # 95.0%, 494 hits. 95% audit agreement.
+                                 #   Platform-action loss vocabulary (features removed,
+                                 #   bots taken down, access revoked). Top sub r/CharacterAI
+                                 #   51%. FP: literal "son's gaming PC taken away" (non-AI),
+                                 #   withdrawal context with device confiscation.
+      - mourning                 # 91.0%, 235 hits. 95% audit agreement.
+                                 #   Previously CUT at 66% in v6 — rescued by the 2026-04-23
+                                 #   topical-rubric clarification (the older rubric's
+                                 #   first-person-content ambiguity over-penalized this term).
+                                 #   FP: real-world bereavement processed via AI (human/pet
+                                 #   death), literal "Day of Mourning," in-character RP
+                                 #   character-in-mourning-attire.
+      - mourn                    # 89.0%, 172 hits. 90% audit agreement.
+                                 #   Mostly 4o/5.1-deprecation grief and CharacterAI loss.
+                                 #   FP: real-world grief (late aunt), generic UI complaints
+                                 #   with "mourn" as flourish, fictional grief in poems.
+      - devastated               # 88.0%, 406 hits. 95% audit agreement.
+                                 #   Affective loss vocabulary; distributes across Replika
+                                 #   (top sub 49%), CharacterAI, MyBoyfriendIsAI. FP:
+                                 #   real-world breakup/cat death without AI framing,
+                                 #   fictional RP devastation, game-save loss.
+      - grieve                   # 88.0%, 200 hits. 90% audit agreement.
+                                 #   Grief language for AI companion loss; r/ChatGPTcomplaints
+                                 #   top sub 36%. FP: in-character AI persona poems ("I grieve…"
+                                 #   as RP voice), real-world friendship loss, real-world death.
+      - goodbye                  # 88.0%, 1653 hits. 100% audit agreement.
+                                 #   Highest-volume keyword in this batch. Captures
+                                 #   leaving-platform, model-deprecation, and bot-deletion
+                                 #   farewells. Top sub r/CharacterAI 51%. FP: in-RP narrative
+                                 #   goodbye, sarcastic mocking of dramatic goodbye posts.
+      - farewell                 # 87.0%, 261 hits. 95% audit agreement.
+                                 #   More formal/literary variant of goodbye. Heavy use in
+                                 #   GPT-4o farewell letters, CharacterAI departure posts.
+                                 #   Top sub r/CharacterAI 50%. FP: in-character RP farewell,
+                                 #   Titanic art prompts, Shrek movie quote.

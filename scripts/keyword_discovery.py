@@ -1,5 +1,18 @@
 #!/usr/bin/env python3
-"""
+"""DEPRECATED (2026-04-23): Do not use.
+
+Co-occurrence discovery has a bad track record for this project. The generated
+report (docs/archive/keyword_discovery_report.md) surfaced mostly bot-card and
+ERP jargon (e.g. "veritas nexus," "stellar synergy") rather than thematically
+useful keywords. See docs/archive/KEYWORD_HISTORY_AND_LESSONS.md for the full
+history of why automated keyword discovery didn't work.
+
+For new keywords: spawn parallel CC agents to read real posts from T1-T3
+companion subs and extract candidate phrases, then run the standard 100-sample
+precision validation via the CC-classification workflow.
+
+---
+Original docstring:
 Keyword Discovery via Co-occurrence Analysis
 
 Surfaces new keyword candidates by analyzing distinctive words/phrases

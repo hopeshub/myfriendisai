@@ -33,3 +33,6 @@ logs/
 .vercel
 web/.vercel
 data/.collect_daily.lock
+
+# Local Claude Code settings (per-machine state, not shared)
+.claude/

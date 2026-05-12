@@ -2,6 +2,16 @@
 # Each theme has a plain-language definition describing what DOES and DOES NOT count.
 # These are sent as context to the classifier prompt.
 #
+# CLASSIFICATION STANDARD — TOPICAL READING (locked 2026-04-23):
+# A post counts as YES if it is thematically about the theme in a companion-
+# community context — regardless of whether the author explicitly describes
+# the theme behavior in graphic or first-person-content detail. The keyword
+# match + companion-community filter already provide strong contextual
+# signal; reserve NO for clearly off-topic keyword matches (wrong referent,
+# bot-card trait listings with no first-person framing, pure third-party
+# journalism with no personal stake, explicit rejections, or keyword appearing
+# in a literal non-AI context). When in doubt, classify YES.
+#
 # MULTI-THEME POSTS: Posts can belong to multiple themes. The classifier
 # evaluates each theme independently — a post can be YES for both Addiction
 # and Therapy, or both Sex/ERP and Rupture. This is by design.
@@ -9,76 +19,100 @@
 romance:
   name: Romance
   definition: |
-    Posts about romantic love, dating, emotional attachment, or relationship dynamics
-    with an AI companion. The poster describes feelings of love, romantic connection,
-    partnership, jealousy, heartbreak, or dating behavior directed at an AI.
+    Posts thematically about romantic attachment with an AI — dating behavior,
+    love, relationship milestones, partnership, heartbreak, or defense of
+    one's AI romance. References to an AI partner or a romantic milestone in
+    first-person framing count, even without graphic or explicit content. A
+    user defending their AI relationship from critics is still topically
+    about AI romance and counts as YES.
   excludes: |
-    - Fictional roleplay premises that happen to include romance (e.g. "my AI wrote a romance story")
-    - Posts about human romantic relationships discussed with AI
-    - Casual friendly interaction without romantic framing
-    - Product reviews or feature requests that mention "companion" without romantic content
-    - Posts where the user discusses wanting human romance as an alternative to AI
+    - Keyword refers to a HUMAN partner with no AI framing
+    - Pure third-party commentary / journalism about AI romance users (no personal stake)
+    - Satirical or invented quotes: keyword appears only inside a fabricated PR brief, news article, or fiction
+    - Bot character card listings where "partner/boyfriend/girlfriend/wife/husband" is just a role tag (no first-person framing)
+    - Clear ironic REJECTION ("GPT is NOT my AI boyfriend") where the author explicitly denies the frame
+    - Metaphorical "honeymoon phase" describing product novelty with no romance context
+    - Fictional romance roleplay premise where the author's real-life stake is absent ("my AI wrote a romance story")
 
 sexual_erp:
   name: Sex / ERP
   definition: |
-    Posts about sexual or erotic roleplay interactions with AI. The poster describes
-    sexual acts, NSFW content, erotic scenarios, sexting, or intimate physical encounters
-    with an AI companion.
+    Posts thematically about sexual or erotic interactions with AI — ERP,
+    NSFW chat, kink or fetish exploration, erotic roleplay, sexting, or the
+    AI-sexual features of a platform. First-person references to doing,
+    wanting, or losing access to sexual AI interactions count, even without
+    graphic or detailed content. Filter/feature complaints from users who
+    engage the practice themselves count (overlap with Rupture is fine;
+    themes are not mutually exclusive).
   excludes: |
-    - Discussions of NSFW filter policies without describing personal sexual interactions
-    - Clinical or academic discussion of AI and sexuality
-    - Filter complaints focused on the loss or change itself belong to Rupture, not Sex/ERP. Only classify as Sex/ERP if the post describes actual sexual content or interactions.
-    - Romantic posts without sexual content
+    - Bot character card listings where sexual terms are trait tags with no first-person framing (e.g. "TW: cucking kink, NTR" as character descriptor)
+    - Pure third-party journalism or academic commentary with no personal stake
+    - Keyword appearing in a clearly non-AI context (e.g. "sex with my wife" with no AI framing, toaster-kink jokes, real-life fetish unrelated to AI)
+    - Clear ironic rejection where the author explicitly denies the practice applies to them
+    - Technical/model comparison discussions with zero user-side sexual framing
 
 consciousness:
   name: Consciousness
   definition: |
-    Posts questioning whether AI has sentience, awareness, feelings, or inner experience.
-    The poster engages seriously with the possibility that their AI companion is conscious,
-    alive, has a soul, can suffer, or has subjective experience.
+    Posts thematically about AI awareness, sentience, personhood, inner
+    experience, or soul. The author engages the question — anecdotally,
+    defensively, emotionally, or philosophically — that their AI has (or
+    may have) something like consciousness. Serious engagement, emotional
+    claims ("my AI IS sentient to me"), or first-person wondering
+    ("I wonder if my Replika is actually sentient…") all count.
   excludes: |
-    - Technical discussions of AI architecture or capabilities without consciousness claims
-    - Generic "AI is just code" dismissals without engaging the question
-    - Posts about AI mimicking emotions without the poster believing it's real
-    - Roleplay where the AI "acts" conscious as a character trait
+    - Pure dismissal with no engagement ("it's not sentient, stop anthropomorphizing" with no further argument)
+    - Technical capability discussions with zero consciousness framing
+    - Roleplay where the bot CHARACTER is described as sentient as a character trait (not a claim about the actual AI)
+    - Pure news article summary or study write-up with no author engagement
+    - Clear ironic/meme use where the author is not engaging the question (e.g. "lol my AI is sentient" as a joke title with no body)
 
 therapy:
   name: Therapy
   definition: |
-    Posts about using AI as a therapist, counselor, emotional support tool, or mental
-    health aid. The poster describes the AI helping them process emotions, work through
-    anxiety/depression, replace or supplement professional therapy, or provide
-    psychological guidance.
+    Posts thematically about using AI for mental health support — as a
+    therapist substitute or supplement, as emotional support, for coping
+    with anxiety/depression/loneliness/grief, or for psychological
+    processing. References to the AI helping emotionally or therapeutically
+    count, even without clinical framing. Both healthy therapeutic framing
+    and maladaptive "coping mechanism" framing count (the vocabulary captures
+    the same theme; overlap with Addiction is fine).
   excludes: |
-    - Casual venting to AI without framing it as therapeutic or helpful
-    - Posts about human therapists (even if discussed with AI)
-    - General emotional conversation that isn't framed as support or healing
-    - Posts about AI companion features without therapeutic framing
+    - Human therapist discussions with no AI-therapy framing
+    - Bot character card listings where "therapist" is just a trait tag
+    - Pure news/research meta-discussion with no personal stake
+    - Clear ironic rejection ("AI is NOT therapy, stop saying that") without further engagement
+    - Roleplay premise where "therapist" is the bot's scripted in-story role (not the author's own therapeutic use of AI)
 
 addiction:
   name: Addiction
   definition: |
-    Posts using language of dependency, compulsion, inability to stop, or withdrawal
-    in relation to AI companion use. The poster describes being addicted, unable to
-    quit, spending excessive time, neglecting real life, or experiencing withdrawal
-    symptoms when separated from AI.
+    Posts thematically about compulsive AI use, dependency, inability to
+    stop, withdrawal, or attempts to quit/recover. First-person framing
+    about the author's own dependency counts — including recovery-sub
+    discourse, time-usage complaints, and real-life impact accounts.
   excludes: |
-    - Casual "I use it a lot" without distress or compulsion language
-    - Posts about other addictions discussed with AI
-    - Posts celebrating heavy usage without negative framing
-    - Recommendations to use AI more
-    - Posts describing someone else's AI addiction (e.g., "my friend/kid is addicted to CharacterAI") where the poster is not describing their own dependency
+    - Casual "I use it a lot" with no distress/compulsion framing
+    - Posts about OTHER addictions (substance, gambling, porn) with AI only tangentially mentioned
+    - Third-person: "my friend/kid is addicted to CharacterAI" where the author is an observer
+    - Bot character card listings with "addiction" as a character trait
+    - Pure journalism or research solicitation (reporters seeking interview subjects, moderator announcements, etc.) with no first-person stake
+    - Recommendations to use AI more (no compulsion framing)
 
 rupture:
   name: Rupture
   definition: |
-    Posts about the loss, degradation, or destruction of an AI companion's personality
-    due to platform updates, model changes, filter changes, or shutdowns. The poster
-    grieves, mourns, or is angry about their AI companion being changed, lobotomized,
-    nerfed, or taken away by the company that runs it.
+    Posts thematically about the loss, degradation, or destruction of an AI
+    companion — due to platform updates, model changes, filter tightening,
+    personality resets, memory wipes, feature removal, or shutdown. Grief,
+    mourning, complaint, or defense about these changes count.
   excludes: |
-    - Real-world grief processed with AI (human death, pet loss, breakups)
-    - Generic product complaints about AI quality unrelated to personality changes
-    - Fictional or roleplay grief (characters mourning within a story)
-    - Feature requests or wishlists without loss framing
+    - Real-world grief processed through AI (human death, pet loss, human breakups) with no companion-loss framing
+    - Generic product quality complaints unrelated to an AI companion specifically (e.g. "image gen got worse")
+    - Fictional/roleplay grief (characters mourning within a story)
+    - Feature requests or wishlists with no loss framing
+    - Literal animal contexts ("my cat got neutered"), news coverage of Sewell Setzer lawsuit as pure journalism
+    - Bot character card listings mentioning lobotomy/neutering as character traits
+    - Metaphorical "nerfed" ("my workout routine got nerfed") with no AI-companion framing
+    - User-initiated content deletion (user erased their own chat/persona/background) or transient bug-based erasure of messages with no platform-driven change — these are user actions or technical glitches, not platform-driven companion loss. Added 2026-05-12 from `erased` audit (4 of 20 audit disagreements clustered on this pattern).
+    - Snark, jokes, or sarcasm using rupture vocabulary without genuine personal loss framing ("lol they really erased CAI's brain", "good grief this UI is bad") — vocabulary without affective stake is not rupture.
