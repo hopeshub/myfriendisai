@@ -466,7 +466,7 @@ export default function TrendsExplorer({ themeData, keywordDetails }: Props) {
   const summaries: SummaryLine[] = useMemo(() => {
     if (selected.size === 0) {
       return [{
-        text: "Tracking how people talk about AI companionship across 27 Reddit communities, from January 2023 to present.",
+        text: "Tracking how people talk about AI companionship across 27 Reddit communities, weighted by post volume, from January 2023 to present.",
         themeName: null,
         themeColor: null,
       }];

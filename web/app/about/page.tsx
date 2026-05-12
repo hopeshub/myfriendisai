@@ -31,6 +31,21 @@ const STATS = [
 
 const CHANGELOG = [
   {
+    date: "April 23, 2026",
+    title: "Keyword revalidation: 6 cuts, 6 promotions, methodology tightened",
+    items: [
+      "Revalidated all 46 high-volume keywords (≥50 hits) against the post-April-20 corpus using the same 100-post manual scoring methodology used to establish the original baselines",
+      "Cut 6 keywords that collapsed below 60% precision: sentient and self-aware (CharacterAI meme dilution), chatbot addiction (journalist and moderator solicitation in recovery subs), and kink, fetish, nsfw bot (bot-directory listings and genre-tag content)",
+      "Promoted 6 keywords from researcher-accepted to clean KEEP after clearing 80%: neutered (93%), grieving (86%), clean for (96%), as a therapist (87%), therapeutic (87%), and for therapy (89%)",
+      "Why this happened: keywords age. “Sentient” (the volume anchor of consciousness, 83% precision in March) dropped to 55% — not because consciousness discourse is fading, but because the word got absorbed into CharacterAI meme culture (joke titles, RP character traits, dismissive one-liners) while serious discourse moved toward more specific vocabulary like personhood, selfhood, and subjective experience. The theme’s vocabulary matured while its most-common carrier word got memed. A similar dynamic drove the sex/ERP cuts: bot-directory listings and genre-tag content now dominate matches for kink, fetish, and “nsfw bot”",
+      "What it means for the trend lines: the consciousness series will look noticeably thinner — sentient alone had carried roughly 1,100 of the theme’s tagged posts. That’s the precision-first tradeoff at work. We trade recall (loose meme-register usage) for signal quality: every remaining match reliably represents serious engagement with the question rather than ironic or joke-register mention",
+      "Rupture is now the strongest theme (8 of 8 keywords at ≥84% precision); Sex/ERP narrowed to its high-precision core — erp (98%), steamy (96%), erotic roleplay (85%) carry the signal",
+      "Tightened the classification standard to use an explicit topical reading (“posts thematically about X in a companion community”) rather than the prior ambiguous wording that mixed topical and first-person-content language. The ambiguity had caused an initial revalidation pass to systematically understate precision on defensible keywords",
+      "Full report: docs/validation_all_themes_revalidation_2026-04-23.md",
+    ],
+    recent: true,
+  },
+  {
     date: "April 20, 2026",
     title: "Multi-word keyword boundary fix and full corpus re-tag",
     items: [
@@ -296,6 +311,40 @@ export default function About() {
           </div>
         </section>
 
+        {/* How the aggregate is composed */}
+        <section style={sectionStyle}>
+          <h2 style={sectionHeaderStyle}>
+            How the aggregate is composed
+          </h2>
+          <div className="space-y-4" style={bodyStyle}>
+            <p>
+              The chart shows post-volume-weighted rates across all 22 primary
+              AI companionship subreddits. A community generating 400 posts a
+              day pulls the aggregate toward its language profile more than one
+              generating 5 a day.
+            </p>
+            <p>
+              One community &mdash; r/CharacterAI &mdash; currently makes up
+              roughly two-thirds of the post volume in our corpus.
+              CharacterAI&apos;s discourse skews toward platform mechanics
+              (memory resets, model degradation, addiction recovery) and away
+              from explicit romance or sexual content, which tend to happen{" "}
+              <em>in</em> conversations on companion-romance and NSFW platforms
+              rather than <em>as posts about them</em>.
+            </p>
+            <p>
+              What this means: the aggregate mention rate for any theme is best
+              read as &ldquo;across the ecosystem, weighted by where the
+              conversation is actually happening&rdquo; &mdash; not
+              &ldquo;across the average AI companion community.&rdquo; Smaller
+              communities like r/MyBoyfriendIsAI, r/NomiAI, and r/SpicyChatAI
+              have very different thematic profiles, but contribute
+              proportionally less to the aggregate. As the ecosystem evolves and
+              the volume distribution shifts, the aggregate will shift with it.
+            </p>
+          </div>
+        </section>
+
         {/* What this captures */}
         <section style={sectionStyle}>
           <h2 style={sectionHeaderStyle}>
@@ -321,9 +370,12 @@ export default function About() {
           <div style={bodyStyle}>
             <p>
               Data from January 2023 through March 12, 2026 was backfilled from
-              PullPush and Arctic Shift Reddit archives. Beginning March 13,
-              2026, posts are collected daily via Reddit&apos;s API. The data
-              format and processing pipeline are identical regardless of source.
+              PullPush and Arctic Shift Reddit archives. From March 13, 2026
+              onward, posts are collected daily via Reddit&apos;s API, with
+              periodic backfills from Arctic Shift to ensure complete coverage
+              of high-volume communities that exceed the daily collection&apos;s
+              per-request limits. The data format and processing pipeline are
+              identical regardless of source.
             </p>
           </div>
         </section>
