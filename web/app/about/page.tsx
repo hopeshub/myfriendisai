@@ -32,6 +32,18 @@ const STATS = [
 const CHANGELOG = [
   {
     date: "May 12, 2026",
+    title: "Therapy theme noise documented; 5 keywords re-validated under clarified [removed]-body rubric",
+    items: [
+      "The May 12 audit revealed that the therapy theme has the highest inter-rater noise across the six themes — all four therapy keywords below the 85% audit-agreement gate (\"as a therapist\" 60%, \"for therapy\" 60%, \"therapeutic\" 65%, \"emotional support\" 75%). This isn't because the keywords are bad. It's because the therapy concept itself has fuzzier boundaries than rupture/romance/addiction in how the community talks about it: peripheral therapy mentions, AI-as-therapist character backstories, critiques of AI-as-therapy, and first-person therapeutic use all overlap in the keyword space",
+      "Anchor-mining was attempted to find higher-precision therapy replacements. Three independent CC agents read 145 already-validated YES posts and converged on candidates: \"my ai therapist\", \"therapist bot\", \"psychologist bot\", \"real therapist\", \"instead of therapy\", and others. All failed pre-screen for the same reason — they're each individually below 50 corpus hits because the community's therapy vocabulary is fragmented across many phrasings. The keywords are well-formed in principle; the corpus is too thin to validate them at n=100 today",
+      "Honest interpretation: the therapy theme's noise floor is structurally higher than other themes' for the reasons above. The four existing therapy keywords are kept (they still produce signal) but readers should treat therapy precision numbers with wider confidence bands than other themes. Once corpus growth makes the higher-precision candidates testable (estimated 2-3 months), the therapy theme can be re-validated and possibly expanded or restructured",
+      "Separately, the theme_definitions.yaml rubric was clarified for posts with [removed] or empty bodies: when the title is on-topic in a companion subreddit, the post counts as YES. This clarification resolves a stored-label drift the audit surfaced. Five keywords were re-classified under the clarified rubric on a fresh n=100 sample with fresh n=20 audit. Results: sex with 99% precision (audit 100%), nsfw chat 96% (95%), lewd 88% (95%), finally deleted 85% (90%) — all now pass all five gates cleanly. \"hours a day\" improved from 63% to 69% with 80% audit agreement; remains researcher-accepted in REVIEW band per its original rationale of T1-T2 dependency-signal coverage",
+      "Full report: docs/validation_v8_full_revalidation_2026-05-12.md (audit findings) and docs/validation_emotional_loss_2026-05-12.md (companion v8.1 doc)",
+    ],
+    recent: true,
+  },
+  {
+    date: "May 12, 2026",
     title: "Full v8 keyword revalidation under the new audit gate: 29 of 40 audited keywords pass",
     items: [
       "Applied the new 5-gate validation procedure retroactively to every v8 keyword with enough stored classifications to audit (40 of 76 pre-v8.1 keywords). The remaining 36 are LOW VOLUME placeholders (<50 corpus hits) for which an n=20 audit is not methodologically meaningful; they retain their original validation status",

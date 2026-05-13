@@ -1,0 +1,15 @@
+# Fresh primary classification under the 2026-04-23 topical-reading rubric.
+# These 5 keywords had stored primary labels predating the rubric lock, and
+# the 2026-05-12 audit revealed systematic disagreement on [removed]-body posts
+# (audit YES vs primary NO). This batch re-runs primary classification on a
+# fresh n=100 sample so we have stored labels that match the current rubric.
+- keyword: lewd
+  theme: sexual_erp
+- keyword: nsfw chat
+  theme: sexual_erp
+- keyword: sex with
+  theme: sexual_erp
+- keyword: finally deleted
+  theme: addiction
+- keyword: hours a day
+  theme: addiction

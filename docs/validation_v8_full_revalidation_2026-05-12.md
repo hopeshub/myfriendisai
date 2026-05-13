@@ -180,6 +180,59 @@ The following 36 v8 keywords have <20 stored classifications and could not be au
 
 ---
 
+## Resolution (later same day, 2026-05-12)
+
+After the initial audit findings, two follow-up actions were taken:
+
+### 1. theme_definitions.yaml clarification for [removed]-body posts
+
+Added an explicit note in the rubric header:
+
+> [REMOVED]-BODY POSTS (clarified 2026-05-12): Many posts have a body of `[removed]` or `[deleted]`. For these posts, classify based on the title + subreddit context. If the title is on-topic in a companion subreddit, the post counts as YES under the topical reading. Only classify NO if the title itself is clearly off-topic.
+
+### 2. Fresh primary classification for the 5 [removed]-affected keywords
+
+A fresh n=100 sample was drawn for each of `lewd`, `nsfw chat`, `sex with`, `finally deleted`, and `hours a day`. Both primary and audit (n=20) were run under the clarified rubric. Results:
+
+| Keyword | Old stored precision | Fresh precision | Audit agreement | Status |
+|---|---|---|---|---|
+| sex with | 92% | **99%** | **100%** | clean KEEP |
+| nsfw chat | 95% | **96%** | **95%** | clean KEEP |
+| lewd | 59% | **88%** | **95%** | clean KEEP (drift resolved) |
+| finally deleted | 81% | **85%** | **90%** | clean KEEP |
+| hours a day | 63% | **69%** | 80% | researcher-accepted REVIEW |
+
+Four of the five now have stored labels that match the current rubric and clear all five gates. `hours a day` remains in the researcher-accepted REVIEW band per its original rationale (T1-T2 dependency-signal coverage, no cleaner replacement available).
+
+### 3. Therapy anchor-mining attempt
+
+To address the therapy-theme audit failures, anchor-mining was run on 145 YES posts under `coping mechanism` (100% audit) and `ai therapist` (85% audit). Three independent CC agents converged on candidate phrases. Pre-screen results:
+
+| Candidate (≥2 agents) | T1-T3 hits | Top sub | Pre-screen verdict |
+|---|---|---|---|
+| comfort character | 66 | r/CharacterAI (65%) | TOP-SUB FAIL |
+| therapy bot | 52 | r/replika (75%) | TOP-SUB FAIL |
+| for my mental health | 40 | r/replika (28%) | LOW VOLUME |
+| therapist bot | 28 | r/replika (46%) | LOW VOLUME |
+| psychologist bot | 24 | r/CharacterAI (83%) | LOW VOLUME |
+| real therapist | 14 | r/CharacterAI (57%) | LOW VOLUME |
+| (others) | <20 | various | LOW VOLUME |
+
+No candidate cleared both volume + concentration gates. The therapy theme has a structurally fragmented vocabulary — the community talks about AI-therapy in many phrasings, each individually too rare for n=100 validation. The 4 noisy existing therapy keywords are retained as the best available signal; readers warned on the about page. **Schedule:** retry anchor mining in 2-3 months once corpus growth pushes candidates above the volume floor.
+
+### Final v8 state after resolution
+
+- 76 v8 + 8 v8.1 = 84 keywords in `keywords_v8.yaml`
+- 40 audited under the 5-gate procedure
+  - 29 cleared all gates (from original audit)
+  - 4 of the 5 [removed]-affected keywords now also clear all gates (fresh validation)
+  - 1 keyword (`hours a day`) remains in researcher-accepted REVIEW
+  - 6 keywords (4 therapy + `husbando` + `honeymoon`) retained with audit-fail annotations
+- 36 LOW VOLUME grandfathered
+- Net audit-clean keyword count: **33 of 40 audited (82.5%)**, up from 29 (72.5%) before the [removed]-body fix
+
+---
+
 ## Source files
 
 - Audit prompt: `analysis/keyword_pipeline/results/audit_v8_revalidation_2026-05-12.md`

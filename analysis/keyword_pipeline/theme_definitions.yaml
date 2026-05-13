@@ -15,6 +15,17 @@
 # MULTI-THEME POSTS: Posts can belong to multiple themes. The classifier
 # evaluates each theme independently — a post can be YES for both Addiction
 # and Therapy, or both Sex/ERP and Rupture. This is by design.
+#
+# [REMOVED]-BODY POSTS (clarified 2026-05-12): Many posts have a body of
+# `[removed]` or `[deleted]` (Reddit moderation or user deletion after
+# posting). For these posts, classify based on the title + subreddit
+# context. If the title is on-topic in a companion subreddit, the post
+# counts as YES under the topical reading. Only classify NO if the title
+# itself is clearly off-topic (e.g., a literal non-AI context, a clear
+# ironic rejection in the title, or a generic title that gives no theme
+# signal at all). This clarification was driven by the 2026-05-12 v8
+# audit revalidation, which surfaced systematic disagreement on
+# [removed]-body posts under the older interpretation.
 
 romance:
   name: Romance

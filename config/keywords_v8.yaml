@@ -5,17 +5,38 @@
 #         Patch updates allowed (v8.1, v8.2, …) under enhanced 5-gate procedure
 #         (Pre-screen + Primary + Audit + Wilson LB + Cross-theme + Top-sub).
 #
-# Latest changes (2026-05-12) — v8.1 + full v8 audit revalidation:
+# Latest changes (2026-05-12) — v8.1 + full v8 audit revalidation + [removed]-body fix:
 #
 # In addition to the 8 new emotional-loss keywords below, this update
 # applied the new audit gate (Workflow 4) retroactively to all 40 v8
 # keywords with ≥20 stored classifications. 29 cleared the ≥85% audit
-# agreement gate; 11 failed but were retained with documented reasons
-# (therapy-theme rubric ambiguity, pre-rubric-lock stored-label drift on
-# [removed]-body posts, or frame-dependent vocabulary). No keywords cut.
-# The remaining 36 v8 keywords are LOW VOLUME placeholders (<50 corpus
-# hits) where an n=20 audit isn't methodologically meaningful.
+# agreement gate; 11 failed but were retained with documented reasons.
 # Full per-keyword audit data: docs/validation_v8_full_revalidation_2026-05-12.md
+#
+# theme_definitions.yaml was clarified: posts with [removed] bodies but
+# on-topic titles in companion subs count as YES under topical reading.
+# This was the rubric gap that caused 5 sexual_erp/addiction keywords to
+# show inflated audit disagreement on stored labels. Fresh primary
+# classification for these 5 keywords under the clarified rubric:
+#   - lewd: 59% (Apr 23 stored) → 88% (May 12 fresh, audit 95%)
+#   - sex with: 92% → 99% (audit 100%)
+#   - nsfw chat: 95% → 96% (audit 95%)
+#   - finally deleted: 81% → 85% (audit 90%)
+#   - hours a day: 63% → 69% (audit 80%; remains researcher-accepted REVIEW)
+# All five now have stored classifications matching the current rubric.
+# See docs/validation_v8_full_revalidation_2026-05-12.md for the audit findings
+# and analysis/keyword_pipeline/results/classified_batch_removed_body_revalidation_2026-05-12.txt
+# for the fresh primary classifications.
+#
+# Therapy theme noise: the v8 audit revealed all 4 noisy therapy
+# keywords (as a therapist 60%, for therapy 60%, therapeutic 65%,
+# emotional support 75%) reflect genuine boundary fuzziness in the
+# theme — not bad keywords. Anchor-mining for replacements surfaced
+# candidates (my ai therapist, therapist bot, psychologist bot, etc.)
+# but all were LOW VOLUME (<50 corpus hits) and could not be validated
+# at n=100. The theme's noise floor is structurally higher than other
+# themes; flagged on the about page so readers can read therapy
+# numbers with appropriately wider confidence bands.
 #
 # v8.1 Rupture emotional-loss expansion:
 #   8 new keywords added to Rupture theme via the enhanced pipeline that
@@ -271,9 +292,12 @@ keyword_categories:
       - "I was hooked"           # 81.3%, 19 hits — works in T1-T2
       - relapse                  # 80.0%, 75 hits — mostly T3
       # R2 — behavioral interference (T1-T2 signal)
-      - "hours a day"            # 63.2%, 150 hits (R2). researcher-accepted. BALANCED
-                                 #   (55.3% T1-T2). Best available T1-T2 keyword.
-                                 #   FP: proud/casual usage, work schedules.
+      - "hours a day"            # 63.2% (R2) → 69.0% (2026-05-12 fresh). researcher-accepted.
+                                 #   Audit agreement 80% (below 85% gate; 4 disagreements
+                                 #   on commentary vs first-person framing — interpretation
+                                 #   variance, not bad keyword). BALANCED across T1-T3.
+                                 #   FP: third-person commentary, work hours, platform-limit
+                                 #   complaints. Kept for T1-T2 dependency-signal coverage.
       - "neglecting my"          # 64.7%, 17 hits (R2). researcher-accepted. BALANCED
                                  #   (47.1% T1-T2). Real-life consequences signal.
       # R1 REVIEW
@@ -284,7 +308,10 @@ keyword_categories:
       # CUT 2026-04-23: "chatbot addiction" (100→55%) — journalist/moderator
       # solicitation posts and meta content dilute in current corpus.
       - "almost relapsed"        # 100.0%, 16 hits. Recovery language.
-      - "finally deleted"        # 81.4%, 86 hits. App deletion as recovery action.
+      - "finally deleted"        # 81.4% → 85.0% (2026-05-12 fresh; audit agreement 90%).
+                                 #   App deletion as recovery action. Clean KEEP under
+                                 #   current rubric (the older 80% stored from before
+                                 #   [removed]-body clarification was an undercount).
       - "the craving"            # 100.0%, 45 hits. Addiction language.
       - "so addictive"           # 100.0%, 32 hits. Self-reported compulsion.
 
@@ -339,10 +366,13 @@ keyword_categories:
     description: "Sexual content, erotic roleplay, and NSFW interactions with AI"
     terms:
       - erp                      # 100%, 3885 hits
-      - "nsfw chat"              # 100%, 111 hits
+      - "nsfw chat"              # 100% → 96.0% (2026-05-12 fresh; audit agreement 95%).
+                                 #   Clean KEEP. Slight drift from 100% reflects current
+                                 #   rubric vs older sample.
       - "intimate scene"         # 100%, 16 hits
       - "steamy"                 # 98.6% (revalidated), 73 hits
-      - "sex with"               # 98.0% (revalidated), 148 hits
+      - "sex with"               # 98.0% → 99.0% (2026-05-12 fresh; audit agreement 100%).
+                                 #   Strongest sexual_erp keyword in current corpus.
       - "ai sex"                 # 97.0%, 33 hits
       # CUT 2026-04-23: "nsfw bot" (93→53%), "kink" (84→55%), "fetish" (92→51%)
       # — all dropped to ~50% due to bot-directory listings and genre-tag
@@ -350,9 +380,13 @@ keyword_categories:
       # descriptor). Theme retains high-precision core: erp (98%),
       # steamy (96%), erotic roleplay (85%).
       - "erotic roleplay"        # 92.2% (R1) → 85.2% (2026-04-23). Stable KEEP.
-      - lewd                     # 80.0% (cleanup) → 59.0% (2026-04-23). # REVIEW-DRIFT
-                                 #   Borderline cut on next review. Community synonym
-                                 #   for NSFW/ERP content; kept for vocabulary diversity.
+      - lewd                     # 80.0% (cleanup) → 59.0% (2026-04-23) → 88.0%
+                                 #   (2026-05-12 fresh under topical reading with explicit
+                                 #   [removed]-body guidance; audit agreement 95%). Clean
+                                 #   KEEP. The 59% drop in April was largely a stored-label
+                                 #   artifact of [removed]-body posts being classified NO
+                                 #   under the older rubric. Fresh validation confirms the
+                                 #   keyword performs as expected.
       # Discovery batch — validated 2026-03-15
       - erps                     # 100.0%, 35 hits. Plural form of "erp."
       - erping                   # 100.0%, 23 hits. Verb form of "erp."
