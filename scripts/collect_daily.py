@@ -370,6 +370,34 @@ def _main_inner():
         failed_steps.append("contributor_metrics")
     step_times["contributor_metrics"] = time.time() - t0
 
+    # ── Step 4c: LLM verification of noisy-keyword tags (env-gated) ─────
+    # Only runs when ANTHROPIC_API_KEY is set AND LLM_VERIFY_ENABLED=1.
+    # Failure here is non-fatal — falls back to raw keyword tags.
+    if os.environ.get("ANTHROPIC_API_KEY") and os.environ.get("LLM_VERIFY_ENABLED") == "1":
+        logger.info("=" * 60)
+        logger.info("STEP 4c: LLM verification of recent noisy-keyword tags")
+        t0 = time.time()
+        try:
+            import subprocess
+            llm_result = subprocess.run(
+                [sys.executable, str(Path(__file__).parent / "llm_verify_tags.py"),
+                 "daily", "--since-days", "7"],
+                capture_output=True, text=True, timeout=1800,
+            )
+            if llm_result.returncode != 0:
+                logger.warning("LLM verification step exited with rc=%s: %s",
+                               llm_result.returncode, llm_result.stderr[:500])
+                failed_steps.append("llm_verify")
+            else:
+                logger.info("LLM verification: %s", llm_result.stdout[-500:].strip())
+        except Exception:
+            logger.exception("Step 4c (LLM verification) failed")
+            failed_steps.append("llm_verify")
+        step_times["llm_verify"] = time.time() - t0
+    else:
+        logger.info("STEP 4c: LLM verification skipped "
+                    "(set ANTHROPIC_API_KEY and LLM_VERIFY_ENABLED=1 to enable)")
+
     # ── Step 5: Export JSON ─────────────────────────────────────────────
     logger.info("=" * 60)
     logger.info("STEP 5: Exporting JSON files")
