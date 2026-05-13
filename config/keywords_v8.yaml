@@ -205,20 +205,40 @@ keyword_categories:
   - name: therapy
     description: "AI described as therapeutic support or therapist replacement"
     terms:
-      - "ai therapist"            # 92.0%, 27 hits (R1)
-      - "free therapy"            # 75.0%, 11 hits (R1) — low volume, clean signal
-      - "ai therapy"              # 73.3%, 17 hits (R1)
-      - "as a therapist"          # 73.0% (R2) → 86.9% (2026-04-23). Promoted to KEEP.
-                                  #   "as" implies intentional use, not complaint.
-      - therapeutic               # 69.0% (R2) → 87.0% (2026-04-23). Promoted to KEEP.
-                                  #   Biggest volume therapy keyword. Replika and
-                                  #   MyBoyfriendIsAI overwhelmingly genuine.
-      - "for therapy"             # 63.5% (R2) → 89.0% (2026-04-23). Promoted to KEEP.
-                                  #   Prior FP (negation "not for therapy") appears
-                                  #   less common in current corpus.
+      # THERAPY THEME NOISE (documented 2026-05-12):
+      # The therapy theme has the highest inter-rater noise of the six themes.
+      # 4 of 6 audited therapy keywords below the ≥85% audit-agreement gate.
+      # This reflects genuine construct fuzziness — the boundary between
+      # "first-person AI-therapy use" and "AI-as-therapist as topic discussed"
+      # is porous, and the keywords trigger on both. Anchor-mining for
+      # higher-precision replacements (my ai therapist, therapist bot,
+      # psychologist bot, real therapist, instead of therapy, etc.) found
+      # well-formed candidates but ALL failed pre-screen for low volume
+      # (<50 hits) — the community uses many phrasings, each individually
+      # too rare for n=100 validation. The existing keywords are kept as
+      # the best available signal; readers warned on about page.
+      # NEXT REVIEW: 2-3 months out, retry mining once corpus grows.
+      - "ai therapist"            # 92.0% (R1) → 85% audit agreement (2026-05-12).
+                                  #   At threshold; cleanest therapy keyword.
+      - "free therapy"            # 75.0%, 11 hits (R1) — LOW VOLUME, not auditable
+      - "ai therapy"              # 73.3%, 17 hits (R1) — LOW VOLUME, not auditable
+      - "as a therapist"          # 73.0% → 86.9% (2026-04-23) → audit 60% (2026-05-12).
+                                  #   Audit-gate FAIL — interpretation variance on
+                                  #   meta/critique posts. Theme-level fuzziness; kept.
+      - therapeutic               # 69.0% → 87.0% (2026-04-23) → audit 65% (2026-05-12).
+                                  #   Audit-gate FAIL — boundary ambiguity between
+                                  #   first-person therapeutic use and meta-discussion.
+                                  #   Biggest-volume therapy keyword; kept as best signal.
+      - "for therapy"             # 63.5% → 89.0% (2026-04-23) → audit 60% (2026-05-12).
+                                  #   Audit-gate FAIL — both readings ("for [my] therapy"
+                                  #   vs "for [substitute] therapy") trigger the keyword.
+                                  #   Kept; future cycle may split into two narrower keywords.
       # Discovery batch — validated 2026-03-15
-      - "emotional support"      # 100.0%, 505 hits. Broad therapeutic framing.
-      - "coping mechanism"       # 100.0%, 307 hits. Clinically precise language.
+      - "emotional support"      # 100.0% → audit 75% (2026-05-12). Audit-gate FAIL.
+                                  #   Broad therapeutic framing; some platform-level
+                                  #   claims classify ambiguously. Kept for high volume.
+      - "coping mechanism"       # 100.0% → audit 100% (2026-05-12). Cleanest therapy
+                                  #   keyword by audit agreement. Anchor for mining.
 
   # ──────────────────────────────────────────────
   # 2. CONSCIOUSNESS

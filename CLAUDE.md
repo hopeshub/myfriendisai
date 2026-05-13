@@ -88,9 +88,11 @@ Regex-based keyword tagging runs on all collected posts via `scripts/tag_keyword
 | **addiction** | 14 | ~1,705 | Self-reported addiction, compulsive use, and attempts to quit or recover |
 | **romance** | 19 | ~2,014 | Romantic framing of a personal relationship with AI |
 | **sexual_erp** | 10 | ~5,343 | Sexual content, erotic roleplay, and NSFW interactions with AI |
-| **rupture** | 14 | ~1,828 | Loss or disruption of AI companion relationships due to platform changes |
+| **rupture** | 22 | ~5,026 | Loss or disruption of AI companion relationships due to platform changes |
 
-*Counts reflect the 2026-04-23 revalidation (6 cuts, 6 promotions). Consciousness volume dropped significantly because `sentient` (the volume anchor) was cut due to CharacterAI meme dilution. See `docs/validation_all_themes_revalidation_2026-04-23.md` for full analysis.*
+*Counts reflect the 2026-04-23 revalidation (6 cuts, 6 promotions) and the 2026-05-12 v8.1 expansion (8 new rupture keywords) and audit revalidation (40 keywords audited under the 5-gate procedure). Rupture volume rose substantially after the emotional-loss expansion. See `docs/validation_all_themes_revalidation_2026-04-23.md`, `docs/validation_emotional_loss_2026-05-12.md`, and `docs/validation_v8_full_revalidation_2026-05-12.md` for the full analyses.*
+
+**Therapy theme noise (documented 2026-05-12):** The therapy theme has the highest inter-rater noise across the six themes. All four therapy keywords below the ≥85% audit-agreement gate (`as a therapist` 60%, `for therapy` 60%, `therapeutic` 65%, `emotional support` 75%) — reflecting genuine boundary fuzziness in the construct, not bad keywords. Anchor-mining for higher-precision replacements was attempted (3 parallel agents over 145 YES posts) and found valid candidates (`my ai therapist`, `therapist bot`, `psychologist bot`, `real therapist`, `instead of therapy`) — but all failed pre-screen for low volume (<50 hits) because the community's therapy vocabulary is structurally fragmented across many phrasings. **For future Claude sessions: do not re-attempt therapy keyword mining until corpus growth pushes candidates above the 50-hit floor (estimate 2-3 months from 2026-05-12).** The four existing keywords are kept as the best available signal; the about-page changelog flags the higher noise for readers.
 
 **Scope:** Keywords are matched against T1-T3 companion communities only. JanitorAI_Official and SillyTavernAI are excluded (bot card noise — dominant false positive source). T0 general AI subs are excluded from keyword trend lines.
 

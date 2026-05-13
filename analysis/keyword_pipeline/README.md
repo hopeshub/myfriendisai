@@ -358,6 +358,14 @@ Every precision number from this pipeline sits on top of these caveats. They sho
 
 A keyword can be 95% precise at matching "posts where the keyword appears in companion-adjacent context" while still being construct-invalid (measuring the wrong thing). Example: `keep4o` at high precision for rupture would track OpenAI 4o controversy rather than AI-companion loss broadly. **High precision does not guarantee construct validity.** Top-sub concentration and temporal distribution are the minimum checks for this.
 
+### 5b. Theme-level noise variance (documented 2026-05-12)
+
+Not all themes have the same boundary clarity. The 2026-05-12 v8 audit revalidation found mean inter-rater agreement of 93% across rupture/consciousness/addiction/romance, but only **74% for therapy**. The therapy theme has a fuzzier construct boundary — the difference between "first-person AI-therapy use" and "AI-as-therapist as topic discussed" is porous in practice, and the existing therapy keywords (`therapeutic`, `for therapy`, `as a therapist`, `emotional support`) trigger on both.
+
+Anchor-mining for narrower replacements (`my ai therapist`, `therapist bot`, `psychologist bot`, etc.) surfaced well-formed candidates that **all failed pre-screen for low volume** — the community talks about AI-therapy in many phrasings, each too rare for n=100 validation. This is a structural limit, not a methodology gap.
+
+**Operating implication:** therapy precision numbers should be read with wider confidence bands (±10-15pp from classifier interpretation variance) than other themes' numbers (±~7pp). The about-page changelog flags this for site readers. Future Claude sessions: don't repeat the therapy mining attempt until corpus growth (estimate 2-3 months from 2026-05-12) lifts the candidate phrases above the volume floor.
+
 ### 6. Sample-size-vs-threshold mismatch
 
 At n=100, the 80% precision threshold has a ±7-8pp CI. The Wilson-LB gate partially mitigates this, but near-threshold decisions (83-86% point precision) are not statistically clean. For these, rely on FP-pattern categorizability and cross-agent convergence, not the point estimate alone.
