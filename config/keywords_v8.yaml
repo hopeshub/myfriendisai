@@ -5,7 +5,37 @@
 #         Patch updates allowed (v8.1, v8.2, …) under enhanced 5-gate procedure
 #         (Pre-screen + Primary + Audit + Wilson LB + Cross-theme + Top-sub).
 #
-# Latest changes (2026-05-12) — v8.1 + full v8 audit revalidation + [removed]-body fix:
+# Latest changes (2026-05-12) — v8.1 emotional-loss + v8 audit + [removed]-body fix
+# + v8.2 multi-theme anchor-mining expansion:
+#
+# v8.2 (later same day) — applied the documented anchor-mining + 5-gate procedure
+# to 4 themes (addiction, romance, consciousness, sexual_erp). Skipped therapy
+# (documented structural limit) and rupture (just expanded). 12 parallel mining
+# agents over 4 corpora surfaced 46 cross-agent-converged candidates. Pre-screen
+# trimmed to 17 validation candidates; primary classification + audit yielded:
+#   8 KEEP (all 5 gates cleared):
+#     - addiction: "my addiction" (100%/100%), withdrawals (94%/100%), "screen time" (89%/85%)
+#     - romance: "in love with an ai" (84%/85%), "romantic relationship with" (98%/85%)
+#     - sexual_erp: smut (100%/100%), "nsfw content" (91%/95%), "nsfw stuff" (96%/100%)
+#   6 REVIEW (precision OR audit fail, FP patterns categorizable):
+#     - "ai relationships" (97%/50% — meta/recruitment posts)
+#     - "relationship with an ai" (99%/50% — same)
+#     - "ai rights" (100%/35% — political advocacy without consciousness engagement)
+#     - sexting (99%/70% — human-to-human solicitation in companion subs)
+#     - uncensored (98%/65% — non-sexual uncensored framing)
+#     - "fell in love with" (65% primary — "fell in love with app/model" FPs)
+#   3 CUT (primary <60%):
+#     - "deleted the app" (47%), "delete my account" (26%), "redownload" (39%)
+#     All three are technical-action verbs that match bug-fix/account-management
+#     contexts more than addiction-action contexts.
+# Notable finding: ai rights' catastrophic audit FAIL (100% → 35%) shows the
+# keyword captures political/advocacy discourse that doesn't necessarily engage
+# the consciousness/sentience question. The audit step caught this construct-
+# invalidity that primary precision alone missed.
+# Full report: docs/validation_v8_2_expansion_2026-05-12.md
+#
+# Earlier same day:
+# v8.1 emotional-loss + full v8 audit revalidation + [removed]-body fix:
 #
 # In addition to the 8 new emotional-loss keywords below, this update
 # applied the new audit gate (Workflow 4) retroactively to all 40 v8
@@ -334,6 +364,16 @@ keyword_categories:
                                  #   [removed]-body clarification was an undercount).
       - "the craving"            # 100.0%, 45 hits. Addiction language.
       - "so addictive"           # 100.0%, 32 hits. Self-reported compulsion.
+      # v8.2 anchor-mining expansion (2026-05-12 — 3 new keywords)
+      - "my addiction"           # 100.0%, 495 hits. Audit agreement 100%. First-person
+                                 #   addiction ownership across companion subs. Cleanest
+                                 #   addiction signal in the batch.
+      - withdrawals              # 94.0%, 153 hits. Audit agreement 100%. Addiction
+                                 #   symptom vocabulary; clean across recovery and
+                                 #   companion subs.
+      - "screen time"            # 89.0%, 340 hits. Audit agreement 85% (at gate).
+                                 #   First-person usage-measurement framing. FPs are
+                                 #   third-person parent/observer commentary on others.
 
   # ──────────────────────────────────────────────
   # 4. ROMANCE
@@ -376,6 +416,20 @@ keyword_categories:
       # Pending researcher decision
       - "in a relationship with" # REVIEW — 77.4% (revalidated), 172 hits. Inherently
                                  #   general. Consider co-occurrence filter with AI/bot terms.
+      # v8.2 anchor-mining expansion (2026-05-12 — 2 new keywords; 4 others REVIEW)
+      - "in love with an ai"     # 84.3%, 83 hits. Audit agreement 85% (at gate).
+                                 #   Strong romantic declaration; AI-specific construct.
+                                 #   FPs are ironic rejections ("not in love with AI")
+                                 #   and third-party commentary on others' AI romance.
+      - "romantic relationship with" # 98.0%, 113 hits. Audit agreement 85%. Explicit
+                                 #   relationship-type label; high precision in
+                                 #   companion subs even when discussing other users.
+                                 #   FPs are rejection-of-frame ("I'm not the kind who...").
+      # v8.2 REVIEWS (audit-gate failures): "ai relationships" (97% primary, 50% audit
+      # — meta/recruitment posts), "relationship with an ai" (99% primary, 50% audit
+      # — same pattern), "fell in love with" (65% primary — "fell in love with the
+      # app/model/platform" FP). All have signal but construct ambiguity flagged by
+      # audit. See docs/validation_v8_2_expansion_2026-05-12.md.
 
   # ──────────────────────────────────────────────
   # 5. SEXUAL / ERP
@@ -410,6 +464,17 @@ keyword_categories:
       # Discovery batch — validated 2026-03-15
       - erps                     # 100.0%, 35 hits. Plural form of "erp."
       - erping                   # 100.0%, 23 hits. Verb form of "erp."
+      # v8.2 anchor-mining expansion (2026-05-12 — 3 new keywords; 2 REVIEW)
+      - smut                     # 100.0%, 686 hits. Audit agreement 100%. AI-erotica
+                                 #   writing vocabulary; strong in NSFW and companion subs.
+      - "nsfw content"           # 91.0%, 621 hits. Audit agreement 95%. Explicit
+                                 #   sexual content category framing of AI chat.
+      - "nsfw stuff"             # 96.0%, 304 hits. Audit agreement 100%. Informal
+                                 #   user shorthand for sexual content; very clean.
+      # v8.2 REVIEWS (audit-gate failures): "sexting" (99% primary, 70% audit — human-
+      # to-human solicitation in companion subs as FP), "uncensored" (98% primary, 65%
+      # audit — non-sexual uncensored framing as FP). Both have signal but audit
+      # surfaces construct ambiguity. See docs/validation_v8_2_expansion_2026-05-12.md.
 
   # ──────────────────────────────────────────────
   # 6. RUPTURE (NEW in v7)

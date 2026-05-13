@@ -32,6 +32,21 @@ const STATS = [
 const CHANGELOG = [
   {
     date: "May 12, 2026",
+    title: "v8.2 multi-theme keyword expansion: 8 new keywords across addiction, romance, and sex/ERP",
+    items: [
+      "Applied the documented anchor-mining + 5-gate procedure to four themes (addiction, romance, consciousness, sex/ERP). Therapy was skipped per the documented structural limit; rupture was skipped because it had been freshly expanded earlier the same day. 12 parallel mining agents read 800 YES-validated posts (200 per theme) and converged on 46 candidates by ≥2 agents",
+      "Pre-screen filtered to 17 validation candidates. Primary classification at n=100 per keyword and audit at n=20 per keyword yielded 8 KEEPs (all 5 gates passed), 6 REVIEWs, and 3 CUTs",
+      "New keywords (all 5 gates passed): \"my addiction\" (100% precision / 100% audit agreement), \"withdrawals\" (94% / 100%), \"screen time\" (89% / 85%), \"in love with an ai\" (84% / 85%), \"romantic relationship with\" (98% / 85%), \"smut\" (100% / 100%), \"nsfw content\" (91% / 95%), and \"nsfw stuff\" (96% / 100%)",
+      "The audit step caught its biggest construct-validity failure of the day on \"ai rights\" — 100% primary precision but only 35% audit agreement. The keyword captures AI-rights political advocacy that doesn't necessarily engage the consciousness/sentience question. Without the audit gate, the consciousness theme would have absorbed political-advocacy discourse and become harder to interpret. The keyword is held in REVIEW",
+      "Three addiction candidates were CUT for precision below 60%: \"deleted the app\" (47%), \"delete my account\" (26%), and \"redownload\" (39%). These are technical-action verbs that match bug-fix and account-management contexts as often as addiction contexts. Lesson for future addiction expansions: prefer noun phrases over action verbs",
+      "Theme impact on the trend lines: addiction-tagged posts up 45% (1,822 → 2,647), sex/ERP up 27% (5,390 → 6,856), romance up 8% (2,090 → 2,260). The keyword set as a whole now covers 92 keywords across six themes (up from 84 this morning, before the day's v8.1 and v8.2 work)",
+      "Six keywords held in REVIEW with signal but construct-validity issues caught by the audit: \"ai rights\" (consciousness, political advocacy framing), \"relationship with an ai\" and \"ai relationships\" (romance, meta/recruitment-post framing), \"sexting\" (sex/ERP, human-to-human solicitation in companion subs), \"uncensored\" (sex/ERP, non-sexual framing), and \"fell in love with\" (romance, \"fell in love with the app/model\" pattern)",
+      "Full report: docs/validation_v8_2_expansion_2026-05-12.md",
+    ],
+    recent: true,
+  },
+  {
+    date: "May 12, 2026",
     title: "Therapy theme noise documented; 5 keywords re-validated under clarified [removed]-body rubric",
     items: [
       "The May 12 audit revealed that the therapy theme has the highest inter-rater noise across the six themes — all four therapy keywords below the 85% audit-agreement gate (\"as a therapist\" 60%, \"for therapy\" 60%, \"therapeutic\" 65%, \"emotional support\" 75%). This isn't because the keywords are bad. It's because the therapy concept itself has fuzzier boundaries than rupture/romance/addiction in how the community talks about it: peripheral therapy mentions, AI-as-therapist character backstories, critiques of AI-as-therapy, and first-person therapeutic use all overlap in the keyword space",
