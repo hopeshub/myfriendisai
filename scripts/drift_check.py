@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
-"""Quarterly drift check for keyword precision.
+"""Monthly drift check for keyword precision (cadence updated 2026-05-13;
+older quarterly labels remain accepted).
 
 Three subcommands:
 
-  build [--quarter YYYY-Qn] [--n 50] [--surface post|comment|both] [--keywords k1,k2]
+  build [--quarter YYYY-MM-or-YYYY-Qn] [--n 50] [--surface post|comment|both] [--keywords k1,k2]
       Pulls N random hits per keyword from the database and writes
       Markdown sample files to analysis/keyword_pipeline/results/.
       Each file is ready to be read by a CC subagent for classification.
@@ -18,18 +19,18 @@ Three subcommands:
       precision, change vs. previous measurement, and an alarm list of
       keywords below 0.70 precision.
 
-Usage example (quarterly cadence):
+Usage example (monthly cadence):
 
-  # 1. Build samples (every 3 months, or on demand)
-  .venv/bin/python scripts/drift_check.py build --quarter 2026-Q3
+  # 1. Build samples (every month, or on demand)
+  .venv/bin/python scripts/drift_check.py build --quarter 2026-06
 
-  # 2. Dispatch agents (manual, via Claude session)
+  # 2. Dispatch agents OR use the LLM classifier directly
   #    Each generated file has its own classification prompt in the header.
-  #    Agents write results to *_results.txt files in the same directory.
+  #    Results go to *_results.txt files in the same directory.
 
   # 3. Parse results back into the tracker
   .venv/bin/python scripts/drift_check.py record \\
-      --files analysis/keyword_pipeline/results/drift_2026-Q3_*_results.txt
+      --files analysis/keyword_pipeline/results/drift_2026-06_*_results.txt
 
   # 4. Inspect current status
   .venv/bin/python scripts/drift_check.py report
@@ -62,14 +63,19 @@ def truncate(s: Optional[str], n: int) -> str:
     return s if len(s) <= n else s[:n] + "..."
 
 
-def current_quarter() -> str:
+def current_period() -> str:
+    """Default period label = YYYY-MM (monthly cadence as of 2026-05-13).
+    Older quarterly labels like 2026-Q3 are still accepted via --quarter."""
     today = date.today()
-    q = (today.month - 1) // 3 + 1
-    return f"{today.year}-Q{q}"
+    return today.strftime("%Y-%m")
+
+
+# Backward-compat alias for older invocations.
+current_quarter = current_period
 
 
 def cmd_build(args):
-    quarter = args.quarter or current_quarter()
+    quarter = args.quarter or current_period()
     n_per_keyword = args.n
     surface = args.surface
     target_keywords = set(args.keywords.split(",")) if args.keywords else None
@@ -164,7 +170,7 @@ def write_sample_file(path: Path, rows, term: str, theme: str, level: str, quart
 
 # ── RECORD ────────────────────────────────────────────────────────────────
 RESULT_FILENAME_RE = re.compile(
-    r"drift_(?P<quarter>\d{4}-Q\d)_(?P<theme>[a-z_]+)_(?P<slug>[A-Za-z0-9_-]+)_(?P<level>post|comment)_results\.txt$"
+    r"drift_(?P<quarter>\d{4}-(?:Q\d|\d{2}))_(?P<theme>[a-z_]+)_(?P<slug>[A-Za-z0-9_-]+)_(?P<level>post|comment)_results\.txt$"
 )
 RESULT_LINE_RE = re.compile(r"^\s*(\d+)\s*[\.\)]?\s*(TP|FP)\b", re.IGNORECASE)
 

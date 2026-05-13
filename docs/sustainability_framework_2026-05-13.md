@@ -78,11 +78,13 @@ Established schedule (manual; document here so it persists across Claude session
 | Cadence | Action |
 |---|---|
 | Daily | Theme health export regenerates with current concentration metrics |
-| Quarterly | Run `drift_check.py build` + dispatch agents + `drift_check.py record` for every keyword |
+| **Monthly** (was quarterly, tightened 2026-05-13) | Run `drift_check.py build` + classify (via LLM or agents) + `drift_check.py record` for every keyword |
 | Annual | Sample-based comprehensiveness audit (recall floor) — last run 2026-05-13 |
 | Ad hoc | Adversarial audit when a major model release lands (drift catalyst events) |
 
-Next quarterly drift check due: **2026-08-13** (2026-Q3). Adversarial re-audit due: **after the next GPT or Claude major release**, whichever lands first.
+Next monthly drift check due: **2026-06-13**. Adversarial re-audit due: **after the next GPT or Claude major release**, whichever lands first.
+
+Cadence rationale: quarterly was the initial setting because manual agent dispatch was expensive. With the LLM classifier (`scripts/llm_verify_tags.py`) now available, drift checks can be fully automated at ~$5/month, catching `therapeutic`-style inversions 2-3 months earlier than the quarterly cadence would.
 
 ## What survives Claude turnover
 
