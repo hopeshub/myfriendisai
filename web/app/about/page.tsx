@@ -32,6 +32,19 @@ const STATS = [
 const CHANGELOG = [
   {
     date: "May 13, 2026",
+    title: "Comprehensiveness audit: measured recall, documented that the chart shows the floor of theme prevalence",
+    items: [
+      "Took 400 random posts from the corpus (200 random across all subs plus 40 each from five theme-rich subs) and had independent classifiers decide which themes each post thematically belongs to under the rubric. Then compared against what our keyword set actually tagged on the same posts. The gap is the recall miss",
+      "Per-theme recall estimates: rupture 3%, addiction 32%, romance 4%, sex/ERP 21%, consciousness 0% (of 8 agent-YES posts in the sample), therapy 14%. Wide confidence intervals because the sample sizes for each theme are small, but the direction is clear: we catch a small fraction of what an independent classifier would call theme-relevant",
+      "Why so low: the keyword set is precision-first by design. The 80% precision gate rejects everyday-language phrases like \"she said,\" \"my Lilly,\" \"5 years with my Replika\" because they can't be reliably attributed to AI companionship without admitting too much noise from human-relationship contexts. The cost of that design is recall on naturalistic vocabulary. The audit makes the cost visible and measurable",
+      "What this means for the chart: the trend lines show the floor of theme prevalence, not a ceiling. The shape and timing of each line are honest (a real rupture spike on a real event date) and cross-time comparisons within a theme work. But the absolute magnitude of each line is smaller than the underlying amount of theme-relevant discourse. In particular, in known-theme subs like r/MyBoyfriendIsAI (romance) and r/Character_AI_Recovery (addiction), an independent classifier would tag 60-95% of posts as theme-relevant while our keyword set tags 5-34%",
+      "What we're NOT doing: lowering the precision gate, switching to LLM classification, or otherwise changing the methodology. The trade-off was made deliberately and remains defensible. What we ARE doing: documenting the recall floor honestly so readers understand what the chart shows and doesn't show. The about page now includes this caveat in the methodology section",
+      "Full audit report: docs/comprehensiveness_audit_2026-05-13.md (sample composition, missed-post patterns, per-stratum recall, options considered and rejected). Re-run scheduled in ~6 months to see if recall improves with vocabulary expansion or stays flat (structural limit)",
+    ],
+    recent: true,
+  },
+  {
+    date: "May 13, 2026",
     title: "Keyword discipline check + cross-theme volume caveats added",
     items: [
       "Audited the keyword config for every below-80% keyword still in production. 16 keywords are below the precision gate; all 16 now have an explicit documented status (5 researcher-accepted with rationale, 7 LOW VOLUME placeholders below the n=50 corpus floor, 4 audit-gate failures from the May 12 retroactive audit). 0 below-gate keywords are shipping without one of those three documented statuses",
@@ -419,6 +432,24 @@ export default function About() {
               instrument widened, not because the discourse did. The
               post-only series in the data file controls for this and is
               comparable across the full 2023&ndash;2026 window.
+            </p>
+            <p>
+              <strong>The chart shows a floor, not a ceiling.</strong> A May
+              2026 comprehensiveness audit measured recall by sampling 400
+              random posts from the corpus and having independent classifiers
+              decide which themes each post belongs to. Across the six themes
+              recall ranged from about 5&percnt; to 30&percnt; &mdash; meaning
+              roughly that fraction of posts an independent classifier
+              would call theme-relevant are actually tagged by our keyword
+              set. The rest are missed because they use naturalistic everyday
+              language (&ldquo;she said something funny today,&rdquo; a photo
+              titled &ldquo;Lilly was feeling cute&rdquo;) that can&apos;t be
+              validated to 80&percnt; precision without admitting too much
+              noise. The shape and timing of each trend line is honest, and
+              spike interpretation is reliable. But the absolute magnitude of
+              each line is meaningfully smaller than the actual amount of
+              theme-relevant discourse in the corpus. Full audit:
+              docs/comprehensiveness_audit_2026-05-13.md in the repository.
             </p>
           </div>
         </section>
