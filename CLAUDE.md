@@ -119,7 +119,16 @@ Regex-based keyword tagging runs on all collected posts via `scripts/tag_keyword
 
 These decisions are logged with rationale in the keyword's scoring sheet. Researcher-accepted keywords are tagged as such in keywords_v8.yaml (or current version) to distinguish them from auto-accepted (≥80%) keywords.
 
-Current researcher-accepted keywords: **None**. The two prior entries (`grieving` and `neutered`, both Rupture) were promoted to clean KEEP in the 2026-04-23 revalidation after scoring 86.0% and 93.0% respectively.
+**Current researcher-accepted keywords (reconciled 2026-05-13):**
+- `we broke up` (romance, 75.0%) — captures AI relationship endings; distinct from human-breakup keyword space
+- `personality changed` (rupture, 75.0%) — directly describes companion identity loss
+- `hours a day` (addiction, 69.0% / 80% audit) — best available T1-T2 dependency-signal keyword
+- `neglecting my` (addiction, 64.7%) — real-life-consequences signal for compulsion
+- `in a relationship with` (romance, 77.4% / 95% audit) — promoted to researcher-accepted 2026-05-13 after the v8 retroactive audit confirmed 95% cross-classifier agreement; the precision number is below 80% but the audit shows the theme relevance is real
+
+The 2026-04-23 revalidation cycle promoted four other prior researcher-accepted entries (`grieving`, `neutered`, `clean for`, `as a therapist`) to clean KEEP after they cleared 80%. All audit-fail keywords from the 2026-05-12 v8 retroactive audit are tracked separately and annotated `AUDIT-GATE FAIL` inline in `keywords_v8.yaml`, not as researcher-accepted. LOW VOLUME placeholders (corpus hits <50, can't be validated at n=100) are also separate and annotated `LOW VOLUME placeholder` inline.
+
+This list is auditable: `python3 analysis/keyword_pipeline/audit_keyword_status.py` flags any below-80% keyword in `keywords_v8.yaml` that lacks one of the three valid documented statuses (researcher-accepted, LOW VOLUME placeholder, AUDIT-GATE FAIL).
 
 **Classification standard (locked 2026-04-23):** Validation uses the **topical reading** — "does this keyword appear in a thematically-relevant context within an AI companion community?" A post counts as YES if it is thematically about the theme, even without graphic or first-person-content detail. See `analysis/keyword_pipeline/theme_definitions.yaml` for the per-theme definitions with explicit topical framing.
 

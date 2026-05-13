@@ -32,6 +32,17 @@ const STATS = [
 const CHANGELOG = [
   {
     date: "May 13, 2026",
+    title: "Keyword discipline check + cross-theme volume caveats added",
+    items: [
+      "Audited the keyword config for every below-80% keyword still in production. 16 keywords are below the precision gate; all 16 now have an explicit documented status (5 researcher-accepted with rationale, 7 LOW VOLUME placeholders below the n=50 corpus floor, 4 audit-gate failures from the May 12 retroactive audit). 0 below-gate keywords are shipping without one of those three documented statuses",
+      "Added analysis/keyword_pipeline/audit_keyword_status.py to enforce this discipline going forward. Any future keyword change can run this script and it will exit non-zero if a below-gate keyword is shipping without a documented status. CLAUDE.md now lists the actual current researcher-accepted keywords (we broke up, personality changed, hours a day, neglecting my, in a relationship with) rather than the previous-but-stale \"None\"",
+      "Strengthened the methodology section on the about page with two specific caveats about absolute theme volumes: (1) a single platform event can dominate a theme's lifetime total &mdash; e.g., the February 2023 Replika ERP-removal era contributes roughly two-thirds of all sex/ERP-tagged posts to date, so the theme's headline magnitude reflects one specific platform decision and its aftermath rather than steady ongoing volume; (2) comment tagging only began March 2026, so themes whose discussion happens more in comments (sex/ERP, therapy) appear to grow faster in 2026 partly because the instrument widened",
+      "These caveats already applied — the chart's shape signal is honest, the timing signal is honest, and the per-1k normalization controls for corpus growth. What we're adding is explicit language so readers don't mistake a 2023-Replika-event-dominated theme volume for a steady-state phenomenon size",
+    ],
+    recent: true,
+  },
+  {
+    date: "May 13, 2026",
     title: "Per-theme coverage_start: trend lines now begin at each theme's measurement-instrument start date",
     items: [
       "Each theme's vocabulary became measurable in companion-community discourse at a different time. Before its vocabulary was active, a theme's trend line was effectively flat — but that flatness was the measurement instrument not existing, not the discourse not existing. Reading the line as \"this theme didn't happen back then\" was wrong. This update fixes that uniformly across all six themes",
@@ -389,6 +400,25 @@ export default function About() {
               conversation is changing. But comparing mention rates between
               themes does not tell you which topic is &ldquo;bigger&rdquo; or
               more important.
+            </p>
+            <p>
+              Two other caveats specifically affect absolute-volume reads:
+              first, a single high-profile event can dominate a theme&apos;s
+              lifetime total. The February 2023 Replika ERP-removal era
+              contributes roughly two-thirds of all sex/ERP-tagged posts to
+              date &mdash; the theme&apos;s headline magnitude isn&apos;t
+              about steady ongoing volume, it&apos;s about one specific platform
+              decision and its aftermath. Read theme volumes alongside the
+              event annotations on the chart, not as standalone numbers.
+            </p>
+            <p>
+              Second, comment tagging began only in March 2026. Posts older
+              than that have no comment-sourced hits; newer posts do. Themes
+              whose discussion happens more in comments than posts (sex/ERP,
+              therapy) appear to grow faster in 2026 partly because the
+              instrument widened, not because the discourse did. The
+              post-only series in the data file controls for this and is
+              comparable across the full 2023&ndash;2026 window.
             </p>
           </div>
         </section>

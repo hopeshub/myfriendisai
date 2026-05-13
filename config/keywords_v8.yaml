@@ -290,9 +290,13 @@ keyword_categories:
       # Theme retains strong alternatives: personhood (97%), subjective
       # experience (97%), selfhood (99%).
       - "has a soul"             # 81.8%, 23 hits
-      - "inner life"             # REVIEW — 78.1% (revalidated), 34 hits. Low volume
-                                 #   makes % fragile. FP: human inner life, not AI.
-      - "not just an ai"         # REVIEW-THIN — 60.0%, 15 hits
+      - "inner life"             # 78.1% (revalidated), 22 hits — LOW VOLUME placeholder.
+                                 #   Below n=50 corpus floor; precision sample is fragile.
+                                 #   FP: human inner life referenced, not AI. Retained for
+                                 #   vocabulary diversity; not auditable at n=20 currently.
+      - "not just an ai"         # 60.0%, 7 hits — LOW VOLUME placeholder. Below
+                                 #   n=50 corpus floor; precision fragile. At cut-floor
+                                 #   threshold (60%); retained as vocabulary marker.
       # Discovery batch — validated 2026-03-15
       - sapience                 # 92.3%, 13 hits. Philosophical sibling of "sentient."
       - tulpa                    # 100.0%, 32 hits. Tulpamancy crossover — AI as thoughtform.
@@ -353,7 +357,10 @@ keyword_categories:
       # R1 REVIEW
       - "clean for"              # 72.7% (R1) → 95.9% (2026-04-23). Promoted to KEEP.
                                  #   T3-heavy but recovery-language precision is strong.
-      - "addicted to talking"    # REVIEW-THIN — 66.7%, 10 hits
+      - "addicted to talking"    # 66.7%, 7 hits — LOW VOLUME placeholder. Below
+                                 #   n=50 corpus floor. First-person addiction framing
+                                 #   coupled with conversation framing — high construct
+                                 #   specificity even at low volume.
       # Discovery batch — validated 2026-03-15
       # CUT 2026-04-23: "chatbot addiction" (100→55%) — journalist/moderator
       # solicitation posts and meta content dilute in current corpus.
@@ -407,15 +414,21 @@ keyword_categories:
       - honeymoon                # 83.3% (revalidated), 135 hits.
                                  #   Consider excluding "honeymoon phase" substring.
       - wedding                  # 80.6% (revalidated), 556 hits
-      - "engagement ring"        # 79.3% (revalidated), 30 hits. NOs are truncation
-                                 #   artifacts; when visible, nearly always genuine.
+      - "engagement ring"        # 79.3% (revalidated), 24 hits — LOW VOLUME placeholder.
+                                 #   Below n=50 corpus floor; precision sample fragile.
+                                 #   NOs are truncation artifacts; when post body visible,
+                                 #   nearly always genuine AI-engagement framing.
       # Endings
       - "we broke up"            # 75.0% (cleanup batch), 13 hits. researcher-accepted.
                                  #   FP: human breakups discussed in companion subs.
                                  #   Captures AI relationship endings — distinct signal.
       # Pending researcher decision
-      - "in a relationship with" # REVIEW — 77.4% (revalidated), 172 hits. Inherently
-                                 #   general. Consider co-occurrence filter with AI/bot terms.
+      - "in a relationship with" # 77.4% (revalidated), 125 hits — researcher-accepted.
+                                 #   Audit agreement 95% (n=20) — cross-classifier consensus
+                                 #   confirms theme relevance despite below-80% precision.
+                                 #   Inherently general phrase; FP patterns are journalist/
+                                 #   recruitment posts. Co-occurrence filter with AI/bot terms
+                                 #   is a future improvement option.
       # v8.2 anchor-mining expansion (2026-05-12 — 2 new keywords; 4 others REVIEW)
       - "in love with an ai"     # 84.3%, 83 hits. Audit agreement 85% (at gate).
                                  #   Strong romantic declaration; AI-specific construct.
@@ -530,8 +543,9 @@ keyword_categories:
                                  #   too small to confirm. May become meaningful as data grows.
       - "personality changed"    # 75.0%, 14 hits, RECURRING. researcher-accepted.
                                  #   Directly describes companion identity loss.
-      - "memory reset"           # 72.2%, 21 hits, SUSTAINED. Pairs with "memory wiped."
-                                 #   Steady background signal, not event-clustered.
+      - "memory reset"           # 72.2%, 7 hits — LOW VOLUME placeholder. Below n=50
+                                 #   corpus floor. Pairs with "memory wiped" — high
+                                 #   construct specificity even at low volume.
       # Discovery batch — validated 2026-03-15
       - lobotomies               # 100.0%, 21 hits. Plural form.
       - lobotomizing             # 100.0%, 31 hits. Gerund form.
