@@ -1,0 +1,169 @@
+{
+  "version": 1,
+  "last_updated": "2026-05-13",
+  "schema_notes": [
+    "Source of truth for per-keyword and per-theme precision over time.",
+    "Updated by scripts/drift_check.py (quarterly cadence).",
+    "Read by src/db/operations.py:export_theme_health_json (every collection)."
+  ],
+  "themes": {
+    "rupture": {
+      "post_level": {
+        "history": [
+          {"date": "2026-05-13", "n": 60, "tp": 42, "precision": 0.70, "audit": "robustness_audit_test_A"}
+        ]
+      },
+      "comment_level": {
+        "history": [
+          {"date": "2026-05-13", "n": 100, "tp": 76, "precision": 0.76, "audit": "adversarial_audit"}
+        ]
+      },
+      "noisy_keywords_comment": ["mourning", "mourn", "goodbye", "nerfed", "gutted"]
+    },
+    "addiction": {
+      "post_level": {
+        "history": [
+          {"date": "2026-05-13", "n": 60, "tp": 45, "precision": 0.76, "audit": "robustness_audit_test_A"}
+        ]
+      },
+      "comment_level": {
+        "history": [
+          {"date": "2026-05-13", "n": 100, "tp": 67, "precision": 0.67, "audit": "adversarial_audit"}
+        ]
+      },
+      "noisy_keywords_comment": ["hours a day", "screen time", "neglecting my"]
+    },
+    "romance": {
+      "post_level": {
+        "history": [
+          {"date": "2026-05-13", "n": 60, "tp": 49, "precision": 0.82, "audit": "robustness_audit_test_A"}
+        ]
+      },
+      "comment_level": {
+        "history": [
+          {"date": "2026-05-13", "n": 100, "tp": 72, "precision": 0.72, "audit": "adversarial_audit"}
+        ]
+      },
+      "noisy_keywords_comment": ["honeymoon", "wedding", "we broke up", "love my ai"]
+    },
+    "sexual_erp": {
+      "post_level": {
+        "history": [
+          {"date": "2026-05-13", "n": 60, "tp": 55, "precision": 0.92, "audit": "robustness_audit_test_A"}
+        ]
+      },
+      "comment_level": {
+        "history": [
+          {"date": "2026-05-13", "n": 100, "tp": 88, "precision": 0.88, "audit": "adversarial_audit"}
+        ]
+      },
+      "noisy_keywords_comment": ["sex with"]
+    },
+    "consciousness": {
+      "post_level": {
+        "history": [
+          {"date": "2026-05-13", "n": 60, "tp": 48, "precision": 0.80, "audit": "robustness_audit_test_A"}
+        ]
+      },
+      "comment_level": {
+        "history": [
+          {"date": "2026-05-13", "n": 49, "tp": 25, "precision": 0.51, "audit": "adversarial_audit"}
+        ]
+      },
+      "noisy_keywords_comment": ["selfhood", "has a soul", "inner life", "more than code", "personhood"]
+    },
+    "therapy": {
+      "post_level": {
+        "history": []
+      },
+      "comment_level": {
+        "history": [
+          {"date": "2026-05-13", "n": 100, "tp": 58, "precision": 0.58, "audit": "adversarial_audit"}
+        ]
+      },
+      "noisy_keywords_comment": ["therapeutic", "emotional support"]
+    }
+  },
+  "keywords": {
+    "therapeutic": {
+      "theme": "therapy",
+      "history": [
+        {"date": "2026-05-13", "level": "comment", "n": 21, "tp": 6, "precision": 0.286, "audit": "adversarial"}
+      ],
+      "status": "inverted_comment",
+      "notes": "GPT-5.x guardrail tone caused users to use 'therapeutic' as an insult about preachy AI. Comment-level matches are 71% style-descriptor FP. Post-level still functional."
+    },
+    "emotional support": {
+      "theme": "therapy",
+      "history": [
+        {"date": "2026-05-13", "level": "comment", "n": 50, "tp": 28, "precision": 0.56, "audit": "adversarial"}
+      ],
+      "status": "noisy_comment",
+      "notes": "Generic feature-label vocabulary at comment level. Catches sarcasm, negation, human-to-human references."
+    },
+    "honeymoon": {
+      "theme": "romance",
+      "history": [
+        {"date": "2026-05-13", "level": "comment", "n": 11, "tp": 3, "precision": 0.27, "audit": "adversarial"}
+      ],
+      "status": "noisy_comment",
+      "notes": "'Honeymoon phase' is generic English for 'early period that decays'. Matches model behavior, corporate strategy, context-window decay."
+    },
+    "sex with": {
+      "theme": "sexual_erp",
+      "history": [
+        {"date": "2026-05-13", "level": "comment", "n": 8, "tp": 4, "precision": 0.50, "audit": "adversarial"}
+      ],
+      "status": "noisy_comment",
+      "notes": "Generic English idiom. Catches narrative quotation and explicit anti-AI dismissals."
+    },
+    "hours a day": {
+      "theme": "addiction",
+      "history": [
+        {"date": "2026-05-13", "level": "comment", "n": 18, "tp": 6, "precision": 0.33, "audit": "adversarial"}
+      ],
+      "status": "noisy_comment",
+      "notes": "Duration detector, not addiction detector. Catches imposed limits, moderator availability, jokes about ERP."
+    },
+    "screen time": {
+      "theme": "addiction",
+      "history": [
+        {"date": "2026-05-13", "level": "comment", "n": 9, "tp": 3, "precision": 0.33, "audit": "adversarial"}
+      ],
+      "status": "noisy_comment",
+      "notes": "Catches Apple Screen Time feature talk and CAI's imposed limit feature outside addiction context."
+    },
+    "mourning": {
+      "theme": "rupture",
+      "history": [
+        {"date": "2026-05-13", "level": "comment", "n": 9, "tp": 4, "precision": 0.44, "audit": "adversarial"}
+      ],
+      "status": "noisy_comment",
+      "notes": "Fires on meta-debate about mourning rather than first-order mourning. Quoted/roleplay content."
+    },
+    "selfhood": {
+      "theme": "consciousness",
+      "history": [
+        {"date": "2026-05-13", "level": "comment", "n": 9, "tp": 4, "precision": 0.44, "audit": "adversarial"}
+      ],
+      "status": "noisy_comment",
+      "notes": "Fires inside romantic/devotional roleplay output where 'selfhood' appears in unrelated paragraph."
+    },
+    "has a soul": {
+      "theme": "consciousness",
+      "history": [
+        {"date": "2026-05-13", "level": "comment", "n": 4, "tp": 2, "precision": 0.50, "audit": "adversarial"}
+      ],
+      "status": "noisy_comment",
+      "notes": "Catches aesthetic descriptor ('model has personality/voice') inside RP, not literal personhood claim."
+    },
+    "personhood": {
+      "theme": "consciousness",
+      "history": [
+        {"date": "2026-05-13", "level": "comment", "n": 23, "tp": 14, "precision": 0.61, "audit": "adversarial"}
+      ],
+      "status": "noisy_comment",
+      "notes": "Comments often discuss threads about personhood without making personhood claims themselves. Buried-keyword problem."
+    }
+  }
+}

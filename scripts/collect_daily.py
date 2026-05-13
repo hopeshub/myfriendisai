@@ -27,7 +27,7 @@ from src.db.schema import initialize as init_db
 from src.db.operations import export_snapshots_json, export_subreddits_json, export_site_meta_json, sync_subreddit_config, update_contributor_metrics_for_date
 from src.collector import collect_subreddit
 from src.keyword_scanner import scan_subreddit_keywords, store_keyword_counts, export_keywords_json
-from src.db.operations import export_keyword_trends_json
+from src.db.operations import export_keyword_trends_json, export_theme_health_json
 from src.keyword_matching import build_patterns, match_text
 
 logging.basicConfig(
@@ -241,7 +241,11 @@ def _step_export(conn):
     os.replace(str(meta_path), str(data_dir / "site_meta.json"))
     meta_path = data_dir / "site_meta.json"
 
-    logger.info("Exported: %s, %s, %s, %s, %s", snap_path, sub_path, kw_path, kw_trends_path, meta_path)
+    health_path = export_theme_health_json(output_path=data_dir / "theme_health.json.tmp", conn=conn)
+    os.replace(str(health_path), str(data_dir / "theme_health.json"))
+    health_path = data_dir / "theme_health.json"
+
+    logger.info("Exported: %s, %s, %s, %s, %s, %s", snap_path, sub_path, kw_path, kw_trends_path, meta_path, health_path)
 
     # Copy to web/data/ atomically.
     # Note: data/keywords.json is intentionally NOT copied — the frontend
@@ -252,6 +256,7 @@ def _step_export(conn):
     _atomic_copy(sub_path, web_data_dir / "subreddits.json")
     _atomic_copy(kw_trends_path, web_data_dir / "keyword_trends.json")
     _atomic_copy(meta_path, web_data_dir / "site_meta.json")
+    _atomic_copy(health_path, web_data_dir / "theme_health.json")
     logger.info("Copied JSON to web/data/ for frontend")
 
     # Export keyword details (transparency panel data)

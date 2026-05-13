@@ -23,6 +23,45 @@ function getPostCount(): string {
   }
 }
 
+type ThemeHealthEntry = {
+  total_post_tags: number;
+  total_comment_tags: number;
+  top_sub_post: { subreddit: string; n: number; pct: number } | null;
+  top_sub_comment: { subreddit: string; n: number; pct: number } | null;
+  top_day: { date: string; n: number; pct: number } | null;
+  top_month: { month: string; n: number; pct: number } | null;
+  top5_authors_pct: number;
+  post_precision: { date: string; n: number; precision: number } | null;
+  comment_precision: { date: string; n: number; precision: number } | null;
+  noisy_keywords_comment: string[];
+};
+
+type ThemeHealthData = {
+  generated_at: string;
+  drift_last_updated: string | null;
+  themes: Record<string, ThemeHealthEntry>;
+};
+
+function loadThemeHealth(): ThemeHealthData | null {
+  try {
+    const raw = readFileSync(join(process.cwd(), "data", "theme_health.json"), "utf-8");
+    return JSON.parse(raw) as ThemeHealthData;
+  } catch {
+    return null;
+  }
+}
+
+const THEME_LABELS: Record<string, string> = {
+  rupture: "Rupture",
+  addiction: "Addiction",
+  romance: "Romance",
+  sexual_erp: "Sex / ERP",
+  consciousness: "Consciousness",
+  therapy: "Therapy",
+};
+
+const THEME_ORDER = ["rupture", "addiction", "romance", "sexual_erp", "consciousness", "therapy"];
+
 const STATS = [
   { value: getPostCount(), label: "posts in corpus" },
   { value: "27", label: "tracked communities" },
@@ -30,6 +69,32 @@ const STATS = [
 ];
 
 const CHANGELOG = [
+  {
+    date: "May 13, 2026",
+    title: "Sustainability framework: drift detection, public health metrics, comment-precision tracked separately from post-precision",
+    items: [
+      "After the day's adversarial audit exposed that per-keyword validation at admission is structurally incapable of catching language drift, emergent concentration, or comment-level context collapse, three infrastructure pieces were added to the project. The audit found one keyword (therapeutic) had inverted post-admission: it was 65% audit-agreement when added, and by May 2026 it had collapsed to 29% comment precision because GPT-5.x guardrail tone caused users to use it as an insult about preachy AI. The validation procedure has no eyes on a keyword after admission, so this kind of failure was invisible until the adversarial audit specifically went looking",
+      "Piece 1 — Quarterly drift check: scripts/drift_check.py with build, record, and report subcommands. Builds N random hits per keyword, dispatches agents to classify under topical reading, parses results back into analysis/keyword_pipeline/drift_history.json. The next therapeutic-style inversion gets caught in the quarter it happens, not 18 months later. Next quarterly check due 2026-08-13",
+      "Piece 2 — Public theme health snapshot: data/theme_health.json regenerates on every collection (added to scripts/collect_daily.py). Frontend renders a new section on this page showing per-theme: post precision, comment precision, top-sub concentration (posts + comments), top-month event share, top-5-authors share, and currently flagged noisy comment keywords. Color-coded so readers can see which themes are reliable for which surfaces without reading the methodology docs",
+      "Piece 3 — Comment-precision treated as its own object: post-level and comment-level precision are tracked separately at both the keyword level (drift_history.json) and the theme level (theme_health.json). The 80% gate was established for post-level validation; comments run 5-25 points lower and now have their own published number. No more single corpus-wide precision claim hiding the spread",
+      "What this does NOT do: it does not prune any keywords. v8 stays locked. The currently flagged noisy comment keywords (10 of them, including therapeutic, emotional support, honeymoon, sex with) are visible to readers but still tagged in production. Pruning is a future v9 methodology change",
+      "Full design and procedure: docs/sustainability_framework_2026-05-13.md. Diagnostic findings that triggered the build: docs/adversarial_audit_2026-05-13.md",
+    ],
+    recent: true,
+  },
+  {
+    date: "May 13, 2026",
+    title: "Adversarial audit: 700 comments classified independently, three themes flagged as below 80% precision at the comment level",
+    items: [
+      "Seven parallel CC subagents under instruction to behave as adversarial data scientists classified 100 random tagged comments per theme (49 for consciousness — the full population) under strict topical reading, plus 100 random untagged comments to estimate recall floor. Findings: per-theme comment precision is sex/ERP 88%, rupture 76%, romance 72%, addiction 67%, therapy 58%, consciousness 51%. Five of six themes are below the project's 80% gate at the comment level; two (therapy and consciousness) are not measuring what they claim",
+      "The user-flagged hypothesis was confirmed: \"therapy\" theme is measuring three things, only one of which is therapy. \"emotional support\" (44% FP) catches generic feature-label, sarcasm, negation. \"therapeutic\" (29% precision) has structurally inverted under GPT-5.x guardrails — users use \"therapeutic\" as an insult about preachy AI tone, and those complaints count as endorsements of AI-as-therapy. Two-thirds of comment-level therapy volume is this inversion plus generic feature-mention",
+      "Five of six themes have subreddit-concentration violations at the 30% threshold. r/CharacterAI is 46% of post-rupture, r/replika is 48% of post-sex/ERP. Comment-level worse: r/ChatGPTcomplaints is 61% of comment-rupture, 60% of comment-consciousness, 50% of comment-therapy. Themes are confounded with subreddit selection — this is real, and three of six comment-themes are predominantly one sub. The chart was presenting all themes with equal authority; it shouldn't",
+      "40.5% of all sex/ERP-tagged posts come from Feb-Apr 2023 (Replika ERP removal era). The single top day (Feb 11, 2023) is 3.2% of the entire series. The sex/ERP theme is a memorial to one Luka product decision with a 3-year tail; the shape is honest about that event but not about steady-state sex/ERP discourse",
+      "The single most damaging miscoding: a verbatim romantic stage-direction comment in r/MyBoyfriendIsAI (\"my hand pausing mid-stroke along your arm... my fingers find yours, threading together\") is tagged as consciousness/personhood because \"more than code\" appears later in the comment. Romance fan-fiction credited as philosophy of mind. The sustainability framework's noisy-keyword flagging (today's other change) surfaces this class of failure",
+      "Full report with all 8 sections of the adversarial brief (per-theme precision, recall floor, construct validity, concentration, theme overlap, temporal artifacts, embarrassment finding, what NOT to chase): docs/adversarial_audit_2026-05-13.md",
+    ],
+    recent: true,
+  },
   {
     date: "May 13, 2026",
     title: "Robustness audit: 751 posts read by 14 independent classifiers to verify every theme tags what we say it tags",
@@ -278,6 +343,7 @@ const sectionStyle: React.CSSProperties = {
 };
 
 export default function About() {
+  const themeHealth = loadThemeHealth();
   return (
     <div style={{ maxWidth: 720 }} className="mx-auto px-4 sm:px-6 py-10 sm:py-16">
       {/* Page headline */}
@@ -386,6 +452,148 @@ export default function About() {
             </p>
           </div>
         </section>
+
+        {/* Theme health snapshot */}
+        {themeHealth && (
+          <section style={{ ...sectionStyle, marginBottom: 64 }}>
+            <h2 style={sectionHeaderStyle}>Theme health snapshot</h2>
+            <div className="space-y-4" style={bodyStyle}>
+              <p>
+                Each theme has different reliability properties. This table
+                summarizes per-theme precision (from the most recent quarterly
+                drift check), corpus concentration (one platform, one event,
+                one author), and currently flagged noisy keywords at the
+                comment level. Readers should interpret each theme&apos;s line
+                in light of its own health profile, not a single corpus-wide
+                quality number.
+              </p>
+              <p style={{ color: "#94A3B8", fontSize: 13 }}>
+                Drift data last updated {themeHealth.drift_last_updated ?? "—"}.
+                Concentration metrics regenerated on every export.
+              </p>
+            </div>
+            <div className="mt-6 space-y-3">
+              {THEME_ORDER.filter((k) => themeHealth.themes[k]).map((key) => {
+                const t = themeHealth.themes[key];
+                const postPrec = t.post_precision?.precision;
+                const commPrec = t.comment_precision?.precision;
+                const fmtPrec = (p?: number) =>
+                  p == null ? "—" : `${Math.round(p * 100)}%`;
+                const precColor = (p?: number) =>
+                  p == null ? "#94A3B8" : p < 0.6 ? "#F87171" : p < 0.8 ? "#FBBF24" : "#86EFAC";
+                return (
+                  <div
+                    key={key}
+                    className="rounded-lg"
+                    style={{
+                      backgroundColor: "#1A1D27",
+                      padding: 16,
+                      fontSize: 14,
+                      lineHeight: 1.7,
+                    }}
+                  >
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                        alignItems: "baseline",
+                        marginBottom: 8,
+                      }}
+                    >
+                      <strong style={{ color: "#E2E8F0", fontSize: 15 }}>
+                        {THEME_LABELS[key]}
+                      </strong>
+                      <span style={{ color: "#94A3B8", fontSize: 12 }}>
+                        {t.total_post_tags.toLocaleString()} post tags · {t.total_comment_tags.toLocaleString()} comment tags
+                      </span>
+                    </div>
+                    <div
+                      style={{
+                        display: "grid",
+                        gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
+                        gap: "4px 24px",
+                        color: "#CBD5E1",
+                      }}
+                    >
+                      <div>
+                        <span style={{ color: "#8293A6" }}>Post precision: </span>
+                        <span style={{ color: precColor(postPrec) }}>{fmtPrec(postPrec)}</span>
+                        {t.post_precision && (
+                          <span style={{ color: "#64748B", fontSize: 12 }}>
+                            {" "}(n={t.post_precision.n}, {t.post_precision.date})
+                          </span>
+                        )}
+                      </div>
+                      <div>
+                        <span style={{ color: "#8293A6" }}>Comment precision: </span>
+                        <span style={{ color: precColor(commPrec) }}>{fmtPrec(commPrec)}</span>
+                        {t.comment_precision && (
+                          <span style={{ color: "#64748B", fontSize: 12 }}>
+                            {" "}(n={t.comment_precision.n}, {t.comment_precision.date})
+                          </span>
+                        )}
+                      </div>
+                      {t.top_sub_post && (
+                        <div>
+                          <span style={{ color: "#8293A6" }}>Top sub (posts): </span>
+                          r/{t.top_sub_post.subreddit} ({t.top_sub_post.pct}%)
+                        </div>
+                      )}
+                      {t.top_sub_comment && (
+                        <div>
+                          <span style={{ color: "#8293A6" }}>Top sub (comments): </span>
+                          r/{t.top_sub_comment.subreddit} ({t.top_sub_comment.pct}%)
+                        </div>
+                      )}
+                      {t.top_month && (
+                        <div>
+                          <span style={{ color: "#8293A6" }}>Top month: </span>
+                          {t.top_month.month} ({t.top_month.pct}%)
+                        </div>
+                      )}
+                      <div>
+                        <span style={{ color: "#8293A6" }}>Top-5 authors share: </span>
+                        {t.top5_authors_pct}%
+                      </div>
+                    </div>
+                    {t.noisy_keywords_comment.length > 0 && (
+                      <div style={{ marginTop: 8, fontSize: 13, color: "#94A3B8" }}>
+                        <span style={{ color: "#8293A6" }}>Flagged comment keywords: </span>
+                        {t.noisy_keywords_comment.map((kw, i) => (
+                          <span key={kw}>
+                            <code
+                              style={{
+                                backgroundColor: "#0F172A",
+                                padding: "1px 6px",
+                                borderRadius: 4,
+                                fontSize: 12,
+                              }}
+                            >
+                              {kw}
+                            </code>
+                            {i < t.noisy_keywords_comment.length - 1 ? " " : ""}
+                          </span>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+            <p
+              className="mt-4"
+              style={{ ...bodyStyle, fontSize: 13, color: "#8293A6" }}
+            >
+              Methodology: precision values come from per-theme construct-validity
+              audits (post-level) and adversarial comment-precision audits, both
+              conducted under the topical reading. Yellow (&lt;80%) indicates
+              theme volume should be read directionally rather than quantitatively;
+              red (&lt;60%) indicates the comment series for that theme is
+              unreliable and should not be cited until cleaned up. See the
+              changelog entries dated May 13, 2026 for the underlying audits.
+            </p>
+          </section>
+        )}
 
         {/* Why hit rates don't compare */}
         <section style={sectionStyle}>

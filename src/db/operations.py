@@ -576,3 +576,146 @@ def export_keyword_trends_json(
 
     path.write_text(json.dumps(result, indent=2))
     return path
+
+
+def export_theme_health_json(
+    output_path: Optional[Path] = None,
+    conn: Optional[sqlite3.Connection] = None,
+) -> Path:
+    """Export per-theme health metrics for public methodology surface.
+
+    Combines current corpus concentration stats with drift_history.json
+    precision tracking. Frontend reads this to render the Theme Health
+    section of the about page.
+    """
+    from src.config import load_keyword_communities
+
+    path = output_path or DATA_DIR / "theme_health.json"
+    path.parent.mkdir(parents=True, exist_ok=True)
+    _conn = conn or get_connection()
+
+    DRIFT_PATH = Path(__file__).parent.parent.parent / "analysis" / "keyword_pipeline" / "drift_history.json"
+    drift = json.loads(DRIFT_PATH.read_text()) if DRIFT_PATH.exists() else {"themes": {}, "keywords": {}}
+
+    THEMES = ["rupture", "addiction", "romance", "sexual_erp", "consciousness", "therapy"]
+    T1_T3 = [c["subreddit"] for c in load_keyword_communities()]
+    sub_ph = ",".join("?" * len(T1_T3))
+
+    try:
+        out_themes = {}
+        for theme in THEMES:
+            # Post tags + comment tags
+            post_total = _conn.execute(
+                f"SELECT COUNT(DISTINCT post_id) FROM post_keyword_tags "
+                f"WHERE category=? AND source='post' AND subreddit IN ({sub_ph})",
+                (theme, *T1_T3),
+            ).fetchone()[0]
+            comment_total = _conn.execute(
+                f"SELECT COUNT(DISTINCT comment_id) FROM comment_keyword_hits "
+                f"WHERE category=? AND subreddit IN ({sub_ph})",
+                (theme, *T1_T3),
+            ).fetchone()[0]
+
+            # Top sub (posts)
+            top_sub_post_row = _conn.execute(
+                f"""SELECT subreddit, COUNT(DISTINCT post_id) AS n
+                   FROM post_keyword_tags
+                   WHERE category=? AND source='post' AND subreddit IN ({sub_ph})
+                   GROUP BY subreddit ORDER BY n DESC LIMIT 1""",
+                (theme, *T1_T3),
+            ).fetchone()
+            top_sub_post = (
+                {"subreddit": top_sub_post_row[0], "n": top_sub_post_row[1],
+                 "pct": round(100 * top_sub_post_row[1] / post_total, 1)}
+                if top_sub_post_row and post_total else None
+            )
+
+            # Top sub (comments)
+            top_sub_comm_row = _conn.execute(
+                f"""SELECT subreddit, COUNT(DISTINCT comment_id) AS n
+                   FROM comment_keyword_hits
+                   WHERE category=? AND subreddit IN ({sub_ph})
+                   GROUP BY subreddit ORDER BY n DESC LIMIT 1""",
+                (theme, *T1_T3),
+            ).fetchone()
+            top_sub_comment = (
+                {"subreddit": top_sub_comm_row[0], "n": top_sub_comm_row[1],
+                 "pct": round(100 * top_sub_comm_row[1] / comment_total, 1)}
+                if top_sub_comm_row and comment_total else None
+            )
+
+            # Top day (posts)
+            top_day_row = _conn.execute(
+                f"""SELECT date(p.created_utc,'unixepoch') AS d,
+                          COUNT(DISTINCT t.post_id) AS n
+                   FROM post_keyword_tags t JOIN posts p ON p.id = t.post_id
+                   WHERE t.category=? AND t.source='post' AND p.subreddit IN ({sub_ph})
+                   GROUP BY d ORDER BY n DESC LIMIT 1""",
+                (theme, *T1_T3),
+            ).fetchone()
+            top_day = (
+                {"date": top_day_row[0], "n": top_day_row[1],
+                 "pct": round(100 * top_day_row[1] / post_total, 2)}
+                if top_day_row and post_total else None
+            )
+
+            # Top author share (top 5 authors' combined share)
+            top5_row = _conn.execute(
+                f"""SELECT SUM(n) FROM (
+                       SELECT COUNT(DISTINCT t.post_id) AS n
+                       FROM post_keyword_tags t JOIN posts p ON p.id = t.post_id
+                       WHERE t.category=? AND t.source='post' AND p.subreddit IN ({sub_ph})
+                         AND p.author NOT IN ('[deleted]','AutoModerator') AND p.author IS NOT NULL
+                       GROUP BY p.author ORDER BY n DESC LIMIT 5
+                   )""",
+                (theme, *T1_T3),
+            ).fetchone()
+            top5_n = top5_row[0] if top5_row and top5_row[0] is not None else 0
+            top5_authors_pct = round(100 * top5_n / post_total, 1) if post_total else 0.0
+
+            # 3-month event share: month with largest contribution + flanking 2 months
+            # Approximation: take top month and report it + its share
+            top_month_row = _conn.execute(
+                f"""SELECT strftime('%Y-%m', p.created_utc, 'unixepoch') AS m,
+                          COUNT(DISTINCT t.post_id) AS n
+                   FROM post_keyword_tags t JOIN posts p ON p.id = t.post_id
+                   WHERE t.category=? AND t.source='post' AND p.subreddit IN ({sub_ph})
+                   GROUP BY m ORDER BY n DESC LIMIT 1""",
+                (theme, *T1_T3),
+            ).fetchone()
+            top_month = (
+                {"month": top_month_row[0], "n": top_month_row[1],
+                 "pct": round(100 * top_month_row[1] / post_total, 1)}
+                if top_month_row and post_total else None
+            )
+
+            # Drift precision
+            drift_theme = drift.get("themes", {}).get(theme, {})
+            post_history = drift_theme.get("post_level", {}).get("history", [])
+            comm_history = drift_theme.get("comment_level", {}).get("history", [])
+            post_precision = post_history[-1] if post_history else None
+            comment_precision = comm_history[-1] if comm_history else None
+
+            out_themes[theme] = {
+                "total_post_tags": post_total,
+                "total_comment_tags": comment_total,
+                "top_sub_post": top_sub_post,
+                "top_sub_comment": top_sub_comment,
+                "top_day": top_day,
+                "top_month": top_month,
+                "top5_authors_pct": top5_authors_pct,
+                "post_precision": post_precision,
+                "comment_precision": comment_precision,
+                "noisy_keywords_comment": drift_theme.get("noisy_keywords_comment", []),
+            }
+
+        result = {
+            "generated_at": date.today().isoformat(),
+            "drift_last_updated": drift.get("last_updated"),
+            "themes": out_themes,
+        }
+        path.write_text(json.dumps(result, indent=2))
+    finally:
+        if conn is None:
+            _conn.close()
+    return path
