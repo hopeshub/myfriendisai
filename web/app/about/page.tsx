@@ -32,6 +32,19 @@ const STATS = [
 const CHANGELOG = [
   {
     date: "May 13, 2026",
+    title: "Robustness audit: 751 posts read by 14 independent classifiers to verify every theme tags what we say it tags",
+    items: [
+      "Three parallel tests, dispatched as 14 subagents, to replicate what a researcher would see if they spent two months reading every tagged post: (A) 60 random tagged posts per theme to check construct validity, (B) all rupture-tagged posts from 4 event dates to check that spikes correspond to the events we claim, (C) 40 posts per sub from 5 theme-rich subs to characterize how the keyword set behaves on each community's native vocabulary",
+      "Construct validity: precision under the topical reading was 70-92% across the five themes audited (rupture 70%, addiction 76%, romance 82%, consciousness 80%, sex/ERP 92%). Theme-level precision is lower than the per-keyword 80% gate because the topical reading is strict (dominant-topic must be the theme, not just shared vocabulary) and the mix weights weak keywords equally with strong ones. All five themes' failure modes are concentrated in identifiable patterns (e.g., \"goodbye\" leaking into RP sign-offs; \"screen time\" leaking outside recovery context) — none are construct-invalid in a structural way",
+      "Event coherence: the four event dates checked are dominated by the platform events we'd expect. 2023-02-13 was 100% Replika ERP removal (50/50 posts). 2024-09-24 was ~97% the old.character.ai legacy site shutdown (87/89 posts). 2026-02-13 was 100% the GPT-4o sunset (86/86 posts). 2026-05-09 was 77% CharacterAI's Roar/Soft Launch model removal and only 8% the Sonnet 4.5 retirement petition — the keyword set caught two coinciding rupture events that week and the dominant tagged volume came from CharacterAI, not Anthropic",
+      "Subreddit-level recall asymmetry: confirmed independently on a separate sample that the keyword set under-tags romance in r/MyBoyfriendIsAI (~45% observed recall) and addiction in r/Character_AI_Recovery (~50% observed recall). Both under-tag because the subs use sub-native and naturalistic vocabulary (named-partner anecdotes, day-counter recovery posts like \"Day 2,\" \"5 days clean\") that the precision-first keyword set deliberately doesn't anchor to. Both subs' tagged posts are essentially 100% precise — there are zero false positives in the 20 sampled tagged addiction posts from r/Character_AI_Recovery",
+      "What this changes: nothing on the chart. v8 keywords are locked, the per-theme trend lines remain the same, and the methodology stays precision-first. What this adds is a second independent confirmation, from a different sampling angle, that the precision-vs-recall trade-off is real and bounded. Together with the comprehensiveness audit earlier today, the chart's precision and recall axes are now both empirically characterized",
+      "Full report: docs/robustness_audit_2026-05-13.md. Source files for each test in analysis/keyword_pipeline/results/robustness_{A,B,C}_*_2026-05-13.md. Together with docs/comprehensiveness_audit_2026-05-13.md, this completes the validation pass scheduled for May 13",
+    ],
+    recent: true,
+  },
+  {
+    date: "May 13, 2026",
     title: "Comprehensiveness audit: measured recall, documented that the chart shows the floor of theme prevalence",
     items: [
       "Took 400 random posts from the corpus (200 random across all subs plus 40 each from five theme-rich subs) and had independent classifiers decide which themes each post thematically belongs to under the rubric. Then compared against what our keyword set actually tagged on the same posts. The gap is the recall miss",
