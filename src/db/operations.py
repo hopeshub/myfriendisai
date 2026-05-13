@@ -508,6 +508,58 @@ def export_keyword_trends_json(
     ]
     result["_total_posts"] = total_posts_list
 
+    # ─── Per-theme coverage_start computation ──────────────────────────
+    # Rule (uniform across themes, documented in CLAUDE.md and README §5b):
+    # coverage_start is the first month where the theme's monthly post-only
+    # count is ≥ COVERAGE_THRESHOLD AND every subsequent COMPLETE month also
+    # clears the threshold. The current (in-progress) calendar month is
+    # excluded from the "all later months" check because it's not yet a
+    # full month's data.
+    #
+    # Why post-only and not post+comment: post-only is comparable across the
+    # full 2023-2026 timeline (comments only began tagging March 2026). Using
+    # post+comment would create a phantom step-change at 2026-03 for every
+    # theme. Using post-only keeps the rule corpus-comparable.
+    #
+    # Why N=5: empirically calibrated against 2026-05-12 data. Lands every
+    # established theme at 2023-01 and consciousness at 2025-04 — the latter
+    # matching the documented finding that consciousness vocabulary (currently
+    # personhood/selfhood/subjective experience) is post-2024 community-jargon
+    # and pre-coverage data is keyword-coverage-artifactual rather than
+    # representative of real discourse. See docs/validation_v8_2_expansion_2026-05-12.md
+    # and the agent-derived calibration analysis from 2026-05-13.
+    COVERAGE_THRESHOLD = 5
+    from datetime import date as _date
+    current_month = _date.today().strftime("%Y-%m")
+    coverage_start: dict[str, Optional[str]] = {}
+    for category, entries in result.items():
+        if category.startswith("_"):
+            continue
+        # Aggregate post-only counts by month
+        monthly_post_only: defaultdict[str, int] = defaultdict(int)
+        for entry in entries:
+            month = entry["date"][:7]  # YYYY-MM
+            monthly_post_only[month] += entry["count_post_only"]
+        if not monthly_post_only:
+            coverage_start[category] = None
+            continue
+        # Sort months chronologically
+        months = sorted(monthly_post_only.keys())
+        # Find first month where this month and every subsequent COMPLETE
+        # month clears the threshold (current month excluded from check).
+        chosen: Optional[str] = None
+        for i, month in enumerate(months):
+            if monthly_post_only[month] < COVERAGE_THRESHOLD:
+                continue
+            # Check all subsequent completed months
+            later = [m for m in months[i + 1:] if m != current_month]
+            if all(monthly_post_only[m] >= COVERAGE_THRESHOLD for m in later):
+                chosen = month
+                break
+        # Convert YYYY-MM to YYYY-MM-01 for ISO consistency
+        coverage_start[category] = f"{chosen}-01" if chosen else None
+    result["_coverage_start"] = coverage_start
+
     # Data quality check: warn if any recent day has abnormal post count
     import logging
     _logger = logging.getLogger(__name__)

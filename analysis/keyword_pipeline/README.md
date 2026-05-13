@@ -358,6 +358,22 @@ Every precision number from this pipeline sits on top of these caveats. They sho
 
 A keyword can be 95% precise at matching "posts where the keyword appears in companion-adjacent context" while still being construct-invalid (measuring the wrong thing). Example: `keep4o` at high precision for rupture would track OpenAI 4o controversy rather than AI-companion loss broadly. **High precision does not guarantee construct validity.** Top-sub concentration and temporal distribution are the minimum checks for this.
 
+### 5c. Per-theme coverage_start (documented 2026-05-13)
+
+Each theme's keyword vocabulary stabilized in companion-community discourse at a different time. Rendering a theme's trend line before its vocabulary was active produces a misleading near-zero baseline that reads as "discourse didn't exist" but actually means "we couldn't measure it." To address this uniformly:
+
+**Rule:** A theme's `coverage_start` is the first calendar month where its post-only monthly count is ≥5 AND every subsequent completed month also has ≥5 hits. The current in-progress month is excluded from the "every subsequent month" check.
+
+**Why post-only:** Comments only began tagging March 2026; using post+comment would create a phantom step-change at that date for every theme. Post-only is corpus-comparable across the full 2023-2026 timeline.
+
+**Why threshold = 5:** Empirically calibrated against 2026-05-12 data. Lands every established theme (rupture, sex/ERP, romance, addiction, therapy) at 2023-01-01 — they had vocabulary from the start. Lands consciousness at 2025-04-01 — matching the documented finding that the current consciousness vocabulary (personhood / selfhood / subjective experience plus LOW VOLUME placeholders) is r/BeyondThePromptAI subculture vocabulary that emerged 2024-2025. `sentient` was the historical anchor and was CUT 2026-04-23 due to CharacterAI meme dilution, leaving nothing to capture pre-2025 consciousness discourse.
+
+**Where it's computed and stored:** `src/db/operations.py::export_keyword_trends_json` writes per-theme `coverage_start` to the top of `data/keyword_trends.json` under `_coverage_start`. The frontend (`web/app/page.tsx::loadThemeData`) filters each theme's rendered series at this date. Raw JSON still has the full history for researchers.
+
+**When dates may move earlier:** Any time vocabulary expansion recovers historical signal (e.g., a future cycle finds 2023-2024 consciousness vocabulary), the rule re-runs automatically on next export. The dates may also move LATER if a theme has its keyword set narrowed substantially and a previously-covered month drops below 5.
+
+**Therapy floor risk:** Therapy's 2023-09 floor (9 posts) is uncomfortably close to threshold. If a future revalidation cuts more therapy keywords and any month dips below 5, the rule would push therapy's coverage_start to ~2024. Mitigation: surface per-theme monthly floors in validation reports after any therapy keyword changes.
+
 ### 5b. Theme-level noise variance (documented 2026-05-12)
 
 Not all themes have the same boundary clarity. The 2026-05-12 v8 audit revalidation found mean inter-rater agreement of 93% across rupture/consciousness/addiction/romance, but only **74% for therapy**. The therapy theme has a fuzzier construct boundary — the difference between "first-person AI-therapy use" and "AI-as-therapist as topic discussed" is porous in practice, and the existing therapy keywords (`therapeutic`, `for therapy`, `as a therapist`, `emotional support`) trigger on both.

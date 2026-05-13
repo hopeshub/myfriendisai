@@ -31,6 +31,19 @@ const STATS = [
 
 const CHANGELOG = [
   {
+    date: "May 13, 2026",
+    title: "Per-theme coverage_start: trend lines now begin at each theme's measurement-instrument start date",
+    items: [
+      "Each theme's vocabulary became measurable in companion-community discourse at a different time. Before its vocabulary was active, a theme's trend line was effectively flat — but that flatness was the measurement instrument not existing, not the discourse not existing. Reading the line as \"this theme didn't happen back then\" was wrong. This update fixes that uniformly across all six themes",
+      "New rule (applied identically to every theme): a theme's coverage_start is the first calendar month where it produced ≥5 tagged posts AND every subsequent completed month also produced ≥5. The current in-progress month is excluded from the check. Computed automatically at export time, written to the data files, applied by the chart. No per-theme judgment calls",
+      "Resulting coverage_start dates: rupture, sex/ERP, romance, addiction, and therapy all start 2023-01-01 — they had working vocabulary from the beginning of our corpus. Consciousness starts 2025-04-01 — the current consciousness vocabulary (personhood, selfhood, subjective experience, plus several low-volume placeholders) is heavily r/BeyondThePromptAI subculture vocabulary that emerged in late 2024. \"Sentient\" was the historical volume anchor but was cut April 23, 2026 due to CharacterAI meme dilution, leaving us unable to measure 2023-2024 consciousness discourse at all",
+      "What this changes for readers: the consciousness trend line now begins April 2025 instead of January 2023. The previous version showed a misleading 11x growth from 2024 to 2025 — that wasn't real growth, it was the instrument coming online. The site no longer suggests consciousness discourse \"exploded\" in 2026; instead it shows what we can actually measure, which starts when our keywords started capturing the conversation",
+      "Researchers using the raw JSON still get the full historical series — coverage_start is metadata indicating the chart's render-from date, not data deletion. The rule re-computes automatically on every export, so future vocabulary expansion that recovers historical signal will move dates earlier without any code change",
+      "This is a general norm, not a consciousness-specific patch. If any future theme has its vocabulary narrowed substantially and a previously-covered month drops below 5 posts, that theme's coverage_start would move forward — surfacing a real measurement problem rather than hiding it",
+    ],
+    recent: true,
+  },
+  {
     date: "May 12, 2026",
     title: "v8.2 multi-theme keyword expansion: 8 new keywords across addiction, romance, and sex/ERP",
     items: [

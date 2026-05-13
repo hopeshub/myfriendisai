@@ -20,7 +20,7 @@ function loadThemeData(): ThemeData {
   const filePath = path.join(process.cwd(), "data", "keyword_trends.json");
   if (!fs.existsSync(filePath)) return {};
 
-  let raw: Record<string, Array<{ date: string; count: number; count_7d_avg?: number }>>;
+  let raw: Record<string, unknown>;
   try {
     raw = JSON.parse(fs.readFileSync(filePath, "utf8"));
   } catch (e) {
@@ -30,16 +30,32 @@ function loadThemeData(): ThemeData {
 
   // Total posts per day for normalization
   const totalPostsByDate: Record<string, number> = {};
-  for (const e of raw["_total_posts"] ?? []) {
+  for (const e of (raw["_total_posts"] as Array<{ date: string; count: number }> | undefined) ?? []) {
     totalPostsByDate[e.date] = e.count;
   }
 
+  // Per-theme coverage_start: dates before this are unreliable keyword coverage
+  // and are filtered out of the rendered series. Rule documented in CLAUDE.md
+  // (and computed in src/db/operations.py export_keyword_trends_json).
+  const coverageStart = (raw["_coverage_start"] as Record<string, string | null> | undefined) ?? {};
+
   const result: ThemeData = {};
   for (const [themeId, categories] of Object.entries(THEME_CATEGORIES)) {
+    // Determine this theme's coverage_start (earliest of its merged categories).
+    // Themes currently map 1:1 to categories, but if that changes the earliest
+    // coverage gives the most data while still respecting each category's floor.
+    let themeCoverageStart: string | null = null;
+    for (const cat of categories) {
+      const cs = coverageStart[cat];
+      if (cs && (!themeCoverageStart || cs < themeCoverageStart)) {
+        themeCoverageStart = cs;
+      }
+    }
+
     // Sum raw daily hits and 7-day averages across merged categories
     const rawByDate: Record<string, { count: number; avg: number }> = {};
     for (const cat of categories) {
-      for (const e of raw[cat] ?? []) {
+      for (const e of (raw[cat] as Array<{ date: string; count: number; count_7d_avg?: number }> | undefined) ?? []) {
         if (!rawByDate[e.date]) rawByDate[e.date] = { count: 0, avg: 0 };
         rawByDate[e.date].count += e.count;
         rawByDate[e.date].avg += e.count_7d_avg ?? e.count;
@@ -48,7 +64,14 @@ function loadThemeData(): ThemeData {
 
     // Clip current partial month
     const currentMonth = new Date().toISOString().slice(0, 7); // "YYYY-MM"
-    const dates = Object.keys(rawByDate).sort().filter((d) => d.slice(0, 7) < currentMonth);
+    let dates = Object.keys(rawByDate).sort().filter((d) => d.slice(0, 7) < currentMonth);
+
+    // Apply coverage_start filter: drop dates before the theme's coverage_start.
+    // Researchers reading the raw JSON still see the full series; only the
+    // rendered chart respects this filter.
+    if (themeCoverageStart) {
+      dates = dates.filter((d) => d >= themeCoverageStart!);
+    }
 
     result[themeId] = dates.map((date) => {
       const total = totalPostsByDate[date] ?? 0;
