@@ -33,6 +33,7 @@ type ThemeHealthEntry = {
   top5_authors_pct: number;
   post_precision: { date: string; n: number; precision: number } | null;
   comment_precision: { date: string; n: number; precision: number } | null;
+  llm_stats: { tp: number; fp: number; ambiguous: number; total: number; precision: number | null } | null;
   noisy_keywords_comment: string[];
 };
 
@@ -467,6 +468,69 @@ export default function About() {
           </div>
         </section>
 
+        {/* How tags are verified — hybrid keyword + LLM */}
+        <section id="verification" style={{ ...sectionStyle, marginBottom: 64 }}>
+          <h2 style={sectionHeaderStyle}>How tags are verified</h2>
+          <div className="space-y-4" style={bodyStyle}>
+            <p>
+              Pure keyword matching has a precision ceiling. Words like
+              &ldquo;therapeutic,&rdquo; &ldquo;honeymoon,&rdquo; or
+              &ldquo;sex with&rdquo; are catching different things in 2026
+              than they were when added: &ldquo;therapeutic&rdquo; gets used
+              as an insult about preachy AI tone, &ldquo;honeymoon
+              phase&rdquo; describes model behavior decay, &ldquo;sex
+              with&rdquo; appears in &ldquo;I&apos;d rather have sex with a
+              real person&rdquo; (a dismissal of AI companionship, the
+              opposite of the theme). Each is now a known failure mode
+              caught by the May 13 adversarial audit.
+            </p>
+            <p>
+              The fix is a two-stage classifier. Stage one is the
+              validated keyword set: a fast pattern match that finds
+              candidate posts and comments. Stage two is Claude reading
+              each candidate in context to confirm it&apos;s genuinely
+              about the theme &mdash; catching sarcasm, negation, quoted
+              speech, AI roleplay output, and metaphorical use that pure
+              keyword matching would mis-attribute.
+            </p>
+            <p>
+              For keywords whose precision already exceeds 80% under the
+              topical reading (&ldquo;erp,&rdquo; &ldquo;my
+              addiction,&rdquo; &ldquo;relapse,&rdquo; etc.), no
+              verification is needed &mdash; the keyword is doing its job.
+              For keywords flagged as noisy by the methodology audit, every
+              match is sent to Claude for in-context classification before
+              being counted. The chart&apos;s LLM-verified series only
+              counts posts where at least one of their flagged-keyword
+              matches survives this filter.
+            </p>
+            <p style={{ color: "#94A3B8", fontSize: 13 }}>
+              Every verdict stores the model identifier and a timestamp.
+              When the underlying model changes (e.g., to Claude 5), the
+              recheck command re-classifies a sample under the new model
+              and compares; this is the drift-detection layer that catches
+              language-shift failures the original keyword admission
+              process cannot see.
+            </p>
+            <p style={{ color: "#94A3B8", fontSize: 13 }}>
+              Cost: ~$0.001 per item on Claude Haiku 4.5. Total annual
+              verification cost is comparable to the domain registration.
+              Full design and the rollout procedure are in{" "}
+              <code
+                style={{
+                  backgroundColor: "#0F172A",
+                  padding: "1px 6px",
+                  borderRadius: 4,
+                  fontSize: 12,
+                }}
+              >
+                docs/llm_classification_framework_2026-05-13.md
+              </code>{" "}
+              in the repository.
+            </p>
+          </div>
+        </section>
+
         {/* Theme health snapshot */}
         {themeHealth && (
           <section style={{ ...sectionStyle, marginBottom: 64 }}>
@@ -588,6 +652,28 @@ export default function About() {
                             {i < t.noisy_keywords_comment.length - 1 ? " " : ""}
                           </span>
                         ))}
+                      </div>
+                    )}
+                    {t.llm_stats && t.llm_stats.total > 0 && (
+                      <div
+                        style={{
+                          marginTop: 8,
+                          fontSize: 13,
+                          color: "#94A3B8",
+                          paddingTop: 8,
+                          borderTop: "1px solid #2A2D3A",
+                        }}
+                      >
+                        <span style={{ color: "#8293A6" }}>Claude-verified: </span>
+                        {t.llm_stats.tp} kept · {t.llm_stats.fp} rejected
+                        {t.llm_stats.ambiguous > 0 && ` · ${t.llm_stats.ambiguous} ambiguous`}
+                        {" "}
+                        <span style={{ color: "#64748B", fontSize: 12 }}>
+                          (n={t.llm_stats.total}, post-verification precision{" "}
+                          {t.llm_stats.precision != null
+                            ? `${Math.round(t.llm_stats.precision * 100)}%`
+                            : "—"})
+                        </span>
                       </div>
                     )}
                   </div>

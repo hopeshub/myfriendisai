@@ -268,7 +268,13 @@
         "precision": 0.58,
         "audit": "adversarial_audit"
       },
-      "llm_stats": null,
+      "llm_stats": {
+        "tp": 85,
+        "fp": 93,
+        "ambiguous": 7,
+        "total": 185,
+        "precision": 0.459
+      },
       "noisy_keywords_comment": [
         "therapeutic",
         "emotional support"

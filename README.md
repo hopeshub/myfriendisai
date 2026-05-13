@@ -1,6 +1,6 @@
 # My Friend Is AI
 
-A research dashboard tracking how people talk about AI companionship across Reddit. Visualizes keyword trends across 27 subreddits using daily snapshots and validated regex matching.
+A research dashboard tracking how people talk about AI companionship across Reddit. Visualizes keyword trends across 27 subreddits using daily snapshots, validated regex matching, and (where the keyword set is noisy) per-match LLM verification under a topical-reading rubric.
 
 **Live site:** [myfriendisai.com](https://myfriendisai.com)
 
@@ -19,7 +19,7 @@ It does **not** measure sentiment, prevalence, or how many people are actually i
 
 ## How the data works
 
-Posts and comments are collected daily via Reddit's public `.json` endpoints. Each post is tagged against validated keyword lists using regex matching with word-boundary constraints. Trends are normalized to mentions per 1,000 posts.
+Posts and comments are collected daily via Reddit's public `.json` endpoints. Each post is tagged against validated keyword lists using regex matching with word-boundary constraints. Where the keyword set is noisy (e.g., `therapeutic` after GPT-5.x guardrails inverted its meaning, `sex with` catching idiomatic English about human relationships), each match is sent to Claude Haiku for in-context classification under a topical-reading rubric. The chart's LLM-verified series counts only the matches that survive this filter. Trends are normalized to mentions per 1,000 posts.
 
 Historical data (Jan 2023 – Mar 2026) was backfilled from PullPush Reddit archives. Forward-looking comment collection began March 2026.
 
@@ -37,6 +37,7 @@ Full methodology: [myfriendisai.com/about](https://myfriendisai.com/about)
 | Data collection | Python with `requests` |
 | Database | SQLite (~3.8M posts) |
 | Keyword matching | Regex with word-boundary matching |
+| LLM verification | Anthropic SDK (Claude Haiku 4.5) for noisy-keyword gating |
 | Frontend | Next.js 16 + TypeScript + Tailwind CSS |
 | Charts | Recharts |
 | Hosting | Vercel |

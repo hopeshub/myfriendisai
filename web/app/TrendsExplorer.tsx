@@ -984,9 +984,16 @@ export default function TrendsExplorer({ themeData, keywordDetails }: Props) {
           marginBottom: 8,
         }}
       >
-        Each theme tracks validated keywords. Mention rates reflect how
-        distinctive each theme&apos;s vocabulary is, not necessarily how
-        prevalent the topic is overall.
+        Each theme tracks validated keywords. Where the keyword set is
+        unreliable, every match is read in context by Claude to confirm
+        it&apos;s actually about the theme.{" "}
+        <a
+          href="/about#verification"
+          style={{ color: "#94A3B8", textDecoration: "underline" }}
+        >
+          How verification works
+        </a>
+        .
       </p>
 
       {/* Mobile event list */}
