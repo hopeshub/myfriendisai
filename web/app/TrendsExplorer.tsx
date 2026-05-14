@@ -981,7 +981,11 @@ export default function TrendsExplorer({ themeData, keywordDetails }: Props) {
         </div>
       </div>
 
-      {/* Methodology note — below chart on all viewports */}
+      {/* Methodology note — below chart on all viewports.
+          Honest about state: the chart currently shows raw keyword counts.
+          LLM verification (Sonnet 4.6) is mid-rollout; will become the
+          default series once the backfill completes and calibration ships.
+          Per-theme precision varies; see Theme Health snapshot below. */}
       <p
         className="text-center"
         style={{
@@ -991,14 +995,20 @@ export default function TrendsExplorer({ themeData, keywordDetails }: Props) {
           marginBottom: 8,
         }}
       >
-        Each theme tracks validated keywords. Where the keyword set is
-        unreliable, every match is read in context by Claude to confirm
-        it&apos;s actually about the theme.{" "}
+        Each theme tracks validated keywords. Per-theme precision varies
+        (51–92%); LLM verification is rolling out to filter false positives.{" "}
         <a
           href="/about#verification"
           style={{ color: "#94A3B8", textDecoration: "underline" }}
         >
-          How verification works
+          Methodology
+        </a>{" "}
+        ·{" "}
+        <a
+          href="/about"
+          style={{ color: "#94A3B8", textDecoration: "underline" }}
+        >
+          Theme reliability
         </a>
         .
       </p>

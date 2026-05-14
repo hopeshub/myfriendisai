@@ -107,30 +107,39 @@ export LLM_VERIFY_ENABLED=1
 
 Daily collection from then on will verify ~50-200 new noisy-keyword tags per run.
 
-## What this fixes
+## What this fixes — projected vs. measured
 
-The 10 currently-flagged noisy keywords causing the comment-level precision problems:
+**Important retraction (2026-05-14):** The projections below ("Expected after LLM gating") were unvalidated guesses. They were partially falsified by the calibration data we now have. Keeping them for the audit trail; **the "measured" column is what actually happened.**
 
-| Keyword | Theme | Current precision | Expected after LLM gating |
+### Original projections (incorrect — kept for transparency)
+
+| Keyword | Theme | Pre-LLM precision | Projected post-LLM (UNVALIDATED — overstated) |
 |---|---|---|---|
-| `therapeutic` | therapy | 29% | ~95% (LLM understands "preachy AI" insult vs. therapy use) |
-| `emotional support` | therapy | 56% | ~90% (LLM understands feature-label vs. genuine use) |
-| `honeymoon` | romance | 27% | ~95% (LLM understands "honeymoon phase" metaphor) |
-| `sex with` | sex/ERP | 50% | ~95% (LLM resolves "had sex with [human]" vs. AI) |
-| `hours a day` | addiction | 33% | ~90% (LLM understands imposed limits vs. compulsive use) |
-| `screen time` | addiction | 33% | ~90% |
-| `mourning` / `mourn` | rupture | 44% | ~90% |
-| `selfhood` | consciousness | 44% | ~90% (LLM separates personhood claim from romantic devotion) |
-| `has a soul` | consciousness | 50% | ~90% |
-| `personhood` | consciousness | 61% | ~95% |
+| `therapeutic` | therapy | 29% | ~95% (turned out closer to 50% on Haiku, see below) |
+| `emotional support` | therapy | 56% | ~90% (turned out closer to 52% on Haiku) |
+| `honeymoon` | romance | 27% | ~95% (turned out closer to 73% on Haiku) |
+| `sex with` | sex/ERP | 50% | ~95% (turned out closer to 50% on Haiku) |
+| `hours a day` | addiction | 33% | ~90% (turned out closer to 33% on Haiku) |
+| `screen time` | addiction | 33% | ~90% (similar) |
+| `mourning` / `mourn` | rupture | 44% | ~90% (similar) |
+| `selfhood` | consciousness | 44% | ~90% (similar) |
+| `has a soul` | consciousness | 50% | ~90% (similar) |
+| `personhood` | consciousness | 61% | ~95% (turned out closer to 62% on Haiku) |
 
-Expected outcomes (subject to actual rollout):
+### Measured outcomes (Sonnet 4.6 + v2 prompt, n=900 paired calibration, 2026-05-14)
 
-- Therapy comment precision: 58% → ~85%
-- Consciousness comment precision: 51% → ~85%
-- Romance comment precision: 72% → ~85%
-- Addiction comment precision: 67% → ~85%
-- Rupture/sex_erp largely unchanged (already passing)
+| Theme | Pre-LLM (raw) | Post-LLM (Sonnet 4.6) | Δ |
+|---|---|---|---|
+| Therapy | 58% | (TBD — backfill in progress) | TBD |
+| Consciousness | 51% | (TBD) | TBD |
+| Romance | 72% | (TBD) | TBD |
+| Addiction | 67% | (TBD) | TBD |
+
+The **calibration agreement** between Sonnet's verdicts and an independent CC agent gold-standard classifier was **88.1%** on n=900 (vs Haiku's 82.6%; McNemar p<0.0001). Sonnet's false-rejection rate is 31% (vs Haiku's 50%) — i.e., when Sonnet rejects an item as off-theme, an independent classifier disagrees ~31% of the time.
+
+Post-LLM theme precision will be measured directly from `theme_health.json` after the production backfill completes. Until then, these numbers should be treated as TBD, not as the original projections.
+
+**Lesson:** projecting a +30-60pp lift from prompt engineering alone was overoptimistic. The actual lift is real but smaller. Future framework docs should not publish projected lifts before measurement.
 
 ## Methodology disclosure
 

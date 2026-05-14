@@ -87,10 +87,15 @@ function loadVerificationExamples(): VerificationExamplesData | null {
   }
 }
 
+// Stats shown at the top of the page. We previously had "80% minimum
+// precision threshold" here — that's the per-keyword admission gate, not
+// the corpus-wide observed precision, and several themes audit lower
+// (consciousness comment-level is 51%, therapy 58%). Replacing it with
+// the audited post-level range plus a pointer to per-theme detail below.
 const STATS = [
   { value: getPostCount(), label: "posts in corpus" },
   { value: "27", label: "tracked communities" },
-  { value: "80%", label: "minimum precision threshold" },
+  { value: "70–92%", label: "audited post-level precision (varies by theme)" },
 ];
 
 const CHANGELOG = [
@@ -550,6 +555,19 @@ export default function About() {
               language-shift failures the original keyword admission
               process cannot see.
             </p>
+            <p style={{ color: "#F87171", fontSize: 13 }}>
+              <strong>Single-model calibration limitation:</strong> the
+              calibration step uses a Claude subagent as the &ldquo;gold
+              standard&rdquo; that the production Claude classifier is
+              compared against. Within-Claude inter-rater agreement of 88%
+              is not the same as Claude-vs-human or Claude-vs-GPT
+              agreement. A small human-coded calibration set (~n=200) and
+              cross-model validation against a non-Claude classifier are
+              both roadmap items that would strengthen this. Until then,
+              all reported precision numbers should be read as
+              &ldquo;within-Claude topical-reading agreement,&rdquo; not
+              ground-truth precision against an external standard.
+            </p>
             <p style={{ color: "#94A3B8", fontSize: 13 }}>
               Cost: ~$0.001 per item on Claude Haiku 4.5. Total annual
               verification cost is comparable to the domain registration.
@@ -906,17 +924,44 @@ export default function About() {
               2026 comprehensiveness audit measured recall by sampling 400
               random posts from the corpus and having independent classifiers
               decide which themes each post belongs to. Across the six themes
-              recall ranged from about 5&percnt; to 30&percnt; &mdash; meaning
-              roughly that fraction of posts an independent classifier
-              would call theme-relevant are actually tagged by our keyword
-              set. The rest are missed because they use naturalistic everyday
-              language (&ldquo;she said something funny today,&rdquo; a photo
-              titled &ldquo;Lilly was feeling cute&rdquo;) that can&apos;t be
-              validated to 80&percnt; precision without admitting too much
-              noise. The shape and timing of each trend line is honest, and
-              spike interpretation is reliable. But the absolute magnitude of
-              each line is meaningfully smaller than the actual amount of
-              theme-relevant discourse in the corpus. Full audit:
+              recall ranged from about 3&percnt; to 32&percnt; &mdash; with
+              wide confidence intervals because the per-theme agent-YES
+              counts in the n=400 sample are small. The rest are missed
+              because they use naturalistic everyday language (&ldquo;she
+              said something funny today,&rdquo; a photo titled &ldquo;Lilly
+              was feeling cute&rdquo;) that can&apos;t be validated to
+              80&percnt; precision without admitting too much noise.
+            </p>
+            <p>
+              <strong>Per-theme recall with Wilson 95% confidence intervals
+              (n=400 stratified sample):</strong>
+            </p>
+            <div
+              style={{
+                backgroundColor: "#1A1D27",
+                padding: "12px 16px",
+                borderRadius: 6,
+                fontSize: 13,
+                fontFamily: "ui-monospace, monospace",
+                color: "#CBD5E1",
+              }}
+            >
+              <div>rupture: 3% (CI [1%, 8%])</div>
+              <div>romance: 4% (CI [1%, 11%])</div>
+              <div>therapy: 14% (CI [3%, 51%])</div>
+              <div>sexual_erp: 21% (CI [9%, 43%])</div>
+              <div>addiction: 32% (CI [20%, 47%])</div>
+              <div>consciousness: 0% (CI [0%, 32%]) &mdash; n=8 agent-YES</div>
+            </div>
+            <p style={{ color: "#94A3B8", fontSize: 13 }}>
+              The CIs are wide. Treat point estimates with that uncertainty.
+              Romance and rupture are the worst-recall themes by design: their
+              real-world vocabulary is naturalistic (&ldquo;my husband,&rdquo;
+              &ldquo;I miss her&rdquo;) and not catchable by precision-first
+              keyword matching. The shape and timing of each trend line is
+              honest, and spike interpretation is reliable. But the absolute
+              magnitude of each line is meaningfully smaller than the actual
+              amount of theme-relevant discourse in the corpus. Full audit:
               docs/comprehensiveness_audit_2026-05-13.md in the repository.
             </p>
           </div>
@@ -987,6 +1032,105 @@ export default function About() {
               of high-volume communities that exceed the daily collection&apos;s
               per-request limits. The data format and processing pipeline are
               identical regardless of source.
+            </p>
+            <p>
+              The aggregate JSON exports in{" "}
+              <code
+                style={{
+                  backgroundColor: "#0F172A",
+                  padding: "1px 6px",
+                  borderRadius: 4,
+                  fontSize: 12,
+                }}
+              >
+                /web/data/
+              </code>{" "}
+              (keyword trends, theme health, subreddit metadata) are licensed{" "}
+              <a
+                href="https://creativecommons.org/licenses/by/4.0/"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ color: "#94A3B8", textDecoration: "underline" }}
+              >
+                CC BY 4.0
+              </a>
+              . Cite with attribution; reuse and redistribute freely. The
+              underlying ~3.9M-post SQLite database (~24GB) is not in the
+              public repository for storage reasons — available on request via
+              the contact link below.
+            </p>
+          </div>
+        </section>
+
+        {/* Author / contact / citation */}
+        <section style={sectionStyle}>
+          <h2 style={sectionHeaderStyle}>Author &amp; citation</h2>
+          <div style={bodyStyle}>
+            <p>
+              Built and maintained by Walker Bockley. Independent research
+              project; no institutional affiliation. Contact via the GitHub
+              repository (issues or discussions).
+            </p>
+            <p>
+              <strong>Suggested citation:</strong>
+            </p>
+            <p
+              style={{
+                backgroundColor: "#0F172A",
+                padding: "12px 16px",
+                borderRadius: 6,
+                fontSize: 13,
+                fontFamily: "ui-monospace, monospace",
+                color: "#CBD5E1",
+                marginTop: 4,
+              }}
+            >
+              Bockley, W. (2026). <em>My Friend Is AI: Reddit discourse tracker
+              for AI companionship communities.</em>{" "}
+              <a
+                href="https://myfriendisai.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ color: "#94A3B8", textDecoration: "underline" }}
+              >
+                myfriendisai.com
+              </a>
+              . Accessed [DATE]. Code:{" "}
+              <a
+                href="https://github.com/hopeshub/myfriendisai"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ color: "#94A3B8", textDecoration: "underline" }}
+              >
+                github.com/hopeshub/myfriendisai
+              </a>
+              .
+            </p>
+            <p style={{ color: "#94A3B8", fontSize: 13 }}>
+              The corpus updates daily; data shown today is not what a citing
+              reader will see in 18 months. For research citation, archive the
+              specific JSON snapshot you used at access time and reference the
+              GitHub commit SHA. Per-release DOI/Zenodo snapshots are a
+              roadmap item, not yet shipped.
+            </p>
+            <p style={{ color: "#94A3B8", fontSize: 13 }}>
+              <strong>What this is appropriate for:</strong> as supplementary
+              evidence for timing of platform-rupture events in companion
+              communities (e.g., the Feb 2023 Replika ERP removal, Sept 2024
+              CharacterAI legacy shutdown, Feb 2026 GPT-4o sunset); as a
+              methodological exemplar of precision-first keyword tracking with
+              documented recall floor; as a footnote pointer to the scope of
+              public Reddit discourse on AI companionship.
+            </p>
+            <p style={{ color: "#94A3B8", fontSize: 13 }}>
+              <strong>What this is NOT appropriate for:</strong> absolute
+              prevalence of any theme (the project&apos;s own audits report
+              per-theme recall of 3–32%); cross-theme magnitude comparison
+              (vocabulary distinctiveness varies, see &ldquo;Why mention rates
+              don&apos;t compare&rdquo; below); comment-level consciousness
+              or therapy claims (audited at 51% and 58% precision); claims
+              about user sentiment, attitudes, or behavior (the chart measures
+              language, not the underlying phenomenon).
             </p>
           </div>
         </section>

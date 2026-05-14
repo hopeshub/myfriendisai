@@ -10,6 +10,15 @@ from src.db.schema import get_connection
 
 DATA_DIR = Path(__file__).parent.parent.parent / "data"
 
+# Platform-staff / dev accounts excluded from theme counts.
+# These users post developer announcements, patch notes, or marketing
+# content that's not community discourse. They shouldn't drive theme
+# trends. Identified during the 2026-05-13 adversarial audit.
+# Add accounts here as we discover them — leave the SQL hooks in place.
+EXCLUDED_AUTHORS = (
+    "SoulmateAI_Dev",  # Soulmate platform creator — 89 posts, 57 tagged sex/ERP
+)
+
 
 def sync_subreddit_config(communities: list[dict], conn: Optional[sqlite3.Connection] = None) -> None:
     """Upsert subreddit_config rows from the loaded communities list.
@@ -431,29 +440,38 @@ def export_keyword_trends_json(
     path.parent.mkdir(parents=True, exist_ok=True)
     _conn = conn or get_connection()
 
+    excluded_authors_placeholders = ",".join("?" * len(EXCLUDED_AUTHORS))
     try:
-        # Post+comment metric (all sources — the default)
+        # Post+comment metric (all sources — the default). Excludes posts
+        # from EXCLUDED_AUTHORS (platform-dev accounts whose content is
+        # marketing/announcements, not community discourse).
         rows = _conn.execute(
             f"""
-            SELECT category, post_date, COUNT(DISTINCT post_id) AS count
-            FROM post_keyword_tags
-            WHERE subreddit IN ({placeholders})
-            GROUP BY category, post_date
-            ORDER BY category, post_date
+            SELECT t.category, t.post_date,
+                   COUNT(DISTINCT t.post_id) AS count
+            FROM post_keyword_tags t
+            JOIN posts p ON p.id = t.post_id
+            WHERE t.subreddit IN ({placeholders})
+              AND (p.author IS NULL OR p.author NOT IN ({excluded_authors_placeholders}))
+            GROUP BY t.category, t.post_date
+            ORDER BY t.category, t.post_date
             """,
-            active_subreddits,
+            (*active_subreddits, *EXCLUDED_AUTHORS),
         ).fetchall()
-        # Post-only control series (source='post' only)
+        # Post-only control series (source='post' only). Same exclusion.
         post_only_rows = _conn.execute(
             f"""
-            SELECT category, post_date, COUNT(DISTINCT post_id) AS count
-            FROM post_keyword_tags
-            WHERE subreddit IN ({placeholders})
-              AND source = 'post'
-            GROUP BY category, post_date
-            ORDER BY category, post_date
+            SELECT t.category, t.post_date,
+                   COUNT(DISTINCT t.post_id) AS count
+            FROM post_keyword_tags t
+            JOIN posts p ON p.id = t.post_id
+            WHERE t.subreddit IN ({placeholders})
+              AND t.source = 'post'
+              AND (p.author IS NULL OR p.author NOT IN ({excluded_authors_placeholders}))
+            GROUP BY t.category, t.post_date
+            ORDER BY t.category, t.post_date
             """,
-            active_subreddits,
+            (*active_subreddits, *EXCLUDED_AUTHORS),
         ).fetchall()
         # LLM-verified series: post is counted for a theme if AT LEAST ONE of
         # its keyword matches in that theme is NOT explicitly rejected by the
