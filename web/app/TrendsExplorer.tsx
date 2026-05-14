@@ -640,24 +640,31 @@ export default function TrendsExplorer({ themeData, keywordDetails }: Props) {
               Clear
             </button>
           )}
-          {(["absolute", "relative"] as ChartMode[]).map((mode) => (
-            <button
-              key={mode}
-              onClick={() => {
-                setChartMode(mode);
-              }}
-              aria-pressed={chartMode === mode}
-              aria-label={`${mode === "absolute" ? "Absolute" : "Relative"} chart mode`}
-              className="h-11 sm:h-auto px-3 py-1 text-sm sm:text-xs font-medium rounded-md transition-colors"
-              style={{
-                backgroundColor: chartMode === mode ? "#1A1D27" : "transparent",
-                color: chartMode === mode ? "#F8FAFC" : "#94A3B8",
-                border: `1px solid ${chartMode === mode ? "#2A2D3A" : "transparent"}`,
-              }}
-            >
-              {mode === "absolute" ? "Absolute" : "Relative"}
-            </button>
-          ))}
+          {(["absolute", "relative"] as ChartMode[]).map((mode) => {
+            // "Absolute" mode shows the mention rate per 1k posts (volume-normalized).
+            // "Relative" mode shows each theme's value as % of its own peak (peak-normalized).
+            // The labels say what you're actually seeing on the y-axis — "Absolute" was
+            // misleading because mention rate is already a ratio, not an absolute count.
+            const label = mode === "absolute" ? "Per 1k posts" : "% of peak";
+            return (
+              <button
+                key={mode}
+                onClick={() => {
+                  setChartMode(mode);
+                }}
+                aria-pressed={chartMode === mode}
+                aria-label={`${label} chart mode`}
+                className="h-11 sm:h-auto px-3 py-1 text-sm sm:text-xs font-medium rounded-md transition-colors"
+                style={{
+                  backgroundColor: chartMode === mode ? "#1A1D27" : "transparent",
+                  color: chartMode === mode ? "#F8FAFC" : "#94A3B8",
+                  border: `1px solid ${chartMode === mode ? "#2A2D3A" : "transparent"}`,
+                }}
+              >
+                {label}
+              </button>
+            );
+          })}
         </div>
       </div>
 
