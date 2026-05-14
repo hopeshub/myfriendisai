@@ -63,8 +63,12 @@ NOISY_KEYWORDS_DEFAULT = [
 
 
 def connect() -> sqlite3.Connection:
-    conn = sqlite3.connect(DB_PATH)
+    # 60s busy_timeout — multiple backfill processes can run concurrently
+    # without locking each other out. WAL journal mode lets readers and
+    # one writer overlap; busy_timeout handles contention between writers.
+    conn = sqlite3.connect(DB_PATH, timeout=60.0)
     conn.row_factory = sqlite3.Row
+    conn.execute("PRAGMA busy_timeout = 60000")
     return conn
 
 
