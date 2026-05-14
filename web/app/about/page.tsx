@@ -87,15 +87,19 @@ function loadVerificationExamples(): VerificationExamplesData | null {
   }
 }
 
-// Stats shown at the top of the page. We previously had "80% minimum
-// precision threshold" here — that's the per-keyword admission gate, not
-// the corpus-wide observed precision, and several themes audit lower
-// (consciousness comment-level is 51%, therapy 58%). Replacing it with
-// the audited post-level range plus a pointer to per-theme detail below.
+// Stats shown at the top of the page. The "80%" number is the per-keyword
+// admission gate — every keyword in the production set was validated at
+// n=100 against the topical-reading rubric and admitted only if it scored
+// ≥80% precision. Previously labeled "minimum precision threshold" which
+// reviewers correctly flagged as misleading (a reader could mistake it
+// for aggregate chart precision). The narrower label below makes the
+// scope of the claim explicit; aggregate per-theme precision (which
+// varies across keywords and surfaces) is shown in the Theme Health
+// snapshot section below.
 const STATS = [
   { value: getPostCount(), label: "posts in corpus" },
   { value: "27", label: "tracked communities" },
-  { value: "70–92%", label: "audited post-level precision (varies by theme)" },
+  { value: "≥80%", label: "per-keyword admission gate (validated at n=100)" },
 ];
 
 const CHANGELOG = [
