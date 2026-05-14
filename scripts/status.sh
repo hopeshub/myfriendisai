@@ -41,8 +41,8 @@ echo "  verdicts in DB:  $SONNET_N"
 echo "  last verdict:    $SONNET_LAST UTC (${SONNET_AGE}s ago)"
 if [ "$SONNET_PROCS" -eq 0 ] && [ "$SONNET_N" -lt 21000 ]; then
     echo "  STATE: ⚠️  CRASHED — no processes alive, target ~21k not reached"
-elif [ "$SONNET_PROCS" -gt 0 ] && [ "$SONNET_AGE" -gt 300 ]; then
-    echo "  STATE: ⚠️  STALLED — processes alive but no new verdicts in last 5 min"
+elif [ "$SONNET_PROCS" -gt 0 ] && [ "$SONNET_AGE" -gt 1200 ]; then
+    echo "  STATE: ⚠️  STALLED — processes alive but no new verdicts in last 20 min"
 elif [ "$SONNET_PROCS" -gt 0 ]; then
     REMAINING=$(( 21000 - SONNET_N ))
     [ "$REMAINING" -lt 0 ] && REMAINING=0
