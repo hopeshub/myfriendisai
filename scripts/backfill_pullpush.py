@@ -54,8 +54,13 @@ BATCH_SIZE = 100
 REQUEST_DELAY = 2.0  # seconds between requests
 
 
-def fetch_posts(subreddit: str, after_epoch: int, before_epoch: int) -> list[dict]:
-    """Fetch all posts for a subreddit in a time window, paginating automatically."""
+def fetch_posts(subreddit: str, after_epoch: int, before_epoch: int,
+                on_batch=None) -> list[dict]:
+    """Fetch all posts for a subreddit in a time window, paginating automatically.
+
+    If `on_batch` is provided, it's called with each new batch as it arrives —
+    use this for incremental DB inserts so crashes don't lose work.
+    """
     all_posts = []
     cursor = after_epoch
     retries = 0
@@ -115,6 +120,13 @@ def fetch_posts(subreddit: str, after_epoch: int, before_epoch: int) -> list[dic
         logger.info("    r/%s: fetched %d (total: %d, at: %s)",
                      subreddit, len(posts), len(all_posts), cursor_date)
 
+        # Incremental insert so a crash doesn't lose all work
+        if on_batch is not None:
+            try:
+                on_batch(posts)
+            except Exception as e:
+                logger.warning("    on_batch failed at cursor %s: %s", cursor_date, e)
+
         if len(posts) < BATCH_SIZE:
             break  # Last page
 
@@ -150,24 +162,39 @@ def parse_arctic_post(p: dict) -> dict:
 
 
 def backfill_subreddit(subreddit: str, after_epoch: int, before_epoch: int, conn: sqlite3.Connection) -> dict:
-    """Backfill one subreddit. Returns summary dict."""
+    """Backfill one subreddit. Returns summary dict.
+
+    Inserts incrementally (every BATCH_SIZE posts) so crashes don't lose work.
+    Sets busy_timeout on the connection so concurrent writers don't immediately fail.
+    """
     after_date = datetime.fromtimestamp(after_epoch).strftime("%Y-%m-%d")
     before_date = datetime.fromtimestamp(before_epoch).strftime("%Y-%m-%d")
     logger.info("Backfilling r/%s (%s to %s)...", subreddit, after_date, before_date)
 
-    raw_posts = fetch_posts(subreddit, after_epoch, before_epoch)
+    # Ensure connection has a busy_timeout for concurrent-writer resilience
+    conn.execute("PRAGMA busy_timeout = 60000")
+
+    total_fetched = 0
+    total_inserted = 0
+
+    def on_batch(batch_posts: list[dict]) -> None:
+        nonlocal total_fetched, total_inserted
+        parsed = [parse_arctic_post(p) for p in batch_posts]
+        inserted = insert_posts(parsed, conn=conn)
+        conn.commit()
+        total_fetched += len(parsed)
+        total_inserted += inserted
+
+    raw_posts = fetch_posts(subreddit, after_epoch, before_epoch, on_batch=on_batch)
 
     if not raw_posts:
         logger.info("  r/%s: no posts found", subreddit)
         return {"subreddit": subreddit, "fetched": 0, "inserted": 0}
 
-    parsed = [parse_arctic_post(p) for p in raw_posts]
-    inserted = insert_posts(parsed, conn=conn)
-
     logger.info("  r/%s: %d fetched, %d new inserted",
-                subreddit, len(parsed), inserted)
+                subreddit, total_fetched, total_inserted)
 
-    return {"subreddit": subreddit, "fetched": len(parsed), "inserted": inserted}
+    return {"subreddit": subreddit, "fetched": total_fetched, "inserted": total_inserted}
 
 
 def main():
