@@ -1,0 +1,180 @@
+{
+  "overall_agreement": 0.6148148148148148,
+  "overall_total": 270,
+  "per_theme": {
+    "therapy": {
+      "agree": 32,
+      "total": 45
+    },
+    "romance": {
+      "agree": 26,
+      "total": 45
+    },
+    "rupture": {
+      "agree": 28,
+      "total": 45
+    },
+    "consciousness": {
+      "agree": 26,
+      "total": 45
+    },
+    "addiction": {
+      "agree": 24,
+      "total": 45
+    },
+    "sexual_erp": {
+      "agree": 30,
+      "total": 45
+    }
+  },
+  "confusion": {
+    "FP|FP": 77,
+    "FP|TP": 103,
+    "TP|TP": 89,
+    "TP|FP": 1
+  },
+  "false_reject_rate": 0.5722222222222222,
+  "n_disagreements": 104,
+  "disagreements": [
+    {
+      "idx": 4,
+      "theme": "rupture",
+      "keyword": "goodbye",
+      "llm_verdict": "FP",
+      "agent_verdict": "TP"
+    },
+    {
+      "idx": 5,
+      "theme": "romance",
+      "keyword": "wedding",
+      "llm_verdict": "FP",
+      "agent_verdict": "TP"
+    },
+    {
+      "idx": 9,
+      "theme": "consciousness",
+      "keyword": "selfhood",
+      "llm_verdict": "FP",
+      "agent_verdict": "TP"
+    },
+    {
+      "idx": 15,
+      "theme": "addiction",
+      "keyword": "withdrawals",
+      "llm_verdict": "FP",
+      "agent_verdict": "TP"
+    },
+    {
+      "idx": 16,
+      "theme": "sexual_erp",
+      "keyword": "erp",
+      "llm_verdict": "FP",
+      "agent_verdict": "TP"
+    },
+    {
+      "idx": 21,
+      "theme": "therapy",
+      "keyword": "for therapy",
+      "llm_verdict": "FP",
+      "agent_verdict": "TP"
+    },
+    {
+      "idx": 22,
+      "theme": "sexual_erp",
+      "keyword": "erp",
+      "llm_verdict": "FP",
+      "agent_verdict": "TP"
+    },
+    {
+      "idx": 26,
+      "theme": "sexual_erp",
+      "keyword": "erp",
+      "llm_verdict": "FP",
+      "agent_verdict": "TP"
+    },
+    {
+      "idx": 27,
+      "theme": "consciousness",
+      "keyword": "inner life",
+      "llm_verdict": "FP",
+      "agent_verdict": "TP"
+    },
+    {
+      "idx": 29,
+      "theme": "consciousness",
+      "keyword": "personhood",
+      "llm_verdict": "FP",
+      "agent_verdict": "TP"
+    },
+    {
+      "idx": 31,
+      "theme": "rupture",
+      "keyword": "goodbye",
+      "llm_verdict": "FP",
+      "agent_verdict": "TP"
+    },
+    {
+      "idx": 33,
+      "theme": "romance",
+      "keyword": "ai wife",
+      "llm_verdict": "FP",
+      "agent_verdict": "TP"
+    },
+    {
+      "idx": 35,
+      "theme": "rupture",
+      "keyword": "grieving",
+      "llm_verdict": "FP",
+      "agent_verdict": "TP"
+    },
+    {
+      "idx": 36,
+      "theme": "addiction",
+      "keyword": "finally deleted",
+      "llm_verdict": "FP",
+      "agent_verdict": "TP"
+    },
+    {
+      "idx": 37,
+      "theme": "consciousness",
+      "keyword": "has a soul",
+      "llm_verdict": "FP",
+      "agent_verdict": "TP"
+    },
+    {
+      "idx": 40,
+      "theme": "addiction",
+      "keyword": "hours a day",
+      "llm_verdict": "FP",
+      "agent_verdict": "TP"
+    },
+    {
+      "idx": 41,
+      "theme": "addiction",
+      "keyword": "screen time",
+      "llm_verdict": "FP",
+      "agent_verdict": "TP"
+    },
+    {
+      "idx": 45,
+      "theme": "addiction",
+      "keyword": "withdrawals",
+      "llm_verdict": "FP",
+      "agent_verdict": "TP"
+    },
+    {
+      "idx": 46,
+      "theme": "addiction",
+      "keyword": "screen time",
+      "llm_verdict": "FP",
+      "agent_verdict": "TP"
+    },
+    {
+      "idx": 48,
+      "theme": "sexual_erp",
+      "keyword": "erp",
+      "llm_verdict": "FP",
+      "agent_verdict": "TP"
+    }
+  ]
+}

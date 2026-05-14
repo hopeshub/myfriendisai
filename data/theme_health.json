@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-13",
+  "generated_at": "2026-05-14",
   "drift_last_updated": "2026-05-13",
   "themes": {
     "rupture": {
@@ -40,7 +40,13 @@
         "precision": 0.76,
         "audit": "adversarial_audit"
       },
-      "llm_stats": null,
+      "llm_stats": {
+        "tp": 3366,
+        "fp": 2324,
+        "ambiguous": 446,
+        "total": 6136,
+        "precision": 0.549
+      },
       "noisy_keywords_comment": [
         "mourning",
         "mourn",
@@ -87,7 +93,13 @@
         "precision": 0.67,
         "audit": "adversarial_audit"
       },
-      "llm_stats": null,
+      "llm_stats": {
+        "tp": 2708,
+        "fp": 446,
+        "ambiguous": 121,
+        "total": 3275,
+        "precision": 0.827
+      },
       "noisy_keywords_comment": [
         "hours a day",
         "screen time",
@@ -133,11 +145,11 @@
         "audit": "adversarial_audit"
       },
       "llm_stats": {
-        "tp": 5,
-        "fp": 0,
-        "ambiguous": 0,
-        "total": 5,
-        "precision": 1.0
+        "tp": 1726,
+        "fp": 627,
+        "ambiguous": 196,
+        "total": 2549,
+        "precision": 0.677
       },
       "noisy_keywords_comment": [
         "honeymoon",
@@ -184,7 +196,13 @@
         "precision": 0.88,
         "audit": "adversarial_audit"
       },
-      "llm_stats": null,
+      "llm_stats": {
+        "tp": 5905,
+        "fp": 1186,
+        "ambiguous": 351,
+        "total": 7442,
+        "precision": 0.793
+      },
       "noisy_keywords_comment": [
         "sex with"
       ]
@@ -227,7 +245,13 @@
         "precision": 0.51,
         "audit": "adversarial_audit"
       },
-      "llm_stats": null,
+      "llm_stats": {
+        "tp": 322,
+        "fp": 178,
+        "ambiguous": 10,
+        "total": 510,
+        "precision": 0.631
+      },
       "noisy_keywords_comment": [
         "selfhood",
         "has a soul",
@@ -269,11 +293,11 @@
         "audit": "adversarial_audit"
       },
       "llm_stats": {
-        "tp": 85,
-        "fp": 93,
-        "ambiguous": 7,
-        "total": 185,
-        "precision": 0.459
+        "tp": 851,
+        "fp": 572,
+        "ambiguous": 59,
+        "total": 1482,
+        "precision": 0.574
       },
       "noisy_keywords_comment": [
         "therapeutic",

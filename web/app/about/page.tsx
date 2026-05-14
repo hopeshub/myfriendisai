@@ -95,6 +95,19 @@ const STATS = [
 
 const CHANGELOG = [
   {
+    date: "May 14, 2026",
+    title: "LLM classification calibration: ran the full backfill, found the gating prompt is over-rejecting, default chart series unchanged",
+    items: [
+      "The full hybrid backfill finished overnight (~13k Haiku verdicts across all 92 keywords on both surfaces). A 270-item stratified calibration sample was then classified by an independent Claude Code agent under the same topical-reading rubric, used as gold standard against the production LLM verdicts",
+      "Calibration headline: overall agreement 61.5% (threshold 85%). When the LLM keeps a tag (verdict=TP), it agrees with the independent classifier 89/90 = 99% of the time — accurate. But when the LLM rejects a tag (verdict=FP), the independent classifier disagrees 57% of the time. The LLM is correctly identifying obvious problems but incorrectly gating away genuine theme content",
+      "Decision: do NOT flip the default chart series. The chart still shows raw keyword counts (count); the LLM-verified series (count_llm_verified) is in the data export but not the default render. Flipping it under current prompt calibration would visibly under-count themes — the wrong kind of correction",
+      "What survives from the day: the verification examples panel below this section is real and useful (showcases 18 consensus FPs caught across the six themes). The infrastructure works. The block is on the prompt rubric, which currently treats 'polysemy / sarcasm / quoted speech' as a checklist rather than as 'when in doubt, YES'",
+      "Next iteration: tune the SYSTEM_TEMPLATE prompt in src/llm_classifier.py to lean harder on the topical-reading rubric and away from FP-pattern matching, OR escalate from Haiku 4.5 to Sonnet 4.6 for the gating call (~3x cost, probably worth it). Then re-run calibration against the same 270-item gold standard to measure improvement directly",
+      "Full overnight summary including the per-theme breakdown, confusion matrix, and reproducing instructions: docs/overnight_run_2026-05-13.md",
+    ],
+    recent: true,
+  },
+  {
     date: "May 13, 2026",
     title: "LLM classification framework: hybrid keyword + LLM gating to break the comment-level precision ceiling",
     items: [
