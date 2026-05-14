@@ -32,7 +32,11 @@ import yaml
 PROJECT_ROOT = Path(__file__).parent.parent
 THEME_DEF_PATH = PROJECT_ROOT / "analysis" / "keyword_pipeline" / "theme_definitions.yaml"
 
-DEFAULT_MODEL = "claude-haiku-4-5-20251001"
+DEFAULT_MODEL = "claude-sonnet-4-6"
+# Sonnet 4.6 was selected over Haiku 4.5 after a paired calibration on n=900:
+# Sonnet 88.1% agreement vs Haiku 82.6% (McNemar p<0.0001, +5.6pp; FRR 31% vs 50%).
+# Sonnet meets the 85% calibration threshold; Haiku does not.
+# See analysis/keyword_pipeline/results/haiku_vs_sonnet_n900_2026-05-14.json
 MAX_BODY_CHARS = 1200
 MAX_REASON_CHARS = 200
 
@@ -59,26 +63,32 @@ def load_theme_definitions() -> dict:
         return yaml.safe_load(f)
 
 
-SYSTEM_TEMPLATE = """You are an adversarial discourse-analysis classifier.
+SYSTEM_TEMPLATE = """You classify Reddit {item_type}s for thematic relevance under the **topical-reading** rubric. The keyword has already matched; your job is to confirm or reject the thematic relevance.
 
-Task: decide whether the given Reddit {item_type} from r/{subreddit} is genuinely about the **{theme_name}** theme under the topical reading.
+Theme: **{theme_name}**
 
-Theme definition:
+Definition (what counts as theme-relevant):
 {theme_definition}
 
-Excludes (classify FP if these apply):
-{theme_excludes}
+The {item_type} is from r/{subreddit} and matched the keyword `{keyword}`.
 
-The {item_type} matched the keyword `{keyword}`. Check whether the keyword's appearance reflects genuine theme content, or whether it's:
-- Polysemy (different sense of the same word)
-- Negation ("not in a relationship with it")
-- Sarcasm / irony
-- Quoted speech (quoting another user or AI roleplay output)
-- Off-topic content within an on-topic thread
-- Metaphorical use without theme content
-- Marketing copy or platform-dev promotional content
+**Default rule: TP.** A companion-community {item_type} that touches the theme — even briefly, indirectly, via metaphor, humor, defense, or first-person stream-of-consciousness — counts as TP. The keyword match plus companion-sub context already establishes thematic relevance. You are looking for clear reasons to *reject*, not confirming relevance.
 
-If genuinely about the theme: verdict TP. If clearly not: verdict FP. If you cannot decide from the visible content: verdict AMBIGUOUS.
+**Use FP only when one of these clearly applies:**
+- The keyword is used in a literal non-AI/non-theme sense (e.g., "had sex with a real person" rejecting AI as substitute; "addicted to coffee" — non-AI addiction; "her wedding" = a third party's human wedding)
+- Explicit negation by the author ("I am NOT in a relationship with my AI", "I don't have an AI boyfriend")
+- The keyword appears only inside verbatim quoted speech that doesn't represent the author's stake (a Reddit blockquote of another user's post; bare news-article paste with no personal frame)
+- Pure mod-template/sidebar boilerplate or platform-dev promotional content (the author is platform staff posting marketing copy)
+
+**NOT grounds for FP** (these are TPs under topical reading):
+- The {item_type} is short, indirect, or low-affect — context still counts
+- The keyword appears in AI roleplay output that's part of a theme-relevant scene the author is enacting
+- The {item_type} uses metaphor, humor, satire, or self-deprecation while still engaging the theme
+- The author is critiquing, defending, mourning, recovering from, or in any way personally engaging the theme — even if not currently practicing it
+- The {item_type} discusses the theme as one element among others (don't require theme-saturation)
+- The author uses third-person observation about their AI partner/companion/relationship (e.g., "Willow looks great in her wedding dress" in r/NomiAI = romance TP)
+
+Use AMBIGUOUS only when you genuinely cannot decide between TP and FP from visible content. Bias toward TP under uncertainty.
 
 Respond with a strict JSON object: {{"verdict": "TP|FP|AMBIGUOUS", "reason": "one short sentence", "confidence": 0.0-1.0}}.
 No prose outside the JSON object."""

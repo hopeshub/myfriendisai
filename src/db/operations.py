@@ -457,8 +457,12 @@ def export_keyword_trends_json(
         ).fetchall()
         # LLM-verified series: post is counted for a theme if AT LEAST ONE of
         # its keyword matches in that theme is NOT explicitly rejected by the
-        # LLM (TP, AMBIGUOUS, or no verdict yet — all count). FP-only posts drop.
-        # Posts whose only theme-keyword matches are LLM-FP are excluded.
+        # production LLM (TP, AMBIGUOUS, or no verdict yet — all count).
+        # Filters to the production model (Sonnet 4.6) so we don't mix verdicts
+        # from earlier prompt-iteration runs (Haiku v1 strict, etc.) with the
+        # current methodology. The model identifier is the canonical production
+        # gate; legacy verdicts under other models are preserved but excluded.
+        PRODUCTION_LLM_MODEL = "claude-sonnet-4-6"
         llm_verified_rows = _conn.execute(
             f"""
             SELECT t.category, t.post_date, COUNT(DISTINCT t.post_id) AS count
@@ -472,6 +476,7 @@ def export_keyword_trends_json(
                          AND c.post_id = t2.post_id
                          AND c.theme = t2.category
                          AND c.keyword = t2.matched_term
+                         AND c.model = '{PRODUCTION_LLM_MODEL}'
                   WHERE t2.post_id = t.post_id
                     AND t2.category = t.category
                     AND t2.source = 'post'
@@ -741,7 +746,10 @@ def export_theme_health_json(
             post_precision = post_history[-1] if post_history else None
             comment_precision = comm_history[-1] if comm_history else None
 
-            # LLM-verified stats (if any backfill has happened)
+            # LLM-verified stats — filter to the current production model
+            # (Sonnet 4.6, selected after the 2026-05-14 paired calibration).
+            # Legacy verdicts under Haiku/claude-code are preserved in the DB
+            # for audit but not surfaced as the production stats.
             llm_stats_row = _conn.execute(
                 """SELECT
                        SUM(CASE WHEN verdict='TP' THEN 1 ELSE 0 END) AS tp,
@@ -749,7 +757,7 @@ def export_theme_health_json(
                        SUM(CASE WHEN verdict='AMBIGUOUS' THEN 1 ELSE 0 END) AS amb,
                        COUNT(*) AS n
                    FROM llm_classifications
-                   WHERE theme=? AND model != 'claude-code'""",
+                   WHERE theme=? AND model='claude-sonnet-4-6'""",
                 (theme,),
             ).fetchone()
             llm_stats = None
