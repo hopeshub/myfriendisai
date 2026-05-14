@@ -63,6 +63,30 @@ const THEME_LABELS: Record<string, string> = {
 
 const THEME_ORDER = ["rupture", "addiction", "romance", "sexual_erp", "consciousness", "therapy"];
 
+type VerificationExample = {
+  subreddit: string;
+  title: string;
+  body: string;
+  keyword: string;
+  tag_type: string;
+  verdict: "TP" | "FP";
+  llm_reason: string;
+};
+
+type VerificationExamplesData = {
+  generated_at: string;
+  themes: Record<string, { label: string; fp: VerificationExample[]; tp: VerificationExample[] }>;
+};
+
+function loadVerificationExamples(): VerificationExamplesData | null {
+  try {
+    const raw = readFileSync(join(process.cwd(), "data", "verification_examples.json"), "utf-8");
+    return JSON.parse(raw) as VerificationExamplesData;
+  } catch {
+    return null;
+  }
+}
+
 const STATS = [
   { value: getPostCount(), label: "posts in corpus" },
   { value: "27", label: "tracked communities" },
@@ -359,6 +383,7 @@ const sectionStyle: React.CSSProperties = {
 
 export default function About() {
   const themeHealth = loadThemeHealth();
+  const verificationExamples = loadVerificationExamples();
   return (
     <div style={{ maxWidth: 720 }} className="mx-auto px-4 sm:px-6 py-10 sm:py-16">
       {/* Page headline */}
@@ -528,6 +553,115 @@ export default function About() {
               </code>{" "}
               in the repository.
             </p>
+
+            {/* Verification examples — actual classifications */}
+            {verificationExamples && Object.keys(verificationExamples.themes).length > 0 && (
+              <div className="mt-6">
+                <h3
+                  style={{
+                    fontSize: 13,
+                    fontWeight: 500,
+                    color: "#94A3B8",
+                    marginBottom: 12,
+                    textTransform: "uppercase",
+                    letterSpacing: "0.04em",
+                  }}
+                >
+                  What Claude catches
+                </h3>
+                <p style={{ ...bodyStyle, fontSize: 13, marginBottom: 16 }}>
+                  Real classifications from the production dataset. Each card
+                  shows a keyword that matched, the post or comment content,
+                  and Claude&apos;s verdict (kept or rejected) with reasoning.
+                </p>
+                <div className="space-y-3">
+                  {Object.entries(verificationExamples.themes).flatMap(([key, t]) =>
+                    [...t.fp, ...t.tp].slice(0, 2).map((ex, i) => (
+                      <div
+                        key={`${key}-${ex.verdict}-${i}`}
+                        className="rounded-lg"
+                        style={{
+                          backgroundColor: "#1A1D27",
+                          padding: 14,
+                          fontSize: 13,
+                          lineHeight: 1.6,
+                        }}
+                      >
+                        <div
+                          style={{
+                            display: "flex",
+                            justifyContent: "space-between",
+                            alignItems: "baseline",
+                            marginBottom: 6,
+                          }}
+                        >
+                          <div style={{ color: "#94A3B8", fontSize: 12 }}>
+                            <span style={{ color: "#8293A6" }}>theme:</span>{" "}
+                            {t.label}
+                            {"  "}
+                            <span style={{ color: "#8293A6" }}>·{" "}keyword:</span>{" "}
+                            <code
+                              style={{
+                                backgroundColor: "#0F172A",
+                                padding: "1px 5px",
+                                borderRadius: 3,
+                                fontSize: 11,
+                              }}
+                            >
+                              {ex.keyword}
+                            </code>
+                            {"  "}
+                            <span style={{ color: "#8293A6" }}>· r/{ex.subreddit}</span>
+                          </div>
+                          <span
+                            style={{
+                              fontSize: 11,
+                              fontWeight: 600,
+                              padding: "2px 8px",
+                              borderRadius: 4,
+                              backgroundColor:
+                                ex.verdict === "TP" ? "#0F2A1F" : "#2A1A1A",
+                              color:
+                                ex.verdict === "TP" ? "#86EFAC" : "#F87171",
+                            }}
+                          >
+                            {ex.verdict === "TP" ? "KEPT" : "REJECTED"}
+                          </span>
+                        </div>
+                        {ex.title && (
+                          <div
+                            style={{
+                              color: "#CBD5E1",
+                              fontWeight: 500,
+                              marginBottom: 4,
+                            }}
+                          >
+                            {ex.title}
+                          </div>
+                        )}
+                        <div
+                          style={{
+                            color: "#94A3B8",
+                            fontStyle: "italic",
+                            marginBottom: 8,
+                            paddingLeft: 10,
+                            borderLeft: "2px solid #334155",
+                          }}
+                        >
+                          {ex.body || "(no body)"}
+                        </div>
+                        <div
+                          style={{ color: "#8293A6", fontSize: 12 }}
+                        >
+                          <span style={{ color: "#64748B" }}>Claude:</span>{" "}
+                          {ex.llm_reason}
+                        </div>
+                      </div>
+                    )),
+                  )}
+                </div>
+              </div>
+            )}
           </div>
         </section>
 
