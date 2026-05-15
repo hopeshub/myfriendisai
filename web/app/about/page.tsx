@@ -305,27 +305,6 @@ export default function About() {
           </div>
         </section>
 
-        {/* Who made this */}
-        <section style={sectionStyle}>
-          <h2 style={sectionHeaderStyle}>Who made this</h2>
-          <div style={bodyStyle}>
-            <p>
-              I&apos;m Walker Bockley &mdash; I built this and I keep it
-              running. If you spot a mistake or have a question, opening an
-              issue on{" "}
-              <a
-                href="https://github.com/hopeshub/myfriendisai"
-                target="_blank"
-                rel="noopener noreferrer"
-                className={linkClass}
-              >
-                GitHub
-              </a>{" "}
-              is the best way to reach me.
-            </p>
-          </div>
-        </section>
-
         {/* Changelog */}
         <section>
           <h2 style={sectionHeaderStyle}>Changelog</h2>
