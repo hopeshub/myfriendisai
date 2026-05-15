@@ -117,7 +117,18 @@ export default function TrendAtlas({
         return (
           <div
             key={t.id}
-            className="rounded-lg"
+            role="button"
+            tabIndex={0}
+            data-theme-trigger={t.id}
+            onClick={() => onOpenDetail(t.id)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                onOpenDetail(t.id);
+              }
+            }}
+            aria-label={`${t.label} — open theme detail`}
+            className="rounded-lg cursor-pointer transition-colors"
             style={{
               backgroundColor: "#1A1D27",
               border: "1px solid #2A2D3A",
@@ -127,19 +138,12 @@ export default function TrendAtlas({
           >
             {/* Panel header */}
             <div className="flex items-center justify-between gap-2 mb-1">
-              <button
-                type="button"
-                data-theme-trigger={t.id}
-                onClick={() => onOpenDetail(t.id)}
-                className="flex items-center gap-1.5 transition-opacity hover:opacity-80"
-                style={{ fontSize: 13 }}
-                aria-label={`${t.label} — open theme detail`}
-              >
+              <span className="flex items-center gap-1.5" style={{ fontSize: 13 }}>
                 <span aria-hidden>{t.emoji}</span>
                 <span style={{ color: t.color, fontWeight: 600 }}>
                   {t.label}
                 </span>
-              </button>
+              </span>
               <span
                 title="How much theme-relevant discourse the keyword set catches. Heights are not comparable between detectors of different width."
                 style={{
