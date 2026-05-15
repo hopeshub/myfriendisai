@@ -40,13 +40,15 @@ body {
 .recharts-wrapper,
 .recharts-wrapper svg,
 .recharts-surface {
-  outline: none !important;
   -webkit-tap-highlight-color: transparent;
 }
 
-.recharts-wrapper:focus,
-.recharts-wrapper *:focus {
-  outline: none !important;
+/* Remove mouse-focus outline on Recharts internals (the surface gets a
+   focus ring on click which looks ugly), but PRESERVE :focus-visible so
+   keyboard users still get an outline for accessibility. */
+.recharts-wrapper:focus:not(:focus-visible),
+.recharts-wrapper *:focus:not(:focus-visible) {
+  outline: none;
 }
 
 /* Focus-visible for keyboard accessibility */
@@ -101,4 +103,47 @@ a:focus-visible {
 
 .side-panel {
   animation: slideInRight 250ms ease-out;
+}
+
+/* Theme Health snapshot grid: single column on mobile, 2-col on tablet+.
+   Prevents long values like "r/ChatGPTcomplaints (61%)" from wrapping
+   awkwardly on iPhone-sized viewports. */
+.theme-health-grid {
+  grid-template-columns: minmax(0, 1fr);
+}
+@media (min-width: 640px) {
+  .theme-health-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Verification example cards: header metadata stacks below the verdict pill
+   on small viewports so theme/keyword/sub don't collide on one row. */
+.verification-card-header {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+}
+@media (min-width: 640px) {
+  .verification-card-header {
+    flex-direction: row;
+    align-items: baseline;
+    gap: 0;
+  }
+}
+
+/* Skip-to-content link: visible only on keyboard focus. */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: #F97316;
+  color: #0F1117;
+  padding: 8px 16px;
+  z-index: 100;
+  text-decoration: none;
+  font-weight: 600;
+}
+.skip-link:focus {
+  top: 0;
 }

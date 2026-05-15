@@ -759,14 +759,28 @@ export default function TrendsExplorer({ themeData, keywordDetails }: Props) {
 
 
       {/* Chart */}
-      <div
+      <figure
         ref={chartRef}
-        className="rounded-xl border p-2 sm:p-4 lg:p-6 outline-none"
+        role="img"
+        aria-labelledby="chart-caption"
+        className="rounded-xl border p-2 sm:p-4 lg:p-6 outline-none m-0"
         style={{
           backgroundColor: "#1A1D27",
           borderColor: "#2A2D3A",
         }}
       >
+        <figcaption id="chart-caption" className="sr-only">
+          Line chart showing mention rates per 1,000 posts for six themes
+          (rupture, addiction, romance, sexual roleplay, consciousness, therapy)
+          across {THEMES.length === 6 ? "27" : ""} AI-companionship Reddit
+          communities from January 2023 to present. Themes can be toggled
+          individually; switch between mention rate (per 1k posts) and
+          peak-normalized (% of peak) modes. Event annotations mark major
+          platform changes including the February 2023 Replika ERP removal,
+          the September 2024 CharacterAI legacy site shutdown, and the
+          February 2026 GPT-4o sunset. Detailed time-series data tables and
+          per-theme reliability metrics are available on the about page.
+        </figcaption>
         <div
           className="w-full overflow-hidden"
           style={{ height: chartConfig.height }}
@@ -979,7 +993,7 @@ export default function TrendsExplorer({ themeData, keywordDetails }: Props) {
             </ComposedChart>
           </ResponsiveContainer>
         </div>
-      </div>
+      </figure>
 
       {/* Methodology note — below chart on all viewports.
           Honest about state: the chart currently shows raw keyword counts.

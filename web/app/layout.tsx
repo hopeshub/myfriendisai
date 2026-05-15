@@ -17,12 +17,12 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "My Friend Is AI",
   description:
-    "Tracking the growth and cultural dynamics of AI companionship communities on Reddit. Hybrid keyword + LLM-verified discourse classification.",
+    "Tracking the growth and cultural dynamics of AI companionship communities on Reddit. Validated keyword matching with LLM verification rolling out for noisy keywords.",
   metadataBase: new URL("https://myfriendisai.com"),
   openGraph: {
     title: "My Friend Is AI",
     description:
-      "Tracking AI companion discourse on Reddit across six themes — romance, addiction, consciousness, therapy, rupture, and sexual roleplay. Every match is keyword-flagged and (where the keyword set is noisy) read in context by Claude to confirm theme relevance.",
+      "Tracking AI companion discourse on Reddit across six themes — romance, addiction, consciousness, therapy, rupture, and sexual roleplay. Keyword-matched against validated patterns; per-theme reliability varies (51-92%). LLM verification rolling out to filter noisy keywords.",
     url: "https://myfriendisai.com",
     siteName: "My Friend Is AI",
     type: "website",
@@ -68,6 +68,7 @@ export default function RootLayout({
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
       </head>
       <body className={`antialiased ${inter.className}`}>
+        <a href="#main" className="skip-link">Skip to content</a>
         <StaleDataBanner />
         <header className="border-b border-border">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
@@ -98,7 +99,7 @@ export default function RootLayout({
           </div>
         </header>
 
-        <main>{children}</main>
+        <main id="main">{children}</main>
 
         <footer className="border-t border-border mt-20">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 py-6 text-sm text-muted">

@@ -165,8 +165,8 @@ communities:
     display_name: "r/HeavenGF"
     tier: 2
     category: "Platform-Specific"
-    is_active: true
-    notes: "11K subscribers. Product comparison and discovery hub for AI companion apps."
+    is_active: false
+    notes: "DEACTIVATED 2026-05-14: Reddit returns subreddit-not-found (sub deleted/renamed). Daily collection failure on this one sub was making the pipeline exit 1 and skip push for 3+ days. Reactivate if the sub returns. Per-sub failures should also be made non-fatal in run_collect.sh — see ops review."
 
   - subreddit: Paradot
     display_name: "r/Paradot"

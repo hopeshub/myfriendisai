@@ -464,8 +464,23 @@ def _main_inner():
     if failed_steps:
         logger.error("Pipeline step(s) failed: %s", ", ".join(failed_steps))
 
-    if failed_steps or post_stats.get("error_details"):
+    # Decide exit status. Previously: any per-sub error → exit 1 → push skipped.
+    # That made one dead subreddit (e.g., r/HeavenGF on 2026-05-14) block the
+    # entire daily deploy for 3+ days. New policy: per-sub errors are NOT fatal
+    # unless they affect a majority of subreddits OR a step itself failed.
+    # Catastrophic-only fatality keeps the site fresh through normal sub-deletion
+    # events while still flagging genuine pipeline breakage.
+    n_total = post_stats.get("total", 1) or 1
+    n_errors = post_stats.get("errors", 0)
+    catastrophic_sub_failure = n_errors > n_total / 2
+    if failed_steps or catastrophic_sub_failure:
         return 1
+    # Soft warning state: per-sub issues exist but pipeline overall is healthy
+    if post_stats.get("error_details"):
+        logger.warning(
+            "Per-sub errors present (%d/%d) but below catastrophic threshold — pushing anyway.",
+            n_errors, n_total,
+        )
     return 0
 
 

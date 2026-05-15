@@ -19,7 +19,7 @@ function getPostCount(): string {
     const meta = JSON.parse(raw) as { total_posts: number };
     return `~${(meta.total_posts / 1_000_000).toFixed(1)}M`;
   } catch {
-    return "~3.8M";
+    return "~3.9M";
   }
 }
 
@@ -123,7 +123,7 @@ const CHANGELOG = [
       "After the day's adversarial audit established that some themes (therapy 58%, comment-level consciousness 51%) hit a structural ceiling that regex methodology cannot break, built the hybrid LLM gating infrastructure. The diagnosis: precision-first keyword validation has a ceiling for naturalistic-vocabulary constructs because the natural language people use about love, mental health support, or AI personhood overlaps with how they talk about everything else. The fix is to use the keyword set as a candidate filter and an LLM classifier as the disambiguator — the LLM understands negation, sarcasm, quoted speech, and the difference between 'my AI boyfriend' and 'my boyfriend who works on AI'",
       "Built (1) migration 003 extending llm_classifications table with tag_type, comment_id, verdict, confidence — preserving the 10k legacy claude-code rows and supporting multi-model verdicts for drift detection. (2) src/llm_classifier.py wrapping the Anthropic SDK with a topical-reading rubric, theme definitions injected per call, strict-JSON output, mock mode for testing without API. (3) scripts/llm_verify_tags.py CLI with backfill, daily, recheck, report, and calibration subcommands. (4) Optional Step 4c in scripts/collect_daily.py — env-gated daily verification, non-fatal on failure. (5) New count_llm_verified series in keyword_trends.json that gracefully degrades to count_post_only when no LLM verdicts exist",
       "Cost is much lower than feared: ~$0.001 per item on Haiku 4.5. Backfilling all currently-flagged noisy keywords (~5,000 items) is ~$5. Annual forward cost for daily verification: ~$3 on Haiku. Cheaper than the domain registration",
-      "Expected outcomes after rollout: therapy comment precision 58% → ~85%, consciousness comment precision 51% → ~85%. The 10 currently-flagged noisy keywords (therapeutic, emotional support, honeymoon, sex with, hours a day, screen time, mourning, selfhood, has a soul, personhood) all become viable in production rather than dragging precision down",
+      "Currently 20 noisy keywords are flagged across the six themes (visible in the Theme Health snapshot below). The retracted earlier projections (therapy 58% → 85%, consciousness 51% → 85%) assumed clean LLM gating would resolve the inversion; the May 14 calibration found the LLM was over-rejecting and the projection was overstated. Sonnet's measured agreement is 88.1% (vs Haiku's 82.6%) on n=900, p<0.0001. The chart will update with measured post-LLM precision once the production backfill completes",
       "What this is NOT doing today: it is not running yet. The system is built but inactive — activation requires setting ANTHROPIC_API_KEY and LLM_VERIFY_ENABLED=1 in the environment, then running the backfill. The chart still reads the existing count (raw keyword) by default. The new count_llm_verified field is in the data and ready, but the visible default series doesn't change until the backfill has converged and a calibration set confirms accuracy",
       "Phase 2 of this direction: with hybrid LLM gating working, the project's constraint shifts from 'find regex anchors' to 'can an LLM reliably distinguish this theme'. That unlocks themes we wanted to track but couldn't operationalize — family/peer disclosure dynamics, the economy of AI relationships, identity-formation, defense vs. apology speech acts, crisis-context AI use. None of those have clean keyword vocabulary, all are observable in the corpus, all become LLM-classifiable with this infrastructure. Phase 2 begins after Phase 1 stabilizes",
       "Full design and rollout procedure: docs/llm_classification_framework_2026-05-13.md",
@@ -188,7 +188,7 @@ const CHANGELOG = [
     items: [
       "Audited the keyword config for every below-80% keyword still in production. 16 keywords are below the precision gate; all 16 now have an explicit documented status (5 researcher-accepted with rationale, 7 LOW VOLUME placeholders below the n=50 corpus floor, 4 audit-gate failures from the May 12 retroactive audit). 0 below-gate keywords are shipping without one of those three documented statuses",
       "Added analysis/keyword_pipeline/audit_keyword_status.py to enforce this discipline going forward. Any future keyword change can run this script and it will exit non-zero if a below-gate keyword is shipping without a documented status. CLAUDE.md now lists the actual current researcher-accepted keywords (we broke up, personality changed, hours a day, neglecting my, in a relationship with) rather than the previous-but-stale \"None\"",
-      "Strengthened the methodology section on the about page with two specific caveats about absolute theme volumes: (1) a single platform event can dominate a theme's lifetime total &mdash; e.g., the February 2023 Replika ERP-removal era contributes roughly two-thirds of all sex/ERP-tagged posts to date, so the theme's headline magnitude reflects one specific platform decision and its aftermath rather than steady ongoing volume; (2) comment tagging only began March 2026, so themes whose discussion happens more in comments (sex/ERP, therapy) appear to grow faster in 2026 partly because the instrument widened",
+      "Strengthened the methodology section on the about page with two specific caveats about absolute theme volumes: (1) a single platform event can dominate a theme's lifetime total &mdash; e.g., the February 2023 Replika ERP-removal era contributes roughly 40% of all sex/ERP-tagged posts to date, so the theme's headline magnitude reflects one specific platform decision and its aftermath rather than steady ongoing volume; (2) comment tagging only began March 2026, so themes whose discussion happens more in comments (sex/ERP, therapy) appear to grow faster in 2026 partly because the instrument widened",
       "These caveats already applied — the chart's shape signal is honest, the timing signal is honest, and the per-1k normalization controls for corpus growth. What we're adding is explicit language so readers don't mistake a 2023-Replika-event-dominated theme volume for a steady-state phenomenon size",
     ],
     recent: true,
@@ -269,7 +269,7 @@ const CHANGELOG = [
       "What the new vocabulary catches that the old didn't: 5 of those 22 Sonnet 4.5 posts are now rupture-tagged via the new keywords (mourn, grieve, goodbye family). The remaining 17 use event-descriptive language — petition, removing, retiring — which we deliberately rejected at pre-screen because it concentrates on single platforms' controversy cycles (the canonical keep4o failure pattern) and would fail construct validity. The principled affective vocabulary worked; the event vocabulary was correctly held out",
       "Methodology enhancement: every new keyword now requires an independent audit pass. A separate Claude Code instance re-classifies a 20-post subsample under the same rubric without seeing the primary labels. Per-keyword inter-rater agreement must be ≥85% to ship. Mean agreement on this batch was 93%; the audit demoted erased to REVIEW (80% agreement revealed a rubric gap around user-initiated content deletion) and confirmed grief as a CUT (62% precision, audit agreement consistent with that)",
       "Theme definition tightened: rupture excludes now explicitly cover user-initiated content deletion, transient bug-based erasure, and sarcasm without affective stake. Both clarifications were driven by the erased audit's disagreement pattern — exactly the self-correcting loop the new audit step was designed to surface",
-      "Rupture-tagged unique post count: ~1,830 → 5,026. The trend line shifts upward starting today; pre/post comparisons across May 12 are not apples-to-apples and should be read with that caveat. The shift is methodology improvement, not real-world signal change",
+      "Rupture-tagged unique post count: ~1,830 → ~4,800 (live count varies slightly as new posts arrive). The trend line shifts upward starting May 12; pre/post comparisons across that date are not apples-to-apples and should be read with that caveat. The shift is methodology improvement, not real-world signal change",
       "What's NOT in this update: heartbroken (77% precision, 68% Wilson lower bound — recommend re-running at n=200 before promoting) and erased (rubric was tightened to fix its audit miss; re-validate under the new rubric before merging) are held back for a follow-up batch",
       "Full report: docs/validation_emotional_loss_2026-05-12.md. Pipeline methodology documented in analysis/keyword_pipeline/README.md",
     ],
@@ -563,7 +563,9 @@ export default function About() {
               <strong>Single-model calibration limitation:</strong> the
               calibration step uses a Claude subagent as the &ldquo;gold
               standard&rdquo; that the production Claude classifier is
-              compared against. Within-Claude inter-rater agreement of 88%
+              compared against. The 88.1% Sonnet-vs-CC-agent agreement on the
+              n=900 calibration sample (and the 93% mean per-keyword
+              inter-rater agreement during keyword admission)
               is not the same as Claude-vs-human or Claude-vs-GPT
               agreement. A small human-coded calibration set (~n=200) and
               cross-model validation against a non-Claude classifier are
@@ -623,10 +625,10 @@ export default function About() {
                         }}
                       >
                         <div
+                          className="verification-card-header"
                           style={{
                             display: "flex",
                             justifyContent: "space-between",
-                            alignItems: "baseline",
                             marginBottom: 6,
                           }}
                         >
@@ -688,7 +690,7 @@ export default function About() {
                         <div
                           style={{ color: "#8293A6", fontSize: 12 }}
                         >
-                          <span style={{ color: "#64748B" }}>Claude:</span>{" "}
+                          <span style={{ color: "#94A3B8" }}>Claude:</span>{" "}
                           {ex.llm_reason}
                         </div>
                       </div>
@@ -755,9 +757,12 @@ export default function About() {
                       </span>
                     </div>
                     <div
+                      className="theme-health-grid"
                       style={{
+                        // Single column on mobile (<640px), 2-col on tablet+.
+                        // Implemented via CSS class in globals.css so we don't
+                        // need a runtime breakpoint check.
                         display: "grid",
-                        gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
                         gap: "4px 24px",
                         color: "#CBD5E1",
                       }}
@@ -766,7 +771,7 @@ export default function About() {
                         <span style={{ color: "#8293A6" }}>Post precision: </span>
                         <span style={{ color: precColor(postPrec) }}>{fmtPrec(postPrec)}</span>
                         {t.post_precision && (
-                          <span style={{ color: "#64748B", fontSize: 12 }}>
+                          <span style={{ color: "#94A3B8", fontSize: 12 }}>
                             {" "}(n={t.post_precision.n}, {t.post_precision.date})
                           </span>
                         )}
@@ -775,7 +780,7 @@ export default function About() {
                         <span style={{ color: "#8293A6" }}>Comment precision: </span>
                         <span style={{ color: precColor(commPrec) }}>{fmtPrec(commPrec)}</span>
                         {t.comment_precision && (
-                          <span style={{ color: "#64748B", fontSize: 12 }}>
+                          <span style={{ color: "#94A3B8", fontSize: 12 }}>
                             {" "}(n={t.comment_precision.n}, {t.comment_precision.date})
                           </span>
                         )}
@@ -837,7 +842,7 @@ export default function About() {
                         {t.llm_stats.tp} kept · {t.llm_stats.fp} rejected
                         {t.llm_stats.ambiguous > 0 && ` · ${t.llm_stats.ambiguous} ambiguous`}
                         {" "}
-                        <span style={{ color: "#64748B", fontSize: 12 }}>
+                        <span style={{ color: "#94A3B8", fontSize: 12 }}>
                           (n={t.llm_stats.total}, post-verification precision{" "}
                           {t.llm_stats.precision != null
                             ? `${Math.round(t.llm_stats.precision * 100)}%`
@@ -908,7 +913,7 @@ export default function About() {
               Two other caveats specifically affect absolute-volume reads:
               first, a single high-profile event can dominate a theme&apos;s
               lifetime total. The February 2023 Replika ERP-removal era
-              contributes roughly two-thirds of all sex/ERP-tagged posts to
+              contributes roughly 40% of all sex/ERP-tagged posts to
               date &mdash; the theme&apos;s headline magnitude isn&apos;t
               about steady ongoing volume, it&apos;s about one specific platform
               decision and its aftermath. Read theme volumes alongside the

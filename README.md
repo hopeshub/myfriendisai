@@ -14,12 +14,12 @@ It does **not** measure sentiment, prevalence, or how many people are actually i
 
 - **27 subreddits** across 4 tiers: general AI (T0), primary companionship (T1), platform-specific (T2), and recovery/dependency (T3)
 - **6 keyword themes** — Romance, Sex/ERP, Consciousness, Therapy, Addiction, Rupture
-- **~3.8M posts** from January 2023 to present, updated daily
+- **~3.9M posts** from January 2023 to present, updated daily
 - **Keyword validation** — every keyword is manually scored against 100-post samples; only keywords at 80%+ precision are accepted (60-79% may be accepted when false positive patterns are well-defined)
 
 ## How the data works
 
-Posts and comments are collected daily via Reddit's public `.json` endpoints. Each post is tagged against validated keyword lists using regex matching with word-boundary constraints. Where the keyword set is noisy (e.g., `therapeutic` after GPT-5.x guardrails inverted its meaning, `sex with` catching idiomatic English about human relationships), each match is sent to Claude Haiku for in-context classification under a topical-reading rubric. The chart's LLM-verified series counts only the matches that survive this filter. Trends are normalized to mentions per 1,000 posts.
+Posts and comments are collected daily via Reddit's public `.json` endpoints. Each post is tagged against validated keyword lists using regex matching with word-boundary constraints. For noisy keywords (e.g., `therapeutic` after GPT-5.x guardrails inverted its meaning, `sex with` catching idiomatic English about human relationships), an LLM verification layer using Claude Sonnet is rolling out — each match is sent for in-context classification under a topical-reading rubric. The current default chart series uses raw keyword counts; the `count_llm_verified` series is in the data export and will become the default once the production backfill completes. Trends are normalized to mentions per 1,000 posts.
 
 Historical data (Jan 2023 – Mar 2026) was backfilled from PullPush Reddit archives. Forward-looking comment collection began March 2026.
 
@@ -35,7 +35,7 @@ Full methodology: [myfriendisai.com/about](https://myfriendisai.com/about)
 | Layer | Technology |
 |-------|-----------|
 | Data collection | Python with `requests` |
-| Database | SQLite (~3.8M posts) |
+| Database | SQLite (~3.9M posts) |
 | Keyword matching | Regex with word-boundary matching |
 | LLM verification | Anthropic SDK (Claude Haiku 4.5) for noisy-keyword gating |
 | Frontend | Next.js 16 + TypeScript + Tailwind CSS |
