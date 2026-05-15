@@ -97,9 +97,9 @@ function EventLegend({ events }: { events: NumberedEvent[] }) {
                 fontSize: 10,
                 fontWeight: 700,
                 flexShrink: 0,
-                color: e.methodology ? "#94A3B8" : "#0F1117",
-                backgroundColor: e.methodology ? "transparent" : "#94A3B8",
-                border: e.methodology ? "1px dashed #5B6472" : "none",
+                color: e.methodology ? "#D4A862" : "#0F1117",
+                backgroundColor: e.methodology ? "transparent" : "#C2974D",
+                border: e.methodology ? "1px dashed #C2974D" : "none",
               }}
             >
               {e.num}
@@ -266,13 +266,14 @@ export default function TrendAtlas({
                       <ReferenceLine
                         key={e.date}
                         x={e.date}
-                        stroke="#5B6472"
+                        stroke="#C2974D"
+                        strokeOpacity={0.7}
                         strokeDasharray={e.methodology ? "2 3" : "5 3"}
                         strokeWidth={1}
                         label={{
                           value: String(e.num),
                           position: "insideTop",
-                          fill: "#8293A6",
+                          fill: "#D4A862",
                           fontSize: 10,
                         }}
                       />
