@@ -705,7 +705,7 @@ export default function TrendsExplorer({ themeData, keywordDetails }: Props) {
                 );
               }}
               aria-pressed={isActive}
-              aria-label={`${card.label}: ${card.value.toFixed(1)} mentions per 1000 posts`}
+              aria-label={`${card.id === "sexual_erp" ? "Sex/Erotic Roleplay" : card.label}: ${card.value.toFixed(1)} mentions per 1000 posts`}
               className="metric-card text-left rounded-lg cursor-pointer"
               style={{
                 backgroundColor: isPanelActive ? "#1F2233" : "#1A1D27",
@@ -727,7 +727,15 @@ export default function TrendsExplorer({ themeData, keywordDetails }: Props) {
                 style={{ color: "#94A3B8" }}
               >
                 <span>{card.emoji}</span>
-                <span>{card.label}</span>
+                <span
+                  title={
+                    card.id === "sexual_erp"
+                      ? "Sex / Erotic Roleplay"
+                      : undefined
+                  }
+                >
+                  {card.label}
+                </span>
               </div>
               <div
                 className="text-[18px] sm:text-[20px] font-medium leading-tight mt-0.5"
