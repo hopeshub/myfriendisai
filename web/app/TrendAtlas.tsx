@@ -13,7 +13,7 @@ import {
   CartesianGrid,
 } from "recharts";
 import type { ThemeData } from "./themeData";
-import { THEMES, EVENTS, DETECTOR_LABEL } from "./themes";
+import { THEMES, EVENTS, DETECTOR_LABEL, DETECTOR_EXPLAINER } from "./themes";
 
 // ── Trend Atlas ──────────────────────────────────────────────────────────────
 // One panel per theme, each on its OWN y-axis — detection sensitivity differs
@@ -65,9 +65,10 @@ function monthlySeries(
 }
 
 // ── Event legend ─────────────────────────────────────────────────────────────
-// Compact single block above the grid. Event numbers are STABLE — assigned by
-// fixed chronological order over the full event set — so a given number always
-// means the same event regardless of the selected time range.
+// Compact single block above the grid. Events visible in the selected time
+// range are numbered 1..n in chronological order, so the legend never shows a
+// gap (e.g. "3, 4, 5"). Numbers re-index when the range changes — the legend
+// and every panel update together, so within any view they stay consistent.
 function EventLegend({
   events,
   bp,
@@ -166,17 +167,14 @@ export default function TrendAtlas({
   const panelHeight = bp === "mobile" ? 210 : 240;
   const labelFs = bp === "mobile" ? 14 : 11;
 
-  // Events numbered by FIXED chronological order over the full set (stable
-  // identifiers), then filtered to the visible window.
-  const numberedEvents: NumberedEvent[] = EVENTS.map((e, i) => ({
-    ...e,
-    num: i + 1,
-  })).filter(
+  // Events that fall inside the visible window, numbered 1..n in order — so
+  // the legend never shows a gap like "3, 4, 5".
+  const numberedEvents: NumberedEvent[] = EVENTS.filter(
     (e) =>
       months.length > 0 &&
       e.date >= months[0] &&
       e.date <= months[months.length - 1],
-  );
+  ).map((e, i) => ({ ...e, num: i + 1 }));
 
   return (
     <div>
@@ -217,10 +215,10 @@ export default function TrendAtlas({
                   <span aria-hidden>{t.emoji}</span>
                   <span style={{ color: t.color }}>{t.label}</span>
                 </span>
-                {/* Detector chip — the key "heights aren't comparable" signal,
-                    given real visible weight rather than a faint corner tag. */}
+                {/* Detector chip — the key "heights aren't comparable" signal.
+                    Hover/focus reveals what the detector width means. */}
                 <span
-                  title="How much theme-relevant discourse the keyword set catches. Line heights are NOT comparable between panels of different detector width."
+                  className="info-chip"
                   style={{
                     fontSize: labelFs,
                     color: "#AEB9C7",
@@ -232,6 +230,9 @@ export default function TrendAtlas({
                   }}
                 >
                   {DETECTOR_LABEL[t.detector]}
+                  <span className="info-chip__pop" role="tooltip">
+                    {DETECTOR_EXPLAINER}
+                  </span>
                 </span>
               </div>
 

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { THEMES, DETECTOR_LABEL } from "../../themes";
+import { THEMES, DETECTOR_LABEL, DETECTOR_EXPLAINER } from "../../themes";
 import {
   loadThemeData,
   loadKeywordDetails,
@@ -30,34 +30,48 @@ function truncate(str: string, max: number): string {
 }
 
 type SamplePost = { title: string; subreddit: string; date: string; id: string };
+type SampleWithTerm = SamplePost & { matchedTerm: string };
 
-/** Pick up to `limit` diverse posts, one from each keyword where possible. */
+const MIN_SAMPLES = 2;
+
+/**
+ * Pick example posts, each carrying the keyword that matched it (shown on the
+ * page as "matched …" evidence).
+ *
+ * Pass 1 takes only posts whose *title* visibly contains the keyword, across
+ * all keywords — so every example is self-evidently on-theme, not a hit buried
+ * in a post body the reader cannot see. Quality over quantity: a fuzzy theme
+ * may surface only 3-4 examples rather than padding to `limit` with ambiguous
+ * ones. Pass 2 is a safety net — body-only matches, used only if a theme can't
+ * yield even MIN_SAMPLES self-evident posts.
+ */
 function pickSamplePosts(
   keywords: CategoryDetail["keywords"],
   limit: number,
-): SamplePost[] {
-  const out: SamplePost[] = [];
+): SampleWithTerm[] {
+  const out: SampleWithTerm[] = [];
   const seen = new Set<string>();
+  // Pass 1: keyword visible in the title — one post per keyword.
   for (const kw of keywords) {
     if (out.length >= limit) break;
-    for (const sp of kw.sample_posts) {
-      if (!seen.has(sp.title)) {
-        out.push(sp);
-        seen.add(sp.title);
-        break;
-      }
+    const term = kw.term.toLowerCase();
+    const hit = kw.sample_posts.find(
+      (sp) => !seen.has(sp.title) && sp.title.toLowerCase().includes(term),
+    );
+    if (hit) {
+      out.push({ ...hit, matchedTerm: kw.term });
+      seen.add(hit.title);
     }
   }
-  if (out.length < limit) {
+  // Pass 2: only if too few self-evident examples, top up to MIN_SAMPLES.
+  if (out.length < MIN_SAMPLES) {
     for (const kw of keywords) {
-      for (const sp of kw.sample_posts) {
-        if (out.length >= limit) break;
-        if (!seen.has(sp.title)) {
-          out.push(sp);
-          seen.add(sp.title);
-        }
+      if (out.length >= MIN_SAMPLES) break;
+      const free = kw.sample_posts.find((sp) => !seen.has(sp.title));
+      if (free) {
+        out.push({ ...free, matchedTerm: kw.term });
+        seen.add(free.title);
       }
-      if (out.length >= limit) break;
     }
   }
   return out;
@@ -105,9 +119,7 @@ export default async function ThemePage({
   const series = loadThemeData()[id] ?? [];
   const details: CategoryDetail | undefined = loadKeywordDetails()[id];
   const samples = details ? pickSamplePosts(details.keywords, 5) : [];
-  const topSubs = details
-    ? details.subreddits.slice(0, 5).map((s) => s.name)
-    : [];
+  const topSubs = details ? details.subreddits.slice(0, 5) : [];
 
   return (
     <div className="max-w-[920px] mx-auto px-4 sm:px-8 py-8">
@@ -134,7 +146,7 @@ export default async function ThemePage({
         <div className="mt-1.5 flex items-center gap-3 flex-wrap">
           <p style={{ fontSize: 15, color: "#94A3B8" }}>{theme.tagline}</p>
           <span
-            title="How much theme-relevant discourse the keyword set catches. A narrower detector means the line is a floor — the real conversation runs higher."
+            className="info-chip"
             style={{
               fontSize: 11,
               color: "#AEB9C7",
@@ -146,6 +158,9 @@ export default async function ThemePage({
             }}
           >
             {DETECTOR_LABEL[theme.detector]}
+            <span className="info-chip__pop" role="tooltip">
+              {DETECTOR_EXPLAINER}
+            </span>
           </span>
         </div>
       </div>
@@ -179,16 +194,17 @@ export default async function ThemePage({
       {topSubs.length > 0 && (
         <p style={{ fontSize: 13.5, color: "#8293A6", marginTop: 16 }}>
           Most active in{" "}
-          {topSubs.map((name, i) => (
-            <span key={name}>
+          {topSubs.map((s, i) => (
+            <span key={s.name}>
               {i > 0 && ", "}
               <Link
-                href={`/communities/${name}`}
+                href={`/communities/${s.name}`}
                 className="hover:underline underline-offset-2"
                 style={{ color: "#CBD5E1" }}
               >
-                r/{name}
+                r/{s.name}
               </Link>
+              <span style={{ color: "#64748B" }}> {s.pct}%</span>
             </span>
           ))}
           .
@@ -217,8 +233,12 @@ export default async function ThemePage({
                 >
                   {truncate(sp.title, 110)}
                 </a>
-                <div style={{ fontSize: 11.5, color: "#8293A6", marginTop: 3 }}>
+                <div style={{ fontSize: 11.5, color: "#8293A6", marginTop: 4 }}>
                   r/{sp.subreddit} &middot; {fmtMonthYear(sp.date)}
+                  <span style={{ color: "#5C6775" }}> &middot; matched </span>
+                  <span style={{ color: theme.color }}>
+                    &ldquo;{sp.matchedTerm}&rdquo;
+                  </span>
                 </div>
               </div>
             ))}

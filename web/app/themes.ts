@@ -114,6 +114,10 @@ export const DETECTOR_LABEL: Record<Detector, string> = {
   broad: "broad detector",
 };
 
+// Explanation shown in the hover popover on the detector chip.
+export const DETECTOR_EXPLAINER =
+  "How much of this theme’s real discussion the keywords catch — narrow, moderate, or broad. A narrower detector means the line undercounts more, so line heights aren’t comparable between themes.";
+
 // `methodology: true` marks a change to the measuring instrument (a keyword-set
 // change), as opposed to a real-world platform event. The chart styles the two
 // differently so an instrument change is never read as a social spike.

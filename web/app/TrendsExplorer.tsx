@@ -57,20 +57,22 @@ export default function TrendsExplorer({ themeData }: Props) {
         ))}
       </div>
 
-      {/* Trend Atlas — small-multiples grid */}
-      <figure role="img" aria-labelledby="atlas-caption" className="m-0">
-        <figcaption id="atlas-caption" className="sr-only">
-          A grid of six small line charts, one per theme (romance, sex/erotic
-          roleplay, consciousness, therapy, addiction, rupture), showing each
+      {/* Trend Atlas — small-multiples grid. A plain section, not a
+          figure/role="img": the panels are links and must stay discoverable
+          in the accessibility tree (role="img" would collapse them into one
+          opaque image). */}
+      <section aria-label="Trend atlas: six AI-companionship themes over time">
+        <p className="sr-only">
+          Six small line charts, one per theme (romance, sex/erotic roleplay,
+          consciousness, therapy, addiction, rupture), each showing that
           theme&apos;s rate of validated-keyword mentions per 1,000 posts over
           time across AI-companionship Reddit communities. Each panel has its
           own y-axis; line heights are not comparable between themes because
           keyword detection sensitivity differs by theme. Each panel begins at
-          its own coverage-start date. Event markers note major platform
-          changes. Each panel links to that theme&apos;s page.
-        </figcaption>
+          its own coverage-start date, and is a link to that theme&apos;s page.
+        </p>
         <TrendAtlas themeData={themeData} timeRange={timeRange} bp={bp} />
-      </figure>
+      </section>
 
       {/* Methodology note */}
       <p
