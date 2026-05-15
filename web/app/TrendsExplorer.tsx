@@ -18,22 +18,14 @@ export default function TrendsExplorer({ themeData }: Props) {
 
   return (
     <div className="max-w-[1536px] mx-auto px-4 sm:px-8 py-4 sm:py-5">
-      {/* Headline + measurement contract */}
+      {/* Headline */}
       <div className="mb-4">
         <h1 className="text-[22px] sm:text-2xl lg:text-3xl font-bold text-[#F8FAFC] mb-1.5">
           How are people talking about AI companionship?
         </h1>
         <p className="text-sm sm:text-base text-[#94A3B8]">
           Six recurring themes in how people talk about AI companions on
-          Reddit — romance, sex, consciousness, therapy, addiction, and loss —
-          and how each has risen or fallen over time.
-        </p>
-        <p className="text-xs sm:text-sm text-[#64748B] mt-2">
-          Each panel has its own scale (mentions per 1,000 posts) — read a
-          line&apos;s <span className="text-[#94A3B8]">shape over time</span>,
-          not its height against other themes.{" "}
-          <span className="text-[#94A3B8]">Click any theme</span> to see its
-          story.
+          Reddit — and how each has risen or fallen over time.
         </p>
       </div>
 
@@ -56,6 +48,14 @@ export default function TrendsExplorer({ themeData }: Props) {
           </button>
         ))}
       </div>
+
+      {/* How to read the panels — a chart-reading note, kept with the chart
+          rather than in the masthead. */}
+      <p className="text-xs sm:text-sm text-[#64748B] mb-3">
+        Each panel has its own scale — compare a line&apos;s{" "}
+        <span className="text-[#94A3B8]">shape over time</span>, not its
+        height against other themes.
+      </p>
 
       {/* Trend Atlas — small-multiples grid. A plain section, not a
           figure/role="img": the panels are links and must stay discoverable
