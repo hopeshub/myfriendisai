@@ -205,7 +205,9 @@ export default function About() {
               if it just happens to share a word. Keywords that don&apos;t hold
               up get dropped. And because language drifts &mdash;
               &ldquo;therapeutic&rdquo; started showing up as an insult about
-              preachy AI &mdash; I re-check the set over time, not just once.
+              preachy AI &mdash; I re-check the keyword set every month,
+              sampling recent matches for any keyword whose meaning has
+              slipped.
             </p>
             <p>
               The chart then shows how many posts use a theme&apos;s keywords,

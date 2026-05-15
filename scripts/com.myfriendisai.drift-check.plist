@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  Monthly keyword-drift sample build.
+
+  Reference copy — the live copy lives at
+  ~/Library/LaunchAgents/com.myfriendisai.drift-check.plist
+  Install:  cp scripts/com.myfriendisai.drift-check.plist ~/Library/LaunchAgents/
+            launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.myfriendisai.drift-check.plist
+
+  Fires on the 13th of each month at 12:00 local time and runs
+  scripts/run_drift_build.sh, which stages drift-check sample files and
+  posts a macOS notification. Classification is done afterward in a
+  Claude Code session.
+-->
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.myfriendisai.drift-check</string>
+
+    <key>ProgramArguments</key>
+    <array>
+        <string>/Users/walker/Projects/myfriendisai/scripts/run_drift_build.sh</string>
+    </array>
+
+    <!-- Run monthly on the 13th at 12:00 local time -->
+    <key>StartCalendarInterval</key>
+    <dict>
+        <key>Day</key>
+        <integer>13</integer>
+        <key>Hour</key>
+        <integer>12</integer>
+        <key>Minute</key>
+        <integer>0</integer>
+    </dict>
+
+    <key>StandardOutPath</key>
+    <string>/Users/walker/Projects/myfriendisai/logs/drift_build.launchd.log</string>
+    <key>StandardErrorPath</key>
+    <string>/Users/walker/Projects/myfriendisai/logs/drift_build.launchd.log</string>
+
+    <key>WorkingDirectory</key>
+    <string>/Users/walker/Projects/myfriendisai</string>
+</dict>
+</plist>
