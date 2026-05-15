@@ -147,15 +147,3 @@ a:focus-visible {
 .skip-link:focus {
   top: 0;
 }
-
-/* Inline theme-detail row: gentle entrance when a panel is expanded. */
-@keyframes detailRowIn {
-  from { opacity: 0; transform: translateY(-6px); }
-  to   { opacity: 1; transform: none; }
-}
-.detail-row-in {
-  animation: detailRowIn 200ms ease-out;
-}
-@media (prefers-reduced-motion: reduce) {
-  .detail-row-in { animation: none; }
-}

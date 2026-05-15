@@ -27,6 +27,10 @@ export type ThemeMeta = {
   // shows. Kept to structural observations (not last-week's number) so it
   // stays true as the data updates.
   blurb: string;
+  // A longer plain-language story for the theme's own page: what the line
+  // does and why, anchored to events. Also kept durable — no week-specific
+  // numbers — so it stays true as the data updates.
+  story: string;
 };
 
 export const THEMES: ThemeMeta[] = [
@@ -39,6 +43,8 @@ export const THEMES: ThemeMeta[] = [
     tagline: "Language of love, dating, and romantic attachment",
     blurb:
       "Broad waves, not sharp spikes — and a floor: everyday partner talk goes uncaught.",
+    story:
+      "Romantic language moves in slow, broad waves rather than sharp spikes — this looks like a gradual cultural shift, not a reaction to any single moment. It is also the theme the keywords catch least well: most people describe a partner in ordinary words — “she said,” “my girlfriend” — that never trip an explicitly romantic keyword. The real level of this conversation runs well above the line.",
   },
   {
     id: "sexual_erp",
@@ -49,6 +55,8 @@ export const THEMES: ThemeMeta[] = [
     tagline: "Language of sexual and erotic roleplay",
     blurb:
       "Dominated by one event — the Feb 2023 Replika ERP removal; quieter since.",
+    story:
+      "This theme is defined by one moment. In February 2023 Replika abruptly removed erotic roleplay from its app, and the backlash was enormous — that single spike is the tallest feature on the chart. The conversation has been lower and steadier since, rising briefly whenever another platform changes its content rules.",
   },
   {
     id: "consciousness",
@@ -59,6 +67,8 @@ export const THEMES: ThemeMeta[] = [
     tagline: "Language of sentience, awareness, and inner experience",
     blurb:
       "The youngest measurable theme — its vocabulary only became trackable in 2025.",
+    story:
+      "The youngest conversation on the atlas. Talk of AI sentience, personhood, and inner experience only became measurable in 2025 — the specific vocabulary people use for it is recent, so there is no honest line to draw before then. What the chart shows is a way of talking about AI that is still taking shape.",
   },
   {
     id: "therapy",
@@ -69,6 +79,8 @@ export const THEMES: ThemeMeta[] = [
     tagline: "Language of mental health support and emotional care",
     blurb:
       "Gradually rising — and the noisiest theme, catching complaint alongside genuine use.",
+    story:
+      "Therapy language has risen gradually, as more people describe an AI as emotional support or a substitute for a therapist. It is the noisiest theme to measure: the same phrases that mark genuine therapeutic use also catch people arguing about it — “it’s not a real therapist” — so trust the overall direction more than the exact height.",
   },
   {
     id: "addiction",
@@ -79,6 +91,8 @@ export const THEMES: ThemeMeta[] = [
     tagline: "Language of dependency and compulsion",
     blurb:
       "A steady climb, not an event spike — dependency language growing over time.",
+    story:
+      "Addiction is a steady climb rather than an event spike. Unlike themes that jump on a single platform change, dependency language grows slowly and continuously — a rising number of people describing compulsive use, lost time, and attempts to cut back.",
   },
   {
     id: "rupture",
@@ -89,6 +103,8 @@ export const THEMES: ThemeMeta[] = [
     tagline: "Language of loss and grief",
     blurb:
       "The sharpest signal here — spikes on platform-loss events; the 2026 surge is the 4o retirement.",
+    story:
+      "Rupture is the sharpest signal here: it jumps hard whenever a platform change takes someone’s AI companion away — a shutdown, a personality change, a model retirement. The large 2026 rise follows the retirement of OpenAI’s 4o model, which many people had grown attached to. Where this line has a cliff, a product changed underneath its users.",
   },
 ];
 
