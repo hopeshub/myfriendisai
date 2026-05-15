@@ -69,10 +69,9 @@ export default function TrendsExplorer({ themeData, keywordDetails }: Props) {
             and how each has risen or fallen over time.
           </p>
           <p className="text-xs sm:text-sm text-[#64748B] mt-2">
-            Each panel is its own chart. Read a line&apos;s{" "}
-            <span className="text-[#94A3B8]">shape over time</span> — not its
-            height against other themes. Keyword sensitivity differs by theme,
-            so a taller line is not a more common theme.
+            Each panel has its own scale (mentions per 1,000 posts) — read a
+            line&apos;s <span className="text-[#94A3B8]">shape over time</span>,
+            not its height against other themes.
           </p>
         </div>
 

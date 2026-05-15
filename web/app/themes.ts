@@ -38,7 +38,7 @@ export const THEMES: ThemeMeta[] = [
     detector: "narrow",
     tagline: "Language of love, dating, and romantic attachment",
     blurb:
-      "Broad waves rather than sharp spikes. The keywords catch only distinctive romance language, so everyday partner talk is missed — read the line as a floor.",
+      "Broad waves, not sharp spikes — and a floor: everyday partner talk goes uncaught.",
   },
   {
     id: "sexual_erp",
@@ -48,7 +48,7 @@ export const THEMES: ThemeMeta[] = [
     detector: "moderate",
     tagline: "Language of sexual and erotic roleplay",
     blurb:
-      "Shaped by one event: the Feb 2023 Replika ERP removal drove a large share of all sex/ERP volume to date. Recent movement runs well below that peak.",
+      "Dominated by one event — the Feb 2023 Replika ERP removal; quieter since.",
   },
   {
     id: "consciousness",
@@ -58,7 +58,7 @@ export const THEMES: ThemeMeta[] = [
     detector: "narrow",
     tagline: "Language of sentience, awareness, and inner experience",
     blurb:
-      "The youngest measurable theme — its vocabulary (personhood, selfhood) only became common enough to track reliably from 2025.",
+      "The youngest measurable theme — its vocabulary only became trackable in 2025.",
   },
   {
     id: "therapy",
@@ -68,7 +68,7 @@ export const THEMES: ThemeMeta[] = [
     detector: "moderate",
     tagline: "Language of mental health support and emotional care",
     blurb:
-      "Gradually rising as AI-as-support language spreads — and the noisiest theme, picking up complaint and sarcasm alongside genuine use.",
+      "Gradually rising — and the noisiest theme, catching complaint alongside genuine use.",
   },
   {
     id: "addiction",
@@ -78,7 +78,7 @@ export const THEMES: ThemeMeta[] = [
     detector: "broad",
     tagline: "Language of dependency and compulsion",
     blurb:
-      "A steady climb rather than an event spike — dependency and recovery language has grown into a larger share of the conversation over time.",
+      "A steady climb, not an event spike — dependency language growing over time.",
   },
   {
     id: "rupture",
@@ -88,7 +88,7 @@ export const THEMES: ThemeMeta[] = [
     detector: "narrow",
     tagline: "Language of loss and grief",
     blurb:
-      "The sharpest signal here. Grief and loss language spikes on platform-loss events — the 2026 surge tracks the GPT-4o retirement — and stays low between them.",
+      "The sharpest signal here — spikes on platform-loss events; the 2026 surge is the 4o retirement.",
   },
 ];
 

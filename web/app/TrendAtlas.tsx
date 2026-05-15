@@ -19,9 +19,11 @@ import { THEMES, EVENTS, DETECTOR_LABEL } from "./themes";
 // ~10x between themes, so line heights are not comparable between panels.
 // Compare each theme's shape and timing over time; that comparison is honest.
 //
-// Each panel is a small editorial section: a heading, a one-line reading of the
-// theme's trend, and the chart. Events are shared across themes, so they are
-// labelled once in a legend above the grid; each panel carries a numbered tick.
+// Panels are kept compact so all six tile into roughly one viewport (a true
+// "atlas" glance, not a scroll of paragraphs). Events are shared across themes,
+// so they're labelled once in a legend; each panel carries a numbered tick.
+// THEMES order is fixed and intentional — panels are never sorted by value
+// (sorting by value would itself imply the cross-theme ranking we forbid).
 
 type TimeRange = "6M" | "1Y" | "2Y" | "ALL";
 type Breakpoint = "mobile" | "tablet" | "desktop";
@@ -59,31 +61,37 @@ function monthlySeries(
 }
 
 // ── Event legend ─────────────────────────────────────────────────────────────
-function EventLegend({ events }: { events: NumberedEvent[] }) {
+// Compact single block above the grid. Event numbers are STABLE — assigned by
+// fixed chronological order over the full event set — so a given number always
+// means the same event regardless of the selected time range.
+function EventLegend({
+  events,
+  bp,
+}: {
+  events: NumberedEvent[];
+  bp: Breakpoint;
+}) {
   const hasMethodology = events.some((e) => e.methodology);
+  const fs = bp === "mobile" ? 14 : 12;
   return (
-    <div style={{ marginBottom: 22 }}>
+    <div style={{ marginBottom: 16 }}>
       <div
-        style={{
-          fontSize: 11,
-          color: "#64748B",
-          textTransform: "uppercase",
-          letterSpacing: "0.05em",
-          marginBottom: 8,
-        }}
+        style={{ display: "flex", flexWrap: "wrap", gap: "6px 16px", alignItems: "center" }}
       >
-        Events
-      </div>
-      <div style={{ display: "flex", flexWrap: "wrap", gap: "8px 20px" }}>
+        <span
+          style={{
+            fontSize: 11,
+            color: "#64748B",
+            textTransform: "uppercase",
+            letterSpacing: "0.05em",
+          }}
+        >
+          Events
+        </span>
         {events.map((e) => (
           <span
             key={e.date}
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: 7,
-              fontSize: 12.5,
-            }}
+            style={{ display: "inline-flex", alignItems: "center", gap: 6, fontSize: fs }}
           >
             <span
               aria-hidden
@@ -91,10 +99,10 @@ function EventLegend({ events }: { events: NumberedEvent[] }) {
                 display: "inline-flex",
                 alignItems: "center",
                 justifyContent: "center",
-                width: 17,
-                height: 17,
+                width: 16,
+                height: 16,
                 borderRadius: 999,
-                fontSize: 10,
+                fontSize: 9.5,
                 fontWeight: 700,
                 flexShrink: 0,
                 color: e.methodology ? "#D4A862" : "#0F1117",
@@ -104,13 +112,13 @@ function EventLegend({ events }: { events: NumberedEvent[] }) {
             >
               {e.num}
             </span>
-            <span style={{ color: "#CBD5E1" }}>{e.label}</span>
+            <span style={{ color: "#CBD5E1" }}>{e.shortLabel}</span>
             <span style={{ color: "#64748B" }}>{fmtMonthShort(e.date)}</span>
           </span>
         ))}
       </div>
       {hasMethodology && (
-        <div style={{ fontSize: 10.5, color: "#64748B", marginTop: 6 }}>
+        <div style={{ fontSize: bp === "mobile" ? 14 : 11, color: "#64748B", marginTop: 6 }}>
           A hollow marker is a change to our keyword set — a measurement
           change, not a real-world event.
         </div>
@@ -150,22 +158,30 @@ export default function TrendAtlas({
     return { perTheme: series, months: domain };
   }, [themeData, timeRange]);
 
-  const cols = bp === "desktop" ? 2 : 1;
-  const panelHeight = bp === "mobile" ? 210 : 248;
+  const cols = bp === "mobile" ? 1 : 2;
+  const panelHeight = bp === "mobile" ? 196 : 184;
+  const labelFs = bp === "mobile" ? 14 : 11;
 
-  // Events within the visible window, numbered left-to-right by date.
-  const numberedEvents: NumberedEvent[] = months.length
-    ? EVENTS.filter(
-        (e) => e.date >= months[0] && e.date <= months[months.length - 1],
-      ).map((e, i) => ({ ...e, num: i + 1 }))
-    : [];
+  // Events numbered by FIXED chronological order over the full set (stable
+  // identifiers), then filtered to the visible window.
+  const numberedEvents: NumberedEvent[] = EVENTS.map((e, i) => ({
+    ...e,
+    num: i + 1,
+  })).filter(
+    (e) =>
+      months.length > 0 &&
+      e.date >= months[0] &&
+      e.date <= months[months.length - 1],
+  );
 
   return (
     <div>
-      {numberedEvents.length > 0 && <EventLegend events={numberedEvents} />}
+      {numberedEvents.length > 0 && (
+        <EventLegend events={numberedEvents} bp={bp} />
+      )}
 
       <div
-        className="grid gap-x-10 gap-y-9"
+        className="grid gap-x-8 gap-y-5"
         style={{ gridTemplateColumns: `repeat(${cols}, minmax(0, 1fr))` }}
       >
         {THEMES.map((t) => {
@@ -174,8 +190,6 @@ export default function TrendAtlas({
           for (const r of series) byDate[r.date] = r.value;
           const themeStart = series[0]?.date;
 
-          // Render the full shared month domain; null before the theme's own
-          // start so the line simply begins at its coverage_start.
           const data = months.map((m) => ({
             date: m,
             value: themeStart && m >= themeStart ? byDate[m] ?? 0 : null,
@@ -197,22 +211,28 @@ export default function TrendAtlas({
                 }
               }}
               aria-label={`${t.label} — open theme detail`}
-              className="cursor-pointer rounded-lg transition-colors hover:bg-[#15171E] -mx-3 px-3 py-2"
+              className="group min-w-0 cursor-pointer rounded-lg transition-colors hover:bg-[#15171E] p-2"
             >
               {/* Panel header */}
-              <div className="flex items-baseline justify-between gap-3">
+              <div className="flex items-center justify-between gap-3">
                 <span
                   className="flex items-center gap-2"
-                  style={{ fontSize: 16.5, fontWeight: 600 }}
+                  style={{ fontSize: 16, fontWeight: 600 }}
                 >
                   <span aria-hidden>{t.emoji}</span>
                   <span style={{ color: t.color }}>{t.label}</span>
                 </span>
+                {/* Detector chip — the key "heights aren't comparable" signal,
+                    given real visible weight rather than a faint corner tag. */}
                 <span
-                  title="How much theme-relevant discourse the keyword set catches. Heights are not comparable between detectors of different width."
+                  title="How much theme-relevant discourse the keyword set catches. Line heights are NOT comparable between panels of different detector width."
                   style={{
-                    fontSize: 10.5,
-                    color: "#64748B",
+                    fontSize: labelFs,
+                    color: "#AEB9C7",
+                    backgroundColor: "#20242F",
+                    border: "1px solid #2F3441",
+                    borderRadius: 5,
+                    padding: "1.5px 8px",
                     whiteSpace: "nowrap",
                   }}
                 >
@@ -220,14 +240,14 @@ export default function TrendAtlas({
                 </span>
               </div>
 
-              {/* Per-theme reading */}
+              {/* One-line reading of the theme's trend */}
               <p
                 style={{
-                  fontSize: 13,
-                  lineHeight: 1.55,
+                  fontSize: bp === "mobile" ? 14 : 12.5,
+                  lineHeight: 1.45,
                   color: "#94A3B8",
-                  marginTop: 4,
-                  marginBottom: 10,
+                  marginTop: 3,
+                  marginBottom: 6,
                 }}
               >
                 {t.blurb}
@@ -241,7 +261,7 @@ export default function TrendAtlas({
                   >
                     <CartesianGrid
                       strokeDasharray="3 3"
-                      stroke="#23262F"
+                      stroke="#2A2D3A"
                       vertical={false}
                     />
                     <XAxis
@@ -254,12 +274,13 @@ export default function TrendAtlas({
                       minTickGap={44}
                     />
                     <YAxis
-                      width={34}
+                      width={36}
                       stroke="transparent"
                       tick={{ fill: "#64748B", fontSize: 11 }}
                       tickLine={false}
                       axisLine={false}
-                      tickCount={3}
+                      domain={[0, "auto"]}
+                      tickCount={4}
                       allowDecimals={false}
                     />
                     {numberedEvents.map((e) => (
@@ -306,16 +327,16 @@ export default function TrendAtlas({
                             <span style={{ color: "#F8FAFC", fontWeight: 600 }}>
                               {(payload[0].value as number).toFixed(1)}
                             </span>
-                            <span style={{ color: "#94A3B8" }}> per 1k</span>
+                            <span style={{ color: "#94A3B8" }}> per 1k posts</span>
                           </div>
                         );
                       }}
                     />
                     <Line
-                      type="monotone"
+                      type="linear"
                       dataKey="value"
                       stroke={t.color}
-                      strokeWidth={2.2}
+                      strokeWidth={2}
                       dot={false}
                       isAnimationActive={false}
                       connectNulls={false}
@@ -324,11 +345,23 @@ export default function TrendAtlas({
                 </ResponsiveContainer>
               </div>
 
-              {startsLate && (
-                <div style={{ fontSize: 10.5, color: "#64748B", marginTop: 3 }}>
-                  measurable from {fmtMonthShort(themeStart!)}
-                </div>
-              )}
+              {/* Footer row: coverage note (left) + detail affordance (right) */}
+              <div
+                className="flex items-center justify-between"
+                style={{ marginTop: 2, minHeight: 16 }}
+              >
+                <span style={{ fontSize: labelFs, color: "#64748B" }}>
+                  {startsLate
+                    ? `measurable from ${fmtMonthShort(themeStart!)}`
+                    : ""}
+                </span>
+                <span
+                  className="transition-colors group-hover:text-[#94A3B8]"
+                  style={{ fontSize: labelFs, color: "#64748B" }}
+                >
+                  Details &rarr;
+                </span>
+              </div>
             </div>
           );
         })}
