@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { ThemeData } from "./page";
-import { EVENTS, type ThemeId } from "./themes";
+import { type ThemeId } from "./themes";
 import { useBreakpoint } from "./useBreakpoint";
 import TransparencyPanel from "./TransparencyPanel";
 import type { KeywordDetailsData } from "./TransparencyPanel";
@@ -12,22 +12,11 @@ import { THEMES } from "./themes";
 
 type TimeRange = "6M" | "1Y" | "2Y" | "ALL";
 
-const MONTH_NAMES = [
-  "Jan", "Feb", "Mar", "Apr", "May", "Jun",
-  "Jul", "Aug", "Sep", "Oct", "Nov", "Dec",
-];
-
-function formatMonthShort(dateStr: string): string {
-  const d = new Date(dateStr + "T00:00:00Z");
-  return `${MONTH_NAMES[d.getUTCMonth()]} '${String(d.getUTCFullYear()).slice(2)}`;
-}
-
 type Props = { themeData: ThemeData; keywordDetails: KeywordDetailsData };
 
 export default function TrendsExplorer({ themeData, keywordDetails }: Props) {
   const [detailPanel, setDetailPanel] = useState<ThemeId | null>(null);
   const [timeRange, setTimeRange] = useState<TimeRange>("1Y");
-  const [eventsExpanded, setEventsExpanded] = useState(false);
   const panelRef = useRef<HTMLDivElement>(null);
   const { bp: rawBp, isMobileStrip: rawMobileStrip } = useBreakpoint();
   // Default to desktop during SSR/hydration to avoid layout flash
@@ -151,53 +140,6 @@ export default function TrendsExplorer({ themeData, keywordDetails }: Props) {
           </a>
           .
         </p>
-
-        {/* Mobile event list */}
-        {bp === "mobile" && (
-          <div className="mt-3">
-            {!eventsExpanded ? (
-              <button
-                onClick={() => setEventsExpanded(true)}
-                className="text-xs text-[#94A3B8] hover:text-[#F8FAFC] transition-colors"
-              >
-                View events ({EVENTS.length})
-              </button>
-            ) : (
-              <div
-                className="rounded-lg p-3 text-xs"
-                style={{ backgroundColor: "#1A1D27", border: "1px solid #2A2D3A" }}
-              >
-                <div className="flex items-center justify-between mb-2">
-                  <span className="text-[#94A3B8] font-medium">Events</span>
-                  <button
-                    onClick={() => setEventsExpanded(false)}
-                    className="text-[#94A3B8] hover:text-[#F8FAFC] transition-colors text-xs"
-                  >
-                    Close
-                  </button>
-                </div>
-                <div className="space-y-1.5 max-h-40 overflow-y-auto">
-                  {EVENTS.map((event) => (
-                    <div key={event.date} className="flex gap-2 text-[#94A3B8]">
-                      <span className="text-[#F8FAFC] whitespace-nowrap">
-                        {formatMonthShort(event.date)}
-                      </span>
-                      <span>&mdash;</span>
-                      <span>
-                        {event.label}
-                        {event.methodology && (
-                          <span style={{ color: "#64748B" }}>
-                            {" "}(keyword-set change)
-                          </span>
-                        )}
-                      </span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-          </div>
-        )}
       </div>
 
       {/* Detail panel — sidebar on desktop, bottom sheet on mobile */}
