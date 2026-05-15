@@ -159,7 +159,6 @@ export default function TrendAtlas({
               <ResponsiveContainer width="100%" height="100%">
                 <LineChart
                   data={data}
-                  syncId="trend-atlas"
                   margin={{ top: 6, right: 8, bottom: 2, left: 0 }}
                 >
                   <CartesianGrid
