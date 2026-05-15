@@ -495,6 +495,7 @@ Single breakpoint at **≤768px**. Desktop layout unchanged. Key decisions:
 - [x] Accessibility fixes (focus styles, ARIA attributes, color contrast, focus trap)
 
 ### Future work
+- **Recurring off-site DB backup (operational).** `data/tracker.db` (~23 GB) holds the irreplaceable 2017+ corpus. Backed up manually to the T9 external drive on 2026-05-15 — a one-time copy. TODO: set up a *recurring* backup, ideally to a cloud bucket (e.g. Backblaze B2, ~$1.50/yr). `scripts/backup_db.sh` already does a WAL-safe copy + integrity check and takes a destination arg; it needs a cloud destination configured and a schedule. (Scheduling to the external drive is fragile — the drive must be connected, and a launchd job needs its own removable-volume permission.)
 - Comment keyword precision validation
 - Composite "engagement index" scoring (need more daily data)
 - Narrative/editorial content
