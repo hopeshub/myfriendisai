@@ -23,16 +23,73 @@ export type ThemeMeta = {
   color: string;
   tagline: string;
   detector: Detector;
+  // A short, durable reading of the theme's trend shape — what the panel
+  // shows. Kept to structural observations (not last-week's number) so it
+  // stays true as the data updates.
+  blurb: string;
 };
 
-// Colors tuned so value text passes WCAG AA on the card backgrounds.
 export const THEMES: ThemeMeta[] = [
-  { id: "romance",       label: "Romance",       emoji: "💕", color: "#FF69B4", detector: "narrow",   tagline: "Language of love, dating, and romantic attachment" },
-  { id: "sexual_erp",    label: "Sex / ERP",     emoji: "🔞", color: "#f87171", detector: "moderate", tagline: "Language of sexual and erotic roleplay" },
-  { id: "consciousness", label: "Consciousness", emoji: "🧠", color: "#C084FC", detector: "narrow",   tagline: "Language of sentience, awareness, and inner experience" },
-  { id: "therapy",       label: "Therapy",       emoji: "🫂", color: "#60A5FA", detector: "moderate", tagline: "Language of mental health support and emotional care" },
-  { id: "addiction",     label: "Addiction",     emoji: "💊", color: "#fd7112", detector: "broad",    tagline: "Language of dependency and compulsion" },
-  { id: "rupture",       label: "Rupture",       emoji: "🥀", color: "#22C55E", detector: "narrow",   tagline: "Language of loss and grief" },
+  {
+    id: "romance",
+    label: "Romance",
+    emoji: "💕",
+    color: "#FF69B4",
+    detector: "narrow",
+    tagline: "Language of love, dating, and romantic attachment",
+    blurb:
+      "Broad waves rather than sharp spikes. The keywords catch only distinctive romance language, so everyday partner talk is missed — read the line as a floor.",
+  },
+  {
+    id: "sexual_erp",
+    label: "Sex / ERP",
+    emoji: "🔞",
+    color: "#f87171",
+    detector: "moderate",
+    tagline: "Language of sexual and erotic roleplay",
+    blurb:
+      "Shaped by one event: the Feb 2023 Replika ERP removal drove a large share of all sex/ERP volume to date. Recent movement runs well below that peak.",
+  },
+  {
+    id: "consciousness",
+    label: "Consciousness",
+    emoji: "🧠",
+    color: "#C084FC",
+    detector: "narrow",
+    tagline: "Language of sentience, awareness, and inner experience",
+    blurb:
+      "The youngest measurable theme — its vocabulary (personhood, selfhood) only became common enough to track reliably from 2025.",
+  },
+  {
+    id: "therapy",
+    label: "Therapy",
+    emoji: "🫂",
+    color: "#60A5FA",
+    detector: "moderate",
+    tagline: "Language of mental health support and emotional care",
+    blurb:
+      "Gradually rising as AI-as-support language spreads — and the noisiest theme, picking up complaint and sarcasm alongside genuine use.",
+  },
+  {
+    id: "addiction",
+    label: "Addiction",
+    emoji: "💊",
+    color: "#fd7112",
+    detector: "broad",
+    tagline: "Language of dependency and compulsion",
+    blurb:
+      "A steady climb rather than an event spike — dependency and recovery language has grown into a larger share of the conversation over time.",
+  },
+  {
+    id: "rupture",
+    label: "Rupture",
+    emoji: "🥀",
+    color: "#22C55E",
+    detector: "narrow",
+    tagline: "Language of loss and grief",
+    blurb:
+      "The sharpest signal here. Grief and loss language spikes on platform-loss events — the 2026 surge tracks the GPT-4o retirement — and stays low between them.",
+  },
 ];
 
 export const DETECTOR_LABEL: Record<Detector, string> = {

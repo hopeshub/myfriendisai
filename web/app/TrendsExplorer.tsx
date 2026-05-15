@@ -64,11 +64,15 @@ export default function TrendsExplorer({ themeData, keywordDetails }: Props) {
             How are people talking about AI companionship?
           </h1>
           <p className="text-sm sm:text-base text-[#94A3B8]">
-            Six themes tracked across 26 Reddit communities. Each panel shows
-            one theme&apos;s rate of distinctive keyword language over time.
-            Compare the <span className="text-[#CBD5E1]">shape and timing</span>{" "}
-            of each line — not heights between themes. Detection sensitivity
-            differs by theme, so a taller line is not a more common theme.
+            Six recurring themes in how people talk about AI companions on
+            Reddit — romance, sex, consciousness, therapy, addiction, and loss —
+            and how each has risen or fallen over time.
+          </p>
+          <p className="text-xs sm:text-sm text-[#64748B] mt-2">
+            Each panel is its own chart. Read a line&apos;s{" "}
+            <span className="text-[#94A3B8]">shape over time</span> — not its
+            height against other themes. Keyword sensitivity differs by theme,
+            so a taller line is not a more common theme.
           </p>
         </div>
 

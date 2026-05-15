@@ -15,13 +15,13 @@ import type { ThemeData } from "./page";
 import { THEMES, EVENTS, DETECTOR_LABEL } from "./themes";
 
 // ── Trend Atlas ──────────────────────────────────────────────────────────────
-// Small-multiples grid: one panel per theme, each on its OWN y-axis. The axes
-// deliberately do not match — detection sensitivity differs ~10x between themes,
-// so line heights are not comparable between panels. Compare each theme's shape
-// and timing over time; that comparison is honest. A shared y-axis would not be.
+// One panel per theme, each on its OWN y-axis — detection sensitivity differs
+// ~10x between themes, so line heights are not comparable between panels.
+// Compare each theme's shape and timing over time; that comparison is honest.
 //
-// Events are shared across all themes, so they are labelled once in a legend
-// above the grid; each panel carries only a faint numbered tick.
+// Each panel is a small editorial section: a heading, a one-line reading of the
+// theme's trend, and the chart. Events are shared across themes, so they are
+// labelled once in a legend above the grid; each panel carries a numbered tick.
 
 type TimeRange = "6M" | "1Y" | "2Y" | "ALL";
 type Breakpoint = "mobile" | "tablet" | "desktop";
@@ -59,23 +59,22 @@ function monthlySeries(
 }
 
 // ── Event legend ─────────────────────────────────────────────────────────────
-// Shown once above the grid. Each panel then only needs a numbered tick.
 function EventLegend({ events }: { events: NumberedEvent[] }) {
   const hasMethodology = events.some((e) => e.methodology);
   return (
-    <div style={{ marginBottom: 14 }}>
+    <div style={{ marginBottom: 22 }}>
       <div
         style={{
           fontSize: 11,
           color: "#64748B",
           textTransform: "uppercase",
           letterSpacing: "0.05em",
-          marginBottom: 7,
+          marginBottom: 8,
         }}
       >
         Events
       </div>
-      <div style={{ display: "flex", flexWrap: "wrap", gap: "7px 18px" }}>
+      <div style={{ display: "flex", flexWrap: "wrap", gap: "8px 20px" }}>
         {events.map((e) => (
           <span
             key={e.date}
@@ -151,8 +150,8 @@ export default function TrendAtlas({
     return { perTheme: series, months: domain };
   }, [themeData, timeRange]);
 
-  const cols = bp === "mobile" ? 1 : bp === "tablet" ? 2 : 3;
-  const panelHeight = bp === "mobile" ? 178 : 204;
+  const cols = bp === "desktop" ? 2 : 1;
+  const panelHeight = bp === "mobile" ? 210 : 248;
 
   // Events within the visible window, numbered left-to-right by date.
   const numberedEvents: NumberedEvent[] = months.length
@@ -166,7 +165,7 @@ export default function TrendAtlas({
       {numberedEvents.length > 0 && <EventLegend events={numberedEvents} />}
 
       <div
-        className="grid gap-3"
+        className="grid gap-x-10 gap-y-9"
         style={{ gridTemplateColumns: `repeat(${cols}, minmax(0, 1fr))` }}
       >
         {THEMES.map((t) => {
@@ -198,33 +197,22 @@ export default function TrendAtlas({
                 }
               }}
               aria-label={`${t.label} — open theme detail`}
-              className="rounded-lg cursor-pointer transition-colors"
-              style={{
-                backgroundColor: "#1A1D27",
-                border: "1px solid #2A2D3A",
-                borderLeft: `3px solid ${t.color}`,
-                padding: "10px 12px 8px",
-              }}
+              className="cursor-pointer rounded-lg transition-colors hover:bg-[#15171E] -mx-3 px-3 py-2"
             >
               {/* Panel header */}
-              <div className="flex items-center justify-between gap-2 mb-1">
+              <div className="flex items-baseline justify-between gap-3">
                 <span
-                  className="flex items-center gap-1.5"
-                  style={{ fontSize: 13 }}
+                  className="flex items-center gap-2"
+                  style={{ fontSize: 16.5, fontWeight: 600 }}
                 >
                   <span aria-hidden>{t.emoji}</span>
-                  <span style={{ color: t.color, fontWeight: 600 }}>
-                    {t.label}
-                  </span>
+                  <span style={{ color: t.color }}>{t.label}</span>
                 </span>
                 <span
                   title="How much theme-relevant discourse the keyword set catches. Heights are not comparable between detectors of different width."
                   style={{
-                    fontSize: 10,
-                    color: "#8293A6",
-                    border: "1px solid #2A2D3A",
-                    borderRadius: 4,
-                    padding: "1px 6px",
+                    fontSize: 10.5,
+                    color: "#64748B",
                     whiteSpace: "nowrap",
                   }}
                 >
@@ -232,11 +220,24 @@ export default function TrendAtlas({
                 </span>
               </div>
 
+              {/* Per-theme reading */}
+              <p
+                style={{
+                  fontSize: 13,
+                  lineHeight: 1.55,
+                  color: "#94A3B8",
+                  marginTop: 4,
+                  marginBottom: 10,
+                }}
+              >
+                {t.blurb}
+              </p>
+
               <div style={{ height: panelHeight }}>
                 <ResponsiveContainer width="100%" height="100%">
                   <LineChart
                     data={data}
-                    margin={{ top: 14, right: 8, bottom: 2, left: 0 }}
+                    margin={{ top: 16, right: 8, bottom: 2, left: 0 }}
                   >
                     <CartesianGrid
                       strokeDasharray="3 3"
@@ -247,15 +248,15 @@ export default function TrendAtlas({
                       dataKey="date"
                       tickFormatter={fmtMonthShort}
                       stroke="#2A2D3A"
-                      tick={{ fill: "#64748B", fontSize: 10 }}
+                      tick={{ fill: "#64748B", fontSize: 11 }}
                       tickLine={false}
                       axisLine={{ stroke: "#2A2D3A" }}
-                      minTickGap={36}
+                      minTickGap={44}
                     />
                     <YAxis
                       width={34}
                       stroke="transparent"
-                      tick={{ fill: "#64748B", fontSize: 10 }}
+                      tick={{ fill: "#64748B", fontSize: 11 }}
                       tickLine={false}
                       axisLine={false}
                       tickCount={3}
@@ -265,14 +266,14 @@ export default function TrendAtlas({
                       <ReferenceLine
                         key={e.date}
                         x={e.date}
-                        stroke="#6B7280"
+                        stroke="#5B6472"
                         strokeDasharray={e.methodology ? "2 3" : "5 3"}
                         strokeWidth={1}
                         label={{
                           value: String(e.num),
                           position: "insideTop",
-                          fill: "#94A3B8",
-                          fontSize: 9.5,
+                          fill: "#8293A6",
+                          fontSize: 10,
                         }}
                       />
                     ))}
@@ -313,7 +314,7 @@ export default function TrendAtlas({
                       type="monotone"
                       dataKey="value"
                       stroke={t.color}
-                      strokeWidth={1.8}
+                      strokeWidth={2.2}
                       dot={false}
                       isAnimationActive={false}
                       connectNulls={false}
@@ -323,7 +324,7 @@ export default function TrendAtlas({
               </div>
 
               {startsLate && (
-                <div style={{ fontSize: 10, color: "#64748B", marginTop: 2 }}>
+                <div style={{ fontSize: 10.5, color: "#64748B", marginTop: 3 }}>
                   measurable from {fmtMonthShort(themeStart!)}
                 </div>
               )}
