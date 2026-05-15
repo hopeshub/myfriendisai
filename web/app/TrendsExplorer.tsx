@@ -1,10 +1,9 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import type { ThemeData } from "./page";
 import { type ThemeId } from "./themes";
 import { useBreakpoint } from "./useBreakpoint";
-import TransparencyPanel from "./TransparencyPanel";
 import type { KeywordDetailsData } from "./TransparencyPanel";
 import BottomSheet from "./BottomSheet";
 import TrendAtlas from "./TrendAtlas";
@@ -17,30 +16,10 @@ type Props = { themeData: ThemeData; keywordDetails: KeywordDetailsData };
 export default function TrendsExplorer({ themeData, keywordDetails }: Props) {
   const [detailPanel, setDetailPanel] = useState<ThemeId | null>(null);
   const [timeRange, setTimeRange] = useState<TimeRange>("1Y");
-  const panelRef = useRef<HTMLDivElement>(null);
   const { bp: rawBp, isMobileStrip: rawMobileStrip } = useBreakpoint();
   // Default to desktop during SSR/hydration to avoid layout flash
   const bp = rawBp ?? "desktop";
   const isMobileStrip = rawMobileStrip ?? false;
-
-  // Close the desktop detail panel on outside click (the bottom sheet
-  // handles its own dismissal on mobile).
-  const handleClickOutside = useCallback(
-    (e: MouseEvent) => {
-      if (!detailPanel || isMobileStrip) return;
-      const target = e.target as Node;
-      if (panelRef.current?.contains(target)) return;
-      // Clicks on a panel-header trigger are handled by their own onClick.
-      if ((target as HTMLElement).closest?.("[data-theme-trigger]")) return;
-      setDetailPanel(null);
-    },
-    [detailPanel, isMobileStrip],
-  );
-
-  useEffect(() => {
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, [handleClickOutside]);
 
   const closeDetail = useCallback(() => {
     const triggerId = detailPanel;
@@ -54,6 +33,16 @@ export default function TrendsExplorer({ themeData, keywordDetails }: Props) {
       });
     }
   }, [detailPanel]);
+
+  // Escape closes the open detail (inline expansion on desktop/tablet, bottom
+  // sheet on mobile) and returns focus to the panel that opened it.
+  useEffect(() => {
+    function onKey(e: KeyboardEvent) {
+      if (e.key === "Escape" && detailPanel) closeDetail();
+    }
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [detailPanel, closeDetail]);
 
   return (
     <>
@@ -111,7 +100,13 @@ export default function TrendsExplorer({ themeData, keywordDetails }: Props) {
             themeData={themeData}
             timeRange={timeRange}
             bp={bp}
-            onOpenDetail={(id) => setDetailPanel(id as ThemeId)}
+            selected={detailPanel}
+            keywordDetails={keywordDetails}
+            onOpenDetail={(id) =>
+              setDetailPanel((prev) =>
+                prev === id ? null : (id as ThemeId),
+              )
+            }
           />
         </figure>
 
@@ -145,15 +140,16 @@ export default function TrendsExplorer({ themeData, keywordDetails }: Props) {
         </p>
       </div>
 
-      {/* Detail panel — sidebar on desktop, bottom sheet on mobile */}
-      {(() => {
-        const panelTheme = detailPanel
-          ? THEMES.find((t) => t.id === detailPanel)
-          : null;
-        const panelData = detailPanel ? keywordDetails[detailPanel] : null;
-        if (!panelTheme || !panelData) return null;
-
-        if (isMobileStrip) {
+      {/* Detail — on desktop/tablet the detail expands inline inside the
+          atlas grid (see TrendAtlas); on mobile (single-column grid) it opens
+          as a bottom sheet so the strip stays usable above it. */}
+      {bp === "mobile" &&
+        (() => {
+          const panelTheme = detailPanel
+            ? THEMES.find((t) => t.id === detailPanel)
+            : null;
+          const panelData = detailPanel ? keywordDetails[detailPanel] : null;
+          if (!panelTheme || !panelData) return null;
           return (
             <BottomSheet
               isOpen={!!detailPanel}
@@ -165,21 +161,7 @@ export default function TrendsExplorer({ themeData, keywordDetails }: Props) {
               onClose={closeDetail}
             />
           );
-        }
-        return (
-          <div ref={panelRef}>
-            <TransparencyPanel
-              themeId={panelTheme.id}
-              themeLabel={panelTheme.label}
-              themeEmoji={panelTheme.emoji}
-              themeTagline={panelTheme.tagline}
-              themeColor={panelTheme.color}
-              data={panelData}
-              onClose={closeDetail}
-            />
-          </div>
-        );
-      })()}
+        })()}
     </>
   );
 }

@@ -1,6 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
+// Shared theme-detail building blocks: the keyword / community / example-post
+// sections and their types. Rendered inline inside the Trend Atlas grid on
+// desktop/tablet (TrendAtlas.tsx) and inside the mobile BottomSheet.
+
+import { useState } from "react";
 
 // ─── Types ────────────────────────────────────────────────────────────────
 
@@ -21,16 +25,6 @@ export type CategoryDetail = {
 };
 
 export type KeywordDetailsData = Record<string, CategoryDetail>;
-
-type Props = {
-  themeId: string;
-  themeLabel: string;
-  themeEmoji: string;
-  themeTagline: string;
-  themeColor: string;
-  data: CategoryDetail;
-  onClose: () => void;
-};
 
 // ─── Helpers ──────────────────────────────────────────────────────────────
 
@@ -245,89 +239,3 @@ export function SamplePostsSection({ samples }: { samples: SamplePost[] }) {
   );
 }
 
-// ─── Main component: centered modal dialog ────────────────────────────────
-// A centered modal rather than a right-edge slideout — a slideout sat on top
-// of whatever right-column panel you clicked (e.g. Rupture), hiding it.
-
-export default function TransparencyPanel({
-  themeLabel,
-  themeEmoji,
-  themeTagline,
-  themeColor,
-  data,
-  onClose,
-}: Props) {
-  const samples = pickSamples(data.keywords);
-
-  useEffect(() => {
-    function onKey(e: KeyboardEvent) {
-      if (e.key === "Escape") onClose();
-    }
-    document.addEventListener("keydown", onKey);
-    return () => document.removeEventListener("keydown", onKey);
-  }, [onClose]);
-
-  return (
-    <div
-      className="fixed inset-0 z-40 flex items-center justify-center p-4"
-      style={{ backgroundColor: "rgba(8,10,15,0.66)" }}
-      onClick={onClose}
-    >
-      <div
-        role="dialog"
-        aria-modal="true"
-        aria-label={`${themeLabel} — theme detail`}
-        onClick={(e) => e.stopPropagation()}
-        className="flex flex-col rounded-xl overflow-hidden"
-        style={{
-          width: "min(560px, 100%)",
-          maxHeight: "85vh",
-          backgroundColor: "#1A1D27",
-          borderTop: `3px solid ${themeColor}`,
-          boxShadow: "0 18px 50px rgba(0,0,0,0.55)",
-        }}
-      >
-        {/* Header */}
-        <div
-          className="flex items-center justify-between px-5 py-3 flex-shrink-0"
-          style={{ borderBottom: "0.5px solid #1E293B" }}
-        >
-          <div>
-            <div className="text-[15px] font-medium" style={{ color: themeColor }}>
-              {themeEmoji} {themeLabel}
-            </div>
-            <div className="text-[11px] mt-0.5" style={{ color: "#8293A6" }}>
-              {themeTagline}
-            </div>
-          </div>
-          <button
-            onClick={onClose}
-            className="text-[20px] leading-none min-w-11 min-h-11 flex items-center justify-center rounded hover:text-foreground transition-colors"
-            style={{ color: "#8293A6" }}
-            aria-label="Close"
-          >
-            &times;
-          </button>
-        </div>
-
-        {/* Scrollable content */}
-        <div className="flex-1 overflow-y-auto px-5 py-4 space-y-5">
-          <KeywordsSection keywords={data.keywords} color={themeColor} />
-          <CommunitiesSection subreddits={data.subreddits} color={themeColor} />
-          <SamplePostsSection samples={samples} />
-
-          {/* Footer */}
-          <div
-            className="text-[11px] pt-2"
-            style={{ color: "#8293A6", borderTop: "0.5px solid #1E293B" }}
-          >
-            {data.keywords.length} keywords across{" "}
-            {data.subreddits.length} communities &middot;{" "}
-            {data.unique_posts.toLocaleString()} posts matched &middot; All
-            keywords manually validated
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
