@@ -959,12 +959,15 @@ export default function TrendsExplorer({ themeData, keywordDetails }: Props) {
                 const isSelected = selected.has(theme.id);
                 const hasSelection = selected.size > 0;
                 const isFaded = hasSelection && !isSelected;
-                // Default (no selection): all lines faint at 20% per FRONTEND_DESIGN_SPEC
+                // Default (no selection): all lines visible at 85% opacity.
+                // Selecting a theme dims the others to 20% to focus attention.
+                // Previous default of 20% on every line made the chart look
+                // broken on first visit (first-visitor audit, 2026-05-14).
                 const opacity = hasSelection
                   ? isFaded
                     ? 0.2
                     : 1
-                  : 0.2;
+                  : 0.85;
                 const isNearest = nearestTheme === theme.id;
                 return (
                   <Line
@@ -1010,7 +1013,8 @@ export default function TrendsExplorer({ themeData, keywordDetails }: Props) {
         }}
       >
         Each theme tracks validated keywords. Per-theme precision varies
-        (51–92%); LLM verification is rolling out to filter false positives.{" "}
+        by theme and surface (see Theme Health); LLM verification is rolling
+        out to filter false positives.{" "}
         <a
           href="/about#verification"
           style={{ color: "#94A3B8", textDecoration: "underline" }}
