@@ -121,7 +121,7 @@ export default async function ThemePage({
       </Link>
 
       {/* Header */}
-      <div className="mt-5">
+      <div className="mt-4">
         <h1
           className="font-bold flex items-center gap-2.5"
           style={{ fontSize: 30, color: theme.color }}
@@ -152,7 +152,7 @@ export default async function ThemePage({
 
       {/* The chart */}
       <div
-        className="mt-6 rounded-xl"
+        className="mt-5 rounded-xl"
         style={{
           backgroundColor: "#1A1D27",
           border: "1px solid #2A2D3A",
@@ -169,7 +169,7 @@ export default async function ThemePage({
           fontSize: 16.5,
           lineHeight: 1.7,
           color: "#D3DAE3",
-          marginTop: 26,
+          marginTop: 18,
         }}
       >
         {theme.story}

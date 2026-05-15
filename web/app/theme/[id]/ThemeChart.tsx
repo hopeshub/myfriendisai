@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import {
   ResponsiveContainer,
   LineChart,
@@ -13,10 +13,10 @@ import {
 } from "recharts";
 import { EVENTS } from "../../themes";
 
-// A single large line chart for one theme's page. Same honest series as the
-// homepage atlas panel (validated-keyword mentions per 1,000 posts, monthly
-// mean), just given room to breathe — full-size, with the events written out
-// in words below the chart instead of squeezed onto it.
+// A single line chart for one theme's page. Same honest series as the homepage
+// atlas panel (validated-keyword mentions per 1,000 posts, monthly mean), with
+// a time-range selector so a reader can zoom in. Events are marked with
+// numbered ticks and written out in full below the chart.
 
 const MONTH_NAMES = [
   "Jan", "Feb", "Mar", "Apr", "May", "Jun",
@@ -49,6 +49,9 @@ function monthlySeries(
     .map((m) => ({ date: m, value: buckets[m].sum / buckets[m].n }));
 }
 
+type TimeRange = "6M" | "1Y" | "2Y" | "ALL";
+const RANGES: TimeRange[] = ["6M", "1Y", "2Y", "ALL"];
+
 export default function ThemeChart({
   series,
   color,
@@ -56,21 +59,33 @@ export default function ThemeChart({
   series: { date: string; hitsPerK: number }[];
   color: string;
 }) {
+  const [range, setRange] = useState<TimeRange>("ALL");
   const monthly = useMemo(() => monthlySeries(series), [series]);
 
+  // Apply the selected time window.
+  const data = useMemo(() => {
+    if (range === "ALL" || !monthly.length) return monthly;
+    const back = range === "2Y" ? 24 : range === "1Y" ? 12 : 6;
+    const last = new Date(monthly[monthly.length - 1].date + "T00:00:00Z");
+    last.setUTCMonth(last.getUTCMonth() - back);
+    const cutoff = last.toISOString().slice(0, 10);
+    return monthly.filter((m) => m.date >= cutoff);
+  }, [monthly, range]);
+
+  // Events that fall inside the visible window, numbered in order.
   const events = useMemo(() => {
-    if (!monthly.length) return [];
-    const first = monthly[0].date;
-    const last = monthly[monthly.length - 1].date;
+    if (!data.length) return [];
+    const first = data[0].date;
+    const last = data[data.length - 1].date;
     return EVENTS.filter((e) => e.date >= first && e.date <= last).map(
       (e, i) => ({ ...e, num: i + 1 }),
     );
-  }, [monthly]);
+  }, [data]);
 
   if (!monthly.length) {
     return (
       <div className="h-[240px] flex items-center justify-center text-sm text-[#64748B]">
-        No data in range yet.
+        No data yet.
       </div>
     );
   }
@@ -79,10 +94,30 @@ export default function ThemeChart({
 
   return (
     <div>
-      <div className="h-[260px] sm:h-[360px] w-full">
+      {/* Time range selector */}
+      <div className="flex gap-1 mb-3">
+        {RANGES.map((r) => (
+          <button
+            key={r}
+            onClick={() => setRange(r)}
+            aria-pressed={range === r}
+            aria-label={`Show ${r === "ALL" ? "all time" : `last ${r}`}`}
+            className="px-3 h-8 text-xs font-medium rounded-md transition-colors"
+            style={{
+              backgroundColor: range === r ? "#0F1117" : "transparent",
+              color: range === r ? "#F8FAFC" : "#94A3B8",
+              border: `1px solid ${range === r ? "#2A2D3A" : "transparent"}`,
+            }}
+          >
+            {r}
+          </button>
+        ))}
+      </div>
+
+      <div className="h-[240px] sm:h-[300px] w-full">
         <ResponsiveContainer width="100%" height="100%">
           <LineChart
-            data={monthly}
+            data={data}
             margin={{ top: 24, right: 14, bottom: 4, left: 0 }}
           >
             <CartesianGrid
@@ -172,12 +207,12 @@ export default function ThemeChart({
         only
       </div>
 
-      {/* Events written out in words */}
+      {/* Events — written out, one compact row */}
       {events.length > 0 && (
         <div
           style={{
-            marginTop: 14,
-            paddingTop: 12,
+            marginTop: 12,
+            paddingTop: 10,
             borderTop: "0.5px solid #1E293B",
           }}
         >
@@ -185,7 +220,7 @@ export default function ThemeChart({
             style={{
               display: "flex",
               flexWrap: "wrap",
-              gap: "8px 18px",
+              gap: "6px 14px",
               alignItems: "center",
             }}
           >
@@ -205,8 +240,9 @@ export default function ThemeChart({
                 style={{
                   display: "inline-flex",
                   alignItems: "center",
-                  gap: 7,
-                  fontSize: 13,
+                  gap: 6,
+                  fontSize: 12.5,
+                  whiteSpace: "nowrap",
                 }}
               >
                 <span
@@ -215,10 +251,10 @@ export default function ThemeChart({
                     display: "inline-flex",
                     alignItems: "center",
                     justifyContent: "center",
-                    width: 17,
-                    height: 17,
+                    width: 16,
+                    height: 16,
                     borderRadius: 999,
-                    fontSize: 10,
+                    fontSize: 9.5,
                     fontWeight: 700,
                     flexShrink: 0,
                     color: e.methodology ? "#D4A862" : "#0F1117",
@@ -229,7 +265,6 @@ export default function ThemeChart({
                   {e.num}
                 </span>
                 <span style={{ color: "#CBD5E1" }}>{e.label}</span>
-                <span style={{ color: "#64748B" }}>{fmtMonth(e.date)}</span>
               </span>
             ))}
           </div>
