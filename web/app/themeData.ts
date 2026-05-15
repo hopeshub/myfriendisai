@@ -11,6 +11,9 @@ export type SamplePost = {
   subreddit: string;
   date: string;
   id: string;
+  // A short body excerpt around the matched keyword, or null when the keyword
+  // matched the title instead (export_keyword_details.py).
+  excerpt: string | null;
 };
 export type KeywordEntry = {
   term: string;

@@ -23,6 +23,42 @@ EXCLUDED_TITLES = {"[deleted]", "[removed]", "", None}
 # Prefer samples from the last 12 months
 RECENT_CUTOFF_DAYS = 365
 
+# How many sample posts to export per keyword. Generous so the theme pages can
+# show an abundance of real examples.
+SAMPLE_LIMIT = 12
+
+
+def make_excerpt(term: str, selftext, width: int = 150) -> "str | None":
+    """A short snippet of the post body around the first occurrence of `term`.
+
+    Returns None when the body is empty or does not contain the term (e.g. the
+    keyword matched the post title instead). The theme page shows this excerpt
+    so a body-matched example still visibly shows why it was tagged.
+    """
+    if not selftext:
+        return None
+    body = str(selftext)
+    # Strip markdown links to their text and bare URLs, so an excerpt never
+    # lands in the middle of a URL.
+    body = re.sub(r"\[([^\]]+)\]\([^)]+\)", r"\1", body)
+    body = re.sub(r"https?://\S+", "", body)
+    body = re.sub(r"\bwww\.\S+", "", body)
+    body = " ".join(body.split())
+    if not body:
+        return None
+    idx = body.lower().find(term.lower())
+    if idx == -1:
+        return None
+    pad = max(0, (width - len(term)) // 2)
+    start = max(0, idx - pad)
+    end = min(len(body), idx + len(term) + pad)
+    snippet = body[start:end].strip()
+    if start > 0:
+        snippet = "…" + snippet
+    if end < len(body):
+        snippet = snippet + "…"
+    return snippet
+
 
 def parse_precision(comment_text: str) -> "float | None":
     """Extract precision percentage from a YAML inline comment like '# 92.0%, 27 hits'."""
@@ -95,40 +131,44 @@ def build_keyword_details(db: sqlite3.Connection, categories: dict) -> dict:
                 ).fetchone()
                 hits = row[0] if row else 0
 
-            # Sample 3 recent post titles (exclude SpicyChatAI — mostly promotional)
+            # Sample recent posts (exclude SpicyChatAI — mostly promotional)
             sample_posts = db.execute(
-                """SELECT DISTINCT p.title, pkt.subreddit, pkt.post_date, p.id
+                """SELECT DISTINCT p.title, pkt.subreddit, pkt.post_date, p.id,
+                          p.selftext
                    FROM post_keyword_tags pkt
                    JOIN posts p ON pkt.post_id = p.id
                    WHERE pkt.category = ? AND LOWER(pkt.matched_term) = LOWER(?)
+                     AND pkt.source = 'post'
                      AND p.title IS NOT NULL
                      AND p.title NOT IN ('[deleted]', '[removed]', '')
                      AND pkt.subreddit != 'SpicyChatAI'
                      AND pkt.post_date >= ?
                    ORDER BY pkt.post_date DESC
-                   LIMIT 3""",
-                (cat_name, term, recent_date),
+                   LIMIT ?""",
+                (cat_name, term, recent_date, SAMPLE_LIMIT),
             ).fetchall()
 
             # Fall back to older posts if not enough recent ones
-            if len(sample_posts) < 3:
+            if len(sample_posts) < SAMPLE_LIMIT:
                 older = db.execute(
-                    """SELECT DISTINCT p.title, pkt.subreddit, pkt.post_date, p.id
+                    """SELECT DISTINCT p.title, pkt.subreddit, pkt.post_date, p.id,
+                              p.selftext
                        FROM post_keyword_tags pkt
                        JOIN posts p ON pkt.post_id = p.id
                        WHERE pkt.category = ? AND LOWER(pkt.matched_term) = LOWER(?)
+                         AND pkt.source = 'post'
                          AND p.title IS NOT NULL
                          AND p.title NOT IN ('[deleted]', '[removed]', '')
                          AND pkt.subreddit != 'SpicyChatAI'
                        ORDER BY pkt.post_date DESC
                        LIMIT ?""",
-                    (cat_name, term, 3 - len(sample_posts)),
+                    (cat_name, term, SAMPLE_LIMIT - len(sample_posts)),
                 ).fetchall()
                 existing_titles = {sp[0] for sp in sample_posts}
                 for o in older:
                     if o[0] not in existing_titles:
                         sample_posts.append(o)
-                    if len(sample_posts) >= 3:
+                    if len(sample_posts) >= SAMPLE_LIMIT:
                         break
 
             keywords.append(
@@ -142,6 +182,7 @@ def build_keyword_details(db: sqlite3.Connection, categories: dict) -> dict:
                             "subreddit": sp[1],
                             "date": sp[2],
                             "id": sp[3],
+                            "excerpt": make_excerpt(term, sp[4]),
                         }
                         for sp in sample_posts
                     ],

@@ -6,6 +6,7 @@ import {
   loadThemeData,
   loadKeywordDetails,
   type CategoryDetail,
+  type SamplePost,
 } from "../../themeData";
 import ThemeChart from "./ThemeChart";
 
@@ -29,21 +30,15 @@ function truncate(str: string, max: number): string {
   return str.length > max ? str.slice(0, max).trimEnd() + "…" : str;
 }
 
-type SamplePost = { title: string; subreddit: string; date: string; id: string };
 type SampleWithTerm = SamplePost & { matchedTerm: string };
 
-const MIN_SAMPLES = 2;
-
 /**
- * Pick example posts, each carrying the keyword that matched it (shown on the
- * page as "matched …" evidence).
- *
- * Pass 1 takes only posts whose *title* visibly contains the keyword, across
- * all keywords — so every example is self-evidently on-theme, not a hit buried
- * in a post body the reader cannot see. Quality over quantity: a fuzzy theme
- * may surface only 3-4 examples rather than padding to `limit` with ambiguous
- * ones. Pass 2 is a safety net — body-only matches, used only if a theme can't
- * yield even MIN_SAMPLES self-evident posts.
+ * Pick example posts across the theme's keywords — one per keyword first (for
+ * vocabulary diversity), then filling with more. Each carries the keyword that
+ * matched it; the page highlights that keyword in the post title or in a body
+ * excerpt, so every example visibly shows why it was tagged. The export
+ * already restricts these to post-sourced matches (keyword in the post, not a
+ * comment), so an excerpt or a title hit is always available.
  */
 function pickSamplePosts(
   keywords: CategoryDetail["keywords"],
@@ -51,30 +46,46 @@ function pickSamplePosts(
 ): SampleWithTerm[] {
   const out: SampleWithTerm[] = [];
   const seen = new Set<string>();
-  // Pass 1: keyword visible in the title — one post per keyword.
   for (const kw of keywords) {
     if (out.length >= limit) break;
-    const term = kw.term.toLowerCase();
-    const hit = kw.sample_posts.find(
-      (sp) => !seen.has(sp.title) && sp.title.toLowerCase().includes(term),
-    );
-    if (hit) {
-      out.push({ ...hit, matchedTerm: kw.term });
-      seen.add(hit.title);
+    const free = kw.sample_posts.find((sp) => !seen.has(sp.title));
+    if (free) {
+      out.push({ ...free, matchedTerm: kw.term });
+      seen.add(free.title);
     }
   }
-  // Pass 2: only if too few self-evident examples, top up to MIN_SAMPLES.
-  if (out.length < MIN_SAMPLES) {
+  if (out.length < limit) {
     for (const kw of keywords) {
-      if (out.length >= MIN_SAMPLES) break;
-      const free = kw.sample_posts.find((sp) => !seen.has(sp.title));
-      if (free) {
-        out.push({ ...free, matchedTerm: kw.term });
-        seen.add(free.title);
+      for (const sp of kw.sample_posts) {
+        if (out.length >= limit) break;
+        if (!seen.has(sp.title)) {
+          out.push({ ...sp, matchedTerm: kw.term });
+          seen.add(sp.title);
+        }
       }
+      if (out.length >= limit) break;
     }
   }
   return out;
+}
+
+/** Wrap the first occurrence of `term` in `text` in the theme colour. */
+function highlight(
+  text: string,
+  term: string,
+  color: string,
+): React.ReactNode {
+  const i = text.toLowerCase().indexOf(term.toLowerCase());
+  if (i < 0) return text;
+  return (
+    <>
+      {text.slice(0, i)}
+      <span style={{ color, fontWeight: 600 }}>
+        {text.slice(i, i + term.length)}
+      </span>
+      {text.slice(i + term.length)}
+    </>
+  );
 }
 
 export function generateStaticParams() {
@@ -118,7 +129,7 @@ export default async function ThemePage({
 
   const series = loadThemeData()[id] ?? [];
   const details: CategoryDetail | undefined = loadKeywordDetails()[id];
-  const samples = details ? pickSamplePosts(details.keywords, 5) : [];
+  const samples = details ? pickSamplePosts(details.keywords, 12) : [];
   const topSubs = details ? details.subreddits.slice(0, 5) : [];
 
   return (
@@ -216,40 +227,61 @@ export default async function ThemePage({
         <div style={SECTION_LABEL}>What people are saying</div>
         {samples.length > 0 ? (
           <div style={{ marginTop: 6 }}>
-            {samples.map((sp, i) => (
-              <div
-                key={sp.id}
-                style={{
-                  padding: "10px 0",
-                  borderTop: i > 0 ? "0.5px solid #1E293B" : undefined,
-                }}
-              >
-                <a
-                  href={`https://www.reddit.com/comments/${sp.id}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:underline underline-offset-2 transition-colors"
-                  style={{ fontSize: 14.5, color: "#CBD5E1" }}
+            {samples.map((sp, i) => {
+              const inTitle = sp.title
+                .toLowerCase()
+                .includes(sp.matchedTerm.toLowerCase());
+              const displayTitle = truncate(sp.title, 120);
+              return (
+                <div
+                  key={sp.id}
+                  style={{
+                    padding: "12px 0",
+                    borderTop: i > 0 ? "0.5px solid #1E293B" : undefined,
+                  }}
                 >
-                  {truncate(sp.title, 110)}
-                </a>
-                <div style={{ fontSize: 11.5, color: "#8293A6", marginTop: 4 }}>
-                  r/{sp.subreddit} &middot; {fmtMonthYear(sp.date)}
-                  <span style={{ color: "#5C6775" }}> &middot; matched </span>
-                  <span style={{ color: theme.color }}>
-                    &ldquo;{sp.matchedTerm}&rdquo;
-                  </span>
+                  <a
+                    href={`https://www.reddit.com/comments/${sp.id}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:underline underline-offset-2 transition-colors"
+                    style={{ fontSize: 14.5, color: "#CBD5E1" }}
+                  >
+                    {inTitle
+                      ? highlight(displayTitle, sp.matchedTerm, theme.color)
+                      : displayTitle}
+                  </a>
+                  {!inTitle && sp.excerpt && (
+                    <div
+                      style={{
+                        fontSize: 13,
+                        lineHeight: 1.55,
+                        color: "#94A3B8",
+                        marginTop: 5,
+                        borderLeft: "2px solid #2A2D3A",
+                        paddingLeft: 10,
+                      }}
+                    >
+                      {highlight(sp.excerpt, sp.matchedTerm, theme.color)}
+                    </div>
+                  )}
+                  <div
+                    style={{ fontSize: 11.5, color: "#8293A6", marginTop: 5 }}
+                  >
+                    r/{sp.subreddit} &middot; {fmtMonthYear(sp.date)}
+                  </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         ) : (
           <p style={{ fontSize: 13.5, color: "#8293A6", marginTop: 6 }}>
             No example posts available yet.
           </p>
         )}
-        <p style={{ fontSize: 12, color: "#64748B", marginTop: 12 }}>
-          A few real posts the keywords matched.{" "}
+        <p style={{ fontSize: 12, color: "#64748B", marginTop: 14 }}>
+          Real posts from the tracked communities, with the matched keyword
+          highlighted.{" "}
           <a
             href="/about#verification"
             style={{ color: "#94A3B8", textDecoration: "underline" }}
