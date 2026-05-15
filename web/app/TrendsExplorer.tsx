@@ -467,7 +467,7 @@ export default function TrendsExplorer({ themeData, keywordDetails }: Props) {
   const summaries: SummaryLine[] = useMemo(() => {
     if (selected.size === 0) {
       return [{
-        text: "Tracking how people talk about AI companionship across 27 Reddit communities, weighted by post volume, from January 2023 to present.",
+        text: "Tracking how people talk about AI companionship across 27 Reddit communities, weighted by post volume. Each theme line begins where keyword coverage becomes reliable (late 2022 onward); the corpus itself reaches back to 2017.",
         themeName: null,
         themeColor: null,
       }];
@@ -782,7 +782,9 @@ export default function TrendsExplorer({ themeData, keywordDetails }: Props) {
           Line chart showing mention rates per 1,000 posts for six themes
           (rupture, addiction, romance, sexual roleplay, consciousness, therapy)
           across {THEMES.length === 6 ? "27" : ""} AI-companionship Reddit
-          communities from January 2023 to present. Themes can be toggled
+          communities. Each theme series begins at its own coverage-start
+          date (late 2022 onward, where keyword measurement is reliable);
+          the underlying corpus reaches back to 2017. Themes can be toggled
           individually; switch between mention rate (per 1k posts) and
           peak-normalized (% of peak) modes. Event annotations mark major
           platform changes including the February 2023 Replika ERP removal,
