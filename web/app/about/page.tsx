@@ -73,7 +73,7 @@ const CHANGELOG = [
     date: "March 2026",
     title: "Per-theme start dates",
     items: [
-      "Each theme's line now begins only once its vocabulary was common enough to measure reliably. The consciousness line starts in 2025 rather than 2023 for this reason — a flat earlier line would imply absence where we simply could not measure yet.",
+      "Each theme's line now begins only once its vocabulary was common enough to measure reliably. The consciousness line starts in 2025 rather than 2023 for this reason — a flat earlier line would imply absence where I simply couldn't measure it yet.",
     ],
     recent: false,
   },
@@ -141,11 +141,11 @@ export default function About() {
           Tracking how people talk about AI companions
         </h1>
         <p style={{ fontSize: 16, color: "#94A3B8", lineHeight: 1.7 }}>
-          An independent, one-person project. It measures one thing: how the
-          language of AI companionship shows up in public Reddit posts over
-          time, across six recurring themes &mdash; not how many people are in
-          relationships with AI, and not a peer-reviewed study. It is built in
-          the open, and honest about what it can and can&apos;t show.
+          I track six recurring themes in AI-companion communities on Reddit
+          &mdash; romance, addiction, grief, and a few more &mdash; and how
+          often each comes up in posts, going back to 2017. It measures the
+          conversation, not the reality behind it: how often a theme is talked
+          about, not how common it actually is.
         </p>
       </div>
 
@@ -199,11 +199,13 @@ export default function About() {
               ))}
             </ul>
             <p>
-              For each theme we gather candidate keywords, then check every one
-              by hand. We pull 100 real posts a keyword matched, read them, and
+              For each theme I gather candidate keywords, then check every one
+              by hand. I pull 100 real posts a keyword matched, read them, and
               keep the keyword only if it genuinely marks the theme &mdash; not
               if it just happens to share a word. Keywords that don&apos;t hold
-              up are dropped.
+              up get dropped. And because language drifts &mdash;
+              &ldquo;therapeutic&rdquo; started showing up as an insult about
+              preachy AI &mdash; I re-check the set over time, not just once.
             </p>
             <p>
               The chart shows how often the surviving keywords appear, as a rate
@@ -251,21 +253,27 @@ export default function About() {
               <strong style={leadStyle}>
                 Each line is a floor, not a ceiling.
               </strong>{" "}
-              Keeping only high-precision keywords means missing a lot &mdash;
-              somewhere between a few percent and roughly a third of the
-              relevant posts, depending on the theme. The shape and timing of a
-              trend are honest; the absolute height is an undercount. We would
-              rather miss real posts than let in false ones.
+              Keeping only high-precision keywords means missing a lot. I
+              measured how much by hand-sampling 400 random posts: depending on
+              the theme, the keywords catch only a few percent to about a third
+              of the posts that genuinely belong. So a trend&apos;s shape and
+              timing are honest, but its absolute height is an undercount
+              &mdash; I&apos;d rather miss real posts than let in false ones.
             </p>
             <p>
-              <strong style={leadStyle}>No AI judges the posts.</strong>{" "}
-              The chart is a plain keyword count &mdash; nothing re-reads each
-              post to decide whether it &ldquo;really&rdquo; belongs. That is
-              deliberate: a keyword count is reproducible, so a line moves when
-              the conversation moves, not when a model&apos;s judgment drifts.
-              The cost is precision &mdash; a word like &ldquo;therapeutic&rdquo;
-              can drift in meaning &mdash; which is why keywords are validated
-              by hand and rechecked over time.
+              <strong style={leadStyle}>
+                No AI scores the posts &mdash; though I tried.
+              </strong>{" "}
+              The chart is a plain keyword count; nothing re-reads each post to
+              judge whether it &ldquo;really&rdquo; counts. I did build that
+              &mdash; an extra layer where an LLM re-checks every match &mdash;
+              and measured it. It lifted precision a little (roughly 80% to
+              88%), but it couldn&apos;t close the bigger gap: the keywords
+              miss a lot to begin with, and a filter sitting behind them
+              can&apos;t recover what they never caught. So I left it out. The
+              plain count has its own advantage anyway &mdash; it&apos;s
+              reproducible, so a line moves when the conversation moves, not
+              when a model&apos;s judgment drifts.
             </p>
           </div>
         </section>
@@ -302,9 +310,9 @@ export default function About() {
           <h2 style={sectionHeaderStyle}>Who made this</h2>
           <div style={bodyStyle}>
             <p>
-              Built and maintained by Walker Bockley &mdash; an independent
-              project, with no institution or funding behind it. If you spot a
-              mistake or have a question, opening an issue on{" "}
+              I&apos;m Walker Bockley &mdash; I built this and I keep it
+              running. If you spot a mistake or have a question, opening an
+              issue on{" "}
               <a
                 href="https://github.com/hopeshub/myfriendisai"
                 target="_blank"
