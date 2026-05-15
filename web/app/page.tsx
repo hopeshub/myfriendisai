@@ -16,12 +16,6 @@ const THEME_CATEGORIES: Record<string, string[]> = {
 export type ThemeDataPoint = { date: string; value: number; hitsPerK: number };
 export type ThemeData = Record<string, ThemeDataPoint[]>;
 
-// Default chart series. Flip to "count_llm_verified" after LLM calibration
-// passes (see scripts/llm_calibration_check.py). The LLM-verified series
-// gracefully degrades to count_post_only on dates with no LLM verdicts, so
-// historical data is preserved when the flip happens.
-const DEFAULT_SERIES: "count" | "count_llm_verified" = "count";
-
 function loadThemeData(): ThemeData {
   const filePath = path.join(process.cwd(), "data", "keyword_trends.json");
   if (!fs.existsSync(filePath)) return {};
@@ -59,27 +53,19 @@ function loadThemeData(): ThemeData {
     }
 
     // Sum raw daily hits and 7-day averages across merged categories.
-    // DEFAULT_SERIES controls whether we use raw keyword counts or the
-    // LLM-verified subset (where the LLM was run; gracefully falls back
-    // to count_post_only on dates with no LLM verdicts).
-    const countKey = DEFAULT_SERIES;
-    const avgKey =
-      DEFAULT_SERIES === "count_llm_verified"
-        ? "count_llm_verified_7d_avg"
-        : "count_7d_avg";
+    // The chart uses the raw keyword count series; there is no LLM-classified
+    // series in the published chart (see CLAUDE.md section 2.3).
     const rawByDate: Record<string, { count: number; avg: number }> = {};
     for (const cat of categories) {
       type Entry = {
         date: string;
         count: number;
         count_7d_avg?: number;
-        count_llm_verified?: number;
-        count_llm_verified_7d_avg?: number;
       };
       for (const e of (raw[cat] as Entry[] | undefined) ?? []) {
         if (!rawByDate[e.date]) rawByDate[e.date] = { count: 0, avg: 0 };
-        rawByDate[e.date].count += (e[countKey] ?? e.count) as number;
-        rawByDate[e.date].avg += (e[avgKey] ?? e.count_7d_avg ?? e.count) as number;
+        rawByDate[e.date].count += e.count;
+        rawByDate[e.date].avg += e.count_7d_avg ?? e.count;
       }
     }
 

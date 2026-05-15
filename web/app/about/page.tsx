@@ -73,7 +73,7 @@ const THEME_ORDER = ["rupture", "addiction", "romance", "sexual_erp", "conscious
 // snapshot section below.
 const STATS = [
   { value: getPostCount(), label: "posts in corpus" },
-  { value: "27", label: "tracked communities" },
+  { value: "26", label: "tracked communities" },
   { value: "≥80%", label: "per-keyword admission gate (validated at n=100)" },
 ];
 
@@ -581,7 +581,7 @@ export default function About() {
           </h2>
           <div className="space-y-4" style={bodyStyle}>
             <p>
-              The chart shows post-volume-weighted rates across all 22 primary
+              The chart shows post-volume-weighted rates across all 21 primary
               AI companionship subreddits. A community generating 400 posts a
               day pulls the aggregate toward its language profile more than one
               generating 5 a day.

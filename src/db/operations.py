@@ -473,38 +473,11 @@ def export_keyword_trends_json(
             """,
             (*active_subreddits, *EXCLUDED_AUTHORS),
         ).fetchall()
-        # LLM-verified series: post is counted for a theme if AT LEAST ONE of
-        # its keyword matches in that theme is NOT explicitly rejected by the
-        # production LLM (TP, AMBIGUOUS, or no verdict yet — all count).
-        # Filters to the production model (Sonnet 4.6) so we don't mix verdicts
-        # from earlier prompt-iteration runs (Haiku v1 strict, etc.) with the
-        # current methodology. The model identifier is the canonical production
-        # gate; legacy verdicts under other models are preserved but excluded.
-        PRODUCTION_LLM_MODEL = "claude-sonnet-4-6"
-        llm_verified_rows = _conn.execute(
-            f"""
-            SELECT t.category, t.post_date, COUNT(DISTINCT t.post_id) AS count
-            FROM post_keyword_tags t
-            WHERE t.subreddit IN ({placeholders})
-              AND t.source = 'post'
-              AND EXISTS (
-                  SELECT 1 FROM post_keyword_tags t2
-                  LEFT JOIN llm_classifications c
-                      ON c.tag_type='post'
-                         AND c.post_id = t2.post_id
-                         AND c.theme = t2.category
-                         AND c.keyword = t2.matched_term
-                         AND c.model = '{PRODUCTION_LLM_MODEL}'
-                  WHERE t2.post_id = t.post_id
-                    AND t2.category = t.category
-                    AND t2.source = 'post'
-                    AND (c.verdict IS NULL OR c.verdict != 'FP')
-              )
-            GROUP BY t.category, t.post_date
-            ORDER BY t.category, t.post_date
-            """,
-            active_subreddits,
-        ).fetchall()
+        # NOTE: a count_llm_verified series was removed from this export on
+        # 2026-05-15. LLM verification is not part of the published chart (see
+        # CLAUDE.md 2.3); keeping the series here also made the exporter query
+        # the optional llm_classifications table, breaking fresh-schema exports
+        # and the test suite. LLM verdicts live in audit data only.
         total_posts_rows = _conn.execute(
             f"""
             SELECT date(created_utc, 'unixepoch') AS post_date, COUNT(*) AS count
@@ -529,15 +502,10 @@ def export_keyword_trends_json(
     for category, post_date, count in post_only_rows:
         post_only_lookup[category][post_date] = count
 
-    llm_verified_lookup: dict = defaultdict(dict)
-    for category, post_date, count in llm_verified_rows:
-        llm_verified_lookup[category][post_date] = count
-
     result = {}
     for category, entries in sorted(by_category.items()):
         with_avg = []
         post_only_series = post_only_lookup.get(category, {})
-        llm_verified_series = llm_verified_lookup.get(category, {})
         for i, entry in enumerate(entries):
             window = [e["count"] for e in entries[max(0, i - 6): i + 1]]
             avg = round(sum(window) / len(window), 2)
@@ -547,25 +515,12 @@ def export_keyword_trends_json(
                 post_only_series.get(e["date"], 0) for e in entries[max(0, i - 6): i + 1]
             ]
             post_only_avg = round(sum(post_only_window) / len(post_only_window), 2)
-            # LLM-verified count: posts with at least one non-FP keyword match.
-            # Falls back to post_only when no LLM verdicts exist (pre-rollout state).
-            llm_verified_count = llm_verified_series.get(entry["date"], post_only_count)
-            llm_verified_window = [
-                llm_verified_series.get(
-                    e["date"],
-                    post_only_series.get(e["date"], 0),
-                )
-                for e in entries[max(0, i - 6): i + 1]
-            ]
-            llm_verified_avg = round(sum(llm_verified_window) / len(llm_verified_window), 2)
             with_avg.append({
                 "date": entry["date"],
                 "count": entry["count"],
                 "count_7d_avg": avg,
                 "count_post_only": post_only_count,
                 "count_post_only_7d_avg": post_only_avg,
-                "count_llm_verified": llm_verified_count,
-                "count_llm_verified_7d_avg": llm_verified_avg,
             })
         result[category] = with_avg
 
