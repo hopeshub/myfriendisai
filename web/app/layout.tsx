@@ -71,7 +71,7 @@ export default function RootLayout({
         <a href="#main" className="skip-link">Skip to content</a>
         <StaleDataBanner />
         <header className="border-b border-border">
-          <div className="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
+          <div className="max-w-[1536px] mx-auto px-4 sm:px-8 py-4 flex items-center justify-between">
             <Link
               href="/"
               className={`text-lg tracking-tight hover:text-primary transition-colors ${GeistSans.className}`}
@@ -102,7 +102,7 @@ export default function RootLayout({
         <main id="main">{children}</main>
 
         <footer className="border-t border-border mt-20">
-          <div className="max-w-6xl mx-auto px-4 sm:px-6 py-6 text-sm text-muted">
+          <div className="max-w-[1536px] mx-auto px-4 sm:px-8 py-6 text-sm text-muted">
             <span>Data from Reddit&apos;s public endpoints · {formatPostCount(meta.total_posts)} posts · {startYear}–present</span>
           </div>
         </footer>

@@ -57,9 +57,9 @@ export default function TrendsExplorer({ themeData, keywordDetails }: Props) {
 
   return (
     <>
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 py-4 sm:py-6">
+      <div className="max-w-[1536px] mx-auto px-4 sm:px-8 py-4 sm:py-5">
         {/* Headline + measurement contract */}
-        <div className="mb-5 sm:mb-6">
+        <div className="mb-4">
           <h1 className="text-[22px] sm:text-2xl lg:text-3xl font-bold text-[#F8FAFC] mb-1.5">
             How are people talking about AI companionship?
           </h1>

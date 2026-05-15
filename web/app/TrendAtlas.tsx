@@ -112,7 +112,7 @@ function EventLegend({
             >
               {e.num}
             </span>
-            <span style={{ color: "#CBD5E1" }}>{e.shortLabel}</span>
+            <span style={{ color: "#CBD5E1" }}>{e.label}</span>
             <span style={{ color: "#64748B" }}>{fmtMonthShort(e.date)}</span>
           </span>
         ))}
@@ -161,7 +161,7 @@ export default function TrendAtlas({
   // 3 columns on desktop (2 rows → all six panels fit one screen), 2 on
   // tablet, 1 on mobile.
   const cols = bp === "mobile" ? 1 : bp === "tablet" ? 2 : 3;
-  const panelHeight = bp === "mobile" ? 196 : 178;
+  const panelHeight = bp === "mobile" ? 210 : 240;
   const labelFs = bp === "mobile" ? 14 : 11;
 
   // Events numbered by FIXED chronological order over the full set (stable
@@ -259,7 +259,7 @@ export default function TrendAtlas({
                 <ResponsiveContainer width="100%" height="100%">
                   <LineChart
                     data={data}
-                    margin={{ top: 16, right: 8, bottom: 2, left: 0 }}
+                    margin={{ top: 24, right: 8, bottom: 2, left: 0 }}
                   >
                     <CartesianGrid
                       strokeDasharray="3 3"
@@ -295,9 +295,9 @@ export default function TrendAtlas({
                         strokeWidth={1}
                         label={{
                           value: String(e.num),
-                          position: "insideTop",
+                          position: "top",
                           fill: "#D4A862",
-                          fontSize: 10,
+                          fontSize: 11,
                         }}
                       />
                     ))}
