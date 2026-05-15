@@ -1,172 +1,48 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import {
-  ComposedChart,
-  Line,
-  LineChart,
-  XAxis,
-  YAxis,
-  Tooltip,
-  ResponsiveContainer,
-  CartesianGrid,
-  ReferenceLine,
-} from "recharts";
+import { useCallback, useEffect, useRef, useState } from "react";
 import type { ThemeData } from "./page";
+import { EVENTS, type ThemeId } from "./themes";
 import { useBreakpoint } from "./useBreakpoint";
 import TransparencyPanel from "./TransparencyPanel";
 import type { KeywordDetailsData } from "./TransparencyPanel";
 import BottomSheet from "./BottomSheet";
-
-// ─── Themes ────────────────────────────────────────────────────────────────
-
-// Colors tuned so that the value text on each metric card passes WCAG AA
-// (>=4.5:1) against both the card bg (#1A1D27) and the active card bg (#1F2233).
-// Chart lines themselves need only 3:1 (non-text), which all pass.
-const THEMES = [
-  { id: "romance",       label: "Romance",        emoji: "💕", color: "#FF69B4", tagline: "Language of love, dating, and romantic attachment" },
-  { id: "sexual_erp",    label: "Sex / ERP",      emoji: "🔞", color: "#f87171", tagline: "Language of sexual and erotic roleplay" },
-  { id: "consciousness", label: "Consciousness",  emoji: "🧠", color: "#C084FC", tagline: "Language of sentience, awareness, and inner experience" },
-  { id: "therapy",       label: "Therapy",        emoji: "🫂", color: "#60A5FA", tagline: "Language of mental health support and emotional care" },
-  { id: "addiction",     label: "Addiction",       emoji: "💊", color: "#fd7112", tagline: "Language of dependency and compulsion" },
-  { id: "rupture",       label: "Rupture",        emoji: "🥀", color: "#22C55E", tagline: "Language of loss and grief" },
-] as const;
-
-type ThemeId = (typeof THEMES)[number]["id"];
-
-// ─── Events ────────────────────────────────────────────────────────────────
-
-const EVENTS = [
-  { date: "2023-02-01", label: "Replika ERP removal", shortLabel: "Replika ERP" },
-  { date: "2024-05-01", label: "4o launches", shortLabel: "4o launch" },
-  { date: "2025-04-01", label: "Sycophancy update", shortLabel: "Syco. update" },
-  { date: "2025-08-01", label: "4o 1st sunset", shortLabel: "4o sunset" },
-  { date: "2026-02-01", label: "4o retired", shortLabel: "4o ret." },
-  { date: "2026-05-12", label: "Rupture vocabulary expanded (v8.1)", shortLabel: "Rupture v8.1" },
-];
-
-// ─── Helpers ───────────────────────────────────────────────────────────────
+import TrendAtlas from "./TrendAtlas";
+import { THEMES } from "./themes";
 
 type TimeRange = "6M" | "1Y" | "2Y" | "ALL";
-type ChartMode = "absolute" | "relative";
 
 const MONTH_NAMES = [
-  "Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec",
+  "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+  "Jul", "Aug", "Sep", "Oct", "Nov", "Dec",
 ];
 
-function formatMonthTick(dateStr: string): string {
+function formatMonthShort(dateStr: string): string {
   const d = new Date(dateStr + "T00:00:00Z");
-  return `${MONTH_NAMES[d.getUTCMonth()]} ${d.getUTCFullYear()}`;
+  return `${MONTH_NAMES[d.getUTCMonth()]} '${String(d.getUTCFullYear()).slice(2)}`;
 }
-
-function formatMonthTickShort(dateStr: string): string {
-  const d = new Date(dateStr + "T00:00:00Z");
-  const yr = String(d.getUTCFullYear()).slice(2);
-  return `${MONTH_NAMES[d.getUTCMonth()]} '${yr}`;
-}
-
-/** Compute a clean axis max and evenly spaced ticks for a given data max */
-function niceAxis(dataMax: number): { max: number; ticks: number[] } {
-  if (dataMax <= 0) return { max: 10, ticks: [2, 4, 6, 8, 10] };
-  // Pick a nice step size that yields 4-6 ticks
-  const rough = dataMax / 5;
-  const exp = Math.pow(10, Math.floor(Math.log10(rough)));
-  const frac = rough / exp;
-  let step: number;
-  if (frac <= 1) step = exp;
-  else if (frac <= 2) step = 2 * exp;
-  else if (frac <= 5) step = 5 * exp;
-  else step = 10 * exp;
-  const max = Math.ceil(dataMax / step) * step;
-  const ticks: number[] = [];
-  for (let v = step; v <= max; v += step) {
-    ticks.push(Math.round(v * 1000) / 1000);
-  }
-  return { max, ticks };
-}
-
-function toMonth(dateStr: string): string {
-  return dateStr.slice(0, 7) + "-01";
-}
-
-function downsample(data: number[], maxPoints: number): number[] {
-  if (data.length <= maxPoints) return data;
-  const step = data.length / maxPoints;
-  const result: number[] = [];
-  for (let i = 0; i < maxPoints; i++) {
-    const start = Math.floor(i * step);
-    const end = Math.floor((i + 1) * step);
-    let sum = 0;
-    for (let j = start; j < end; j++) sum += data[j];
-    result.push(sum / (end - start));
-  }
-  return result;
-}
-
-/** Clip values above p95 so outlier spikes don't flatten the sparkline */
-function clipOutliers(data: number[]): number[] {
-  if (data.length < 5) return data;
-  const sorted = [...data].sort((a, b) => a - b);
-  const p95 = sorted[Math.floor(sorted.length * 0.95)];
-  return data.map((v) => Math.min(v, p95));
-}
-
-// ─── Sparkline ─────────────────────────────────────────────────────────────
-
-function Sparkline({
-  data,
-  color,
-  height,
-}: {
-  data: number[];
-  color: string;
-  height: number;
-}) {
-  const chartData = data.map((v, i) => ({ v, i }));
-  return (
-    <ResponsiveContainer width="100%" height={height}>
-      <LineChart data={chartData}>
-        <Line
-          type="monotone"
-          dataKey="v"
-          stroke={color}
-          strokeWidth={1.2}
-          dot={false}
-          isAnimationActive={false}
-        />
-      </LineChart>
-    </ResponsiveContainer>
-  );
-}
-
-// ─── Component ─────────────────────────────────────────────────────────────
 
 type Props = { themeData: ThemeData; keywordDetails: KeywordDetailsData };
 
 export default function TrendsExplorer({ themeData, keywordDetails }: Props) {
-  const [selected, setSelected] = useState<Set<ThemeId>>(new Set());
   const [detailPanel, setDetailPanel] = useState<ThemeId | null>(null);
   const [timeRange, setTimeRange] = useState<TimeRange>("1Y");
-  const [chartMode, setChartMode] = useState<ChartMode>("absolute");
   const [eventsExpanded, setEventsExpanded] = useState(false);
-  const chartRef = useRef<HTMLDivElement>(null);
-  const mouseYRef = useRef<number>(0);
-  const [nearestTheme, setNearestTheme] = useState<ThemeId | null>(null);
   const panelRef = useRef<HTMLDivElement>(null);
-  const cardRowRef = useRef<HTMLDivElement>(null);
   const { bp: rawBp, isMobileStrip: rawMobileStrip } = useBreakpoint();
   // Default to desktop during SSR/hydration to avoid layout flash
   const bp = rawBp ?? "desktop";
   const isMobileStrip = rawMobileStrip ?? false;
 
-  // Close panel when clicking outside (but not on cards, which have their own handler)
+  // Close the desktop detail panel on outside click (the bottom sheet
+  // handles its own dismissal on mobile).
   const handleClickOutside = useCallback(
     (e: MouseEvent) => {
-      if (!detailPanel) return;
-      if (isMobileStrip) return; // BottomSheet handles its own dismissal
+      if (!detailPanel || isMobileStrip) return;
       const target = e.target as Node;
       if (panelRef.current?.contains(target)) return;
-      if (cardRowRef.current?.contains(target)) return;
+      // Clicks on a panel-header trigger are handled by their own onClick.
+      if ((target as HTMLElement).closest?.("[data-theme-trigger]")) return;
       setDetailPanel(null);
     },
     [detailPanel, isMobileStrip],
@@ -177,428 +53,42 @@ export default function TrendsExplorer({ themeData, keywordDetails }: Props) {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [handleClickOutside]);
 
-  function toggleTheme(id: ThemeId) {
-    setSelected((prev) => {
-      const next = new Set(prev);
-      if (next.has(id)) next.delete(id);
-      else next.add(id);
-      return next;
-    });
-  }
-
-  // ── Time range cutoff ──
-  const cutoffDate = useMemo(() => {
-    if (timeRange === "ALL") return null;
-    const monthsBack = timeRange === "2Y" ? 24 : timeRange === "1Y" ? 12 : 6;
-    const cutoff = new Date();
-    cutoff.setMonth(cutoff.getMonth() - monthsBack);
-    return cutoff.toISOString().split("T")[0];
-  }, [timeRange]);
-
-  // ── 90-day cutoff for metric card values ──
-  const last90Cutoff = useMemo(() => {
-    let latestDate = "";
-    for (const theme of THEMES) {
-      const pts = themeData[theme.id] ?? [];
-      for (const p of pts) {
-        if (p.date > latestDate) latestDate = p.date;
-      }
-    }
-    if (!latestDate) return "";
-    const d = new Date(latestDate + "T00:00:00Z");
-    d.setUTCDate(d.getUTCDate() - 90);
-    return d.toISOString().split("T")[0];
-  }, [themeData]);
-
-  // ── Metric card data (value = 90-day avg hitsPerK, sparkline = selected time range) ──
-  const metricCards = useMemo(() => {
-    const cards = THEMES.map((theme) => {
-      const points = themeData[theme.id] ?? [];
-
-      // 90-day average for the display value (always, regardless of time range)
-      // Divide by calendar days (90), not days-with-hits, to match YoY methodology
-      const CARD_WINDOW = 90;
-      const recent = last90Cutoff
-        ? points.filter((p) => p.date >= last90Cutoff)
-        : points;
-      const recentHpk = recent.map((p) => p.hitsPerK);
-      const avgValue =
-        recentHpk.length > 0
-          ? recentHpk.reduce((s, v) => s + v, 0) / CARD_WINDOW
-          : 0;
-
-      // Sparkline uses the selected time range
-      const filtered = cutoffDate
-        ? points.filter((p) => p.date >= cutoffDate)
-        : points;
-      const sparkHpk = filtered.map((p) => p.hitsPerK);
-
-      return {
-        ...theme,
-        value: Math.round(avgValue * 10) / 10,
-        sparklineData: downsample(clipOutliers(sparkHpk), 60),
-      };
-    });
-    return cards;
-  }, [themeData, cutoffDate, last90Cutoff]);
-
-  // ── Monthly aggregation (raw counts) ──
-  const allMonthlyRaw = useMemo(() => {
-    const monthlyRaw: Record<string, Record<string, number>> = {};
-    for (const theme of THEMES) {
-      for (const pt of themeData[theme.id] ?? []) {
-        const m = toMonth(pt.date);
-        if (!monthlyRaw[m]) monthlyRaw[m] = {};
-        monthlyRaw[m][theme.id] = (monthlyRaw[m][theme.id] ?? 0) + pt.value;
-      }
-    }
-    return Object.keys(monthlyRaw)
-      .sort()
-      .map(
-        (m) => ({ date: m, ...monthlyRaw[m] }) as Record<string, number | string>,
-      );
-  }, [themeData]);
-
-  // ── Monthly aggregation (absolute: average hitsPerK per month) ──
-  const allMonthlyAbsolute = useMemo(() => {
-    const monthly: Record<
-      string,
-      Record<string, { sum: number; count: number }>
-    > = {};
-    for (const theme of THEMES) {
-      for (const pt of themeData[theme.id] ?? []) {
-        const m = toMonth(pt.date);
-        if (!monthly[m]) monthly[m] = {};
-        if (!monthly[m][theme.id])
-          monthly[m][theme.id] = { sum: 0, count: 0 };
-        monthly[m][theme.id].sum += pt.hitsPerK;
-        monthly[m][theme.id].count += 1;
-      }
-    }
-    return Object.keys(monthly)
-      .sort()
-      .map((m) => {
-        const row: Record<string, number | string> = { date: m };
-        for (const theme of THEMES) {
-          const d = monthly[m]?.[theme.id];
-          row[theme.id] = d ? d.sum / d.count : 0;
-        }
-        return row;
+  const closeDetail = useCallback(() => {
+    const triggerId = detailPanel;
+    setDetailPanel(null);
+    // Restore focus to the panel header that opened it (a11y).
+    if (triggerId) {
+      requestAnimationFrame(() => {
+        document
+          .querySelector<HTMLButtonElement>(`[data-theme-trigger="${triggerId}"]`)
+          ?.focus();
       });
-  }, [themeData]);
-
-  // ── Time range filter (on raw counts) ──
-  const filteredRaw = useMemo(() => {
-    if (timeRange === "ALL") return allMonthlyRaw;
-    const monthsBack = timeRange === "2Y" ? 24 : timeRange === "1Y" ? 12 : 6;
-    const cutoff = new Date();
-    cutoff.setMonth(cutoff.getMonth() - monthsBack);
-    const cutoffStr = cutoff.toISOString().slice(0, 7) + "-01";
-    return allMonthlyRaw.filter((d) => (d.date as string) >= cutoffStr);
-  }, [allMonthlyRaw, timeRange]);
-
-  // ── Time range filter (on absolute hitsPerK) ──
-  const filteredAbsolute = useMemo(() => {
-    if (timeRange === "ALL") return allMonthlyAbsolute;
-    const monthsBack = timeRange === "2Y" ? 24 : timeRange === "1Y" ? 12 : 6;
-    const cutoff = new Date();
-    cutoff.setMonth(cutoff.getMonth() - monthsBack);
-    const cutoffStr = cutoff.toISOString().slice(0, 7) + "-01";
-    return allMonthlyAbsolute.filter((d) => (d.date as string) >= cutoffStr);
-  }, [allMonthlyAbsolute, timeRange]);
-
-  // ── Chart data: absolute (hitsPerK) or relative (% of peak) ──
-  const { chartData, peakMonths } = useMemo(() => {
-    // Always compute peaks from raw data (used by summary)
-    const peaks: Partial<Record<ThemeId, { month: string; count: number }>> = {};
-    for (const theme of THEMES) {
-      let peakMonth = "";
-      let peakCount = 0;
-      for (const row of filteredRaw) {
-        const c = (row[theme.id] as number) ?? 0;
-        if (c > peakCount) {
-          peakCount = c;
-          peakMonth = row.date as string;
-        }
-      }
-      if (peakCount > 0)
-        peaks[theme.id] = { month: peakMonth, count: peakCount };
     }
-
-    if (chartMode === "absolute") {
-      const data = filteredAbsolute.map((row) => {
-        const out: Record<string, number | string> = { date: row.date };
-        for (const theme of THEMES) {
-          out[theme.id] = (row[theme.id] as number) ?? 0;
-        }
-        return out;
-      });
-      return { chartData: data, peakMonths: peaks };
-    }
-
-    // Relative mode — normalize each theme to its own peak = 100
-    const data = filteredRaw.map((row) => {
-      const out: Record<string, number | string> = { date: row.date };
-      for (const theme of THEMES) {
-        const raw = (row[theme.id] as number) ?? 0;
-        const peak = peaks[theme.id]?.count ?? 1;
-        out[theme.id] = (raw / peak) * 100;
-      }
-      return out;
-    });
-    return { chartData: data, peakMonths: peaks };
-  }, [filteredRaw, filteredAbsolute, chartMode]);
-
-  // ── Y-axis config (explicit so tooltip pixel math matches the chart) ──
-  const yAxisConfig = useMemo(() => {
-    if (chartMode === "relative") {
-      let dataMax = 0;
-      for (const row of chartData) {
-        for (const theme of THEMES) {
-          const v = (row[theme.id] as number) ?? 0;
-          if (v > dataMax) dataMax = v;
-        }
-      }
-      return niceAxis(Math.max(dataMax, 10));
-    }
-    // Absolute mode: use p95 of all values to set the Y-axis ceiling,
-    // so a single outlier spike (e.g., Replika ERP Feb 2023) doesn't
-    // flatten the entire chart.
-    const allValues: number[] = [];
-    for (const row of chartData) {
-      for (const theme of THEMES) {
-        const v = (row[theme.id] as number) ?? 0;
-        if (v > 0) allValues.push(v);
-      }
-    }
-    if (allValues.length === 0) return niceAxis(10);
-    allValues.sort((a, b) => a - b);
-    const p99 = allValues[Math.floor(allValues.length * 0.99)];
-    // Use p99 so extreme spikes (e.g., Replika ERP crisis) don't flatten
-    // the rest of the chart, but normal peaks are still fully visible
-    return niceAxis(Math.max(p99, 10));
-  }, [chartMode, chartData]);
-
-  const yDomainMax = yAxisConfig.max;
-
-  // ── Visible events ──
-  const visibleEvents = useMemo(() => {
-    if (!chartData.length) return [];
-    const min = chartData[0].date as string;
-    const max = chartData[chartData.length - 1].date as string;
-    return EVENTS.filter((e) => e.date >= min && e.date <= max);
-  }, [chartData]);
-
-  // ── Per-theme YoY summary helper ──
-  const themeSummary = useCallback((theme: typeof THEMES[number]): {
-    text: string;
-    themeName: string;
-    themeColor: string;
-  } => {
-    const entries = themeData[theme.id] ?? [];
-    if (entries.length >= 90) {
-      const sorted = entries.map((e) => e.date).sort();
-      const latest = sorted[sorted.length - 1];
-      const d = new Date(latest + "T00:00:00Z");
-      const cutoff90 = new Date(d);
-      cutoff90.setUTCDate(cutoff90.getUTCDate() - 90);
-      const cutoff90Str = cutoff90.toISOString().split("T")[0];
-
-      const priorEnd = new Date(d);
-      priorEnd.setUTCFullYear(priorEnd.getUTCFullYear() - 1);
-      const priorStart = new Date(priorEnd);
-      priorStart.setUTCDate(priorStart.getUTCDate() - 90);
-      const priorEndStr = priorEnd.toISOString().split("T")[0];
-      const priorStartStr = priorStart.toISOString().split("T")[0];
-
-      const recent = entries.filter(
-        (e) => e.date > cutoff90Str && e.date <= latest,
-      );
-      const prior = entries.filter(
-        (e) => e.date > priorStartStr && e.date <= priorEndStr,
-      );
-
-      // Use per-1k-posts rate and divide by calendar days (90) to avoid
-      // sparse-data bias — days with zero hits are treated as zero, not skipped.
-      const WINDOW_DAYS = 90;
-      const recentAvg =
-        recent.reduce((s, e) => s + e.hitsPerK, 0) / WINDOW_DAYS;
-      const priorAvg =
-        prior.reduce((s, e) => s + e.hitsPerK, 0) / WINDOW_DAYS;
-
-      if (priorAvg > 0 && prior.length >= 30) {
-        const pct = Math.round(((recentAvg - priorAvg) / priorAvg) * 100);
-        const recentRate = Math.round(recentAvg * 10) / 10;
-        const priorRate = Math.round(priorAvg * 10) / 10;
-        let text: string;
-        if (Math.abs(pct) < 10) {
-          text = `${theme.label} has been stable vs same period last year.`;
-        } else if (Math.abs(pct) > 100) {
-          const dir = pct > 0 ? "rose" : "fell";
-          const from = pct > 0 ? priorRate : recentRate;
-          const to = pct > 0 ? recentRate : priorRate;
-          text = `${theme.label} ${dir} from ${from} to ${to} mentions per 1k posts vs same period last year.`;
-        } else {
-          const dir = pct > 0 ? "up" : "down";
-          text = `${theme.label} is ${dir} ${Math.abs(pct)}% vs same period last year.`;
-        }
-        return { text, themeName: theme.label, themeColor: theme.color };
-      }
-    }
-
-    const peak = peakMonths[theme.id];
-    if (peak) {
-      return {
-        text: `${theme.label} peaked in ${formatMonthTick(peak.month)}.`,
-        themeName: theme.label,
-        themeColor: theme.color,
-      };
-    }
-
-    return {
-      text: `Tracking ${theme.label} discourse.`,
-      themeName: theme.label,
-      themeColor: theme.color,
-    };
-  }, [themeData, peakMonths]);
-
-  // ── Subtitle logic: stacked summaries for 1-3 selected themes ──
-  type SummaryLine = { text: string; themeName: string | null; themeColor: string | null };
-  const summaries: SummaryLine[] = useMemo(() => {
-    if (selected.size === 0) {
-      return [{
-        text: "Tracking how people talk about AI companionship across 27 Reddit communities, weighted by post volume. Each theme line begins where keyword coverage becomes reliable (late 2022 onward); the corpus itself reaches back to 2017.",
-        themeName: null,
-        themeColor: null,
-      }];
-    }
-
-    if (selected.size > 3) {
-      return [{
-        text: `Showing ${selected.size} of 6 themes.`,
-        themeName: null,
-        themeColor: null,
-      }];
-    }
-
-    // 1-3 themes: generate a summary line for each
-    const activeThemes = THEMES.filter((t) => selected.has(t.id));
-    return activeThemes.map((t) => themeSummary(t));
-  }, [selected, themeSummary]);
-
-  // ── Responsive chart config ──
-  const chartConfig = useMemo(() => {
-    if (bp === "mobile") {
-      return {
-        height: 280,
-        margin: { top: 10, right: 8, bottom: 30, left: 8 },
-        xTickCount: 4,
-        minTickGap: 30,
-        strokeActive: 2.5,
-        strokeInactive: 1.5,
-        yAxisWidth: 0,
-        showYAxis: false,
-        eventLabelAngle: 0,
-        showEventLabels: false,
-        useShortEventLabels: false,
-        tickFormatter: formatMonthTickShort,
-      };
-    }
-    if (bp === "tablet") {
-      // 640-768px: abbreviated event labels, tighter layout
-      if (isMobileStrip) {
-        return {
-          height: 320,
-          margin: { top: 60, right: 12, bottom: 30, left: 12 },
-          xTickCount: 5,
-          minTickGap: 40,
-          strokeActive: 2.5,
-          strokeInactive: 1.5,
-          yAxisWidth: 40,
-          showYAxis: true,
-          eventLabelAngle: -45,
-          showEventLabels: true,
-          useShortEventLabels: true,
-          tickFormatter: formatMonthTickShort,
-        };
-      }
-      return {
-        height: 360,
-        margin: { top: 80, right: 20, bottom: 30, left: 24 },
-        xTickCount: 6,
-        minTickGap: 40,
-        strokeActive: 2.5,
-        strokeInactive: 1.5,
-        yAxisWidth: 44,
-        showYAxis: true,
-        eventLabelAngle: -45,
-        showEventLabels: true,
-        useShortEventLabels: false,
-        tickFormatter: formatMonthTickShort,
-      };
-    }
-    return {
-      height: 440,
-      margin: { top: 100, right: 64, bottom: 8, left: 24 },
-      xTickCount: 8,
-      minTickGap: timeRange === "6M" ? 40 : 60,
-      strokeActive: 2,
-      strokeInactive: 1,
-      yAxisWidth: 44,
-      showYAxis: true,
-      eventLabelAngle: -60,
-      showEventLabels: true,
-      useShortEventLabels: false,
-      tickFormatter: formatMonthTick,
-    };
-  }, [bp, isMobileStrip, timeRange]);
-
-  // ── Sparkline height by breakpoint ──
-  const sparklineHeight = bp === "mobile" ? 20 : 24;
+  }, [detailPanel]);
 
   return (
     <>
-    <div className="max-w-5xl mx-auto px-4 sm:px-6 py-4 sm:py-6">
-      {/* Headline + dynamic summary */}
-      <div className="mb-6 sm:mb-8">
-        <h1 className="text-[22px] sm:text-2xl lg:text-3xl font-bold text-[#F8FAFC] mb-1">
-          How are people talking about AI companionship?
-        </h1>
-        <div className="space-y-0.5">
-          {summaries.map((line, idx) => (
-            <p key={idx} className="text-sm sm:text-base text-[#94A3B8] line-clamp-2 sm:line-clamp-none">
-              {line.themeName && line.themeColor ? (
-                <>
-                  {line.text.split(line.themeName).map((part, i, arr) =>
-                    i < arr.length - 1 ? (
-                      <span key={i}>
-                        {part}
-                        <span style={{ color: line.themeColor! }}>
-                          {line.themeName}
-                        </span>
-                      </span>
-                    ) : (
-                      <span key={i}>{part}</span>
-                    ),
-                  )}
-                </>
-              ) : (
-                line.text
-              )}
-            </p>
-          ))}
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 py-4 sm:py-6">
+        {/* Headline + measurement contract */}
+        <div className="mb-5 sm:mb-6">
+          <h1 className="text-[22px] sm:text-2xl lg:text-3xl font-bold text-[#F8FAFC] mb-1.5">
+            How are people talking about AI companionship?
+          </h1>
+          <p className="text-sm sm:text-base text-[#94A3B8]">
+            Six themes tracked across 26 Reddit communities. Each panel shows
+            one theme&apos;s rate of distinctive keyword language over time.
+            Compare the <span className="text-[#CBD5E1]">shape and timing</span>{" "}
+            of each line — not heights between themes. Detection sensitivity
+            differs by theme, so a taller line is not a more common theme.
+          </p>
         </div>
-      </div>
 
-      {/* Time range selector + chart mode toggle */}
-      <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-0 mb-2">
-        <div className="flex gap-1">
+        {/* Time range selector */}
+        <div className="flex gap-1 mb-3">
           {(["6M", "1Y", "2Y", "ALL"] as TimeRange[]).map((range) => (
             <button
               key={range}
-              onClick={() => {
-                setTimeRange(range);
-              }}
+              onClick={() => setTimeRange(range)}
               aria-pressed={timeRange === range}
               aria-label={`Show ${range === "ALL" ? "all time" : `last ${range}`}`}
               className="flex-1 sm:flex-none h-11 sm:h-auto px-3 py-1 text-sm sm:text-xs font-medium rounded-md transition-colors"
@@ -612,548 +102,139 @@ export default function TrendsExplorer({ themeData, keywordDetails }: Props) {
             </button>
           ))}
         </div>
-        <div className="hidden sm:block flex-1" />
-        {/* Desktop: Clear button in its own slot */}
-        {selected.size >= 2 && (
-          <button
-            onClick={() => {
-              setSelected(new Set());
-              setDetailPanel(null);
-            }}
-            className="hidden sm:block px-3 py-1 text-xs font-medium rounded-md transition-colors"
-            style={{ color: "#94A3B8", border: "1px solid #2A2D3A" }}
-          >
-            Clear
-          </button>
-        )}
-        <div className="flex items-center gap-1 ml-auto sm:ml-0">
-          {/* Mobile: Clear button inline with mode toggle */}
-          {selected.size >= 2 && (
-            <button
-              onClick={() => {
-                setSelected(new Set());
-                setDetailPanel(null);
-              }}
-              className="sm:hidden h-11 px-3 py-1 text-sm font-medium rounded-md transition-colors"
-              style={{ color: "#94A3B8", border: "1px solid #2A2D3A" }}
-            >
-              Clear
-            </button>
-          )}
-          {(["absolute", "relative"] as ChartMode[]).map((mode) => {
-            // "Absolute" mode shows the mention rate per 1k posts (volume-normalized).
-            // "Relative" mode shows each theme's value as % of its own peak (peak-normalized).
-            // The labels say what you're actually seeing on the y-axis — "Absolute" was
-            // misleading because mention rate is already a ratio, not an absolute count.
-            const label = mode === "absolute" ? "Per 1k posts" : "% of peak";
-            return (
-              <button
-                key={mode}
-                onClick={() => {
-                  setChartMode(mode);
-                }}
-                aria-pressed={chartMode === mode}
-                aria-label={`${label} chart mode`}
-                className="h-11 sm:h-auto px-3 py-1 text-sm sm:text-xs font-medium rounded-md transition-colors"
-                style={{
-                  backgroundColor: chartMode === mode ? "#1A1D27" : "transparent",
-                  color: chartMode === mode ? "#F8FAFC" : "#94A3B8",
-                  border: `1px solid ${chartMode === mode ? "#2A2D3A" : "transparent"}`,
-                }}
-              >
-                {label}
-              </button>
-            );
-          })}
-        </div>
-      </div>
 
-      {/* Metric cards */}
-      <div
-        ref={cardRowRef}
-        className={
-          isMobileStrip
-            ? "mobile-card-strip flex gap-2 mb-2"
-            : "grid gap-[6px] sm:gap-2 mb-2"
-        }
-        style={
-          isMobileStrip
-            ? undefined
-            : {
-                gridTemplateColumns:
-                  bp === "mobile"
-                    ? "repeat(2, 1fr)"
-                    : bp === "tablet"
-                      ? "repeat(3, 1fr)"
-                      : "repeat(6, 1fr)",
-              }
-        }
-      >
-        {metricCards.map((card) => {
-          const isActive = selected.has(card.id as ThemeId);
-          const dimmed = selected.size > 0 && !isActive;
-          const isPanelActive = detailPanel === card.id;
+        {/* Trend Atlas — small-multiples grid */}
+        <figure role="img" aria-labelledby="atlas-caption" className="m-0">
+          <figcaption id="atlas-caption" className="sr-only">
+            A grid of six small line charts, one per theme (romance, sex/erotic
+            roleplay, consciousness, therapy, addiction, rupture), showing each
+            theme&apos;s rate of validated-keyword mentions per 1,000 posts over
+            time across AI-companionship Reddit communities. Each panel has its
+            own y-axis; line heights are not comparable between themes because
+            keyword detection sensitivity differs by theme. Each panel begins at
+            its own coverage-start date. Event markers note major platform
+            changes. Per-theme reliability detail is on the about page.
+          </figcaption>
+          <TrendAtlas
+            themeData={themeData}
+            timeRange={timeRange}
+            bp={bp}
+            onOpenDetail={(id) => setDetailPanel(id as ThemeId)}
+          />
+        </figure>
 
-          return (
-            <button
-              key={card.id}
-              data-theme-card={card.id}
-              onClick={() => {
-                toggleTheme(card.id as ThemeId);
-                setDetailPanel((prev) =>
-                  prev === (card.id as ThemeId) ? null : (card.id as ThemeId),
-                );
-              }}
-              aria-pressed={isActive}
-              aria-label={`${card.id === "sexual_erp" ? "Sex/Erotic Roleplay" : card.label}: ${card.value.toFixed(1)} mentions per 1000 posts`}
-              className="metric-card text-left rounded-lg cursor-pointer"
-              style={{
-                backgroundColor: isPanelActive ? "#1F2233" : "#1A1D27",
-                borderLeft: `3px solid ${card.color}`,
-                padding: "12px 10px",
-                minHeight: 44,
-                opacity: dimmed ? 0.5 : 1,
-                boxShadow: isPanelActive
-                  ? `0 0 16px color-mix(in srgb, ${card.color} 30%, transparent)`
-                  : undefined,
-                "--card-color": card.color,
-                ...(isMobileStrip
-                  ? { width: 140, flexShrink: 0, scrollSnapAlign: "start" as const }
-                  : {}),
-              } as React.CSSProperties}
-            >
-              <div
-                className={`${isMobileStrip ? "text-[14px]" : "text-[11px]"} leading-tight flex items-center gap-1`}
-                style={{ color: "#94A3B8" }}
-              >
-                <span>{card.emoji}</span>
-                <span
-                  title={
-                    card.id === "sexual_erp"
-                      ? "Sex / Erotic Roleplay"
-                      : undefined
-                  }
-                >
-                  {card.label}
-                </span>
-              </div>
-              <div
-                className="text-[18px] sm:text-[20px] font-medium leading-tight mt-0.5"
-                style={{
-                  color: card.color,
-                  fontVariantNumeric: "tabular-nums",
-                }}
-              >
-                {card.value.toFixed(1)}
-              </div>
-              {!isMobileStrip && (
-                <div
-                  className="text-[10px] leading-tight"
-                  style={{ color: "#94A3B8" }}
-                >
-                  mentions / 1k posts
-                </div>
-              )}
-              <div className="mt-1.5 pointer-events-none">
-                <Sparkline
-                  data={card.sparklineData}
-                  color={card.color}
-                  height={sparklineHeight}
-                />
-              </div>
-            </button>
-          );
-        })}
-      </div>
-
-
-      {/* Chart */}
-      <figure
-        ref={chartRef}
-        role="img"
-        aria-labelledby="chart-caption"
-        className="rounded-xl border p-2 sm:p-4 lg:p-6 outline-none m-0"
-        style={{
-          backgroundColor: "#1A1D27",
-          borderColor: "#2A2D3A",
-        }}
-      >
-        <figcaption id="chart-caption" className="sr-only">
-          Line chart showing mention rates per 1,000 posts for six themes
-          (rupture, addiction, romance, sexual roleplay, consciousness, therapy)
-          across {THEMES.length === 6 ? "27" : ""} AI-companionship Reddit
-          communities. Each theme series begins at its own coverage-start
-          date (late 2022 onward, where keyword measurement is reliable);
-          the underlying corpus reaches back to 2017. Themes can be toggled
-          individually; switch between mention rate (per 1k posts) and
-          peak-normalized (% of peak) modes. Event annotations mark major
-          platform changes including the February 2023 Replika ERP removal,
-          the September 2024 CharacterAI legacy site shutdown, and the
-          February 2026 GPT-4o sunset. Detailed time-series data tables and
-          per-theme reliability metrics are available on the about page.
-        </figcaption>
-        <div
-          className="w-full overflow-hidden"
-          style={{ height: chartConfig.height }}
+        {/* Methodology note */}
+        <p
+          className="text-center"
+          style={{
+            fontSize: isMobileStrip ? 14 : 12,
+            color: "#8293A6",
+            marginTop: 16,
+            marginBottom: 8,
+          }}
         >
-          <ResponsiveContainer width="100%" height="100%">
-            <ComposedChart
-              data={chartData}
-              margin={chartConfig.margin}
-              onMouseMove={(_state, event) => {
-                if (!event || !chartRef.current) return;
-                const rect = chartRef.current.getBoundingClientRect();
-                mouseYRef.current =
-                  event.clientY - rect.top - chartConfig.margin.top;
-              }}
-            >
-              <CartesianGrid
-                strokeDasharray="3 3"
-                stroke="#2A2D3A"
-                vertical={false}
-                horizontalPoints={[]}
-              />
+          Each line is the rate of validated-keyword mentions per 1,000 posts
+          (7-day smoothed, post text only). The chart uses keyword counts — no
+          AI classification. Per-theme reliability varies.{" "}
+          <a
+            href="/about#verification"
+            style={{ color: "#94A3B8", textDecoration: "underline" }}
+          >
+            Methodology
+          </a>{" "}
+          ·{" "}
+          <a
+            href="/about"
+            style={{ color: "#94A3B8", textDecoration: "underline" }}
+          >
+            Theme reliability
+          </a>
+          .
+        </p>
 
-              <XAxis
-                dataKey="date"
-                tickFormatter={chartConfig.tickFormatter}
-                stroke="#2A2D3A"
-                tick={{
-                  fill: "#94A3B8",
-                  fontSize: bp === "mobile" ? 10 : 12,
-                }}
-                tickLine={false}
-                axisLine={{ stroke: "#2A2D3A" }}
-                minTickGap={chartConfig.minTickGap}
-              />
-
-              {chartConfig.showYAxis && (
-                <YAxis
-                  yAxisId="index"
-                  domain={[0, yDomainMax]}
-                  allowDataOverflow
-                  ticks={yAxisConfig.ticks}
-                  tickFormatter={(v: number) =>
-                    v < 10 && v !== Math.floor(v)
-                      ? v.toFixed(1)
-                      : String(Math.round(v))
-                  }
-                  stroke="transparent"
-                  tick={{ fill: "#94A3B8", fontSize: 12 }}
-                  axisLine={false}
-                  tickLine={false}
-                  width={chartConfig.yAxisWidth}
-                  label={{
-                    value: chartMode === "absolute" ? "mentions per 1k posts" : "% of peak",
-                    angle: -90,
-                    position: "left" as const,
-                    fill: "#94A3B8",
-                    fontSize: 11,
-                    dx: -4,
-                  }}
-                />
-              )}
-
-              {!chartConfig.showYAxis && (
-                <YAxis
-                  yAxisId="index"
-                  domain={[0, yDomainMax]}
-                  allowDataOverflow
-                  hide
-                  width={0}
-                />
-              )}
-
-              <Tooltip
-                content={({ active, payload, label }) => {
-                  if (!active || !payload?.length || !label) {
-                    if (nearestTheme !== null) setNearestTheme(null);
-                    return null;
-                  }
-
-                  // Filter to selected themes, or use all if none selected
-                  const candidates =
-                    selected.size > 0
-                      ? payload.filter((p) =>
-                          selected.has(p.dataKey as ThemeId),
-                        )
-                      : payload;
-                  if (!candidates.length) {
-                    if (nearestTheme !== null) setNearestTheme(null);
-                    return null;
-                  }
-
-                  // Find the single closest theme to cursor Y
-                  const cursorY = mouseYRef.current;
-                  const plotHeight =
-                    chartConfig.height -
-                    chartConfig.margin.top -
-                    chartConfig.margin.bottom;
-
-                  let closest = candidates[0];
-                  let closestDist = Infinity;
-                  for (const p of candidates) {
-                    const val = (p.value as number) ?? 0;
-                    const pixelY =
-                      plotHeight - (val / yDomainMax) * plotHeight;
-                    const dist = Math.abs(cursorY - pixelY);
-                    if (dist < closestDist) {
-                      closestDist = dist;
-                      closest = p;
-                    }
-                  }
-
-                  const tid = closest.dataKey as ThemeId;
-                  const theme = THEMES.find((t) => t.id === tid);
-                  if (!theme) return null;
-
-                  if (nearestTheme !== tid) setNearestTheme(tid);
-
-                  const val =
-                    chartMode === "absolute"
-                      ? `${(closest.value as number).toFixed(1)} per 1k`
-                      : `${Math.round(closest.value as number)}% of peak`;
-
-                  return (
-                    <div
-                      className="rounded-md px-2.5 py-1.5 text-xs shadow-xl whitespace-nowrap"
-                      style={{
-                        backgroundColor: "#0F1117",
-                        border: "1px solid #2A2D3A",
-                      }}
-                    >
-                      <span style={{ color: "#94A3B8" }}>
-                        {formatMonthTick(label as string)}
+        {/* Mobile event list */}
+        {bp === "mobile" && (
+          <div className="mt-3">
+            {!eventsExpanded ? (
+              <button
+                onClick={() => setEventsExpanded(true)}
+                className="text-xs text-[#94A3B8] hover:text-[#F8FAFC] transition-colors"
+              >
+                View events ({EVENTS.length})
+              </button>
+            ) : (
+              <div
+                className="rounded-lg p-3 text-xs"
+                style={{ backgroundColor: "#1A1D27", border: "1px solid #2A2D3A" }}
+              >
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-[#94A3B8] font-medium">Events</span>
+                  <button
+                    onClick={() => setEventsExpanded(false)}
+                    className="text-[#94A3B8] hover:text-[#F8FAFC] transition-colors text-xs"
+                  >
+                    Close
+                  </button>
+                </div>
+                <div className="space-y-1.5 max-h-40 overflow-y-auto">
+                  {EVENTS.map((event) => (
+                    <div key={event.date} className="flex gap-2 text-[#94A3B8]">
+                      <span className="text-[#F8FAFC] whitespace-nowrap">
+                        {formatMonthShort(event.date)}
                       </span>
-                      <span style={{ color: "#94A3B8" }}>{" \u00B7 "}</span>
-                      <span style={{ color: theme.color }}>
-                        {theme.label}
-                      </span>
-                      <span style={{ color: "#94A3B8" }}>{" \u00B7 "}</span>
-                      <span className="text-[#F8FAFC] font-medium">
-                        {val}
+                      <span>&mdash;</span>
+                      <span>
+                        {event.label}
+                        {event.methodology && (
+                          <span style={{ color: "#64748B" }}>
+                            {" "}(keyword-set change)
+                          </span>
+                        )}
                       </span>
                     </div>
-                  );
-                }}
-                cursor={false}
-              />
-
-              {/* Event annotations */}
-              {visibleEvents.map((event) => (
-                <ReferenceLine
-                  key={event.date}
-                  yAxisId="index"
-                  x={event.date}
-                  stroke="#6B7280"
-                  strokeDasharray="2 4"
-                  strokeWidth={1}
-                  label={
-                    chartConfig.showEventLabels
-                      ? {
-                          value: chartConfig.useShortEventLabels
-                            ? event.shortLabel
-                            : event.label,
-                          position: "insideTopLeft",
-                          angle: chartConfig.eventLabelAngle,
-                          fill: "#94A3B8",
-                          fontSize: chartConfig.useShortEventLabels ? 8 : 9,
-                          offset: 6,
-                        }
-                      : undefined
-                  }
-                />
-              ))}
-
-              {/* Theme lines */}
-              {THEMES.map((theme) => {
-                const isSelected = selected.has(theme.id);
-                const hasSelection = selected.size > 0;
-                const isFaded = hasSelection && !isSelected;
-                // Default (no selection): all lines visible at 85% opacity.
-                // Selecting a theme dims the others to 20% to focus attention.
-                // Previous default of 20% on every line made the chart look
-                // broken on first visit (first-visitor audit, 2026-05-14).
-                const opacity = hasSelection
-                  ? isFaded
-                    ? 0.2
-                    : 1
-                  : 0.85;
-                const isNearest = nearestTheme === theme.id;
-                return (
-                  <Line
-                    key={theme.id}
-                    yAxisId="index"
-                    type="monotone"
-                    dataKey={theme.id}
-                    stroke={theme.color}
-                    strokeWidth={
-                      isSelected
-                        ? chartConfig.strokeActive
-                        : chartConfig.strokeInactive
-                    }
-                    strokeOpacity={opacity}
-                    dot={false}
-                    activeDot={
-                      isNearest
-                        ? { r: 4, fill: theme.color, stroke: "#0F1117", strokeWidth: 2 }
-                        : false
-                    }
-                    isAnimationActive={false}
-                    legendType="none"
-                  />
-                );
-              })}
-            </ComposedChart>
-          </ResponsiveContainer>
-        </div>
-      </figure>
-
-      {/* Methodology note — below chart on all viewports.
-          Honest about state: the chart currently shows raw keyword counts.
-          LLM verification (Sonnet 4.6) is mid-rollout; will become the
-          default series once the backfill completes and calibration ships.
-          Per-theme precision varies; see Theme Health snapshot below. */}
-      <p
-        className="text-center"
-        style={{
-          fontSize: isMobileStrip ? 14 : 12,
-          color: "#8293A6",
-          marginTop: 12,
-          marginBottom: 8,
-        }}
-      >
-        Each theme tracks validated keywords. Per-theme precision varies
-        by theme and surface (see Theme Health); LLM verification is rolling
-        out to filter false positives.{" "}
-        <a
-          href="/about#verification"
-          style={{ color: "#94A3B8", textDecoration: "underline" }}
-        >
-          Methodology
-        </a>{" "}
-        ·{" "}
-        <a
-          href="/about"
-          style={{ color: "#94A3B8", textDecoration: "underline" }}
-        >
-          Theme reliability
-        </a>
-        .
-      </p>
-
-      {/* Mobile event list */}
-      {bp === "mobile" && visibleEvents.length > 0 && (
-        <div className="mt-3">
-          {!eventsExpanded ? (
-            <button
-              onClick={() => setEventsExpanded(true)}
-              className="text-xs text-[#94A3B8] hover:text-[#F8FAFC] transition-colors"
-            >
-              View events ({visibleEvents.length})
-            </button>
-          ) : (
-            <div
-              className="rounded-lg p-3 text-xs"
-              style={{
-                backgroundColor: "#1A1D27",
-                border: "1px solid #2A2D3A",
-              }}
-            >
-              <div className="flex items-center justify-between mb-2">
-                <span className="text-[#94A3B8] font-medium">Events</span>
-                <button
-                  onClick={() => setEventsExpanded(false)}
-                  className="text-[#94A3B8] hover:text-[#F8FAFC] transition-colors text-xs"
-                >
-                  Close
-                </button>
+                  ))}
+                </div>
               </div>
-              <div className="space-y-1.5 max-h-40 overflow-y-auto">
-                {visibleEvents.map((event) => (
-                  <div key={event.date} className="flex gap-2 text-[#94A3B8]">
-                    <span className="text-[#F8FAFC] whitespace-nowrap">
-                      {formatMonthTickShort(event.date)}
-                    </span>
-                    <span>&mdash;</span>
-                    <span>{event.label}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
-        </div>
-      )}
+            )}
+          </div>
+        )}
+      </div>
 
-    </div>
+      {/* Detail panel — sidebar on desktop, bottom sheet on mobile */}
+      {(() => {
+        const panelTheme = detailPanel
+          ? THEMES.find((t) => t.id === detailPanel)
+          : null;
+        const panelData = detailPanel ? keywordDetails[detailPanel] : null;
+        if (!panelTheme || !panelData) return null;
 
-    {/* Detail panel — sidebar on desktop, bottom sheet on mobile */}
-    {(() => {
-      const panelTheme = detailPanel
-        ? THEMES.find((t) => t.id === detailPanel)
-        : null;
-      const panelData = detailPanel
-        ? keywordDetails[detailPanel]
-        : null;
-
-      if (isMobileStrip) {
-        // Bottom sheet on mobile — always render so close animation works
-        if (!panelTheme || !panelData) {
-          return null;
+        if (isMobileStrip) {
+          return (
+            <BottomSheet
+              isOpen={!!detailPanel}
+              themeLabel={panelTheme.label}
+              themeEmoji={panelTheme.emoji}
+              themeTagline={panelTheme.tagline}
+              themeColor={panelTheme.color}
+              data={panelData}
+              onClose={closeDetail}
+            />
+          );
         }
         return (
-          <BottomSheet
-            isOpen={!!detailPanel}
-            themeLabel={panelTheme.label}
-            themeEmoji={panelTheme.emoji}
-            themeTagline={panelTheme.tagline}
-            themeColor={panelTheme.color}
-            data={panelData}
-            onClose={() => {
-              const triggerId = detailPanel;
-              setDetailPanel(null);
-              // Restore focus to the originating theme card (a11y).
-              if (triggerId) {
-                requestAnimationFrame(() => {
-                  const trigger = document.querySelector<HTMLButtonElement>(
-                    `[data-theme-card="${triggerId}"]`,
-                  );
-                  trigger?.focus();
-                });
-              }
-            }}
-          />
+          <div ref={panelRef}>
+            <TransparencyPanel
+              themeId={panelTheme.id}
+              themeLabel={panelTheme.label}
+              themeEmoji={panelTheme.emoji}
+              themeTagline={panelTheme.tagline}
+              themeColor={panelTheme.color}
+              data={panelData}
+              onClose={closeDetail}
+            />
+          </div>
         );
-      }
-
-      // Desktop sidebar
-      if (!panelTheme || !panelData) return null;
-      return (
-        <div ref={panelRef}>
-          <TransparencyPanel
-            themeId={panelTheme.id}
-            themeLabel={panelTheme.label}
-            themeEmoji={panelTheme.emoji}
-            themeTagline={panelTheme.tagline}
-            themeColor={panelTheme.color}
-            data={panelData}
-            onClose={() => {
-              const triggerId = detailPanel;
-              setDetailPanel(null);
-              // Restore focus to the originating theme card (a11y).
-              if (triggerId) {
-                requestAnimationFrame(() => {
-                  const trigger = document.querySelector<HTMLButtonElement>(
-                    `[data-theme-card="${triggerId}"]`,
-                  );
-                  trigger?.focus();
-                });
-              }
-            }}
-          />
-        </div>
-      );
-    })()}
+      })()}
     </>
   );
 }

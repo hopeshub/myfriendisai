@@ -28,10 +28,21 @@ function loadThemeData(): ThemeData {
     return {};
   }
 
-  // Total posts per day for normalization
-  const totalPostsByDate: Record<string, number> = {};
-  for (const e of (raw["_total_posts"] as Array<{ date: string; count: number }> | undefined) ?? []) {
-    totalPostsByDate[e.date] = e.count;
+  // Total posts per day, plus a trailing 7-entry rolling mean used as the
+  // rate denominator. The numerator (count_post_only_7d_avg) is already a
+  // 7-entry trailing mean; smoothing the denominator the same way keeps the
+  // displayed rate from spiking on low-volume days — numerator and denominator
+  // now share a window.
+  const totalEntries = (
+    (raw["_total_posts"] as Array<{ date: string; count: number }> | undefined) ?? []
+  )
+    .slice()
+    .sort((a, b) => a.date.localeCompare(b.date));
+  const totalPosts7dAvg: Record<string, number> = {};
+  for (let i = 0; i < totalEntries.length; i++) {
+    const window = totalEntries.slice(Math.max(0, i - 6), i + 1);
+    totalPosts7dAvg[totalEntries[i].date] =
+      window.reduce((s, e) => s + e.count, 0) / window.length;
   }
 
   // Per-theme coverage_start: dates before this are unreliable keyword coverage
@@ -42,8 +53,6 @@ function loadThemeData(): ThemeData {
   const result: ThemeData = {};
   for (const [themeId, categories] of Object.entries(THEME_CATEGORIES)) {
     // Determine this theme's coverage_start (earliest of its merged categories).
-    // Themes currently map 1:1 to categories, but if that changes the earliest
-    // coverage gives the most data while still respecting each category's floor.
     let themeCoverageStart: string | null = null;
     for (const cat of categories) {
       const cs = coverageStart[cat];
@@ -52,20 +61,23 @@ function loadThemeData(): ThemeData {
       }
     }
 
-    // Sum raw daily hits and 7-day averages across merged categories.
-    // The chart uses the raw keyword count series; there is no LLM-classified
-    // series in the published chart (see CLAUDE.md section 2.3).
+    // Sum the POST-ONLY series across merged categories. Post-only is the
+    // longitudinally comparable series: comment tagging only began March 2026,
+    // so the post+comment series has a step artifact there. There is no
+    // LLM-classified series in the published chart (see CLAUDE.md section 2.3).
     const rawByDate: Record<string, { count: number; avg: number }> = {};
     for (const cat of categories) {
       type Entry = {
         date: string;
         count: number;
-        count_7d_avg?: number;
+        count_post_only?: number;
+        count_post_only_7d_avg?: number;
       };
       for (const e of (raw[cat] as Entry[] | undefined) ?? []) {
         if (!rawByDate[e.date]) rawByDate[e.date] = { count: 0, avg: 0 };
-        rawByDate[e.date].count += e.count;
-        rawByDate[e.date].avg += e.count_7d_avg ?? e.count;
+        const postOnly = e.count_post_only ?? e.count;
+        rawByDate[e.date].count += postOnly;
+        rawByDate[e.date].avg += e.count_post_only_7d_avg ?? postOnly;
       }
     }
 
@@ -74,18 +86,17 @@ function loadThemeData(): ThemeData {
     let dates = Object.keys(rawByDate).sort().filter((d) => d.slice(0, 7) < currentMonth);
 
     // Apply coverage_start filter: drop dates before the theme's coverage_start.
-    // Researchers reading the raw JSON still see the full series; only the
-    // rendered chart respects this filter.
+    // Researchers reading the raw JSON still see the full series.
     if (themeCoverageStart) {
       dates = dates.filter((d) => d >= themeCoverageStart!);
     }
 
     result[themeId] = dates.map((date) => {
-      const total = totalPostsByDate[date] ?? 0;
+      const total7d = totalPosts7dAvg[date] ?? 0;
       return {
         date,
         value: rawByDate[date].count,
-        hitsPerK: total > 0 ? (rawByDate[date].avg / total) * 1000 : 0,
+        hitsPerK: total7d > 0 ? (rawByDate[date].avg / total7d) * 1000 : 0,
       };
     });
   }
