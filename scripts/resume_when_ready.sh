@@ -85,20 +85,41 @@ while true; do
         notify "Sonnet API healthy" "Resuming backfill with 2 parallel processes."
 
         KW=$(.venv/bin/python -c "from src.config import load_keywords; print(','.join(t for cat in load_keywords() for t in cat['terms']))")
+        if [ -z "$KW" ]; then
+            echo "[$(date)] ERROR: keyword list empty; not launching." >> "$LOG"
+            notify "Sonnet resume FAILED" "Keyword list came back empty. Manual restart needed."
+            break
+        fi
 
-        # Launch 2 parallel Sonnet processes
-        nohup .venv/bin/python scripts/llm_verify_tags.py backfill \
-            --keywords "$KW" --surface both --model claude-sonnet-4-6 \
-            > /tmp/sonnet_resumed_p1.log 2>&1 &
+        # Use setsid for full process-group detachment so children survive
+        # this parent shell exiting. /dev/null stdin prevents SIGTTIN.
+        setsid bash -c "
+            cd $(pwd)
+            export ANTHROPIC_API_KEY='$ANTHROPIC_API_KEY'
+            .venv/bin/python scripts/llm_verify_tags.py backfill \
+                --keywords '$KW' --surface both --model claude-sonnet-4-6 \
+                > /tmp/sonnet_resumed_p1.log 2>&1 < /dev/null
+        " &
         P1=$!
         sleep 3
-        nohup .venv/bin/python scripts/llm_verify_tags.py backfill \
-            --keywords "$KW" --surface both --model claude-sonnet-4-6 \
-            > /tmp/sonnet_resumed_p2.log 2>&1 &
+        setsid bash -c "
+            cd $(pwd)
+            export ANTHROPIC_API_KEY='$ANTHROPIC_API_KEY'
+            .venv/bin/python scripts/llm_verify_tags.py backfill \
+                --keywords '$KW' --surface both --model claude-sonnet-4-6 \
+                > /tmp/sonnet_resumed_p2.log 2>&1 < /dev/null
+        " &
         P2=$!
 
-        echo "[$(date)] Launched PIDs $P1 and $P2." >> "$LOG"
-        notify "Sonnet resumed" "Backfill restarted as PID $P1 and $P2. Monitor will track."
+        # Verify children survived the parent exit-prep window
+        sleep 5
+        running=$(ps aux | grep -E "python.*llm_verify_tags.*claude-sonnet-4-6" | grep -v grep | wc -l | tr -d ' ')
+        echo "[$(date)] Launched PIDs $P1 and $P2; verified $running running 5s later." >> "$LOG"
+        if [ "$running" -lt 1 ]; then
+            notify "Sonnet resume FAILED" "Processes died after launch. Check /tmp/sonnet_resumed_p*.log."
+        else
+            notify "Sonnet resumed" "$running process(es) alive after launch. Monitor will track."
+        fi
         break
     fi
 
