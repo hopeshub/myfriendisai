@@ -158,8 +158,10 @@ export default function TrendAtlas({
     return { perTheme: series, months: domain };
   }, [themeData, timeRange]);
 
-  const cols = bp === "mobile" ? 1 : 2;
-  const panelHeight = bp === "mobile" ? 196 : 184;
+  // 3 columns on desktop (2 rows → all six panels fit one screen), 2 on
+  // tablet, 1 on mobile.
+  const cols = bp === "mobile" ? 1 : bp === "tablet" ? 2 : 3;
+  const panelHeight = bp === "mobile" ? 196 : 178;
   const labelFs = bp === "mobile" ? 14 : 11;
 
   // Events numbered by FIXED chronological order over the full set (stable
@@ -181,7 +183,7 @@ export default function TrendAtlas({
       )}
 
       <div
-        className="grid gap-x-8 gap-y-5"
+        className="grid gap-x-6 gap-y-4"
         style={{ gridTemplateColumns: `repeat(${cols}, minmax(0, 1fr))` }}
       >
         {THEMES.map((t) => {
