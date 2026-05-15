@@ -27,33 +27,6 @@ parse_ts() {
 echo "=== STATUS at $(date) ==="
 echo
 
-# ── Sonnet LLM backfill ───────────────────────────────────────────
-# Count only python processes, not the zsh wrappers
-SONNET_PROCS=$(ps aux | grep -E "python.*llm_verify_tags.*claude-sonnet-4-6" | grep -v grep | wc -l | tr -d ' ')
-SONNET_N=$(sqlite3 "$DB" "SELECT COUNT(*) FROM llm_classifications WHERE model='claude-sonnet-4-6';" 2>/dev/null)
-# Order by strftime epoch, not raw string — DB has mixed "T...Z" and "space"
-# timestamp formats; lexical sort returns "T" first (T=0x54 > space=0x20).
-SONNET_LAST=$(sqlite3 "$DB" "SELECT classified_at FROM llm_classifications WHERE model='claude-sonnet-4-6' ORDER BY strftime('%s', classified_at) DESC LIMIT 1;" 2>/dev/null)
-SONNET_LAST_EPOCH=$(parse_ts "$SONNET_LAST")
-SONNET_AGE=$(( NOW - SONNET_LAST_EPOCH ))
-
-echo "Sonnet LLM backfill:"
-echo "  processes alive: $SONNET_PROCS"
-echo "  verdicts in DB:  $SONNET_N"
-echo "  last verdict:    $SONNET_LAST UTC (${SONNET_AGE}s ago)"
-if [ "$SONNET_PROCS" -eq 0 ] && [ "$SONNET_N" -lt 21000 ]; then
-    echo "  STATE: ⚠️  CRASHED — no processes alive, target ~21k not reached"
-elif [ "$SONNET_PROCS" -gt 0 ] && [ "$SONNET_AGE" -gt 1200 ]; then
-    echo "  STATE: ⚠️  STALLED — processes alive but no new verdicts in last 20 min"
-elif [ "$SONNET_PROCS" -gt 0 ]; then
-    REMAINING=$(( 21000 - SONNET_N ))
-    [ "$REMAINING" -lt 0 ] && REMAINING=0
-    echo "  STATE: ✓ RUNNING — ~$REMAINING items remaining"
-else
-    echo "  STATE: ✓ COMPLETE"
-fi
-echo
-
 # ── Pre-2023 Arctic Shift backfill ────────────────────────────────
 BACKFILL_PROCS=$(ps aux | grep -E "python.*backfill_pullpush" | grep -v grep | wc -l | tr -d ' ')
 PRE_2023_N=$(sqlite3 "$DB" "SELECT COUNT(*) FROM posts WHERE created_utc < strftime('%s','2023-01-01');" 2>/dev/null)
@@ -78,7 +51,7 @@ echo
 
 # ── Recent log errors (any 'database is locked' or python tracebacks) ──
 echo "Recent errors in logs (last 100 lines only):"
-for log in /tmp/sonnet_full_backfill.log /tmp/sonnet_backfill_p2.log /tmp/sonnet_backfill_p3.log /tmp/backfill_pre2023_v2.log; do
+for log in /tmp/backfill_pre2023_v2.log; do
     if [ -f "$log" ]; then
         ERR_COUNT=$(tail -100 "$log" 2>/dev/null | grep -cE "Traceback|locked|crashed" | tr -d ' \n')
         if [ "${ERR_COUNT:-0}" != "0" ]; then
@@ -90,7 +63,7 @@ echo
 
 # ── Quick health: any background python processes? ──
 echo "Python background jobs:"
-ps aux | grep python | grep -v grep | grep -E "llm_verify_tags|backfill_pullpush" | awk '{print "  PID="$2, "CPU="$3"%", "MEM="$4"%", "RUNTIME="$10, $11}'
+ps aux | grep python | grep -v grep | grep -E "backfill_pullpush" | awk '{print "  PID="$2, "CPU="$3"%", "MEM="$4"%", "RUNTIME="$10, $11}'
 echo
 
 echo "=== END STATUS ==="

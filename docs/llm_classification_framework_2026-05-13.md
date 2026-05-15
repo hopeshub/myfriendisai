@@ -1,3 +1,16 @@
+> **⚠️ EXPERIMENT CLOSED — historical artifact (2026-05-15).** This document describes the
+> hybrid keyword + LLM verification layer that was built 2026-05-13/14 and then **abandoned**.
+> The verification code (`src/llm_classifier.py`, `scripts/llm_verify_tags.py`, the calibration
+> scripts, `collect_daily.py` Step 4c) was deleted 2026-05-15 and `count_llm_verified` was
+> removed from the export. Nothing described below as "Architecture", "Rollout procedure", or
+> "Phase 2" is live or planned. The ~14,800 Sonnet verdicts remain in the `llm_classifications`
+> table for audit only. The only surviving LLM use is the monthly drift check
+> (`scripts/drift_check.py`). For why the experiment was closed and what LLM use *is* additive,
+> see `docs/llm_integration_strategy_2026-05-15.md`. This file is kept for the calibration data
+> and the post-mortem audit trail.
+>
+> ---
+
 # LLM classification framework — 2026-05-13
 
 Hybrid keyword + LLM gating to fix the comment-level precision ceiling that pure regex methodology hit on naturalistic-vocabulary themes (therapy, romance, comment-level consciousness). Built after the adversarial audit found:
