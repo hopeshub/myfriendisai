@@ -697,6 +697,7 @@ export default function TrendsExplorer({ themeData, keywordDetails }: Props) {
           return (
             <button
               key={card.id}
+              data-theme-card={card.id}
               onClick={() => {
                 toggleTheme(card.id as ThemeId);
                 setDetailPanel((prev) =>
@@ -1098,7 +1099,19 @@ export default function TrendsExplorer({ themeData, keywordDetails }: Props) {
             themeTagline={panelTheme.tagline}
             themeColor={panelTheme.color}
             data={panelData}
-            onClose={() => setDetailPanel(null)}
+            onClose={() => {
+              const triggerId = detailPanel;
+              setDetailPanel(null);
+              // Restore focus to the originating theme card (a11y).
+              if (triggerId) {
+                requestAnimationFrame(() => {
+                  const trigger = document.querySelector<HTMLButtonElement>(
+                    `[data-theme-card="${triggerId}"]`,
+                  );
+                  trigger?.focus();
+                });
+              }
+            }}
           />
         );
       }
@@ -1114,7 +1127,19 @@ export default function TrendsExplorer({ themeData, keywordDetails }: Props) {
             themeTagline={panelTheme.tagline}
             themeColor={panelTheme.color}
             data={panelData}
-            onClose={() => setDetailPanel(null)}
+            onClose={() => {
+              const triggerId = detailPanel;
+              setDetailPanel(null);
+              // Restore focus to the originating theme card (a11y).
+              if (triggerId) {
+                requestAnimationFrame(() => {
+                  const trigger = document.querySelector<HTMLButtonElement>(
+                    `[data-theme-card="${triggerId}"]`,
+                  );
+                  trigger?.focus();
+                });
+              }
+            }}
           />
         </div>
       );

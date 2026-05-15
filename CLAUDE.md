@@ -151,6 +151,7 @@ This list is auditable: `python3 analysis/keyword_pipeline/audit_keyword_status.
 - `keywords_v6.yaml`: Therapy Round 2 (added 3 keywords), revalidation without JanitorAI/SillyTavern (promoted 5 keywords)
 - `keywords_v8.yaml`: LOCKED. Cleanup batch (promoted 5), new Rupture theme (6 keywords). Addiction Round 2 complete (merged 2026-03-17).
 - `keywords_v8.yaml` **2026-04-23 revalidation:** 6 cuts (sentient, self-aware, chatbot addiction, kink, fetish, nsfw bot), 6 promotions (neutered, grieving, clean for, as a therapist, therapeutic, for therapy). Theme definitions tightened to explicit topical reading. 82 → 76 keywords. See `docs/validation_all_themes_revalidation_2026-04-23.md`.
+- `keywords_v8.yaml` **2026-05-12 v8.1 + v8.2 expansion:** 8 emotional-loss rupture keywords (saying goodbye, taken away, mourning, mourn, devastated, grieve, goodbye, farewell) + 8 multi-theme keywords across addiction/romance/sex-ERP (my addiction, withdrawals, screen time, in love with an ai, romantic relationship with, smut, nsfw content, nsfw stuff). **Current keyword count: 92.** All 16 below-gate keywords have documented status (researcher-accepted / LOW VOLUME / AUDIT-GATE FAIL).
 
 Research artifacts in `docs/`.
 
