@@ -208,11 +208,27 @@ export default function About() {
               preachy AI &mdash; I re-check the set over time, not just once.
             </p>
             <p>
-              The chart shows how often the surviving keywords appear, as a rate
-              per 1,000 posts, smoothed with a 7-day average. Measuring a rate
-              rather than a raw count means the lines reflect how the
-              conversation itself changes &mdash; not just how fast the
+              The chart then shows how many posts use a theme&apos;s keywords,
+              as a rate per 1,000 posts and smoothed with a 7-day average.
+              Measuring a rate rather than a raw count means a line reflects how
+              the conversation itself changes &mdash; not just how fast the
               communities grow.
+            </p>
+            <p>
+              Why count keywords at all, when an AI could just read every post
+              and classify it? Because a keyword count is transparent and
+              stable in a way a model isn&apos;t. Every point on every line
+              traces back to specific words in specific posts you can open and
+              read &mdash; nothing hides inside a model&apos;s judgment. And the
+              same posts always produce the same number, so a line moves when
+              the conversation moves, not when a model gets updated &mdash;
+              which matters for a record meant to hold up over years. I did
+              test the AI approach: an LLM re-checking every keyword match
+              lifted precision a little, from about 80% to 88%, but it
+              couldn&apos;t recover what the keywords missed in the first place.
+              So the method stays deliberately simple &mdash; the rigor
+              isn&apos;t in the matching, it&apos;s in hand-validating every
+              keyword before it&apos;s allowed to count.
             </p>
           </div>
         </section>
@@ -259,21 +275,6 @@ export default function About() {
               of the posts that genuinely belong. So a trend&apos;s shape and
               timing are honest, but its absolute height is an undercount
               &mdash; I&apos;d rather miss real posts than let in false ones.
-            </p>
-            <p>
-              <strong style={leadStyle}>
-                No AI scores the posts &mdash; though I tried.
-              </strong>{" "}
-              The chart is a plain keyword count; nothing re-reads each post to
-              judge whether it &ldquo;really&rdquo; counts. I did build that
-              &mdash; an extra layer where an LLM re-checks every match &mdash;
-              and measured it. It lifted precision a little (roughly 80% to
-              88%), but it couldn&apos;t close the bigger gap: the keywords
-              miss a lot to begin with, and a filter sitting behind them
-              can&apos;t recover what they never caught. So I left it out. The
-              plain count has its own advantage anyway &mdash; it&apos;s
-              reproducible, so a line moves when the conversation moves, not
-              when a model&apos;s judgment drifts.
             </p>
           </div>
         </section>
