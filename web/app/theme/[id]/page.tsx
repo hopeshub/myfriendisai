@@ -9,6 +9,7 @@ import {
   type SamplePost,
 } from "../../themeData";
 import ThemeChart from "./ThemeChart";
+import ThemeBackdrop from "./ThemeBackdrop";
 
 // ── Per-theme page ───────────────────────────────────────────────────────────
 // The deeper "what is this and why" for one theme: a full-size chart, a plain-
@@ -133,7 +134,7 @@ export default async function ThemePage({
   const topSubs = details ? details.subreddits.slice(0, 5) : [];
 
   return (
-    <div className="max-w-[920px] mx-auto px-4 sm:px-8 py-8">
+    <ThemeBackdrop>
       {/* Back to the atlas */}
       <Link
         href="/"
@@ -339,6 +340,6 @@ export default async function ThemePage({
           ),
         )}
       </nav>
-    </div>
+    </ThemeBackdrop>
   );
 }
