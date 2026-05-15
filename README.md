@@ -1,6 +1,6 @@
 # My Friend Is AI
 
-A research dashboard tracking how people talk about AI companionship across Reddit. Visualizes keyword trends across 27 subreddits using daily snapshots, validated regex matching, and (where the keyword set is noisy) per-match LLM verification under a topical-reading rubric.
+An independent, one-person research dashboard tracking how people talk about AI companionship across Reddit. Visualizes validated-keyword trends across 27 subreddits using daily snapshots and regex matching, normalized per 1,000 posts. The chart uses keyword counts only — there is no AI classification in it.
 
 **Live site:** [myfriendisai.com](https://myfriendisai.com)
 
@@ -19,7 +19,7 @@ It does **not** measure sentiment, prevalence, or how many people are actually i
 
 ## How the data works
 
-Posts and comments are collected daily via Reddit's public `.json` endpoints. Each post is tagged against validated keyword lists using regex matching with word-boundary constraints. For noisy keywords (e.g., `therapeutic` after GPT-5.x guardrails inverted its meaning, `sex with` catching idiomatic English about human relationships), an LLM verification layer using Claude Sonnet is rolling out — each match is sent for in-context classification under a topical-reading rubric. The current default chart series uses raw keyword counts; the `count_llm_verified` series is in the data export and will become the default once the production backfill completes. Trends are normalized to mentions per 1,000 posts.
+Posts and comments are collected daily via Reddit's public `.json` endpoints. Each post is tagged against validated keyword lists using regex matching with word-boundary constraints. The published chart shows raw keyword counts — there is no AI classification in it. (An LLM verification layer was built and evaluated in May 2026; it is not used in the chart, because it corrects precision while the project's larger accuracy gap is recall — see the [About page](https://myfriendisai.com/about) for the full reasoning.) Trends are normalized to mentions per 1,000 posts.
 
 Historical data (Jan 2023 – Mar 2026) was backfilled from PullPush Reddit archives. Forward-looking comment collection began March 2026.
 
@@ -37,7 +37,7 @@ Full methodology: [myfriendisai.com/about](https://myfriendisai.com/about)
 | Data collection | Python with `requests` |
 | Database | SQLite (~3.9M posts) |
 | Keyword matching | Regex with word-boundary matching |
-| LLM verification | Anthropic SDK (Claude Haiku 4.5) for noisy-keyword gating |
+| Keyword drift check | Monthly LLM-assisted sample review — monitoring only, not in the chart |
 | Frontend | Next.js 16 + TypeScript + Tailwind CSS |
 | Charts | Recharts |
 | Hosting | Vercel |

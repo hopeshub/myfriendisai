@@ -33,7 +33,6 @@ type ThemeHealthEntry = {
   top5_authors_pct: number;
   post_precision: { date: string; n: number; precision: number } | null;
   comment_precision: { date: string; n: number; precision: number } | null;
-  llm_stats: { tp: number; fp: number; ambiguous: number; total: number; precision: number | null } | null;
   noisy_keywords_comment: string[];
 };
 
@@ -63,30 +62,6 @@ const THEME_LABELS: Record<string, string> = {
 
 const THEME_ORDER = ["rupture", "addiction", "romance", "sexual_erp", "consciousness", "therapy"];
 
-type VerificationExample = {
-  subreddit: string;
-  title: string;
-  body: string;
-  keyword: string;
-  tag_type: string;
-  verdict: "TP" | "FP";
-  llm_reason: string;
-};
-
-type VerificationExamplesData = {
-  generated_at: string;
-  themes: Record<string, { label: string; fp: VerificationExample[]; tp: VerificationExample[] }>;
-};
-
-function loadVerificationExamples(): VerificationExamplesData | null {
-  try {
-    const raw = readFileSync(join(process.cwd(), "data", "verification_examples.json"), "utf-8");
-    return JSON.parse(raw) as VerificationExamplesData;
-  } catch {
-    return null;
-  }
-}
-
 // Stats shown at the top of the page. The "80%" number is the per-keyword
 // admission gate — every keyword in the production set was validated at
 // n=100 against the topical-reading rubric and admitted only if it scored
@@ -104,9 +79,22 @@ const STATS = [
 
 const CHANGELOG = [
   {
+    date: "May 15, 2026",
+    title: "LLM verification scoped down: the published chart uses validated keyword counts only",
+    items: [
+      "Decision: the chart shows raw validated-keyword counts and nothing else — a deterministic, reproducible series. There is no AI/LLM classification in the numbers you see. The hybrid keyword + LLM verification layer built over May 13–14 was evaluated as a chart filter and is not being used as one.",
+      "Why: LLM verification corrects precision (roughly 80% to 88%), but the project's larger accuracy gap is recall — the audits estimate the keyword set catches only 3–32% of theme-relevant posts per theme. An LLM that only re-judges posts the keywords already matched cannot recover the ones the keywords missed. A full-corpus LLM filter is therefore precision polish that changes no conclusion a reader would draw, at meaningful one-time and ongoing cost.",
+      "A second reason not to surface it: the verdicts were produced under a deliberately lenient prompt. This project's own May 15 keyword audit found that prompt inflates — it rates ~95% of tags correct, where a stricter adversarial audit of similar material found 51–72%. The verdicts can flag a clearly-broken keyword but cannot certify an absolute precision figure, so they have no business being a headline number.",
+      "What the LLM is still used for: a periodic, sample-based drift check that watches keywords for shifts in meaning over time — the kind of failure that hit \"therapeutic.\" That is a monitoring tool, not part of the published measurement.",
+      "The ~14,800 verdicts already collected stay in the database as an audit record, and the count_llm_verified series stays in the raw data export for transparency — neither is shown as a number on the site. The earlier-planned \"Phase 2\" of LLM-only themes is closed.",
+    ],
+    recent: true,
+  },
+  {
     date: "May 14, 2026",
     title: "LLM classification calibration: ran the full backfill, found the gating prompt is over-rejecting, default chart series unchanged",
     items: [
+      "Superseded (May 15, 2026): the LLM-verification rollout described below was wound down — see the May 15, 2026 entry above. The published chart uses validated keyword counts only; LLM classification is not part of it.",
       "The full hybrid backfill finished overnight (~13k Haiku verdicts across all 92 keywords on both surfaces). A 270-item stratified calibration sample was then classified by an independent Claude Code agent under the same topical-reading rubric, used as gold standard against the production LLM verdicts",
       "Calibration headline: overall agreement 61.5% (threshold 85%). When the LLM keeps a tag (verdict=TP), it agrees with the independent classifier 89/90 = 99% of the time — accurate. But when the LLM rejects a tag (verdict=FP), the independent classifier disagrees 57% of the time. The LLM is correctly identifying obvious problems but incorrectly gating away genuine theme content",
       "Decision: do NOT flip the default chart series. The chart still shows raw keyword counts (count); the LLM-verified series (count_llm_verified) is in the data export but not the default render. Flipping it under current prompt calibration would visibly under-count themes — the wrong kind of correction",
@@ -120,6 +108,7 @@ const CHANGELOG = [
     date: "May 13, 2026",
     title: "LLM classification framework: hybrid keyword + LLM gating to break the comment-level precision ceiling",
     items: [
+      "Superseded (May 15, 2026): the LLM-verification rollout described below was wound down — see the May 15, 2026 entry above. The published chart uses validated keyword counts only; LLM classification is not part of it.",
       "After the day's adversarial audit established that some themes (therapy 58%, comment-level consciousness 51%) hit a structural ceiling that regex methodology cannot break, built the hybrid LLM gating infrastructure. The diagnosis: precision-first keyword validation has a ceiling for naturalistic-vocabulary constructs because the natural language people use about love, mental health support, or AI personhood overlaps with how they talk about everything else. The fix is to use the keyword set as a candidate filter and an LLM classifier as the disambiguator — the LLM understands negation, sarcasm, quoted speech, and the difference between 'my AI boyfriend' and 'my boyfriend who works on AI'",
       "Built (1) migration 003 extending llm_classifications table with tag_type, comment_id, verdict, confidence — preserving the 10k legacy claude-code rows and supporting multi-model verdicts for drift detection. (2) src/llm_classifier.py wrapping the Anthropic SDK with a topical-reading rubric, theme definitions injected per call, strict-JSON output, mock mode for testing without API. (3) scripts/llm_verify_tags.py CLI with backfill, daily, recheck, report, and calibration subcommands. (4) Optional Step 4c in scripts/collect_daily.py — env-gated daily verification, non-fatal on failure. (5) New count_llm_verified series in keyword_trends.json that gracefully degrades to count_post_only when no LLM verdicts exist",
       "Cost is much lower than feared: ~$0.001 per item on Haiku 4.5. Backfilling all currently-flagged noisy keywords (~5,000 items) is ~$5. Annual forward cost for daily verification: ~$3 on Haiku. Cheaper than the domain registration",
@@ -405,7 +394,6 @@ const sectionStyle: React.CSSProperties = {
 
 export default function About() {
   const themeHealth = loadThemeHealth();
-  const verificationExamples = loadVerificationExamples();
   return (
     <div style={{ maxWidth: 720 }} className="mx-auto px-4 sm:px-6 py-10 sm:py-16">
       {/* Page headline */}
@@ -428,7 +416,12 @@ export default function About() {
           Tracking how people talk about AI companions
         </h1>
         <p style={{ fontSize: 16, color: "#94A3B8" }}>
-          Tracking AI companion discourse on Reddit across six themes.
+          An independent, one-person research project tracking AI companion
+          discourse on Reddit across six themes. It measures one thing: how the{" "}
+          <em>language</em> of AI companionship shows up in public Reddit posts
+          over time &mdash; not how many people are in relationships with AI,
+          and not a peer-reviewed academic study. It is built in the open and
+          honest about what it can and can&apos;t show.
         </p>
       </div>
 
@@ -515,190 +508,55 @@ export default function About() {
           </div>
         </section>
 
-        {/* How tags are verified — hybrid keyword + LLM */}
+        {/* Keyword reliability — no LLM classification in the chart */}
         <section id="verification" style={{ ...sectionStyle, marginBottom: 64 }}>
-          <h2 style={sectionHeaderStyle}>How tags are verified</h2>
+          <h2 style={sectionHeaderStyle}>
+            Keyword reliability &mdash; and why there&apos;s no AI in the chart
+          </h2>
           <div className="space-y-4" style={bodyStyle}>
             <p>
               Pure keyword matching has a precision ceiling. Words like
-              &ldquo;therapeutic,&rdquo; &ldquo;honeymoon,&rdquo; or
-              &ldquo;sex with&rdquo; are catching different things in 2026
-              than they were when added: &ldquo;therapeutic&rdquo; gets used
-              as an insult about preachy AI tone, &ldquo;honeymoon
-              phase&rdquo; describes model behavior decay, &ldquo;sex
-              with&rdquo; appears in &ldquo;I&apos;d rather have sex with a
-              real person&rdquo; (a dismissal of AI companionship, the
-              opposite of the theme). Each is now a known failure mode
-              caught by the May 13 adversarial audit.
+              &ldquo;therapeutic,&rdquo; &ldquo;honeymoon,&rdquo; or &ldquo;sex
+              with&rdquo; can catch different things over time &mdash;
+              &ldquo;therapeutic&rdquo; gets used as an insult about preachy AI
+              tone; &ldquo;sex with&rdquo; turns up in &ldquo;I&apos;d rather
+              have sex with a real person,&rdquo; a dismissal of AI
+              companionship rather than an instance of it. The May 2026
+              adversarial audit measured this directly: per-theme precision
+              runs roughly 51&ndash;92%, depending on the theme and on whether
+              the match is in a post or a comment.
             </p>
             <p>
-              The fix is a two-stage classifier. Stage one is the
-              validated keyword set: a fast pattern match that finds
-              candidate posts and comments. Stage two is Claude reading
-              each candidate in context to confirm it&apos;s genuinely
-              about the theme &mdash; catching sarcasm, negation, quoted
-              speech, AI roleplay output, and metaphorical use that pure
-              keyword matching would mis-attribute.
+              What we do about it: the published chart shows{" "}
+              <strong>
+                raw validated-keyword counts &mdash; no AI classification, no
+                per-post re-judging.
+              </strong>{" "}
+              That is deliberate. A keyword count is deterministic and
+              reproducible, so the trend line moves when the discourse moves,
+              not when a model&apos;s judgment drifts. Every keyword was
+              hand-read against 100 posts before being admitted to the set.
             </p>
             <p>
-              For keywords whose precision already exceeds 80% under the
-              topical reading (&ldquo;erp,&rdquo; &ldquo;my
-              addiction,&rdquo; &ldquo;relapse,&rdquo; etc.), no
-              verification is needed &mdash; the keyword is doing its job.
-              For keywords flagged as noisy by the methodology audit, every
-              match is sent to Claude for in-context classification before
-              being counted. The chart&apos;s LLM-verified series only
-              counts posts where at least one of their flagged-keyword
-              matches survives this filter.
+              We did build an LLM verification layer in May 2026 &mdash; a
+              second stage where Claude reads each keyword-flagged post to
+              confirm it. <strong>It is not used in the chart.</strong> It
+              improves precision modestly (about 80% to 88%), but the
+              project&apos;s larger accuracy gap is <em>recall</em> &mdash; the
+              audits estimate only 3&ndash;32% of theme-relevant posts per
+              theme are caught at all &mdash; and a filter sitting behind the
+              keywords cannot recover what the keywords never matched. The
+              verdicts were also graded under a lenient prompt that this
+              project&apos;s own audit found inflates them. The May 15, 2026
+              changelog entry below has the full reasoning.
             </p>
             <p style={{ color: "#94A3B8", fontSize: 13 }}>
-              Every verdict stores the model identifier and a timestamp.
-              When the underlying model changes (e.g., to Claude 5), the
-              recheck command re-classifies a sample under the new model
-              and compares; this is the drift-detection layer that catches
-              language-shift failures the original keyword admission
-              process cannot see.
+              What the LLM does do: once a month, a sample-based drift check
+              reads keyword-flagged posts and flags any keyword whose meaning
+              seems to be shifting &mdash; the kind of failure that hit
+              &ldquo;therapeutic.&rdquo; It is a monitoring tool that watches
+              the keyword set over time; it never feeds the chart.
             </p>
-            <p style={{ color: "#F87171", fontSize: 13 }}>
-              <strong>Single-model calibration limitation:</strong> the
-              calibration step uses a Claude subagent as the &ldquo;gold
-              standard&rdquo; that the production Claude classifier is
-              compared against. The 88.1% Sonnet-vs-CC-agent agreement on the
-              n=900 calibration sample (and the 93% mean per-keyword
-              inter-rater agreement during keyword admission)
-              is not the same as Claude-vs-human or Claude-vs-GPT
-              agreement. A small human-coded calibration set (~n=200) and
-              cross-model validation against a non-Claude classifier are
-              both roadmap items that would strengthen this. Until then,
-              all reported precision numbers should be read as
-              &ldquo;within-Claude topical-reading agreement,&rdquo; not
-              ground-truth precision against an external standard.
-            </p>
-            <p style={{ color: "#94A3B8", fontSize: 13 }}>
-              Cost: ~$0.001 per item on Claude Haiku 4.5. Total annual
-              verification cost is comparable to the domain registration.
-              Full design and the rollout procedure are in{" "}
-              <code
-                style={{
-                  backgroundColor: "#0F172A",
-                  padding: "1px 6px",
-                  borderRadius: 4,
-                  fontSize: 12,
-                }}
-              >
-                docs/llm_classification_framework_2026-05-13.md
-              </code>{" "}
-              in the repository.
-            </p>
-
-            {/* Verification examples — actual classifications */}
-            {verificationExamples && Object.keys(verificationExamples.themes).length > 0 && (
-              <div className="mt-6">
-                <h3
-                  style={{
-                    fontSize: 13,
-                    fontWeight: 500,
-                    color: "#94A3B8",
-                    marginBottom: 12,
-                    textTransform: "uppercase",
-                    letterSpacing: "0.04em",
-                  }}
-                >
-                  What Claude catches
-                </h3>
-                <p style={{ ...bodyStyle, fontSize: 13, marginBottom: 16 }}>
-                  Real classifications from the production dataset. Each card
-                  shows a keyword that matched, the post or comment content,
-                  and Claude&apos;s verdict (kept or rejected) with reasoning.
-                </p>
-                <div className="space-y-3">
-                  {Object.entries(verificationExamples.themes).flatMap(([key, t]) =>
-                    [...t.fp, ...t.tp].slice(0, 2).map((ex, i) => (
-                      <div
-                        key={`${key}-${ex.verdict}-${i}`}
-                        className="rounded-lg"
-                        style={{
-                          backgroundColor: "#1A1D27",
-                          padding: 14,
-                          fontSize: 13,
-                          lineHeight: 1.6,
-                        }}
-                      >
-                        <div
-                          className="verification-card-header"
-                          style={{
-                            display: "flex",
-                            justifyContent: "space-between",
-                            marginBottom: 6,
-                          }}
-                        >
-                          <div style={{ color: "#94A3B8", fontSize: 12 }}>
-                            <span style={{ color: "#8293A6" }}>theme:</span>{" "}
-                            {t.label}
-                            {"  "}
-                            <span style={{ color: "#8293A6" }}>·{" "}keyword:</span>{" "}
-                            <code
-                              style={{
-                                backgroundColor: "#0F172A",
-                                padding: "1px 5px",
-                                borderRadius: 3,
-                                fontSize: 11,
-                              }}
-                            >
-                              {ex.keyword}
-                            </code>
-                            {"  "}
-                            <span style={{ color: "#8293A6" }}>· r/{ex.subreddit}</span>
-                          </div>
-                          <span
-                            style={{
-                              fontSize: 11,
-                              fontWeight: 600,
-                              padding: "2px 8px",
-                              borderRadius: 4,
-                              backgroundColor:
-                                ex.verdict === "TP" ? "#0F2A1F" : "#2A1A1A",
-                              color:
-                                ex.verdict === "TP" ? "#86EFAC" : "#F87171",
-                            }}
-                          >
-                            {ex.verdict === "TP" ? "KEPT" : "REJECTED"}
-                          </span>
-                        </div>
-                        {ex.title && (
-                          <div
-                            style={{
-                              color: "#CBD5E1",
-                              fontWeight: 500,
-                              marginBottom: 4,
-                            }}
-                          >
-                            {ex.title}
-                          </div>
-                        )}
-                        <div
-                          style={{
-                            color: "#94A3B8",
-                            fontStyle: "italic",
-                            marginBottom: 8,
-                            paddingLeft: 10,
-                            borderLeft: "2px solid #334155",
-                          }}
-                        >
-                          {ex.body || "(no body)"}
-                        </div>
-                        <div
-                          style={{ color: "#8293A6", fontSize: 12 }}
-                        >
-                          <span style={{ color: "#94A3B8" }}>Claude:</span>{" "}
-                          {ex.llm_reason}
-                        </div>
-                      </div>
-                    )),
-                  )}
-                </div>
-              </div>
-            )}
           </div>
         </section>
 
@@ -828,28 +686,6 @@ export default function About() {
                         ))}
                       </div>
                     )}
-                    {t.llm_stats && t.llm_stats.total > 0 && (
-                      <div
-                        style={{
-                          marginTop: 8,
-                          fontSize: 13,
-                          color: "#94A3B8",
-                          paddingTop: 8,
-                          borderTop: "1px solid #2A2D3A",
-                        }}
-                      >
-                        <span style={{ color: "#8293A6" }}>Claude-verified: </span>
-                        {t.llm_stats.tp} kept · {t.llm_stats.fp} rejected
-                        {t.llm_stats.ambiguous > 0 && ` · ${t.llm_stats.ambiguous} ambiguous`}
-                        {" "}
-                        <span style={{ color: "#94A3B8", fontSize: 12 }}>
-                          (n={t.llm_stats.total}, post-verification precision{" "}
-                          {t.llm_stats.precision != null
-                            ? `${Math.round(t.llm_stats.precision * 100)}%`
-                            : "—"})
-                        </span>
-                      </div>
-                    )}
                   </div>
                 );
               })}
@@ -967,8 +803,11 @@ export default function About() {
               Romance and rupture are the worst-recall themes by design: their
               real-world vocabulary is naturalistic (&ldquo;my husband,&rdquo;
               &ldquo;I miss her&rdquo;) and not catchable by precision-first
-              keyword matching. The shape and timing of each trend line is
-              honest, and spike interpretation is reliable. But the absolute
+              keyword matching. The shape and timing of each trend line are
+              <em>approximately</em> honest &mdash; they hold as long as the
+              keyword set&apos;s detection rate stays roughly stable over
+              time, which is plausible but not separately verified &mdash; and
+              spike interpretation is reliable. But the absolute
               magnitude of each line is meaningfully smaller than the actual
               amount of theme-relevant discourse in the corpus. Full audit:
               docs/comprehensiveness_audit_2026-05-13.md in the repository.
@@ -1116,11 +955,11 @@ export default function About() {
               .
             </p>
             <p style={{ color: "#94A3B8", fontSize: 13 }}>
-              The corpus updates daily; data shown today is not what a citing
-              reader will see in 18 months. For research citation, archive the
-              specific JSON snapshot you used at access time and reference the
-              GitHub commit SHA. Per-release DOI/Zenodo snapshots are a
-              roadmap item, not yet shipped.
+              The corpus updates daily &mdash; the numbers shown today are not
+              what you would see in a year. If you reference this project, link
+              the specific GitHub commit so the exact data snapshot you used
+              stays recoverable. This is a living, independent project, not a
+              fixed academic publication.
             </p>
             <p style={{ color: "#94A3B8", fontSize: 13 }}>
               <strong>What this is appropriate for:</strong> as supplementary

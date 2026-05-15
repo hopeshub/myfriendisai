@@ -764,27 +764,11 @@ def export_theme_health_json(
             post_precision = post_history[-1] if post_history else None
             comment_precision = comm_history[-1] if comm_history else None
 
-            # LLM-verified stats — filter to the current production model
-            # (Sonnet 4.6, selected after the 2026-05-14 paired calibration).
-            # Legacy verdicts under Haiku/claude-code are preserved in the DB
-            # for audit but not surfaced as the production stats.
-            llm_stats_row = _conn.execute(
-                """SELECT
-                       SUM(CASE WHEN verdict='TP' THEN 1 ELSE 0 END) AS tp,
-                       SUM(CASE WHEN verdict='FP' THEN 1 ELSE 0 END) AS fp,
-                       SUM(CASE WHEN verdict='AMBIGUOUS' THEN 1 ELSE 0 END) AS amb,
-                       COUNT(*) AS n
-                   FROM llm_classifications
-                   WHERE theme=? AND model='claude-sonnet-4-6'""",
-                (theme,),
-            ).fetchone()
-            llm_stats = None
-            if llm_stats_row and llm_stats_row[3]:
-                tp, fp, amb, n = llm_stats_row
-                llm_stats = {
-                    "tp": tp, "fp": fp, "ambiguous": amb, "total": n,
-                    "precision": round(tp / n, 3) if n else None,
-                }
+            # LLM-verified precision stats were removed from this export on
+            # 2026-05-15. The verdicts were produced under a lenient prompt that
+            # inflates precision (~95% vs an adversarial audit's 51-72%), so a
+            # public precision number derived from them would mislead. LLM
+            # verification is no longer surfaced on the site — see CLAUDE.md 2.3.
 
             out_themes[theme] = {
                 "total_post_tags": post_total,
@@ -796,7 +780,6 @@ def export_theme_health_json(
                 "top5_authors_pct": top5_authors_pct,
                 "post_precision": post_precision,
                 "comment_precision": comment_precision,
-                "llm_stats": llm_stats,
                 "noisy_keywords_comment": drift_theme.get("noisy_keywords_comment", []),
             }
 

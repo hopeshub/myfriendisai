@@ -206,7 +206,7 @@ def main():
         print(f"    {name}: {len(terms)} terms")
 
     print("Querying database at", DB_PATH)
-    db = sqlite3.connect(str(DB_PATH))
+    db = sqlite3.connect(str(DB_PATH), timeout=60.0)
 
     result = build_keyword_details(db, categories)
 

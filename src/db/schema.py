@@ -169,6 +169,11 @@ def get_connection(db_path: Path = DB_PATH) -> sqlite3.Connection:
     conn = sqlite3.connect(str(db_path))
     conn.row_factory = sqlite3.Row
     conn.execute("PRAGMA journal_mode=WAL")
+    # Wait up to 60s for a held lock instead of failing instantly. Without this
+    # the default ~5s timeout makes any concurrent writer (a backfill, a WAL
+    # checkpoint, or a second connection in the same process) instantly fatal —
+    # this was the cause of the 2026-05-15 "database is locked" pipeline failure.
+    conn.execute("PRAGMA busy_timeout=60000")
     conn.execute("PRAGMA foreign_keys=ON")
     return conn
 
