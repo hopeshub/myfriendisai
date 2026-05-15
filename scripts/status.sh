@@ -31,7 +31,9 @@ echo
 # Count only python processes, not the zsh wrappers
 SONNET_PROCS=$(ps aux | grep -E "python.*llm_verify_tags.*claude-sonnet-4-6" | grep -v grep | wc -l | tr -d ' ')
 SONNET_N=$(sqlite3 "$DB" "SELECT COUNT(*) FROM llm_classifications WHERE model='claude-sonnet-4-6';" 2>/dev/null)
-SONNET_LAST=$(sqlite3 "$DB" "SELECT classified_at FROM llm_classifications WHERE model='claude-sonnet-4-6' ORDER BY classified_at DESC LIMIT 1;" 2>/dev/null)
+# Order by strftime epoch, not raw string — DB has mixed "T...Z" and "space"
+# timestamp formats; lexical sort returns "T" first (T=0x54 > space=0x20).
+SONNET_LAST=$(sqlite3 "$DB" "SELECT classified_at FROM llm_classifications WHERE model='claude-sonnet-4-6' ORDER BY strftime('%s', classified_at) DESC LIMIT 1;" 2>/dev/null)
 SONNET_LAST_EPOCH=$(parse_ts "$SONNET_LAST")
 SONNET_AGE=$(( NOW - SONNET_LAST_EPOCH ))
 

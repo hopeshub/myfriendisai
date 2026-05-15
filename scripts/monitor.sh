@@ -38,7 +38,8 @@ while true; do
     # ── Sonnet status ────────────────────────────────────
     SONNET_PROCS=$(ps aux | grep -E "python.*llm_verify_tags.*claude-sonnet-4-6" | grep -v grep | wc -l | tr -d ' ')
     SONNET_N=$(sqlite3 "$DB" "SELECT COUNT(*) FROM llm_classifications WHERE model='claude-sonnet-4-6';" 2>/dev/null)
-    SONNET_LAST=$(sqlite3 "$DB" "SELECT classified_at FROM llm_classifications WHERE model='claude-sonnet-4-6' ORDER BY classified_at DESC LIMIT 1;" 2>/dev/null)
+    # Order by epoch — DB has mixed "T...Z" and "space" timestamp formats.
+    SONNET_LAST=$(sqlite3 "$DB" "SELECT classified_at FROM llm_classifications WHERE model='claude-sonnet-4-6' ORDER BY strftime('%s', classified_at) DESC LIMIT 1;" 2>/dev/null)
     SONNET_LAST_TS="${SONNET_LAST//T/ }"
     SONNET_LAST_TS="${SONNET_LAST_TS%Z}"
     SONNET_LAST_TS="${SONNET_LAST_TS%%.*}"
