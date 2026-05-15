@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 // ─── Types ────────────────────────────────────────────────────────────────
 
@@ -245,7 +245,9 @@ export function SamplePostsSection({ samples }: { samples: SamplePost[] }) {
   );
 }
 
-// ─── Main component: right-edge side panel ────────────────────────────────
+// ─── Main component: centered modal dialog ────────────────────────────────
+// A centered modal rather than a right-edge slideout — a slideout sat on top
+// of whatever right-column panel you clicked (e.g. Rupture), hiding it.
 
 export default function TransparencyPanel({
   themeLabel,
@@ -257,54 +259,73 @@ export default function TransparencyPanel({
 }: Props) {
   const samples = pickSamples(data.keywords);
 
+  useEffect(() => {
+    function onKey(e: KeyboardEvent) {
+      if (e.key === "Escape") onClose();
+    }
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [onClose]);
+
   return (
     <div
-      className="side-panel fixed top-0 right-0 bottom-0 flex flex-col z-40"
-      style={{
-        width: "min(400px, 100vw)",
-        backgroundColor: "#1A1D27",
-        borderLeft: `3px solid ${themeColor}`,
-        boxShadow: "-8px 0 24px rgba(0,0,0,0.4)",
-      }}
+      className="fixed inset-0 z-40 flex items-center justify-center p-4"
+      style={{ backgroundColor: "rgba(8,10,15,0.66)" }}
+      onClick={onClose}
     >
-      {/* Header — sticky at top */}
       <div
-        className="flex items-center justify-between px-5 py-3 flex-shrink-0"
-        style={{ borderBottom: "0.5px solid #1E293B" }}
+        role="dialog"
+        aria-modal="true"
+        aria-label={`${themeLabel} — theme detail`}
+        onClick={(e) => e.stopPropagation()}
+        className="flex flex-col rounded-xl overflow-hidden"
+        style={{
+          width: "min(560px, 100%)",
+          maxHeight: "85vh",
+          backgroundColor: "#1A1D27",
+          borderTop: `3px solid ${themeColor}`,
+          boxShadow: "0 18px 50px rgba(0,0,0,0.55)",
+        }}
       >
-        <div>
-          <div className="text-[15px] font-medium" style={{ color: themeColor }}>
-            {themeEmoji} {themeLabel}
-          </div>
-          <div className="text-[11px] mt-0.5" style={{ color: "#8293A6" }}>
-            {themeTagline}
-          </div>
-        </div>
-        <button
-          onClick={onClose}
-          className="text-[20px] leading-none min-w-11 min-h-11 flex items-center justify-center rounded hover:text-foreground transition-colors"
-          style={{ color: "#8293A6" }}
-          aria-label="Close panel"
-        >
-          &times;
-        </button>
-      </div>
-
-      {/* Scrollable content */}
-      <div className="flex-1 overflow-y-auto px-5 py-4 space-y-5">
-        <KeywordsSection keywords={data.keywords} color={themeColor} />
-        <CommunitiesSection subreddits={data.subreddits} color={themeColor} />
-        <SamplePostsSection samples={samples} />
-
-        {/* Footer */}
+        {/* Header */}
         <div
-          className="text-[11px] pt-2"
-          style={{ color: "#8293A6", borderTop: "0.5px solid #1E293B" }}
+          className="flex items-center justify-between px-5 py-3 flex-shrink-0"
+          style={{ borderBottom: "0.5px solid #1E293B" }}
         >
-          {data.keywords.length} keywords across{" "}
-          {data.subreddits.length} communities &middot;{" "}
-          {data.unique_posts.toLocaleString()} posts matched &middot; All
-          keywords manually validated
+          <div>
+            <div className="text-[15px] font-medium" style={{ color: themeColor }}>
+              {themeEmoji} {themeLabel}
+            </div>
+            <div className="text-[11px] mt-0.5" style={{ color: "#8293A6" }}>
+              {themeTagline}
+            </div>
+          </div>
+          <button
+            onClick={onClose}
+            className="text-[20px] leading-none min-w-11 min-h-11 flex items-center justify-center rounded hover:text-foreground transition-colors"
+            style={{ color: "#8293A6" }}
+            aria-label="Close"
+          >
+            &times;
+          </button>
+        </div>
+
+        {/* Scrollable content */}
+        <div className="flex-1 overflow-y-auto px-5 py-4 space-y-5">
+          <KeywordsSection keywords={data.keywords} color={themeColor} />
+          <CommunitiesSection subreddits={data.subreddits} color={themeColor} />
+          <SamplePostsSection samples={samples} />
+
+          {/* Footer */}
+          <div
+            className="text-[11px] pt-2"
+            style={{ color: "#8293A6", borderTop: "0.5px solid #1E293B" }}
+          >
+            {data.keywords.length} keywords across{" "}
+            {data.subreddits.length} communities &middot;{" "}
+            {data.unique_posts.toLocaleString()} posts matched &middot; All
+            keywords manually validated
+          </div>
         </div>
       </div>
     </div>
