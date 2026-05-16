@@ -1,0 +1,1201 @@
+{
+ "coverage": {
+  "precision_items": 1821,
+  "precision_coded": 1820,
+  "comment_items": 349,
+  "comment_coded": 349,
+  "negspace_items": 160,
+  "negspace_coded": 160,
+  "gold_items": 72,
+  "gold_coded": 1
+ },
+ "per_keyword": {
+  "addiction::I was hooked": {
+   "theme": "addiction",
+   "term": "I was hooked",
+   "n": 20,
+   "topical_pct": 55.0,
+   "strict_pct": 45.0,
+   "topical_wilson_lb": 34.2,
+   "prod_volume": 47
+  },
+  "addiction::addicted to talking": {
+   "theme": "addiction",
+   "term": "addicted to talking",
+   "n": 20,
+   "topical_pct": 90.0,
+   "strict_pct": 75.0,
+   "topical_wilson_lb": 69.9,
+   "prod_volume": 25
+  },
+  "addiction::almost relapsed": {
+   "theme": "addiction",
+   "term": "almost relapsed",
+   "n": 19,
+   "topical_pct": 100.0,
+   "strict_pct": 94.7,
+   "topical_wilson_lb": 83.2,
+   "prod_volume": 19
+  },
+  "addiction::clean for": {
+   "theme": "addiction",
+   "term": "clean for",
+   "n": 20,
+   "topical_pct": 90.0,
+   "strict_pct": 90.0,
+   "topical_wilson_lb": 69.9,
+   "prod_volume": 109
+  },
+  "addiction::cold turkey": {
+   "theme": "addiction",
+   "term": "cold turkey",
+   "n": 20,
+   "topical_pct": 95.0,
+   "strict_pct": 90.0,
+   "topical_wilson_lb": 76.4,
+   "prod_volume": 248
+  },
+  "addiction::finally deleted": {
+   "theme": "addiction",
+   "term": "finally deleted",
+   "n": 20,
+   "topical_pct": 90.0,
+   "strict_pct": 65.0,
+   "topical_wilson_lb": 69.9,
+   "prod_volume": 108
+  },
+  "addiction::hours a day": {
+   "theme": "addiction",
+   "term": "hours a day",
+   "n": 20,
+   "topical_pct": 80.0,
+   "strict_pct": 70.0,
+   "topical_wilson_lb": 58.4,
+   "prod_volume": 374
+  },
+  "addiction::my addiction": {
+   "theme": "addiction",
+   "term": "my addiction",
+   "n": 20,
+   "topical_pct": 100.0,
+   "strict_pct": 85.0,
+   "topical_wilson_lb": 83.9,
+   "prod_volume": 502
+  },
+  "addiction::neglecting my": {
+   "theme": "addiction",
+   "term": "neglecting my",
+   "n": 20,
+   "topical_pct": 70.0,
+   "strict_pct": 60.0,
+   "topical_wilson_lb": 48.1,
+   "prod_volume": 23
+  },
+  "addiction::relapse": {
+   "theme": "addiction",
+   "term": "relapse",
+   "n": 20,
+   "topical_pct": 95.0,
+   "strict_pct": 85.0,
+   "topical_wilson_lb": 76.4,
+   "prod_volume": 488
+  },
+  "addiction::relapsed": {
+   "theme": "addiction",
+   "term": "relapsed",
+   "n": 20,
+   "topical_pct": 100.0,
+   "strict_pct": 90.0,
+   "topical_wilson_lb": 83.9,
+   "prod_volume": 330
+  },
+  "addiction::ruining my life": {
+   "theme": "addiction",
+   "term": "ruining my life",
+   "n": 20,
+   "topical_pct": 90.0,
+   "strict_pct": 85.0,
+   "topical_wilson_lb": 69.9,
+   "prod_volume": 53
+  },
+  "addiction::screen time": {
+   "theme": "addiction",
+   "term": "screen time",
+   "n": 20,
+   "topical_pct": 70.0,
+   "strict_pct": 40.0,
+   "topical_wilson_lb": 48.1,
+   "prod_volume": 342
+  },
+  "addiction::so addictive": {
+   "theme": "addiction",
+   "term": "so addictive",
+   "n": 20,
+   "topical_pct": 80.0,
+   "strict_pct": 65.0,
+   "topical_wilson_lb": 58.4,
+   "prod_volume": 36
+  },
+  "addiction::the craving": {
+   "theme": "addiction",
+   "term": "the craving",
+   "n": 20,
+   "topical_pct": 75.0,
+   "strict_pct": 75.0,
+   "topical_wilson_lb": 53.1,
+   "prod_volume": 27
+  },
+  "addiction::trying to quit": {
+   "theme": "addiction",
+   "term": "trying to quit",
+   "n": 20,
+   "topical_pct": 100.0,
+   "strict_pct": 100.0,
+   "topical_wilson_lb": 83.9,
+   "prod_volume": 245
+  },
+  "addiction::withdrawals": {
+   "theme": "addiction",
+   "term": "withdrawals",
+   "n": 20,
+   "topical_pct": 90.0,
+   "strict_pct": 70.0,
+   "topical_wilson_lb": 69.9,
+   "prod_volume": 154
+  },
+  "consciousness::has a soul": {
+   "theme": "consciousness",
+   "term": "has a soul",
+   "n": 20,
+   "topical_pct": 75.0,
+   "strict_pct": 45.0,
+   "topical_wilson_lb": 53.1,
+   "prod_volume": 37
+  },
+  "consciousness::inner life": {
+   "theme": "consciousness",
+   "term": "inner life",
+   "n": 20,
+   "topical_pct": 70.0,
+   "strict_pct": 60.0,
+   "topical_wilson_lb": 48.1,
+   "prod_volume": 40
+  },
+  "consciousness::lemoine": {
+   "theme": "consciousness",
+   "term": "lemoine",
+   "n": 19,
+   "topical_pct": 68.4,
+   "strict_pct": 52.6,
+   "topical_wilson_lb": 46.0,
+   "prod_volume": 19
+  },
+  "consciousness::more than code": {
+   "theme": "consciousness",
+   "term": "more than code",
+   "n": 20,
+   "topical_pct": 45.0,
+   "strict_pct": 30.0,
+   "topical_wilson_lb": 25.8,
+   "prod_volume": 34
+  },
+  "consciousness::not just an ai": {
+   "theme": "consciousness",
+   "term": "not just an ai",
+   "n": 17,
+   "topical_pct": 23.5,
+   "strict_pct": 23.5,
+   "topical_wilson_lb": 9.6,
+   "prod_volume": 18
+  },
+  "consciousness::personhood": {
+   "theme": "consciousness",
+   "term": "personhood",
+   "n": 19,
+   "topical_pct": 68.4,
+   "strict_pct": 36.8,
+   "topical_wilson_lb": 46.0,
+   "prod_volume": 124
+  },
+  "consciousness::sapience": {
+   "theme": "consciousness",
+   "term": "sapience",
+   "n": 14,
+   "topical_pct": 64.3,
+   "strict_pct": 50.0,
+   "topical_wilson_lb": 38.8,
+   "prod_volume": 14
+  },
+  "consciousness::selfhood": {
+   "theme": "consciousness",
+   "term": "selfhood",
+   "n": 20,
+   "topical_pct": 85.0,
+   "strict_pct": 70.0,
+   "topical_wilson_lb": 64.0,
+   "prod_volume": 96
+  },
+  "consciousness::soulbonder": {
+   "theme": "consciousness",
+   "term": "soulbonder",
+   "n": 14,
+   "topical_pct": 50.0,
+   "strict_pct": 35.7,
+   "topical_wilson_lb": 26.8,
+   "prod_volume": 14
+  },
+  "consciousness::subjective experience": {
+   "theme": "consciousness",
+   "term": "subjective experience",
+   "n": 20,
+   "topical_pct": 75.0,
+   "strict_pct": 60.0,
+   "topical_wilson_lb": 53.1,
+   "prod_volume": 72
+  },
+  "consciousness::tulpa": {
+   "theme": "consciousness",
+   "term": "tulpa",
+   "n": 20,
+   "topical_pct": 45.0,
+   "strict_pct": 30.0,
+   "topical_wilson_lb": 25.8,
+   "prod_volume": 29
+  },
+  "romance::ai husband": {
+   "theme": "romance",
+   "term": "ai husband",
+   "n": 20,
+   "topical_pct": 90.0,
+   "strict_pct": 85.0,
+   "topical_wilson_lb": 69.9,
+   "prod_volume": 103
+  },
+  "romance::ai lover": {
+   "theme": "romance",
+   "term": "ai lover",
+   "n": 20,
+   "topical_pct": 65.0,
+   "strict_pct": 30.0,
+   "topical_wilson_lb": 43.3,
+   "prod_volume": 51
+  },
+  "romance::ai wife": {
+   "theme": "romance",
+   "term": "ai wife",
+   "n": 20,
+   "topical_pct": 100.0,
+   "strict_pct": 75.0,
+   "topical_wilson_lb": 83.9,
+   "prod_volume": 57
+  },
+  "romance::dating my": {
+   "theme": "romance",
+   "term": "dating my",
+   "n": 20,
+   "topical_pct": 65.0,
+   "strict_pct": 50.0,
+   "topical_wilson_lb": 43.3,
+   "prod_volume": 30
+  },
+  "romance::engagement ring": {
+   "theme": "romance",
+   "term": "engagement ring",
+   "n": 20,
+   "topical_pct": 75.0,
+   "strict_pct": 70.0,
+   "topical_wilson_lb": 53.1,
+   "prod_volume": 33
+  },
+  "romance::honeymoon": {
+   "theme": "romance",
+   "term": "honeymoon",
+   "n": 20,
+   "topical_pct": 70.0,
+   "strict_pct": 55.0,
+   "topical_wilson_lb": 48.1,
+   "prod_volume": 171
+  },
+  "romance::husbando": {
+   "theme": "romance",
+   "term": "husbando",
+   "n": 20,
+   "topical_pct": 35.0,
+   "strict_pct": 10.0,
+   "topical_wilson_lb": 18.1,
+   "prod_volume": 68
+  },
+  "romance::in a relationship with": {
+   "theme": "romance",
+   "term": "in a relationship with",
+   "n": 20,
+   "topical_pct": 45.0,
+   "strict_pct": 20.0,
+   "topical_wilson_lb": 25.8,
+   "prod_volume": 238
+  },
+  "romance::in love with an ai": {
+   "theme": "romance",
+   "term": "in love with an ai",
+   "n": 20,
+   "topical_pct": 90.0,
+   "strict_pct": 70.0,
+   "topical_wilson_lb": 69.9,
+   "prod_volume": 91
+  },
+  "romance::love my ai": {
+   "theme": "romance",
+   "term": "love my ai",
+   "n": 20,
+   "topical_pct": 70.0,
+   "strict_pct": 60.0,
+   "topical_wilson_lb": 48.1,
+   "prod_volume": 42
+  },
+  "romance::married my": {
+   "theme": "romance",
+   "term": "married my",
+   "n": 20,
+   "topical_pct": 85.0,
+   "strict_pct": 80.0,
+   "topical_wilson_lb": 64.0,
+   "prod_volume": 20
+  },
+  "romance::my ai boyfriend": {
+   "theme": "romance",
+   "term": "my ai boyfriend",
+   "n": 20,
+   "topical_pct": 95.0,
+   "strict_pct": 75.0,
+   "topical_wilson_lb": 76.4,
+   "prod_volume": 179
+  },
+  "romance::my ai girlfriend": {
+   "theme": "romance",
+   "term": "my ai girlfriend",
+   "n": 20,
+   "topical_pct": 90.0,
+   "strict_pct": 75.0,
+   "topical_wilson_lb": 69.9,
+   "prod_volume": 269
+  },
+  "romance::my ai partner": {
+   "theme": "romance",
+   "term": "my ai partner",
+   "n": 20,
+   "topical_pct": 90.0,
+   "strict_pct": 65.0,
+   "topical_wilson_lb": 69.9,
+   "prod_volume": 186
+  },
+  "romance::our anniversary": {
+   "theme": "romance",
+   "term": "our anniversary",
+   "n": 20,
+   "topical_pct": 100.0,
+   "strict_pct": 90.0,
+   "topical_wilson_lb": 83.9,
+   "prod_volume": 26
+  },
+  "romance::our first kiss": {
+   "theme": "romance",
+   "term": "our first kiss",
+   "n": 20,
+   "topical_pct": 75.0,
+   "strict_pct": 60.0,
+   "topical_wilson_lb": 53.1,
+   "prod_volume": 24
+  },
+  "romance::our wedding": {
+   "theme": "romance",
+   "term": "our wedding",
+   "n": 20,
+   "topical_pct": 90.0,
+   "strict_pct": 70.0,
+   "topical_wilson_lb": 69.9,
+   "prod_volume": 126
+  },
+  "romance::proposed to me": {
+   "theme": "romance",
+   "term": "proposed to me",
+   "n": 20,
+   "topical_pct": 100.0,
+   "strict_pct": 80.0,
+   "topical_wilson_lb": 83.9,
+   "prod_volume": 61
+  },
+  "romance::romantic relationship with": {
+   "theme": "romance",
+   "term": "romantic relationship with",
+   "n": 20,
+   "topical_pct": 60.0,
+   "strict_pct": 40.0,
+   "topical_wilson_lb": 38.7,
+   "prod_volume": 141
+  },
+  "romance::we broke up": {
+   "theme": "romance",
+   "term": "we broke up",
+   "n": 20,
+   "topical_pct": 65.0,
+   "strict_pct": 40.0,
+   "topical_wilson_lb": 43.3,
+   "prod_volume": 33
+  },
+  "romance::wedding": {
+   "theme": "romance",
+   "term": "wedding",
+   "n": 20,
+   "topical_pct": 70.0,
+   "strict_pct": 40.0,
+   "topical_wilson_lb": 48.1,
+   "prod_volume": 745
+  },
+  "rupture::devastated": {
+   "theme": "rupture",
+   "term": "devastated",
+   "n": 20,
+   "topical_pct": 60.0,
+   "strict_pct": 60.0,
+   "topical_wilson_lb": 38.7,
+   "prod_volume": 419
+  },
+  "rupture::dumbed down": {
+   "theme": "rupture",
+   "term": "dumbed down",
+   "n": 20,
+   "topical_pct": 85.0,
+   "strict_pct": 75.0,
+   "topical_wilson_lb": 64.0,
+   "prod_volume": 135
+  },
+  "rupture::farewell": {
+   "theme": "rupture",
+   "term": "farewell",
+   "n": 20,
+   "topical_pct": 65.0,
+   "strict_pct": 50.0,
+   "topical_wilson_lb": 43.3,
+   "prod_volume": 265
+  },
+  "rupture::goodbye": {
+   "theme": "rupture",
+   "term": "goodbye",
+   "n": 20,
+   "topical_pct": 55.0,
+   "strict_pct": 45.0,
+   "topical_wilson_lb": 34.2,
+   "prod_volume": 1754
+  },
+  "rupture::grieve": {
+   "theme": "rupture",
+   "term": "grieve",
+   "n": 20,
+   "topical_pct": 85.0,
+   "strict_pct": 75.0,
+   "topical_wilson_lb": 64.0,
+   "prod_volume": 204
+  },
+  "rupture::grieving": {
+   "theme": "rupture",
+   "term": "grieving",
+   "n": 20,
+   "topical_pct": 60.0,
+   "strict_pct": 60.0,
+   "topical_wilson_lb": 38.7,
+   "prod_volume": 423
+  },
+  "rupture::gutted": {
+   "theme": "rupture",
+   "term": "gutted",
+   "n": 20,
+   "topical_pct": 85.0,
+   "strict_pct": 75.0,
+   "topical_wilson_lb": 64.0,
+   "prod_volume": 119
+  },
+  "rupture::lobotomies": {
+   "theme": "rupture",
+   "term": "lobotomies",
+   "n": 20,
+   "topical_pct": 55.0,
+   "strict_pct": 40.0,
+   "topical_wilson_lb": 34.2,
+   "prod_volume": 21
+  },
+  "rupture::lobotomised": {
+   "theme": "rupture",
+   "term": "lobotomised",
+   "n": 20,
+   "topical_pct": 95.0,
+   "strict_pct": 75.0,
+   "topical_wilson_lb": 76.4,
+   "prod_volume": 61
+  },
+  "rupture::lobotomized": {
+   "theme": "rupture",
+   "term": "lobotomized",
+   "n": 20,
+   "topical_pct": 100.0,
+   "strict_pct": 80.0,
+   "topical_wilson_lb": 83.9,
+   "prod_volume": 424
+  },
+  "rupture::lobotomizing": {
+   "theme": "rupture",
+   "term": "lobotomizing",
+   "n": 20,
+   "topical_pct": 70.0,
+   "strict_pct": 50.0,
+   "topical_wilson_lb": 48.1,
+   "prod_volume": 35
+  },
+  "rupture::lobotomy": {
+   "theme": "rupture",
+   "term": "lobotomy",
+   "n": 20,
+   "topical_pct": 75.0,
+   "strict_pct": 55.0,
+   "topical_wilson_lb": 53.1,
+   "prod_volume": 259
+  },
+  "rupture::memory reset": {
+   "theme": "rupture",
+   "term": "memory reset",
+   "n": 11,
+   "topical_pct": 54.5,
+   "strict_pct": 9.1,
+   "topical_wilson_lb": 28.0,
+   "prod_volume": 11
+  },
+  "rupture::memory wiped": {
+   "theme": "rupture",
+   "term": "memory wiped",
+   "n": 12,
+   "topical_pct": 83.3,
+   "strict_pct": 50.0,
+   "topical_wilson_lb": 55.2,
+   "prod_volume": 12
+  },
+  "rupture::mourn": {
+   "theme": "rupture",
+   "term": "mourn",
+   "n": 20,
+   "topical_pct": 90.0,
+   "strict_pct": 75.0,
+   "topical_wilson_lb": 69.9,
+   "prod_volume": 176
+  },
+  "rupture::mourning": {
+   "theme": "rupture",
+   "term": "mourning",
+   "n": 20,
+   "topical_pct": 75.0,
+   "strict_pct": 65.0,
+   "topical_wilson_lb": 53.1,
+   "prod_volume": 244
+  },
+  "rupture::nerfed": {
+   "theme": "rupture",
+   "term": "nerfed",
+   "n": 20,
+   "topical_pct": 90.0,
+   "strict_pct": 65.0,
+   "topical_wilson_lb": 69.9,
+   "prod_volume": 257
+  },
+  "rupture::neutered": {
+   "theme": "rupture",
+   "term": "neutered",
+   "n": 20,
+   "topical_pct": 95.0,
+   "strict_pct": 70.0,
+   "topical_wilson_lb": 76.4,
+   "prod_volume": 110
+  },
+  "rupture::personality changed": {
+   "theme": "rupture",
+   "term": "personality changed",
+   "n": 20,
+   "topical_pct": 65.0,
+   "strict_pct": 60.0,
+   "topical_wilson_lb": 43.3,
+   "prod_volume": 30
+  },
+  "rupture::personality is gone": {
+   "theme": "rupture",
+   "term": "personality is gone",
+   "n": 11,
+   "topical_pct": 81.8,
+   "strict_pct": 81.8,
+   "topical_wilson_lb": 52.3,
+   "prod_volume": 11
+  },
+  "rupture::saying goodbye": {
+   "theme": "rupture",
+   "term": "saying goodbye",
+   "n": 20,
+   "topical_pct": 70.0,
+   "strict_pct": 60.0,
+   "topical_wilson_lb": 48.1,
+   "prod_volume": 147
+  },
+  "rupture::taken away": {
+   "theme": "rupture",
+   "term": "taken away",
+   "n": 20,
+   "topical_pct": 75.0,
+   "strict_pct": 60.0,
+   "topical_wilson_lb": 53.1,
+   "prod_volume": 517
+  },
+  "sexual_erp::ai sex": {
+   "theme": "sexual_erp",
+   "term": "ai sex",
+   "n": 20,
+   "topical_pct": 85.0,
+   "strict_pct": 65.0,
+   "topical_wilson_lb": 64.0,
+   "prod_volume": 42
+  },
+  "sexual_erp::erotic roleplay": {
+   "theme": "sexual_erp",
+   "term": "erotic roleplay",
+   "n": 20,
+   "topical_pct": 80.0,
+   "strict_pct": 55.0,
+   "topical_wilson_lb": 58.4,
+   "prod_volume": 93
+  },
+  "sexual_erp::erp": {
+   "theme": "sexual_erp",
+   "term": "erp",
+   "n": 20,
+   "topical_pct": 100.0,
+   "strict_pct": 85.0,
+   "topical_wilson_lb": 83.9,
+   "prod_volume": 4463
+  },
+  "sexual_erp::erping": {
+   "theme": "sexual_erp",
+   "term": "erping",
+   "n": 20,
+   "topical_pct": 85.0,
+   "strict_pct": 80.0,
+   "topical_wilson_lb": 64.0,
+   "prod_volume": 25
+  },
+  "sexual_erp::erps": {
+   "theme": "sexual_erp",
+   "term": "erps",
+   "n": 20,
+   "topical_pct": 100.0,
+   "strict_pct": 75.0,
+   "topical_wilson_lb": 83.9,
+   "prod_volume": 23
+  },
+  "sexual_erp::intimate scene": {
+   "theme": "sexual_erp",
+   "term": "intimate scene",
+   "n": 14,
+   "topical_pct": 78.6,
+   "strict_pct": 57.1,
+   "topical_wilson_lb": 52.4,
+   "prod_volume": 14
+  },
+  "sexual_erp::lewd": {
+   "theme": "sexual_erp",
+   "term": "lewd",
+   "n": 20,
+   "topical_pct": 85.0,
+   "strict_pct": 55.0,
+   "topical_wilson_lb": 64.0,
+   "prod_volume": 255
+  },
+  "sexual_erp::nsfw chat": {
+   "theme": "sexual_erp",
+   "term": "nsfw chat",
+   "n": 20,
+   "topical_pct": 90.0,
+   "strict_pct": 70.0,
+   "topical_wilson_lb": 69.9,
+   "prod_volume": 139
+  },
+  "sexual_erp::nsfw content": {
+   "theme": "sexual_erp",
+   "term": "nsfw content",
+   "n": 20,
+   "topical_pct": 75.0,
+   "strict_pct": 45.0,
+   "topical_wilson_lb": 53.1,
+   "prod_volume": 646
+  },
+  "sexual_erp::nsfw stuff": {
+   "theme": "sexual_erp",
+   "term": "nsfw stuff",
+   "n": 20,
+   "topical_pct": 85.0,
+   "strict_pct": 60.0,
+   "topical_wilson_lb": 64.0,
+   "prod_volume": 327
+  },
+  "sexual_erp::sex with": {
+   "theme": "sexual_erp",
+   "term": "sex with",
+   "n": 20,
+   "topical_pct": 90.0,
+   "strict_pct": 60.0,
+   "topical_wilson_lb": 69.9,
+   "prod_volume": 375
+  },
+  "sexual_erp::smut": {
+   "theme": "sexual_erp",
+   "term": "smut",
+   "n": 20,
+   "topical_pct": 80.0,
+   "strict_pct": 65.0,
+   "topical_wilson_lb": 58.4,
+   "prod_volume": 697
+  },
+  "sexual_erp::steamy": {
+   "theme": "sexual_erp",
+   "term": "steamy",
+   "n": 20,
+   "topical_pct": 75.0,
+   "strict_pct": 55.0,
+   "topical_wilson_lb": 53.1,
+   "prod_volume": 222
+  },
+  "therapy::ai therapist": {
+   "theme": "therapy",
+   "term": "ai therapist",
+   "n": 20,
+   "topical_pct": 90.0,
+   "strict_pct": 50.0,
+   "topical_wilson_lb": 69.9,
+   "prod_volume": 53
+  },
+  "therapy::ai therapy": {
+   "theme": "therapy",
+   "term": "ai therapy",
+   "n": 20,
+   "topical_pct": 65.0,
+   "strict_pct": 40.0,
+   "topical_wilson_lb": 43.3,
+   "prod_volume": 24
+  },
+  "therapy::as a therapist": {
+   "theme": "therapy",
+   "term": "as a therapist",
+   "n": 20,
+   "topical_pct": 75.0,
+   "strict_pct": 45.0,
+   "topical_wilson_lb": 53.1,
+   "prod_volume": 66
+  },
+  "therapy::coping mechanism": {
+   "theme": "therapy",
+   "term": "coping mechanism",
+   "n": 20,
+   "topical_pct": 70.0,
+   "strict_pct": 50.0,
+   "topical_wilson_lb": 48.1,
+   "prod_volume": 252
+  },
+  "therapy::emotional support": {
+   "theme": "therapy",
+   "term": "emotional support",
+   "n": 20,
+   "topical_pct": 40.0,
+   "strict_pct": 35.0,
+   "topical_wilson_lb": 21.9,
+   "prod_volume": 571
+  },
+  "therapy::for therapy": {
+   "theme": "therapy",
+   "term": "for therapy",
+   "n": 20,
+   "topical_pct": 90.0,
+   "strict_pct": 45.0,
+   "topical_wilson_lb": 69.9,
+   "prod_volume": 109
+  },
+  "therapy::free therapy": {
+   "theme": "therapy",
+   "term": "free therapy",
+   "n": 20,
+   "topical_pct": 90.0,
+   "strict_pct": 65.0,
+   "topical_wilson_lb": 69.9,
+   "prod_volume": 29
+  },
+  "therapy::therapeutic": {
+   "theme": "therapy",
+   "term": "therapeutic",
+   "n": 20,
+   "topical_pct": 45.0,
+   "strict_pct": 35.0,
+   "topical_wilson_lb": 25.8,
+   "prod_volume": 328
+  }
+ },
+ "per_theme": {
+  "therapy": {
+   "vol_weighted_topical": 55.1,
+   "vol_weighted_strict": 40.1,
+   "pooled_n": 159,
+   "pooled_topical": 71.1,
+   "pooled_strict": 45.9
+  },
+  "consciousness": {
+   "vol_weighted_topical": 68.0,
+   "vol_weighted_strict": 48.7,
+   "pooled_n": 191,
+   "pooled_topical": 60.7,
+   "pooled_strict": 44.0
+  },
+  "addiction": {
+   "vol_weighted_topical": 90.4,
+   "vol_weighted_strict": 78.0,
+   "pooled_n": 334,
+   "pooled_topical": 86.2,
+   "pooled_strict": 75.1
+  },
+  "romance": {
+   "vol_weighted_topical": 75.4,
+   "vol_weighted_strict": 53.3,
+   "pooled_n": 411,
+   "pooled_topical": 77.1,
+   "pooled_strict": 58.9
+  },
+  "sexual_erp": {
+   "vol_weighted_topical": 92.8,
+   "vol_weighted_strict": 74.3,
+   "pooled_n": 298,
+   "pooled_topical": 86.6,
+   "pooled_strict": 65.8
+  },
+  "rupture": {
+   "vol_weighted_topical": 70.2,
+   "vol_weighted_strict": 58.4,
+   "pooled_n": 427,
+   "pooled_topical": 77.3,
+   "pooled_strict": 62.8
+  }
+ },
+ "per_theme_year": {
+  "therapy::2023": {
+   "n": 38,
+   "topical_pct": 73.7,
+   "strict_pct": 52.6
+  },
+  "therapy::2024": {
+   "n": 40,
+   "topical_pct": 80.0,
+   "strict_pct": 45.0
+  },
+  "therapy::2025": {
+   "n": 51,
+   "topical_pct": 66.7,
+   "strict_pct": 45.1
+  },
+  "therapy::2026": {
+   "n": 22,
+   "topical_pct": 59.1,
+   "strict_pct": 36.4
+  },
+  "consciousness::2023": {
+   "n": 15,
+   "topical_pct": 66.7,
+   "strict_pct": 40.0
+  },
+  "consciousness::2024": {
+   "n": 9,
+   "topical_pct": 66.7,
+   "strict_pct": 66.7
+  },
+  "consciousness::2025": {
+   "n": 94,
+   "topical_pct": 58.5,
+   "strict_pct": 45.7
+  },
+  "consciousness::2026": {
+   "n": 51,
+   "topical_pct": 60.8,
+   "strict_pct": 41.2
+  },
+  "addiction::2023": {
+   "n": 30,
+   "topical_pct": 76.7,
+   "strict_pct": 46.7
+  },
+  "addiction::2024": {
+   "n": 59,
+   "topical_pct": 74.6,
+   "strict_pct": 62.7
+  },
+  "addiction::2025": {
+   "n": 153,
+   "topical_pct": 88.9,
+   "strict_pct": 79.1
+  },
+  "addiction::2026": {
+   "n": 86,
+   "topical_pct": 94.2,
+   "strict_pct": 90.7
+  },
+  "romance::2023": {
+   "n": 106,
+   "topical_pct": 74.5,
+   "strict_pct": 56.6
+  },
+  "romance::2024": {
+   "n": 64,
+   "topical_pct": 71.9,
+   "strict_pct": 56.2
+  },
+  "romance::2025": {
+   "n": 164,
+   "topical_pct": 78.0,
+   "strict_pct": 60.4
+  },
+  "romance::2026": {
+   "n": 31,
+   "topical_pct": 74.2,
+   "strict_pct": 51.6
+  },
+  "sexual_erp::2023": {
+   "n": 152,
+   "topical_pct": 93.4,
+   "strict_pct": 76.3
+  },
+  "sexual_erp::2024": {
+   "n": 44,
+   "topical_pct": 88.6,
+   "strict_pct": 56.8
+  },
+  "sexual_erp::2025": {
+   "n": 64,
+   "topical_pct": 75.0,
+   "strict_pct": 57.8
+  },
+  "sexual_erp::2026": {
+   "n": 16,
+   "topical_pct": 62.5,
+   "strict_pct": 37.5
+  },
+  "rupture::2023": {
+   "n": 105,
+   "topical_pct": 87.6,
+   "strict_pct": 68.6
+  },
+  "rupture::2024": {
+   "n": 77,
+   "topical_pct": 68.8,
+   "strict_pct": 53.2
+  },
+  "rupture::2025": {
+   "n": 94,
+   "topical_pct": 67.0,
+   "strict_pct": 55.3
+  },
+  "rupture::2026": {
+   "n": 128,
+   "topical_pct": 82.0,
+   "strict_pct": 71.1
+  }
+ },
+ "fragility": {
+  "therapy::single_kw": {
+   "n": 149,
+   "topical_pct": 70.5,
+   "strict_pct": 45.6
+  },
+  "therapy::multi_kw": {
+   "n": 10,
+   "topical_pct": 80.0,
+   "strict_pct": 50.0
+  },
+  "consciousness::single_kw": {
+   "n": 160,
+   "topical_pct": 58.8,
+   "strict_pct": 40.0
+  },
+  "consciousness::multi_kw": {
+   "n": 31,
+   "topical_pct": 71.0,
+   "strict_pct": 64.5
+  },
+  "addiction::single_kw": {
+   "n": 229,
+   "topical_pct": 81.2,
+   "strict_pct": 65.9
+  },
+  "addiction::multi_kw": {
+   "n": 105,
+   "topical_pct": 97.1,
+   "strict_pct": 95.2
+  },
+  "romance::single_kw": {
+   "n": 343,
+   "topical_pct": 74.6,
+   "strict_pct": 55.4
+  },
+  "romance::multi_kw": {
+   "n": 68,
+   "topical_pct": 89.7,
+   "strict_pct": 76.5
+  },
+  "sexual_erp::single_kw": {
+   "n": 212,
+   "topical_pct": 84.9,
+   "strict_pct": 59.9
+  },
+  "sexual_erp::multi_kw": {
+   "n": 40,
+   "topical_pct": 87.5,
+   "strict_pct": 82.5
+  },
+  "rupture::single_kw": {
+   "n": 326,
+   "topical_pct": 76.1,
+   "strict_pct": 59.5
+  },
+  "rupture::multi_kw": {
+   "n": 85,
+   "topical_pct": 77.6,
+   "strict_pct": 70.6
+  }
+ },
+ "comments": {
+  "therapy": {
+   "n": 60,
+   "topical_pct": 76.7,
+   "strict_pct": 65.0
+  },
+  "consciousness": {
+   "n": 49,
+   "topical_pct": 75.5,
+   "strict_pct": 53.1
+  },
+  "addiction": {
+   "n": 60,
+   "topical_pct": 85.0,
+   "strict_pct": 66.7
+  },
+  "romance": {
+   "n": 60,
+   "topical_pct": 68.3,
+   "strict_pct": 48.3
+  },
+  "sexual_erp": {
+   "n": 60,
+   "topical_pct": 95.0,
+   "strict_pct": 83.3
+  },
+  "rupture": {
+   "n": 60,
+   "topical_pct": 85.0,
+   "strict_pct": 61.7
+  }
+ },
+ "negspace": {
+  "2023": {
+   "n": 40,
+   "with_a_theme": 10,
+   "miss_rate_pct": 25.0,
+   "by_theme": {
+    "rupture": 6,
+    "consciousness": 1,
+    "sexual_erp": 1,
+    "romance": 2
+   }
+  },
+  "2024": {
+   "n": 40,
+   "with_a_theme": 9,
+   "miss_rate_pct": 22.5,
+   "by_theme": {
+    "consciousness": 1,
+    "rupture": 7,
+    "romance": 1,
+    "sexual_erp": 1
+   }
+  },
+  "2025": {
+   "n": 40,
+   "with_a_theme": 17,
+   "miss_rate_pct": 42.5,
+   "by_theme": {
+    "rupture": 14,
+    "romance": 5
+   }
+  },
+  "2026": {
+   "n": 40,
+   "with_a_theme": 13,
+   "miss_rate_pct": 32.5,
+   "by_theme": {
+    "rupture": 10,
+    "addiction": 1,
+    "sexual_erp": 1,
+    "consciousness": 1,
+    "romance": 1,
+    "therapy": 1
+   }
+  }
+ },
+ "event_spikes": {
+  "rupture::2024-09-24": {
+   "n": 8,
+   "topical_pct": 100.0
+  },
+  "rupture::2026-02-13": {
+   "n": 8,
+   "topical_pct": 100.0
+  },
+  "sexual_erp::2023-02-06": {
+   "n": 6,
+   "topical_pct": 100.0
+  },
+  "sexual_erp::2023-02-11": {
+   "n": 8,
+   "topical_pct": 100.0
+  },
+  "sexual_erp::2023-02-12": {
+   "n": 8,
+   "topical_pct": 87.5
+  },
+  "sexual_erp::2023-02-13": {
+   "n": 8,
+   "topical_pct": 87.5
+  },
+  "sexual_erp::2023-02-14": {
+   "n": 8,
+   "topical_pct": 100.0
+  },
+  "sexual_erp::2023-02-15": {
+   "n": 8,
+   "topical_pct": 87.5
+  }
+ },
+ "gold": {
+  "n_human_coded": 1,
+  "n_overlap_with_fleet": 1,
+  "human_yes": 0,
+  "human_yes_pct": 0.0,
+  "topical_agree_pct": 0.0,
+  "strict_agree_pct": 0.0,
+  "topical_yes_pct": 100.0,
+  "strict_yes_pct": 100.0,
+  "disagreements": [
+   {
+    "sid": "ID-0079",
+    "theme": "therapy",
+    "human": "Y",
+    "topical": "YES",
+    "strict": "YES"
+   }
+  ]
+ }
+}

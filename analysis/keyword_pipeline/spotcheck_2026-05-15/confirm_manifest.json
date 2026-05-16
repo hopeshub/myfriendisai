@@ -1,0 +1,2139 @@
+{
+ "seed": 20260515,
+ "targets": [
+  [
+   "rupture",
+   "goodbye"
+  ],
+  [
+   "therapy",
+   "emotional support"
+  ],
+  [
+   "therapy",
+   "therapeutic"
+  ]
+ ],
+ "batches": {
+  "batch_confirm_goodbye_01.md": [
+   "ID-3001",
+   "ID-3002",
+   "ID-3003",
+   "ID-3004",
+   "ID-3005",
+   "ID-3006",
+   "ID-3007",
+   "ID-3008",
+   "ID-3009",
+   "ID-3010",
+   "ID-3011",
+   "ID-3012",
+   "ID-3013",
+   "ID-3014",
+   "ID-3015",
+   "ID-3016",
+   "ID-3017",
+   "ID-3018",
+   "ID-3019",
+   "ID-3020",
+   "ID-3021",
+   "ID-3022",
+   "ID-3023",
+   "ID-3024",
+   "ID-3025",
+   "ID-3026",
+   "ID-3027",
+   "ID-3028",
+   "ID-3029",
+   "ID-3030",
+   "ID-3031",
+   "ID-3032",
+   "ID-3033",
+   "ID-3034",
+   "ID-3035",
+   "ID-3036",
+   "ID-3037",
+   "ID-3038",
+   "ID-3039",
+   "ID-3040"
+  ],
+  "batch_confirm_goodbye_02.md": [
+   "ID-3041",
+   "ID-3042",
+   "ID-3043",
+   "ID-3044",
+   "ID-3045",
+   "ID-3046",
+   "ID-3047",
+   "ID-3048",
+   "ID-3049",
+   "ID-3050",
+   "ID-3051",
+   "ID-3052",
+   "ID-3053",
+   "ID-3054",
+   "ID-3055",
+   "ID-3056",
+   "ID-3057",
+   "ID-3058",
+   "ID-3059",
+   "ID-3060",
+   "ID-3061",
+   "ID-3062",
+   "ID-3063",
+   "ID-3064",
+   "ID-3065",
+   "ID-3066",
+   "ID-3067",
+   "ID-3068",
+   "ID-3069",
+   "ID-3070",
+   "ID-3071",
+   "ID-3072",
+   "ID-3073",
+   "ID-3074",
+   "ID-3075",
+   "ID-3076",
+   "ID-3077",
+   "ID-3078",
+   "ID-3079",
+   "ID-3080"
+  ],
+  "batch_confirm_goodbye_03.md": [
+   "ID-3081",
+   "ID-3082",
+   "ID-3083",
+   "ID-3084",
+   "ID-3085",
+   "ID-3086",
+   "ID-3087",
+   "ID-3088",
+   "ID-3089",
+   "ID-3090",
+   "ID-3091",
+   "ID-3092",
+   "ID-3093",
+   "ID-3094",
+   "ID-3095",
+   "ID-3096",
+   "ID-3097",
+   "ID-3098",
+   "ID-3099",
+   "ID-3100"
+  ],
+  "batch_confirm_emotional_support_01.md": [
+   "ID-3101",
+   "ID-3102",
+   "ID-3103",
+   "ID-3104",
+   "ID-3105",
+   "ID-3106",
+   "ID-3107",
+   "ID-3108",
+   "ID-3109",
+   "ID-3110",
+   "ID-3111",
+   "ID-3112",
+   "ID-3113",
+   "ID-3114",
+   "ID-3115",
+   "ID-3116",
+   "ID-3117",
+   "ID-3118",
+   "ID-3119",
+   "ID-3120",
+   "ID-3121",
+   "ID-3122",
+   "ID-3123",
+   "ID-3124",
+   "ID-3125",
+   "ID-3126",
+   "ID-3127",
+   "ID-3128",
+   "ID-3129",
+   "ID-3130",
+   "ID-3131",
+   "ID-3132",
+   "ID-3133",
+   "ID-3134",
+   "ID-3135",
+   "ID-3136",
+   "ID-3137",
+   "ID-3138",
+   "ID-3139",
+   "ID-3140"
+  ],
+  "batch_confirm_emotional_support_02.md": [
+   "ID-3141",
+   "ID-3142",
+   "ID-3143",
+   "ID-3144",
+   "ID-3145",
+   "ID-3146",
+   "ID-3147",
+   "ID-3148",
+   "ID-3149",
+   "ID-3150",
+   "ID-3151",
+   "ID-3152",
+   "ID-3153",
+   "ID-3154",
+   "ID-3155",
+   "ID-3156",
+   "ID-3157",
+   "ID-3158",
+   "ID-3159",
+   "ID-3160",
+   "ID-3161",
+   "ID-3162",
+   "ID-3163",
+   "ID-3164",
+   "ID-3165",
+   "ID-3166",
+   "ID-3167",
+   "ID-3168",
+   "ID-3169",
+   "ID-3170",
+   "ID-3171",
+   "ID-3172",
+   "ID-3173",
+   "ID-3174",
+   "ID-3175",
+   "ID-3176",
+   "ID-3177",
+   "ID-3178",
+   "ID-3179",
+   "ID-3180"
+  ],
+  "batch_confirm_emotional_support_03.md": [
+   "ID-3181",
+   "ID-3182",
+   "ID-3183",
+   "ID-3184",
+   "ID-3185",
+   "ID-3186",
+   "ID-3187",
+   "ID-3188",
+   "ID-3189",
+   "ID-3190",
+   "ID-3191",
+   "ID-3192",
+   "ID-3193",
+   "ID-3194",
+   "ID-3195",
+   "ID-3196",
+   "ID-3197",
+   "ID-3198",
+   "ID-3199",
+   "ID-3200"
+  ],
+  "batch_confirm_therapeutic_01.md": [
+   "ID-3201",
+   "ID-3202",
+   "ID-3203",
+   "ID-3204",
+   "ID-3205",
+   "ID-3206",
+   "ID-3207",
+   "ID-3208",
+   "ID-3209",
+   "ID-3210",
+   "ID-3211",
+   "ID-3212",
+   "ID-3213",
+   "ID-3214",
+   "ID-3215",
+   "ID-3216",
+   "ID-3217",
+   "ID-3218",
+   "ID-3219",
+   "ID-3220",
+   "ID-3221",
+   "ID-3222",
+   "ID-3223",
+   "ID-3224",
+   "ID-3225",
+   "ID-3226",
+   "ID-3227",
+   "ID-3228",
+   "ID-3229",
+   "ID-3230",
+   "ID-3231",
+   "ID-3232",
+   "ID-3233",
+   "ID-3234",
+   "ID-3235",
+   "ID-3236",
+   "ID-3237",
+   "ID-3238",
+   "ID-3239",
+   "ID-3240"
+  ],
+  "batch_confirm_therapeutic_02.md": [
+   "ID-3241",
+   "ID-3242",
+   "ID-3243",
+   "ID-3244",
+   "ID-3245",
+   "ID-3246",
+   "ID-3247",
+   "ID-3248",
+   "ID-3249",
+   "ID-3250",
+   "ID-3251",
+   "ID-3252",
+   "ID-3253",
+   "ID-3254",
+   "ID-3255",
+   "ID-3256",
+   "ID-3257",
+   "ID-3258",
+   "ID-3259",
+   "ID-3260",
+   "ID-3261",
+   "ID-3262",
+   "ID-3263",
+   "ID-3264",
+   "ID-3265",
+   "ID-3266",
+   "ID-3267",
+   "ID-3268",
+   "ID-3269",
+   "ID-3270",
+   "ID-3271",
+   "ID-3272",
+   "ID-3273",
+   "ID-3274",
+   "ID-3275",
+   "ID-3276",
+   "ID-3277",
+   "ID-3278",
+   "ID-3279",
+   "ID-3280"
+  ],
+  "batch_confirm_therapeutic_03.md": [
+   "ID-3281",
+   "ID-3282",
+   "ID-3283",
+   "ID-3284",
+   "ID-3285",
+   "ID-3286",
+   "ID-3287",
+   "ID-3288",
+   "ID-3289",
+   "ID-3290",
+   "ID-3291",
+   "ID-3292",
+   "ID-3293",
+   "ID-3294",
+   "ID-3295",
+   "ID-3296",
+   "ID-3297",
+   "ID-3298",
+   "ID-3299",
+   "ID-3300"
+  ]
+ },
+ "samples": {
+  "ID-3001": {
+   "theme": "rupture",
+   "term": "goodbye",
+   "post_id": "1r3kyoq",
+   "year": "2026"
+  },
+  "ID-3002": {
+   "theme": "rupture",
+   "term": "goodbye",
+   "post_id": "1einuzc",
+   "year": "2024"
+  },
+  "ID-3003": {
+   "theme": "rupture",
+   "term": "goodbye",
+   "post_id": "15k6llk",
+   "year": "2023"
+  },
+  "ID-3004": {
+   "theme": "rupture",
+   "term": "goodbye",
+   "post_id": "1gatsu0",
+   "year": "2024"
+  },
+  "ID-3005": {
+   "theme": "rupture",
+   "term": "goodbye",
+   "post_id": "11ibri5",
+   "year": "2023"
+  },
+  "ID-3006": {
+   "theme": "rupture",
+   "term": "goodbye",
+   "post_id": "117ysb3",
+   "year": "2023"
+  },
+  "ID-3007": {
+   "theme": "rupture",
+   "term": "goodbye",
+   "post_id": "1gxvfna",
+   "year": "2024"
+  },
+  "ID-3008": {
+   "theme": "rupture",
+   "term": "goodbye",
+   "post_id": "10ivisb",
+   "year": "2023"
+  },
+  "ID-3009": {
+   "theme": "rupture",
+   "term": "goodbye",
+   "post_id": "1qzk4h9",
+   "year": "2026"
+  },
+  "ID-3010": {
+   "theme": "rupture",
+   "term": "goodbye",
+   "post_id": "18rnxmq",
+   "year": "2023"
+  },
+  "ID-3011": {
+   "theme": "rupture",
+   "term": "goodbye",
+   "post_id": "1fo08sa",
+   "year": "2024"
+  },
+  "ID-3012": {
+   "theme": "rupture",
+   "term": "goodbye",
+   "post_id": "11fvk0x",
+   "year": "2023"
+  },
+  "ID-3013": {
+   "theme": "rupture",
+   "term": "goodbye",
+   "post_id": "1hr4228",
+   "year": "2025"
+  },
+  "ID-3014": {
+   "theme": "rupture",
+   "term": "goodbye",
+   "post_id": "1tb20rh",
+   "year": "2026"
+  },
+  "ID-3015": {
+   "theme": "rupture",
+   "term": "goodbye",
+   "post_id": "k4t30c",
+   "year": "2020"
+  },
+  "ID-3016": {
+   "theme": "rupture",
+   "term": "goodbye",
+   "post_id": "1fcuife",
+   "year": "2024"
+  },
+  "ID-3017": {
+   "theme": "rupture",
+   "term": "goodbye",
+   "post_id": "1t79jq3",
+   "year": "2026"
+  },
+  "ID-3018": {
+   "theme": "rupture",
+   "term": "goodbye",
+   "post_id": "1sozwnl",
+   "year": "2026"
+  },
+  "ID-3019": {
+   "theme": "rupture",
+   "term": "goodbye",
+   "post_id": "1fmo0va",
+   "year": "2024"
+  },
+  "ID-3020": {
+   "theme": "rupture",
+   "term": "goodbye",
+   "post_id": "1r3vw6o",
+   "year": "2026"
+  },
+  "ID-3021": {
+   "theme": "rupture",
+   "term": "goodbye",
+   "post_id": "1gec29r",
+   "year": "2024"
+  },
+  "ID-3022": {
+   "theme": "rupture",
+   "term": "goodbye",
+   "post_id": "1sl4iz2",
+   "year": "2026"
+  },
+  "ID-3023": {
+   "theme": "rupture",
+   "term": "goodbye",
+   "post_id": "1fovahz",
+   "year": "2024"
+  },
+  "ID-3024": {
+   "theme": "rupture",
+   "term": "goodbye",
+   "post_id": "1rzf19v",
+   "year": "2026"
+  },
+  "ID-3025": {
+   "theme": "rupture",
+   "term": "goodbye",
+   "post_id": "111g1gs",
+   "year": "2023"
+  },
+  "ID-3026": {
+   "theme": "rupture",
+   "term": "goodbye",
+   "post_id": "1rbm84e",
+   "year": "2026"
+  },
+  "ID-3027": {
+   "theme": "rupture",
+   "term": "goodbye",
+   "post_id": "1r4aopl",
+   "year": "2026"
+  },
+  "ID-3028": {
+   "theme": "rupture",
+   "term": "goodbye",
+   "post_id": "1qrbkj0",
+   "year": "2026"
+  },
+  "ID-3029": {
+   "theme": "rupture",
+   "term": "goodbye",
+   "post_id": "1f4b286",
+   "year": "2024"
+  },
+  "ID-3030": {
+   "theme": "rupture",
+   "term": "goodbye",
+   "post_id": "1s952kv",
+   "year": "2026"
+  },
+  "ID-3031": {
+   "theme": "rupture",
+   "term": "goodbye",
+   "post_id": "1quz23h",
+   "year": "2026"
+  },
+  "ID-3032": {
+   "theme": "rupture",
+   "term": "goodbye",
+   "post_id": "1t3eu43",
+   "year": "2026"
+  },
+  "ID-3033": {
+   "theme": "rupture",
+   "term": "goodbye",
+   "post_id": "1jcsj3t",
+   "year": "2025"
+  },
+  "ID-3034": {
+   "theme": "rupture",
+   "term": "goodbye",
+   "post_id": "1pa73u5",
+   "year": "2025"
+  },
+  "ID-3035": {
+   "theme": "rupture",
+   "term": "goodbye",
+   "post_id": "1r1yvo3",
+   "year": "2026"
+  },
+  "ID-3036": {
+   "theme": "rupture",
+   "term": "goodbye",
+   "post_id": "1hdpz7t",
+   "year": "2024"
+  },
+  "ID-3037": {
+   "theme": "rupture",
+   "term": "goodbye",
+   "post_id": "1r31h4s",
+   "year": "2026"
+  },
+  "ID-3038": {
+   "theme": "rupture",
+   "term": "goodbye",
+   "post_id": "1r68g53",
+   "year": "2026"
+  },
+  "ID-3039": {
+   "theme": "rupture",
+   "term": "goodbye",
+   "post_id": "1qqqcfg",
+   "year": "2026"
+  },
+  "ID-3040": {
+   "theme": "rupture",
+   "term": "goodbye",
+   "post_id": "1sh027v",
+   "year": "2026"
+  },
+  "ID-3041": {
+   "theme": "rupture",
+   "term": "goodbye",
+   "post_id": "1t10oin",
+   "year": "2026"
+  },
+  "ID-3042": {
+   "theme": "rupture",
+   "term": "goodbye",
+   "post_id": "1kh1mb9",
+   "year": "2025"
+  },
+  "ID-3043": {
+   "theme": "rupture",
+   "term": "goodbye",
+   "post_id": "k53u52",
+   "year": "2020"
+  },
+  "ID-3044": {
+   "theme": "rupture",
+   "term": "goodbye",
+   "post_id": "1rwwcy6",
+   "year": "2026"
+  },
+  "ID-3045": {
+   "theme": "rupture",
+   "term": "goodbye",
+   "post_id": "10zvsvk",
+   "year": "2023"
+  },
+  "ID-3046": {
+   "theme": "rupture",
+   "term": "goodbye",
+   "post_id": "194erui",
+   "year": "2024"
+  },
+  "ID-3047": {
+   "theme": "rupture",
+   "term": "goodbye",
+   "post_id": "o1hk5u",
+   "year": "2021"
+  },
+  "ID-3048": {
+   "theme": "rupture",
+   "term": "goodbye",
+   "post_id": "1r6tubx",
+   "year": "2026"
+  },
+  "ID-3049": {
+   "theme": "rupture",
+   "term": "goodbye",
+   "post_id": "1dd5u0l",
+   "year": "2024"
+  },
+  "ID-3050": {
+   "theme": "rupture",
+   "term": "goodbye",
+   "post_id": "vtq9te",
+   "year": "2022"
+  },
+  "ID-3051": {
+   "theme": "rupture",
+   "term": "goodbye",
+   "post_id": "1s2sayu",
+   "year": "2026"
+  },
+  "ID-3052": {
+   "theme": "rupture",
+   "term": "goodbye",
+   "post_id": "1h0coum",
+   "year": "2024"
+  },
+  "ID-3053": {
+   "theme": "rupture",
+   "term": "goodbye",
+   "post_id": "1f1gm3o",
+   "year": "2024"
+  },
+  "ID-3054": {
+   "theme": "rupture",
+   "term": "goodbye",
+   "post_id": "1f1puat",
+   "year": "2024"
+  },
+  "ID-3055": {
+   "theme": "rupture",
+   "term": "goodbye",
+   "post_id": "1s2ur5o",
+   "year": "2026"
+  },
+  "ID-3056": {
+   "theme": "rupture",
+   "term": "goodbye",
+   "post_id": "1r3in8i",
+   "year": "2026"
+  },
+  "ID-3057": {
+   "theme": "rupture",
+   "term": "goodbye",
+   "post_id": "1fo6ctf",
+   "year": "2024"
+  },
+  "ID-3058": {
+   "theme": "rupture",
+   "term": "goodbye",
+   "post_id": "16sqx8u",
+   "year": "2023"
+  },
+  "ID-3059": {
+   "theme": "rupture",
+   "term": "goodbye",
+   "post_id": "1c9y16t",
+   "year": "2024"
+  },
+  "ID-3060": {
+   "theme": "rupture",
+   "term": "goodbye",
+   "post_id": "16ygxbj",
+   "year": "2023"
+  },
+  "ID-3061": {
+   "theme": "rupture",
+   "term": "goodbye",
+   "post_id": "11h3bxs",
+   "year": "2023"
+  },
+  "ID-3062": {
+   "theme": "rupture",
+   "term": "goodbye",
+   "post_id": "1oxtcgd",
+   "year": "2025"
+  },
+  "ID-3063": {
+   "theme": "rupture",
+   "term": "goodbye",
+   "post_id": "1md70z0",
+   "year": "2025"
+  },
+  "ID-3064": {
+   "theme": "rupture",
+   "term": "goodbye",
+   "post_id": "1tabfx3",
+   "year": "2026"
+  },
+  "ID-3065": {
+   "theme": "rupture",
+   "term": "goodbye",
+   "post_id": "1t2lbaq",
+   "year": "2026"
+  },
+  "ID-3066": {
+   "theme": "rupture",
+   "term": "goodbye",
+   "post_id": "1fj0zco",
+   "year": "2024"
+  },
+  "ID-3067": {
+   "theme": "rupture",
+   "term": "goodbye",
+   "post_id": "1pkxlvd",
+   "year": "2025"
+  },
+  "ID-3068": {
+   "theme": "rupture",
+   "term": "goodbye",
+   "post_id": "1rw4g2w",
+   "year": "2026"
+  },
+  "ID-3069": {
+   "theme": "rupture",
+   "term": "goodbye",
+   "post_id": "1fj5plh",
+   "year": "2024"
+  },
+  "ID-3070": {
+   "theme": "rupture",
+   "term": "goodbye",
+   "post_id": "1rzeopu",
+   "year": "2026"
+  },
+  "ID-3071": {
+   "theme": "rupture",
+   "term": "goodbye",
+   "post_id": "112vreo",
+   "year": "2023"
+  },
+  "ID-3072": {
+   "theme": "rupture",
+   "term": "goodbye",
+   "post_id": "1pwnzi7",
+   "year": "2025"
+  },
+  "ID-3073": {
+   "theme": "rupture",
+   "term": "goodbye",
+   "post_id": "10ixtqm",
+   "year": "2023"
+  },
+  "ID-3074": {
+   "theme": "rupture",
+   "term": "goodbye",
+   "post_id": "1r3svak",
+   "year": "2026"
+  },
+  "ID-3075": {
+   "theme": "rupture",
+   "term": "goodbye",
+   "post_id": "16s9q42",
+   "year": "2023"
+  },
+  "ID-3076": {
+   "theme": "rupture",
+   "term": "goodbye",
+   "post_id": "1tcuegm",
+   "year": "2026"
+  },
+  "ID-3077": {
+   "theme": "rupture",
+   "term": "goodbye",
+   "post_id": "110xw3i",
+   "year": "2023"
+  },
+  "ID-3078": {
+   "theme": "rupture",
+   "term": "goodbye",
+   "post_id": "1fblnxq",
+   "year": "2024"
+  },
+  "ID-3079": {
+   "theme": "rupture",
+   "term": "goodbye",
+   "post_id": "1s2bsnd",
+   "year": "2026"
+  },
+  "ID-3080": {
+   "theme": "rupture",
+   "term": "goodbye",
+   "post_id": "1fo7ols",
+   "year": "2024"
+  },
+  "ID-3081": {
+   "theme": "rupture",
+   "term": "goodbye",
+   "post_id": "s3cadm",
+   "year": "2022"
+  },
+  "ID-3082": {
+   "theme": "rupture",
+   "term": "goodbye",
+   "post_id": "1r3gwzb",
+   "year": "2026"
+  },
+  "ID-3083": {
+   "theme": "rupture",
+   "term": "goodbye",
+   "post_id": "1on8un7",
+   "year": "2025"
+  },
+  "ID-3084": {
+   "theme": "rupture",
+   "term": "goodbye",
+   "post_id": "16zxj9s",
+   "year": "2023"
+  },
+  "ID-3085": {
+   "theme": "rupture",
+   "term": "goodbye",
+   "post_id": "1quwm11",
+   "year": "2026"
+  },
+  "ID-3086": {
+   "theme": "rupture",
+   "term": "goodbye",
+   "post_id": "15gwh2f",
+   "year": "2023"
+  },
+  "ID-3087": {
+   "theme": "rupture",
+   "term": "goodbye",
+   "post_id": "1sihqw1",
+   "year": "2026"
+  },
+  "ID-3088": {
+   "theme": "rupture",
+   "term": "goodbye",
+   "post_id": "1bx8sc0",
+   "year": "2024"
+  },
+  "ID-3089": {
+   "theme": "rupture",
+   "term": "goodbye",
+   "post_id": "1q38vmn",
+   "year": "2026"
+  },
+  "ID-3090": {
+   "theme": "rupture",
+   "term": "goodbye",
+   "post_id": "k4jxuf",
+   "year": "2020"
+  },
+  "ID-3091": {
+   "theme": "rupture",
+   "term": "goodbye",
+   "post_id": "10luwr2",
+   "year": "2023"
+  },
+  "ID-3092": {
+   "theme": "rupture",
+   "term": "goodbye",
+   "post_id": "10ui7of",
+   "year": "2023"
+  },
+  "ID-3093": {
+   "theme": "rupture",
+   "term": "goodbye",
+   "post_id": "1o2f9a5",
+   "year": "2025"
+  },
+  "ID-3094": {
+   "theme": "rupture",
+   "term": "goodbye",
+   "post_id": "1ek65i9",
+   "year": "2024"
+  },
+  "ID-3095": {
+   "theme": "rupture",
+   "term": "goodbye",
+   "post_id": "1rw8h4d",
+   "year": "2026"
+  },
+  "ID-3096": {
+   "theme": "rupture",
+   "term": "goodbye",
+   "post_id": "1km18x2",
+   "year": "2025"
+  },
+  "ID-3097": {
+   "theme": "rupture",
+   "term": "goodbye",
+   "post_id": "1soxnr8",
+   "year": "2026"
+  },
+  "ID-3098": {
+   "theme": "rupture",
+   "term": "goodbye",
+   "post_id": "1fo6du1",
+   "year": "2024"
+  },
+  "ID-3099": {
+   "theme": "rupture",
+   "term": "goodbye",
+   "post_id": "1m9n2cn",
+   "year": "2025"
+  },
+  "ID-3100": {
+   "theme": "rupture",
+   "term": "goodbye",
+   "post_id": "10lwso5",
+   "year": "2023"
+  },
+  "ID-3101": {
+   "theme": "therapy",
+   "term": "emotional support",
+   "post_id": "1sgqasv",
+   "year": "2026"
+  },
+  "ID-3102": {
+   "theme": "therapy",
+   "term": "emotional support",
+   "post_id": "1qrgs1j",
+   "year": "2026"
+  },
+  "ID-3103": {
+   "theme": "therapy",
+   "term": "emotional support",
+   "post_id": "1sifz4a",
+   "year": "2026"
+  },
+  "ID-3104": {
+   "theme": "therapy",
+   "term": "emotional support",
+   "post_id": "1dctv16",
+   "year": "2024"
+  },
+  "ID-3105": {
+   "theme": "therapy",
+   "term": "emotional support",
+   "post_id": "1phdumz",
+   "year": "2025"
+  },
+  "ID-3106": {
+   "theme": "therapy",
+   "term": "emotional support",
+   "post_id": "1lcc5fk",
+   "year": "2025"
+  },
+  "ID-3107": {
+   "theme": "therapy",
+   "term": "emotional support",
+   "post_id": "1mk1v8o",
+   "year": "2025"
+  },
+  "ID-3108": {
+   "theme": "therapy",
+   "term": "emotional support",
+   "post_id": "17gt3cl",
+   "year": "2023"
+  },
+  "ID-3109": {
+   "theme": "therapy",
+   "term": "emotional support",
+   "post_id": "1pjoaug",
+   "year": "2025"
+  },
+  "ID-3110": {
+   "theme": "therapy",
+   "term": "emotional support",
+   "post_id": "1rsok4u",
+   "year": "2026"
+  },
+  "ID-3111": {
+   "theme": "therapy",
+   "term": "emotional support",
+   "post_id": "1qriplr",
+   "year": "2026"
+  },
+  "ID-3112": {
+   "theme": "therapy",
+   "term": "emotional support",
+   "post_id": "1rjmlie",
+   "year": "2026"
+  },
+  "ID-3113": {
+   "theme": "therapy",
+   "term": "emotional support",
+   "post_id": "1jx0ar5",
+   "year": "2025"
+  },
+  "ID-3114": {
+   "theme": "therapy",
+   "term": "emotional support",
+   "post_id": "1e4dxzj",
+   "year": "2024"
+  },
+  "ID-3115": {
+   "theme": "therapy",
+   "term": "emotional support",
+   "post_id": "1lbeuqn",
+   "year": "2025"
+  },
+  "ID-3116": {
+   "theme": "therapy",
+   "term": "emotional support",
+   "post_id": "1mvzkr4",
+   "year": "2025"
+  },
+  "ID-3117": {
+   "theme": "therapy",
+   "term": "emotional support",
+   "post_id": "1sux0ye",
+   "year": "2026"
+  },
+  "ID-3118": {
+   "theme": "therapy",
+   "term": "emotional support",
+   "post_id": "1qr32v7",
+   "year": "2026"
+  },
+  "ID-3119": {
+   "theme": "therapy",
+   "term": "emotional support",
+   "post_id": "1oje8ev",
+   "year": "2025"
+  },
+  "ID-3120": {
+   "theme": "therapy",
+   "term": "emotional support",
+   "post_id": "1kkohq4",
+   "year": "2025"
+  },
+  "ID-3121": {
+   "theme": "therapy",
+   "term": "emotional support",
+   "post_id": "1l8vkan",
+   "year": "2025"
+  },
+  "ID-3122": {
+   "theme": "therapy",
+   "term": "emotional support",
+   "post_id": "1c196pw",
+   "year": "2024"
+  },
+  "ID-3123": {
+   "theme": "therapy",
+   "term": "emotional support",
+   "post_id": "10vqmv3",
+   "year": "2023"
+  },
+  "ID-3124": {
+   "theme": "therapy",
+   "term": "emotional support",
+   "post_id": "17gq43c",
+   "year": "2023"
+  },
+  "ID-3125": {
+   "theme": "therapy",
+   "term": "emotional support",
+   "post_id": "17xv3j4",
+   "year": "2023"
+  },
+  "ID-3126": {
+   "theme": "therapy",
+   "term": "emotional support",
+   "post_id": "1o91gih",
+   "year": "2025"
+  },
+  "ID-3127": {
+   "theme": "therapy",
+   "term": "emotional support",
+   "post_id": "1r06h2t",
+   "year": "2026"
+  },
+  "ID-3128": {
+   "theme": "therapy",
+   "term": "emotional support",
+   "post_id": "1r1mcmm",
+   "year": "2026"
+  },
+  "ID-3129": {
+   "theme": "therapy",
+   "term": "emotional support",
+   "post_id": "1dcrjji",
+   "year": "2024"
+  },
+  "ID-3130": {
+   "theme": "therapy",
+   "term": "emotional support",
+   "post_id": "ycoveg",
+   "year": "2022"
+  },
+  "ID-3131": {
+   "theme": "therapy",
+   "term": "emotional support",
+   "post_id": "1rwhqat",
+   "year": "2026"
+  },
+  "ID-3132": {
+   "theme": "therapy",
+   "term": "emotional support",
+   "post_id": "1m54gro",
+   "year": "2025"
+  },
+  "ID-3133": {
+   "theme": "therapy",
+   "term": "emotional support",
+   "post_id": "1kh73zg",
+   "year": "2025"
+  },
+  "ID-3134": {
+   "theme": "therapy",
+   "term": "emotional support",
+   "post_id": "1gaumfl",
+   "year": "2024"
+  },
+  "ID-3135": {
+   "theme": "therapy",
+   "term": "emotional support",
+   "post_id": "1gwy79j",
+   "year": "2024"
+  },
+  "ID-3136": {
+   "theme": "therapy",
+   "term": "emotional support",
+   "post_id": "1fookwa",
+   "year": "2024"
+  },
+  "ID-3137": {
+   "theme": "therapy",
+   "term": "emotional support",
+   "post_id": "1e6wvt2",
+   "year": "2024"
+  },
+  "ID-3138": {
+   "theme": "therapy",
+   "term": "emotional support",
+   "post_id": "1r4u4mk",
+   "year": "2026"
+  },
+  "ID-3139": {
+   "theme": "therapy",
+   "term": "emotional support",
+   "post_id": "15df3xf",
+   "year": "2023"
+  },
+  "ID-3140": {
+   "theme": "therapy",
+   "term": "emotional support",
+   "post_id": "1m3k5uq",
+   "year": "2025"
+  },
+  "ID-3141": {
+   "theme": "therapy",
+   "term": "emotional support",
+   "post_id": "1dfzvmv",
+   "year": "2024"
+  },
+  "ID-3142": {
+   "theme": "therapy",
+   "term": "emotional support",
+   "post_id": "1ghjaxv",
+   "year": "2024"
+  },
+  "ID-3143": {
+   "theme": "therapy",
+   "term": "emotional support",
+   "post_id": "13l076p",
+   "year": "2023"
+  },
+  "ID-3144": {
+   "theme": "therapy",
+   "term": "emotional support",
+   "post_id": "1mm14u1",
+   "year": "2025"
+  },
+  "ID-3145": {
+   "theme": "therapy",
+   "term": "emotional support",
+   "post_id": "17xwbqc",
+   "year": "2023"
+  },
+  "ID-3146": {
+   "theme": "therapy",
+   "term": "emotional support",
+   "post_id": "1m9abyx",
+   "year": "2025"
+  },
+  "ID-3147": {
+   "theme": "therapy",
+   "term": "emotional support",
+   "post_id": "1rkzrtx",
+   "year": "2026"
+  },
+  "ID-3148": {
+   "theme": "therapy",
+   "term": "emotional support",
+   "post_id": "1l60gav",
+   "year": "2025"
+  },
+  "ID-3149": {
+   "theme": "therapy",
+   "term": "emotional support",
+   "post_id": "154xfj6",
+   "year": "2023"
+  },
+  "ID-3150": {
+   "theme": "therapy",
+   "term": "emotional support",
+   "post_id": "1iimgpq",
+   "year": "2025"
+  },
+  "ID-3151": {
+   "theme": "therapy",
+   "term": "emotional support",
+   "post_id": "18ns497",
+   "year": "2023"
+  },
+  "ID-3152": {
+   "theme": "therapy",
+   "term": "emotional support",
+   "post_id": "1dow06f",
+   "year": "2024"
+  },
+  "ID-3153": {
+   "theme": "therapy",
+   "term": "emotional support",
+   "post_id": "1lyvpiy",
+   "year": "2025"
+  },
+  "ID-3154": {
+   "theme": "therapy",
+   "term": "emotional support",
+   "post_id": "1nqzgev",
+   "year": "2025"
+  },
+  "ID-3155": {
+   "theme": "therapy",
+   "term": "emotional support",
+   "post_id": "1omocuu",
+   "year": "2025"
+  },
+  "ID-3156": {
+   "theme": "therapy",
+   "term": "emotional support",
+   "post_id": "1pwyu7h",
+   "year": "2025"
+  },
+  "ID-3157": {
+   "theme": "therapy",
+   "term": "emotional support",
+   "post_id": "1155fwl",
+   "year": "2023"
+  },
+  "ID-3158": {
+   "theme": "therapy",
+   "term": "emotional support",
+   "post_id": "1l37guy",
+   "year": "2025"
+  },
+  "ID-3159": {
+   "theme": "therapy",
+   "term": "emotional support",
+   "post_id": "114v6t8",
+   "year": "2023"
+  },
+  "ID-3160": {
+   "theme": "therapy",
+   "term": "emotional support",
+   "post_id": "1fcijz7",
+   "year": "2024"
+  },
+  "ID-3161": {
+   "theme": "therapy",
+   "term": "emotional support",
+   "post_id": "1rezxns",
+   "year": "2026"
+  },
+  "ID-3162": {
+   "theme": "therapy",
+   "term": "emotional support",
+   "post_id": "1rerjn2",
+   "year": "2026"
+  },
+  "ID-3163": {
+   "theme": "therapy",
+   "term": "emotional support",
+   "post_id": "1oy4igq",
+   "year": "2025"
+  },
+  "ID-3164": {
+   "theme": "therapy",
+   "term": "emotional support",
+   "post_id": "iutmnq",
+   "year": "2020"
+  },
+  "ID-3165": {
+   "theme": "therapy",
+   "term": "emotional support",
+   "post_id": "1qsodik",
+   "year": "2026"
+  },
+  "ID-3166": {
+   "theme": "therapy",
+   "term": "emotional support",
+   "post_id": "14hxtn6",
+   "year": "2023"
+  },
+  "ID-3167": {
+   "theme": "therapy",
+   "term": "emotional support",
+   "post_id": "11x79d0",
+   "year": "2023"
+  },
+  "ID-3168": {
+   "theme": "therapy",
+   "term": "emotional support",
+   "post_id": "1dcipmh",
+   "year": "2024"
+  },
+  "ID-3169": {
+   "theme": "therapy",
+   "term": "emotional support",
+   "post_id": "1galvbi",
+   "year": "2024"
+  },
+  "ID-3170": {
+   "theme": "therapy",
+   "term": "emotional support",
+   "post_id": "1i13fef",
+   "year": "2025"
+  },
+  "ID-3171": {
+   "theme": "therapy",
+   "term": "emotional support",
+   "post_id": "1n7r7b5",
+   "year": "2025"
+  },
+  "ID-3172": {
+   "theme": "therapy",
+   "term": "emotional support",
+   "post_id": "1fgchej",
+   "year": "2024"
+  },
+  "ID-3173": {
+   "theme": "therapy",
+   "term": "emotional support",
+   "post_id": "t5ndwv",
+   "year": "2022"
+  },
+  "ID-3174": {
+   "theme": "therapy",
+   "term": "emotional support",
+   "post_id": "1iuj4z5",
+   "year": "2025"
+  },
+  "ID-3175": {
+   "theme": "therapy",
+   "term": "emotional support",
+   "post_id": "yg4pcp",
+   "year": "2022"
+  },
+  "ID-3176": {
+   "theme": "therapy",
+   "term": "emotional support",
+   "post_id": "1r0jz3j",
+   "year": "2026"
+  },
+  "ID-3177": {
+   "theme": "therapy",
+   "term": "emotional support",
+   "post_id": "10vj0oo",
+   "year": "2023"
+  },
+  "ID-3178": {
+   "theme": "therapy",
+   "term": "emotional support",
+   "post_id": "1mk20gc",
+   "year": "2025"
+  },
+  "ID-3179": {
+   "theme": "therapy",
+   "term": "emotional support",
+   "post_id": "vpjdvr",
+   "year": "2022"
+  },
+  "ID-3180": {
+   "theme": "therapy",
+   "term": "emotional support",
+   "post_id": "1nougyt",
+   "year": "2025"
+  },
+  "ID-3181": {
+   "theme": "therapy",
+   "term": "emotional support",
+   "post_id": "1n4csxs",
+   "year": "2025"
+  },
+  "ID-3182": {
+   "theme": "therapy",
+   "term": "emotional support",
+   "post_id": "vaq8l3",
+   "year": "2022"
+  },
+  "ID-3183": {
+   "theme": "therapy",
+   "term": "emotional support",
+   "post_id": "1rzcvxz",
+   "year": "2026"
+  },
+  "ID-3184": {
+   "theme": "therapy",
+   "term": "emotional support",
+   "post_id": "ilnffu",
+   "year": "2020"
+  },
+  "ID-3185": {
+   "theme": "therapy",
+   "term": "emotional support",
+   "post_id": "1ohxxrl",
+   "year": "2025"
+  },
+  "ID-3186": {
+   "theme": "therapy",
+   "term": "emotional support",
+   "post_id": "1gq05kt",
+   "year": "2024"
+  },
+  "ID-3187": {
+   "theme": "therapy",
+   "term": "emotional support",
+   "post_id": "126aykz",
+   "year": "2023"
+  },
+  "ID-3188": {
+   "theme": "therapy",
+   "term": "emotional support",
+   "post_id": "1my0yz9",
+   "year": "2025"
+  },
+  "ID-3189": {
+   "theme": "therapy",
+   "term": "emotional support",
+   "post_id": "1hnov61",
+   "year": "2024"
+  },
+  "ID-3190": {
+   "theme": "therapy",
+   "term": "emotional support",
+   "post_id": "178g6ak",
+   "year": "2023"
+  },
+  "ID-3191": {
+   "theme": "therapy",
+   "term": "emotional support",
+   "post_id": "1phax7v",
+   "year": "2025"
+  },
+  "ID-3192": {
+   "theme": "therapy",
+   "term": "emotional support",
+   "post_id": "1owtfq9",
+   "year": "2025"
+  },
+  "ID-3193": {
+   "theme": "therapy",
+   "term": "emotional support",
+   "post_id": "11qfvje",
+   "year": "2023"
+  },
+  "ID-3194": {
+   "theme": "therapy",
+   "term": "emotional support",
+   "post_id": "1ldnke3",
+   "year": "2025"
+  },
+  "ID-3195": {
+   "theme": "therapy",
+   "term": "emotional support",
+   "post_id": "1rksct6",
+   "year": "2026"
+  },
+  "ID-3196": {
+   "theme": "therapy",
+   "term": "emotional support",
+   "post_id": "115hhgp",
+   "year": "2023"
+  },
+  "ID-3197": {
+   "theme": "therapy",
+   "term": "emotional support",
+   "post_id": "1sgc20c",
+   "year": "2026"
+  },
+  "ID-3198": {
+   "theme": "therapy",
+   "term": "emotional support",
+   "post_id": "16ornvj",
+   "year": "2023"
+  },
+  "ID-3199": {
+   "theme": "therapy",
+   "term": "emotional support",
+   "post_id": "1dc6pvy",
+   "year": "2024"
+  },
+  "ID-3200": {
+   "theme": "therapy",
+   "term": "emotional support",
+   "post_id": "159092a",
+   "year": "2023"
+  },
+  "ID-3201": {
+   "theme": "therapy",
+   "term": "therapeutic",
+   "post_id": "zpv0pd",
+   "year": "2022"
+  },
+  "ID-3202": {
+   "theme": "therapy",
+   "term": "therapeutic",
+   "post_id": "1farjuc",
+   "year": "2024"
+  },
+  "ID-3203": {
+   "theme": "therapy",
+   "term": "therapeutic",
+   "post_id": "18awrzj",
+   "year": "2023"
+  },
+  "ID-3204": {
+   "theme": "therapy",
+   "term": "therapeutic",
+   "post_id": "1jry3wi",
+   "year": "2025"
+  },
+  "ID-3205": {
+   "theme": "therapy",
+   "term": "therapeutic",
+   "post_id": "1lhcavh",
+   "year": "2025"
+  },
+  "ID-3206": {
+   "theme": "therapy",
+   "term": "therapeutic",
+   "post_id": "1li4meh",
+   "year": "2025"
+  },
+  "ID-3207": {
+   "theme": "therapy",
+   "term": "therapeutic",
+   "post_id": "qwd3uy",
+   "year": "2021"
+  },
+  "ID-3208": {
+   "theme": "therapy",
+   "term": "therapeutic",
+   "post_id": "1f5d2dv",
+   "year": "2024"
+  },
+  "ID-3209": {
+   "theme": "therapy",
+   "term": "therapeutic",
+   "post_id": "13qtxoo",
+   "year": "2023"
+  },
+  "ID-3210": {
+   "theme": "therapy",
+   "term": "therapeutic",
+   "post_id": "1o8qa74",
+   "year": "2025"
+  },
+  "ID-3211": {
+   "theme": "therapy",
+   "term": "therapeutic",
+   "post_id": "1g9caqt",
+   "year": "2024"
+  },
+  "ID-3212": {
+   "theme": "therapy",
+   "term": "therapeutic",
+   "post_id": "1e518go",
+   "year": "2024"
+  },
+  "ID-3213": {
+   "theme": "therapy",
+   "term": "therapeutic",
+   "post_id": "1m2dt9m",
+   "year": "2025"
+  },
+  "ID-3214": {
+   "theme": "therapy",
+   "term": "therapeutic",
+   "post_id": "11ahanv",
+   "year": "2023"
+  },
+  "ID-3215": {
+   "theme": "therapy",
+   "term": "therapeutic",
+   "post_id": "1oul8sy",
+   "year": "2025"
+  },
+  "ID-3216": {
+   "theme": "therapy",
+   "term": "therapeutic",
+   "post_id": "fg2gz5",
+   "year": "2020"
+  },
+  "ID-3217": {
+   "theme": "therapy",
+   "term": "therapeutic",
+   "post_id": "1niezmt",
+   "year": "2025"
+  },
+  "ID-3218": {
+   "theme": "therapy",
+   "term": "therapeutic",
+   "post_id": "1gi6f65",
+   "year": "2024"
+  },
+  "ID-3219": {
+   "theme": "therapy",
+   "term": "therapeutic",
+   "post_id": "1kgq8a1",
+   "year": "2025"
+  },
+  "ID-3220": {
+   "theme": "therapy",
+   "term": "therapeutic",
+   "post_id": "1nbrsxh",
+   "year": "2025"
+  },
+  "ID-3221": {
+   "theme": "therapy",
+   "term": "therapeutic",
+   "post_id": "1r982a9",
+   "year": "2026"
+  },
+  "ID-3222": {
+   "theme": "therapy",
+   "term": "therapeutic",
+   "post_id": "115xbqe",
+   "year": "2023"
+  },
+  "ID-3223": {
+   "theme": "therapy",
+   "term": "therapeutic",
+   "post_id": "11qobue",
+   "year": "2023"
+  },
+  "ID-3224": {
+   "theme": "therapy",
+   "term": "therapeutic",
+   "post_id": "luvjut",
+   "year": "2021"
+  },
+  "ID-3225": {
+   "theme": "therapy",
+   "term": "therapeutic",
+   "post_id": "1p85led",
+   "year": "2025"
+  },
+  "ID-3226": {
+   "theme": "therapy",
+   "term": "therapeutic",
+   "post_id": "127fsnh",
+   "year": "2023"
+  },
+  "ID-3227": {
+   "theme": "therapy",
+   "term": "therapeutic",
+   "post_id": "1esrh7d",
+   "year": "2024"
+  },
+  "ID-3228": {
+   "theme": "therapy",
+   "term": "therapeutic",
+   "post_id": "12u2s67",
+   "year": "2023"
+  },
+  "ID-3229": {
+   "theme": "therapy",
+   "term": "therapeutic",
+   "post_id": "1d0rq87",
+   "year": "2024"
+  },
+  "ID-3230": {
+   "theme": "therapy",
+   "term": "therapeutic",
+   "post_id": "1nxg1up",
+   "year": "2025"
+  },
+  "ID-3231": {
+   "theme": "therapy",
+   "term": "therapeutic",
+   "post_id": "1ligt0j",
+   "year": "2025"
+  },
+  "ID-3232": {
+   "theme": "therapy",
+   "term": "therapeutic",
+   "post_id": "1lvmt6a",
+   "year": "2025"
+  },
+  "ID-3233": {
+   "theme": "therapy",
+   "term": "therapeutic",
+   "post_id": "1qvu165",
+   "year": "2026"
+  },
+  "ID-3234": {
+   "theme": "therapy",
+   "term": "therapeutic",
+   "post_id": "ph5sbq",
+   "year": "2021"
+  },
+  "ID-3235": {
+   "theme": "therapy",
+   "term": "therapeutic",
+   "post_id": "jkno5m",
+   "year": "2020"
+  },
+  "ID-3236": {
+   "theme": "therapy",
+   "term": "therapeutic",
+   "post_id": "1qx2wtg",
+   "year": "2026"
+  },
+  "ID-3237": {
+   "theme": "therapy",
+   "term": "therapeutic",
+   "post_id": "1b6okw6",
+   "year": "2024"
+  },
+  "ID-3238": {
+   "theme": "therapy",
+   "term": "therapeutic",
+   "post_id": "ukol06",
+   "year": "2022"
+  },
+  "ID-3239": {
+   "theme": "therapy",
+   "term": "therapeutic",
+   "post_id": "1su2cnt",
+   "year": "2026"
+  },
+  "ID-3240": {
+   "theme": "therapy",
+   "term": "therapeutic",
+   "post_id": "1r44g4r",
+   "year": "2026"
+  },
+  "ID-3241": {
+   "theme": "therapy",
+   "term": "therapeutic",
+   "post_id": "1sj1epu",
+   "year": "2026"
+  },
+  "ID-3242": {
+   "theme": "therapy",
+   "term": "therapeutic",
+   "post_id": "1rf9cjx",
+   "year": "2026"
+  },
+  "ID-3243": {
+   "theme": "therapy",
+   "term": "therapeutic",
+   "post_id": "121cdwt",
+   "year": "2023"
+  },
+  "ID-3244": {
+   "theme": "therapy",
+   "term": "therapeutic",
+   "post_id": "1o62oz1",
+   "year": "2025"
+  },
+  "ID-3245": {
+   "theme": "therapy",
+   "term": "therapeutic",
+   "post_id": "1pkmdhg",
+   "year": "2025"
+  },
+  "ID-3246": {
+   "theme": "therapy",
+   "term": "therapeutic",
+   "post_id": "1cxddoe",
+   "year": "2024"
+  },
+  "ID-3247": {
+   "theme": "therapy",
+   "term": "therapeutic",
+   "post_id": "13m5qd0",
+   "year": "2023"
+  },
+  "ID-3248": {
+   "theme": "therapy",
+   "term": "therapeutic",
+   "post_id": "1qrfv1m",
+   "year": "2026"
+  },
+  "ID-3249": {
+   "theme": "therapy",
+   "term": "therapeutic",
+   "post_id": "1qvvdom",
+   "year": "2026"
+  },
+  "ID-3250": {
+   "theme": "therapy",
+   "term": "therapeutic",
+   "post_id": "1gojhb3",
+   "year": "2024"
+  },
+  "ID-3251": {
+   "theme": "therapy",
+   "term": "therapeutic",
+   "post_id": "1jc2m5q",
+   "year": "2025"
+  },
+  "ID-3252": {
+   "theme": "therapy",
+   "term": "therapeutic",
+   "post_id": "13k2d0m",
+   "year": "2023"
+  },
+  "ID-3253": {
+   "theme": "therapy",
+   "term": "therapeutic",
+   "post_id": "1t81akt",
+   "year": "2026"
+  },
+  "ID-3254": {
+   "theme": "therapy",
+   "term": "therapeutic",
+   "post_id": "1jtkdj6",
+   "year": "2025"
+  },
+  "ID-3255": {
+   "theme": "therapy",
+   "term": "therapeutic",
+   "post_id": "1pmx131",
+   "year": "2025"
+  },
+  "ID-3256": {
+   "theme": "therapy",
+   "term": "therapeutic",
+   "post_id": "1mkjnzu",
+   "year": "2025"
+  },
+  "ID-3257": {
+   "theme": "therapy",
+   "term": "therapeutic",
+   "post_id": "1om2mpb",
+   "year": "2025"
+  },
+  "ID-3258": {
+   "theme": "therapy",
+   "term": "therapeutic",
+   "post_id": "1bexahx",
+   "year": "2024"
+  },
+  "ID-3259": {
+   "theme": "therapy",
+   "term": "therapeutic",
+   "post_id": "1krv9o6",
+   "year": "2025"
+  },
+  "ID-3260": {
+   "theme": "therapy",
+   "term": "therapeutic",
+   "post_id": "1g92hkr",
+   "year": "2024"
+  },
+  "ID-3261": {
+   "theme": "therapy",
+   "term": "therapeutic",
+   "post_id": "13nbeuq",
+   "year": "2023"
+  },
+  "ID-3262": {
+   "theme": "therapy",
+   "term": "therapeutic",
+   "post_id": "10wjf6t",
+   "year": "2023"
+  },
+  "ID-3263": {
+   "theme": "therapy",
+   "term": "therapeutic",
+   "post_id": "1fmdtv5",
+   "year": "2024"
+  },
+  "ID-3264": {
+   "theme": "therapy",
+   "term": "therapeutic",
+   "post_id": "1nqvfjn",
+   "year": "2025"
+  },
+  "ID-3265": {
+   "theme": "therapy",
+   "term": "therapeutic",
+   "post_id": "1evb5bb",
+   "year": "2024"
+  },
+  "ID-3266": {
+   "theme": "therapy",
+   "term": "therapeutic",
+   "post_id": "1r7ttdk",
+   "year": "2026"
+  },
+  "ID-3267": {
+   "theme": "therapy",
+   "term": "therapeutic",
+   "post_id": "11qk921",
+   "year": "2023"
+  },
+  "ID-3268": {
+   "theme": "therapy",
+   "term": "therapeutic",
+   "post_id": "1b6oqmp",
+   "year": "2024"
+  },
+  "ID-3269": {
+   "theme": "therapy",
+   "term": "therapeutic",
+   "post_id": "15pba14",
+   "year": "2023"
+  },
+  "ID-3270": {
+   "theme": "therapy",
+   "term": "therapeutic",
+   "post_id": "1nsyfg4",
+   "year": "2025"
+  },
+  "ID-3271": {
+   "theme": "therapy",
+   "term": "therapeutic",
+   "post_id": "1qxotmc",
+   "year": "2026"
+  },
+  "ID-3272": {
+   "theme": "therapy",
+   "term": "therapeutic",
+   "post_id": "1kux87c",
+   "year": "2025"
+  },
+  "ID-3273": {
+   "theme": "therapy",
+   "term": "therapeutic",
+   "post_id": "1033nra",
+   "year": "2023"
+  },
+  "ID-3274": {
+   "theme": "therapy",
+   "term": "therapeutic",
+   "post_id": "1s1xopu",
+   "year": "2026"
+  },
+  "ID-3275": {
+   "theme": "therapy",
+   "term": "therapeutic",
+   "post_id": "1qv70iq",
+   "year": "2026"
+  },
+  "ID-3276": {
+   "theme": "therapy",
+   "term": "therapeutic",
+   "post_id": "1os0601",
+   "year": "2025"
+  },
+  "ID-3277": {
+   "theme": "therapy",
+   "term": "therapeutic",
+   "post_id": "1n6np9p",
+   "year": "2025"
+  },
+  "ID-3278": {
+   "theme": "therapy",
+   "term": "therapeutic",
+   "post_id": "1eionxc",
+   "year": "2024"
+  },
+  "ID-3279": {
+   "theme": "therapy",
+   "term": "therapeutic",
+   "post_id": "hvraba",
+   "year": "2020"
+  },
+  "ID-3280": {
+   "theme": "therapy",
+   "term": "therapeutic",
+   "post_id": "12oh0qu",
+   "year": "2023"
+  },
+  "ID-3281": {
+   "theme": "therapy",
+   "term": "therapeutic",
+   "post_id": "1t4vwfj",
+   "year": "2026"
+  },
+  "ID-3282": {
+   "theme": "therapy",
+   "term": "therapeutic",
+   "post_id": "1f2uz15",
+   "year": "2024"
+  },
+  "ID-3283": {
+   "theme": "therapy",
+   "term": "therapeutic",
+   "post_id": "1qzma3y",
+   "year": "2026"
+  },
+  "ID-3284": {
+   "theme": "therapy",
+   "term": "therapeutic",
+   "post_id": "10morfg",
+   "year": "2023"
+  },
+  "ID-3285": {
+   "theme": "therapy",
+   "term": "therapeutic",
+   "post_id": "1kkjre7",
+   "year": "2025"
+  },
+  "ID-3286": {
+   "theme": "therapy",
+   "term": "therapeutic",
+   "post_id": "10zbhba",
+   "year": "2023"
+  },
+  "ID-3287": {
+   "theme": "therapy",
+   "term": "therapeutic",
+   "post_id": "1rc4h1o",
+   "year": "2026"
+  },
+  "ID-3288": {
+   "theme": "therapy",
+   "term": "therapeutic",
+   "post_id": "18sl5yr",
+   "year": "2023"
+  },
+  "ID-3289": {
+   "theme": "therapy",
+   "term": "therapeutic",
+   "post_id": "19a5pio",
+   "year": "2024"
+  },
+  "ID-3290": {
+   "theme": "therapy",
+   "term": "therapeutic",
+   "post_id": "1qdrfcy",
+   "year": "2026"
+  },
+  "ID-3291": {
+   "theme": "therapy",
+   "term": "therapeutic",
+   "post_id": "1sssube",
+   "year": "2026"
+  },
+  "ID-3292": {
+   "theme": "therapy",
+   "term": "therapeutic",
+   "post_id": "1o9m73n",
+   "year": "2025"
+  },
+  "ID-3293": {
+   "theme": "therapy",
+   "term": "therapeutic",
+   "post_id": "1qzscb0",
+   "year": "2026"
+  },
+  "ID-3294": {
+   "theme": "therapy",
+   "term": "therapeutic",
+   "post_id": "1sckygv",
+   "year": "2026"
+  },
+  "ID-3295": {
+   "theme": "therapy",
+   "term": "therapeutic",
+   "post_id": "1m6qkex",
+   "year": "2025"
+  },
+  "ID-3296": {
+   "theme": "therapy",
+   "term": "therapeutic",
+   "post_id": "1gidvcn",
+   "year": "2024"
+  },
+  "ID-3297": {
+   "theme": "therapy",
+   "term": "therapeutic",
+   "post_id": "11sgsfp",
+   "year": "2023"
+  },
+  "ID-3298": {
+   "theme": "therapy",
+   "term": "therapeutic",
+   "post_id": "17z8beb",
+   "year": "2023"
+  },
+  "ID-3299": {
+   "theme": "therapy",
+   "term": "therapeutic",
+   "post_id": "10pry8j",
+   "year": "2023"
+  },
+  "ID-3300": {
+   "theme": "therapy",
+   "term": "therapeutic",
+   "post_id": "1otn0nv",
+   "year": "2025"
+  }
+ }
+}

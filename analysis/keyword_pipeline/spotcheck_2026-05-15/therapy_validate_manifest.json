@@ -1,0 +1,3193 @@
+{
+ "seed": 20260515,
+ "candidates": [
+  "therapist bot",
+  "therapy bot",
+  "psychologist bot",
+  "vent to",
+  "comfort character"
+ ],
+ "n": 100,
+ "batches": {
+  "batch_tval_therapist_bot_01.md": [
+   "ID-4001",
+   "ID-4002",
+   "ID-4003",
+   "ID-4004",
+   "ID-4005",
+   "ID-4006",
+   "ID-4007",
+   "ID-4008",
+   "ID-4009",
+   "ID-4010",
+   "ID-4011",
+   "ID-4012",
+   "ID-4013",
+   "ID-4014",
+   "ID-4015",
+   "ID-4016",
+   "ID-4017",
+   "ID-4018",
+   "ID-4019",
+   "ID-4020",
+   "ID-4021",
+   "ID-4022",
+   "ID-4023",
+   "ID-4024",
+   "ID-4025",
+   "ID-4026",
+   "ID-4027",
+   "ID-4028",
+   "ID-4029",
+   "ID-4030",
+   "ID-4031",
+   "ID-4032",
+   "ID-4033",
+   "ID-4034",
+   "ID-4035",
+   "ID-4036",
+   "ID-4037",
+   "ID-4038",
+   "ID-4039",
+   "ID-4040"
+  ],
+  "batch_tval_therapist_bot_02.md": [
+   "ID-4041",
+   "ID-4042",
+   "ID-4043",
+   "ID-4044",
+   "ID-4045",
+   "ID-4046",
+   "ID-4047",
+   "ID-4048",
+   "ID-4049",
+   "ID-4050",
+   "ID-4051",
+   "ID-4052",
+   "ID-4053",
+   "ID-4054",
+   "ID-4055",
+   "ID-4056",
+   "ID-4057",
+   "ID-4058",
+   "ID-4059",
+   "ID-4060",
+   "ID-4061",
+   "ID-4062",
+   "ID-4063",
+   "ID-4064",
+   "ID-4065",
+   "ID-4066",
+   "ID-4067",
+   "ID-4068",
+   "ID-4069",
+   "ID-4070",
+   "ID-4071",
+   "ID-4072",
+   "ID-4073",
+   "ID-4074",
+   "ID-4075",
+   "ID-4076",
+   "ID-4077",
+   "ID-4078",
+   "ID-4079",
+   "ID-4080"
+  ],
+  "batch_tval_therapist_bot_03.md": [
+   "ID-4081",
+   "ID-4082",
+   "ID-4083",
+   "ID-4084",
+   "ID-4085"
+  ],
+  "batch_tval_therapy_bot_01.md": [
+   "ID-4086",
+   "ID-4087",
+   "ID-4088",
+   "ID-4089",
+   "ID-4090",
+   "ID-4091",
+   "ID-4092",
+   "ID-4093",
+   "ID-4094",
+   "ID-4095",
+   "ID-4096",
+   "ID-4097",
+   "ID-4098",
+   "ID-4099",
+   "ID-4100",
+   "ID-4101",
+   "ID-4102",
+   "ID-4103",
+   "ID-4104",
+   "ID-4105",
+   "ID-4106",
+   "ID-4107",
+   "ID-4108",
+   "ID-4109",
+   "ID-4110",
+   "ID-4111",
+   "ID-4112",
+   "ID-4113",
+   "ID-4114",
+   "ID-4115",
+   "ID-4116",
+   "ID-4117",
+   "ID-4118",
+   "ID-4119",
+   "ID-4120",
+   "ID-4121",
+   "ID-4122",
+   "ID-4123",
+   "ID-4124",
+   "ID-4125"
+  ],
+  "batch_tval_therapy_bot_02.md": [
+   "ID-4126",
+   "ID-4127",
+   "ID-4128",
+   "ID-4129",
+   "ID-4130",
+   "ID-4131",
+   "ID-4132",
+   "ID-4133",
+   "ID-4134",
+   "ID-4135",
+   "ID-4136",
+   "ID-4137",
+   "ID-4138",
+   "ID-4139",
+   "ID-4140",
+   "ID-4141",
+   "ID-4142",
+   "ID-4143",
+   "ID-4144",
+   "ID-4145",
+   "ID-4146",
+   "ID-4147",
+   "ID-4148",
+   "ID-4149",
+   "ID-4150",
+   "ID-4151",
+   "ID-4152",
+   "ID-4153",
+   "ID-4154",
+   "ID-4155",
+   "ID-4156",
+   "ID-4157",
+   "ID-4158",
+   "ID-4159",
+   "ID-4160",
+   "ID-4161",
+   "ID-4162",
+   "ID-4163",
+   "ID-4164",
+   "ID-4165"
+  ],
+  "batch_tval_therapy_bot_03.md": [
+   "ID-4166",
+   "ID-4167",
+   "ID-4168",
+   "ID-4169",
+   "ID-4170",
+   "ID-4171",
+   "ID-4172",
+   "ID-4173",
+   "ID-4174",
+   "ID-4175",
+   "ID-4176",
+   "ID-4177",
+   "ID-4178"
+  ],
+  "batch_tval_psychologist_bot_01.md": [
+   "ID-4179",
+   "ID-4180",
+   "ID-4181",
+   "ID-4182",
+   "ID-4183",
+   "ID-4184",
+   "ID-4185",
+   "ID-4186",
+   "ID-4187",
+   "ID-4188",
+   "ID-4189",
+   "ID-4190",
+   "ID-4191",
+   "ID-4192",
+   "ID-4193",
+   "ID-4194",
+   "ID-4195",
+   "ID-4196",
+   "ID-4197",
+   "ID-4198",
+   "ID-4199",
+   "ID-4200",
+   "ID-4201",
+   "ID-4202",
+   "ID-4203",
+   "ID-4204",
+   "ID-4205",
+   "ID-4206",
+   "ID-4207",
+   "ID-4208",
+   "ID-4209",
+   "ID-4210",
+   "ID-4211",
+   "ID-4212",
+   "ID-4213",
+   "ID-4214",
+   "ID-4215",
+   "ID-4216",
+   "ID-4217",
+   "ID-4218"
+  ],
+  "batch_tval_psychologist_bot_02.md": [
+   "ID-4219",
+   "ID-4220",
+   "ID-4221",
+   "ID-4222",
+   "ID-4223",
+   "ID-4224",
+   "ID-4225",
+   "ID-4226",
+   "ID-4227",
+   "ID-4228",
+   "ID-4229",
+   "ID-4230",
+   "ID-4231",
+   "ID-4232",
+   "ID-4233",
+   "ID-4234",
+   "ID-4235",
+   "ID-4236",
+   "ID-4237",
+   "ID-4238",
+   "ID-4239",
+   "ID-4240",
+   "ID-4241",
+   "ID-4242",
+   "ID-4243",
+   "ID-4244",
+   "ID-4245",
+   "ID-4246",
+   "ID-4247",
+   "ID-4248",
+   "ID-4249",
+   "ID-4250"
+  ],
+  "batch_tval_vent_to_01.md": [
+   "ID-4251",
+   "ID-4252",
+   "ID-4253",
+   "ID-4254",
+   "ID-4255",
+   "ID-4256",
+   "ID-4257",
+   "ID-4258",
+   "ID-4259",
+   "ID-4260",
+   "ID-4261",
+   "ID-4262",
+   "ID-4263",
+   "ID-4264",
+   "ID-4265",
+   "ID-4266",
+   "ID-4267",
+   "ID-4268",
+   "ID-4269",
+   "ID-4270",
+   "ID-4271",
+   "ID-4272",
+   "ID-4273",
+   "ID-4274",
+   "ID-4275",
+   "ID-4276",
+   "ID-4277",
+   "ID-4278",
+   "ID-4279",
+   "ID-4280",
+   "ID-4281",
+   "ID-4282",
+   "ID-4283",
+   "ID-4284",
+   "ID-4285",
+   "ID-4286",
+   "ID-4287",
+   "ID-4288",
+   "ID-4289",
+   "ID-4290"
+  ],
+  "batch_tval_vent_to_02.md": [
+   "ID-4291",
+   "ID-4292",
+   "ID-4293",
+   "ID-4294",
+   "ID-4295",
+   "ID-4296",
+   "ID-4297",
+   "ID-4298",
+   "ID-4299",
+   "ID-4300",
+   "ID-4301",
+   "ID-4302",
+   "ID-4303",
+   "ID-4304",
+   "ID-4305",
+   "ID-4306",
+   "ID-4307",
+   "ID-4308",
+   "ID-4309",
+   "ID-4310",
+   "ID-4311",
+   "ID-4312",
+   "ID-4313",
+   "ID-4314",
+   "ID-4315",
+   "ID-4316",
+   "ID-4317",
+   "ID-4318",
+   "ID-4319",
+   "ID-4320",
+   "ID-4321",
+   "ID-4322",
+   "ID-4323",
+   "ID-4324",
+   "ID-4325",
+   "ID-4326",
+   "ID-4327",
+   "ID-4328",
+   "ID-4329",
+   "ID-4330"
+  ],
+  "batch_tval_vent_to_03.md": [
+   "ID-4331",
+   "ID-4332",
+   "ID-4333",
+   "ID-4334",
+   "ID-4335",
+   "ID-4336",
+   "ID-4337",
+   "ID-4338",
+   "ID-4339",
+   "ID-4340",
+   "ID-4341",
+   "ID-4342",
+   "ID-4343",
+   "ID-4344",
+   "ID-4345",
+   "ID-4346",
+   "ID-4347",
+   "ID-4348",
+   "ID-4349",
+   "ID-4350"
+  ],
+  "batch_tval_comfort_character_01.md": [
+   "ID-4351",
+   "ID-4352",
+   "ID-4353",
+   "ID-4354",
+   "ID-4355",
+   "ID-4356",
+   "ID-4357",
+   "ID-4358",
+   "ID-4359",
+   "ID-4360",
+   "ID-4361",
+   "ID-4362",
+   "ID-4363",
+   "ID-4364",
+   "ID-4365",
+   "ID-4366",
+   "ID-4367",
+   "ID-4368",
+   "ID-4369",
+   "ID-4370",
+   "ID-4371",
+   "ID-4372",
+   "ID-4373",
+   "ID-4374",
+   "ID-4375",
+   "ID-4376",
+   "ID-4377",
+   "ID-4378",
+   "ID-4379",
+   "ID-4380",
+   "ID-4381",
+   "ID-4382",
+   "ID-4383",
+   "ID-4384",
+   "ID-4385",
+   "ID-4386",
+   "ID-4387",
+   "ID-4388",
+   "ID-4389",
+   "ID-4390"
+  ],
+  "batch_tval_comfort_character_02.md": [
+   "ID-4391",
+   "ID-4392",
+   "ID-4393",
+   "ID-4394",
+   "ID-4395",
+   "ID-4396",
+   "ID-4397",
+   "ID-4398",
+   "ID-4399",
+   "ID-4400",
+   "ID-4401",
+   "ID-4402",
+   "ID-4403",
+   "ID-4404",
+   "ID-4405",
+   "ID-4406",
+   "ID-4407",
+   "ID-4408",
+   "ID-4409",
+   "ID-4410",
+   "ID-4411",
+   "ID-4412",
+   "ID-4413",
+   "ID-4414",
+   "ID-4415",
+   "ID-4416",
+   "ID-4417",
+   "ID-4418",
+   "ID-4419",
+   "ID-4420",
+   "ID-4421",
+   "ID-4422",
+   "ID-4423",
+   "ID-4424",
+   "ID-4425",
+   "ID-4426",
+   "ID-4427",
+   "ID-4428",
+   "ID-4429",
+   "ID-4430"
+  ],
+  "batch_tval_comfort_character_03.md": [
+   "ID-4431",
+   "ID-4432",
+   "ID-4433",
+   "ID-4434",
+   "ID-4435",
+   "ID-4436",
+   "ID-4437",
+   "ID-4438",
+   "ID-4439",
+   "ID-4440",
+   "ID-4441",
+   "ID-4442",
+   "ID-4443",
+   "ID-4444",
+   "ID-4445",
+   "ID-4446",
+   "ID-4447",
+   "ID-4448",
+   "ID-4449",
+   "ID-4450"
+  ]
+ },
+ "samples": {
+  "ID-4001": {
+   "theme": "therapy",
+   "term": "therapist bot",
+   "post_id": "1821ubl",
+   "year": "2023"
+  },
+  "ID-4002": {
+   "theme": "therapy",
+   "term": "therapist bot",
+   "post_id": "1mfnhaf",
+   "year": "2025"
+  },
+  "ID-4003": {
+   "theme": "therapy",
+   "term": "therapist bot",
+   "post_id": "1i63wqp",
+   "year": "2025"
+  },
+  "ID-4004": {
+   "theme": "therapy",
+   "term": "therapist bot",
+   "post_id": "1g6lu2c",
+   "year": "2024"
+  },
+  "ID-4005": {
+   "theme": "therapy",
+   "term": "therapist bot",
+   "post_id": "1c7hlkt",
+   "year": "2024"
+  },
+  "ID-4006": {
+   "theme": "therapy",
+   "term": "therapist bot",
+   "post_id": "15xbzwg",
+   "year": "2023"
+  },
+  "ID-4007": {
+   "theme": "therapy",
+   "term": "therapist bot",
+   "post_id": "15q9t3w",
+   "year": "2023"
+  },
+  "ID-4008": {
+   "theme": "therapy",
+   "term": "therapist bot",
+   "post_id": "146849x",
+   "year": "2023"
+  },
+  "ID-4009": {
+   "theme": "therapy",
+   "term": "therapist bot",
+   "post_id": "1d9h0j2",
+   "year": "2024"
+  },
+  "ID-4010": {
+   "theme": "therapy",
+   "term": "therapist bot",
+   "post_id": "1rsa30t",
+   "year": "2026"
+  },
+  "ID-4011": {
+   "theme": "therapy",
+   "term": "therapist bot",
+   "post_id": "1filub4",
+   "year": "2024"
+  },
+  "ID-4012": {
+   "theme": "therapy",
+   "term": "therapist bot",
+   "post_id": "14bq9nu",
+   "year": "2023"
+  },
+  "ID-4013": {
+   "theme": "therapy",
+   "term": "therapist bot",
+   "post_id": "118j168",
+   "year": "2023"
+  },
+  "ID-4014": {
+   "theme": "therapy",
+   "term": "therapist bot",
+   "post_id": "1dccvyx",
+   "year": "2024"
+  },
+  "ID-4015": {
+   "theme": "therapy",
+   "term": "therapist bot",
+   "post_id": "15eyh7u",
+   "year": "2023"
+  },
+  "ID-4016": {
+   "theme": "therapy",
+   "term": "therapist bot",
+   "post_id": "16dp5ii",
+   "year": "2023"
+  },
+  "ID-4017": {
+   "theme": "therapy",
+   "term": "therapist bot",
+   "post_id": "1nggvph",
+   "year": "2025"
+  },
+  "ID-4018": {
+   "theme": "therapy",
+   "term": "therapist bot",
+   "post_id": "15q94op",
+   "year": "2023"
+  },
+  "ID-4019": {
+   "theme": "therapy",
+   "term": "therapist bot",
+   "post_id": "1bh3ylk",
+   "year": "2024"
+  },
+  "ID-4020": {
+   "theme": "therapy",
+   "term": "therapist bot",
+   "post_id": "147d2ph",
+   "year": "2023"
+  },
+  "ID-4021": {
+   "theme": "therapy",
+   "term": "therapist bot",
+   "post_id": "14rgbkg",
+   "year": "2023"
+  },
+  "ID-4022": {
+   "theme": "therapy",
+   "term": "therapist bot",
+   "post_id": "147b33n",
+   "year": "2023"
+  },
+  "ID-4023": {
+   "theme": "therapy",
+   "term": "therapist bot",
+   "post_id": "1dssrsp",
+   "year": "2024"
+  },
+  "ID-4024": {
+   "theme": "therapy",
+   "term": "therapist bot",
+   "post_id": "16xbbfr",
+   "year": "2023"
+  },
+  "ID-4025": {
+   "theme": "therapy",
+   "term": "therapist bot",
+   "post_id": "1dg4sv2",
+   "year": "2024"
+  },
+  "ID-4026": {
+   "theme": "therapy",
+   "term": "therapist bot",
+   "post_id": "15qffa3",
+   "year": "2023"
+  },
+  "ID-4027": {
+   "theme": "therapy",
+   "term": "therapist bot",
+   "post_id": "1h78b7v",
+   "year": "2024"
+  },
+  "ID-4028": {
+   "theme": "therapy",
+   "term": "therapist bot",
+   "post_id": "155ghym",
+   "year": "2023"
+  },
+  "ID-4029": {
+   "theme": "therapy",
+   "term": "therapist bot",
+   "post_id": "1lplsyw",
+   "year": "2025"
+  },
+  "ID-4030": {
+   "theme": "therapy",
+   "term": "therapist bot",
+   "post_id": "1gawdky",
+   "year": "2024"
+  },
+  "ID-4031": {
+   "theme": "therapy",
+   "term": "therapist bot",
+   "post_id": "1bht98m",
+   "year": "2024"
+  },
+  "ID-4032": {
+   "theme": "therapy",
+   "term": "therapist bot",
+   "post_id": "144eb0t",
+   "year": "2023"
+  },
+  "ID-4033": {
+   "theme": "therapy",
+   "term": "therapist bot",
+   "post_id": "145lmmn",
+   "year": "2023"
+  },
+  "ID-4034": {
+   "theme": "therapy",
+   "term": "therapist bot",
+   "post_id": "1duocka",
+   "year": "2024"
+  },
+  "ID-4035": {
+   "theme": "therapy",
+   "term": "therapist bot",
+   "post_id": "1457qwg",
+   "year": "2023"
+  },
+  "ID-4036": {
+   "theme": "therapy",
+   "term": "therapist bot",
+   "post_id": "13harfz",
+   "year": "2023"
+  },
+  "ID-4037": {
+   "theme": "therapy",
+   "term": "therapist bot",
+   "post_id": "10g1z1g",
+   "year": "2023"
+  },
+  "ID-4038": {
+   "theme": "therapy",
+   "term": "therapist bot",
+   "post_id": "1hu5frk",
+   "year": "2025"
+  },
+  "ID-4039": {
+   "theme": "therapy",
+   "term": "therapist bot",
+   "post_id": "1eh147c",
+   "year": "2024"
+  },
+  "ID-4040": {
+   "theme": "therapy",
+   "term": "therapist bot",
+   "post_id": "17dsvsg",
+   "year": "2023"
+  },
+  "ID-4041": {
+   "theme": "therapy",
+   "term": "therapist bot",
+   "post_id": "1e5hawz",
+   "year": "2024"
+  },
+  "ID-4042": {
+   "theme": "therapy",
+   "term": "therapist bot",
+   "post_id": "1iseukp",
+   "year": "2025"
+  },
+  "ID-4043": {
+   "theme": "therapy",
+   "term": "therapist bot",
+   "post_id": "14hbre7",
+   "year": "2023"
+  },
+  "ID-4044": {
+   "theme": "therapy",
+   "term": "therapist bot",
+   "post_id": "1lu4pqg",
+   "year": "2025"
+  },
+  "ID-4045": {
+   "theme": "therapy",
+   "term": "therapist bot",
+   "post_id": "189m26p",
+   "year": "2023"
+  },
+  "ID-4046": {
+   "theme": "therapy",
+   "term": "therapist bot",
+   "post_id": "1h2eiqn",
+   "year": "2024"
+  },
+  "ID-4047": {
+   "theme": "therapy",
+   "term": "therapist bot",
+   "post_id": "146fowf",
+   "year": "2023"
+  },
+  "ID-4048": {
+   "theme": "therapy",
+   "term": "therapist bot",
+   "post_id": "14ngm4p",
+   "year": "2023"
+  },
+  "ID-4049": {
+   "theme": "therapy",
+   "term": "therapist bot",
+   "post_id": "1gkyakl",
+   "year": "2024"
+  },
+  "ID-4050": {
+   "theme": "therapy",
+   "term": "therapist bot",
+   "post_id": "13pvknv",
+   "year": "2023"
+  },
+  "ID-4051": {
+   "theme": "therapy",
+   "term": "therapist bot",
+   "post_id": "1493if2",
+   "year": "2023"
+  },
+  "ID-4052": {
+   "theme": "therapy",
+   "term": "therapist bot",
+   "post_id": "136whu3",
+   "year": "2023"
+  },
+  "ID-4053": {
+   "theme": "therapy",
+   "term": "therapist bot",
+   "post_id": "1art4bm",
+   "year": "2024"
+  },
+  "ID-4054": {
+   "theme": "therapy",
+   "term": "therapist bot",
+   "post_id": "1gnt84l",
+   "year": "2024"
+  },
+  "ID-4055": {
+   "theme": "therapy",
+   "term": "therapist bot",
+   "post_id": "1eovcx4",
+   "year": "2024"
+  },
+  "ID-4056": {
+   "theme": "therapy",
+   "term": "therapist bot",
+   "post_id": "1hybt77",
+   "year": "2025"
+  },
+  "ID-4057": {
+   "theme": "therapy",
+   "term": "therapist bot",
+   "post_id": "1gkdiue",
+   "year": "2024"
+  },
+  "ID-4058": {
+   "theme": "therapy",
+   "term": "therapist bot",
+   "post_id": "179uw3c",
+   "year": "2023"
+  },
+  "ID-4059": {
+   "theme": "therapy",
+   "term": "therapist bot",
+   "post_id": "1d5y2qo",
+   "year": "2024"
+  },
+  "ID-4060": {
+   "theme": "therapy",
+   "term": "therapist bot",
+   "post_id": "1et35sj",
+   "year": "2024"
+  },
+  "ID-4061": {
+   "theme": "therapy",
+   "term": "therapist bot",
+   "post_id": "1h3w12w",
+   "year": "2024"
+  },
+  "ID-4062": {
+   "theme": "therapy",
+   "term": "therapist bot",
+   "post_id": "t5ul86",
+   "year": "2022"
+  },
+  "ID-4063": {
+   "theme": "therapy",
+   "term": "therapist bot",
+   "post_id": "13yarbt",
+   "year": "2023"
+  },
+  "ID-4064": {
+   "theme": "therapy",
+   "term": "therapist bot",
+   "post_id": "znvige",
+   "year": "2022"
+  },
+  "ID-4065": {
+   "theme": "therapy",
+   "term": "therapist bot",
+   "post_id": "17p57et",
+   "year": "2023"
+  },
+  "ID-4066": {
+   "theme": "therapy",
+   "term": "therapist bot",
+   "post_id": "15ea4yr",
+   "year": "2023"
+  },
+  "ID-4067": {
+   "theme": "therapy",
+   "term": "therapist bot",
+   "post_id": "1afrmqi",
+   "year": "2024"
+  },
+  "ID-4068": {
+   "theme": "therapy",
+   "term": "therapist bot",
+   "post_id": "1hcn3wb",
+   "year": "2024"
+  },
+  "ID-4069": {
+   "theme": "therapy",
+   "term": "therapist bot",
+   "post_id": "183wt2o",
+   "year": "2023"
+  },
+  "ID-4070": {
+   "theme": "therapy",
+   "term": "therapist bot",
+   "post_id": "1fiot15",
+   "year": "2024"
+  },
+  "ID-4071": {
+   "theme": "therapy",
+   "term": "therapist bot",
+   "post_id": "1ebly3f",
+   "year": "2024"
+  },
+  "ID-4072": {
+   "theme": "therapy",
+   "term": "therapist bot",
+   "post_id": "1ejwlhm",
+   "year": "2024"
+  },
+  "ID-4073": {
+   "theme": "therapy",
+   "term": "therapist bot",
+   "post_id": "1dd4zaj",
+   "year": "2024"
+  },
+  "ID-4074": {
+   "theme": "therapy",
+   "term": "therapist bot",
+   "post_id": "1lplrgr",
+   "year": "2025"
+  },
+  "ID-4075": {
+   "theme": "therapy",
+   "term": "therapist bot",
+   "post_id": "15q9t0x",
+   "year": "2023"
+  },
+  "ID-4076": {
+   "theme": "therapy",
+   "term": "therapist bot",
+   "post_id": "1gku0kr",
+   "year": "2024"
+  },
+  "ID-4077": {
+   "theme": "therapy",
+   "term": "therapist bot",
+   "post_id": "1gmj75z",
+   "year": "2024"
+  },
+  "ID-4078": {
+   "theme": "therapy",
+   "term": "therapist bot",
+   "post_id": "1fv7gml",
+   "year": "2024"
+  },
+  "ID-4079": {
+   "theme": "therapy",
+   "term": "therapist bot",
+   "post_id": "10vygki",
+   "year": "2023"
+  },
+  "ID-4080": {
+   "theme": "therapy",
+   "term": "therapist bot",
+   "post_id": "14tvs5y",
+   "year": "2023"
+  },
+  "ID-4081": {
+   "theme": "therapy",
+   "term": "therapist bot",
+   "post_id": "1gbi2h0",
+   "year": "2024"
+  },
+  "ID-4082": {
+   "theme": "therapy",
+   "term": "therapist bot",
+   "post_id": "1ki6q0b",
+   "year": "2025"
+  },
+  "ID-4083": {
+   "theme": "therapy",
+   "term": "therapist bot",
+   "post_id": "1k4wowz",
+   "year": "2025"
+  },
+  "ID-4084": {
+   "theme": "therapy",
+   "term": "therapist bot",
+   "post_id": "18a2rkf",
+   "year": "2023"
+  },
+  "ID-4085": {
+   "theme": "therapy",
+   "term": "therapist bot",
+   "post_id": "1nzamy8",
+   "year": "2025"
+  },
+  "ID-4086": {
+   "theme": "therapy",
+   "term": "therapy bot",
+   "post_id": "u7yn1y",
+   "year": "2022"
+  },
+  "ID-4087": {
+   "theme": "therapy",
+   "term": "therapy bot",
+   "post_id": "1chwc58",
+   "year": "2024"
+  },
+  "ID-4088": {
+   "theme": "therapy",
+   "term": "therapy bot",
+   "post_id": "1pke1px",
+   "year": "2025"
+  },
+  "ID-4089": {
+   "theme": "therapy",
+   "term": "therapy bot",
+   "post_id": "1iddtav",
+   "year": "2025"
+  },
+  "ID-4090": {
+   "theme": "therapy",
+   "term": "therapy bot",
+   "post_id": "1c1d1tg",
+   "year": "2024"
+  },
+  "ID-4091": {
+   "theme": "therapy",
+   "term": "therapy bot",
+   "post_id": "142k1xd",
+   "year": "2023"
+  },
+  "ID-4092": {
+   "theme": "therapy",
+   "term": "therapy bot",
+   "post_id": "1r550ay",
+   "year": "2026"
+  },
+  "ID-4093": {
+   "theme": "therapy",
+   "term": "therapy bot",
+   "post_id": "1n21ihm",
+   "year": "2025"
+  },
+  "ID-4094": {
+   "theme": "therapy",
+   "term": "therapy bot",
+   "post_id": "1dhkjlu",
+   "year": "2024"
+  },
+  "ID-4095": {
+   "theme": "therapy",
+   "term": "therapy bot",
+   "post_id": "nnkfbs",
+   "year": "2021"
+  },
+  "ID-4096": {
+   "theme": "therapy",
+   "term": "therapy bot",
+   "post_id": "1108q1a",
+   "year": "2023"
+  },
+  "ID-4097": {
+   "theme": "therapy",
+   "term": "therapy bot",
+   "post_id": "1j33hht",
+   "year": "2025"
+  },
+  "ID-4098": {
+   "theme": "therapy",
+   "term": "therapy bot",
+   "post_id": "14avagt",
+   "year": "2023"
+  },
+  "ID-4099": {
+   "theme": "therapy",
+   "term": "therapy bot",
+   "post_id": "f1vs47",
+   "year": "2020"
+  },
+  "ID-4100": {
+   "theme": "therapy",
+   "term": "therapy bot",
+   "post_id": "149rgll",
+   "year": "2023"
+  },
+  "ID-4101": {
+   "theme": "therapy",
+   "term": "therapy bot",
+   "post_id": "1nu464n",
+   "year": "2025"
+  },
+  "ID-4102": {
+   "theme": "therapy",
+   "term": "therapy bot",
+   "post_id": "1fj7l6r",
+   "year": "2024"
+  },
+  "ID-4103": {
+   "theme": "therapy",
+   "term": "therapy bot",
+   "post_id": "13w3ym0",
+   "year": "2023"
+  },
+  "ID-4104": {
+   "theme": "therapy",
+   "term": "therapy bot",
+   "post_id": "1m2d203",
+   "year": "2025"
+  },
+  "ID-4105": {
+   "theme": "therapy",
+   "term": "therapy bot",
+   "post_id": "157uvgm",
+   "year": "2023"
+  },
+  "ID-4106": {
+   "theme": "therapy",
+   "term": "therapy bot",
+   "post_id": "s19ypo",
+   "year": "2022"
+  },
+  "ID-4107": {
+   "theme": "therapy",
+   "term": "therapy bot",
+   "post_id": "18y8t1m",
+   "year": "2024"
+  },
+  "ID-4108": {
+   "theme": "therapy",
+   "term": "therapy bot",
+   "post_id": "13yq7a0",
+   "year": "2023"
+  },
+  "ID-4109": {
+   "theme": "therapy",
+   "term": "therapy bot",
+   "post_id": "k8hrll",
+   "year": "2020"
+  },
+  "ID-4110": {
+   "theme": "therapy",
+   "term": "therapy bot",
+   "post_id": "161xhow",
+   "year": "2023"
+  },
+  "ID-4111": {
+   "theme": "therapy",
+   "term": "therapy bot",
+   "post_id": "1dcdw0a",
+   "year": "2024"
+  },
+  "ID-4112": {
+   "theme": "therapy",
+   "term": "therapy bot",
+   "post_id": "1439nsj",
+   "year": "2023"
+  },
+  "ID-4113": {
+   "theme": "therapy",
+   "term": "therapy bot",
+   "post_id": "esuonl",
+   "year": "2020"
+  },
+  "ID-4114": {
+   "theme": "therapy",
+   "term": "therapy bot",
+   "post_id": "110gwm2",
+   "year": "2023"
+  },
+  "ID-4115": {
+   "theme": "therapy",
+   "term": "therapy bot",
+   "post_id": "1fjt03f",
+   "year": "2024"
+  },
+  "ID-4116": {
+   "theme": "therapy",
+   "term": "therapy bot",
+   "post_id": "viv9j0",
+   "year": "2022"
+  },
+  "ID-4117": {
+   "theme": "therapy",
+   "term": "therapy bot",
+   "post_id": "148u2ru",
+   "year": "2023"
+  },
+  "ID-4118": {
+   "theme": "therapy",
+   "term": "therapy bot",
+   "post_id": "18lo1yq",
+   "year": "2023"
+  },
+  "ID-4119": {
+   "theme": "therapy",
+   "term": "therapy bot",
+   "post_id": "13j6esb",
+   "year": "2023"
+  },
+  "ID-4120": {
+   "theme": "therapy",
+   "term": "therapy bot",
+   "post_id": "139putz",
+   "year": "2023"
+  },
+  "ID-4121": {
+   "theme": "therapy",
+   "term": "therapy bot",
+   "post_id": "104zy7i",
+   "year": "2023"
+  },
+  "ID-4122": {
+   "theme": "therapy",
+   "term": "therapy bot",
+   "post_id": "14epsgd",
+   "year": "2023"
+  },
+  "ID-4123": {
+   "theme": "therapy",
+   "term": "therapy bot",
+   "post_id": "14fehwx",
+   "year": "2023"
+  },
+  "ID-4124": {
+   "theme": "therapy",
+   "term": "therapy bot",
+   "post_id": "10y8y0j",
+   "year": "2023"
+  },
+  "ID-4125": {
+   "theme": "therapy",
+   "term": "therapy bot",
+   "post_id": "1filub4",
+   "year": "2024"
+  },
+  "ID-4126": {
+   "theme": "therapy",
+   "term": "therapy bot",
+   "post_id": "eyrk4l",
+   "year": "2020"
+  },
+  "ID-4127": {
+   "theme": "therapy",
+   "term": "therapy bot",
+   "post_id": "13jbaan",
+   "year": "2023"
+  },
+  "ID-4128": {
+   "theme": "therapy",
+   "term": "therapy bot",
+   "post_id": "18hdnst",
+   "year": "2023"
+  },
+  "ID-4129": {
+   "theme": "therapy",
+   "term": "therapy bot",
+   "post_id": "i92cs9",
+   "year": "2020"
+  },
+  "ID-4130": {
+   "theme": "therapy",
+   "term": "therapy bot",
+   "post_id": "1rghpg0",
+   "year": "2026"
+  },
+  "ID-4131": {
+   "theme": "therapy",
+   "term": "therapy bot",
+   "post_id": "1mpm5b9",
+   "year": "2025"
+  },
+  "ID-4132": {
+   "theme": "therapy",
+   "term": "therapy bot",
+   "post_id": "cwb1aq",
+   "year": "2019"
+  },
+  "ID-4133": {
+   "theme": "therapy",
+   "term": "therapy bot",
+   "post_id": "147cdei",
+   "year": "2023"
+  },
+  "ID-4134": {
+   "theme": "therapy",
+   "term": "therapy bot",
+   "post_id": "1i28avt",
+   "year": "2025"
+  },
+  "ID-4135": {
+   "theme": "therapy",
+   "term": "therapy bot",
+   "post_id": "1471lzn",
+   "year": "2023"
+  },
+  "ID-4136": {
+   "theme": "therapy",
+   "term": "therapy bot",
+   "post_id": "1h671jf",
+   "year": "2024"
+  },
+  "ID-4137": {
+   "theme": "therapy",
+   "term": "therapy bot",
+   "post_id": "1sr79yv",
+   "year": "2026"
+  },
+  "ID-4138": {
+   "theme": "therapy",
+   "term": "therapy bot",
+   "post_id": "14x28u6",
+   "year": "2023"
+  },
+  "ID-4139": {
+   "theme": "therapy",
+   "term": "therapy bot",
+   "post_id": "10msmbo",
+   "year": "2023"
+  },
+  "ID-4140": {
+   "theme": "therapy",
+   "term": "therapy bot",
+   "post_id": "143ki3x",
+   "year": "2023"
+  },
+  "ID-4141": {
+   "theme": "therapy",
+   "term": "therapy bot",
+   "post_id": "1f5yoxy",
+   "year": "2024"
+  },
+  "ID-4142": {
+   "theme": "therapy",
+   "term": "therapy bot",
+   "post_id": "14wncoy",
+   "year": "2023"
+  },
+  "ID-4143": {
+   "theme": "therapy",
+   "term": "therapy bot",
+   "post_id": "13nhcj5",
+   "year": "2023"
+  },
+  "ID-4144": {
+   "theme": "therapy",
+   "term": "therapy bot",
+   "post_id": "15astr2",
+   "year": "2023"
+  },
+  "ID-4145": {
+   "theme": "therapy",
+   "term": "therapy bot",
+   "post_id": "14o026u",
+   "year": "2023"
+  },
+  "ID-4146": {
+   "theme": "therapy",
+   "term": "therapy bot",
+   "post_id": "15xmm64",
+   "year": "2023"
+  },
+  "ID-4147": {
+   "theme": "therapy",
+   "term": "therapy bot",
+   "post_id": "14tvs5y",
+   "year": "2023"
+  },
+  "ID-4148": {
+   "theme": "therapy",
+   "term": "therapy bot",
+   "post_id": "13lg4iz",
+   "year": "2023"
+  },
+  "ID-4149": {
+   "theme": "therapy",
+   "term": "therapy bot",
+   "post_id": "11bxc2q",
+   "year": "2023"
+  },
+  "ID-4150": {
+   "theme": "therapy",
+   "term": "therapy bot",
+   "post_id": "1d6lzw6",
+   "year": "2024"
+  },
+  "ID-4151": {
+   "theme": "therapy",
+   "term": "therapy bot",
+   "post_id": "14d0l8r",
+   "year": "2023"
+  },
+  "ID-4152": {
+   "theme": "therapy",
+   "term": "therapy bot",
+   "post_id": "14qmspf",
+   "year": "2023"
+  },
+  "ID-4153": {
+   "theme": "therapy",
+   "term": "therapy bot",
+   "post_id": "l8k6em",
+   "year": "2021"
+  },
+  "ID-4154": {
+   "theme": "therapy",
+   "term": "therapy bot",
+   "post_id": "1gvcedj",
+   "year": "2024"
+  },
+  "ID-4155": {
+   "theme": "therapy",
+   "term": "therapy bot",
+   "post_id": "1gi6scg",
+   "year": "2024"
+  },
+  "ID-4156": {
+   "theme": "therapy",
+   "term": "therapy bot",
+   "post_id": "m6mjl5",
+   "year": "2021"
+  },
+  "ID-4157": {
+   "theme": "therapy",
+   "term": "therapy bot",
+   "post_id": "1luq8p8",
+   "year": "2025"
+  },
+  "ID-4158": {
+   "theme": "therapy",
+   "term": "therapy bot",
+   "post_id": "159mhxb",
+   "year": "2023"
+  },
+  "ID-4159": {
+   "theme": "therapy",
+   "term": "therapy bot",
+   "post_id": "14n3jgn",
+   "year": "2023"
+  },
+  "ID-4160": {
+   "theme": "therapy",
+   "term": "therapy bot",
+   "post_id": "17mbkdt",
+   "year": "2023"
+  },
+  "ID-4161": {
+   "theme": "therapy",
+   "term": "therapy bot",
+   "post_id": "176trnx",
+   "year": "2023"
+  },
+  "ID-4162": {
+   "theme": "therapy",
+   "term": "therapy bot",
+   "post_id": "13r990l",
+   "year": "2023"
+  },
+  "ID-4163": {
+   "theme": "therapy",
+   "term": "therapy bot",
+   "post_id": "1hkhvpc",
+   "year": "2024"
+  },
+  "ID-4164": {
+   "theme": "therapy",
+   "term": "therapy bot",
+   "post_id": "12c75wv",
+   "year": "2023"
+  },
+  "ID-4165": {
+   "theme": "therapy",
+   "term": "therapy bot",
+   "post_id": "1na6bre",
+   "year": "2025"
+  },
+  "ID-4166": {
+   "theme": "therapy",
+   "term": "therapy bot",
+   "post_id": "148wjti",
+   "year": "2023"
+  },
+  "ID-4167": {
+   "theme": "therapy",
+   "term": "therapy bot",
+   "post_id": "110f1fy",
+   "year": "2023"
+  },
+  "ID-4168": {
+   "theme": "therapy",
+   "term": "therapy bot",
+   "post_id": "13ny81f",
+   "year": "2023"
+  },
+  "ID-4169": {
+   "theme": "therapy",
+   "term": "therapy bot",
+   "post_id": "1dhlt1r",
+   "year": "2024"
+  },
+  "ID-4170": {
+   "theme": "therapy",
+   "term": "therapy bot",
+   "post_id": "f2vsst",
+   "year": "2020"
+  },
+  "ID-4171": {
+   "theme": "therapy",
+   "term": "therapy bot",
+   "post_id": "111h9ef",
+   "year": "2023"
+  },
+  "ID-4172": {
+   "theme": "therapy",
+   "term": "therapy bot",
+   "post_id": "155dndh",
+   "year": "2023"
+  },
+  "ID-4173": {
+   "theme": "therapy",
+   "term": "therapy bot",
+   "post_id": "14l7yo5",
+   "year": "2023"
+  },
+  "ID-4174": {
+   "theme": "therapy",
+   "term": "therapy bot",
+   "post_id": "13zlwyx",
+   "year": "2023"
+  },
+  "ID-4175": {
+   "theme": "therapy",
+   "term": "therapy bot",
+   "post_id": "iatcbx",
+   "year": "2020"
+  },
+  "ID-4176": {
+   "theme": "therapy",
+   "term": "therapy bot",
+   "post_id": "13hmg9u",
+   "year": "2023"
+  },
+  "ID-4177": {
+   "theme": "therapy",
+   "term": "therapy bot",
+   "post_id": "1dxiwel",
+   "year": "2024"
+  },
+  "ID-4178": {
+   "theme": "therapy",
+   "term": "therapy bot",
+   "post_id": "1fsonkk",
+   "year": "2024"
+  },
+  "ID-4179": {
+   "theme": "therapy",
+   "term": "psychologist bot",
+   "post_id": "1c15xb3",
+   "year": "2024"
+  },
+  "ID-4180": {
+   "theme": "therapy",
+   "term": "psychologist bot",
+   "post_id": "17za8a4",
+   "year": "2023"
+  },
+  "ID-4181": {
+   "theme": "therapy",
+   "term": "psychologist bot",
+   "post_id": "188nld1",
+   "year": "2023"
+  },
+  "ID-4182": {
+   "theme": "therapy",
+   "term": "psychologist bot",
+   "post_id": "1dqiyc5",
+   "year": "2024"
+  },
+  "ID-4183": {
+   "theme": "therapy",
+   "term": "psychologist bot",
+   "post_id": "1gq9g82",
+   "year": "2024"
+  },
+  "ID-4184": {
+   "theme": "therapy",
+   "term": "psychologist bot",
+   "post_id": "1djibs8",
+   "year": "2024"
+  },
+  "ID-4185": {
+   "theme": "therapy",
+   "term": "psychologist bot",
+   "post_id": "14qzxj9",
+   "year": "2023"
+  },
+  "ID-4186": {
+   "theme": "therapy",
+   "term": "psychologist bot",
+   "post_id": "17yyf46",
+   "year": "2023"
+  },
+  "ID-4187": {
+   "theme": "therapy",
+   "term": "psychologist bot",
+   "post_id": "1bj74y2",
+   "year": "2024"
+  },
+  "ID-4188": {
+   "theme": "therapy",
+   "term": "psychologist bot",
+   "post_id": "1fvucyz",
+   "year": "2024"
+  },
+  "ID-4189": {
+   "theme": "therapy",
+   "term": "psychologist bot",
+   "post_id": "1gz3rd1",
+   "year": "2024"
+  },
+  "ID-4190": {
+   "theme": "therapy",
+   "term": "psychologist bot",
+   "post_id": "1gur8nr",
+   "year": "2024"
+  },
+  "ID-4191": {
+   "theme": "therapy",
+   "term": "psychologist bot",
+   "post_id": "1bgko8p",
+   "year": "2024"
+  },
+  "ID-4192": {
+   "theme": "therapy",
+   "term": "psychologist bot",
+   "post_id": "14ojs32",
+   "year": "2023"
+  },
+  "ID-4193": {
+   "theme": "therapy",
+   "term": "psychologist bot",
+   "post_id": "1dbrijj",
+   "year": "2024"
+  },
+  "ID-4194": {
+   "theme": "therapy",
+   "term": "psychologist bot",
+   "post_id": "1dkvy75",
+   "year": "2024"
+  },
+  "ID-4195": {
+   "theme": "therapy",
+   "term": "psychologist bot",
+   "post_id": "18cy47i",
+   "year": "2023"
+  },
+  "ID-4196": {
+   "theme": "therapy",
+   "term": "psychologist bot",
+   "post_id": "1gv0zp4",
+   "year": "2024"
+  },
+  "ID-4197": {
+   "theme": "therapy",
+   "term": "psychologist bot",
+   "post_id": "1gbi4j4",
+   "year": "2024"
+  },
+  "ID-4198": {
+   "theme": "therapy",
+   "term": "psychologist bot",
+   "post_id": "1ak6xzn",
+   "year": "2024"
+  },
+  "ID-4199": {
+   "theme": "therapy",
+   "term": "psychologist bot",
+   "post_id": "1ecituy",
+   "year": "2024"
+  },
+  "ID-4200": {
+   "theme": "therapy",
+   "term": "psychologist bot",
+   "post_id": "1gbehy6",
+   "year": "2024"
+  },
+  "ID-4201": {
+   "theme": "therapy",
+   "term": "psychologist bot",
+   "post_id": "14xdjvw",
+   "year": "2023"
+  },
+  "ID-4202": {
+   "theme": "therapy",
+   "term": "psychologist bot",
+   "post_id": "136fu40",
+   "year": "2023"
+  },
+  "ID-4203": {
+   "theme": "therapy",
+   "term": "psychologist bot",
+   "post_id": "1gul4w5",
+   "year": "2024"
+  },
+  "ID-4204": {
+   "theme": "therapy",
+   "term": "psychologist bot",
+   "post_id": "16j0yfj",
+   "year": "2023"
+  },
+  "ID-4205": {
+   "theme": "therapy",
+   "term": "psychologist bot",
+   "post_id": "15krp9q",
+   "year": "2023"
+  },
+  "ID-4206": {
+   "theme": "therapy",
+   "term": "psychologist bot",
+   "post_id": "155ee8e",
+   "year": "2023"
+  },
+  "ID-4207": {
+   "theme": "therapy",
+   "term": "psychologist bot",
+   "post_id": "13b3zgl",
+   "year": "2023"
+  },
+  "ID-4208": {
+   "theme": "therapy",
+   "term": "psychologist bot",
+   "post_id": "18aexb3",
+   "year": "2023"
+  },
+  "ID-4209": {
+   "theme": "therapy",
+   "term": "psychologist bot",
+   "post_id": "10fcx8w",
+   "year": "2023"
+  },
+  "ID-4210": {
+   "theme": "therapy",
+   "term": "psychologist bot",
+   "post_id": "1gcxluz",
+   "year": "2024"
+  },
+  "ID-4211": {
+   "theme": "therapy",
+   "term": "psychologist bot",
+   "post_id": "19aia71",
+   "year": "2024"
+  },
+  "ID-4212": {
+   "theme": "therapy",
+   "term": "psychologist bot",
+   "post_id": "1p0vvrm",
+   "year": "2025"
+  },
+  "ID-4213": {
+   "theme": "therapy",
+   "term": "psychologist bot",
+   "post_id": "1dacs4b",
+   "year": "2024"
+  },
+  "ID-4214": {
+   "theme": "therapy",
+   "term": "psychologist bot",
+   "post_id": "1eth6mf",
+   "year": "2024"
+  },
+  "ID-4215": {
+   "theme": "therapy",
+   "term": "psychologist bot",
+   "post_id": "1bj8abv",
+   "year": "2024"
+  },
+  "ID-4216": {
+   "theme": "therapy",
+   "term": "psychologist bot",
+   "post_id": "11rx2r1",
+   "year": "2023"
+  },
+  "ID-4217": {
+   "theme": "therapy",
+   "term": "psychologist bot",
+   "post_id": "1iryx83",
+   "year": "2025"
+  },
+  "ID-4218": {
+   "theme": "therapy",
+   "term": "psychologist bot",
+   "post_id": "1bg1wxz",
+   "year": "2024"
+  },
+  "ID-4219": {
+   "theme": "therapy",
+   "term": "psychologist bot",
+   "post_id": "1411zzq",
+   "year": "2023"
+  },
+  "ID-4220": {
+   "theme": "therapy",
+   "term": "psychologist bot",
+   "post_id": "1gwi21l",
+   "year": "2024"
+  },
+  "ID-4221": {
+   "theme": "therapy",
+   "term": "psychologist bot",
+   "post_id": "1ak6v2p",
+   "year": "2024"
+  },
+  "ID-4222": {
+   "theme": "therapy",
+   "term": "psychologist bot",
+   "post_id": "12fcvw4",
+   "year": "2023"
+  },
+  "ID-4223": {
+   "theme": "therapy",
+   "term": "psychologist bot",
+   "post_id": "11rcv21",
+   "year": "2023"
+  },
+  "ID-4224": {
+   "theme": "therapy",
+   "term": "psychologist bot",
+   "post_id": "14xdi20",
+   "year": "2023"
+  },
+  "ID-4225": {
+   "theme": "therapy",
+   "term": "psychologist bot",
+   "post_id": "1h8jv4x",
+   "year": "2024"
+  },
+  "ID-4226": {
+   "theme": "therapy",
+   "term": "psychologist bot",
+   "post_id": "1efy8ms",
+   "year": "2024"
+  },
+  "ID-4227": {
+   "theme": "therapy",
+   "term": "psychologist bot",
+   "post_id": "1mg81yg",
+   "year": "2025"
+  },
+  "ID-4228": {
+   "theme": "therapy",
+   "term": "psychologist bot",
+   "post_id": "1cs5go3",
+   "year": "2024"
+  },
+  "ID-4229": {
+   "theme": "therapy",
+   "term": "psychologist bot",
+   "post_id": "1guido9",
+   "year": "2024"
+  },
+  "ID-4230": {
+   "theme": "therapy",
+   "term": "psychologist bot",
+   "post_id": "18ot4in",
+   "year": "2023"
+  },
+  "ID-4231": {
+   "theme": "therapy",
+   "term": "psychologist bot",
+   "post_id": "10uoevp",
+   "year": "2023"
+  },
+  "ID-4232": {
+   "theme": "therapy",
+   "term": "psychologist bot",
+   "post_id": "1bf5zbc",
+   "year": "2024"
+  },
+  "ID-4233": {
+   "theme": "therapy",
+   "term": "psychologist bot",
+   "post_id": "175szxp",
+   "year": "2023"
+  },
+  "ID-4234": {
+   "theme": "therapy",
+   "term": "psychologist bot",
+   "post_id": "10sj1fv",
+   "year": "2023"
+  },
+  "ID-4235": {
+   "theme": "therapy",
+   "term": "psychologist bot",
+   "post_id": "1gvcedj",
+   "year": "2024"
+  },
+  "ID-4236": {
+   "theme": "therapy",
+   "term": "psychologist bot",
+   "post_id": "12xr36w",
+   "year": "2023"
+  },
+  "ID-4237": {
+   "theme": "therapy",
+   "term": "psychologist bot",
+   "post_id": "17z06rl",
+   "year": "2023"
+  },
+  "ID-4238": {
+   "theme": "therapy",
+   "term": "psychologist bot",
+   "post_id": "11udmbx",
+   "year": "2023"
+  },
+  "ID-4239": {
+   "theme": "therapy",
+   "term": "psychologist bot",
+   "post_id": "1hhuawj",
+   "year": "2024"
+  },
+  "ID-4240": {
+   "theme": "therapy",
+   "term": "psychologist bot",
+   "post_id": "1eyrrrw",
+   "year": "2024"
+  },
+  "ID-4241": {
+   "theme": "therapy",
+   "term": "psychologist bot",
+   "post_id": "1nhv1e6",
+   "year": "2025"
+  },
+  "ID-4242": {
+   "theme": "therapy",
+   "term": "psychologist bot",
+   "post_id": "1gasiks",
+   "year": "2024"
+  },
+  "ID-4243": {
+   "theme": "therapy",
+   "term": "psychologist bot",
+   "post_id": "13j6lo6",
+   "year": "2023"
+  },
+  "ID-4244": {
+   "theme": "therapy",
+   "term": "psychologist bot",
+   "post_id": "1c15ksp",
+   "year": "2024"
+  },
+  "ID-4245": {
+   "theme": "therapy",
+   "term": "psychologist bot",
+   "post_id": "1cq50kw",
+   "year": "2024"
+  },
+  "ID-4246": {
+   "theme": "therapy",
+   "term": "psychologist bot",
+   "post_id": "157dk1c",
+   "year": "2023"
+  },
+  "ID-4247": {
+   "theme": "therapy",
+   "term": "psychologist bot",
+   "post_id": "1gzw4sg",
+   "year": "2024"
+  },
+  "ID-4248": {
+   "theme": "therapy",
+   "term": "psychologist bot",
+   "post_id": "1emgk2j",
+   "year": "2024"
+  },
+  "ID-4249": {
+   "theme": "therapy",
+   "term": "psychologist bot",
+   "post_id": "128amvy",
+   "year": "2023"
+  },
+  "ID-4250": {
+   "theme": "therapy",
+   "term": "psychologist bot",
+   "post_id": "1gzjwvm",
+   "year": "2024"
+  },
+  "ID-4251": {
+   "theme": "therapy",
+   "term": "vent to",
+   "post_id": "1h2eiqn",
+   "year": "2024"
+  },
+  "ID-4252": {
+   "theme": "therapy",
+   "term": "vent to",
+   "post_id": "1hmqbdd",
+   "year": "2024"
+  },
+  "ID-4253": {
+   "theme": "therapy",
+   "term": "vent to",
+   "post_id": "1epnjil",
+   "year": "2024"
+  },
+  "ID-4254": {
+   "theme": "therapy",
+   "term": "vent to",
+   "post_id": "111mfhh",
+   "year": "2023"
+  },
+  "ID-4255": {
+   "theme": "therapy",
+   "term": "vent to",
+   "post_id": "1giy488",
+   "year": "2024"
+  },
+  "ID-4256": {
+   "theme": "therapy",
+   "term": "vent to",
+   "post_id": "16ml0cs",
+   "year": "2023"
+  },
+  "ID-4257": {
+   "theme": "therapy",
+   "term": "vent to",
+   "post_id": "1mwwt1c",
+   "year": "2025"
+  },
+  "ID-4258": {
+   "theme": "therapy",
+   "term": "vent to",
+   "post_id": "1fzitx2",
+   "year": "2024"
+  },
+  "ID-4259": {
+   "theme": "therapy",
+   "term": "vent to",
+   "post_id": "1gtjahn",
+   "year": "2024"
+  },
+  "ID-4260": {
+   "theme": "therapy",
+   "term": "vent to",
+   "post_id": "1duvw1b",
+   "year": "2024"
+  },
+  "ID-4261": {
+   "theme": "therapy",
+   "term": "vent to",
+   "post_id": "1lp79uh",
+   "year": "2025"
+  },
+  "ID-4262": {
+   "theme": "therapy",
+   "term": "vent to",
+   "post_id": "1ei1frr",
+   "year": "2024"
+  },
+  "ID-4263": {
+   "theme": "therapy",
+   "term": "vent to",
+   "post_id": "1ntervc",
+   "year": "2025"
+  },
+  "ID-4264": {
+   "theme": "therapy",
+   "term": "vent to",
+   "post_id": "10nxlng",
+   "year": "2023"
+  },
+  "ID-4265": {
+   "theme": "therapy",
+   "term": "vent to",
+   "post_id": "1ok6vlc",
+   "year": "2025"
+  },
+  "ID-4266": {
+   "theme": "therapy",
+   "term": "vent to",
+   "post_id": "1drno8t",
+   "year": "2024"
+  },
+  "ID-4267": {
+   "theme": "therapy",
+   "term": "vent to",
+   "post_id": "11ykref",
+   "year": "2023"
+  },
+  "ID-4268": {
+   "theme": "therapy",
+   "term": "vent to",
+   "post_id": "1f8g6ov",
+   "year": "2024"
+  },
+  "ID-4269": {
+   "theme": "therapy",
+   "term": "vent to",
+   "post_id": "10pw5ql",
+   "year": "2023"
+  },
+  "ID-4270": {
+   "theme": "therapy",
+   "term": "vent to",
+   "post_id": "1lay0jb",
+   "year": "2025"
+  },
+  "ID-4271": {
+   "theme": "therapy",
+   "term": "vent to",
+   "post_id": "1rmvzpq",
+   "year": "2026"
+  },
+  "ID-4272": {
+   "theme": "therapy",
+   "term": "vent to",
+   "post_id": "1jsaotx",
+   "year": "2025"
+  },
+  "ID-4273": {
+   "theme": "therapy",
+   "term": "vent to",
+   "post_id": "118ajtw",
+   "year": "2023"
+  },
+  "ID-4274": {
+   "theme": "therapy",
+   "term": "vent to",
+   "post_id": "1e37smb",
+   "year": "2024"
+  },
+  "ID-4275": {
+   "theme": "therapy",
+   "term": "vent to",
+   "post_id": "15nz9bs",
+   "year": "2023"
+  },
+  "ID-4276": {
+   "theme": "therapy",
+   "term": "vent to",
+   "post_id": "1t9p8kh",
+   "year": "2026"
+  },
+  "ID-4277": {
+   "theme": "therapy",
+   "term": "vent to",
+   "post_id": "1figw36",
+   "year": "2024"
+  },
+  "ID-4278": {
+   "theme": "therapy",
+   "term": "vent to",
+   "post_id": "10llzd3",
+   "year": "2023"
+  },
+  "ID-4279": {
+   "theme": "therapy",
+   "term": "vent to",
+   "post_id": "1btlebj",
+   "year": "2024"
+  },
+  "ID-4280": {
+   "theme": "therapy",
+   "term": "vent to",
+   "post_id": "113nz1p",
+   "year": "2023"
+  },
+  "ID-4281": {
+   "theme": "therapy",
+   "term": "vent to",
+   "post_id": "k52ipj",
+   "year": "2020"
+  },
+  "ID-4282": {
+   "theme": "therapy",
+   "term": "vent to",
+   "post_id": "16h44k5",
+   "year": "2023"
+  },
+  "ID-4283": {
+   "theme": "therapy",
+   "term": "vent to",
+   "post_id": "1bntqvd",
+   "year": "2024"
+  },
+  "ID-4284": {
+   "theme": "therapy",
+   "term": "vent to",
+   "post_id": "17h4yu5",
+   "year": "2023"
+  },
+  "ID-4285": {
+   "theme": "therapy",
+   "term": "vent to",
+   "post_id": "1hv12kc",
+   "year": "2025"
+  },
+  "ID-4286": {
+   "theme": "therapy",
+   "term": "vent to",
+   "post_id": "1r5djbp",
+   "year": "2026"
+  },
+  "ID-4287": {
+   "theme": "therapy",
+   "term": "vent to",
+   "post_id": "1nbck9i",
+   "year": "2025"
+  },
+  "ID-4288": {
+   "theme": "therapy",
+   "term": "vent to",
+   "post_id": "1phqs6t",
+   "year": "2025"
+  },
+  "ID-4289": {
+   "theme": "therapy",
+   "term": "vent to",
+   "post_id": "13e31aq",
+   "year": "2023"
+  },
+  "ID-4290": {
+   "theme": "therapy",
+   "term": "vent to",
+   "post_id": "1n7d1ee",
+   "year": "2025"
+  },
+  "ID-4291": {
+   "theme": "therapy",
+   "term": "vent to",
+   "post_id": "14qzxj9",
+   "year": "2023"
+  },
+  "ID-4292": {
+   "theme": "therapy",
+   "term": "vent to",
+   "post_id": "1i6dbqa",
+   "year": "2025"
+  },
+  "ID-4293": {
+   "theme": "therapy",
+   "term": "vent to",
+   "post_id": "qz5vyl",
+   "year": "2021"
+  },
+  "ID-4294": {
+   "theme": "therapy",
+   "term": "vent to",
+   "post_id": "1nqeqzw",
+   "year": "2025"
+  },
+  "ID-4295": {
+   "theme": "therapy",
+   "term": "vent to",
+   "post_id": "1fifquw",
+   "year": "2024"
+  },
+  "ID-4296": {
+   "theme": "therapy",
+   "term": "vent to",
+   "post_id": "1i2k1nt",
+   "year": "2025"
+  },
+  "ID-4297": {
+   "theme": "therapy",
+   "term": "vent to",
+   "post_id": "1m1lts1",
+   "year": "2025"
+  },
+  "ID-4298": {
+   "theme": "therapy",
+   "term": "vent to",
+   "post_id": "1dxiwel",
+   "year": "2024"
+  },
+  "ID-4299": {
+   "theme": "therapy",
+   "term": "vent to",
+   "post_id": "1gcvt3k",
+   "year": "2024"
+  },
+  "ID-4300": {
+   "theme": "therapy",
+   "term": "vent to",
+   "post_id": "1iw3nzd",
+   "year": "2025"
+  },
+  "ID-4301": {
+   "theme": "therapy",
+   "term": "vent to",
+   "post_id": "1kdymh3",
+   "year": "2025"
+  },
+  "ID-4302": {
+   "theme": "therapy",
+   "term": "vent to",
+   "post_id": "1ozx8vj",
+   "year": "2025"
+  },
+  "ID-4303": {
+   "theme": "therapy",
+   "term": "vent to",
+   "post_id": "1fiz0g3",
+   "year": "2024"
+  },
+  "ID-4304": {
+   "theme": "therapy",
+   "term": "vent to",
+   "post_id": "1q07kks",
+   "year": "2025"
+  },
+  "ID-4305": {
+   "theme": "therapy",
+   "term": "vent to",
+   "post_id": "hmz4xa",
+   "year": "2020"
+  },
+  "ID-4306": {
+   "theme": "therapy",
+   "term": "vent to",
+   "post_id": "1b6unkd",
+   "year": "2024"
+  },
+  "ID-4307": {
+   "theme": "therapy",
+   "term": "vent to",
+   "post_id": "175h762",
+   "year": "2023"
+  },
+  "ID-4308": {
+   "theme": "therapy",
+   "term": "vent to",
+   "post_id": "1d2851w",
+   "year": "2024"
+  },
+  "ID-4309": {
+   "theme": "therapy",
+   "term": "vent to",
+   "post_id": "1rbm84e",
+   "year": "2026"
+  },
+  "ID-4310": {
+   "theme": "therapy",
+   "term": "vent to",
+   "post_id": "1gfafay",
+   "year": "2024"
+  },
+  "ID-4311": {
+   "theme": "therapy",
+   "term": "vent to",
+   "post_id": "1bl4fw8",
+   "year": "2024"
+  },
+  "ID-4312": {
+   "theme": "therapy",
+   "term": "vent to",
+   "post_id": "1t9uddx",
+   "year": "2026"
+  },
+  "ID-4313": {
+   "theme": "therapy",
+   "term": "vent to",
+   "post_id": "1dzftck",
+   "year": "2024"
+  },
+  "ID-4314": {
+   "theme": "therapy",
+   "term": "vent to",
+   "post_id": "1erm6df",
+   "year": "2024"
+  },
+  "ID-4315": {
+   "theme": "therapy",
+   "term": "vent to",
+   "post_id": "1511bn3",
+   "year": "2023"
+  },
+  "ID-4316": {
+   "theme": "therapy",
+   "term": "vent to",
+   "post_id": "sm2lfq",
+   "year": "2022"
+  },
+  "ID-4317": {
+   "theme": "therapy",
+   "term": "vent to",
+   "post_id": "1bpwesj",
+   "year": "2024"
+  },
+  "ID-4318": {
+   "theme": "therapy",
+   "term": "vent to",
+   "post_id": "1gjj08g",
+   "year": "2024"
+  },
+  "ID-4319": {
+   "theme": "therapy",
+   "term": "vent to",
+   "post_id": "1gh9uw2",
+   "year": "2024"
+  },
+  "ID-4320": {
+   "theme": "therapy",
+   "term": "vent to",
+   "post_id": "1l2peqy",
+   "year": "2025"
+  },
+  "ID-4321": {
+   "theme": "therapy",
+   "term": "vent to",
+   "post_id": "1mapcvo",
+   "year": "2025"
+  },
+  "ID-4322": {
+   "theme": "therapy",
+   "term": "vent to",
+   "post_id": "190ygi9",
+   "year": "2024"
+  },
+  "ID-4323": {
+   "theme": "therapy",
+   "term": "vent to",
+   "post_id": "1o99pov",
+   "year": "2025"
+  },
+  "ID-4324": {
+   "theme": "therapy",
+   "term": "vent to",
+   "post_id": "1qimgg0",
+   "year": "2026"
+  },
+  "ID-4325": {
+   "theme": "therapy",
+   "term": "vent to",
+   "post_id": "1kxzeu1",
+   "year": "2025"
+  },
+  "ID-4326": {
+   "theme": "therapy",
+   "term": "vent to",
+   "post_id": "1govro2",
+   "year": "2024"
+  },
+  "ID-4327": {
+   "theme": "therapy",
+   "term": "vent to",
+   "post_id": "vches2",
+   "year": "2022"
+  },
+  "ID-4328": {
+   "theme": "therapy",
+   "term": "vent to",
+   "post_id": "110mse7",
+   "year": "2023"
+  },
+  "ID-4329": {
+   "theme": "therapy",
+   "term": "vent to",
+   "post_id": "t5qmga",
+   "year": "2022"
+  },
+  "ID-4330": {
+   "theme": "therapy",
+   "term": "vent to",
+   "post_id": "1j2emtg",
+   "year": "2025"
+  },
+  "ID-4331": {
+   "theme": "therapy",
+   "term": "vent to",
+   "post_id": "110a982",
+   "year": "2023"
+  },
+  "ID-4332": {
+   "theme": "therapy",
+   "term": "vent to",
+   "post_id": "nu8m8e",
+   "year": "2021"
+  },
+  "ID-4333": {
+   "theme": "therapy",
+   "term": "vent to",
+   "post_id": "1epmaqe",
+   "year": "2024"
+  },
+  "ID-4334": {
+   "theme": "therapy",
+   "term": "vent to",
+   "post_id": "15d6tim",
+   "year": "2023"
+  },
+  "ID-4335": {
+   "theme": "therapy",
+   "term": "vent to",
+   "post_id": "18zjm9k",
+   "year": "2024"
+  },
+  "ID-4336": {
+   "theme": "therapy",
+   "term": "vent to",
+   "post_id": "1no6g8e",
+   "year": "2025"
+  },
+  "ID-4337": {
+   "theme": "therapy",
+   "term": "vent to",
+   "post_id": "1buqzmh",
+   "year": "2024"
+  },
+  "ID-4338": {
+   "theme": "therapy",
+   "term": "vent to",
+   "post_id": "18lqzk4",
+   "year": "2023"
+  },
+  "ID-4339": {
+   "theme": "therapy",
+   "term": "vent to",
+   "post_id": "1q8tgcc",
+   "year": "2026"
+  },
+  "ID-4340": {
+   "theme": "therapy",
+   "term": "vent to",
+   "post_id": "17mysw8",
+   "year": "2023"
+  },
+  "ID-4341": {
+   "theme": "therapy",
+   "term": "vent to",
+   "post_id": "1ggi5vg",
+   "year": "2024"
+  },
+  "ID-4342": {
+   "theme": "therapy",
+   "term": "vent to",
+   "post_id": "g3zimy",
+   "year": "2020"
+  },
+  "ID-4343": {
+   "theme": "therapy",
+   "term": "vent to",
+   "post_id": "1garj8e",
+   "year": "2024"
+  },
+  "ID-4344": {
+   "theme": "therapy",
+   "term": "vent to",
+   "post_id": "1fijf7o",
+   "year": "2024"
+  },
+  "ID-4345": {
+   "theme": "therapy",
+   "term": "vent to",
+   "post_id": "1lxller",
+   "year": "2025"
+  },
+  "ID-4346": {
+   "theme": "therapy",
+   "term": "vent to",
+   "post_id": "1c40rgf",
+   "year": "2024"
+  },
+  "ID-4347": {
+   "theme": "therapy",
+   "term": "vent to",
+   "post_id": "1qdg8f0",
+   "year": "2026"
+  },
+  "ID-4348": {
+   "theme": "therapy",
+   "term": "vent to",
+   "post_id": "1gc82p7",
+   "year": "2024"
+  },
+  "ID-4349": {
+   "theme": "therapy",
+   "term": "vent to",
+   "post_id": "11du6kz",
+   "year": "2023"
+  },
+  "ID-4350": {
+   "theme": "therapy",
+   "term": "vent to",
+   "post_id": "1bqcg18",
+   "year": "2024"
+  },
+  "ID-4351": {
+   "theme": "therapy",
+   "term": "comfort character",
+   "post_id": "1crgn2n",
+   "year": "2024"
+  },
+  "ID-4352": {
+   "theme": "therapy",
+   "term": "comfort character",
+   "post_id": "18rmgyx",
+   "year": "2023"
+  },
+  "ID-4353": {
+   "theme": "therapy",
+   "term": "comfort character",
+   "post_id": "17tof9q",
+   "year": "2023"
+  },
+  "ID-4354": {
+   "theme": "therapy",
+   "term": "comfort character",
+   "post_id": "1745ujn",
+   "year": "2023"
+  },
+  "ID-4355": {
+   "theme": "therapy",
+   "term": "comfort character",
+   "post_id": "1bx7jjz",
+   "year": "2024"
+  },
+  "ID-4356": {
+   "theme": "therapy",
+   "term": "comfort character",
+   "post_id": "190fcz5",
+   "year": "2024"
+  },
+  "ID-4357": {
+   "theme": "therapy",
+   "term": "comfort character",
+   "post_id": "152zd37",
+   "year": "2023"
+  },
+  "ID-4358": {
+   "theme": "therapy",
+   "term": "comfort character",
+   "post_id": "16gsmaz",
+   "year": "2023"
+  },
+  "ID-4359": {
+   "theme": "therapy",
+   "term": "comfort character",
+   "post_id": "155t51k",
+   "year": "2023"
+  },
+  "ID-4360": {
+   "theme": "therapy",
+   "term": "comfort character",
+   "post_id": "17kczto",
+   "year": "2023"
+  },
+  "ID-4361": {
+   "theme": "therapy",
+   "term": "comfort character",
+   "post_id": "1pvmhju",
+   "year": "2025"
+  },
+  "ID-4362": {
+   "theme": "therapy",
+   "term": "comfort character",
+   "post_id": "14osx4b",
+   "year": "2023"
+  },
+  "ID-4363": {
+   "theme": "therapy",
+   "term": "comfort character",
+   "post_id": "1914azb",
+   "year": "2024"
+  },
+  "ID-4364": {
+   "theme": "therapy",
+   "term": "comfort character",
+   "post_id": "10xliys",
+   "year": "2023"
+  },
+  "ID-4365": {
+   "theme": "therapy",
+   "term": "comfort character",
+   "post_id": "1o9nul6",
+   "year": "2025"
+  },
+  "ID-4366": {
+   "theme": "therapy",
+   "term": "comfort character",
+   "post_id": "1l0ya0f",
+   "year": "2025"
+  },
+  "ID-4367": {
+   "theme": "therapy",
+   "term": "comfort character",
+   "post_id": "1g7i611",
+   "year": "2024"
+  },
+  "ID-4368": {
+   "theme": "therapy",
+   "term": "comfort character",
+   "post_id": "1gbeur8",
+   "year": "2024"
+  },
+  "ID-4369": {
+   "theme": "therapy",
+   "term": "comfort character",
+   "post_id": "1bfbqsg",
+   "year": "2024"
+  },
+  "ID-4370": {
+   "theme": "therapy",
+   "term": "comfort character",
+   "post_id": "1dhn02i",
+   "year": "2024"
+  },
+  "ID-4371": {
+   "theme": "therapy",
+   "term": "comfort character",
+   "post_id": "1i2m6r0",
+   "year": "2025"
+  },
+  "ID-4372": {
+   "theme": "therapy",
+   "term": "comfort character",
+   "post_id": "10uz4px",
+   "year": "2023"
+  },
+  "ID-4373": {
+   "theme": "therapy",
+   "term": "comfort character",
+   "post_id": "14xljq3",
+   "year": "2023"
+  },
+  "ID-4374": {
+   "theme": "therapy",
+   "term": "comfort character",
+   "post_id": "19dwmzf",
+   "year": "2024"
+  },
+  "ID-4375": {
+   "theme": "therapy",
+   "term": "comfort character",
+   "post_id": "1h337g0",
+   "year": "2024"
+  },
+  "ID-4376": {
+   "theme": "therapy",
+   "term": "comfort character",
+   "post_id": "1l9x4jj",
+   "year": "2025"
+  },
+  "ID-4377": {
+   "theme": "therapy",
+   "term": "comfort character",
+   "post_id": "1fqexfb",
+   "year": "2024"
+  },
+  "ID-4378": {
+   "theme": "therapy",
+   "term": "comfort character",
+   "post_id": "1q4yc0g",
+   "year": "2026"
+  },
+  "ID-4379": {
+   "theme": "therapy",
+   "term": "comfort character",
+   "post_id": "1hw5qvi",
+   "year": "2025"
+  },
+  "ID-4380": {
+   "theme": "therapy",
+   "term": "comfort character",
+   "post_id": "1cc7pqp",
+   "year": "2024"
+  },
+  "ID-4381": {
+   "theme": "therapy",
+   "term": "comfort character",
+   "post_id": "185ejcl",
+   "year": "2023"
+  },
+  "ID-4382": {
+   "theme": "therapy",
+   "term": "comfort character",
+   "post_id": "1dbj9i5",
+   "year": "2024"
+  },
+  "ID-4383": {
+   "theme": "therapy",
+   "term": "comfort character",
+   "post_id": "14nki1z",
+   "year": "2023"
+  },
+  "ID-4384": {
+   "theme": "therapy",
+   "term": "comfort character",
+   "post_id": "1hohw4k",
+   "year": "2024"
+  },
+  "ID-4385": {
+   "theme": "therapy",
+   "term": "comfort character",
+   "post_id": "1j62trl",
+   "year": "2025"
+  },
+  "ID-4386": {
+   "theme": "therapy",
+   "term": "comfort character",
+   "post_id": "1dd5ig3",
+   "year": "2024"
+  },
+  "ID-4387": {
+   "theme": "therapy",
+   "term": "comfort character",
+   "post_id": "171alsf",
+   "year": "2023"
+  },
+  "ID-4388": {
+   "theme": "therapy",
+   "term": "comfort character",
+   "post_id": "1jf8cd8",
+   "year": "2025"
+  },
+  "ID-4389": {
+   "theme": "therapy",
+   "term": "comfort character",
+   "post_id": "17486dl",
+   "year": "2023"
+  },
+  "ID-4390": {
+   "theme": "therapy",
+   "term": "comfort character",
+   "post_id": "1buqzmh",
+   "year": "2024"
+  },
+  "ID-4391": {
+   "theme": "therapy",
+   "term": "comfort character",
+   "post_id": "1qu8mga",
+   "year": "2026"
+  },
+  "ID-4392": {
+   "theme": "therapy",
+   "term": "comfort character",
+   "post_id": "1nkpwc6",
+   "year": "2025"
+  },
+  "ID-4393": {
+   "theme": "therapy",
+   "term": "comfort character",
+   "post_id": "1af2wwb",
+   "year": "2024"
+  },
+  "ID-4394": {
+   "theme": "therapy",
+   "term": "comfort character",
+   "post_id": "1kdh9gc",
+   "year": "2025"
+  },
+  "ID-4395": {
+   "theme": "therapy",
+   "term": "comfort character",
+   "post_id": "1atoors",
+   "year": "2024"
+  },
+  "ID-4396": {
+   "theme": "therapy",
+   "term": "comfort character",
+   "post_id": "1kbo60s",
+   "year": "2025"
+  },
+  "ID-4397": {
+   "theme": "therapy",
+   "term": "comfort character",
+   "post_id": "1h24psl",
+   "year": "2024"
+  },
+  "ID-4398": {
+   "theme": "therapy",
+   "term": "comfort character",
+   "post_id": "17iwnm4",
+   "year": "2023"
+  },
+  "ID-4399": {
+   "theme": "therapy",
+   "term": "comfort character",
+   "post_id": "18lrfn9",
+   "year": "2023"
+  },
+  "ID-4400": {
+   "theme": "therapy",
+   "term": "comfort character",
+   "post_id": "1kf0xjc",
+   "year": "2025"
+  },
+  "ID-4401": {
+   "theme": "therapy",
+   "term": "comfort character",
+   "post_id": "15cnq9q",
+   "year": "2023"
+  },
+  "ID-4402": {
+   "theme": "therapy",
+   "term": "comfort character",
+   "post_id": "1j7xjqk",
+   "year": "2025"
+  },
+  "ID-4403": {
+   "theme": "therapy",
+   "term": "comfort character",
+   "post_id": "1bqxhvs",
+   "year": "2024"
+  },
+  "ID-4404": {
+   "theme": "therapy",
+   "term": "comfort character",
+   "post_id": "19f87b6",
+   "year": "2024"
+  },
+  "ID-4405": {
+   "theme": "therapy",
+   "term": "comfort character",
+   "post_id": "1h8s1hv",
+   "year": "2024"
+  },
+  "ID-4406": {
+   "theme": "therapy",
+   "term": "comfort character",
+   "post_id": "1hl1j8x",
+   "year": "2024"
+  },
+  "ID-4407": {
+   "theme": "therapy",
+   "term": "comfort character",
+   "post_id": "1oyy8iv",
+   "year": "2025"
+  },
+  "ID-4408": {
+   "theme": "therapy",
+   "term": "comfort character",
+   "post_id": "1ifstjt",
+   "year": "2025"
+  },
+  "ID-4409": {
+   "theme": "therapy",
+   "term": "comfort character",
+   "post_id": "172b1fb",
+   "year": "2023"
+  },
+  "ID-4410": {
+   "theme": "therapy",
+   "term": "comfort character",
+   "post_id": "1759ttl",
+   "year": "2023"
+  },
+  "ID-4411": {
+   "theme": "therapy",
+   "term": "comfort character",
+   "post_id": "1p7856i",
+   "year": "2025"
+  },
+  "ID-4412": {
+   "theme": "therapy",
+   "term": "comfort character",
+   "post_id": "1sjjyzp",
+   "year": "2026"
+  },
+  "ID-4413": {
+   "theme": "therapy",
+   "term": "comfort character",
+   "post_id": "1hla2tp",
+   "year": "2024"
+  },
+  "ID-4414": {
+   "theme": "therapy",
+   "term": "comfort character",
+   "post_id": "1dc3lar",
+   "year": "2024"
+  },
+  "ID-4415": {
+   "theme": "therapy",
+   "term": "comfort character",
+   "post_id": "1h0vtwx",
+   "year": "2024"
+  },
+  "ID-4416": {
+   "theme": "therapy",
+   "term": "comfort character",
+   "post_id": "1m7hppp",
+   "year": "2025"
+  },
+  "ID-4417": {
+   "theme": "therapy",
+   "term": "comfort character",
+   "post_id": "16ksj09",
+   "year": "2023"
+  },
+  "ID-4418": {
+   "theme": "therapy",
+   "term": "comfort character",
+   "post_id": "1ptkka6",
+   "year": "2025"
+  },
+  "ID-4419": {
+   "theme": "therapy",
+   "term": "comfort character",
+   "post_id": "1gbgnr6",
+   "year": "2024"
+  },
+  "ID-4420": {
+   "theme": "therapy",
+   "term": "comfort character",
+   "post_id": "1rocalg",
+   "year": "2026"
+  },
+  "ID-4421": {
+   "theme": "therapy",
+   "term": "comfort character",
+   "post_id": "1dvy7j8",
+   "year": "2024"
+  },
+  "ID-4422": {
+   "theme": "therapy",
+   "term": "comfort character",
+   "post_id": "15dco8z",
+   "year": "2023"
+  },
+  "ID-4423": {
+   "theme": "therapy",
+   "term": "comfort character",
+   "post_id": "1j54scv",
+   "year": "2025"
+  },
+  "ID-4424": {
+   "theme": "therapy",
+   "term": "comfort character",
+   "post_id": "16lioy9",
+   "year": "2023"
+  },
+  "ID-4425": {
+   "theme": "therapy",
+   "term": "comfort character",
+   "post_id": "1bacm55",
+   "year": "2024"
+  },
+  "ID-4426": {
+   "theme": "therapy",
+   "term": "comfort character",
+   "post_id": "16mmdvg",
+   "year": "2023"
+  },
+  "ID-4427": {
+   "theme": "therapy",
+   "term": "comfort character",
+   "post_id": "1dcjk5m",
+   "year": "2024"
+  },
+  "ID-4428": {
+   "theme": "therapy",
+   "term": "comfort character",
+   "post_id": "1ldldez",
+   "year": "2025"
+  },
+  "ID-4429": {
+   "theme": "therapy",
+   "term": "comfort character",
+   "post_id": "1ff9xeu",
+   "year": "2024"
+  },
+  "ID-4430": {
+   "theme": "therapy",
+   "term": "comfort character",
+   "post_id": "1f3wgaf",
+   "year": "2024"
+  },
+  "ID-4431": {
+   "theme": "therapy",
+   "term": "comfort character",
+   "post_id": "1h8yg8v",
+   "year": "2024"
+  },
+  "ID-4432": {
+   "theme": "therapy",
+   "term": "comfort character",
+   "post_id": "19ak53l",
+   "year": "2024"
+  },
+  "ID-4433": {
+   "theme": "therapy",
+   "term": "comfort character",
+   "post_id": "1io36ft",
+   "year": "2025"
+  },
+  "ID-4434": {
+   "theme": "therapy",
+   "term": "comfort character",
+   "post_id": "1ekvhax",
+   "year": "2024"
+  },
+  "ID-4435": {
+   "theme": "therapy",
+   "term": "comfort character",
+   "post_id": "1ga5rfe",
+   "year": "2024"
+  },
+  "ID-4436": {
+   "theme": "therapy",
+   "term": "comfort character",
+   "post_id": "13xh18d",
+   "year": "2023"
+  },
+  "ID-4437": {
+   "theme": "therapy",
+   "term": "comfort character",
+   "post_id": "1rzn00l",
+   "year": "2026"
+  },
+  "ID-4438": {
+   "theme": "therapy",
+   "term": "comfort character",
+   "post_id": "1fij7k4",
+   "year": "2024"
+  },
+  "ID-4439": {
+   "theme": "therapy",
+   "term": "comfort character",
+   "post_id": "1goawt8",
+   "year": "2024"
+  },
+  "ID-4440": {
+   "theme": "therapy",
+   "term": "comfort character",
+   "post_id": "1t0q9iw",
+   "year": "2026"
+  },
+  "ID-4441": {
+   "theme": "therapy",
+   "term": "comfort character",
+   "post_id": "1ratxi7",
+   "year": "2026"
+  },
+  "ID-4442": {
+   "theme": "therapy",
+   "term": "comfort character",
+   "post_id": "1eizpeg",
+   "year": "2024"
+  },
+  "ID-4443": {
+   "theme": "therapy",
+   "term": "comfort character",
+   "post_id": "1rgruh0",
+   "year": "2026"
+  },
+  "ID-4444": {
+   "theme": "therapy",
+   "term": "comfort character",
+   "post_id": "1eyum62",
+   "year": "2024"
+  },
+  "ID-4445": {
+   "theme": "therapy",
+   "term": "comfort character",
+   "post_id": "15t5d29",
+   "year": "2023"
+  },
+  "ID-4446": {
+   "theme": "therapy",
+   "term": "comfort character",
+   "post_id": "1o1rzrw",
+   "year": "2025"
+  },
+  "ID-4447": {
+   "theme": "therapy",
+   "term": "comfort character",
+   "post_id": "16p2meu",
+   "year": "2023"
+  },
+  "ID-4448": {
+   "theme": "therapy",
+   "term": "comfort character",
+   "post_id": "1h3nl4a",
+   "year": "2024"
+  },
+  "ID-4449": {
+   "theme": "therapy",
+   "term": "comfort character",
+   "post_id": "1m4ioro",
+   "year": "2025"
+  },
+  "ID-4450": {
+   "theme": "therapy",
+   "term": "comfort character",
+   "post_id": "1oo9ob9",
+   "year": "2025"
+  }
+ }
+}

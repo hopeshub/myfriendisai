@@ -1,0 +1,9 @@
+CM-0101 | topical=BORD | strict=NO | fp=theme-mismatch
+CM-0102 | topical=NO | strict=NO | fp=theme-mismatch
+CM-0103 | topical=YES | strict=YES | fp=-
+CM-0104 | topical=YES | strict=YES | fp=-
+CM-0105 | topical=YES | strict=BORD | fp=theme-mismatch
+CM-0106 | topical=NO | strict=NO | fp=wrong-referent
+CM-0107 | topical=NO | strict=NO | fp=wrong-referent
+CM-0108 | topical=YES | strict=YES | fp=-
+CM-0109 | topical=NO | strict=NO | fp=theme-mismatch

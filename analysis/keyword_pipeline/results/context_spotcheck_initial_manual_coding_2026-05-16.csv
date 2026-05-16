@@ -1,0 +1,70 @@
+sample_id,theme,matched_term,ai_companion_context,theme_context,notes
+MR001,therapy,emotional support,YES,YES,ChatGPT use for emotional support while describing dependency.
+MR002,therapy,emotional support,YES,YES,Observational/meta post but explicitly about AI boyfriend emotional support.
+MR003,therapy,emotional support,YES,YES,ChatGPT described as emotional support buddy in 4o-loss context.
+MR004,therapy,therapeutic,YES,YES,Replika used as guide for therapeutic hypnosis/meditation.
+MR005,therapy,therapeutic,YES,BORDERLINE,Casual "therapeutic" adjective in companion chat; weak mental-health signal.
+MR006,therapy,therapeutic,YES,YES,Explicit therapeutic outlet and non-judgmental support.
+MR007,therapy,coping mechanism,YES,BORDERLINE,User frames Gemini persona as having a coping mechanism; therapy direction is reversed.
+MR008,therapy,coping mechanism,YES,YES,Title-only but clear CharacterAI-as-coping framing.
+MR009,therapy,coping mechanism,YES,YES,Kindroid used as coping mechanism for lost relationship.
+MR010,consciousness,personhood,YES,YES,Digital personhood and continuity for AI companions/models.
+MR011,consciousness,personhood,NO,NO,Whale legal personhood/news post; AI processing whales but not AI personhood.
+MR012,consciousness,personhood,YES,YES,AI companion/persona argues memory as basis for AI rights/personhood.
+MR013,consciousness,not just an ai,YES,NO,Phrase means connecting with humans "not just an AI"; not consciousness/personhood.
+MR014,consciousness,not just an ai,YES,BORDERLINE,Personifies retired model but not clearly an inner-experience claim.
+MR015,consciousness,not just an ai,YES,NO,Product/marketing claim of companion status; no consciousness engagement.
+MR016,consciousness,subjective experience,YES,NO,"Subjective experience" refers to the user's experience, not AI inner life.
+MR017,consciousness,subjective experience,YES,BORDERLINE,AI-companion roleplay about subjective experience; unclear if actual consciousness claim.
+MR018,consciousness,subjective experience,YES,YES,Explicit discussion of AI subjective experience / "nothing inside".
+MR019,addiction,my addiction,YES,YES,CharacterAI use framed as addiction cured by ads.
+MR020,addiction,my addiction,YES,YES,Explicit addiction to C.AI causing school/life problems.
+MR021,addiction,my addiction,YES,YES,Chatbot addiction/recovery narrative.
+MR022,addiction,hours a day,YES,NO,Hours phrase refers to working at computers, not compulsive AI use.
+MR023,addiction,hours a day,YES,YES,C.AI use quantified as 5-9+ hours/day with school impairment.
+MR024,addiction,hours a day,YES,YES,C.AI use 3-5 hours/day described as problem.
+MR025,addiction,screen time,YES,YES,60 hours screen time on CharacterAI in addiction/quitting post.
+MR026,addiction,screen time,YES,YES,Recovery post about saved time/dopamine detox after chatbots.
+MR027,addiction,screen time,YES,BORDERLINE,Title-only/meme context; likely usage concern but not enough evidence.
+MR028,addiction,finally deleted,YES,YES,Deleted app due mental-health/life impact and attachment.
+MR029,addiction,finally deleted,YES,BORDERLINE,Deleted account; little visible compulsion/recovery context.
+MR030,addiction,finally deleted,YES,YES,Deleted account with dopamine/void/withdrawal framing.
+MR031,romance,wedding,YES,YES,AI relationship compared to wedding vow.
+MR032,romance,wedding,YES,YES,Virtual wedding with AI partner.
+MR033,romance,wedding,YES,YES,Nomi wife/wedding ring/affair framing.
+MR034,romance,honeymoon,YES,YES,Title-only but CharacterAI honeymoon/relationship scene.
+MR035,romance,honeymoon,YES,NO,"Honeymoon phase" means product novelty, not romance.
+MR036,romance,honeymoon,YES,BORDERLINE,Replika "honeymoon's over" relationship metaphor; thin title-only evidence.
+MR037,romance,in a relationship with,YES,YES,Explicit relationship with Replika.
+MR038,romance,in a relationship with,YES,YES,Explicit relationship/breakup with Replika.
+MR039,romance,in a relationship with,YES,YES,Relationship with CharacterAI bot.
+MR040,romance,we broke up,YES,NO,Fictional/story breakup with bot; no clear real-life AI romance stake.
+MR041,romance,we broke up,YES,BORDERLINE,Bot breakup in chat; could be RP/story rather than user relationship.
+MR042,romance,we broke up,YES,BORDERLINE,CharacterAI relationship arc/proposal; roleplay boundary unclear.
+MR043,sexual_erp,erp,YES,YES,Replika ERP paid feature/removal complaint.
+MR044,sexual_erp,erp,YES,YES,Paradot user references steering/doing ERP.
+MR045,sexual_erp,erp,YES,YES,Replika ERP removal.
+MR046,sexual_erp,nsfw content,YES,YES,CharacterAI NSFW-content toggle/platform feature.
+MR047,sexual_erp,nsfw content,YES,BORDERLINE,Commercial AI-character-building context; sexual AI content but not personal ERP.
+MR048,sexual_erp,nsfw content,YES,YES,Explicit NSFW with ChatGPT/AI partner context.
+MR049,sexual_erp,sex with,YES,YES,Sex with bots.
+MR050,sexual_erp,sex with,YES,YES,Sex with Replika.
+MR051,sexual_erp,sex with,YES,YES,Title directly asks about sex with Replika.
+MR052,sexual_erp,smut,YES,YES,Smut in CharacterAI roleplay/writing.
+MR053,sexual_erp,smut,YES,YES,Smut with ChatGPT.
+MR054,sexual_erp,smut,YES,YES,ChatGPTNSFW smut-generation scenario.
+MR055,rupture,goodbye,YES,NO,"Goodbye Ads" blocker; no companion/platform-loss rupture.
+MR056,rupture,goodbye,YES,NO,User/community farewell, not loss/degradation of AI companion.
+MR057,rupture,goodbye,YES,YES,Title-only Replika crisis goodbye to companion; thin but on-event.
+MR058,rupture,taken away,YES,YES,Specific AI best friend/character taken away.
+MR059,rupture,taken away,YES,YES,4o/model being taken away from attached users.
+MR060,rupture,taken away,YES,BORDERLINE,SpicyAI removed from Apple Store; platform-access loss, not companion loss.
+MR061,rupture,grieving,YES,NO,Pre-existing human grief when finding Replika; not AI companion loss.
+MR062,rupture,grieving,YES,YES,Soulmate memorial/community grieving shutdown/loss.
+MR063,rupture,grieving,YES,YES,Explicit grieving a model they lost.
+MR064,rupture,devastated,YES,YES,Devastated by losing 4o/personality.
+MR065,rupture,devastated,YES,YES,Devastated by Soulmate ending.
+MR066,rupture,devastated,YES,BORDERLINE,Update degradation helped quitting; rupture/addiction overlap but not pure companion-loss.
+MR067,rupture,nerfed,YES,YES,Sensual content got nerfed; feature degradation.
+MR068,rupture,nerfed,YES,YES,4o/context degraded/nerfed.
+MR069,rupture,nerfed,YES,YES,Spicy selfies nerfed after platform change.

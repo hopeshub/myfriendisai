@@ -39,6 +39,14 @@ function getCommunityCount(): number {
 const CHANGELOG = [
   {
     date: "May 2026",
+    title: "Theme accuracy re-checked",
+    items: [
+      "Re-checked that keywords land on the theme they claim — about 1,800 tagged posts re-read by independent classifiers, then a sample re-coded by hand. Keywords reliably identify AI-companion discourse; sorting it into the right theme is tightest for sex/ERP and addiction, and holds up better for therapy and consciousness than a first, classifier-only pass had suggested. The re-check also confirmed that therapy and addiction are largely one subject — the same reliance on an AI, framed once as help and once as a problem. No keywords changed: the response to a fast-moving vocabulary is disclosure, not constant edits.",
+    ],
+    recent: true,
+  },
+  {
+    date: "May 2026",
     title: "Data extended back to 2017",
     items: [
       "The chart previously began in 2023. The underlying corpus now reaches back to 2017, bringing the early Replika years and the first companion-app crises into view.",
@@ -285,7 +293,7 @@ export default function About() {
           <h2 style={sectionHeaderStyle}>How to read the lines</h2>
           <div className="space-y-4" style={bodyStyle}>
             <p>
-              Three limits are worth holding in mind before you read too much
+              Four limits are worth holding in mind before you read too much
               into any single line.
             </p>
             <p>
@@ -328,6 +336,19 @@ export default function About() {
               weakens a line, while a false one corrupts it, so the method errs
               toward missing.
             </p>
+            <p>
+              <strong style={leadStyle}>
+                Therapy and addiction are two readings of one behavior.
+              </strong>{" "}
+              Both lines track the same act &mdash; leaning on an AI to get
+              through something hard &mdash; and what divides them is only how
+              the writer frames it. &ldquo;It&apos;s my coping mechanism&rdquo;
+              and &ldquo;I can&apos;t stop&rdquo; are the same use seen in two
+              lights. So the two lines share many of the same posts, by design;
+              a therapy post that looks like it belongs under addiction usually
+              belongs under both. Read them as a linked pair, and watch which
+              way the balance tips.
+            </p>
           </div>
         </section>
 
@@ -338,9 +359,16 @@ export default function About() {
             <p>
               Posts from 2017 through early 2026 were backfilled from public
               Reddit archives (PullPush and Arctic Shift). From March 2026
-              onward, they are collected fresh from Reddit every day. Both
-              sources share the same format, so the two stretches join without a
-              seam.
+              onward, they are collected fresh from Reddit every day. One caveat
+              comes with the older years: the further back a post goes, the more
+              likely its text was removed or deleted before the archive captured
+              it &mdash; so there is simply less wording for the keywords to
+              match in the early years than in the recent ones. Every line
+              therefore runs a little lower at its start than the discourse
+              really was, which makes each rise look somewhat steeper than it
+              was. The shape and the timing of events are sound; the steepness
+              of the long climb is partly the instrument warming up, not only
+              the subject growing.
             </p>
             <p>
               The code, the keyword lists, and every validation record are
