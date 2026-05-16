@@ -4,8 +4,8 @@ This module calls the Anthropic API (`import anthropic` below), which violates t
 project's no-API-classifier rule. Classification must go through the CC-based
 workflow: prepare_sample.py -> CC reads and classifies inline -> parse_classifications.py.
 
-Additionally, automated keyword discovery has a documented bad track record — see
-docs/archive/KEYWORD_HISTORY_AND_LESSONS.md. Three rounds of automated validation
+Additionally, automated keyword discovery has a documented bad track record for
+this project. Three rounds of automated validation
 all mostly failed; the keywords that survived were found by parallel CC agents
 reading real posts, not by API-based candidate generation.
 

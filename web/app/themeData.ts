@@ -73,8 +73,8 @@ export function loadThemeData(): ThemeData {
   }
 
   // Per-theme coverage_start: dates before this are unreliable keyword coverage
-  // and are filtered out of the rendered series. Rule documented in CLAUDE.md
-  // (and computed in src/db/operations.py export_keyword_trends_json).
+  // and are filtered out of the rendered series. Rule computed in
+  // src/db/operations.py export_keyword_trends_json.
   const coverageStart = (raw["_coverage_start"] as Record<string, string | null> | undefined) ?? {};
 
   const result: ThemeData = {};
@@ -91,7 +91,7 @@ export function loadThemeData(): ThemeData {
     // Sum the POST-ONLY series across merged categories. Post-only is the
     // longitudinally comparable series: comment tagging only began March 2026,
     // so the post+comment series has a step artifact there. There is no
-    // LLM-classified series in the published chart (see CLAUDE.md section 2.3).
+    // LLM-classified series in the published chart.
     const rawByDate: Record<string, { count: number; avg: number }> = {};
     for (const cat of categories) {
       type Entry = {

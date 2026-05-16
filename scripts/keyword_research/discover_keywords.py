@@ -3,8 +3,7 @@
 
 This orchestrator imports `src.keyword_discovery`, which calls the Anthropic API —
 a violation of the project's no-API-classifier rule. It also belongs to the
-automated-discovery pipeline category documented as a failed approach in
-docs/archive/KEYWORD_HISTORY_AND_LESSONS.md.
+automated-discovery pipeline, a documented failed approach for this project.
 
 For new keywords: spawn parallel CC agents to read real posts from T1-T3 companion
 subs and extract candidate phrases, then run the standard 100-sample precision

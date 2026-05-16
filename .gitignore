@@ -36,3 +36,30 @@ data/.collect_daily.lock
 
 # Local Claude Code settings (per-machine state, not shared)
 .claude/
+
+# analysis/ — the keyword-validation tooling is tracked; the raw artifacts of
+# individual runs (batch files, classifier output, samples) stay local. The
+# conclusions of every run are written up in docs/.
+/analysis/**
+!/analysis/**/
+!/analysis/**/*.py
+!/analysis/**/*.yaml
+!/analysis/**/*.yml
+!/analysis/README.md
+!/analysis/keyword_pipeline/drift_history.json
+
+# Build-process notes — kept local, not published. The public methodology
+# record is the validation/audit reports in docs/ and the About page.
+CLAUDE.md
+docs/archive/
+docs/HANDOFF_*.md
+docs/CC_PROMPT_*.md
+docs/about_page_disclosure_draft_2026-05-15.md
+docs/chart_redesign_plan_2026-05-15.md
+docs/cost_estimation_retrospective_2026-05-15.md
+docs/data_presentation_proposals_2026-05-15.md
+docs/overnight_run_2026-05-13.md
+docs/pre_launch_audit_2026-05-14.md
+docs/project_audit_overview_2026-05-15.md
+docs/trend_atlas_fix_plan_2026-05-15.md
+docs/voice_guide.md

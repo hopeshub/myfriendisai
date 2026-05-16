@@ -281,8 +281,8 @@ Consequences:
 freely; document the linkage rather than wall them off. The fix is presentation,
 not keywords. Applied: the About page's "How to read the lines" section now
 carries a limit, "Therapy and addiction are two readings of one behavior," and a
-changelog entry records the re-check and the linkage. `CLAUDE.md` updated
-(therapy-noise note + overlap policy). No keyword or methodology change.
+changelog entry records the re-check and the linkage. No keyword or
+methodology change.
 
 ---
 

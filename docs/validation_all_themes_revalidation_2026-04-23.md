@@ -206,4 +206,3 @@ A header comment at the top of the file documents the classification standard an
 
 - `docs/validation_romance_revalidation_2026-04-20.md` — prior romance-only drift audit
 - `docs/precision_audit_2026-04-20.md` — original smoke test that surfaced romance drift
-- `docs/archive/KEYWORD_HISTORY_AND_LESSONS.md` — history of validation methodology

@@ -7,7 +7,7 @@ rather than its theme — i.e. whether anything needs cutting.
 
 This audit replaces the abandoned plan to backfill LLM verification to 100%
 coverage and flip the chart to `count_llm_verified`. See the strategic
-reasoning in CLAUDE.md (§2.3, "Scope decision 2026-05-15").
+reasoning in `docs/llm_integration_strategy_2026-05-15.md`.
 
 ## Method and its limit
 
@@ -60,7 +60,7 @@ their admission-time manual validation stands.
    ranking against an inflated baseline, the worst cells are not garbage
    keywords — they are borderline keywords, and all three sub-85% post/comment
    cells are *already documented*: `we broke up` and `hours a day` are
-   researcher-accepted (logged in CLAUDE.md); `honeymoon` is an
+   researcher-accepted (logged in `config/keywords_v8.yaml`); `honeymoon` is an
    already-flagged noisy comment keyword; `not just an ai` is a low-volume
    consciousness keyword. There is nothing here that admission validation
    and the existing noisy-keyword flag did not already catch.

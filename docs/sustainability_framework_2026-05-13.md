@@ -95,7 +95,6 @@ If a future Claude session opens this project a year from now, the framework sho
 - `scripts/drift_check.py --help` — the procedure
 - This doc — the why
 - `docs/adversarial_audit_2026-05-13.md` — what went wrong and what to look for
-- `CLAUDE.md` — pointer to all of the above
 
 The system should *degrade gracefully* without active intervention. If quarterly drift checks lapse, the report still tells you which keywords were last seen at what precision and when. If theme health stops updating, the JSON sitting in data/ remains the latest known state. If a future audit needs to be run, the CLI builds the samples from current data without human guidance beyond `--quarter`.
 

@@ -474,8 +474,8 @@ def export_keyword_trends_json(
             (*active_subreddits, *EXCLUDED_AUTHORS),
         ).fetchall()
         # NOTE: a count_llm_verified series was removed from this export on
-        # 2026-05-15. LLM verification is not part of the published chart (see
-        # CLAUDE.md 2.3); keeping the series here also made the exporter query
+        # 2026-05-15. LLM verification is not part of the published chart;
+        # keeping the series here also made the exporter query
         # the optional llm_classifications table, breaking fresh-schema exports
         # and the test suite. LLM verdicts live in audit data only.
         total_posts_rows = _conn.execute(
@@ -532,7 +532,7 @@ def export_keyword_trends_json(
     result["_total_posts"] = total_posts_list
 
     # ─── Per-theme coverage_start computation ──────────────────────────
-    # Rule (uniform across themes, documented in CLAUDE.md and README §5b):
+    # Rule (uniform across themes):
     # coverage_start is the first month where the theme's monthly post-only
     # count is ≥ COVERAGE_THRESHOLD AND every subsequent COMPLETE month also
     # clears the threshold. The current (in-progress) calendar month is
@@ -723,7 +723,7 @@ def export_theme_health_json(
             # 2026-05-15. The verdicts were produced under a lenient prompt that
             # inflates precision (~95% vs an adversarial audit's 51-72%), so a
             # public precision number derived from them would mislead. LLM
-            # verification is no longer surfaced on the site — see CLAUDE.md 2.3.
+            # verification is no longer surfaced on the site.
 
             out_themes[theme] = {
                 "total_post_tags": post_total,
