@@ -205,7 +205,7 @@ per-keyword screens that systematically understated. With census measurement:
 5. **Small KEEP keywords** (8 of the Lever-1 KEEPs have ≤10 hits) go on the
    drift-check watch list — a census certifies today's matches, not future ones.
 
-### Recommended follow-up (not done here — would itself need a checkpoint)
+### Recommended follow-up — DONE 2026-05-16 (see Addendum 2)
 
 The audit's per-keyword n=20 screens understated **every** keyword they were
 checked against here. That means the audit's theme numbers for the *other four*
@@ -283,3 +283,45 @@ not keywords. Applied: the About page's "How to read the lines" section now
 carries a limit, "Therapy and addiction are two readings of one behavior," and a
 changelog entry records the re-check and the linkage. `CLAUDE.md` updated
 (therapy-noise note + overlap policy). No keyword or methodology change.
+
+---
+
+## Addendum 2 — the other four themes re-measured (2026-05-16)
+
+The follow-up flagged above was run the same day. Rather than re-census every
+keyword, each of the four un-rechecked themes was sampled **directly**: 240
+posts drawn at random from that theme's tagged posts (post source, active
+communities), classified blind dual-rubric. A direct theme sample measures the
+chart line itself — one honest confidence interval, no per-keyword
+reconstruction. Reproducible: `theme_recheck_build.py` / `theme_recheck_score.py`,
+`analysis/keyword_pipeline/theme_recheck_2026-05-16/`.
+
+| Theme | Audit 2026-05-15 | Re-measured (topical) | 95% CI | Strict |
+|---|--:|--:|--:|--:|
+| romance | 75% | **85.7%** (+11) | 80.5–89.7% | 62.7% |
+| rupture | 78% | **76.9%** (−1) | 71.0–81.8% | 64.5% |
+| sexual_erp | 93% | **95.8%** (+3) | 92.4–97.7% | 87.6% |
+| addiction | 90% | **96.7%** (+7) | 93.5–98.3% | 89.8% |
+
+**The n=20-screen understatement is systemic.** romance, addiction and sex/ERP
+all re-measure higher — romance by +11, mis-measured exactly as therapy and
+consciousness were. **Rupture is the telling exception:** it did not move,
+because its dominant keyword `goodbye` was the one rupture keyword that received
+an n=100 confirmatory read in the original audit (55%→81%). Every theme number
+that rested only on n=20 screens ran low; the one with a real sample behind it
+was accurate.
+
+**Corrected six-theme topical precision** (best available — census, gold
+anchor, or this direct sample): addiction ~97%, sexual_erp ~96%, consciousness
+~87%, romance ~86%, therapy ~80%+ (rebuilt), **rupture ~77%**. The handoff's
+"two strong / two moderate / two weak" tiering does not survive: it is **five
+solid themes and one genuinely moderate one (rupture)** — the noisiest, where
+metaphorical "lobotomized", idiomatic "goodbye", roleplay grief and
+user-initiated departures leak in.
+
+Caveats: n=240 per theme, single classification round (the gold anchor showed
+this round runs within ~3 pts of a human coder, so the numbers are trustworthy
+and if anything mildly conservative); topical rubric; the topical–strict gap is
+overwhelmingly thin-removed title-only posts, not wrong-theme error.
+
+**No keyword or methodology change.** This addendum is measurement only.
