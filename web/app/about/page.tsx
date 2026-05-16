@@ -295,6 +295,13 @@ export default function About() {
               &mdash; not Reddit as a whole, and not &ldquo;people&rdquo; in
               general.
             </p>
+            <p>
+              Within that curated set, each theme is also concentrated. Two or
+              three subreddits usually account for most of a theme&apos;s posts
+              &mdash; and the sexual-content line is about half r/replika alone.
+              A theme line is often, in practice, a close reading of a few
+              communities rather than an even sweep across all of them.
+            </p>
           </div>
         </section>
 
@@ -340,7 +347,7 @@ export default function About() {
           <h2 style={sectionHeaderStyle}>How to read the lines</h2>
           <div className="space-y-4" style={bodyStyle}>
             <p>
-              Four limits are worth holding in mind before you read too much
+              Five limits are worth holding in mind before you read too much
               into any single line.
             </p>
             <p>
@@ -395,6 +402,18 @@ export default function About() {
               a therapy post that looks like it belongs under addiction usually
               belongs under both. Read them as a linked pair, and watch which
               way the balance tips.
+            </p>
+            <p>
+              <strong style={leadStyle}>
+                The set of communities grew over time.
+              </strong>{" "}
+              In the early years almost every tracked community was a primary
+              companionship subreddit. Platform-specific and recovery
+              communities were smaller then, or did not exist yet, and have
+              grown since. Each line is measured against whatever communities
+              existed at the time &mdash; so part of a long climb reflects the
+              tracked world widening, not only the conversation itself. Trust
+              the broad direction of a line more than its exact path.
             </p>
           </div>
         </section>
