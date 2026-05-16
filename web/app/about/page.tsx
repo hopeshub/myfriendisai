@@ -251,6 +251,53 @@ export default function About() {
           </div>
         </section>
 
+        {/* Which communities */}
+        <section style={sectionStyle}>
+          <h2 style={sectionHeaderStyle}>
+            Which communities &mdash; and why only these
+          </h2>
+          <div className="space-y-4" style={bodyStyle}>
+            <p>
+              AI companionship comes up across far more of Reddit than the
+              communities tracked here. The project tracks a curated set
+              anyway, because of a problem that showed up early. In a large
+              general subreddit like r/ChatGPT, the keywords cannot tell two
+              things apart: &ldquo;my boyfriend is using ChatGPT&rdquo; and
+              &ldquo;my boyfriend <em>is</em> an AI&rdquo; are built from the
+              same words. Run a romance keyword across r/ChatGPT and most of
+              what it catches is ordinary human-relationship talk that merely
+              mentions AI.
+            </p>
+            <p>
+              The fix isn&apos;t a smarter keyword &mdash; it&apos;s the room.
+              In a community like r/replika, &ldquo;my boyfriend&rdquo; almost
+              always means the AI, because that is what the community is
+              about. The subreddit does the disambiguating the keyword cannot.
+              The keywords are the lens; the curated community list keeps that
+              lens pointed where the words mean what they appear to mean. It is
+              also why the large general-AI subreddits are tracked for size and
+              activity but kept out of the theme lines.
+            </p>
+            <p>
+              An AI model reading each post could make that call directly
+              &mdash; it could tell the two boyfriends apart where a keyword
+              cannot. But running one across the millions of posts in the large
+              general subreddits would be expensive, and for a one-person
+              project that is out of scope. So the room does that work instead.
+            </p>
+            <p>
+              This is a real choice, and it shapes what the site can see.
+              These communities lean toward people for whom AI companionship is
+              central and often intense &mdash; including recovery communities
+              for people trying to quit. That makes the site good at catching
+              that end of the spectrum and blind to casual mentions elsewhere.
+              The trends describe <em>this curated set of communities</em>{" "}
+              &mdash; not Reddit as a whole, and not &ldquo;people&rdquo; in
+              general.
+            </p>
+          </div>
+        </section>
+
         {/* A moving target */}
         <section style={sectionStyle}>
           <h2 style={sectionHeaderStyle}>A moving target</h2>
