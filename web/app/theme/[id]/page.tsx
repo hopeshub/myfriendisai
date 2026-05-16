@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { THEMES, DETECTOR_LABEL, DETECTOR_EXPLAINER } from "../../themes";
+import { THEMES } from "../../themes";
 import {
   loadThemeData,
   loadKeywordDetails,
@@ -155,26 +155,9 @@ export default async function ThemePage({
           </span>
           {theme.label}
         </h1>
-        <div className="mt-1.5 flex items-center gap-3 flex-wrap">
-          <p style={{ fontSize: 15, color: "#94A3B8" }}>{theme.tagline}</p>
-          <span
-            className="info-chip"
-            style={{
-              fontSize: 11,
-              color: "#AEB9C7",
-              backgroundColor: "#20242F",
-              border: "1px solid #2F3441",
-              borderRadius: 5,
-              padding: "1.5px 8px",
-              whiteSpace: "nowrap",
-            }}
-          >
-            {DETECTOR_LABEL[theme.detector]}
-            <span className="info-chip__pop" role="tooltip">
-              {DETECTOR_EXPLAINER}
-            </span>
-          </span>
-        </div>
+        <p style={{ fontSize: 15, color: "#94A3B8", marginTop: 6 }}>
+          {theme.tagline}
+        </p>
       </div>
 
       {/* The chart — breaks out wider than the text column on desktop */}

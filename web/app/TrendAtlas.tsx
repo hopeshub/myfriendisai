@@ -13,7 +13,7 @@ import {
   CartesianGrid,
 } from "recharts";
 import type { ThemeData } from "./themeData";
-import { THEMES, EVENTS, DETECTOR_LABEL, DETECTOR_EXPLAINER } from "./themes";
+import { THEMES, EVENTS } from "./themes";
 
 // ── Trend Atlas ──────────────────────────────────────────────────────────────
 // One panel per theme, each on its OWN y-axis — detection sensitivity differs
@@ -207,32 +207,13 @@ export default function TrendAtlas({
               className="group block min-w-0 rounded-lg transition-colors hover:bg-[#15171E] p-2"
             >
               {/* Panel header */}
-              <div className="flex items-center justify-between gap-3">
+              <div className="flex items-center gap-3">
                 <span
                   className="flex items-center gap-2"
                   style={{ fontSize: 16, fontWeight: 600 }}
                 >
                   <span aria-hidden>{t.emoji}</span>
                   <span style={{ color: t.color }}>{t.label}</span>
-                </span>
-                {/* Detector chip — the key "heights aren't comparable" signal.
-                    Hover/focus reveals what the detector width means. */}
-                <span
-                  className="info-chip"
-                  style={{
-                    fontSize: labelFs,
-                    color: "#AEB9C7",
-                    backgroundColor: "#20242F",
-                    border: "1px solid #2F3441",
-                    borderRadius: 5,
-                    padding: "1.5px 8px",
-                    whiteSpace: "nowrap",
-                  }}
-                >
-                  {DETECTOR_LABEL[t.detector]}
-                  <span className="info-chip__pop" role="tooltip">
-                    {DETECTOR_EXPLAINER}
-                  </span>
                 </span>
               </div>
 

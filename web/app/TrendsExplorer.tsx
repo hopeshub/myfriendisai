@@ -52,10 +52,11 @@ export default function TrendsExplorer({ themeData }: Props) {
       {/* How to read the panels — a chart-reading note, kept with the chart
           rather than in the masthead. */}
       <p className="text-xs sm:text-sm text-[#64748B] mb-3">
-        Each line tracks how often a theme comes up in posts. Each panel has
-        its own scale — compare a line&apos;s{" "}
+        Each line tracks how often a theme&apos;s language comes up in posts.
+        Some themes are easier to detect this way than others, so each panel
+        has its own scale — compare a line&apos;s{" "}
         <span className="text-[#94A3B8]">shape over time</span>, not its
-        height against other themes.
+        height against another theme.
       </p>
 
       {/* Trend Atlas — small-multiples grid. A plain section, not a
@@ -86,20 +87,13 @@ export default function TrendsExplorer({ themeData }: Props) {
         }}
       >
         Each line is the rate of validated-keyword mentions per 1,000 posts,
-        plotted as a monthly average (post text only). The chart uses keyword
-        counts — no AI classification. Per-theme reliability varies.{" "}
+        plotted as a monthly average of post text. Counted by keyword — no AI
+        classification.{" "}
         <a
           href="/about#verification"
           style={{ color: "#94A3B8", textDecoration: "underline" }}
         >
-          Methodology
-        </a>{" "}
-        ·{" "}
-        <a
-          href="/about"
-          style={{ color: "#94A3B8", textDecoration: "underline" }}
-        >
-          Theme reliability
+          How this works, and how to read it
         </a>
         .
       </p>

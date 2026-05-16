@@ -9,20 +9,12 @@ export type ThemeId =
   | "addiction"
   | "rupture";
 
-// `detector` is a coarse description of how much theme-relevant discourse the
-// keyword set actually catches — from the comprehensiveness audit's recall
-// estimate: narrow < ~10%, moderate ~10-25%, broad > ~25%. It is intentionally
-// coarse; the recall figures have wide confidence intervals. It tells a reader
-// not to compare line heights between a "narrow" and a "broad" theme.
-export type Detector = "narrow" | "moderate" | "broad";
-
 export type ThemeMeta = {
   id: ThemeId;
   label: string;
   emoji: string;
   color: string;
   tagline: string;
-  detector: Detector;
   // A short, durable reading of the theme's trend shape — what the panel
   // shows. Kept to structural observations (not last-week's number) so it
   // stays true as the data updates.
@@ -39,7 +31,6 @@ export const THEMES: ThemeMeta[] = [
     label: "Romance",
     emoji: "💕",
     color: "#FF69B4",
-    detector: "narrow",
     tagline: "Language of love, dating, and romantic attachment",
     blurb:
       "Broad waves, not sharp spikes — and a floor: everyday partner talk goes uncaught.",
@@ -51,7 +42,6 @@ export const THEMES: ThemeMeta[] = [
     label: "Sex / ERP",
     emoji: "🔞",
     color: "#f87171",
-    detector: "moderate",
     tagline: "Language of sexual and erotic roleplay",
     blurb:
       "Dominated by one event — the Feb 2023 Replika ERP removal; quieter since.",
@@ -63,7 +53,6 @@ export const THEMES: ThemeMeta[] = [
     label: "Consciousness",
     emoji: "🧠",
     color: "#C084FC",
-    detector: "narrow",
     tagline: "Language of sentience, awareness, and inner experience",
     blurb:
       "The youngest measurable theme — its vocabulary only became trackable in 2025.",
@@ -75,7 +64,6 @@ export const THEMES: ThemeMeta[] = [
     label: "Therapy",
     emoji: "🫂",
     color: "#60A5FA",
-    detector: "moderate",
     tagline: "Language of mental health support and emotional care",
     blurb:
       "Gradually rising — and the noisiest theme, catching complaint alongside genuine use.",
@@ -87,7 +75,6 @@ export const THEMES: ThemeMeta[] = [
     label: "Addiction",
     emoji: "💊",
     color: "#fd7112",
-    detector: "broad",
     tagline: "Language of dependency and compulsion",
     blurb:
       "A steady climb, not an event spike — dependency language growing over time.",
@@ -99,7 +86,6 @@ export const THEMES: ThemeMeta[] = [
     label: "Rupture",
     emoji: "🥀",
     color: "#22C55E",
-    detector: "narrow",
     tagline: "Language of loss and grief",
     blurb:
       "The sharpest signal here — spikes on platform-loss events; the 2026 surge is the 4o retirement.",
@@ -107,16 +93,6 @@ export const THEMES: ThemeMeta[] = [
       "Rupture is the sharpest signal here: it jumps hard whenever a platform change takes someone’s AI companion away — a shutdown, a personality change, a model retirement. The large 2026 rise follows the retirement of OpenAI’s 4o model, which many people had grown attached to. Where this line has a cliff, a product changed underneath its users.",
   },
 ];
-
-export const DETECTOR_LABEL: Record<Detector, string> = {
-  narrow: "coverage: narrow",
-  moderate: "coverage: moderate",
-  broad: "coverage: broad",
-};
-
-// Explanation shown in the hover popover on the detector chip.
-export const DETECTOR_EXPLAINER =
-  "How much of this theme’s real discussion the keywords catch — narrow, moderate, or broad. A narrower detector means the line undercounts more, so line heights aren’t comparable between themes.";
 
 // `methodology: true` marks a change to the measuring instrument (a keyword-set
 // change), as opposed to a real-world platform event. The chart styles the two
