@@ -383,7 +383,16 @@ export default function About() {
               </a>
               , along with the processed data files. The full post database
               (~24&nbsp;GB) is too large to host there, but I&apos;ll share it
-              on request.
+              on request &mdash; reach me on X at{" "}
+              <a
+                href="https://x.com/hopes_revenge"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={linkClass}
+              >
+                @hopes_revenge
+              </a>
+              , the project&apos;s only point of contact.
             </p>
           </div>
         </section>
