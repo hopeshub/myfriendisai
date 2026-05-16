@@ -84,9 +84,9 @@ export default function TrendsExplorer({ themeData }: Props) {
           marginBottom: 8,
         }}
       >
-        Each line is the rate of validated-keyword mentions per 1,000 posts
-        (7-day smoothed, post text only). The chart uses keyword counts — no
-        AI classification. Per-theme reliability varies.{" "}
+        Each line is the rate of validated-keyword mentions per 1,000 posts,
+        plotted as a monthly average (post text only). The chart uses keyword
+        counts — no AI classification. Per-theme reliability varies.{" "}
         <a
           href="/about#verification"
           style={{ color: "#94A3B8", textDecoration: "underline" }}
