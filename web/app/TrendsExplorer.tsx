@@ -52,7 +52,8 @@ export default function TrendsExplorer({ themeData }: Props) {
       {/* How to read the panels — a chart-reading note, kept with the chart
           rather than in the masthead. */}
       <p className="text-xs sm:text-sm text-[#64748B] mb-3">
-        Each panel has its own scale — compare a line&apos;s{" "}
+        Each line tracks how often a theme comes up in posts. Each panel has
+        its own scale — compare a line&apos;s{" "}
         <span className="text-[#94A3B8]">shape over time</span>, not its
         height against other themes.
       </p>
