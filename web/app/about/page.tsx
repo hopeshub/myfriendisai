@@ -188,7 +188,7 @@ export default function About() {
             </p>
             <ul
               className="space-y-2"
-              style={{ listStyleType: "none", padding: 0, margin: 0 }}
+              style={{ listStyleType: "none", padding: 0 }}
             >
               {THEMES.map((t) => (
                 <li key={t.id} style={{ fontSize: 15, lineHeight: 1.6 }}>
@@ -230,12 +230,52 @@ export default function About() {
               line moves when the discourse moves, not because a model was
               retrained or quietly changed its mind. For a record meant to hold
               up over years, that steadiness is worth more to me than a small
-              gain in accuracy. And the gain really is small. I tested it:
-              having an LLM re-check each keyword match raised precision from
-              roughly 80% to 88%, while doing nothing for the posts the keywords
-              never matched in the first place. So the method stays plain on
-              purpose. The careful work happens earlier, in validating each
-              keyword by hand before it is ever allowed to count.
+              gain in accuracy.
+            </p>
+            <p>
+              And the gain really is small. I tested it: having an LLM re-check
+              each keyword match raised precision from roughly 80% to 88%, while
+              doing nothing for the posts the keywords never matched in the
+              first place. So the method stays plain on purpose. The careful
+              work happens earlier, in validating each keyword by hand before it
+              is ever allowed to count.
+            </p>
+          </div>
+        </section>
+
+        {/* A moving target */}
+        <section style={sectionStyle}>
+          <h2 style={sectionHeaderStyle}>A moving target</h2>
+          <div className="space-y-4" style={bodyStyle}>
+            <p>
+              Most things you measure hold still while you measure them. This
+              subject does not &mdash; and that churn turned out to be one of
+              the project&apos;s clearest findings, not an obstacle to it.
+            </p>
+            <p>
+              The vocabulary moves fast. &ldquo;Sentient&rdquo; was once the
+              natural anchor word for the consciousness theme, until it spread
+              into roleplay and Character.AI memes and stopped marking genuine
+              belief, so I dropped it. &ldquo;Therapeutic&rdquo; turned, over a
+              few months, from a word for real support into an insult aimed at
+              preachy AI. Every model release and content-policy change sends a
+              fresh wave of language through these communities &mdash; Replika
+              removing erotic roleplay in 2023, OpenAI retiring its 4o model in
+              2026. A keyword that reads cleanly in January can be noise by
+              April. The communities move too: some are private or invite-only
+              and can&apos;t be tracked at all, and the set worth watching keeps
+              changing.
+            </p>
+            <p>
+              So the instrument can&apos;t sit still either. The keyword set has
+              been through several full revisions, and the monthly re-check
+              exists because I learned firsthand that a validated keyword is
+              only validated for now.
+            </p>
+            <p style={leadStyle}>
+              None of this is a flaw being patched out. It is the nature of a
+              fast-moving subject &mdash; and keeping the measurement honest
+              means keeping it in motion.
             </p>
           </div>
         </section>
@@ -322,7 +362,7 @@ export default function About() {
 
         {/* Changelog */}
         <section>
-          <h2 style={sectionHeaderStyle}>Changelog</h2>
+          <h2 style={{ ...sectionHeaderStyle, paddingLeft: 24 }}>Changelog</h2>
           <div className="relative" style={{ paddingLeft: 24 }}>
             <div
               className="absolute top-0 bottom-0"
@@ -378,7 +418,14 @@ export default function About() {
               ))}
             </div>
           </div>
-          <p style={{ fontSize: 12, color: "#64748B", marginTop: 20 }}>
+          <p
+            style={{
+              fontSize: 12,
+              color: "#64748B",
+              marginTop: 20,
+              paddingLeft: 24,
+            }}
+          >
             Changes that affect how the chart should be read. The full
             development history is in the project&apos;s{" "}
             <a
