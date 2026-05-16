@@ -36,7 +36,7 @@ export default function ThemeBackdrop({
       style={{ cursor: "pointer" }}
     >
       <div
-        className="max-w-[920px] mx-auto px-4 sm:px-8 py-8"
+        className="max-w-[720px] mx-auto px-4 sm:px-8 py-8"
         style={{ cursor: "auto" }}
       >
         {children}

@@ -183,3 +183,14 @@ a:focus-visible {
   opacity: 1;
   transform: translateY(0);
 }
+
+/* On desktop the theme-page chart breaks out wider than the article column,
+   giving the time-series room while the surrounding text stays a readable
+   measure. Below the mobile breakpoint it falls back to a normal block. */
+@media (min-width: 769px) {
+  .theme-chart-breakout {
+    width: min(960px, 92vw);
+    margin-left: 50%;
+    transform: translateX(-50%);
+  }
+}

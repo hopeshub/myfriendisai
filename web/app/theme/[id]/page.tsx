@@ -177,9 +177,9 @@ export default async function ThemePage({
         </div>
       </div>
 
-      {/* The chart */}
+      {/* The chart — breaks out wider than the text column on desktop */}
       <div
-        className="mt-5 rounded-xl"
+        className="mt-5 rounded-xl theme-chart-breakout"
         style={{
           backgroundColor: "#1A1D27",
           border: "1px solid #2A2D3A",
@@ -225,7 +225,18 @@ export default async function ThemePage({
 
       {/* Example posts */}
       <div style={{ marginTop: 30 }}>
-        <div style={SECTION_LABEL}>What people are saying</div>
+        <div style={SECTION_LABEL}>Matched posts</div>
+        <p
+          style={{
+            fontSize: 13,
+            color: "#8293A6",
+            marginTop: 6,
+            lineHeight: 1.6,
+          }}
+        >
+          A sample of real posts a keyword matched, with the matched term
+          highlighted.
+        </p>
         {samples.length > 0 ? (
           <div style={{ marginTop: 6 }}>
             {samples.map((sp, i) => {
@@ -280,9 +291,16 @@ export default async function ThemePage({
             No example posts available yet.
           </p>
         )}
-        <p style={{ fontSize: 12, color: "#64748B", marginTop: 14 }}>
-          Real posts from the tracked communities, with the matched keyword
-          highlighted.{" "}
+        <p
+          style={{
+            fontSize: 12,
+            color: "#64748B",
+            marginTop: 14,
+            lineHeight: 1.6,
+          }}
+        >
+          Snippets are shortened and usernames aren&apos;t shown; each link
+          opens the original public Reddit post.{" "}
           <a
             href="/about#verification"
             style={{ color: "#94A3B8", textDecoration: "underline" }}

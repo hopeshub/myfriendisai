@@ -59,7 +59,9 @@ export default function ThemeChart({
   series: { date: string; hitsPerK: number }[];
   color: string;
 }) {
-  const [range, setRange] = useState<TimeRange>("ALL");
+  // Defaults to 1Y to match the homepage atlas, so clicking a theme open
+  // doesn't silently change the time window the reader was looking at.
+  const [range, setRange] = useState<TimeRange>("1Y");
   const monthly = useMemo(() => monthlySeries(series), [series]);
 
   // Apply the selected time window.

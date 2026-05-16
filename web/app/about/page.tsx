@@ -79,9 +79,9 @@ const CHANGELOG = [
   },
   {
     date: "March 2026",
-    title: "Comment text included; daily updates began",
+    title: "Daily collection began",
     items: [
-      "The tracker began reading post comments in addition to post text, and moved from a one-time historical backfill to automated daily collection. Themes discussed heavily in comments — sex/ERP and therapy — gain some volume from this point.",
+      "The project moved from a one-time historical backfill to collecting posts fresh from Reddit every day. Comments were collected and keyword-tagged from this point on as well, but the published chart counts post text only — so this change adds no volume to any line.",
     ],
     recent: false,
   },
@@ -141,11 +141,13 @@ export default function About() {
           Tracking how people talk about AI companions
         </h1>
         <p style={{ fontSize: 16, color: "#94A3B8", lineHeight: 1.7 }}>
-          I track six recurring themes in AI-companion communities on Reddit
-          &mdash; romance, addiction, grief, and a few more &mdash; and how
-          often each comes up in posts, going back to 2017. It measures the
-          conversation, not the reality behind it: how often a theme is talked
-          about, not how common it actually is.
+          This project follows six recurring themes in Reddit&apos;s
+          AI-companion communities &mdash; romance, addiction, grief, and three
+          others &mdash; and measures how often each one surfaces in posts,
+          going back to 2017. What it captures is the conversation itself: when
+          a line rises, people are writing about that theme more often. Whether
+          the underlying experience has actually become more common is a
+          separate question, and one this can&apos;t answer on its own.
         </p>
       </div>
 
@@ -180,9 +182,9 @@ export default function About() {
           <h2 style={sectionHeaderStyle}>How it works</h2>
           <div className="space-y-4" style={bodyStyle}>
             <p>
-              The six themes come from reading these communities directly
-              &mdash; the worries, experiences, and turns of phrase that surface
-              again and again:
+              The six themes weren&apos;t decided in advance. They emerged from
+              reading these communities directly and noticing which worries,
+              experiences, and turns of phrase kept coming back:
             </p>
             <ul
               className="space-y-2"
@@ -199,84 +201,92 @@ export default function About() {
               ))}
             </ul>
             <p>
-              For each theme I gather candidate keywords, then check every one
-              by hand. I pull 100 real posts a keyword matched, read them, and
-              keep the keyword only if it genuinely marks the theme &mdash; not
-              if it just happens to share a word. Keywords that don&apos;t hold
-              up get dropped. And because language drifts &mdash;
-              &ldquo;therapeutic&rdquo; started showing up as an insult about
-              preachy AI &mdash; I re-check the keyword set every month,
-              sampling recent matches for any keyword whose meaning has
-              slipped.
+              Each theme is then defined by a set of keywords, and every keyword
+              has to earn its place. For a candidate, I pull 100 real posts it
+              matched and read them; the keyword stays only if those posts are
+              genuinely about the theme. If it is matching on a coincidental
+              shared word, it gets dropped. Language also drifts over time:
+              &ldquo;therapeutic,&rdquo; for one, has lately been turning up as
+              an insult aimed at preachy AI rather than a description of real
+              support. So once a month I re-sample recent matches and re-check
+              any keyword whose meaning may have moved.
             </p>
             <p>
-              The chart then shows how many posts use a theme&apos;s keywords,
-              as a rate per 1,000 posts and smoothed with a 7-day average.
-              Measuring a rate rather than a raw count means a line reflects how
-              the conversation itself changes &mdash; not just how fast the
-              communities grow.
+              The chart shows how many posts use each theme&apos;s keywords,
+              expressed as a rate per 1,000 posts and smoothed with a 7-day
+              average. The rate matters more than a raw count would here. These
+              communities have grown enormously since 2017, so a raw count would
+              mostly retrace that growth; a rate sets the growth aside and shows
+              how the conversation itself is shifting.
             </p>
             <p>
-              Why count keywords at all, when an AI could just read every post
-              and classify it? Because a keyword count is transparent and
-              stable in a way a model isn&apos;t. Every point on every line
-              traces back to specific words in specific posts you can open and
-              read &mdash; nothing hides inside a model&apos;s judgment. And the
-              same posts always produce the same number, so a line moves when
-              the conversation moves, not when a model gets updated &mdash;
-              which matters for a record meant to hold up over years. I did
-              test the AI approach: an LLM re-checking every keyword match
-              lifted precision a little, from about 80% to 88%, but it
-              couldn&apos;t recover what the keywords missed in the first place.
-              So the method stays deliberately simple &mdash; the rigor
-              isn&apos;t in the matching, it&apos;s in hand-validating every
-              keyword before it&apos;s allowed to count.
+              There is an obvious objection here: why count keywords when a
+              language model could read every post and classify it directly?
+              The reason is that I wanted a measurement that stays put. A
+              keyword count is fully transparent &mdash; every point on every
+              line traces back to specific words in specific posts, and anyone
+              can open those posts and check for themselves. It is also
+              reproducible: the same posts always yield the same number, so a
+              line moves when the discourse moves, not because a model was
+              retrained or quietly changed its mind. For a record meant to hold
+              up over years, that steadiness is worth more to me than a small
+              gain in accuracy. And the gain really is small. I tested it:
+              having an LLM re-check each keyword match raised precision from
+              roughly 80% to 88%, while doing nothing for the posts the keywords
+              never matched in the first place. So the method stays plain on
+              purpose. The careful work happens earlier, in validating each
+              keyword by hand before it is ever allowed to count.
             </p>
           </div>
         </section>
 
         {/* Reading it honestly */}
         <section id="verification" style={sectionStyle}>
-          <h2 style={sectionHeaderStyle}>Reading it honestly</h2>
+          <h2 style={sectionHeaderStyle}>How to read the lines</h2>
           <div className="space-y-4" style={bodyStyle}>
             <p>
-              A few limits worth knowing before you read too much into any
-              single line.
+              Three limits are worth holding in mind before you read too much
+              into any single line.
             </p>
             <p>
               <strong style={leadStyle}>
                 It counts language, not people or feelings.
               </strong>{" "}
-              When the addiction line rises, more people are using
-              addiction-related language &mdash; not necessarily that more
-              people are addicted, and nothing about whether they feel good or
-              bad about it. This is a frequency tracker.
+              A rising addiction line means addiction-related language is
+              showing up more often. It does not establish that more people are
+              addicted, and it says nothing about whether they feel good or bad
+              about their use. The site tracks how often a subject comes up, and
+              only that.
             </p>
             <p>
               <strong style={leadStyle}>
-                Don&apos;t compare heights between themes.
+                Don&apos;t compare one theme&apos;s height against another.
               </strong>{" "}
-              Each theme has its own vocabulary. Addiction borrows distinctive
-              recovery words &mdash; &ldquo;relapse,&rdquo; &ldquo;cold
-              turkey&rdquo; &mdash; that are easy to catch cleanly. Romance
-              hides in everyday language &mdash; &ldquo;I love him,&rdquo;
-              &ldquo;my boyfriend&rdquo; &mdash; barely separable from ordinary
-              relationship talk, so only a few specific phrases survive
-              validation. Addiction&apos;s line can sit higher than
-              romance&apos;s without romance being any smaller. Follow each
-              line&apos;s own shape over time; don&apos;t rank the themes by
-              height.
+              Each theme is detected through its own vocabulary, and some
+              vocabularies are simply easier to catch. Addiction has a
+              distinctive recovery vocabulary &mdash; &ldquo;relapse,&rdquo;
+              &ldquo;cold turkey&rdquo; &mdash; that matches cleanly. Romance
+              lives in ordinary language like &ldquo;I love him&rdquo; or
+              &ldquo;my boyfriend,&rdquo; nearly inseparable from everyday
+              relationship talk, so only a handful of phrases survive
+              validation. That asymmetry alone can lift the addiction line above
+              the romance line even when romance is the larger subject. Each
+              line can be trusted against its own past; the distance between two
+              lines cannot.
             </p>
             <p>
               <strong style={leadStyle}>
                 Each line is a floor, not a ceiling.
               </strong>{" "}
-              Keeping only high-precision keywords means missing a lot. I
-              measured how much by hand-sampling 400 random posts: depending on
-              the theme, the keywords catch only a few percent to about a third
-              of the posts that genuinely belong. So a trend&apos;s shape and
-              timing are honest, but its absolute height is an undercount
-              &mdash; I&apos;d rather miss real posts than let in false ones.
+              Holding keywords to a high precision bar leaves the set
+              deliberately incomplete, and I measured the cost. In a hand-coded
+              sample of 400 random posts, the keywords caught somewhere between a
+              few percent and about a third of the posts that genuinely
+              belonged, depending on the theme. A trend&apos;s shape and timing
+              can still be trusted; its absolute height cannot, and it always
+              runs low. That is a trade I made on purpose: a missed post only
+              weakens a line, while a false one corrupts it, so the method errs
+              toward missing.
             </p>
           </div>
         </section>
@@ -287,9 +297,10 @@ export default function About() {
           <div className="space-y-4" style={bodyStyle}>
             <p>
               Posts from 2017 through early 2026 were backfilled from public
-              Reddit archives &mdash; PullPush and Arctic Shift. From March 2026
-              on, they are collected fresh from Reddit every day. The format is
-              the same either way.
+              Reddit archives (PullPush and Arctic Shift). From March 2026
+              onward, they are collected fresh from Reddit every day. Both
+              sources share the same format, so the two stretches join without a
+              seam.
             </p>
             <p>
               The code, the keyword lists, and every validation record are
@@ -302,8 +313,9 @@ export default function About() {
               >
                 GitHub
               </a>
-              . The processed data files are there too; the full post database
-              (~24&nbsp;GB) is available on request.
+              , along with the processed data files. The full post database
+              (~24&nbsp;GB) is too large to host there, but I&apos;ll share it
+              on request.
             </p>
           </div>
         </section>

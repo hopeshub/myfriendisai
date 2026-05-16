@@ -109,9 +109,9 @@ export const THEMES: ThemeMeta[] = [
 ];
 
 export const DETECTOR_LABEL: Record<Detector, string> = {
-  narrow: "narrow detector",
-  moderate: "moderate detector",
-  broad: "broad detector",
+  narrow: "coverage: narrow",
+  moderate: "coverage: moderate",
+  broad: "coverage: broad",
 };
 
 // Explanation shown in the hover popover on the detector chip.
