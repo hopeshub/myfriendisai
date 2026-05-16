@@ -90,7 +90,7 @@ export const THEMES: ThemeMeta[] = [
     blurb:
       "The sharpest signal here — spikes on platform-loss events; the 2026 surge is the 4o retirement.",
     story:
-      "Rupture is the sharpest signal here: it jumps hard whenever a platform change takes someone’s AI companion away — a shutdown, a personality change, a model retirement. The large 2026 rise follows the retirement of OpenAI’s 4o model, which many people had grown attached to. Where this line has a cliff, a product changed underneath its users.",
+      "Rupture is the sharpest signal here: it jumps hard whenever a platform change takes someone’s AI companion away — a shutdown, a personality change, a model retirement. The large 2026 rise coincides with the retirement of OpenAI’s 4o model; the timing is striking, though the chart can show the co-occurrence, not prove the cause. Where this line has a cliff, a product changed underneath its users.",
   },
 ];
 

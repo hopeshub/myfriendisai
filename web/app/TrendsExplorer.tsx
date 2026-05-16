@@ -21,11 +21,11 @@ export default function TrendsExplorer({ themeData }: Props) {
       {/* Headline */}
       <div className="mb-4">
         <h1 className="text-[22px] sm:text-2xl lg:text-3xl font-bold text-[#F8FAFC] mb-1.5">
-          How are people talking about AI companionship?
+          How AI-companion communities talk about AI
         </h1>
         <p className="text-sm sm:text-base text-[#94A3B8]">
-          Six recurring themes in how people talk about AI companions on
-          Reddit — and how each has risen or fallen over time.
+          Six recurring themes across a curated set of AI-companion subreddits
+          — traced through the words people use, going back to 2017.
         </p>
       </div>
 

@@ -188,7 +188,7 @@ export default async function ThemePage({
       {/* Most active communities — one quiet line */}
       {topSubs.length > 0 && (
         <p style={{ fontSize: 13.5, color: "#8293A6", marginTop: 16 }}>
-          Most active in{" "}
+          Most of this theme&apos;s posts come from a few communities &mdash;{" "}
           {topSubs.map((s, i) => (
             <span key={s.name}>
               {i > 0 && ", "}
@@ -202,7 +202,8 @@ export default async function ThemePage({
               <span style={{ color: "#64748B" }}> {s.pct}%</span>
             </span>
           ))}
-          .
+          {" "}&mdash; so this line is a close reading of those rooms, not an
+          even sweep across Reddit.
         </p>
       )}
 

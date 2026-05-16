@@ -146,7 +146,7 @@ export default function About() {
           style={{ fontSize: 32, fontWeight: 600 }}
           className="text-foreground mb-2"
         >
-          Tracking how people talk about AI companions
+          Tracking how AI-companion communities talk
         </h1>
         <p style={{ fontSize: 16, color: "#94A3B8", lineHeight: 1.7 }}>
           This project follows six recurring themes in Reddit&apos;s
@@ -190,9 +190,15 @@ export default function About() {
           <h2 style={sectionHeaderStyle}>How it works</h2>
           <div className="space-y-4" style={bodyStyle}>
             <p>
-              The six themes weren&apos;t decided in advance. They emerged from
-              reading these communities directly and noticing which worries,
-              experiences, and turns of phrase kept coming back:
+              The six themes are a deliberate choice, not a neutral census of
+              everything these communities discuss. They came out of reading
+              the communities closely &mdash; but they reflect a particular
+              focus: the parts of life with an AI companion that carry real
+              weight, like intimacy, belief, dependence, and loss. There is no
+              &ldquo;fun,&rdquo; &ldquo;creativity,&rdquo; or &ldquo;everyday
+              utility&rdquo; theme here, and that absence is a choice, not an
+              oversight. This is the lens the project looks through; the list
+              below is what it was pointed at:
             </p>
             <ul
               className="space-y-2"
@@ -347,7 +353,7 @@ export default function About() {
           <h2 style={sectionHeaderStyle}>How to read the lines</h2>
           <div className="space-y-4" style={bodyStyle}>
             <p>
-              Five limits are worth holding in mind before you read too much
+              Six limits are worth holding in mind before you read too much
               into any single line.
             </p>
             <p>
@@ -384,9 +390,9 @@ export default function About() {
               deliberately incomplete, and I measured the cost. In a hand-coded
               sample of 400 random posts, the keywords caught somewhere between a
               few percent and about a third of the posts that genuinely
-              belonged, depending on the theme. A trend&apos;s shape and timing
-              can still be trusted; its absolute height cannot, and it always
-              runs low. That is a trade I made on purpose: a missed post only
+              belonged, depending on the theme. A trend&apos;s broad direction
+              and timing can still be trusted; its absolute height cannot, and
+              it always runs low. That is a trade I made on purpose: a missed post only
               weakens a line, while a false one corrupts it, so the method errs
               toward missing.
             </p>
@@ -414,6 +420,20 @@ export default function About() {
               existed at the time &mdash; so part of a long climb reflects the
               tracked world widening, not only the conversation itself. Trust
               the broad direction of a line more than its exact path.
+            </p>
+            <p>
+              <strong style={leadStyle}>
+                The method is weakest where the subject is most itself.
+              </strong>{" "}
+              The plainest case of AI companionship &mdash; someone simply in
+              it, writing &ldquo;I love him&rdquo; or &ldquo;my boyfriend&rdquo;
+              about an AI in the same ordinary words they would use for a
+              person &mdash; is the hardest for a keyword to claim, because it
+              reads exactly like human-relationship talk. So the lines are
+              sharpest at the edges, where the vocabulary is distinctive
+              &mdash; recovery language, platform-rupture language &mdash; and
+              softest at the ordinary core. The site sees the crises of AI
+              companionship more clearly than the quiet, daily fact of it.
             </p>
           </div>
         </section>

@@ -1,4 +1,5 @@
 import { ImageResponse } from "next/og";
+import siteMeta from "../data/site_meta.json";
 
 export const runtime = "edge";
 export const alt = "My Friend Is AI — Tracking AI companion discourse on Reddit";
@@ -13,6 +14,9 @@ const THEMES = [
   { emoji: "\u{1F48A}", label: "Addiction", color: "#fd7112" },
   { emoji: "\u{1F940}", label: "Rupture", color: "#22C55E" },
 ];
+
+// Read from the build-time data export so the count cannot go stale.
+const POST_COUNT = `~${(siteMeta.total_posts / 1_000_000).toFixed(1)}M`;
 
 export default async function Image() {
   return new ImageResponse(
@@ -92,7 +96,7 @@ export default async function Image() {
             color: "#94A3B8",
           }}
         >
-          myfriendisai.com — ~3.8M posts from 27 Reddit communities
+          myfriendisai.com — {POST_COUNT} posts from 27 Reddit communities
         </div>
       </div>
     ),
