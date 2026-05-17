@@ -24,7 +24,7 @@ from src.config import load_communities, load_keywords, load_keyword_communities
 from src.reddit_client import RedditClient
 from src.utils.rate_limiter import RateLimiter
 from src.db.schema import initialize as init_db
-from src.db.operations import export_snapshots_json, export_subreddits_json, export_site_meta_json, sync_subreddit_config, update_contributor_metrics_for_date
+from src.db.operations import export_snapshots_json, export_subreddits_json, export_site_meta_json, export_community_activity_json, sync_subreddit_config, update_contributor_metrics_for_date
 from src.collector import collect_subreddit
 from src.keyword_scanner import scan_subreddit_keywords, store_keyword_counts, export_keywords_json
 from src.db.operations import export_keyword_trends_json, export_theme_health_json
@@ -229,6 +229,10 @@ def _step_export(conn):
     os.replace(str(sub_path), str(data_dir / "subreddits.json"))
     sub_path = data_dir / "subreddits.json"
 
+    activity_path = export_community_activity_json(output_path=data_dir / "community_activity.json.tmp", conn=conn)
+    os.replace(str(activity_path), str(data_dir / "community_activity.json"))
+    activity_path = data_dir / "community_activity.json"
+
     kw_path = export_keywords_json(output_path=data_dir / "keywords.json.tmp", conn=conn)
     os.replace(str(kw_path), str(data_dir / "keywords.json"))
     kw_path = data_dir / "keywords.json"
@@ -265,6 +269,7 @@ def _step_export(conn):
     web_data_dir.mkdir(parents=True, exist_ok=True)
     _atomic_copy(snap_path, web_data_dir / "snapshots.json")
     _atomic_copy(sub_path, web_data_dir / "subreddits.json")
+    _atomic_copy(activity_path, web_data_dir / "community_activity.json")
     _atomic_copy(kw_trends_path, web_data_dir / "keyword_trends.json")
     _atomic_copy(comp_path, web_data_dir / "composition_trends.json")
     _atomic_copy(meta_path, web_data_dir / "site_meta.json")

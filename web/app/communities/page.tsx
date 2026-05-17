@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { getSubreddits } from "@/lib/data";
+import { getSubreddits, getCommunityActivity } from "@/lib/data";
 import CommunitiesTable from "./CommunitiesTable";
 
 export const metadata: Metadata = {
@@ -16,6 +16,7 @@ export const metadata: Metadata = {
 
 export default function Communities() {
   const subreddits = getSubreddits();
+  const activity = getCommunityActivity();
   const asOf = subreddits[0]?.snapshot_date ?? "—";
 
   return (
@@ -35,7 +36,7 @@ export default function Communities() {
         </Link>
         .
       </p>
-      <CommunitiesTable subreddits={subreddits} />
+      <CommunitiesTable subreddits={subreddits} activity={activity} />
     </div>
   );
 }

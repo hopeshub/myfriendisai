@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import type { SubredditSummary } from "@/lib/types";
+import type { SubredditSummary, CommunityActivity } from "@/lib/types";
+import Sparkline from "./Sparkline";
 
 type SortKey = keyof Pick<
   SubredditSummary,
@@ -60,7 +61,13 @@ function SortButton({
   );
 }
 
-export default function CommunitiesTable({ subreddits }: { subreddits: SubredditSummary[] }) {
+export default function CommunitiesTable({
+  subreddits,
+  activity,
+}: {
+  subreddits: SubredditSummary[];
+  activity: CommunityActivity;
+}) {
   const [sort, setSort] = useState<{ key: SortKey; asc: boolean }>({
     key: "subscribers",
     asc: false,
@@ -107,6 +114,7 @@ export default function CommunitiesTable({ subreddits }: { subreddits: Subreddit
           <thead>
             <tr className="text-xs uppercase tracking-wide border-b border-[#2A2D3A]">
               <th className="pb-3 pr-4 font-medium text-[#6B7689]">Community</th>
+              <th className="pb-3 pr-4 font-medium text-[#6B7689] hidden sm:table-cell">Activity</th>
               <th className="pb-3 pr-4 font-medium text-[#6B7689] hidden sm:table-cell">Tier</th>
               <th className="pb-3 pr-4 font-medium text-right">
                 <SortButton label="Subscribers" sortKey="subscribers" current={sort} onSort={handleSort} />
@@ -140,6 +148,9 @@ export default function CommunitiesTable({ subreddits }: { subreddits: Subreddit
                   )}
                 </td>
                 <td className="py-3 pr-4 hidden sm:table-cell">
+                  <Sparkline values={activity.activity[s.subreddit] ?? []} />
+                </td>
+                <td className="py-3 pr-4 hidden sm:table-cell">
                   <TierBadge tier={s.tier} />
                 </td>
                 <td className="py-3 pr-4 text-sm tabular-nums text-right text-[#C8D0DC]">{fmt(s.subscribers)}</td>
@@ -158,6 +169,9 @@ export default function CommunitiesTable({ subreddits }: { subreddits: Subreddit
       )}
 
       <p className="mt-8 text-xs text-[#6B7689]">
+        <strong>Activity</strong> — monthly post volume, Jan 2023 to the last
+        complete month; each sparkline is on its own scale (read the shape, not
+        the height).{" "}
         <strong>Subscribers</strong> — Direct.{" "}
         <strong>Contributors/wk</strong> — Derived (distinct post + comment authors over the
         past 7 days; comment authors counted from 2026-03-10 onward).{" "}

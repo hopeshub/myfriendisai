@@ -429,6 +429,81 @@ def export_subreddits_json(
     return path
 
 
+def _month_range(start: str, end: str) -> list:
+    """Every 'YYYY-MM' from start to end inclusive."""
+    sy, sm = (int(x) for x in start.split("-"))
+    ey, em = (int(x) for x in end.split("-"))
+    out = []
+    y, m = sy, sm
+    while (y, m) <= (ey, em):
+        out.append(f"{y:04d}-{m:02d}")
+        m += 1
+        if m > 12:
+            m, y = 1, y + 1
+    return out
+
+
+def export_community_activity_json(
+    output_path: Optional[Path] = None,
+    conn: Optional[sqlite3.Connection] = None,
+) -> Path:
+    """Write per-community monthly post volume for the Communities-table sparklines.
+
+    A compact shared-axis series: every active community gets one array of
+    monthly post counts aligned to a single month axis. The axis runs from
+    2023-01 (where monthly volume is reliable — see PostVolumeChart's
+    CHART_START) up to the last *complete* month, so no sparkline ends on a
+    misleading partial-month dip. Each sparkline is read direction-only, on
+    its own scale.
+    """
+    path = output_path or DATA_DIR / "community_activity.json"
+    path.parent.mkdir(parents=True, exist_ok=True)
+    _conn = conn or get_connection()
+    try:
+        # Canonical active community names (the same set subreddits.json uses).
+        subs = [
+            r["subreddit"]
+            for r in _conn.execute(
+                "SELECT subreddit FROM subreddit_config WHERE is_active = 1 "
+                "ORDER BY subreddit ASC"
+            ).fetchall()
+        ]
+        # Monthly post counts, case-insensitive on the subreddit name (the
+        # posts table can carry case drift vs. config — see the collector).
+        rows = _conn.execute(
+            """
+            SELECT LOWER(subreddit) AS sub,
+                   strftime('%Y-%m', created_utc, 'unixepoch') AS month,
+                   COUNT(*) AS n
+            FROM posts
+            WHERE created_utc IS NOT NULL
+            GROUP BY sub, month
+            """
+        ).fetchall()
+        START = "2023-01"
+        current_month = date.today().strftime("%Y-%m")
+        counts: dict = {}
+        max_month = START
+        for r in rows:
+            m = r["month"]
+            # Drop pre-2023 (sparse) and the in-progress month (partial).
+            if not m or m < START or m >= current_month:
+                continue
+            counts.setdefault(r["sub"], {})[m] = r["n"]
+            if m > max_month:
+                max_month = m
+        months = _month_range(START, max_month)
+        activity = {
+            sub: [counts.get(sub.lower(), {}).get(m, 0) for m in months]
+            for sub in subs
+        }
+        path.write_text(json.dumps({"months": months, "activity": activity}))
+    finally:
+        if conn is None:
+            _conn.close()
+    return path
+
+
 def export_keyword_trends_json(
     output_path: Optional[Path] = None,
     conn: Optional[sqlite3.Connection] = None,

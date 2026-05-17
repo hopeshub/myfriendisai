@@ -1,6 +1,6 @@
 import path from "path";
 import fs from "fs";
-import type { SubredditSummary, Snapshot } from "./types";
+import type { SubredditSummary, Snapshot, CommunityActivity } from "./types";
 
 // Data files are copied into web/data/ for Vercel compatibility.
 // The Python collector writes to the project root data/ directory,
@@ -31,4 +31,15 @@ export function getSnapshots(): Snapshot[] {
 
 export function getSnapshotsForSubreddit(subreddit: string): Snapshot[] {
   return getSnapshots().filter((s) => s.subreddit === subreddit);
+}
+
+export function getCommunityActivity(): CommunityActivity {
+  const file = path.join(DATA_DIR, "community_activity.json");
+  if (!fs.existsSync(file)) return { months: [], activity: {} };
+  try {
+    return JSON.parse(fs.readFileSync(file, "utf8")) as CommunityActivity;
+  } catch (e) {
+    console.error("Failed to parse community_activity.json:", e);
+    return { months: [], activity: {} };
+  }
 }

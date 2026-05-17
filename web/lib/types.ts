@@ -15,6 +15,13 @@ export type SubredditSummary = {
   display_name: string | null;
 };
 
+// Per-community monthly post volume — a shared month axis, one count array
+// per community. Powers the Communities-table activity sparklines.
+export type CommunityActivity = {
+  months: string[];
+  activity: Record<string, number[]>;
+};
+
 export type Snapshot = {
   subreddit: string;
   snapshot_date: string;
