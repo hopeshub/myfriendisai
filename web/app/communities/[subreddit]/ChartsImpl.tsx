@@ -11,6 +11,11 @@ import {
 } from "recharts";
 import type { Snapshot } from "@/lib/types";
 
+const MONTH_NAMES = [
+  "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+  "Jul", "Aug", "Sep", "Oct", "Nov", "Dec",
+];
+
 function fmt(n: number | null, decimals = 0): string {
   if (n == null) return "—";
   return n.toLocaleString("en-US", { maximumFractionDigits: decimals });
@@ -41,6 +46,29 @@ function MetricChart({
     }))
     .filter((r) => r.value != null);
 
+  // Axis labels: full ISO dates ("2024-03-25") crammed across the axis are
+  // hard to read. Format adaptively — a multi-year series gets "Mon 'YY",
+  // a short series gets "Mon D" so within-month movement stays legible.
+  const spanDays =
+    formatted.length > 1
+      ? (Date.parse(formatted[formatted.length - 1].date) -
+          Date.parse(formatted[0].date)) /
+        86_400_000
+      : 0;
+  const longSpan = spanDays > 400;
+  const fmtTick = (d: string): string => {
+    const dt = new Date(d + "T00:00:00Z");
+    const mon = MONTH_NAMES[dt.getUTCMonth()];
+    return longSpan
+      ? `${mon} '${String(dt.getUTCFullYear()).slice(2)}`
+      : `${mon} ${dt.getUTCDate()}`;
+  };
+  const fmtTooltipLabel = (d: unknown): string => {
+    if (typeof d !== "string") return "";
+    const dt = new Date(d + "T00:00:00Z");
+    return `${MONTH_NAMES[dt.getUTCMonth()]} ${dt.getUTCDate()}, ${dt.getUTCFullYear()}`;
+  };
+
   return (
     <div>
       <p className="text-xs text-[#6B7689] uppercase tracking-widest mb-3">{label}</p>
@@ -49,9 +77,12 @@ function MetricChart({
           <CartesianGrid strokeDasharray="3 3" stroke="#2A2D3A" />
           <XAxis
             dataKey="date"
+            tickFormatter={fmtTick}
             tick={{ fontSize: 11, fill: "#6B7689" }}
             tickLine={false}
             axisLine={false}
+            minTickGap={48}
+            tickMargin={8}
           />
           <YAxis
             tick={{ fontSize: 11, fill: "#6B7689" }}
@@ -67,6 +98,7 @@ function MetricChart({
             }
           />
           <Tooltip
+            labelFormatter={fmtTooltipLabel}
             formatter={(v) =>
               typeof v === "number"
                 ? decimals > 0 ? v.toFixed(decimals) : fmt(v)
