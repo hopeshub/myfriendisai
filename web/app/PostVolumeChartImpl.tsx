@@ -9,6 +9,7 @@ import {
   YAxis,
   Tooltip,
   CartesianGrid,
+  ReferenceLine,
 } from "recharts";
 import type { PostVolumeSplitPoint } from "./themeData";
 import { measure } from "./styles";
@@ -24,6 +25,10 @@ import { measure } from "./styles";
 // large shaded "patchy coverage" block that dominated the chart. Cropping to
 // the reliable era is cleaner and more honest than rendering two-thirds of the
 // chart as untrustworthy; the corpus extent is noted in the caption instead.
+//
+// The CharacterAI panel carries numbered event markers — the platform changes
+// behind its surge and fall — so the §1 thesis ("one platform's lifecycle, not
+// the category's") is legible on the chart itself, not only in the prose.
 
 const MONTH_NAMES = [
   "Jan", "Feb", "Mar", "Apr", "May", "Jun",
@@ -60,6 +65,13 @@ function monthRange(start: string, end: string): string[] {
 // reliable. Earlier data exists in the corpus but is sparse / archive-gapped.
 const CHART_START = "2023-01";
 
+// r/CharacterAI's platform timeline — the events behind the surge and fall.
+type ChartEvent = { month: string; label: string };
+const CAI_EVENTS: ChartEvent[] = [
+  { month: "2024-10", label: "Lawsuit filed" },
+  { month: "2025-10", label: "New under-18 limits" },
+];
+
 type PanelRow = { month: string; value: number | null };
 
 function VolumePanel({
@@ -69,6 +81,7 @@ function VolumePanel({
   yearTicks,
   color,
   gradientId,
+  events,
 }: {
   title: string;
   caption: string;
@@ -76,6 +89,7 @@ function VolumePanel({
   yearTicks: string[];
   color: string;
   gradientId: string;
+  events?: ChartEvent[];
 }) {
   return (
     <div>
@@ -87,7 +101,7 @@ function VolumePanel({
       </div>
       <div style={{ height: 200 }}>
         <ResponsiveContainer width="100%" height="100%">
-          <AreaChart data={rows} margin={{ top: 8, right: 8, bottom: 2, left: 0 }}>
+          <AreaChart data={rows} margin={{ top: 20, right: 8, bottom: 2, left: 0 }}>
             <defs>
               <linearGradient id={gradientId} x1="0" y1="0" x2="0" y2="1">
                 <stop offset="0%" stopColor={color} stopOpacity={0.5} />
@@ -151,6 +165,24 @@ function VolumePanel({
               connectNulls={false}
               isAnimationActive={false}
             />
+            {/* Numbered platform-event markers — named in the legend below. */}
+            {events?.map((ev, i) => (
+              <ReferenceLine
+                key={ev.month}
+                x={ev.month}
+                stroke="#C2974D"
+                strokeOpacity={0.55}
+                strokeDasharray="4 3"
+                strokeWidth={1}
+                label={{
+                  value: String(i + 1),
+                  position: "top",
+                  fill: "#D4A862",
+                  fontSize: 11,
+                  fontWeight: 700,
+                }}
+              />
+            ))}
           </AreaChart>
         </ResponsiveContainer>
       </div>
@@ -220,6 +252,7 @@ export default function PostVolumeChart({
           yearTicks={yearTicks}
           color="#566173"
           gradientId="pv-cai"
+          events={CAI_EVENTS}
         />
         <VolumePanel
           title="Every other tracked community"
@@ -230,11 +263,56 @@ export default function PostVolumeChart({
           gradientId="pv-other"
         />
       </div>
+
+      {/* Legend for the r/CharacterAI panel's numbered event markers. */}
+      <div
+        style={{
+          fontSize: 11,
+          color: "#6B7689",
+          marginTop: 10,
+          display: "flex",
+          flexWrap: "wrap",
+          gap: "4px 14px",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <span style={{ textTransform: "uppercase", letterSpacing: "0.05em" }}>
+          r/CharacterAI
+        </span>
+        {CAI_EVENTS.map((ev, i) => (
+          <span
+            key={ev.month}
+            style={{ display: "inline-flex", alignItems: "center", gap: 5 }}
+          >
+            <span
+              aria-hidden
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                justifyContent: "center",
+                width: 15,
+                height: 15,
+                borderRadius: 999,
+                fontSize: 10,
+                fontWeight: 700,
+                color: "#0F1117",
+                backgroundColor: "#C2974D",
+              }}
+            >
+              {i + 1}
+            </span>
+            <span style={{ color: "#C8D0DC" }}>{ev.label}</span>
+            <span>{fmtMonth(ev.month)}</span>
+          </span>
+        ))}
+      </div>
+
       <p
         style={{
           fontSize: 11,
           color: "#6B7689",
-          marginTop: 8,
+          marginTop: 6,
           textAlign: "center",
           maxWidth: measure,
           marginLeft: "auto",
