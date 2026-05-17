@@ -107,18 +107,13 @@ export default function Home() {
           className="text-xl sm:text-2xl font-semibold text-[#F8FAFC]"
           style={{ marginBottom: 8, maxWidth: measure }}
         >
-          The communities for getting out
+          Calling it an addiction
         </h2>
-        <p style={{ ...intro, marginBottom: 16 }}>
-          The clearest counter-current the project has found. As AI
-          companionship grew, a second thing took shape beside it: communities
-          organized around <em>quitting</em>{" "}it. The first, r/AI_Addiction,
-          appeared in June 2023 &mdash; &ldquo;for those of us who suffer from
-          addiction to AI services.&rdquo; Two genuine recovery communities
-          followed within months &mdash; r/ChatbotAddiction and
-          r/Character_AI_Recovery &mdash; and they grew. The language inside
-          them is borrowed wholesale from substance recovery: relapse, cold
-          turkey, day counts, &ldquo;X days clean.&rdquo;
+        <p style={{ ...intro, marginBottom: 28 }}>
+          As AI companionship grew, so did unease about it. A growing number of
+          people describe their own AI use as an addiction, and have built
+          communities to quit it &mdash; borrowing the language of substance
+          recovery: relapse, cold turkey, &ldquo;X days clean.&rdquo;
         </p>
         <RecoverySection data={recoveryVolume} />
       </section>
