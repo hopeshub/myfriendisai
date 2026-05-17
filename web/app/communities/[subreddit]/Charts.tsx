@@ -21,7 +21,7 @@ function MetricChart({
   data,
   dataKey,
   label,
-  color = "#18181b",
+  color = "#7C9CD0",
   decimals = 0,
 }: {
   data: Snapshot[];
@@ -37,18 +37,18 @@ function MetricChart({
 
   return (
     <div>
-      <p className="text-xs text-zinc-400 uppercase tracking-widest mb-3">{label}</p>
+      <p className="text-xs text-[#64748B] uppercase tracking-widest mb-3">{label}</p>
       <ResponsiveContainer width="100%" height={140}>
         <LineChart data={formatted} margin={{ top: 4, right: 4, left: 0, bottom: 0 }}>
-          <CartesianGrid strokeDasharray="3 3" stroke="#f4f4f5" />
+          <CartesianGrid strokeDasharray="3 3" stroke="#2A2D3A" />
           <XAxis
             dataKey="date"
-            tick={{ fontSize: 10, fill: "#a1a1aa" }}
+            tick={{ fontSize: 10, fill: "#64748B" }}
             tickLine={false}
             axisLine={false}
           />
           <YAxis
-            tick={{ fontSize: 10, fill: "#a1a1aa" }}
+            tick={{ fontSize: 10, fill: "#64748B" }}
             tickLine={false}
             axisLine={false}
             width={50}
@@ -66,8 +66,14 @@ function MetricChart({
                 ? decimals > 0 ? v.toFixed(decimals) : fmt(v)
                 : String(v)
             }
-            labelStyle={{ fontSize: 11 }}
-            contentStyle={{ fontSize: 11, borderColor: "#e4e4e7" }}
+            labelStyle={{ fontSize: 11, color: "#94A3B8" }}
+            itemStyle={{ color: "#F8FAFC" }}
+            contentStyle={{
+              fontSize: 11,
+              backgroundColor: "#0F1117",
+              borderColor: "#2A2D3A",
+              borderRadius: 6,
+            }}
           />
           <Line
             type="monotone"
@@ -94,43 +100,43 @@ export default function Charts({ subreddit }: { subreddit: string }) {
   }, [subreddit]);
 
   if (snapshots === null) {
-    return <p className="text-sm text-zinc-400">Loading…</p>;
+    return <p className="text-sm text-[#94A3B8]">Loading…</p>;
   }
 
   if (snapshots.length === 0) {
-    return <p className="text-sm text-zinc-400">No snapshot data yet.</p>;
+    return <p className="text-sm text-[#94A3B8]">No snapshot data yet.</p>;
   }
 
   const latest = snapshots.at(-1)!;
 
   return (
     <>
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-8 p-6 bg-zinc-50 rounded-xl">
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-8 p-6 bg-[#1A1D27] rounded-xl">
         <div>
-          <div className="text-2xl font-semibold tabular-nums">{fmt(latest.subscribers)}</div>
-          <div className="text-xs text-zinc-400 mt-0.5">Subscribers</div>
+          <div className="text-2xl font-semibold tabular-nums text-[#F8FAFC]">{fmt(latest.subscribers)}</div>
+          <div className="text-xs text-[#94A3B8] mt-0.5">Subscribers</div>
         </div>
         <div>
-          <div className="text-2xl font-semibold tabular-nums">{fmt(latest.unique_contributors_7d)}</div>
-          <div className="text-xs text-zinc-400 mt-0.5">Contributors / week</div>
+          <div className="text-2xl font-semibold tabular-nums text-[#F8FAFC]">{fmt(latest.unique_contributors_7d)}</div>
+          <div className="text-xs text-[#94A3B8] mt-0.5">Contributors / week</div>
         </div>
         <div>
-          <div className="text-2xl font-semibold tabular-nums">{fmt(latest.posts_today)}</div>
-          <div className="text-xs text-zinc-400 mt-0.5">Posts today</div>
+          <div className="text-2xl font-semibold tabular-nums text-[#F8FAFC]">{fmt(latest.posts_today)}</div>
+          <div className="text-xs text-[#94A3B8] mt-0.5">Posts today</div>
         </div>
         <div>
-          <div className="text-2xl font-semibold tabular-nums">{fmt(latest.avg_comments_per_post, 1)}</div>
-          <div className="text-xs text-zinc-400 mt-0.5">Avg comments / post</div>
+          <div className="text-2xl font-semibold tabular-nums text-[#F8FAFC]">{fmt(latest.avg_comments_per_post, 1)}</div>
+          <div className="text-xs text-[#94A3B8] mt-0.5">Avg comments / post</div>
         </div>
       </div>
 
       <div className="mt-8">
-        <p className="text-sm text-zinc-500 mb-1">
+        <p className="text-sm text-[#94A3B8] mb-1">
           {snapshots.length} day{snapshots.length !== 1 ? "s" : ""} of data
           {snapshots.length === 1 && " — charts will grow as daily collection runs"}
         </p>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-10 mt-8">
-          <MetricChart data={snapshots} dataKey="subscribers" label="Subscribers" color="#18181b" />
+          <MetricChart data={snapshots} dataKey="subscribers" label="Subscribers" color="#7C9CD0" />
           <MetricChart data={snapshots} dataKey="unique_contributors_7d" label="Contributors / week (rolling 7d)" color="#e8692a" />
           <MetricChart data={snapshots} dataKey="posts_today" label="Posts / day" color="#3b82f6" />
           <MetricChart data={snapshots} dataKey="avg_comments_per_post" label="Avg comments per post" color="#8b5cf6" decimals={1} />

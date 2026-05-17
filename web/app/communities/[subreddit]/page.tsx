@@ -48,16 +48,16 @@ export default async function SubredditPage({
   return (
     <div className="py-8">
       <div className="mb-2">
-        <Link href="/communities" className="text-sm text-zinc-400 hover:text-zinc-700 transition-colors">
+        <Link href="/communities" className="text-sm text-[#94A3B8] hover:text-[#F8FAFC] transition-colors">
           ← Communities
         </Link>
       </div>
 
       <div className="flex items-start justify-between gap-4 flex-wrap">
         <div>
-          <h1 className="text-3xl font-semibold tracking-tight">r/{subreddit}</h1>
+          <h1 className="text-3xl font-semibold tracking-tight text-[#F8FAFC]">r/{subreddit}</h1>
           {meta.category && (
-            <p className="text-zinc-400 text-sm mt-1">
+            <p className="text-[#94A3B8] text-sm mt-1">
               {meta.tier != null ? TIER_LABELS[meta.tier] : ""}{meta.category ? ` · ${meta.category}` : ""}
             </p>
           )}
@@ -66,13 +66,13 @@ export default async function SubredditPage({
           href={`https://reddit.com/r/${subreddit}`}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-xs text-zinc-400 hover:text-zinc-700 border border-zinc-200 rounded-full px-3 py-1.5 transition-colors"
+          className="text-xs text-[#94A3B8] hover:text-[#F8FAFC] border border-[#2A2D3A] rounded-full px-3 py-1.5 transition-colors"
         >
           View on Reddit ↗
         </a>
       </div>
 
-      <p className="text-zinc-500 text-sm mt-3 max-w-2xl">
+      <p className="text-[#94A3B8] text-sm mt-3 max-w-2xl">
         Engagement metrics for a single community &mdash; size and activity over
         time, shown as context. This is not the theme tracker, and it does not
         measure how common any experience is.
@@ -80,7 +80,7 @@ export default async function SubredditPage({
 
       <Charts subreddit={subreddit} />
 
-      <p className="mt-10 text-xs text-zinc-400 border-t border-zinc-100 pt-4">
+      <p className="mt-10 text-xs text-[#64748B] border-t border-[#2A2D3A] pt-4">
         <strong>Subscribers</strong> — Direct (Reddit API).{" "}
         <strong>Contributors / week</strong> — Derived: distinct authors of posts +
         comments in the 7 days ending on the snapshot date. Historical series uses

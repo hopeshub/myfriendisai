@@ -22,16 +22,16 @@ const TIER_LABELS: Record<number, string> = {
 };
 
 const TIER_COLORS: Record<number, string> = {
-  0: "bg-zinc-100 text-zinc-500",
-  1: "bg-blue-50 text-blue-600",
-  2: "bg-violet-50 text-violet-600",
-  3: "bg-red-50 text-red-600",
+  0: "bg-slate-400/10 text-slate-300",
+  1: "bg-blue-400/10 text-blue-300",
+  2: "bg-violet-400/10 text-violet-300",
+  3: "bg-red-400/10 text-red-300",
 };
 
 function TierBadge({ tier }: { tier: number | null }) {
   if (tier == null) return null;
   return (
-    <span className={`inline-flex text-xs font-medium px-2 py-0.5 rounded-full ${TIER_COLORS[tier] ?? "bg-zinc-100 text-zinc-500"}`}>
+    <span className={`inline-flex text-xs font-medium px-2 py-0.5 rounded-full ${TIER_COLORS[tier] ?? "bg-slate-400/10 text-slate-300"}`}>
       {TIER_LABELS[tier] ?? `Tier ${tier}`}
     </span>
   );
@@ -52,7 +52,7 @@ function SortButton({
   return (
     <button
       onClick={() => onSort(sortKey)}
-      className={`flex items-center gap-1 ml-auto hover:text-zinc-700 transition-colors ${active ? "text-zinc-800" : "text-zinc-400"}`}
+      className={`flex items-center gap-1 ml-auto hover:text-[#CBD5E1] transition-colors ${active ? "text-[#F8FAFC]" : "text-[#64748B]"}`}
     >
       {label}
       <span className="text-[10px]">{active ? (current.asc ? "↑" : "↓") : "↕"}</span>
@@ -93,8 +93,8 @@ export default function CommunitiesTable({ subreddits }: { subreddits: Subreddit
             onClick={() => setCategoryFilter(cat)}
             className={`text-xs px-3 py-1 rounded-full border transition-colors ${
               categoryFilter === cat
-                ? "bg-zinc-900 text-white border-zinc-900"
-                : "border-zinc-200 text-zinc-500 hover:border-zinc-400"
+                ? "bg-[#1A1D27] text-[#F8FAFC] border-[#2A2D3A]"
+                : "border-[#2A2D3A] text-[#94A3B8] hover:border-[#475569]"
             }`}
           >
             {cat}
@@ -105,9 +105,9 @@ export default function CommunitiesTable({ subreddits }: { subreddits: Subreddit
       <div className="overflow-x-auto">
         <table className="w-full text-left">
           <thead>
-            <tr className="text-xs uppercase tracking-wide border-b border-zinc-200">
-              <th className="pb-3 pr-4 font-medium text-zinc-400">Community</th>
-              <th className="pb-3 pr-4 font-medium text-zinc-400 hidden sm:table-cell">Tier</th>
+            <tr className="text-xs uppercase tracking-wide border-b border-[#2A2D3A]">
+              <th className="pb-3 pr-4 font-medium text-[#64748B]">Community</th>
+              <th className="pb-3 pr-4 font-medium text-[#64748B] hidden sm:table-cell">Tier</th>
               <th className="pb-3 pr-4 font-medium text-right">
                 <SortButton label="Subscribers" sortKey="subscribers" current={sort} onSort={handleSort} />
               </th>
@@ -127,26 +127,26 @@ export default function CommunitiesTable({ subreddits }: { subreddits: Subreddit
           </thead>
           <tbody>
             {sorted.map((s) => (
-              <tr key={s.subreddit} className="border-t border-zinc-100 hover:bg-zinc-50 transition-colors">
+              <tr key={s.subreddit} className="border-t border-[#2A2D3A] hover:bg-[#1A1D27] transition-colors">
                 <td className="py-3 pr-4">
                   <Link
                     href={`/communities/${s.subreddit}`}
-                    className="font-medium text-sm hover:underline"
+                    className="font-medium text-sm text-[#F8FAFC] hover:underline"
                   >
                     r/{s.subreddit}
                   </Link>
                   {s.category && (
-                    <div className="text-xs text-zinc-400 mt-0.5">{s.category}</div>
+                    <div className="text-xs text-[#64748B] mt-0.5">{s.category}</div>
                   )}
                 </td>
                 <td className="py-3 pr-4 hidden sm:table-cell">
                   <TierBadge tier={s.tier} />
                 </td>
-                <td className="py-3 pr-4 text-sm tabular-nums text-right">{fmt(s.subscribers)}</td>
-                <td className="py-3 pr-4 text-sm tabular-nums text-right">{fmt(s.unique_contributors_7d)}</td>
-                <td className="py-3 pr-4 text-sm tabular-nums text-right hidden sm:table-cell">{fmt(s.posts_today)}</td>
-                <td className="py-3 pr-4 text-sm tabular-nums text-right hidden md:table-cell">{fmt(s.avg_comments_per_post, 1)}</td>
-                <td className="py-3 text-sm tabular-nums text-right hidden md:table-cell">{fmt(s.avg_score_per_post, 0)}</td>
+                <td className="py-3 pr-4 text-sm tabular-nums text-right text-[#CBD5E1]">{fmt(s.subscribers)}</td>
+                <td className="py-3 pr-4 text-sm tabular-nums text-right text-[#CBD5E1]">{fmt(s.unique_contributors_7d)}</td>
+                <td className="py-3 pr-4 text-sm tabular-nums text-right text-[#CBD5E1] hidden sm:table-cell">{fmt(s.posts_today)}</td>
+                <td className="py-3 pr-4 text-sm tabular-nums text-right text-[#CBD5E1] hidden md:table-cell">{fmt(s.avg_comments_per_post, 1)}</td>
+                <td className="py-3 text-sm tabular-nums text-right text-[#CBD5E1] hidden md:table-cell">{fmt(s.avg_score_per_post, 0)}</td>
               </tr>
             ))}
           </tbody>
@@ -154,10 +154,10 @@ export default function CommunitiesTable({ subreddits }: { subreddits: Subreddit
       </div>
 
       {sorted.length === 0 && (
-        <p className="text-sm text-zinc-400 py-8 text-center">No communities in this category.</p>
+        <p className="text-sm text-[#94A3B8] py-8 text-center">No communities in this category.</p>
       )}
 
-      <p className="mt-8 text-xs text-zinc-400">
+      <p className="mt-8 text-xs text-[#64748B]">
         <strong>Subscribers</strong> — Direct.{" "}
         <strong>Contributors/wk</strong> — Derived (distinct post + comment authors over the
         past 7 days; comment authors counted from 2026-03-10 onward).{" "}
