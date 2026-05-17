@@ -9,22 +9,21 @@ import {
   YAxis,
   Tooltip,
   CartesianGrid,
-  ReferenceArea,
 } from "recharts";
 import type { PostVolumeSplitPoint } from "./themeData";
 import { measure } from "./styles";
 
 // ── Post-volume chart ────────────────────────────────────────────────────────
 // Two panels, each on its OWN y-scale: r/CharacterAI, and every other tracked
-// community. They are deliberately not stacked or on a shared axis — CharacterAI
-// is so much larger that a shared scale flattens the second panel into an
-// unreadable sliver. Separate scales let each be read on its own terms: one
-// surged and crashed on a platform lifecycle, the other held roughly steady.
+// community. They are deliberately not stacked or on a shared axis —
+// CharacterAI is so much larger that a shared scale flattens the second panel
+// into an unreadable sliver. Separate scales let each be read on its own terms.
 //
-// Honest caveats stay built in: missing months render as a real break
-// (connectNulls off — the 2017-2019 collection gap), and the pre-2023 span is
-// shaded for patchy archive coverage.
-// See docs/characterai_composition_fault_2026-05-16.md.
+// The chart begins in 2023. The post corpus reaches back to 2017, but the
+// 2017-2022 years are sparse and partly archive-gapped — shown earlier as a
+// large shaded "patchy coverage" block that dominated the chart. Cropping to
+// the reliable era is cleaner and more honest than rendering two-thirds of the
+// chart as untrustworthy; the corpus extent is noted in the caption instead.
 
 const MONTH_NAMES = [
   "Jan", "Feb", "Mar", "Apr", "May", "Jun",
@@ -41,7 +40,7 @@ function fmtCount(n: number): string {
   return String(n);
 }
 
-/** Every "YYYY-MM" from start to end inclusive, so gaps become explicit. */
+/** Every "YYYY-MM" from start to end inclusive. */
 function monthRange(start: string, end: string): string[] {
   const out: string[] = [];
   let [y, m] = start.split("-").map(Number);
@@ -57,7 +56,9 @@ function monthRange(start: string, end: string): string[] {
   return out;
 }
 
-const ARCHIVE_SEAM = "2023-01";
+// The chart starts here — the first month from which monthly post counts are
+// reliable. Earlier data exists in the corpus but is sparse / archive-gapped.
+const CHART_START = "2023-01";
 
 type PanelRow = { month: string; value: number | null };
 
@@ -66,21 +67,15 @@ function VolumePanel({
   caption,
   rows,
   yearTicks,
-  firstMonth,
-  hasEarly,
   color,
   gradientId,
-  showSeamLabel,
 }: {
   title: string;
   caption: string;
   rows: PanelRow[];
   yearTicks: string[];
-  firstMonth: string;
-  hasEarly: boolean;
   color: string;
   gradientId: string;
-  showSeamLabel?: boolean;
 }) {
   return (
     <div>
@@ -100,24 +95,6 @@ function VolumePanel({
               </linearGradient>
             </defs>
             <CartesianGrid strokeDasharray="3 3" stroke="#2A2D3A" vertical={false} />
-            {hasEarly && (
-              <ReferenceArea
-                x1={firstMonth}
-                x2={ARCHIVE_SEAM}
-                fill="#64748B"
-                fillOpacity={0.09}
-                label={
-                  showSeamLabel
-                    ? {
-                        value: "patchy archive coverage",
-                        position: "insideTop",
-                        fill: "#94A3B8",
-                        fontSize: 11,
-                      }
-                    : undefined
-                }
-              />
-            )}
             <XAxis
               dataKey="month"
               ticks={yearTicks}
@@ -186,22 +163,20 @@ export default function PostVolumeChart({
 }: {
   data: PostVolumeSplitPoint[];
 }) {
-  const { caiRows, otherRows, yearTicks, firstMonth, hasEarly } = useMemo(() => {
-    if (data.length === 0) {
+  const { caiRows, otherRows, yearTicks } = useMemo(() => {
+    // Crop to the reliable era — 2023 onward.
+    const cropped = data.filter((d) => d.month >= CHART_START);
+    if (cropped.length === 0) {
       return {
         caiRows: [] as PanelRow[],
         otherRows: [] as PanelRow[],
         yearTicks: [] as string[],
-        firstMonth: "",
-        hasEarly: false,
       };
     }
     const lookup: Record<string, PostVolumeSplitPoint> = {};
-    for (const d of data) lookup[d.month] = d;
+    for (const d of cropped) lookup[d.month] = d;
 
-    // Fill the whole span so missing months exist as null points — the area
-    // breaks over a gap instead of ramping straight across it.
-    const months = monthRange(data[0].month, data[data.length - 1].month);
+    const months = monthRange(cropped[0].month, cropped[cropped.length - 1].month);
     const caiRows: PanelRow[] = months.map((m) => ({
       month: m,
       value: lookup[m] ? lookup[m].characterai : null,
@@ -221,13 +196,7 @@ export default function PostVolumeChart({
       }
     }
 
-    return {
-      caiRows,
-      otherRows,
-      yearTicks: ticks,
-      firstMonth: data[0].month,
-      hasEarly: data[0].month < ARCHIVE_SEAM,
-    };
+    return { caiRows, otherRows, yearTicks: ticks };
   }, [data]);
 
   if (caiRows.length === 0) {
@@ -249,19 +218,14 @@ export default function PostVolumeChart({
           caption="Surged, then contracted — one platform's lifecycle."
           rows={caiRows}
           yearTicks={yearTicks}
-          firstMonth={firstMonth}
-          hasEarly={hasEarly}
           color="#566173"
           gradientId="pv-cai"
-          showSeamLabel
         />
         <VolumePanel
           title="Every other tracked community"
           caption="Held roughly steady, with spikes at platform events."
           rows={otherRows}
           yearTicks={yearTicks}
-          firstMonth={firstMonth}
-          hasEarly={hasEarly}
           color="#7C9CD0"
           gradientId="pv-other"
         />
@@ -277,8 +241,10 @@ export default function PostVolumeChart({
           marginRight: "auto",
         }}
       >
-        Each panel has its own scale &mdash; at its 2024 peak r/CharacterAI was
-        roughly five times the size of every other tracked community combined.
+        The chart begins in 2023, where monthly counts become reliable &mdash;
+        the post record itself reaches back to 2017. Each panel has its own
+        scale: at its 2024 peak r/CharacterAI was roughly five times the size of
+        every other tracked community combined.
       </p>
     </div>
   );
