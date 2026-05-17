@@ -30,10 +30,17 @@ function MetricChart({
   color?: string;
   decimals?: number;
 }) {
-  const formatted = data.map((s) => ({
-    date: s.snapshot_date,
-    value: s[dataKey] as number | null,
-  }));
+  // Keep only points where this metric actually has a value. Subscribers is
+  // null for every backfilled (pre-daily-collection) snapshot — Reddit's
+  // subscriber count can't be reconstructed from old posts — so without this
+  // filter the subscribers chart would span three empty years with a stub of
+  // real line in the corner. Each metric now shows only its real data range.
+  const formatted = data
+    .map((s) => ({
+      date: s.snapshot_date,
+      value: s[dataKey] as number | null,
+    }))
+    .filter((r) => r.value != null);
 
   return (
     <div>
@@ -77,9 +84,10 @@ function MetricChart({
           />
           <Line
             type="monotone"
+            name={label}
             dataKey="value"
             stroke={color}
-            dot={data.length === 1}
+            dot={formatted.length === 1}
             strokeWidth={1.5}
             connectNulls
           />
