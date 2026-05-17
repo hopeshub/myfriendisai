@@ -58,14 +58,15 @@ export default function Home() {
           className="text-xl sm:text-2xl font-semibold text-[#F8FAFC]"
           style={{ marginBottom: 8 }}
         >
-          How much the committed core posts
+          How active these communities are
         </h2>
         <p style={{ ...intro, marginBottom: 16 }}>
           Every month, this many posts went up across the AI-companion
           communities tracked here. It is the plainest measure in the project
           &mdash; a count of posts, no keyword judgement involved &mdash; and it
-          answers the simplest question: are these communities growing? They
-          are. Read it as community activity, not a headcount of people &mdash;
+          shows a small early-Replika world becoming a much larger,
+          event-driven ecosystem. Read it as community activity, not a
+          headcount of people &mdash;
           one prolific user outposts ten quiet ones. And treat the shaded years
           before 2023 as a floor, not a count: public archives captured them
           only partially, and one 2017&ndash;2019 stretch not at all.
