@@ -9,6 +9,7 @@ import {
   introParagraph,
   bodyParagraph,
 } from "../styles";
+import { CHANGELOG } from "../changelog";
 
 export const metadata: Metadata = {
   title: "About — My Friend Is AI",
@@ -41,69 +42,8 @@ function getCommunityCount(): number {
   }
 }
 
-// Changelog: a curated list of changes that affect how the chart should be
-// read — not the full development history (that's the Git log).
-const CHANGELOG = [
-  {
-    date: "May 2026",
-    title: "Theme accuracy re-checked",
-    items: [
-      "Re-checked that keywords land on the theme they claim — about 1,800 tagged posts re-read by a separate automated check, then a sample re-coded by hand. Keywords reliably identify AI-companion discourse; sorting it into the right theme is tightest for sex/ERP and addiction, and holds up better for therapy and consciousness than that first automated pass suggested. The re-check also confirmed that therapy and addiction are largely one subject — the same reliance on an AI, framed once as help and once as a problem. No keywords changed: the response to a fast-moving vocabulary is disclosure, not constant edits.",
-    ],
-    recent: true,
-  },
-  {
-    date: "May 2026",
-    title: "Post corpus extended back to 2017",
-    items: [
-      "The post corpus was backfilled from public archives back to 2017. In practice this moved the earliest theme lines from a 2023 start back a few months, into late 2022 — as far back as monthly volume stays reliable enough to chart. The 2017–2021 years exist in the corpus but are too sparse to draw as theme lines, so the early-Replika era is not itself visible on the chart.",
-    ],
-    recent: true,
-  },
-  {
-    date: "May 2026",
-    title: "Rupture vocabulary expanded",
-    items: [
-      "Added grief-and-farewell language; the earlier keywords caught only metaphors like \"lobotomized.\" The rupture line steps up in mid-May 2026 — that part of the rise reflects the wider net, not a sudden change in the discourse itself.",
-    ],
-    recent: true,
-  },
-  {
-    date: "April 2026",
-    title: "Keyword set revalidated",
-    items: [
-      "Every high-volume keyword was re-checked against recent posts. Six were dropped — notably \"sentient,\" which had drifted into meme and roleplay use — so the consciousness line is thinner from this point on.",
-    ],
-    recent: false,
-  },
-  {
-    date: "April 2026",
-    title: "Keyword-matching bug fixed",
-    items: [
-      "Multi-word keywords had been matching inside unrelated words (\"dating my\" caught inside \"updating my\"). Fixing it removed those false positives, slightly lowering the romance, therapy, and sex/ERP lines.",
-    ],
-    recent: false,
-  },
-  {
-    date: "March 2026",
-    title: "Per-theme start dates",
-    items: [
-      "Each theme's line now begins only once its vocabulary was common enough to measure reliably. The consciousness line starts in 2025 rather than 2023 for this reason — a flat earlier line would imply absence where I simply couldn't measure it yet.",
-    ],
-    recent: false,
-  },
-  {
-    date: "March 2026",
-    title: "Daily collection began",
-    items: [
-      "The project moved from a one-time historical backfill to collecting posts fresh from Reddit every day. Comments were collected and keyword-tagged from this point on as well, but the published chart counts post text only — so this change adds no volume to any line.",
-    ],
-    recent: false,
-  },
-];
-
 const linkClass =
-  "text-foreground underline underline-offset-2 hover:text-primary transition-colors";
+  "text-foreground underline underline-offset-2 hover:opacity-80 transition-opacity";
 
 // Section heading + body paragraph come from the shared styles module.
 const sectionHeaderStyle = sectionHeading;
@@ -180,6 +120,24 @@ export default function About() {
       </div>
 
       <div className="space-y-10">
+        {/* Who makes this */}
+        <section style={sectionStyle}>
+          <h2 style={sectionHeaderStyle}>Who makes this</h2>
+          <div className="space-y-4" style={bodyStyle}>
+            <p>
+              This is an independent project, built and maintained by one
+              person. It is not academic, institutional, or peer-reviewed work
+              &mdash; there is no lab or organization behind it.
+            </p>
+            <p>
+              It started from a plain wish: a record of how these communities
+              actually talk, one that anyone can check for themselves, instead
+              of another round of hype or alarm. The method below is what keeps
+              that record honest.
+            </p>
+          </div>
+        </section>
+
         {/* How it works */}
         <section style={sectionStyle}>
           <h2 style={sectionHeaderStyle}>How it works</h2>
@@ -481,7 +439,7 @@ export default function About() {
         </section>
 
         {/* Changelog */}
-        <section>
+        <section id="changelog" style={{ scrollMarginTop: 24 }}>
           <h2 style={{ ...sectionHeaderStyle, paddingLeft: 24 }}>Changelog</h2>
           <div className="relative" style={{ paddingLeft: 24 }}>
             <div

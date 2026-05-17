@@ -1,9 +1,11 @@
+import Link from "next/link";
 import TrendsExplorer from "./TrendsExplorer";
 import PostVolumeChart from "./PostVolumeChart";
 import EventShowcase from "./EventShowcase";
 import RecoverySection from "./RecoverySection";
 import { loadThemeData, loadPostVolumeSplit, loadRecoveryVolume } from "./themeData";
 import { sectionEyebrow, introParagraph, measure } from "./styles";
+import { CHANGELOG } from "./changelog";
 
 // ── Homepage ─────────────────────────────────────────────────────────────────
 // One scrollable narrative, top to bottom:
@@ -137,6 +139,27 @@ export default function Home() {
         </p>
         <RecoverySection data={recoveryVolume} />
       </section>
+
+      {/* Changelog teaser — a quiet sign that the instrument is actively
+          tended; the full list lives on the About page. */}
+      <div
+        style={{
+          marginTop: 56,
+          paddingTop: 20,
+          borderTop: "1px solid #2A2D3A",
+        }}
+      >
+        <p style={{ fontSize: 13, lineHeight: 1.6, color: "#6B7689" }}>
+          Updated daily. Most recent change &mdash; {CHANGELOG[0].title} (
+          {CHANGELOG[0].date}).{" "}
+          <Link
+            href="/about#changelog"
+            style={{ color: "#9AA7B8", textDecoration: "underline" }}
+          >
+            See what&apos;s changed
+          </Link>
+        </p>
+      </div>
     </div>
   );
 }
