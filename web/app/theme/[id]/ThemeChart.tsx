@@ -243,7 +243,7 @@ export default function ThemeChart({
                   display: "inline-flex",
                   alignItems: "center",
                   gap: 6,
-                  fontSize: 12.5,
+                  fontSize: 13,
                   whiteSpace: "nowrap",
                 }}
               >
@@ -256,7 +256,7 @@ export default function ThemeChart({
                     width: 16,
                     height: 16,
                     borderRadius: 999,
-                    fontSize: 9.5,
+                    fontSize: 11,
                     fontWeight: 700,
                     flexShrink: 0,
                     color: e.methodology ? "#D4A862" : "#0F1117",

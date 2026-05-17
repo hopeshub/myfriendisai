@@ -107,7 +107,7 @@ function EventLegend({
                 width: 16,
                 height: 16,
                 borderRadius: 999,
-                fontSize: 9.5,
+                fontSize: 11,
                 fontWeight: 700,
                 flexShrink: 0,
                 color: e.methodology ? "#D4A862" : "#0F1117",
@@ -220,7 +220,7 @@ export default function TrendAtlas({
               {/* One-line reading of the theme's trend */}
               <p
                 style={{
-                  fontSize: bp === "mobile" ? 14 : 12.5,
+                  fontSize: bp === "mobile" ? 14 : 13,
                   lineHeight: 1.45,
                   color: "#94A3B8",
                   marginTop: 3,

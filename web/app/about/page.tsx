@@ -2,6 +2,13 @@ import type { Metadata } from "next";
 import { readFileSync } from "fs";
 import { join } from "path";
 import { THEMES } from "../themes";
+import {
+  fontSize,
+  sectionEyebrow,
+  sectionHeading,
+  introParagraph,
+  bodyParagraph,
+} from "../styles";
 
 export const metadata: Metadata = {
   title: "About — My Friend Is AI",
@@ -98,20 +105,9 @@ const CHANGELOG = [
 const linkClass =
   "text-foreground underline underline-offset-2 hover:text-primary transition-colors";
 
-const sectionHeaderStyle: React.CSSProperties = {
-  fontSize: 14,
-  fontWeight: 500,
-  textTransform: "uppercase",
-  letterSpacing: "0.05em",
-  color: "#8293A6",
-  marginBottom: 16,
-};
-
-const bodyStyle: React.CSSProperties = {
-  fontSize: 15,
-  lineHeight: 1.8,
-  color: "#CBD5E1",
-};
+// Section heading + body paragraph come from the shared styles module.
+const sectionHeaderStyle = sectionHeading;
+const bodyStyle = bodyParagraph;
 
 const sectionStyle: React.CSSProperties = {
   borderLeft: "1px solid #334155",
@@ -131,24 +127,16 @@ export default function About() {
     <div style={{ maxWidth: 720 }} className="mx-auto px-4 sm:px-6 py-10 sm:py-16">
       {/* Header */}
       <div className="mb-10">
-        <div
-          style={{
-            fontSize: 12,
-            textTransform: "uppercase",
-            letterSpacing: "0.05em",
-            color: "#8293A6",
-            marginBottom: 8,
-          }}
-        >
-          About this project
-        </div>
+        <div style={sectionEyebrow}>About this project</div>
         <h1
-          style={{ fontSize: 32, fontWeight: 600 }}
+          style={{ fontSize: fontSize.xxxl, fontWeight: 600 }}
           className="text-foreground mb-2"
         >
           Tracking how AI-companion communities talk
         </h1>
-        <p style={{ fontSize: 16, color: "#94A3B8", lineHeight: 1.7 }}>
+        <p
+          style={{ ...introParagraph, color: "#94A3B8", maxWidth: undefined }}
+        >
           This project follows six recurring themes in Reddit&apos;s
           AI-companion communities &mdash; romance, addiction, grief, and three
           others &mdash; and measures how often each one surfaces in posts. The
@@ -171,7 +159,7 @@ export default function About() {
           >
             <div
               style={{
-                fontSize: 22,
+                fontSize: fontSize.xl,
                 fontWeight: 500,
                 color: "#F8FAFC",
                 fontVariantNumeric: "tabular-nums",
@@ -179,7 +167,7 @@ export default function About() {
             >
               {stat.value}
             </div>
-            <div style={{ fontSize: 12, color: "#94A3B8", marginTop: 2 }}>
+            <div style={{ fontSize: fontSize.xs, color: "#94A3B8", marginTop: 2 }}>
               {stat.label}
             </div>
           </div>
@@ -207,7 +195,7 @@ export default function About() {
               style={{ listStyleType: "none", padding: 0 }}
             >
               {THEMES.map((t) => (
-                <li key={t.id} style={{ fontSize: 15, lineHeight: 1.6 }}>
+                <li key={t.id} style={{ fontSize: fontSize.base, lineHeight: 1.6 }}>
                   <span aria-hidden>{t.emoji}</span>{" "}
                   <span style={{ color: t.color, fontWeight: 500 }}>
                     {t.label}
@@ -490,12 +478,12 @@ export default function About() {
                       border: "2px solid #0F1117",
                     }}
                   />
-                  <div style={{ fontSize: 12, color: "#F59E0B", marginBottom: 2 }}>
+                  <div style={{ fontSize: fontSize.xs, color: "#F59E0B", marginBottom: 2 }}>
                     {entry.date}
                   </div>
                   <div
                     style={{
-                      fontSize: 14,
+                      fontSize: fontSize.base,
                       fontWeight: 500,
                       color: "#F8FAFC",
                       marginBottom: 6,
@@ -508,7 +496,7 @@ export default function About() {
                       <li
                         key={j}
                         style={{
-                          fontSize: 13,
+                          fontSize: fontSize.sm,
                           lineHeight: 1.6,
                           color: "#94A3B8",
                           paddingLeft: 12,
@@ -528,7 +516,7 @@ export default function About() {
           </div>
           <p
             style={{
-              fontSize: 12,
+              fontSize: fontSize.xs,
               color: "#64748B",
               marginTop: 20,
               paddingLeft: 24,

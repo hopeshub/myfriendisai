@@ -190,7 +190,7 @@ export default function RecoveryChart({
                   value: ev.label,
                   position: "top",
                   fill: "#A8895A",
-                  fontSize: 10,
+                  fontSize: 11,
                 }}
               />
             ))}

@@ -10,6 +10,7 @@ import {
 } from "../../themeData";
 import ThemeChart from "./ThemeChart";
 import ThemeBackdrop from "./ThemeBackdrop";
+import { fontSize, sectionEyebrow } from "../../styles";
 
 // ── Per-theme page ───────────────────────────────────────────────────────────
 // The deeper "what is this and why" for one theme: a full-size chart, a plain-
@@ -111,13 +112,8 @@ export async function generateMetadata({
   };
 }
 
-const SECTION_LABEL: React.CSSProperties = {
-  fontSize: 11,
-  fontWeight: 500,
-  textTransform: "uppercase",
-  letterSpacing: "0.05em",
-  color: "#8293A6",
-};
+// Section eyebrow comes from the shared styles module.
+const SECTION_LABEL = sectionEyebrow;
 
 export default async function ThemePage({
   params,
@@ -148,14 +144,14 @@ export default async function ThemePage({
       <div className="mt-4">
         <h1
           className="font-bold flex items-center gap-2.5"
-          style={{ fontSize: 30, color: theme.color }}
+          style={{ fontSize: fontSize.xxxl, color: theme.color }}
         >
-          <span aria-hidden style={{ fontSize: 28 }}>
+          <span aria-hidden style={{ fontSize: fontSize.xxl }}>
             {theme.emoji}
           </span>
           {theme.label}
         </h1>
-        <p style={{ fontSize: 15, color: "#94A3B8", marginTop: 6 }}>
+        <p style={{ fontSize: fontSize.base, color: "#94A3B8", marginTop: 6 }}>
           {theme.tagline}
         </p>
       </div>
@@ -176,7 +172,7 @@ export default async function ThemePage({
       {/* The story */}
       <p
         style={{
-          fontSize: 16.5,
+          fontSize: fontSize.md,
           lineHeight: 1.7,
           color: "#D3DAE3",
           marginTop: 18,
@@ -187,7 +183,7 @@ export default async function ThemePage({
 
       {/* Most active communities — one quiet line */}
       {topSubs.length > 0 && (
-        <p style={{ fontSize: 13.5, color: "#8293A6", marginTop: 16 }}>
+        <p style={{ fontSize: fontSize.base, color: "#8293A6", marginTop: 16 }}>
           Most of this theme&apos;s posts come from a few communities &mdash;{" "}
           {topSubs.map((s, i) => (
             <span key={s.name}>
@@ -212,7 +208,7 @@ export default async function ThemePage({
         <div style={SECTION_LABEL}>Matched posts</div>
         <p
           style={{
-            fontSize: 13,
+            fontSize: fontSize.sm,
             color: "#8293A6",
             marginTop: 6,
             lineHeight: 1.6,
@@ -241,7 +237,7 @@ export default async function ThemePage({
                     target="_blank"
                     rel="noopener noreferrer"
                     className="hover:underline underline-offset-2 transition-colors"
-                    style={{ fontSize: 14.5, color: "#CBD5E1" }}
+                    style={{ fontSize: fontSize.base, color: "#CBD5E1" }}
                   >
                     {inTitle
                       ? highlight(displayTitle, sp.matchedTerm, theme.color)
@@ -250,7 +246,7 @@ export default async function ThemePage({
                   {!inTitle && sp.excerpt && (
                     <div
                       style={{
-                        fontSize: 13,
+                        fontSize: fontSize.sm,
                         lineHeight: 1.55,
                         color: "#94A3B8",
                         marginTop: 5,
@@ -262,7 +258,7 @@ export default async function ThemePage({
                     </div>
                   )}
                   <div
-                    style={{ fontSize: 11.5, color: "#8293A6", marginTop: 5 }}
+                    style={{ fontSize: fontSize.micro, color: "#8293A6", marginTop: 5 }}
                   >
                     r/{sp.subreddit} &middot; {fmtMonthYear(sp.date)}
                   </div>
@@ -271,13 +267,13 @@ export default async function ThemePage({
             })}
           </div>
         ) : (
-          <p style={{ fontSize: 13.5, color: "#8293A6", marginTop: 6 }}>
+          <p style={{ fontSize: fontSize.base, color: "#8293A6", marginTop: 6 }}>
             No example posts available yet.
           </p>
         )}
         <p
           style={{
-            fontSize: 12,
+            fontSize: fontSize.xs,
             color: "#64748B",
             marginTop: 14,
             lineHeight: 1.6,
@@ -311,7 +307,7 @@ export default async function ThemePage({
             <span
               key={t.id}
               style={{
-                fontSize: 14,
+                fontSize: fontSize.base,
                 fontWeight: 600,
                 color: t.color,
                 display: "inline-flex",
@@ -328,7 +324,7 @@ export default async function ThemePage({
               href={`/theme/${t.id}`}
               className="transition-opacity hover:opacity-100"
               style={{
-                fontSize: 14,
+                fontSize: fontSize.base,
                 color: "#94A3B8",
                 opacity: 0.85,
                 display: "inline-flex",

@@ -48,7 +48,7 @@ function EventCard({ event }: { event: ShowcaseEvent }) {
         >
           {event.dateLabel}
         </span>
-        <h3 style={{ fontSize: 19, fontWeight: 600, color: "#F8FAFC" }}>
+        <h3 style={{ fontSize: 18, fontWeight: 600, color: "#F8FAFC" }}>
           {event.title}
         </h3>
       </div>
@@ -75,7 +75,7 @@ function EventCard({ event }: { event: ShowcaseEvent }) {
       {/* What happened */}
       <p
         style={{
-          fontSize: 15,
+          fontSize: 14,
           lineHeight: 1.7,
           color: "#CBD5E1",
           marginTop: 10,

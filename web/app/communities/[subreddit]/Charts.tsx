@@ -43,12 +43,12 @@ function MetricChart({
           <CartesianGrid strokeDasharray="3 3" stroke="#2A2D3A" />
           <XAxis
             dataKey="date"
-            tick={{ fontSize: 10, fill: "#64748B" }}
+            tick={{ fontSize: 11, fill: "#64748B" }}
             tickLine={false}
             axisLine={false}
           />
           <YAxis
-            tick={{ fontSize: 10, fill: "#64748B" }}
+            tick={{ fontSize: 11, fill: "#64748B" }}
             tickLine={false}
             axisLine={false}
             width={50}

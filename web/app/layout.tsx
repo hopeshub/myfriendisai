@@ -131,14 +131,6 @@ export default function RootLayout({
               >
                 GitHub
               </a>
-              <a
-                href="https://x.com/hopes_revenge"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-foreground transition-colors"
-              >
-                Contact
-              </a>
             </nav>
           </div>
         </footer>

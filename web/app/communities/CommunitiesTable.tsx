@@ -55,7 +55,7 @@ function SortButton({
       className={`flex items-center gap-1 ml-auto hover:text-[#CBD5E1] transition-colors ${active ? "text-[#F8FAFC]" : "text-[#64748B]"}`}
     >
       {label}
-      <span className="text-[10px]">{active ? (current.asc ? "↑" : "↓") : "↕"}</span>
+      <span className="text-[11px]">{active ? (current.asc ? "↑" : "↓") : "↕"}</span>
     </button>
   );
 }

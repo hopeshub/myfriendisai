@@ -3,6 +3,7 @@ import PostVolumeChart from "./PostVolumeChart";
 import EventShowcase from "./EventShowcase";
 import RecoverySection from "./RecoverySection";
 import { loadThemeData, loadPostVolumeSplit, loadRecoveryVolume } from "./themeData";
+import { sectionEyebrow, introParagraph } from "./styles";
 
 // ── Homepage ─────────────────────────────────────────────────────────────────
 // One scrollable narrative, top to bottom:
@@ -13,20 +14,9 @@ import { loadThemeData, loadPostVolumeSplit, loadRecoveryVolume } from "./themeD
 //   §3 atlas  → how the six themes shift (direction-only; TrendsExplorer)
 // Post volume comes first to orient; events get the visual weight.
 
-const sectionLabel: React.CSSProperties = {
-  fontSize: 12,
-  textTransform: "uppercase",
-  letterSpacing: "0.06em",
-  color: "#64748B",
-  marginBottom: 8,
-};
-
-const intro: React.CSSProperties = {
-  fontSize: 15,
-  lineHeight: 1.7,
-  color: "#94A3B8",
-  maxWidth: 700,
-};
+// Section eyebrow + intro paragraph come from the shared styles module.
+const sectionLabel = sectionEyebrow;
+const intro = introParagraph;
 
 export default function Home() {
   const themeData = loadThemeData();
@@ -39,7 +29,7 @@ export default function Home() {
       {/* Masthead */}
       <header className="mb-16">
         <h1
-          className="text-[26px] sm:text-3xl lg:text-[34px] font-bold text-[#F8FAFC]"
+          className="text-[26px] sm:text-3xl lg:text-[32px] font-bold text-[#F8FAFC]"
           style={{ lineHeight: 1.2, marginBottom: 12 }}
         >
           How the committed core of AI companionship talks
