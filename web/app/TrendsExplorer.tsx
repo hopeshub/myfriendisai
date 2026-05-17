@@ -1,10 +1,22 @@
 "use client";
 
 import { useState } from "react";
+import dynamic from "next/dynamic";
 import type { ThemeData } from "./themeData";
 import { useBreakpoint } from "./useBreakpoint";
-import TrendAtlas from "./TrendAtlas";
 import { measure } from "./styles";
+
+// Lazy-loaded so Recharts is not in the homepage's initial JS bundle.
+// ResponsiveContainer cannot server-render at a real width anyway, so the
+// SSR'd chart is discarded and re-rendered client-side regardless.
+const TrendAtlas = dynamic(() => import("./TrendAtlas"), {
+  ssr: false,
+  // Responsive: six theme panels — 1 column on mobile, 2 on tablet, 3 on
+  // desktop — so the placeholder height must shrink as the grid widens.
+  loading: () => (
+    <div className="min-h-[1990px] md:min-h-[1110px] lg:min-h-[760px]" />
+  ),
+});
 
 type TimeRange = "6M" | "1Y" | "2Y" | "ALL";
 
