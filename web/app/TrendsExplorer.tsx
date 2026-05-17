@@ -65,8 +65,8 @@ export default function TrendsExplorer({ themeData, themeDataExclCai }: Props) {
       </div>
       <p className="mb-3" style={{ fontSize: 12, color: "#64748B", maxWidth: 720 }}>
         {scope === "all"
-          ? "r / CharacterAI is roughly three-quarters of every post counted here, and it rises and falls on its own platform lifecycle — switch it off to see each rate within the dedicated companionship communities."
-          : "r / CharacterAI removed from both the keyword counts and the denominator. These are the rates within the dedicated companionship and recovery communities — the rises hold, and several are steeper here."}
+          ? "r/CharacterAI is roughly three-quarters of every post counted here, and it rises and falls on its own platform lifecycle — switch it off to see each rate within the dedicated companionship communities."
+          : "r/CharacterAI removed from both the keyword counts and the denominator. These are the rates within the dedicated companionship and recovery communities — the rises hold, and several are steeper here."}
       </p>
 
       {/* Time range selector */}

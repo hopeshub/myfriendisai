@@ -26,7 +26,15 @@ function themeMeta(id: ThemeId) {
 
 function EventCard({ event }: { event: ShowcaseEvent }) {
   return (
-    <article>
+    <article
+      style={{
+        backgroundColor: "#15171E",
+        border: "1px solid #2A2D3A",
+        borderLeft: `3px solid ${themeMeta(event.themes[0])?.color ?? "#94A3B8"}`,
+        borderRadius: 8,
+        padding: 20,
+      }}
+    >
       {/* Header: date + title */}
       <div className="flex items-baseline gap-3 flex-wrap">
         <span
@@ -86,7 +94,7 @@ function EventCard({ event }: { event: ShowcaseEvent }) {
             rel="noopener noreferrer"
             className="group block rounded-lg transition-colors hover:bg-[#1A1D27]"
             style={{
-              backgroundColor: "#15171E",
+              backgroundColor: "#0F1117",
               border: "1px solid #2A2D3A",
               padding: 14,
             }}
@@ -130,7 +138,11 @@ function EventCard({ event }: { event: ShowcaseEvent }) {
               <span>·</span>
               <span>{fmtDate(p.date)}</span>
               <span>·</span>
-              <span>&uarr; {p.score.toLocaleString()}</span>
+              <span>
+                <span aria-hidden>&uarr;</span>{" "}
+                <span className="sr-only">score </span>
+                {p.score.toLocaleString()}
+              </span>
             </div>
           </a>
         ))}
@@ -141,7 +153,7 @@ function EventCard({ event }: { event: ShowcaseEvent }) {
 
 export default function EventShowcase() {
   return (
-    <div className="space-y-10">
+    <div className="space-y-6">
       {SHOWCASE_EVENTS.map((event) => (
         <EventCard key={event.slug} event={event} />
       ))}

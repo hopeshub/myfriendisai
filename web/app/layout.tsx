@@ -65,13 +65,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
       </head>
       <body className={`antialiased ${inter.className}`}>
         <a href="#main" className="skip-link">Skip to content</a>
         <StaleDataBanner />
         <header className="border-b border-border">
-          <div className="max-w-[1536px] mx-auto px-4 sm:px-8 py-4 flex items-center justify-between">
+          <div className="max-w-[1080px] mx-auto px-4 sm:px-8 py-4 flex items-center justify-between">
             <Link
               href="/"
               className={`text-lg tracking-tight hover:text-primary transition-colors ${GeistSans.className}`}
@@ -81,6 +81,12 @@ export default function RootLayout({
               <span style={{ fontWeight: 700, color: "#F8FAFC" }}>AI</span>
             </Link>
             <nav className="flex gap-6 text-sm text-muted">
+              <Link
+                href="/communities"
+                className="hover:text-foreground transition-colors"
+              >
+                Communities
+              </Link>
               <Link
                 href="/about"
                 className="hover:text-foreground transition-colors"
@@ -102,8 +108,38 @@ export default function RootLayout({
         <main id="main">{children}</main>
 
         <footer className="border-t border-border mt-20">
-          <div className="max-w-[1536px] mx-auto px-4 sm:px-8 py-6 text-sm text-muted">
-            <span>Data from Reddit&apos;s public endpoints · {formatPostCount(meta.total_posts)} posts · {startYear}–present</span>
+          <div className="max-w-[1080px] mx-auto px-4 sm:px-8 py-8 text-sm text-muted flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <span>
+              Data from Reddit&apos;s public endpoints ·{" "}
+              {formatPostCount(meta.total_posts)} posts · {startYear}–present
+            </span>
+            <nav className="flex gap-5">
+              <Link href="/about" className="hover:text-foreground transition-colors">
+                About
+              </Link>
+              <Link
+                href="/communities"
+                className="hover:text-foreground transition-colors"
+              >
+                Communities
+              </Link>
+              <a
+                href="https://github.com/hopeshub/myfriendisai"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-foreground transition-colors"
+              >
+                GitHub
+              </a>
+              <a
+                href="https://x.com/hopes_revenge"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-foreground transition-colors"
+              >
+                Contact
+              </a>
+            </nav>
           </div>
         </footer>
         <Analytics />

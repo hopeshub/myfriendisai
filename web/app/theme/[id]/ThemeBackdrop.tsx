@@ -1,46 +1,18 @@
-"use client";
-
-import { useEffect } from "react";
-import { useRouter } from "next/navigation";
-
 /**
- * Theme-page shell. The centered content column sits inside a full-width
- * backdrop; clicking the empty side margins around it — or pressing Escape —
- * navigates back to the homepage atlas, a lightbox-style dismiss.
+ * Theme-page shell — a centered content column.
  *
- * The "← All themes" link and the bottom theme nav remain the primary,
- * keyboard-friendly way back; this is an additional convenience.
+ * This was previously a lightbox-style backdrop: clicking the side margins or
+ * pressing Escape navigated back to the homepage. That was removed — a theme
+ * page is a full route with its own URL, scroll, and navigation, and a
+ * full-page route should not behave like a modal. The "← All themes" link and
+ * the bottom theme nav are the explicit, discoverable ways back.
  */
 export default function ThemeBackdrop({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const router = useRouter();
-
-  useEffect(() => {
-    function onKey(e: KeyboardEvent) {
-      if (e.key === "Escape") router.push("/");
-    }
-    document.addEventListener("keydown", onKey);
-    return () => document.removeEventListener("keydown", onKey);
-  }, [router]);
-
   return (
-    <div
-      // Only a click that lands on the backdrop itself (the side margins),
-      // not on the content column, dismisses.
-      onClick={(e) => {
-        if (e.target === e.currentTarget) router.push("/");
-      }}
-      style={{ cursor: "pointer" }}
-    >
-      <div
-        className="max-w-[720px] mx-auto px-4 sm:px-8 py-8"
-        style={{ cursor: "auto" }}
-      >
-        {children}
-      </div>
-    </div>
+    <div className="max-w-[720px] mx-auto px-4 sm:px-8 py-8">{children}</div>
   );
 }
