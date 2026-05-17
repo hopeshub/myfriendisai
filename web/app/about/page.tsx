@@ -47,9 +47,9 @@ const CHANGELOG = [
   },
   {
     date: "May 2026",
-    title: "Data extended back to 2017",
+    title: "Post corpus extended back to 2017",
     items: [
-      "The chart previously began in 2023. The underlying corpus now reaches back to 2017, bringing the early Replika years and the first companion-app crises into view.",
+      "The post corpus was backfilled from public archives back to 2017. In practice this moved the earliest theme lines from a 2023 start back a few months, into late 2022 — as far back as monthly volume stays reliable enough to chart. The 2017–2021 years exist in the corpus but are too sparse to draw as theme lines, so the early-Replika era is not itself visible on the chart.",
     ],
     recent: true,
   },
@@ -151,8 +151,10 @@ export default function About() {
         <p style={{ fontSize: 16, color: "#94A3B8", lineHeight: 1.7 }}>
           This project follows six recurring themes in Reddit&apos;s
           AI-companion communities &mdash; romance, addiction, grief, and three
-          others &mdash; and measures how often each one surfaces in posts,
-          going back to 2017. What it captures is the conversation itself: when
+          others &mdash; and measures how often each one surfaces in posts. The
+          post corpus reaches back to 2017, though the theme lines themselves
+          begin in 2022&ndash;2023, where monthly volume becomes reliable enough
+          to chart. What it captures is the conversation itself: when
           a line rises, people are writing about that theme more often. Whether
           the underlying experience has actually become more common is a
           separate question, and one this can&apos;t answer on its own.

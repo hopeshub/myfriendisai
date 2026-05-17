@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { getSubreddits } from "@/lib/data";
 import CommunitiesTable from "./CommunitiesTable";
 
@@ -20,8 +21,20 @@ export default function Communities() {
   return (
     <div className="py-8">
       <h1 className="text-3xl font-semibold tracking-tight mb-2">Communities</h1>
-      <p className="text-zinc-500 text-sm mb-8">
+      <p className="text-zinc-500 text-sm mb-2">
         {subreddits.length} communities tracked. Data as of {asOf}.
+      </p>
+      <p className="text-zinc-500 text-sm mb-8 max-w-2xl">
+        Size and activity for each tracked community &mdash; context, not the
+        project&apos;s main measure. The actual instrument is the{" "}
+        <Link
+          href="/"
+          className="underline underline-offset-2 hover:text-zinc-300"
+        >
+          theme tracker
+        </Link>
+        . These engagement figures describe how big and busy a community is, not
+        how common any experience is within it.
       </p>
       <CommunitiesTable subreddits={subreddits} />
     </div>

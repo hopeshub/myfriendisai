@@ -17,12 +17,12 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "My Friend Is AI",
   description:
-    "Tracking the growth and cultural dynamics of AI companionship communities on Reddit, using validated keyword matching across six themes.",
+    "A live, transparent tracker of explicit AI-companion language in curated Reddit communities — how themes like romance, dependency, personhood, sexual roleplay, therapeutic use, and loss rise and fall over time.",
   metadataBase: new URL("https://myfriendisai.com"),
   openGraph: {
     title: "My Friend Is AI",
     description:
-      "Tracking AI companion discourse on Reddit across six themes — romance, addiction, consciousness, therapy, rupture, and sexual roleplay. Keyword-matched against validated patterns; per-theme reliability varies (51-92%).",
+      "A live, transparent tracker of explicit AI-companion language in curated Reddit communities, across six themes — romance, sex/ERP, consciousness, therapy, addiction, and rupture. A precision-first discourse tracker built from validated keyword matching, not a population estimate.",
     url: "https://myfriendisai.com",
     siteName: "My Friend Is AI",
     type: "website",
