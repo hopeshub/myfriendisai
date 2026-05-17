@@ -55,16 +55,9 @@ function EventCard({ event }: { event: ShowcaseEvent }) {
               className="inline-flex items-center gap-1.5"
               style={{ fontSize: 12, color: "#94A3B8" }}
             >
-              <span
-                aria-hidden
-                style={{
-                  width: 8,
-                  height: 8,
-                  borderRadius: 999,
-                  backgroundColor: t?.color ?? "#94A3B8",
-                  display: "inline-block",
-                }}
-              />
+              <span aria-hidden style={{ fontSize: 13 }}>
+                {t?.emoji ?? "•"}
+              </span>
               {t?.label ?? id}
             </span>
           );
