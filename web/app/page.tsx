@@ -70,8 +70,8 @@ export default function Home() {
           different &mdash; it held roughly steady, drifting mildly upward,
           with spikes at the big platform events. That contrast is the point:
           the steep fall in the raw totals is one platform&apos;s story, not
-          the category&apos;s &mdash; the dedicated companionship and recovery
-          communities did not decline. Read it as community activity, not a
+          the category&apos;s. Everything else, taken together, held steady.
+          Read it as community activity, not a
           headcount of people; the shaded years before 2023 are a floor, not a
           count &mdash; public archives captured them only partially, and one
           2017&ndash;2019 stretch not at all.
