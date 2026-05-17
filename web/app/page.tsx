@@ -62,18 +62,19 @@ export default function Home() {
           How active these communities are
         </h2>
         <p style={{ ...intro, marginBottom: 16 }}>
-          Every month, this many posts went up across the AI-companion
-          communities tracked here &mdash; split into r/CharacterAI and
-          everything else. CharacterAI is a mass-market roleplay platform; for
-          years it was 75&ndash;90% of all the posts, so its own boom and bust
-          &mdash; a 2024&ndash;25 contraction after a lawsuit, new content
-          filters, and users leaving &mdash; would otherwise read as the whole
-          category&apos;s. It isn&apos;t. The band that matters is the lower
-          one: the dedicated companionship and recovery communities, which keep
-          growing even as CharacterAI recedes. Read it as community activity,
-          not a headcount of people. The shaded years before 2023 are a floor,
-          not a count &mdash; public archives captured them only partially, and
-          one 2017&ndash;2019 stretch not at all.
+          Two views of the same months, each on its own scale. r/CharacterAI
+          &mdash; a mass-market roleplay platform that for years was
+          75&ndash;90% of every post counted here &mdash; surged and then
+          contracted on its own platform lifecycle: a lawsuit, new content
+          filters, users leaving. Every other tracked community did something
+          different &mdash; it held roughly steady, drifting mildly upward,
+          with spikes at the big platform events. That contrast is the point:
+          the steep fall in the raw totals is one platform&apos;s story, not
+          the category&apos;s &mdash; the dedicated companionship and recovery
+          communities did not decline. Read it as community activity, not a
+          headcount of people; the shaded years before 2023 are a floor, not a
+          count &mdash; public archives captured them only partially, and one
+          2017&ndash;2019 stretch not at all.
         </p>
         <PostVolumeChart data={postVolume} />
       </section>

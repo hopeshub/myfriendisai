@@ -14,15 +14,15 @@ import {
 import type { PostVolumeSplitPoint } from "./themeData";
 
 // ── Post-volume chart ────────────────────────────────────────────────────────
-// How much the committed-core communities post, month by month — split into
-// r/CharacterAI and everything else. CharacterAI is a mass-market roleplay
-// platform that has been 75-90% of all post volume; stacking it separately
-// keeps its own boom-and-bust from being read as the whole category's. The
-// lower band (dedicated companion communities) is the signal that matters.
+// Two panels, each on its OWN y-scale: r/CharacterAI, and every other tracked
+// community. They are deliberately not stacked or on a shared axis — CharacterAI
+// is so much larger that a shared scale flattens the second panel into an
+// unreadable sliver. Separate scales let each be read on its own terms: one
+// surged and crashed on a platform lifecycle, the other held roughly steady.
 //
-// Honest caveats are built in: months with no archived data render as a real
-// break (connectNulls off — the 2017-2019 collection gap), and the pre-2023
-// span is shaded because archive coverage there is patchy.
+// Honest caveats stay built in: missing months render as a real break
+// (connectNulls off — the 2017-2019 collection gap), and the pre-2023 span is
+// shaded for patchy archive coverage.
 // See docs/characterai_composition_fault_2026-05-16.md.
 
 const MONTH_NAMES = [
@@ -57,117 +57,46 @@ function monthRange(start: string, end: string): string[] {
 }
 
 const ARCHIVE_SEAM = "2023-01";
-const CAI_COLOR = "#566173"; // r/CharacterAI — muted slate, the big confounder
-const OTHER_COLOR = "#7C9CD0"; // dedicated communities — the signal
 
-type Row = { month: string; other: number | null; characterai: number | null };
+type PanelRow = { month: string; value: number | null };
 
-function Swatch({ color }: { color: string }) {
-  return (
-    <span
-      aria-hidden
-      style={{
-        display: "inline-block",
-        width: 9,
-        height: 9,
-        borderRadius: 2,
-        backgroundColor: color,
-        marginRight: 5,
-        verticalAlign: "baseline",
-      }}
-    />
-  );
-}
-
-export default function PostVolumeChart({
-  data,
+function VolumePanel({
+  title,
+  caption,
+  rows,
+  yearTicks,
+  firstMonth,
+  hasEarly,
+  color,
+  gradientId,
 }: {
-  data: PostVolumeSplitPoint[];
+  title: string;
+  caption: string;
+  rows: PanelRow[];
+  yearTicks: string[];
+  firstMonth: string;
+  hasEarly: boolean;
+  color: string;
+  gradientId: string;
 }) {
-  const { series, yearTicks, firstMonth, hasEarly } = useMemo(() => {
-    if (data.length === 0) {
-      return { series: [] as Row[], yearTicks: [] as string[], firstMonth: "", hasEarly: false };
-    }
-    const lookup: Record<string, PostVolumeSplitPoint> = {};
-    for (const d of data) lookup[d.month] = d;
-
-    // Fill the whole span so missing months exist as null points — the area
-    // then breaks over a gap instead of ramping straight across it.
-    const months = monthRange(data[0].month, data[data.length - 1].month);
-    const rows: Row[] = months.map((m) => {
-      const d = lookup[m];
-      return {
-        month: m,
-        other: d ? d.other : null,
-        characterai: d ? d.characterai : null,
-      };
-    });
-
-    // One tick per calendar year, anchored to that year's first month.
-    const seen = new Set<string>();
-    const ticks: string[] = [];
-    for (const m of months) {
-      const y = m.slice(0, 4);
-      if (!seen.has(y)) {
-        seen.add(y);
-        ticks.push(m);
-      }
-    }
-
-    return {
-      series: rows,
-      yearTicks: ticks,
-      firstMonth: data[0].month,
-      hasEarly: data[0].month < ARCHIVE_SEAM,
-    };
-  }, [data]);
-
-  if (series.length === 0) {
-    return (
-      <div
-        style={{ height: 240 }}
-        className="flex items-center justify-center text-sm text-[#64748B]"
-      >
-        No post-volume data yet.
-      </div>
-    );
-  }
-
   return (
     <div>
-      {/* Legend */}
-      <div
-        className="flex flex-wrap gap-x-4 gap-y-1"
-        style={{ fontSize: 12, color: "#94A3B8", marginBottom: 8 }}
-      >
-        <span>
-          <Swatch color={OTHER_COLOR} />
-          dedicated companion communities
-        </span>
-        <span>
-          <Swatch color={CAI_COLOR} />
-          r/CharacterAI
-        </span>
+      <div style={{ fontSize: 14, fontWeight: 600, color: "#E2E8F0" }}>
+        {title}
       </div>
-
-      <div style={{ height: 252 }}>
+      <div style={{ fontSize: 12, color: "#94A3B8", marginBottom: 6 }}>
+        {caption}
+      </div>
+      <div style={{ height: 200 }}>
         <ResponsiveContainer width="100%" height="100%">
-          <AreaChart data={series} margin={{ top: 10, right: 8, bottom: 2, left: 0 }}>
+          <AreaChart data={rows} margin={{ top: 8, right: 8, bottom: 2, left: 0 }}>
             <defs>
-              <linearGradient id="pv-other" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor={OTHER_COLOR} stopOpacity={0.6} />
-                <stop offset="100%" stopColor={OTHER_COLOR} stopOpacity={0.15} />
-              </linearGradient>
-              <linearGradient id="pv-cai" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor={CAI_COLOR} stopOpacity={0.55} />
-                <stop offset="100%" stopColor={CAI_COLOR} stopOpacity={0.15} />
+              <linearGradient id={gradientId} x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor={color} stopOpacity={0.5} />
+                <stop offset="100%" stopColor={color} stopOpacity={0.04} />
               </linearGradient>
             </defs>
-            <CartesianGrid
-              strokeDasharray="3 3"
-              stroke="#2A2D3A"
-              vertical={false}
-            />
+            <CartesianGrid strokeDasharray="3 3" stroke="#2A2D3A" vertical={false} />
             {hasEarly && (
               <ReferenceArea
                 x1={firstMonth}
@@ -175,7 +104,7 @@ export default function PostVolumeChart({
                 fill="#64748B"
                 fillOpacity={0.09}
                 label={{
-                  value: "patchy archive coverage — a floor, not a full count",
+                  value: "patchy archive coverage",
                   position: "insideTop",
                   fill: "#64748B",
                   fontSize: 10,
@@ -203,75 +132,143 @@ export default function PostVolumeChart({
             <Tooltip
               cursor={{ stroke: "#475569", strokeWidth: 1 }}
               content={({ active, payload, label }) => {
-                if (!active || !payload?.length) return null;
-                const get = (k: string) =>
-                  payload.find((p) => p.dataKey === k)?.value as
-                    | number
-                    | null
-                    | undefined;
-                const o = get("other");
-                const c = get("characterai");
-                if (o == null && c == null) return null;
-                const total = (o ?? 0) + (c ?? 0);
+                if (!active || !payload?.length || payload[0].value == null) {
+                  return null;
+                }
                 return (
                   <div
                     style={{
                       backgroundColor: "#0F1117",
                       border: "1px solid #2A2D3A",
                       borderRadius: 6,
-                      padding: "6px 9px",
+                      padding: "4px 8px",
                       fontSize: 11,
-                      lineHeight: 1.6,
+                      whiteSpace: "nowrap",
                     }}
                   >
-                    <div style={{ color: "#94A3B8", marginBottom: 2 }}>
+                    <span style={{ color: "#94A3B8" }}>
                       {fmtMonth(label as string)}
-                    </div>
-                    <div style={{ color: "#CBD5E1" }}>
-                      <Swatch color={OTHER_COLOR} />
-                      dedicated&nbsp;&nbsp;
-                      <span style={{ color: "#F8FAFC", fontWeight: 600 }}>
-                        {(o ?? 0).toLocaleString()}
-                      </span>
-                    </div>
-                    <div style={{ color: "#CBD5E1" }}>
-                      <Swatch color={CAI_COLOR} />
-                      r/CharacterAI&nbsp;&nbsp;
-                      <span style={{ color: "#F8FAFC", fontWeight: 600 }}>
-                        {(c ?? 0).toLocaleString()}
-                      </span>
-                    </div>
-                    <div style={{ color: "#64748B", marginTop: 2 }}>
-                      total {total.toLocaleString()} posts
-                    </div>
+                    </span>
+                    <span style={{ color: "#94A3B8" }}>{"  ·  "}</span>
+                    <span style={{ color: "#F8FAFC", fontWeight: 600 }}>
+                      {(payload[0].value as number).toLocaleString()}
+                    </span>
+                    <span style={{ color: "#94A3B8" }}> posts</span>
                   </div>
                 );
               }}
             />
-            {/* Bottom band = the signal; CharacterAI stacked on top. */}
             <Area
               type="monotone"
-              dataKey="other"
-              stackId="v"
-              stroke={OTHER_COLOR}
+              dataKey="value"
+              stroke={color}
               strokeWidth={2}
-              fill="url(#pv-other)"
-              connectNulls={false}
-              isAnimationActive={false}
-            />
-            <Area
-              type="monotone"
-              dataKey="characterai"
-              stackId="v"
-              stroke={CAI_COLOR}
-              strokeWidth={1.5}
-              fill="url(#pv-cai)"
+              fill={`url(#${gradientId})`}
               connectNulls={false}
               isAnimationActive={false}
             />
           </AreaChart>
         </ResponsiveContainer>
       </div>
+    </div>
+  );
+}
+
+export default function PostVolumeChart({
+  data,
+}: {
+  data: PostVolumeSplitPoint[];
+}) {
+  const { caiRows, otherRows, yearTicks, firstMonth, hasEarly } = useMemo(() => {
+    if (data.length === 0) {
+      return {
+        caiRows: [] as PanelRow[],
+        otherRows: [] as PanelRow[],
+        yearTicks: [] as string[],
+        firstMonth: "",
+        hasEarly: false,
+      };
+    }
+    const lookup: Record<string, PostVolumeSplitPoint> = {};
+    for (const d of data) lookup[d.month] = d;
+
+    // Fill the whole span so missing months exist as null points — the area
+    // breaks over a gap instead of ramping straight across it.
+    const months = monthRange(data[0].month, data[data.length - 1].month);
+    const caiRows: PanelRow[] = months.map((m) => ({
+      month: m,
+      value: lookup[m] ? lookup[m].characterai : null,
+    }));
+    const otherRows: PanelRow[] = months.map((m) => ({
+      month: m,
+      value: lookup[m] ? lookup[m].other : null,
+    }));
+
+    const seen = new Set<string>();
+    const ticks: string[] = [];
+    for (const m of months) {
+      const y = m.slice(0, 4);
+      if (!seen.has(y)) {
+        seen.add(y);
+        ticks.push(m);
+      }
+    }
+
+    return {
+      caiRows,
+      otherRows,
+      yearTicks: ticks,
+      firstMonth: data[0].month,
+      hasEarly: data[0].month < ARCHIVE_SEAM,
+    };
+  }, [data]);
+
+  if (caiRows.length === 0) {
+    return (
+      <div
+        style={{ height: 220 }}
+        className="flex items-center justify-center text-sm text-[#64748B]"
+      >
+        No post-volume data yet.
+      </div>
+    );
+  }
+
+  return (
+    <div>
+      <div className="grid gap-x-6 gap-y-5 sm:grid-cols-2">
+        <VolumePanel
+          title="r/CharacterAI"
+          caption="Surged, then contracted — one platform's lifecycle."
+          rows={caiRows}
+          yearTicks={yearTicks}
+          firstMonth={firstMonth}
+          hasEarly={hasEarly}
+          color="#566173"
+          gradientId="pv-cai"
+        />
+        <VolumePanel
+          title="Every other tracked community"
+          caption="Held roughly steady, with spikes at platform events."
+          rows={otherRows}
+          yearTicks={yearTicks}
+          firstMonth={firstMonth}
+          hasEarly={hasEarly}
+          color="#7C9CD0"
+          gradientId="pv-other"
+        />
+      </div>
+      <p
+        style={{
+          fontSize: 11,
+          color: "#64748B",
+          marginTop: 8,
+          textAlign: "center",
+        }}
+      >
+        Each panel has its own scale &mdash; at its 2024 peak r/CharacterAI was
+        roughly five times the size of every other tracked community combined.
+      </p>
     </div>
   );
 }
