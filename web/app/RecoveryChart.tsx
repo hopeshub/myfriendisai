@@ -114,6 +114,7 @@ export default function RecoveryChart({
               allowDecimals={false}
             />
             <Tooltip
+              isAnimationActive={false}
               cursor={{ stroke: "#475569", strokeWidth: 1 }}
               content={({ active, payload, label }) => {
                 if (!active || !payload?.length) return null;
@@ -140,7 +141,6 @@ export default function RecoveryChart({
                       const v =
                         (payload.find((p) => p.dataKey === rc.sub)
                           ?.value as number) ?? 0;
-                      if (!v) return null;
                       return (
                         <div key={rc.sub} style={{ color: "#CBD5E1" }}>
                           <Swatch color={rc.color} />
@@ -168,6 +168,8 @@ export default function RecoveryChart({
                 strokeWidth={1.5}
                 fill={rc.color}
                 fillOpacity={0.45}
+                dot={false}
+                activeDot={false}
                 isAnimationActive={false}
               />
             ))}

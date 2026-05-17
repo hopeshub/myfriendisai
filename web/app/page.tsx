@@ -121,7 +121,8 @@ export default function Home() {
         <p style={{ ...intro, marginBottom: 16 }}>
           The clearest counter-current the project has found. As AI
           companionship grew, a second thing took shape beside it: communities
-          organized around <em>quitting</em> it. r/AI_Addiction was created in
+          organized around <em>quitting</em>{" "}it. r/AI_Addiction was created
+          in
           June 2023 &mdash; &ldquo;for those of us who suffer from addiction to
           AI services.&rdquo; r/ChatbotAddiction and r/Character_AI_Recovery
           followed within months; r/CharacterAIrunaways in September 2024. They
