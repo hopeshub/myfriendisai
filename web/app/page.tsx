@@ -1,7 +1,8 @@
 import TrendsExplorer from "./TrendsExplorer";
 import PostVolumeChart from "./PostVolumeChart";
 import EventShowcase from "./EventShowcase";
-import { loadThemeData, loadPostVolumeSplit } from "./themeData";
+import RecoverySection from "./RecoverySection";
+import { loadThemeData, loadPostVolumeSplit, loadRecoveryVolume } from "./themeData";
 
 // ── Homepage ─────────────────────────────────────────────────────────────────
 // One scrollable narrative, top to bottom:
@@ -31,6 +32,7 @@ export default function Home() {
   const themeData = loadThemeData();
   const themeDataExclCai = loadThemeData("composition_trends.json");
   const postVolume = loadPostVolumeSplit();
+  const recoveryVolume = loadRecoveryVolume();
 
   return (
     <div className="max-w-[1080px] mx-auto px-4 sm:px-8 pt-10 sm:pt-14 pb-8">
@@ -99,12 +101,37 @@ export default function Home() {
       </section>
 
       {/* §3 — The theme atlas */}
-      <section>
+      <section className="mb-16">
         <div style={sectionLabel}>The themes</div>
         <TrendsExplorer
           themeData={themeData}
           themeDataExclCai={themeDataExclCai}
         />
+      </section>
+
+      {/* §4 — The recovery counter-current */}
+      <section>
+        <div style={sectionLabel}>A counter-current</div>
+        <h2
+          className="text-xl sm:text-2xl font-semibold text-[#F8FAFC]"
+          style={{ marginBottom: 8 }}
+        >
+          The communities for getting out
+        </h2>
+        <p style={{ ...intro, marginBottom: 16 }}>
+          The clearest counter-current the project has found. As AI
+          companionship grew, a second thing took shape beside it: communities
+          organized around <em>quitting</em> it. r/AI_Addiction was created in
+          June 2023 &mdash; &ldquo;for those of us who suffer from addiction to
+          AI services.&rdquo; r/ChatbotAddiction and r/Character_AI_Recovery
+          followed within months; r/CharacterAIrunaways in September 2024. They
+          did not exist, and then they did &mdash; and they grew. The language
+          inside them is borrowed wholesale from substance recovery: relapse,
+          cold turkey, day counts, &ldquo;X days clean.&rdquo; It is the
+          addiction line from the atlas above &mdash; the steepest-rising theme
+          in the whole record &mdash; given somewhere to live.
+        </p>
+        <RecoverySection data={recoveryVolume} />
       </section>
     </div>
   );

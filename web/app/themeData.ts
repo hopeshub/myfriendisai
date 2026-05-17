@@ -198,3 +198,53 @@ export function loadPostVolumeSplit(): PostVolumeSplitPoint[] {
       return { month: m, characterai: cai, other: o };
     });
 }
+
+// ── Recovery-community volume ────────────────────────────────────────────────
+// Monthly post volume for the four T3 recovery / quitting communities, read
+// from snapshots.json (posts_today, recomputed from the posts table). These
+// communities are the counter-current to AI companionship: organized quitting
+// and peer support. See the recovery section on the homepage.
+export const RECOVERY_SUBS = [
+  "AI_Addiction",
+  "ChatbotAddiction",
+  "Character_AI_Recovery",
+  "CharacterAIrunaways",
+] as const;
+
+export type RecoveryVolumePoint = { month: string; [sub: string]: string | number };
+
+export function loadRecoveryVolume(): RecoveryVolumePoint[] {
+  const filePath = path.join(process.cwd(), "data", "snapshots.json");
+  if (!fs.existsSync(filePath)) return [];
+  let snaps: Array<{
+    subreddit: string;
+    snapshot_date: string;
+    posts_today: number | null;
+  }>;
+  try {
+    snaps = JSON.parse(fs.readFileSync(filePath, "utf8"));
+  } catch (e) {
+    console.error("Failed to parse snapshots.json:", e);
+    return [];
+  }
+
+  const recovery = new Set<string>(RECOVERY_SUBS);
+  const byMonth: Record<string, Record<string, number>> = {};
+  for (const s of snaps) {
+    if (!recovery.has(s.subreddit)) continue;
+    const m = s.snapshot_date.slice(0, 7);
+    if (!byMonth[m]) byMonth[m] = {};
+    byMonth[m][s.subreddit] =
+      (byMonth[m][s.subreddit] ?? 0) + (s.posts_today ?? 0);
+  }
+
+  const currentMonth = new Date().toISOString().slice(0, 7);
+  return Object.keys(byMonth)
+    .sort()
+    .filter((m) => m < currentMonth)
+    .map((m) => {
+      const row: RecoveryVolumePoint = { month: m };
+      for (const sub of RECOVERY_SUBS) row[sub] = byMonth[m][sub] ?? 0;
+      return row;
+    });
+}
