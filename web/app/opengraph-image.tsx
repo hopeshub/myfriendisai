@@ -1,5 +1,6 @@
 import { ImageResponse } from "next/og";
 import siteMeta from "../data/site_meta.json";
+import subreddits from "../data/subreddits.json";
 
 export const runtime = "edge";
 export const alt = "My Friend Is AI — Tracking AI companion discourse on Reddit";
@@ -15,8 +16,11 @@ const THEMES = [
   { emoji: "\u{1F940}", label: "Rupture", color: "#22C55E" },
 ];
 
-// Read from the build-time data export so the count cannot go stale.
+// Read from the build-time data export so the counts cannot go stale.
 const POST_COUNT = `~${(siteMeta.total_posts / 1_000_000).toFixed(1)}M`;
+const COMMUNITY_COUNT = new Set(
+  (subreddits as Array<{ subreddit: string }>).map((s) => s.subreddit),
+).size;
 
 export default async function Image() {
   return new ImageResponse(
@@ -96,7 +100,8 @@ export default async function Image() {
             color: "#94A3B8",
           }}
         >
-          myfriendisai.com — {POST_COUNT} posts from 27 Reddit communities
+          myfriendisai.com — {POST_COUNT} posts from {COMMUNITY_COUNT} Reddit
+          communities
         </div>
       </div>
     ),

@@ -46,9 +46,9 @@ export default async function SubredditPage({
   if (!meta) notFound();
 
   return (
-    <div className="max-w-[1080px] mx-auto px-4 sm:px-8 py-8">
+    <div className="max-w-[720px] mx-auto px-4 sm:px-8 py-8">
       <div className="mb-2">
-        <Link href="/communities" className="text-sm text-[#94A3B8] hover:text-[#F8FAFC] transition-colors">
+        <Link href="/communities" className="text-sm text-[#9AA7B8] hover:text-[#F8FAFC] transition-colors">
           ← Communities
         </Link>
       </div>
@@ -57,7 +57,7 @@ export default async function SubredditPage({
         <div>
           <h1 className="text-3xl font-semibold tracking-tight text-[#F8FAFC]">r/{subreddit}</h1>
           {meta.category && (
-            <p className="text-[#94A3B8] text-sm mt-1">
+            <p className="text-[#9AA7B8] text-sm mt-1">
               {meta.tier != null ? TIER_LABELS[meta.tier] : ""}{meta.category ? ` · ${meta.category}` : ""}
             </p>
           )}
@@ -66,20 +66,20 @@ export default async function SubredditPage({
           href={`https://reddit.com/r/${subreddit}`}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-xs text-[#94A3B8] hover:text-[#F8FAFC] border border-[#2A2D3A] rounded-full px-3 py-1.5 transition-colors"
+          className="text-xs text-[#9AA7B8] hover:text-[#F8FAFC] border border-[#2A2D3A] rounded-full px-3 py-1.5 transition-colors"
         >
           View on Reddit ↗
         </a>
       </div>
 
-      <p className="text-[#94A3B8] text-sm mt-3 max-w-2xl">
+      <p className="text-[#9AA7B8] text-sm mt-3 max-w-2xl">
         Engagement metrics for a single community &mdash; size and activity over
         time, shown as context.
       </p>
 
       <Charts subreddit={subreddit} />
 
-      <p className="mt-10 text-xs text-[#64748B] border-t border-[#2A2D3A] pt-4">
+      <p className="mt-10 text-xs text-[#6B7689] border-t border-[#2A2D3A] pt-4">
         <strong>Subscribers</strong> — Direct (Reddit API).{" "}
         <strong>Contributors / week</strong> — Derived: distinct authors of posts +
         comments in the 7 days ending on the snapshot date. Historical series uses

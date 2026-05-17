@@ -114,12 +114,12 @@ const sectionStyle: React.CSSProperties = {
   paddingLeft: 24,
 };
 
-const leadStyle: React.CSSProperties = { color: "#E2E8F0", fontWeight: 600 };
+const leadStyle: React.CSSProperties = { color: "#F1F4F8", fontWeight: 600 };
 
 // Understated landmark subhead — a standalone bold line, not a big heading.
 const subheadStyle: React.CSSProperties = {
   fontWeight: 600,
-  color: "#E2E8F0",
+  color: "#F1F4F8",
   fontSize: fontSize.base,
 };
 
@@ -141,7 +141,7 @@ export default function About() {
         >
           Tracking how AI-companion communities talk
         </h1>
-        <p style={{ ...introParagraph, color: "#94A3B8" }}>
+        <p style={{ ...introParagraph, color: "#9AA7B8" }}>
           This project follows six recurring themes in Reddit&apos;s
           AI-companion communities &mdash; romance, addiction, grief, and three
           others &mdash; and measures how often each one surfaces in posts. The
@@ -172,7 +172,7 @@ export default function About() {
             >
               {stat.value}
             </div>
-            <div style={{ fontSize: fontSize.xs, color: "#94A3B8", marginTop: 2 }}>
+            <div style={{ fontSize: fontSize.xs, color: "#9AA7B8", marginTop: 2 }}>
               {stat.label}
             </div>
           </div>
@@ -205,7 +205,7 @@ export default function About() {
                   <span style={{ color: t.color, fontWeight: 500 }}>
                     {t.label}
                   </span>
-                  <span style={{ color: "#94A3B8" }}> &mdash; {t.tagline}</span>
+                  <span style={{ color: "#9AA7B8" }}> &mdash; {t.tagline}</span>
                 </li>
               ))}
             </ul>
@@ -400,7 +400,7 @@ export default function About() {
                     listStyleType: "none",
                   }}
                 >
-                  <span style={{ color: "#64748B" }} className="mr-1.5">
+                  <span style={{ color: "#6B7689" }} className="mr-1.5">
                     &bull;
                   </span>
                   {item}
@@ -529,12 +529,12 @@ export default function About() {
                         style={{
                           fontSize: fontSize.sm,
                           lineHeight: 1.6,
-                          color: "#94A3B8",
+                          color: "#9AA7B8",
                           paddingLeft: 12,
                           listStyleType: "none",
                         }}
                       >
-                        <span style={{ color: "#64748B" }} className="mr-1.5">
+                        <span style={{ color: "#6B7689" }} className="mr-1.5">
                           &bull;
                         </span>
                         {item}
@@ -548,7 +548,7 @@ export default function About() {
           <p
             style={{
               fontSize: fontSize.xs,
-              color: "#64748B",
+              color: "#6B7689",
               marginTop: 20,
               paddingLeft: 24,
             }}

@@ -52,7 +52,7 @@ function SortButton({
   return (
     <button
       onClick={() => onSort(sortKey)}
-      className={`flex items-center gap-1 ml-auto hover:text-[#CBD5E1] transition-colors ${active ? "text-[#F8FAFC]" : "text-[#64748B]"}`}
+      className={`flex items-center gap-1 ml-auto hover:text-[#C8D0DC] transition-colors ${active ? "text-[#F8FAFC]" : "text-[#6B7689]"}`}
     >
       {label}
       <span className="text-[11px]">{active ? (current.asc ? "↑" : "↓") : "↕"}</span>
@@ -94,7 +94,7 @@ export default function CommunitiesTable({ subreddits }: { subreddits: Subreddit
             className={`text-xs px-3 py-1 rounded-full border transition-colors ${
               categoryFilter === cat
                 ? "bg-[#1A1D27] text-[#F8FAFC] border-[#2A2D3A]"
-                : "border-[#2A2D3A] text-[#94A3B8] hover:border-[#475569]"
+                : "border-[#2A2D3A] text-[#9AA7B8] hover:border-[#475569]"
             }`}
           >
             {cat}
@@ -106,8 +106,8 @@ export default function CommunitiesTable({ subreddits }: { subreddits: Subreddit
         <table className="w-full text-left">
           <thead>
             <tr className="text-xs uppercase tracking-wide border-b border-[#2A2D3A]">
-              <th className="pb-3 pr-4 font-medium text-[#64748B]">Community</th>
-              <th className="pb-3 pr-4 font-medium text-[#64748B] hidden sm:table-cell">Tier</th>
+              <th className="pb-3 pr-4 font-medium text-[#6B7689]">Community</th>
+              <th className="pb-3 pr-4 font-medium text-[#6B7689] hidden sm:table-cell">Tier</th>
               <th className="pb-3 pr-4 font-medium text-right">
                 <SortButton label="Subscribers" sortKey="subscribers" current={sort} onSort={handleSort} />
               </th>
@@ -136,17 +136,17 @@ export default function CommunitiesTable({ subreddits }: { subreddits: Subreddit
                     r/{s.subreddit}
                   </Link>
                   {s.category && (
-                    <div className="text-xs text-[#64748B] mt-0.5">{s.category}</div>
+                    <div className="text-xs text-[#6B7689] mt-0.5">{s.category}</div>
                   )}
                 </td>
                 <td className="py-3 pr-4 hidden sm:table-cell">
                   <TierBadge tier={s.tier} />
                 </td>
-                <td className="py-3 pr-4 text-sm tabular-nums text-right text-[#CBD5E1]">{fmt(s.subscribers)}</td>
-                <td className="py-3 pr-4 text-sm tabular-nums text-right text-[#CBD5E1]">{fmt(s.unique_contributors_7d)}</td>
-                <td className="py-3 pr-4 text-sm tabular-nums text-right text-[#CBD5E1] hidden sm:table-cell">{fmt(s.posts_today)}</td>
-                <td className="py-3 pr-4 text-sm tabular-nums text-right text-[#CBD5E1] hidden md:table-cell">{fmt(s.avg_comments_per_post, 1)}</td>
-                <td className="py-3 text-sm tabular-nums text-right text-[#CBD5E1] hidden md:table-cell">{fmt(s.avg_score_per_post, 0)}</td>
+                <td className="py-3 pr-4 text-sm tabular-nums text-right text-[#C8D0DC]">{fmt(s.subscribers)}</td>
+                <td className="py-3 pr-4 text-sm tabular-nums text-right text-[#C8D0DC]">{fmt(s.unique_contributors_7d)}</td>
+                <td className="py-3 pr-4 text-sm tabular-nums text-right text-[#C8D0DC] hidden sm:table-cell">{fmt(s.posts_today)}</td>
+                <td className="py-3 pr-4 text-sm tabular-nums text-right text-[#C8D0DC] hidden md:table-cell">{fmt(s.avg_comments_per_post, 1)}</td>
+                <td className="py-3 text-sm tabular-nums text-right text-[#C8D0DC] hidden md:table-cell">{fmt(s.avg_score_per_post, 0)}</td>
               </tr>
             ))}
           </tbody>
@@ -154,10 +154,10 @@ export default function CommunitiesTable({ subreddits }: { subreddits: Subreddit
       </div>
 
       {sorted.length === 0 && (
-        <p className="text-sm text-[#94A3B8] py-8 text-center">No communities in this category.</p>
+        <p className="text-sm text-[#9AA7B8] py-8 text-center">No communities in this category.</p>
       )}
 
-      <p className="mt-8 text-xs text-[#64748B]">
+      <p className="mt-8 text-xs text-[#6B7689]">
         <strong>Subscribers</strong> — Direct.{" "}
         <strong>Contributors/wk</strong> — Derived (distinct post + comment authors over the
         past 7 days; comment authors counted from 2026-03-10 onward).{" "}

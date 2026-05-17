@@ -37,18 +37,18 @@ function MetricChart({
 
   return (
     <div>
-      <p className="text-xs text-[#64748B] uppercase tracking-widest mb-3">{label}</p>
+      <p className="text-xs text-[#6B7689] uppercase tracking-widest mb-3">{label}</p>
       <ResponsiveContainer width="100%" height={140}>
         <LineChart data={formatted} margin={{ top: 4, right: 4, left: 0, bottom: 0 }}>
           <CartesianGrid strokeDasharray="3 3" stroke="#2A2D3A" />
           <XAxis
             dataKey="date"
-            tick={{ fontSize: 11, fill: "#64748B" }}
+            tick={{ fontSize: 11, fill: "#6B7689" }}
             tickLine={false}
             axisLine={false}
           />
           <YAxis
-            tick={{ fontSize: 11, fill: "#64748B" }}
+            tick={{ fontSize: 11, fill: "#6B7689" }}
             tickLine={false}
             axisLine={false}
             width={50}
@@ -66,8 +66,8 @@ function MetricChart({
                 ? decimals > 0 ? v.toFixed(decimals) : fmt(v)
                 : String(v)
             }
-            labelStyle={{ fontSize: 11, color: "#94A3B8" }}
-            itemStyle={{ color: "#F8FAFC" }}
+            labelStyle={{ fontSize: 11, color: "#9AA7B8" }}
+            itemStyle={{ color: "#F1F4F8" }}
             contentStyle={{
               fontSize: 11,
               backgroundColor: "#0F1117",
@@ -100,11 +100,11 @@ export default function Charts({ subreddit }: { subreddit: string }) {
   }, [subreddit]);
 
   if (snapshots === null) {
-    return <p className="text-sm text-[#94A3B8]">Loading…</p>;
+    return <p className="text-sm text-[#9AA7B8]">Loading…</p>;
   }
 
   if (snapshots.length === 0) {
-    return <p className="text-sm text-[#94A3B8]">No snapshot data yet.</p>;
+    return <p className="text-sm text-[#9AA7B8]">No snapshot data yet.</p>;
   }
 
   const latest = snapshots.at(-1)!;
@@ -114,24 +114,24 @@ export default function Charts({ subreddit }: { subreddit: string }) {
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-8 p-6 bg-[#1A1D27] rounded-xl">
         <div>
           <div className="text-2xl font-semibold tabular-nums text-[#F8FAFC]">{fmt(latest.subscribers)}</div>
-          <div className="text-xs text-[#94A3B8] mt-0.5">Subscribers</div>
+          <div className="text-xs text-[#9AA7B8] mt-0.5">Subscribers</div>
         </div>
         <div>
           <div className="text-2xl font-semibold tabular-nums text-[#F8FAFC]">{fmt(latest.unique_contributors_7d)}</div>
-          <div className="text-xs text-[#94A3B8] mt-0.5">Contributors / week</div>
+          <div className="text-xs text-[#9AA7B8] mt-0.5">Contributors / week</div>
         </div>
         <div>
           <div className="text-2xl font-semibold tabular-nums text-[#F8FAFC]">{fmt(latest.posts_today)}</div>
-          <div className="text-xs text-[#94A3B8] mt-0.5">Posts today</div>
+          <div className="text-xs text-[#9AA7B8] mt-0.5">Posts today</div>
         </div>
         <div>
           <div className="text-2xl font-semibold tabular-nums text-[#F8FAFC]">{fmt(latest.avg_comments_per_post, 1)}</div>
-          <div className="text-xs text-[#94A3B8] mt-0.5">Avg comments / post</div>
+          <div className="text-xs text-[#9AA7B8] mt-0.5">Avg comments / post</div>
         </div>
       </div>
 
       <div className="mt-8">
-        <p className="text-sm text-[#94A3B8] mb-1">
+        <p className="text-sm text-[#9AA7B8] mb-1">
           {snapshots.length} day{snapshots.length !== 1 ? "s" : ""} of data
           {snapshots.length === 1 && " — charts will grow as daily collection runs"}
         </p>

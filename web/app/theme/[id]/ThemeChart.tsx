@@ -86,7 +86,7 @@ export default function ThemeChart({
 
   if (!monthly.length) {
     return (
-      <div className="h-[240px] flex items-center justify-center text-sm text-[#64748B]">
+      <div className="h-[240px] flex items-center justify-center text-sm text-[#6B7689]">
         No data yet.
       </div>
     );
@@ -107,7 +107,7 @@ export default function ThemeChart({
             className="px-3 h-8 text-xs font-medium rounded-md transition-colors"
             style={{
               backgroundColor: range === r ? "#0F1117" : "transparent",
-              color: range === r ? "#F8FAFC" : "#94A3B8",
+              color: range === r ? "#F8FAFC" : "#9AA7B8",
               border: `1px solid ${range === r ? "#2A2D3A" : "transparent"}`,
             }}
           >
@@ -131,7 +131,7 @@ export default function ThemeChart({
               dataKey="date"
               tickFormatter={fmtMonthShort}
               stroke="#2A2D3A"
-              tick={{ fill: "#64748B", fontSize: 12 }}
+              tick={{ fill: "#6B7689", fontSize: 12 }}
               tickLine={false}
               axisLine={{ stroke: "#2A2D3A" }}
               minTickGap={48}
@@ -139,7 +139,7 @@ export default function ThemeChart({
             <YAxis
               width={44}
               stroke="transparent"
-              tick={{ fill: "#64748B", fontSize: 12 }}
+              tick={{ fill: "#6B7689", fontSize: 12 }}
               tickLine={false}
               axisLine={false}
               domain={[0, "auto"]}
@@ -179,14 +179,14 @@ export default function ThemeChart({
                       whiteSpace: "nowrap",
                     }}
                   >
-                    <span style={{ color: "#94A3B8" }}>
+                    <span style={{ color: "#9AA7B8" }}>
                       {fmtMonth(label as string)}
                     </span>
-                    <span style={{ color: "#94A3B8" }}>{"  ·  "}</span>
-                    <span style={{ color: "#F8FAFC", fontWeight: 600 }}>
+                    <span style={{ color: "#9AA7B8" }}>{"  ·  "}</span>
+                    <span style={{ color: "#F1F4F8", fontWeight: 600 }}>
                       {(payload[0].value as number).toFixed(1)}
                     </span>
-                    <span style={{ color: "#94A3B8" }}> per 1k posts</span>
+                    <span style={{ color: "#9AA7B8" }}> per 1k posts</span>
                   </div>
                 );
               }}
@@ -204,7 +204,7 @@ export default function ThemeChart({
         </ResponsiveContainer>
       </div>
 
-      <div style={{ fontSize: 11, color: "#64748B", marginTop: 8 }}>
+      <div style={{ fontSize: 11, color: "#6B7689", marginTop: 8 }}>
         Validated-keyword mentions per 1,000 posts · monthly average · post text
         only
       </div>
@@ -229,7 +229,7 @@ export default function ThemeChart({
             <span
               style={{
                 fontSize: 11,
-                color: "#64748B",
+                color: "#6B7689",
                 textTransform: "uppercase",
                 letterSpacing: "0.05em",
               }}
@@ -266,12 +266,12 @@ export default function ThemeChart({
                 >
                   {e.num}
                 </span>
-                <span style={{ color: "#CBD5E1" }}>{e.label}</span>
+                <span style={{ color: "#C8D0DC" }}>{e.label}</span>
               </span>
             ))}
           </div>
           {hasMethodology && (
-            <div style={{ fontSize: 11, color: "#64748B", marginTop: 7 }}>
+            <div style={{ fontSize: 11, color: "#6B7689", marginTop: 7 }}>
               A hollow marker is a change to our keyword set — a measurement
               change, not a real-world event.
             </div>
