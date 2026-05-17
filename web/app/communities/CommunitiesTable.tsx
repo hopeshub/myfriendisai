@@ -52,7 +52,7 @@ function SortButton({
   return (
     <button
       onClick={() => onSort(sortKey)}
-      className={`flex items-center gap-1 ml-auto hover:text-[#C8D0DC] transition-colors ${active ? "text-[#F8FAFC]" : "text-[#6B7689]"}`}
+      className={`flex items-center gap-1 ml-auto py-2 text-sm sm:text-xs hover:text-[#C8D0DC] transition-colors ${active ? "text-[#F8FAFC]" : "text-[#6B7689]"}`}
     >
       {label}
       <span className="text-[11px]">{active ? (current.asc ? "↑" : "↓") : "↕"}</span>
@@ -91,7 +91,7 @@ export default function CommunitiesTable({ subreddits }: { subreddits: Subreddit
           <button
             key={cat}
             onClick={() => setCategoryFilter(cat)}
-            className={`text-xs px-3 py-1 rounded-full border transition-colors ${
+            className={`text-sm sm:text-xs px-3 py-2 sm:py-1 min-h-11 sm:min-h-0 rounded-full border transition-colors ${
               categoryFilter === cat
                 ? "bg-[#1A1D27] text-[#F8FAFC] border-[#2A2D3A]"
                 : "border-[#2A2D3A] text-[#9AA7B8] hover:border-[#475569]"
