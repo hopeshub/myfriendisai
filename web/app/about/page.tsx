@@ -116,6 +116,13 @@ const sectionStyle: React.CSSProperties = {
 
 const leadStyle: React.CSSProperties = { color: "#E2E8F0", fontWeight: 600 };
 
+// Understated landmark subhead — a standalone bold line, not a big heading.
+const subheadStyle: React.CSSProperties = {
+  fontWeight: 600,
+  color: "#E2E8F0",
+  fontSize: fontSize.base,
+};
+
 export default function About() {
   const stats = [
     { value: getPostCount(), label: "posts analyzed" },
@@ -134,9 +141,7 @@ export default function About() {
         >
           Tracking how AI-companion communities talk
         </h1>
-        <p
-          style={{ ...introParagraph, color: "#94A3B8", maxWidth: undefined }}
-        >
+        <p style={{ ...introParagraph, color: "#94A3B8" }}>
           This project follows six recurring themes in Reddit&apos;s
           AI-companion communities &mdash; romance, addiction, grief, and three
           others &mdash; and measures how often each one surfaces in posts. The
@@ -204,6 +209,7 @@ export default function About() {
                 </li>
               ))}
             </ul>
+            <p style={subheadStyle}>Validating the keywords</p>
             <p>
               Each theme is then defined by a set of keywords, and every keyword
               has to earn its place. For a candidate, I pull 100 real posts it
@@ -221,6 +227,7 @@ export default function About() {
               mostly retrace that growth; a rate sets the growth aside and shows
               how the conversation itself is shifting.
             </p>
+            <p style={subheadStyle}>Why not just use an LLM?</p>
             <p>
               There is an obvious objection here: why count keywords when a
               language model could read every post and classify it directly?
@@ -353,26 +360,59 @@ export default function About() {
               <strong style={leadStyle}>
                 Read direction and timing, not height.
               </strong>{" "}
-              Three things make the <em>height</em> of a line untrustworthy
-              even where its <em>shape</em> holds. Each theme is caught through
-              its own vocabulary, and some vocabularies match more easily
-              &mdash; addiction&apos;s recovery words (&ldquo;relapse,&rdquo;
-              &ldquo;cold turkey&rdquo;) catch cleanly, while romance lives in
-              ordinary language (&ldquo;I love him,&rdquo; &ldquo;my
-              boyfriend&rdquo;) that mostly slips past &mdash; so one line can
-              sit above another even when the second theme is the larger one.
-              The high precision bar also leaves the keyword set deliberately
-              incomplete: in a hand-coded sample of 400 random posts, it caught
-              between a few percent and about a third of the posts that
-              genuinely belonged, depending on the theme. And it is weakest
-              exactly where the subject is most itself &mdash; someone writing
-              &ldquo;I love him&rdquo; about an AI in the same ordinary words
-              they would use for a person is the hardest case of all to catch.
+              Three things make the <em>height</em> of a line untrustworthy,
+              even where its <em>shape</em> holds:
+            </p>
+            <ul className="space-y-2" style={{ listStyleType: "none", padding: 0 }}>
+              {[
+                <>
+                  <span style={leadStyle}>Vocabularies catch unevenly</span>
+                  {" "}&mdash; addiction&apos;s recovery words
+                  (&ldquo;relapse,&rdquo; &ldquo;cold turkey&rdquo;) match
+                  cleanly; romance lives in ordinary language (&ldquo;I love
+                  him,&rdquo; &ldquo;my boyfriend&rdquo;) that mostly slips
+                  past, so one line can sit above another even when the second
+                  theme is the larger one.
+                </>,
+                <>
+                  <span style={leadStyle}>
+                    The keyword set is deliberately incomplete
+                  </span>
+                  {" "}&mdash; in a hand-coded sample of 400 random posts, it
+                  caught between a few percent and about a third of the posts
+                  that genuinely belonged.
+                </>,
+                <>
+                  <span style={leadStyle}>
+                    It&apos;s weakest where the subject is most itself
+                  </span>
+                  {" "}&mdash; someone writing &ldquo;I love him&rdquo; about an
+                  AI in the same ordinary words they would use for a person is
+                  the hardest case of all to catch.
+                </>,
+              ].map((item, i) => (
+                <li
+                  key={i}
+                  style={{
+                    fontSize: fontSize.base,
+                    lineHeight: 1.7,
+                    paddingLeft: 12,
+                    listStyleType: "none",
+                  }}
+                >
+                  <span style={{ color: "#64748B" }} className="mr-1.5">
+                    &bull;
+                  </span>
+                  {item}
+                </li>
+              ))}
+            </ul>
+            <p>
               So every line is a floor, not a ceiling: it runs low, it cannot be
               measured against its neighbours, and only its direction, timing,
-              and spikes can be trusted. That incompleteness is a trade made on
-              purpose &mdash; a missed post only weakens a line, while a false
-              one corrupts it, so the method errs toward missing.
+              and spikes can be trusted &mdash; a missed post only weakens a
+              line, while a false one corrupts it, so the method errs toward
+              missing.
             </p>
             <p>
               <strong style={leadStyle}>

@@ -4,6 +4,7 @@ import { useState } from "react";
 import type { ThemeData } from "./themeData";
 import { useBreakpoint } from "./useBreakpoint";
 import TrendAtlas from "./TrendAtlas";
+import { measure } from "./styles";
 
 type TimeRange = "6M" | "1Y" | "2Y" | "ALL";
 
@@ -24,12 +25,15 @@ export default function TrendsExplorer({ themeData, themeDataExclCai }: Props) {
     <div>
       {/* Section header — the page masthead lives in page.tsx; this is §3. */}
       <div className="mb-4">
-        <h2 className="text-xl sm:text-2xl font-semibold text-[#F8FAFC] mb-2">
+        <h2
+          className="text-xl sm:text-2xl font-semibold text-[#F8FAFC] mb-2"
+          style={{ maxWidth: measure }}
+        >
           How the conversation shifts inside them
         </h2>
         <p
           className="text-sm sm:text-base text-[#94A3B8]"
-          style={{ maxWidth: 700 }}
+          style={{ maxWidth: measure }}
         >
           Six recurring themes, and how often each one&apos;s language surfaces
           in posts across these communities, month by month.
@@ -63,7 +67,7 @@ export default function TrendsExplorer({ themeData, themeDataExclCai }: Props) {
           </button>
         ))}
       </div>
-      <p className="mb-3" style={{ fontSize: 12, color: "#64748B", maxWidth: 720 }}>
+      <p className="mb-3" style={{ fontSize: 12, color: "#64748B", maxWidth: measure }}>
         {scope === "all"
           ? "r/CharacterAI is roughly three-quarters of every post counted here, and it rises and falls on its own platform lifecycle — switch it off to see each rate within the dedicated companionship communities."
           : "r/CharacterAI removed from both the keyword counts and the denominator. These are the rates within the dedicated companionship and recovery communities — the rises hold, and several are steeper here."}
@@ -114,7 +118,7 @@ export default function TrendsExplorer({ themeData, themeDataExclCai }: Props) {
           color: "#8293A6",
           marginTop: 16,
           marginBottom: 8,
-          maxWidth: 760,
+          maxWidth: measure,
           marginLeft: "auto",
           marginRight: "auto",
         }}

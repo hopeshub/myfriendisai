@@ -36,6 +36,9 @@ export const fontSize = {
 
 // ── Shared style objects ─────────────────────────────────────────────────────
 
+/** The reading measure — max line length (px) for all running text. */
+export const measure = 680;
+
 /** Small uppercase "eyebrow" label that sits above a section heading. */
 export const sectionEyebrow: CSSProperties = {
   fontSize: fontSize.xs,
@@ -61,7 +64,7 @@ export const introParagraph: CSSProperties = {
   fontSize: fontSize.md,
   lineHeight: 1.7,
   color: "#94A3B8",
-  maxWidth: 700,
+  maxWidth: measure,
 };
 
 /** Standard body paragraph. */
@@ -69,4 +72,5 @@ export const bodyParagraph: CSSProperties = {
   fontSize: fontSize.base,
   lineHeight: 1.8,
   color: "#CBD5E1",
+  maxWidth: measure,
 };

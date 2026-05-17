@@ -3,7 +3,7 @@ import PostVolumeChart from "./PostVolumeChart";
 import EventShowcase from "./EventShowcase";
 import RecoverySection from "./RecoverySection";
 import { loadThemeData, loadPostVolumeSplit, loadRecoveryVolume } from "./themeData";
-import { sectionEyebrow, introParagraph } from "./styles";
+import { sectionEyebrow, introParagraph, measure } from "./styles";
 
 // ── Homepage ─────────────────────────────────────────────────────────────────
 // One scrollable narrative, top to bottom:
@@ -30,7 +30,7 @@ export default function Home() {
       <header className="mb-16">
         <h1
           className="text-[26px] sm:text-3xl lg:text-[32px] font-bold text-[#F8FAFC]"
-          style={{ lineHeight: 1.2, marginBottom: 12 }}
+          style={{ lineHeight: 1.2, marginBottom: 12, maxWidth: measure }}
         >
           How the committed core of AI companionship talks
         </h1>
@@ -39,8 +39,11 @@ export default function Home() {
           central subject &mdash; from r/replika to r/MyBoyfriendIsAI to
           communities for people trying to quit. It tracks six recurring themes
           in how these communities talk, and the platform events that move
-          them. Not how common AI companionship is &mdash; but how this
-          conversation changes over time.
+          them.
+        </p>
+        <p style={{ ...intro, fontSize: 16, color: "#E2E8F0", marginTop: 12 }}>
+          Not how common AI companionship is &mdash; but how this conversation
+          changes over time.
         </p>
       </header>
 
@@ -49,7 +52,7 @@ export default function Home() {
         <div style={sectionLabel}>The communities</div>
         <h2
           className="text-xl sm:text-2xl font-semibold text-[#F8FAFC]"
-          style={{ marginBottom: 8 }}
+          style={{ marginBottom: 8, maxWidth: measure }}
         >
           How active these communities are
         </h2>
@@ -58,11 +61,13 @@ export default function Home() {
           &mdash; a mass-market roleplay platform that for years was
           75&ndash;90% of every post counted here &mdash; surged and then
           contracted on its own platform lifecycle: a lawsuit, new content
-          filters, users leaving. Every other tracked community did something
-          different &mdash; it held roughly steady, drifting mildly upward,
-          with spikes at the big platform events. That contrast is the point:
-          the steep fall in the raw totals is one platform&apos;s story, not
-          the category&apos;s.
+          filters, users leaving.
+        </p>
+        <p style={{ ...intro, marginBottom: 16 }}>
+          Every other tracked community did something different &mdash; it held
+          roughly steady, drifting mildly upward, with spikes at the big
+          platform events. That contrast is the point: the steep fall in the
+          raw totals is one platform&apos;s story, not the category&apos;s.
         </p>
         <PostVolumeChart data={postVolume} />
       </section>
@@ -72,7 +77,7 @@ export default function Home() {
         <div style={sectionLabel}>What happened</div>
         <h2
           className="text-xl sm:text-2xl font-semibold text-[#F8FAFC]"
-          style={{ marginBottom: 8 }}
+          style={{ marginBottom: 8, maxWidth: measure }}
         >
           The events that move the conversation
         </h2>
@@ -100,7 +105,7 @@ export default function Home() {
         <div style={sectionLabel}>A counter-current</div>
         <h2
           className="text-xl sm:text-2xl font-semibold text-[#F8FAFC]"
-          style={{ marginBottom: 8 }}
+          style={{ marginBottom: 8, maxWidth: measure }}
         >
           The communities for getting out
         </h2>
@@ -113,12 +118,14 @@ export default function Home() {
           followed within months &mdash; r/ChatbotAddiction and
           r/Character_AI_Recovery &mdash; and they grew. The language inside
           them is borrowed wholesale from substance recovery: relapse, cold
-          turkey, day counts, &ldquo;X days clean.&rdquo; (The larger
-          r/CharacterAIrunaways is left off the chart &mdash; it is a
-          leavers&apos; space, about switching platforms, not quitting.) This
-          is the addiction line from the atlas
-          above &mdash; the steepest-rising theme in the whole record &mdash;
-          given somewhere to live.
+          turkey, day counts, &ldquo;X days clean.&rdquo;
+        </p>
+        <p style={{ ...intro, marginBottom: 16 }}>
+          (The larger r/CharacterAIrunaways is left off the chart &mdash; it is
+          a leavers&apos; space, about switching platforms, not quitting.) This
+          is the addiction line from the atlas above &mdash; the
+          steepest-rising theme in the whole record &mdash; given somewhere to
+          live.
         </p>
         <RecoverySection data={recoveryVolume} />
       </section>

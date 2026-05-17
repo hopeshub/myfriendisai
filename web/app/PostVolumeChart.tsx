@@ -12,6 +12,7 @@ import {
   ReferenceArea,
 } from "recharts";
 import type { PostVolumeSplitPoint } from "./themeData";
+import { measure } from "./styles";
 
 // ── Post-volume chart ────────────────────────────────────────────────────────
 // Two panels, each on its OWN y-scale: r/CharacterAI, and every other tracked
@@ -271,6 +272,9 @@ export default function PostVolumeChart({
           color: "#64748B",
           marginTop: 8,
           textAlign: "center",
+          maxWidth: measure,
+          marginLeft: "auto",
+          marginRight: "auto",
         }}
       >
         Each panel has its own scale &mdash; at its 2024 peak r/CharacterAI was

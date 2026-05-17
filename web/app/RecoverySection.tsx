@@ -6,6 +6,7 @@
 import RecoveryChart from "./RecoveryChart";
 import { RECOVERY_POSTS, type RecoveryPost } from "./recoveryData";
 import type { RecoveryVolumePoint } from "./themeData";
+import { measure } from "./styles";
 
 const MONTHS = [
   "Jan", "Feb", "Mar", "Apr", "May", "Jun",
@@ -35,6 +36,7 @@ export default function RecoverySection({
           color: "#64748B",
           marginTop: 8,
           marginBottom: 28,
+          maxWidth: measure,
         }}
       >
         Monthly posts across the two recovery communities, with key
@@ -110,7 +112,7 @@ export default function RecoverySection({
           fontSize: 13,
           lineHeight: 1.7,
           color: "#94A3B8",
-          maxWidth: 700,
+          maxWidth: measure,
         }}
       >
         <span style={{ color: "#E2E8F0", fontWeight: 600 }}>

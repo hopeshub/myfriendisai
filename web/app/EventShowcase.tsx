@@ -9,6 +9,7 @@ import {
   redditPermalink,
   type ShowcaseEvent,
 } from "./eventShowcaseData";
+import { measure } from "./styles";
 
 const MONTHS = [
   "Jan", "Feb", "Mar", "Apr", "May", "Jun",
@@ -79,6 +80,7 @@ function EventCard({ event }: { event: ShowcaseEvent }) {
           lineHeight: 1.7,
           color: "#CBD5E1",
           marginTop: 10,
+          maxWidth: measure,
         }}
       >
         {event.summary}
