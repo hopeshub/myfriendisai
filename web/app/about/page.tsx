@@ -515,7 +515,7 @@ export default function About() {
                           listStyleType: "none",
                         }}
                       >
-                        <span style={{ color: "#334155" }} className="mr-1.5">
+                        <span style={{ color: "#64748B" }} className="mr-1.5">
                           &bull;
                         </span>
                         {item}

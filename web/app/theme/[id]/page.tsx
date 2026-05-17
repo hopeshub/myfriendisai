@@ -139,7 +139,7 @@ export default async function ThemePage({
       <Link
         href="/"
         className="text-sm transition-colors"
-        style={{ color: "#64748B" }}
+        style={{ color: "#94A3B8" }}
       >
         &larr; All themes
       </Link>
@@ -233,7 +233,7 @@ export default async function ThemePage({
                   key={sp.id}
                   style={{
                     padding: "12px 0",
-                    borderTop: i > 0 ? "0.5px solid #1E293B" : undefined,
+                    borderTop: i > 0 ? "1px solid #1E293B" : undefined,
                   }}
                 >
                   <a
@@ -300,7 +300,7 @@ export default async function ThemePage({
         style={{
           marginTop: 36,
           paddingTop: 18,
-          borderTop: "0.5px solid #1E293B",
+          borderTop: "1px solid #1E293B",
           display: "flex",
           flexWrap: "wrap",
           gap: "10px 18px",

@@ -5,7 +5,7 @@ import { getSubreddits } from "@/lib/data";
 import Charts from "./Charts";
 
 const TIER_LABELS: Record<number, string> = {
-  0: "Tier 0 — Foundation / Control",
+  0: "Tier 0 — General AI",
   1: "Tier 1 — Primary Companionship",
   2: "Tier 2 — Platform-Specific",
   3: "Tier 3 — Recovery & Dependency",
@@ -46,7 +46,7 @@ export default async function SubredditPage({
   if (!meta) notFound();
 
   return (
-    <div className="py-8">
+    <div className="max-w-[1080px] mx-auto px-4 sm:px-8 py-8">
       <div className="mb-2">
         <Link href="/communities" className="text-sm text-[#94A3B8] hover:text-[#F8FAFC] transition-colors">
           ← Communities

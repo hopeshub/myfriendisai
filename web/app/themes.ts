@@ -107,8 +107,8 @@ export type ThemeEvent = {
 export const EVENTS: ThemeEvent[] = [
   { date: "2023-02-01", label: "Replika ERP removal", shortLabel: "Replika ERP" },
   { date: "2024-05-01", label: "4o launches", shortLabel: "4o launch" },
-  { date: "2025-04-01", label: "Sycophancy update", shortLabel: "Syco. update" },
-  { date: "2025-08-01", label: "4o 1st sunset", shortLabel: "4o sunset" },
+  { date: "2025-04-01", label: "Sycophancy update", shortLabel: "Sycophancy" },
+  { date: "2025-08-01", label: "GPT-5 replaces 4o", shortLabel: "GPT-5" },
   { date: "2026-02-01", label: "4o retired", shortLabel: "4o ret." },
   { date: "2026-05-12", label: "Rupture keywords expanded", shortLabel: "Rupture keywords", methodology: true },
 ];

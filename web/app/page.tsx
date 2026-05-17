@@ -90,7 +90,7 @@ export default function Home() {
         >
           The events that move the conversation
         </h2>
-        <p style={{ ...intro, marginBottom: 24 }}>
+        <p style={{ ...intro, marginBottom: 16 }}>
           This is where the instrument is sharpest. When a platform changes
           underneath its users &mdash; an app removes a feature, a model is
           retired &mdash; the language in these communities changes fast and

@@ -24,7 +24,7 @@ export default function TrendsExplorer({ themeData, themeDataExclCai }: Props) {
     <div>
       {/* Section header — the page masthead lives in page.tsx; this is §3. */}
       <div className="mb-4">
-        <h2 className="text-xl sm:text-2xl font-semibold text-[#F8FAFC] mb-1">
+        <h2 className="text-xl sm:text-2xl font-semibold text-[#F8FAFC] mb-2">
           How the conversation shifts inside them
         </h2>
         <p

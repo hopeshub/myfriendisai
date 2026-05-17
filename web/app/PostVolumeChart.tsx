@@ -69,6 +69,7 @@ function VolumePanel({
   hasEarly,
   color,
   gradientId,
+  showSeamLabel,
 }: {
   title: string;
   caption: string;
@@ -78,6 +79,7 @@ function VolumePanel({
   hasEarly: boolean;
   color: string;
   gradientId: string;
+  showSeamLabel?: boolean;
 }) {
   return (
     <div>
@@ -103,12 +105,16 @@ function VolumePanel({
                 x2={ARCHIVE_SEAM}
                 fill="#64748B"
                 fillOpacity={0.09}
-                label={{
-                  value: "patchy archive coverage",
-                  position: "insideTop",
-                  fill: "#64748B",
-                  fontSize: 10,
-                }}
+                label={
+                  showSeamLabel
+                    ? {
+                        value: "patchy archive coverage",
+                        position: "insideTop",
+                        fill: "#94A3B8",
+                        fontSize: 11,
+                      }
+                    : undefined
+                }
               />
             )}
             <XAxis
@@ -246,6 +252,7 @@ export default function PostVolumeChart({
           hasEarly={hasEarly}
           color="#566173"
           gradientId="pv-cai"
+          showSeamLabel
         />
         <VolumePanel
           title="Every other tracked community"

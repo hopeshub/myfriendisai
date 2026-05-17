@@ -120,7 +120,7 @@ export default function ThemeChart({
         <ResponsiveContainer width="100%" height="100%">
           <LineChart
             data={data}
-            margin={{ top: 24, right: 14, bottom: 4, left: 0 }}
+            margin={{ top: 30, right: 14, bottom: 4, left: 0 }}
           >
             <CartesianGrid
               strokeDasharray="3 3"
@@ -204,7 +204,7 @@ export default function ThemeChart({
         </ResponsiveContainer>
       </div>
 
-      <div style={{ fontSize: 11, color: "#64748B", marginTop: 2 }}>
+      <div style={{ fontSize: 11, color: "#64748B", marginTop: 8 }}>
         Validated-keyword mentions per 1,000 posts · monthly average · post text
         only
       </div>
@@ -215,7 +215,7 @@ export default function ThemeChart({
           style={{
             marginTop: 12,
             paddingTop: 10,
-            borderTop: "0.5px solid #1E293B",
+            borderTop: "1px solid #1E293B",
           }}
         >
           <div

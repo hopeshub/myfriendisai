@@ -15,7 +15,7 @@ function fmt(n: number | null, decimals = 0): string {
 }
 
 const TIER_LABELS: Record<number, string> = {
-  0: "Control",
+  0: "General AI",
   1: "Companion",
   2: "Platform",
   3: "Recovery",
