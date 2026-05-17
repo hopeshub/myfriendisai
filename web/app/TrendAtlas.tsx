@@ -86,7 +86,7 @@ function EventLegend({
         <span
           style={{
             fontSize: 11,
-            color: "#64748B",
+            color: "#6B7689",
             textTransform: "uppercase",
             letterSpacing: "0.05em",
           }}
@@ -117,13 +117,13 @@ function EventLegend({
             >
               {e.num}
             </span>
-            <span style={{ color: "#CBD5E1" }}>{e.label}</span>
-            <span style={{ color: "#64748B" }}>{fmtMonthShort(e.date)}</span>
+            <span style={{ color: "#C8D0DC" }}>{e.label}</span>
+            <span style={{ color: "#6B7689" }}>{fmtMonthShort(e.date)}</span>
           </span>
         ))}
       </div>
       {hasMethodology && (
-        <div style={{ fontSize: bp === "mobile" ? 14 : 11, color: "#64748B", marginTop: 6 }}>
+        <div style={{ fontSize: bp === "mobile" ? 14 : 11, color: "#6B7689", marginTop: 6 }}>
           A hollow marker is a change to our keyword set — a measurement
           change, not a real-world event.
         </div>
@@ -222,7 +222,7 @@ export default function TrendAtlas({
                 style={{
                   fontSize: bp === "mobile" ? 14 : 13,
                   lineHeight: 1.45,
-                  color: "#94A3B8",
+                  color: "#9AA7B8",
                   marginTop: 3,
                   marginBottom: 6,
                 }}
@@ -245,7 +245,7 @@ export default function TrendAtlas({
                       dataKey="date"
                       tickFormatter={fmtMonthShort}
                       stroke="#2A2D3A"
-                      tick={{ fill: "#64748B", fontSize: 11 }}
+                      tick={{ fill: "#6B7689", fontSize: 11 }}
                       tickLine={false}
                       axisLine={{ stroke: "#2A2D3A" }}
                       minTickGap={44}
@@ -253,7 +253,7 @@ export default function TrendAtlas({
                     <YAxis
                       width={36}
                       stroke="transparent"
-                      tick={{ fill: "#64748B", fontSize: 11 }}
+                      tick={{ fill: "#6B7689", fontSize: 11 }}
                       tickLine={false}
                       axisLine={false}
                       domain={[0, "auto"]}
@@ -297,14 +297,14 @@ export default function TrendAtlas({
                               whiteSpace: "nowrap",
                             }}
                           >
-                            <span style={{ color: "#94A3B8" }}>
+                            <span style={{ color: "#9AA7B8" }}>
                               {fmtMonth(label as string)}
                             </span>
-                            <span style={{ color: "#94A3B8" }}>{"  ·  "}</span>
-                            <span style={{ color: "#F8FAFC", fontWeight: 600 }}>
+                            <span style={{ color: "#9AA7B8" }}>{"  ·  "}</span>
+                            <span style={{ color: "#F1F4F8", fontWeight: 600 }}>
                               {(payload[0].value as number).toFixed(1)}
                             </span>
-                            <span style={{ color: "#94A3B8" }}> per 1k posts</span>
+                            <span style={{ color: "#9AA7B8" }}> per 1k posts</span>
                           </div>
                         );
                       }}
@@ -327,14 +327,14 @@ export default function TrendAtlas({
                 className="flex items-center justify-between"
                 style={{ marginTop: 2, minHeight: 16 }}
               >
-                <span style={{ fontSize: labelFs, color: "#64748B" }}>
+                <span style={{ fontSize: labelFs, color: "#6B7689" }}>
                   {startsLate
                     ? `measurable from ${fmtMonthShort(themeStart!)}`
                     : ""}
                 </span>
                 <span
                   className="transition-colors group-hover:text-[#94A3B8]"
-                  style={{ fontSize: labelFs, color: "#64748B" }}
+                  style={{ fontSize: labelFs, color: "#6B7689" }}
                 >
                   Explore {t.label} &rarr;
                 </span>

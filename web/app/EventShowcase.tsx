@@ -41,7 +41,7 @@ function EventCard({ event }: { event: ShowcaseEvent }) {
         <span
           style={{
             fontSize: 12,
-            color: "#F59E0B",
+            color: "#C2974D",
             textTransform: "uppercase",
             letterSpacing: "0.05em",
             flexShrink: 0,
@@ -49,7 +49,7 @@ function EventCard({ event }: { event: ShowcaseEvent }) {
         >
           {event.dateLabel}
         </span>
-        <h3 style={{ fontSize: 18, fontWeight: 600, color: "#F8FAFC" }}>
+        <h3 style={{ fontSize: 18, fontWeight: 600, color: "#F1F4F8" }}>
           {event.title}
         </h3>
       </div>
@@ -62,7 +62,7 @@ function EventCard({ event }: { event: ShowcaseEvent }) {
             <span
               key={id}
               className="inline-flex items-center gap-1.5"
-              style={{ fontSize: 12, color: "#94A3B8" }}
+              style={{ fontSize: 12, color: "#9AA7B8" }}
             >
               <span aria-hidden style={{ fontSize: 13 }}>
                 {t?.emoji ?? "•"}
@@ -78,7 +78,7 @@ function EventCard({ event }: { event: ShowcaseEvent }) {
         style={{
           fontSize: 14,
           lineHeight: 1.7,
-          color: "#CBD5E1",
+          color: "#C8D0DC",
           marginTop: 10,
           maxWidth: measure,
         }}
@@ -106,7 +106,7 @@ function EventCard({ event }: { event: ShowcaseEvent }) {
               style={{
                 fontSize: 13,
                 fontWeight: 600,
-                color: "#E2E8F0",
+                color: "#F1F4F8",
                 lineHeight: 1.4,
               }}
             >
@@ -117,7 +117,7 @@ function EventCard({ event }: { event: ShowcaseEvent }) {
               style={{
                 fontSize: 13,
                 lineHeight: 1.6,
-                color: "#94A3B8",
+                color: "#9AA7B8",
                 marginTop: 8,
                 fontStyle: "italic",
               }}
@@ -127,14 +127,14 @@ function EventCard({ event }: { event: ShowcaseEvent }) {
             <div
               style={{
                 fontSize: 11,
-                color: "#64748B",
+                color: "#6B7689",
                 marginTop: 10,
                 display: "flex",
                 gap: 8,
                 flexWrap: "wrap",
               }}
             >
-              <span className="group-hover:text-[#94A3B8] transition-colors">
+              <span className="group-hover:text-[#9AA7B8] transition-colors">
                 r/{p.subreddit}
               </span>
               <span>·</span>

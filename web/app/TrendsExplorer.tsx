@@ -23,29 +23,16 @@ export default function TrendsExplorer({ themeData, themeDataExclCai }: Props) {
 
   return (
     <div>
-      {/* Section header — the page masthead lives in page.tsx; this is §3. */}
-      <div className="mb-4">
-        <h2
-          className="text-xl sm:text-2xl font-semibold text-[#F8FAFC] mb-2"
-          style={{ maxWidth: measure }}
-        >
-          How the conversation shifts inside them
-        </h2>
-        <p
-          className="text-sm sm:text-base text-[#94A3B8]"
-          style={{ maxWidth: measure }}
-        >
-          Six recurring themes, and how often each one&apos;s language surfaces
-          in posts across these communities, month by month.
-        </p>
-      </div>
+      {/* Section header — the eyebrow, heading, and intro now live in
+          page.tsx §3, matching §1/§2/§4. This component starts at the
+          community-scope toggle. */}
 
       {/* Community-scope toggle — CharacterAI dominates the post denominator
           and swings on its own platform lifecycle, which mechanically moves
           every theme rate. Excluding it shows the rate within the dedicated
           communities. See docs/characterai_composition_fault_2026-05-16.md. */}
       <div className="flex items-center gap-2 mb-2 flex-wrap">
-        <span style={{ fontSize: 12, color: "#64748B" }}>Communities:</span>
+        <span style={{ fontSize: 12, color: "#6B7689" }}>Communities:</span>
         {(
           [
             ["all", "All tracked"],
@@ -59,7 +46,7 @@ export default function TrendsExplorer({ themeData, themeDataExclCai }: Props) {
             className="h-9 sm:h-auto px-3 py-1 text-sm sm:text-xs font-medium rounded-md transition-colors"
             style={{
               backgroundColor: scope === s ? "#1A1D27" : "transparent",
-              color: scope === s ? "#F8FAFC" : "#94A3B8",
+              color: scope === s ? "#F1F4F8" : "#9AA7B8",
               border: `1px solid ${scope === s ? "#2A2D3A" : "transparent"}`,
             }}
           >
@@ -67,7 +54,7 @@ export default function TrendsExplorer({ themeData, themeDataExclCai }: Props) {
           </button>
         ))}
       </div>
-      <p className="mb-3" style={{ fontSize: 12, color: "#64748B", maxWidth: measure }}>
+      <p className="mb-3" style={{ fontSize: 12, color: "#6B7689", maxWidth: measure }}>
         {scope === "all"
           ? "r/CharacterAI is roughly three-quarters of every post counted here, and it rises and falls on its own platform lifecycle — switch it off to see each rate within the dedicated companionship communities."
           : "r/CharacterAI removed from both the keyword counts and the denominator. These are the rates within the dedicated companionship and recovery communities — the rises hold, and several are steeper here."}
@@ -84,7 +71,7 @@ export default function TrendsExplorer({ themeData, themeDataExclCai }: Props) {
             className="flex-1 sm:flex-none h-11 sm:h-auto px-3 py-1 text-sm sm:text-xs font-medium rounded-md transition-colors"
             style={{
               backgroundColor: timeRange === range ? "#1A1D27" : "transparent",
-              color: timeRange === range ? "#F8FAFC" : "#94A3B8",
+              color: timeRange === range ? "#F1F4F8" : "#9AA7B8",
               border: `1px solid ${timeRange === range ? "#2A2D3A" : "transparent"}`,
             }}
           >
@@ -110,31 +97,48 @@ export default function TrendsExplorer({ themeData, themeDataExclCai }: Props) {
         <TrendAtlas themeData={activeData} timeRange={timeRange} bp={bp} />
       </section>
 
-      {/* Methodology + how-to-read — consolidated into one note, said once. */}
-      <p
-        className="text-center"
+      {/* Methodology + how-to-read — a quiet caption: short prose lead-in
+          followed by the three reading rules as a bullet list. */}
+      <div
         style={{
           fontSize: isMobileStrip ? 14 : 12,
-          color: "#8293A6",
+          color: "#6B7689",
           marginTop: 16,
           marginBottom: 8,
           maxWidth: measure,
           marginLeft: "auto",
           marginRight: "auto",
+          lineHeight: 1.6,
         }}
       >
-        Each panel is one theme&apos;s rate of validated-keyword mentions per
-        1,000 posts, by month &mdash; counted by keyword, no AI classification.
-        The panels have independent scales: read each line&apos;s shape and
-        timing, not its height against another.{" "}
-        <a
-          href="/about#verification"
-          style={{ color: "#94A3B8", textDecoration: "underline" }}
+        <p>How to read the atlas:</p>
+        <ul
+          style={{
+            listStyleType: "disc",
+            paddingLeft: 18,
+            marginTop: 4,
+          }}
         >
-          How this works, and how to read it
-        </a>
-        .
-      </p>
+          <li>
+            Each panel is one theme&apos;s rate of validated-keyword mentions
+            per 1,000 posts, by month &mdash; counted by keyword, no AI
+            classification.
+          </li>
+          <li>The panels have independent scales.</li>
+          <li>
+            Read each line&apos;s shape and timing, not its height against
+            another.
+          </li>
+        </ul>
+        <p style={{ marginTop: 4 }}>
+          <a
+            href="/about#verification"
+            style={{ color: "#9AA7B8", textDecoration: "underline" }}
+          >
+            How this works, and how to read it
+          </a>
+        </p>
+      </div>
     </div>
   );
 }

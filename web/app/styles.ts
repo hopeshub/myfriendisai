@@ -34,6 +34,18 @@ export const fontSize = {
   xxxl: 32,
 } as const;
 
+// ── Canonical text-color set ─────────────────────────────────────────────────
+// The one role-based text-color ladder for the site: brighter = more important.
+// Use these roles instead of picking a near-grey by component habit.
+export const textColor = {
+  title: "#F8FAFC",
+  heading: "#F1F4F8",
+  body: "#C8D0DC",
+  lead: "#9AA7B8",
+  caption: "#6B7689",
+  eyebrow: "#8293A6",
+} as const;
+
 // ── Shared style objects ─────────────────────────────────────────────────────
 
 /** The reading measure — max line length (px) for all running text. */
@@ -63,7 +75,7 @@ export const sectionHeading: CSSProperties = {
 export const introParagraph: CSSProperties = {
   fontSize: fontSize.md,
   lineHeight: 1.7,
-  color: "#94A3B8",
+  color: "#9AA7B8",
   maxWidth: measure,
 };
 
@@ -71,6 +83,6 @@ export const introParagraph: CSSProperties = {
 export const bodyParagraph: CSSProperties = {
   fontSize: fontSize.base,
   lineHeight: 1.8,
-  color: "#CBD5E1",
+  color: "#C8D0DC",
   maxWidth: measure,
 };

@@ -79,10 +79,10 @@ function VolumePanel({
 }) {
   return (
     <div>
-      <div style={{ fontSize: 14, fontWeight: 600, color: "#E2E8F0" }}>
+      <div style={{ fontSize: 14, fontWeight: 600, color: "#F1F4F8" }}>
         {title}
       </div>
-      <div style={{ fontSize: 12, color: "#94A3B8", marginBottom: 6 }}>
+      <div style={{ fontSize: 12, color: "#6B7689", marginBottom: 6 }}>
         {caption}
       </div>
       <div style={{ height: 200 }}>
@@ -101,14 +101,14 @@ function VolumePanel({
               interval={0}
               tickFormatter={(m: string) => m.slice(0, 4)}
               stroke="#2A2D3A"
-              tick={{ fill: "#64748B", fontSize: 11 }}
+              tick={{ fill: "#6B7689", fontSize: 11 }}
               tickLine={false}
               axisLine={{ stroke: "#2A2D3A" }}
             />
             <YAxis
               width={40}
               stroke="transparent"
-              tick={{ fill: "#64748B", fontSize: 11 }}
+              tick={{ fill: "#6B7689", fontSize: 11 }}
               tickLine={false}
               axisLine={false}
               tickFormatter={fmtCount}
@@ -130,14 +130,14 @@ function VolumePanel({
                       whiteSpace: "nowrap",
                     }}
                   >
-                    <span style={{ color: "#94A3B8" }}>
+                    <span style={{ color: "#9AA7B8" }}>
                       {fmtMonth(label as string)}
                     </span>
-                    <span style={{ color: "#94A3B8" }}>{"  ·  "}</span>
-                    <span style={{ color: "#F8FAFC", fontWeight: 600 }}>
+                    <span style={{ color: "#9AA7B8" }}>{"  ·  "}</span>
+                    <span style={{ color: "#F1F4F8", fontWeight: 600 }}>
                       {(payload[0].value as number).toLocaleString()}
                     </span>
-                    <span style={{ color: "#94A3B8" }}> posts</span>
+                    <span style={{ color: "#9AA7B8" }}> posts</span>
                   </div>
                 );
               }}
@@ -203,7 +203,7 @@ export default function PostVolumeChart({
     return (
       <div
         style={{ height: 220 }}
-        className="flex items-center justify-center text-sm text-[#64748B]"
+        className="flex items-center justify-center text-sm text-[#6B7689]"
       >
         No post-volume data yet.
       </div>
@@ -233,7 +233,7 @@ export default function PostVolumeChart({
       <p
         style={{
           fontSize: 11,
-          color: "#64748B",
+          color: "#6B7689",
           marginTop: 8,
           textAlign: "center",
           maxWidth: measure,

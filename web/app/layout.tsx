@@ -76,7 +76,7 @@ export default function RootLayout({
               href="/"
               className={`text-lg tracking-tight hover:text-primary transition-colors ${GeistSans.className}`}
             >
-              <span style={{ fontWeight: 300, color: "rgba(255,255,255,0.6)" }}>My Friend Is</span>
+              <span style={{ fontWeight: 300, color: "#9AA7B8" }}>My Friend Is</span>
               {" "}
               <span style={{ fontWeight: 700, color: "#F8FAFC" }}>AI</span>
             </Link>

@@ -3,7 +3,7 @@
 :root {
   --background: #0F1117;
   --foreground: #F8FAFC;
-  --muted: #94A3B8;
+  --muted: #9AA7B8;
   --border: #2A2D3A;
   --card: #1A1D27;
   --primary: #F97316;
@@ -29,7 +29,7 @@ body {
 }
 
 .recharts-text {
-  fill: #94A3B8;
+  fill: #6B7689;
   font-size: 12px;
 }
 

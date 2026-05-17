@@ -34,14 +34,24 @@ export default function Home() {
         >
           How the committed core of AI companionship talks
         </h1>
-        <p style={{ ...intro, fontSize: 16, color: "#94A3B8" }}>
+        <p style={{ ...intro, fontSize: 16, color: "#9AA7B8" }}>
           A live record of the Reddit communities where AI companionship is the
           central subject &mdash; from r/replika to r/MyBoyfriendIsAI to
-          communities for people trying to quit. It tracks six recurring themes
-          in how these communities talk, and the platform events that move
-          them.
+          communities for people trying to quit.
         </p>
-        <p style={{ ...intro, fontSize: 16, color: "#E2E8F0", marginTop: 12 }}>
+        <p style={{ ...intro, fontSize: 16, color: "#9AA7B8", marginTop: 12 }}>
+          It tracks six recurring themes in how these communities talk, and the
+          platform events that move them.
+        </p>
+        <p
+          style={{
+            ...intro,
+            fontSize: 16,
+            color: "#9AA7B8",
+            fontWeight: 500,
+            marginTop: 12,
+          }}
+        >
           Not how common AI companionship is &mdash; but how this conversation
           changes over time.
         </p>
@@ -51,7 +61,7 @@ export default function Home() {
       <section className="mb-16">
         <div style={sectionLabel}>The communities</div>
         <h2
-          className="text-xl sm:text-2xl font-semibold text-[#F8FAFC]"
+          className="text-xl sm:text-2xl font-semibold text-[#F1F4F8]"
           style={{ marginBottom: 8, maxWidth: measure }}
         >
           How active these communities are
@@ -76,7 +86,7 @@ export default function Home() {
       <section className="mb-16">
         <div style={sectionLabel}>What happened</div>
         <h2
-          className="text-xl sm:text-2xl font-semibold text-[#F8FAFC]"
+          className="text-xl sm:text-2xl font-semibold text-[#F1F4F8]"
           style={{ marginBottom: 8, maxWidth: measure }}
         >
           The events that move the conversation
@@ -94,6 +104,16 @@ export default function Home() {
       {/* §3 — The theme atlas */}
       <section className="mb-16">
         <div style={sectionLabel}>The themes</div>
+        <h2
+          className="text-xl sm:text-2xl font-semibold text-[#F1F4F8]"
+          style={{ marginBottom: 8, maxWidth: measure }}
+        >
+          How the conversation shifts inside them
+        </h2>
+        <p style={{ ...intro, marginBottom: 16 }}>
+          Six recurring themes, and how often each one&apos;s language surfaces
+          in posts across these communities, month by month.
+        </p>
         <TrendsExplorer
           themeData={themeData}
           themeDataExclCai={themeDataExclCai}
@@ -104,7 +124,7 @@ export default function Home() {
       <section>
         <div style={sectionLabel}>A counter-current</div>
         <h2
-          className="text-xl sm:text-2xl font-semibold text-[#F8FAFC]"
+          className="text-xl sm:text-2xl font-semibold text-[#F1F4F8]"
           style={{ marginBottom: 8, maxWidth: measure }}
         >
           Calling it an addiction

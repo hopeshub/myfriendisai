@@ -33,7 +33,7 @@ export default function RecoverySection({
       <p
         style={{
           fontSize: 12,
-          color: "#64748B",
+          color: "#6B7689",
           marginTop: 8,
           marginBottom: 28,
           maxWidth: measure,
@@ -63,7 +63,7 @@ export default function RecoverySection({
               style={{
                 fontSize: 13,
                 fontWeight: 600,
-                color: "#E2E8F0",
+                color: "#F1F4F8",
                 lineHeight: 1.4,
               }}
             >
@@ -74,7 +74,7 @@ export default function RecoverySection({
               style={{
                 fontSize: 13,
                 lineHeight: 1.6,
-                color: "#94A3B8",
+                color: "#9AA7B8",
                 marginTop: 8,
                 fontStyle: "italic",
               }}
@@ -84,7 +84,7 @@ export default function RecoverySection({
             <div
               style={{
                 fontSize: 11,
-                color: "#64748B",
+                color: "#6B7689",
                 marginTop: 10,
                 display: "flex",
                 gap: 8,
@@ -111,11 +111,11 @@ export default function RecoverySection({
         style={{
           fontSize: 13,
           lineHeight: 1.7,
-          color: "#94A3B8",
+          color: "#9AA7B8",
           maxWidth: measure,
         }}
       >
-        <span style={{ color: "#E2E8F0", fontWeight: 600 }}>
+        <span style={{ color: "#F1F4F8", fontWeight: 600 }}>
           A note on scale.
         </span>{" "}
         These are small communities &mdash; together a few thousand posts a
