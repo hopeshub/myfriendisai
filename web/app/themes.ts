@@ -25,12 +25,35 @@ export type ThemeMeta = {
   story: string;
 };
 
+// ── Theme colour palette ─────────────────────────────────────────────────────
+// Two palettes. Flip ACTIVE_PALETTE between PALETTE_MUTED and PALETTE_VIVID to
+// switch the whole site's theme colours in one line — every chart line, legend,
+// tag, and label reads its colour from THEMES below, which reads it from here.
+const PALETTE_VIVID: Record<ThemeId, string> = {
+  romance: "#FF69B4",
+  sexual_erp: "#f87171",
+  consciousness: "#C084FC",
+  therapy: "#60A5FA",
+  addiction: "#fd7112",
+  rupture: "#22C55E",
+};
+const PALETTE_MUTED: Record<ThemeId, string> = {
+  romance: "#D08CA6",
+  sexual_erp: "#D38E8B",
+  consciousness: "#B197D4",
+  therapy: "#7FA6CE",
+  addiction: "#CF9A63",
+  rupture: "#6FA98C",
+};
+// ↓↓↓  THE SWITCH — set to PALETTE_VIVID to revert to the original colours  ↓↓↓
+const ACTIVE_PALETTE = PALETTE_MUTED;
+
 export const THEMES: ThemeMeta[] = [
   {
     id: "romance",
     label: "Romance",
     emoji: "💕",
-    color: "#FF69B4",
+    color: ACTIVE_PALETTE.romance,
     tagline: "Language of love, dating, and romantic attachment",
     blurb:
       "Broad waves, not sharp spikes — and a floor: everyday partner talk goes uncaught.",
@@ -41,7 +64,7 @@ export const THEMES: ThemeMeta[] = [
     id: "sexual_erp",
     label: "Sex / ERP",
     emoji: "🔞",
-    color: "#f87171",
+    color: ACTIVE_PALETTE.sexual_erp,
     tagline: "Language of sexual and erotic roleplay",
     blurb:
       "Dominated by one event — the Feb 2023 Replika ERP removal; quieter since.",
@@ -52,7 +75,7 @@ export const THEMES: ThemeMeta[] = [
     id: "consciousness",
     label: "Consciousness",
     emoji: "🧠",
-    color: "#C084FC",
+    color: ACTIVE_PALETTE.consciousness,
     tagline: "Language of sentience, awareness, and inner experience",
     blurb:
       "The youngest measurable theme — its vocabulary only became trackable in 2025.",
@@ -63,7 +86,7 @@ export const THEMES: ThemeMeta[] = [
     id: "therapy",
     label: "Therapy",
     emoji: "🫂",
-    color: "#60A5FA",
+    color: ACTIVE_PALETTE.therapy,
     tagline: "Language of mental health support and emotional care",
     blurb:
       "Gradually rising — and the noisiest theme, catching complaint alongside genuine use.",
@@ -74,7 +97,7 @@ export const THEMES: ThemeMeta[] = [
     id: "addiction",
     label: "Addiction",
     emoji: "💊",
-    color: "#fd7112",
+    color: ACTIVE_PALETTE.addiction,
     tagline: "Language of dependency and compulsion",
     blurb:
       "A steady climb, not an event spike — dependency language growing over time.",
@@ -85,7 +108,7 @@ export const THEMES: ThemeMeta[] = [
     id: "rupture",
     label: "Rupture",
     emoji: "🥀",
-    color: "#22C55E",
+    color: ACTIVE_PALETTE.rupture,
     tagline: "Language of loss and grief",
     blurb:
       "The sharpest signal here — spikes on platform-loss events; the 2026 surge is the 4o retirement.",
