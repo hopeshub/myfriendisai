@@ -172,7 +172,16 @@ def get_snapshots(
 
 
 def get_all_snapshots_for_chart(conn: Optional[sqlite3.Connection] = None) -> list[dict]:
-    """Return snapshots for active subreddits, ordered by subreddit + date. Excludes raw JSON blobs."""
+    """Return snapshots for active subreddits, ordered by subreddit + date. Excludes raw JSON blobs.
+
+    posts_today is recomputed here from the posts table (count of posts by
+    created_utc date) rather than read from the stored snapshot value. From
+    March 2026 the stored value comes from the live daily collector, which
+    under-records high-volume subs (the CharacterAI 100-post cap, fixed May
+    2026) — that put a fake cliff in the per-subreddit posts/day charts at the
+    backfill→live seam. The posts table is the single source of truth and is
+    consistent across that seam, so the chart is now drawn from it directly.
+    """
     _conn = conn or get_connection()
     try:
         rows = _conn.execute(
@@ -187,7 +196,25 @@ def get_all_snapshots_for_chart(conn: Optional[sqlite3.Connection] = None) -> li
             ORDER BY s.subreddit ASC, s.snapshot_date ASC
             """
         ).fetchall()
-        return [dict(r) for r in rows]
+        result = [dict(r) for r in rows]
+
+        # True posts-per-day, per subreddit, from the posts table.
+        post_counts = _conn.execute(
+            """
+            SELECT subreddit, date(created_utc, 'unixepoch') AS d, COUNT(*) AS n
+            FROM posts
+            WHERE created_utc IS NOT NULL
+            GROUP BY subreddit, d
+            """
+        ).fetchall()
+        pc = {(r["subreddit"], r["d"]): r["n"] for r in post_counts}
+        for row in result:
+            key = (row["subreddit"], row["snapshot_date"])
+            # Override only where the posts table has data for that day; never
+            # zero out a snapshot whose posts simply aren't in the table.
+            if key in pc:
+                row["posts_today"] = pc[key]
+        return result
     finally:
         if conn is None:
             _conn.close()
