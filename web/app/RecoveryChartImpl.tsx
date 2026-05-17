@@ -13,6 +13,7 @@ import {
 } from "recharts";
 import type { RecoveryVolumePoint } from "./themeData";
 import { RECOVERY_COMMUNITIES, RECOVERY_EVENTS } from "./recoveryData";
+import { usePrefersReducedMotion } from "@/lib/usePrefersReducedMotion";
 
 // Stacked monthly post volume across the two genuine recovery communities,
 // with minimalist Character.AI-specific event markers. The shape — flat near
@@ -50,6 +51,9 @@ export default function RecoveryChart({
 }: {
   data: RecoveryVolumePoint[];
 }) {
+  // No time-range/scope toggle on this chart — animates once on mount only.
+  const reducedMotion = usePrefersReducedMotion();
+
   const yearTicks = useMemo(() => {
     const seen = new Set<string>();
     const ticks: string[] = [];
@@ -164,7 +168,8 @@ export default function RecoveryChart({
               allowDecimals={false}
             />
             <Tooltip
-              isAnimationActive={false}
+              animationDuration={140}
+              animationEasing="ease-out"
               cursor={{ stroke: "#475569", strokeWidth: 1 }}
               content={({ active, payload, label }) => {
                 if (!active || !payload?.length) return null;
@@ -220,7 +225,9 @@ export default function RecoveryChart({
                 fillOpacity={0.45}
                 dot={false}
                 activeDot={false}
-                isAnimationActive={false}
+                isAnimationActive={!reducedMotion}
+                animationDuration={700}
+                animationEasing="ease-out"
               />
             ))}
             {/* Character.AI event markers — numbered ticks (named in the

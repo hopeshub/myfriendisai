@@ -10,6 +10,7 @@ import {
   CartesianGrid,
 } from "recharts";
 import type { Snapshot } from "@/lib/types";
+import { usePrefersReducedMotion } from "@/lib/usePrefersReducedMotion";
 
 const MONTH_NAMES = [
   "Jan", "Feb", "Mar", "Apr", "May", "Jun",
@@ -48,6 +49,10 @@ function MetricChart({
   color?: string;
   decimals?: number;
 }) {
+  // This chart has no time-range/scope toggle, so it animates exactly once on
+  // mount. Gated on reduced-motion since Recharts animation is JS-driven.
+  const reducedMotion = usePrefersReducedMotion();
+
   const buckets: Record<string, { sum: number; n: number }> = {};
   for (const s of data) {
     const v = s[dataKey] as number | null;
@@ -97,6 +102,8 @@ function MetricChart({
               }
             />
             <Tooltip
+              animationDuration={140}
+              animationEasing="ease-out"
               labelFormatter={fmtTooltipLabel}
               formatter={(v) =>
                 typeof v === "number"
@@ -118,7 +125,11 @@ function MetricChart({
               dataKey="value"
               stroke={color}
               dot={monthly.length === 1}
+              activeDot={{ r: 4, fill: color, stroke: color }}
               strokeWidth={1.5}
+              isAnimationActive={!reducedMotion}
+              animationDuration={700}
+              animationEasing="ease-out"
             />
           </LineChart>
         </ResponsiveContainer>

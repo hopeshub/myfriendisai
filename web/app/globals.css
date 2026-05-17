@@ -107,6 +107,42 @@ a:focus-visible {
   animation: slideInRight 250ms ease-out;
 }
 
+/* One-time entrance: fade + 8px upward rise. Only the `from` state is
+   defined; the element's resting CSS is its natural visible state, so when
+   prefers-reduced-motion zeroes the duration the element simply lands
+   visible. `animation-fill-mode: both` holds the `from` state before the
+   delay elapses, so staggered elements don't flash in early. */
+@keyframes riseIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+
+.rise-in {
+  animation: riseIn 500ms ease-out both;
+}
+
+/* Section reveal: fade + 12px rise, applied by the IntersectionObserver only
+   after the client confirms it can observe. The element is server-rendered
+   fully visible; `.reveal-pending` hides it (added synchronously before
+   paint), and `.reveal-in` plays it back. If JS never runs, neither class is
+   applied and the element stays visible. */
+@keyframes revealIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+}
+
+.reveal-pending {
+  opacity: 0;
+}
+
+.reveal-in {
+  animation: revealIn 450ms ease-out both;
+}
+
 /* Theme Health snapshot grid: single column on mobile, 2-col on tablet+.
    Prevents long values like "r/ChatGPTcomplaints (61%)" from wrapping
    awkwardly on iPhone-sized viewports. */

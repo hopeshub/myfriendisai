@@ -164,6 +164,8 @@ export default function ThemeChart({
             ))}
             <Tooltip
               cursor={{ stroke: "#475569", strokeWidth: 1 }}
+              animationDuration={140}
+              animationEasing="ease-out"
               content={({ active, payload, label }) => {
                 if (!active || !payload?.length || payload[0].value == null) {
                   return null;
@@ -197,6 +199,7 @@ export default function ThemeChart({
               stroke={color}
               strokeWidth={2.5}
               dot={false}
+              activeDot={{ r: 4, fill: color, stroke: color }}
               isAnimationActive={false}
               connectNulls={false}
             />

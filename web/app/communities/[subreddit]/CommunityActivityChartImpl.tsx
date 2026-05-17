@@ -10,6 +10,7 @@ import {
   Tooltip,
   CartesianGrid,
 } from "recharts";
+import { usePrefersReducedMotion } from "@/lib/usePrefersReducedMotion";
 
 // ── Community activity chart ─────────────────────────────────────────────────
 // The full-size version of the Communities-table sparkline: one community's
@@ -39,6 +40,9 @@ export default function CommunityActivityChart({
   months: string[];
   values: number[];
 }) {
+  // No time-range toggle on this chart — it animates once on mount only.
+  const reducedMotion = usePrefersReducedMotion();
+
   const { rows, yearTicks } = useMemo(() => {
     const rows = months.map((m, i) => ({ month: m, value: values[i] ?? 0 }));
     const seen = new Set<string>();
@@ -95,6 +99,8 @@ export default function CommunityActivityChart({
           />
           <Tooltip
             cursor={{ stroke: "#475569", strokeWidth: 1 }}
+            animationDuration={140}
+            animationEasing="ease-out"
             content={({ active, payload, label }) => {
               if (!active || !payload?.length || payload[0].value == null) {
                 return null;
@@ -128,7 +134,10 @@ export default function CommunityActivityChart({
             stroke="#7C9CD0"
             strokeWidth={2}
             fill="url(#community-activity)"
-            isAnimationActive={false}
+            activeDot={{ r: 4, fill: "#7C9CD0", stroke: "#7C9CD0" }}
+            isAnimationActive={!reducedMotion}
+            animationDuration={700}
+            animationEasing="ease-out"
           />
         </AreaChart>
       </ResponsiveContainer>

@@ -13,6 +13,7 @@ import {
 } from "recharts";
 import type { PostVolumeSplitPoint } from "./themeData";
 import { measure } from "./styles";
+import { usePrefersReducedMotion } from "@/lib/usePrefersReducedMotion";
 
 // ── Post-volume chart ────────────────────────────────────────────────────────
 // Two panels, each on its OWN y-scale: r/CharacterAI, and every other tracked
@@ -82,6 +83,7 @@ function VolumePanel({
   color,
   gradientId,
   events,
+  animate,
 }: {
   title: string;
   caption: string;
@@ -90,6 +92,7 @@ function VolumePanel({
   color: string;
   gradientId: string;
   events?: ChartEvent[];
+  animate: boolean;
 }) {
   return (
     <div>
@@ -129,6 +132,8 @@ function VolumePanel({
             />
             <Tooltip
               cursor={{ stroke: "#475569", strokeWidth: 1 }}
+              animationDuration={140}
+              animationEasing="ease-out"
               content={({ active, payload, label }) => {
                 if (!active || !payload?.length || payload[0].value == null) {
                   return null;
@@ -163,7 +168,9 @@ function VolumePanel({
               strokeWidth={2}
               fill={`url(#${gradientId})`}
               connectNulls={false}
-              isAnimationActive={false}
+              isAnimationActive={animate}
+              animationDuration={700}
+              animationEasing="ease-out"
             />
             {/* Numbered platform-event markers — named in the legend below. */}
             {events?.map((ev, i) => (
@@ -195,6 +202,9 @@ export default function PostVolumeChart({
 }: {
   data: PostVolumeSplitPoint[];
 }) {
+  // No time-range/scope toggle on this chart — animates once on mount only.
+  const reducedMotion = usePrefersReducedMotion();
+
   const { caiRows, otherRows, yearTicks } = useMemo(() => {
     // Crop to the reliable era — 2023 onward.
     const cropped = data.filter((d) => d.month >= CHART_START);
@@ -253,6 +263,7 @@ export default function PostVolumeChart({
           color="#566173"
           gradientId="pv-cai"
           events={CAI_EVENTS}
+          animate={!reducedMotion}
         />
         <VolumePanel
           title="Every other tracked community"
@@ -261,6 +272,7 @@ export default function PostVolumeChart({
           yearTicks={yearTicks}
           color="#7C9CD0"
           gradientId="pv-other"
+          animate={!reducedMotion}
         />
       </div>
 

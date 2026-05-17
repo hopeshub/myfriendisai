@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Reveal from "./Reveal";
 import TrendsExplorer from "./TrendsExplorer";
 import PostVolumeChart from "./PostVolumeChart";
 import EventShowcase from "./EventShowcase";
@@ -28,30 +29,51 @@ export default function Home() {
 
   return (
     <div className="max-w-[1080px] mx-auto px-4 sm:px-8 pt-10 sm:pt-14 pb-8">
-      {/* Masthead */}
+      {/* Masthead — one-time fade + rise, staggered ~80ms across the four
+          elements. Each element's resting CSS is its natural visible state,
+          so reduced-motion (duration→0) lands visible. */}
       <header className="mb-16">
         <h1
-          className="font-display text-[26px] sm:text-3xl lg:text-[32px] font-semibold text-[#F8FAFC]"
-          style={{ lineHeight: 1.2, marginBottom: 12, maxWidth: measure }}
+          className="font-display text-[26px] sm:text-3xl lg:text-[32px] font-semibold text-[#F8FAFC] rise-in"
+          style={{
+            lineHeight: 1.2,
+            marginBottom: 12,
+            maxWidth: measure,
+            animationDelay: "0ms",
+          }}
         >
           How the committed core of AI companionship talks
         </h1>
-        <p style={{ ...intro, fontSize: 16, color: "#9AA7B8" }}>
+        <p
+          className="rise-in"
+          style={{ ...intro, fontSize: 16, color: "#9AA7B8", animationDelay: "80ms" }}
+        >
           A live record of the Reddit communities where AI companionship is the
           central subject &mdash; from r/replika to r/MyBoyfriendIsAI to
           communities for people trying to quit.
         </p>
-        <p style={{ ...intro, fontSize: 16, color: "#9AA7B8", marginTop: 12 }}>
+        <p
+          className="rise-in"
+          style={{
+            ...intro,
+            fontSize: 16,
+            color: "#9AA7B8",
+            marginTop: 12,
+            animationDelay: "160ms",
+          }}
+        >
           It tracks six recurring themes in how these communities talk, and the
           platform events that move them.
         </p>
         <p
+          className="rise-in"
           style={{
             ...intro,
             fontSize: 16,
             color: "#9AA7B8",
             fontWeight: 500,
             marginTop: 12,
+            animationDelay: "240ms",
           }}
         >
           It can&apos;t tell you how common AI companionship is. It can show
@@ -60,7 +82,8 @@ export default function Home() {
       </header>
 
       {/* §1 — Orientation: post volume */}
-      <section className="mb-16">
+      <Reveal className="mb-16">
+        <section>
         <div style={sectionLabel}>The communities</div>
         <h2
           className="font-display text-xl sm:text-2xl font-semibold text-[#F1F4F8]"
@@ -82,10 +105,12 @@ export default function Home() {
           raw totals is one platform&apos;s story, not the category&apos;s.
         </p>
         <PostVolumeChart data={postVolume} />
-      </section>
+        </section>
+      </Reveal>
 
       {/* §2 — Events */}
-      <section className="mb-16">
+      <Reveal className="mb-16">
+        <section>
         <div style={sectionLabel}>What happened</div>
         <h2
           className="font-display text-xl sm:text-2xl font-semibold text-[#F1F4F8]"
@@ -101,10 +126,12 @@ export default function Home() {
           happened.
         </p>
         <EventShowcase />
-      </section>
+        </section>
+      </Reveal>
 
       {/* §3 — The theme atlas */}
-      <section className="mb-16">
+      <Reveal className="mb-16">
+        <section>
         <div style={sectionLabel}>The themes</div>
         <h2
           className="font-display text-xl sm:text-2xl font-semibold text-[#F1F4F8]"
@@ -120,10 +147,12 @@ export default function Home() {
           themeData={themeData}
           themeDataExclCai={themeDataExclCai}
         />
-      </section>
+        </section>
+      </Reveal>
 
       {/* §4 — The recovery counter-current */}
-      <section>
+      <Reveal>
+        <section>
         <div style={sectionLabel}>A counter-current</div>
         <h2
           className="font-display text-xl sm:text-2xl font-semibold text-[#F1F4F8]"
@@ -138,28 +167,31 @@ export default function Home() {
           recovery: relapse, cold turkey, &ldquo;X days clean.&rdquo;
         </p>
         <RecoverySection data={recoveryVolume} />
-      </section>
+        </section>
+      </Reveal>
 
       {/* Changelog teaser — a quiet sign that the instrument is actively
           tended; the full list lives on the About page. */}
-      <div
-        style={{
-          marginTop: 56,
-          paddingTop: 20,
-          borderTop: "1px solid #2A2D3A",
-        }}
-      >
-        <p style={{ fontSize: 13, lineHeight: 1.6, color: "#6B7689" }}>
-          Updated daily. Most recent change &mdash; {CHANGELOG[0].title} (
-          {CHANGELOG[0].date}).{" "}
-          <Link
-            href="/about#changelog"
-            style={{ color: "#9AA7B8", textDecoration: "underline" }}
-          >
-            See what&apos;s changed
-          </Link>
-        </p>
-      </div>
+      <Reveal>
+        <div
+          style={{
+            marginTop: 56,
+            paddingTop: 20,
+            borderTop: "1px solid #2A2D3A",
+          }}
+        >
+          <p style={{ fontSize: 13, lineHeight: 1.6, color: "#6B7689" }}>
+            Updated daily. Most recent change &mdash; {CHANGELOG[0].title} (
+            {CHANGELOG[0].date}).{" "}
+            <Link
+              href="/about#changelog"
+              style={{ color: "#9AA7B8", textDecoration: "underline" }}
+            >
+              See what&apos;s changed
+            </Link>
+          </p>
+        </div>
+      </Reveal>
     </div>
   );
 }
