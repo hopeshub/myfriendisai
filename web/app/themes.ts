@@ -45,8 +45,8 @@ const PALETTE_MUTED: Record<ThemeId, string> = {
   addiction: "#CF9A63",
   rupture: "#6FA98C",
 };
-// ↓↓↓  THE SWITCH — set to PALETTE_VIVID to revert to the original colours  ↓↓↓
-const ACTIVE_PALETTE = PALETTE_MUTED;
+// ↓↓↓  THE SWITCH — PALETTE_VIVID (original) or PALETTE_MUTED (desaturated)  ↓↓↓
+const ACTIVE_PALETTE = PALETTE_VIVID;
 
 export const THEMES: ThemeMeta[] = [
   {
