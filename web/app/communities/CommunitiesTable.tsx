@@ -151,7 +151,7 @@ export default function CommunitiesTable({
                   <Link
                     href={`/communities/${s.subreddit}#activity`}
                     aria-label={`Full activity chart for r/${s.subreddit}`}
-                    className="inline-block opacity-80 hover:opacity-100 transition-opacity"
+                    className="flex items-center min-h-11 -my-3 py-3 opacity-80 hover:opacity-100 transition-opacity"
                   >
                     <Sparkline values={activity.activity[s.subreddit] ?? []} />
                   </Link>
