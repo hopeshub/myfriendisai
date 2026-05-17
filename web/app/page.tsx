@@ -25,7 +25,7 @@ export default function Home() {
   const recoveryVolume = loadRecoveryVolume();
 
   return (
-    <div className="max-w-[720px] mx-auto px-4 sm:px-8 pt-10 sm:pt-14 pb-8">
+    <div className="max-w-[1080px] mx-auto px-4 sm:px-8 pt-10 sm:pt-14 pb-8">
       {/* Masthead */}
       <header className="mb-16">
         <h1

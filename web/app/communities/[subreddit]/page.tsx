@@ -46,7 +46,7 @@ export default async function SubredditPage({
   if (!meta) notFound();
 
   return (
-    <div className="max-w-[720px] mx-auto px-4 sm:px-8 py-8">
+    <div className="max-w-[1080px] mx-auto px-4 sm:px-8 py-8">
       <div className="mb-2">
         <Link href="/communities" className="text-sm text-[#9AA7B8] hover:text-[#F8FAFC] transition-colors">
           ← Communities
