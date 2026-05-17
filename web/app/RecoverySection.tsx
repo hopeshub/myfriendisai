@@ -37,9 +37,9 @@ export default function RecoverySection({
           marginBottom: 28,
         }}
       >
-        Monthly posts across the four recovery communities. The shape is the
-        finding: near nothing through 2023, then a climb as each new community
-        was founded and filled.
+        Monthly posts across the two recovery communities, with key
+        Character.AI moments marked. The shape is the finding: near nothing
+        through 2023, then a steady climb.
       </p>
 
       <div className="grid gap-3 sm:grid-cols-3" style={{ marginBottom: 24 }}>

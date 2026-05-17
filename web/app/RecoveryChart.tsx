@@ -9,13 +9,14 @@ import {
   YAxis,
   Tooltip,
   CartesianGrid,
+  ReferenceLine,
 } from "recharts";
 import type { RecoveryVolumePoint } from "./themeData";
-import { RECOVERY_COMMUNITIES } from "./recoveryData";
+import { RECOVERY_COMMUNITIES, RECOVERY_EVENTS } from "./recoveryData";
 
-// Stacked monthly post volume across the four recovery / quitting communities.
-// The shape — flat at zero through 2023, then a staggered climb as each
-// community is founded — is the point of the chart.
+// Stacked monthly post volume across the two genuine recovery communities,
+// with minimalist Character.AI-specific event markers. The shape — flat near
+// zero through 2023, then a climb — is the point of the chart.
 
 const MONTH_NAMES = [
   "Jan", "Feb", "Mar", "Apr", "May", "Jun",
@@ -38,7 +39,7 @@ function Swatch({ color }: { color: string }) {
         borderRadius: 2,
         backgroundColor: color,
         marginRight: 5,
-        verticalAlign: "baseline",
+        verticalAlign: "middle",
       }}
     />
   );
@@ -73,6 +74,9 @@ export default function RecoveryChart({
     );
   }
 
+  // Tooltip lists communities top-band-first, matching the visual stack order.
+  const tooltipOrder = [...RECOVERY_COMMUNITIES].reverse();
+
   return (
     <div>
       <div
@@ -87,9 +91,9 @@ export default function RecoveryChart({
         ))}
       </div>
 
-      <div style={{ height: 230 }}>
+      <div style={{ height: 240 }}>
         <ResponsiveContainer width="100%" height="100%">
-          <AreaChart data={data} margin={{ top: 8, right: 8, bottom: 2, left: 0 }}>
+          <AreaChart data={data} margin={{ top: 24, right: 8, bottom: 2, left: 0 }}>
             <CartesianGrid
               strokeDasharray="3 3"
               stroke="#2A2D3A"
@@ -137,7 +141,7 @@ export default function RecoveryChart({
                     <div style={{ color: "#94A3B8", marginBottom: 2 }}>
                       {fmtMonth(label as string)}
                     </div>
-                    {RECOVERY_COMMUNITIES.map((rc) => {
+                    {tooltipOrder.map((rc) => {
                       const v =
                         (payload.find((p) => p.dataKey === rc.sub)
                           ?.value as number) ?? 0;
@@ -171,6 +175,23 @@ export default function RecoveryChart({
                 dot={false}
                 activeDot={false}
                 isAnimationActive={false}
+              />
+            ))}
+            {/* Minimalist Character.AI event markers. */}
+            {RECOVERY_EVENTS.map((ev) => (
+              <ReferenceLine
+                key={ev.date}
+                x={ev.date}
+                stroke="#C2974D"
+                strokeOpacity={0.55}
+                strokeDasharray="4 3"
+                strokeWidth={1}
+                label={{
+                  value: ev.label,
+                  position: "top",
+                  fill: "#A8895A",
+                  fontSize: 10,
+                }}
               />
             ))}
           </AreaChart>

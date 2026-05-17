@@ -1,7 +1,15 @@
 // ── Recovery-section content ─────────────────────────────────────────────────
-// The four T3 recovery / quitting communities and a hand-curated set of real
+// The genuine recovery / quitting communities and a hand-curated set of real
 // posts. Editorial content — excerpts are verbatim (lightly trimmed) from
 // public Reddit posts; not pipeline output. See homepage §4 (RecoverySection).
+//
+// Scope note (2026-05-16): the chart shows the two true recovery communities —
+// r/ChatbotAddiction and r/Character_AI_Recovery, where the discourse is
+// abstinence and peer support. r/AI_Addiction (the genesis sub, June 2023) is
+// too small to chart but its founding post is kept below. r/CharacterAIrunaways
+// is deliberately excluded — at ~21k it is the largest, but its discourse is
+// platform migration ("what's a good alternative"), not quitting, so counting
+// it as recovery would overstate the phenomenon.
 
 export type RecoveryCommunity = {
   sub: string;
@@ -12,10 +20,18 @@ export type RecoveryCommunity = {
 
 // Founding order, oldest first — also the stack order in the chart.
 export const RECOVERY_COMMUNITIES: RecoveryCommunity[] = [
-  { sub: "AI_Addiction", label: "r/AI_Addiction", color: "#C2885F", founded: "June 2023" },
   { sub: "ChatbotAddiction", label: "r/ChatbotAddiction", color: "#A98FC4", founded: "November 2023" },
   { sub: "Character_AI_Recovery", label: "r/Character_AI_Recovery", color: "#7C9CD0", founded: "December 2023" },
-  { sub: "CharacterAIrunaways", label: "r/CharacterAIrunaways", color: "#6FB3A0", founded: "September 2024" },
+];
+
+// Minimalist event markers for the recovery chart — Character.AI-specific
+// moments, since these communities are C.AI-driven (not the OpenAI/4o timeline
+// the theme atlas uses).
+export type RecoveryEvent = { date: string; label: string };
+
+export const RECOVERY_EVENTS: RecoveryEvent[] = [
+  { date: "2024-10", label: "Character.AI lawsuit" },
+  { date: "2025-10", label: "C.AI restricts minors" },
 ];
 
 export type RecoveryPost = {

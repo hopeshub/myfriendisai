@@ -204,11 +204,12 @@ export function loadPostVolumeSplit(): PostVolumeSplitPoint[] {
 // from snapshots.json (posts_today, recomputed from the posts table). These
 // communities are the counter-current to AI companionship: organized quitting
 // and peer support. See the recovery section on the homepage.
+// The two genuine recovery communities. r/AI_Addiction (too small) and
+// r/CharacterAIrunaways (migration, not recovery) are deliberately excluded —
+// see recoveryData.ts.
 export const RECOVERY_SUBS = [
-  "AI_Addiction",
   "ChatbotAddiction",
   "Character_AI_Recovery",
-  "CharacterAIrunaways",
 ] as const;
 
 export type RecoveryVolumePoint = { month: string; [sub: string]: string | number };

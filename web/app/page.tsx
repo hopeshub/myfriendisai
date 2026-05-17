@@ -121,16 +121,19 @@ export default function Home() {
         <p style={{ ...intro, marginBottom: 16 }}>
           The clearest counter-current the project has found. As AI
           companionship grew, a second thing took shape beside it: communities
-          organized around <em>quitting</em>{" "}it. r/AI_Addiction was created
-          in
-          June 2023 &mdash; &ldquo;for those of us who suffer from addiction to
-          AI services.&rdquo; r/ChatbotAddiction and r/Character_AI_Recovery
-          followed within months; r/CharacterAIrunaways in September 2024. They
-          did not exist, and then they did &mdash; and they grew. The language
-          inside them is borrowed wholesale from substance recovery: relapse,
-          cold turkey, day counts, &ldquo;X days clean.&rdquo; It is the
-          addiction line from the atlas above &mdash; the steepest-rising theme
-          in the whole record &mdash; given somewhere to live.
+          organized around <em>quitting</em>{" "}it. The first, r/AI_Addiction,
+          appeared in June 2023 &mdash; &ldquo;for those of us who suffer from
+          addiction to AI services.&rdquo; Two genuine recovery communities
+          followed within months &mdash; r/ChatbotAddiction and
+          r/Character_AI_Recovery &mdash; and they grew. The language inside
+          them is borrowed wholesale from substance recovery: relapse, cold
+          turkey, day counts, &ldquo;X days clean.&rdquo; (A larger community,
+          r/CharacterAIrunaways, formed in September 2024, but it is a
+          leavers&apos; space &mdash; mostly about migrating to another
+          platform, not quitting &mdash; so the chart tracks the two true
+          recovery communities.) This is the addiction line from the atlas
+          above &mdash; the steepest-rising theme in the whole record &mdash;
+          given somewhere to live.
         </p>
         <RecoverySection data={recoveryVolume} />
       </section>
