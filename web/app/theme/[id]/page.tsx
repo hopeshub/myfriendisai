@@ -262,8 +262,11 @@ export default async function ThemePage({
               lineHeight: 1.6,
             }}
           >
-            These keywords are precision-first &mdash; they catch a clean,
-            checkable slice of the theme, not all of it.{" "}
+            These keywords are precision-first: when one matches, the post is
+            usually on-theme &mdash; but they also miss a lot. A hand-coded
+            audit found keyword matching catches only a minority of genuinely
+            on-theme posts &mdash; a few percent to about a third, depending on
+            the theme. Read the line as a floor, not a full count.{" "}
             <a
               href="/about#verification"
               style={{ color: "#9AA7B8", textDecoration: "underline" }}

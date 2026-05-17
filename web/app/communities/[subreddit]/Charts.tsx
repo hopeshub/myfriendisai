@@ -146,7 +146,6 @@ export default function Charts({ subreddit }: { subreddit: string }) {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-10 mt-8">
           <MetricChart data={snapshots} dataKey="subscribers" label="Subscribers" color="#7C9CD0" />
           <MetricChart data={snapshots} dataKey="unique_contributors_7d" label="Contributors / week (rolling 7d)" color="#e8692a" />
-          <MetricChart data={snapshots} dataKey="posts_today" label="Posts / day" color="#3b82f6" />
           <MetricChart data={snapshots} dataKey="avg_comments_per_post" label="Avg comments per post" color="#8b5cf6" decimals={1} />
           <MetricChart data={snapshots} dataKey="avg_score_per_post" label="Avg score per post" color="#10b981" />
         </div>
