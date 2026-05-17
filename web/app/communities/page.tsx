@@ -33,8 +33,7 @@ export default function Communities() {
         >
           theme tracker
         </Link>
-        . These engagement figures describe how big and busy a community is, not
-        how common any experience is within it.
+        .
       </p>
       <CommunitiesTable subreddits={subreddits} />
     </div>

@@ -186,8 +186,8 @@ export default function About() {
               focus: the parts of life with an AI companion that carry real
               weight, like intimacy, belief, dependence, and loss. There is no
               &ldquo;fun,&rdquo; &ldquo;creativity,&rdquo; or &ldquo;everyday
-              utility&rdquo; theme here, and that absence is a choice, not an
-              oversight. This is the lens the project looks through; the list
+              utility&rdquo; theme here. This is the lens the project looks
+              through; the list
               below is what it was pointed at:
             </p>
             <ul
@@ -209,11 +209,9 @@ export default function About() {
               has to earn its place. For a candidate, I pull 100 real posts it
               matched and read them; the keyword stays only if those posts are
               genuinely about the theme. If it is matching on a coincidental
-              shared word, it gets dropped. Language also drifts over time:
-              &ldquo;therapeutic,&rdquo; for one, has lately been turning up as
-              an insult aimed at preachy AI rather than a description of real
-              support. So once a month I re-sample recent matches and re-check
-              any keyword whose meaning may have moved.
+              shared word, it gets dropped. Language also drifts over time, so
+              once a month I re-sample recent matches and re-check any keyword
+              whose meaning may have moved.
             </p>
             <p>
               The chart shows how many posts use each theme&apos;s keywords,
@@ -273,13 +271,6 @@ export default function About() {
               lens pointed where the words mean what they appear to mean. It is
               also why the large general-AI subreddits are tracked for size and
               activity but kept out of the theme lines.
-            </p>
-            <p>
-              An AI model reading each post could make that call directly
-              &mdash; it could tell the two boyfriends apart where a keyword
-              cannot. But running one across the millions of posts in the large
-              general subreddits would be expensive, and for a one-person
-              project that is out of scope. So the room does that work instead.
             </p>
             <p>
               This is a real choice, and it shapes what the site can see.

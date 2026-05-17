@@ -62,11 +62,7 @@ export default function Home() {
           different &mdash; it held roughly steady, drifting mildly upward,
           with spikes at the big platform events. That contrast is the point:
           the steep fall in the raw totals is one platform&apos;s story, not
-          the category&apos;s. Everything else, taken together, held steady.
-          Read it as community activity, not a
-          headcount of people; the shaded years before 2023 are a floor, not a
-          count &mdash; public archives captured them only partially, and one
-          2017&ndash;2019 stretch not at all.
+          the category&apos;s.
         </p>
         <PostVolumeChart data={postVolume} />
       </section>
@@ -117,11 +113,10 @@ export default function Home() {
           followed within months &mdash; r/ChatbotAddiction and
           r/Character_AI_Recovery &mdash; and they grew. The language inside
           them is borrowed wholesale from substance recovery: relapse, cold
-          turkey, day counts, &ldquo;X days clean.&rdquo; (A larger community,
-          r/CharacterAIrunaways, formed in September 2024, but it is a
-          leavers&apos; space &mdash; mostly about migrating to another
-          platform, not quitting &mdash; so the chart tracks the two true
-          recovery communities.) This is the addiction line from the atlas
+          turkey, day counts, &ldquo;X days clean.&rdquo; (The larger
+          r/CharacterAIrunaways is left off the chart &mdash; it is a
+          leavers&apos; space, about switching platforms, not quitting.) This
+          is the addiction line from the atlas
           above &mdash; the steepest-rising theme in the whole record &mdash;
           given somewhere to live.
         </p>

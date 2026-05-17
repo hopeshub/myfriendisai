@@ -74,8 +74,7 @@ export default async function SubredditPage({
 
       <p className="text-[#94A3B8] text-sm mt-3 max-w-2xl">
         Engagement metrics for a single community &mdash; size and activity over
-        time, shown as context. This is not the theme tracker, and it does not
-        measure how common any experience is.
+        time, shown as context.
       </p>
 
       <Charts subreddit={subreddit} />
