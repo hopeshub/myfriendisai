@@ -31,7 +31,7 @@ export default function Home() {
       {/* Masthead */}
       <header className="mb-16">
         <h1
-          className="text-[26px] sm:text-3xl lg:text-[32px] font-bold text-[#F8FAFC]"
+          className="font-display text-[26px] sm:text-3xl lg:text-[32px] font-semibold text-[#F8FAFC]"
           style={{ lineHeight: 1.2, marginBottom: 12, maxWidth: measure }}
         >
           How the committed core of AI companionship talks
@@ -63,7 +63,7 @@ export default function Home() {
       <section className="mb-16">
         <div style={sectionLabel}>The communities</div>
         <h2
-          className="text-xl sm:text-2xl font-semibold text-[#F1F4F8]"
+          className="font-display text-xl sm:text-2xl font-semibold text-[#F1F4F8]"
           style={{ marginBottom: 8, maxWidth: measure }}
         >
           How active these communities are
@@ -88,7 +88,7 @@ export default function Home() {
       <section className="mb-16">
         <div style={sectionLabel}>What happened</div>
         <h2
-          className="text-xl sm:text-2xl font-semibold text-[#F1F4F8]"
+          className="font-display text-xl sm:text-2xl font-semibold text-[#F1F4F8]"
           style={{ marginBottom: 8, maxWidth: measure }}
         >
           The events that move the conversation
@@ -107,7 +107,7 @@ export default function Home() {
       <section className="mb-16">
         <div style={sectionLabel}>The themes</div>
         <h2
-          className="text-xl sm:text-2xl font-semibold text-[#F1F4F8]"
+          className="font-display text-xl sm:text-2xl font-semibold text-[#F1F4F8]"
           style={{ marginBottom: 8, maxWidth: measure }}
         >
           How the conversation shifts inside them
@@ -126,7 +126,7 @@ export default function Home() {
       <section>
         <div style={sectionLabel}>A counter-current</div>
         <h2
-          className="text-xl sm:text-2xl font-semibold text-[#F1F4F8]"
+          className="font-display text-xl sm:text-2xl font-semibold text-[#F1F4F8]"
           style={{ marginBottom: 8, maxWidth: measure }}
         >
           Calling it an addiction

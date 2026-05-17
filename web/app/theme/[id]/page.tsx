@@ -146,7 +146,7 @@ export default async function ThemePage({
       {/* Header */}
       <div className="mt-4">
         <h1
-          className="font-bold flex items-center gap-2.5"
+          className="font-display font-semibold flex items-center gap-2.5"
           style={{ fontSize: fontSize.xxxl, color: theme.color }}
         >
           <span aria-hidden style={{ fontSize: fontSize.xxl }}>

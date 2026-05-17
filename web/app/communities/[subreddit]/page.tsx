@@ -63,7 +63,7 @@ export default async function SubredditPage({
 
       <div className="flex items-start justify-between gap-4 flex-wrap">
         <div>
-          <h1 className="text-3xl font-semibold tracking-tight text-[#F8FAFC]">r/{subreddit}</h1>
+          <h1 className="font-display text-3xl font-semibold tracking-tight text-[#F8FAFC]">r/{subreddit}</h1>
           {meta.category && (
             <p className="text-[#9AA7B8] text-sm mt-1">
               {meta.tier != null ? TIER_LABELS[meta.tier] : ""}{meta.category ? ` · ${meta.category}` : ""}

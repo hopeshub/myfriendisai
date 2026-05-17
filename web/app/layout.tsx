@@ -2,16 +2,23 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { readFileSync } from "fs";
 import { join } from "path";
-import { Inter } from "next/font/google";
-import { GeistSans } from "geist/font/sans";
+import { Inter, Newsreader } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import StaleDataBanner from "./StaleDataBanner";
 import "./globals.css";
 
 const inter = Inter({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
+  weight: ["400", "500", "600", "700"],
   display: "swap",
+});
+
+const newsreader = Newsreader({
+  subsets: ["latin"],
+  weight: ["400", "600"],
+  style: ["normal", "italic"],
+  display: "swap",
+  variable: "--font-newsreader",
 });
 
 export const metadata: Metadata = {
@@ -67,18 +74,18 @@ export default function RootLayout({
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </head>
-      <body className={`antialiased ${inter.className}`}>
+      <body className={`antialiased ${inter.className} ${newsreader.variable}`}>
         <a href="#main" className="skip-link">Skip to content</a>
         <StaleDataBanner />
         <header className="border-b border-border">
           <div className="max-w-[1080px] mx-auto px-4 sm:px-8 py-4 flex items-center justify-between">
             <Link
               href="/"
-              className={`text-lg tracking-tight hover:opacity-80 transition-opacity ${GeistSans.className}`}
+              className="font-display text-lg tracking-tight hover:opacity-80 transition-opacity"
             >
-              <span style={{ fontWeight: 300, color: "#9AA7B8" }}>My Friend Is</span>
+              <span style={{ fontWeight: 400, color: "#9AA7B8", fontStyle: "normal" }}>My Friend Is</span>
               {" "}
-              <span style={{ fontWeight: 700, color: "#F8FAFC" }}>AI</span>
+              <span style={{ fontWeight: 600, color: "#F8FAFC", fontStyle: "italic" }}>AI</span>
             </Link>
             <nav className="flex gap-6 text-sm text-muted">
               <Link

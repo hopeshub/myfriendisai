@@ -22,7 +22,7 @@ export default function Communities() {
 
   return (
     <div className="max-w-[1080px] mx-auto px-4 sm:px-8 py-8">
-      <h1 className="text-3xl font-semibold tracking-tight mb-2 text-[#F8FAFC]">Communities</h1>
+      <h1 className="font-display text-3xl font-semibold tracking-tight mb-2 text-[#F8FAFC]">Communities</h1>
       <p className="text-[#9AA7B8] text-sm mb-2">
         {subreddits.length} communities tracked. Data as of {asOf}.
       </p>

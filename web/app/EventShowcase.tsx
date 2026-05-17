@@ -113,7 +113,7 @@ function EventCard({ event }: { event: ShowcaseEvent }) {
               {p.title}
             </div>
             <p
-              className="line-clamp-4"
+              className="font-display line-clamp-4"
               style={{
                 fontSize: 13,
                 lineHeight: 1.6,

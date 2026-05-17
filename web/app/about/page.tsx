@@ -77,7 +77,7 @@ export default function About() {
         <div style={sectionEyebrow}>About this project</div>
         <h1
           style={{ fontSize: fontSize.xxxl, fontWeight: 600 }}
-          className="text-foreground mb-2"
+          className="font-display text-foreground mb-2"
         >
           Tracking how AI-companion communities talk
         </h1>

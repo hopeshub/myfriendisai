@@ -22,6 +22,10 @@ body {
   font-family: inherit;
 }
 
+.font-display {
+  font-family: var(--font-newsreader), Georgia, "Times New Roman", serif;
+}
+
 .recharts-cartesian-grid line {
   stroke: #2A2D3A;
 }
