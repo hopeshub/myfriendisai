@@ -405,6 +405,7 @@ def export_subreddits_json(
 def export_keyword_trends_json(
     output_path: Optional[Path] = None,
     conn: Optional[sqlite3.Connection] = None,
+    exclude_subreddits: Optional[list[str]] = None,
 ) -> Path:
     """Export daily keyword category counts with 7-day rolling averages.
 
@@ -434,6 +435,12 @@ def export_keyword_trends_json(
     """
     from src.config import load_keyword_communities
     active_subreddits = [c["subreddit"] for c in load_keyword_communities()]
+    # exclude_subreddits: drop a community from BOTH the theme counts and the
+    # _total_posts denominator. Used to emit composition_trends.json (the
+    # ex-CharacterAI view) — see docs/characterai_composition_fault_2026-05-16.md.
+    if exclude_subreddits:
+        _excl = set(exclude_subreddits)
+        active_subreddits = [s for s in active_subreddits if s not in _excl]
     placeholders = ",".join("?" * len(active_subreddits))
 
     path = output_path or DATA_DIR / "keyword_trends.json"

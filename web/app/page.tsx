@@ -1,7 +1,7 @@
 import TrendsExplorer from "./TrendsExplorer";
 import PostVolumeChart from "./PostVolumeChart";
 import EventShowcase from "./EventShowcase";
-import { loadThemeData, loadPostVolume } from "./themeData";
+import { loadThemeData, loadPostVolumeSplit } from "./themeData";
 
 // ── Homepage ─────────────────────────────────────────────────────────────────
 // One scrollable narrative, top to bottom:
@@ -29,7 +29,8 @@ const intro: React.CSSProperties = {
 
 export default function Home() {
   const themeData = loadThemeData();
-  const postVolume = loadPostVolume();
+  const themeDataExclCai = loadThemeData("composition_trends.json");
+  const postVolume = loadPostVolumeSplit();
 
   return (
     <div className="max-w-[1080px] mx-auto px-4 sm:px-8 pt-10 sm:pt-14 pb-8">
@@ -62,14 +63,17 @@ export default function Home() {
         </h2>
         <p style={{ ...intro, marginBottom: 16 }}>
           Every month, this many posts went up across the AI-companion
-          communities tracked here. It is the plainest measure in the project
-          &mdash; a count of posts, no keyword judgement involved &mdash; and it
-          shows a small early-Replika world becoming a much larger,
-          event-driven ecosystem. Read it as community activity, not a
-          headcount of people &mdash;
-          one prolific user outposts ten quiet ones. And treat the shaded years
-          before 2023 as a floor, not a count: public archives captured them
-          only partially, and one 2017&ndash;2019 stretch not at all.
+          communities tracked here &mdash; split into r/CharacterAI and
+          everything else. CharacterAI is a mass-market roleplay platform; for
+          years it was 75&ndash;90% of all the posts, so its own boom and bust
+          &mdash; a 2024&ndash;25 contraction after a lawsuit, new content
+          filters, and users leaving &mdash; would otherwise read as the whole
+          category&apos;s. It isn&apos;t. The band that matters is the lower
+          one: the dedicated companionship and recovery communities, which keep
+          growing even as CharacterAI recedes. Read it as community activity,
+          not a headcount of people. The shaded years before 2023 are a floor,
+          not a count &mdash; public archives captured them only partially, and
+          one 2017&ndash;2019 stretch not at all.
         </p>
         <PostVolumeChart data={postVolume} />
       </section>
@@ -96,7 +100,10 @@ export default function Home() {
       {/* §3 — The theme atlas */}
       <section>
         <div style={sectionLabel}>The themes</div>
-        <TrendsExplorer themeData={themeData} />
+        <TrendsExplorer
+          themeData={themeData}
+          themeDataExclCai={themeDataExclCai}
+        />
       </section>
     </div>
   );

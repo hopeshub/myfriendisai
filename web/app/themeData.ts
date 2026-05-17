@@ -43,8 +43,12 @@ const THEME_CATEGORIES: Record<string, string[]> = {
 export type ThemeDataPoint = { date: string; value: number; hitsPerK: number };
 export type ThemeData = Record<string, ThemeDataPoint[]>;
 
-export function loadThemeData(): ThemeData {
-  const filePath = path.join(process.cwd(), "data", "keyword_trends.json");
+// `filename` selects the source: "keyword_trends.json" (all communities, the
+// published default) or "composition_trends.json" (the ex-CharacterAI view —
+// see docs/characterai_composition_fault_2026-05-16.md). Both files share an
+// identical schema, so the same loader serves both.
+export function loadThemeData(filename: string = "keyword_trends.json"): ThemeData {
+  const filePath = path.join(process.cwd(), "data", filename);
   if (!fs.existsSync(filePath)) return {};
 
   let raw: Record<string, unknown>;
@@ -141,40 +145,56 @@ export function loadKeywordDetails(): KeywordDetailsData {
   }
 }
 
-// ── Post-volume series ───────────────────────────────────────────────────────
-// Monthly post count across the committed-core communities (T1-T3, the same
-// set the keyword themes are matched against — `_total_posts` in
-// keyword_trends.json is built from exactly those subreddits). This is the
-// orientation chart: how much these communities post over time. It is
-// community activity, not a measure of how common any experience is.
-export type PostVolumePoint = { month: string; posts: number };
+// ── Post-volume series, split by composition ─────────────────────────────────
+// Monthly post count across the committed-core communities (T1-T3), split into
+// r/CharacterAI and everything else. CharacterAI is 75-90% of the volume and
+// swings on its own platform lifecycle; the split keeps its rise-and-fall from
+// being misread as the whole category's. `characterai` is derived as the
+// difference between the full _total_posts (keyword_trends.json) and the
+// ex-CharacterAI _total_posts (composition_trends.json).
+// See docs/characterai_composition_fault_2026-05-16.md.
+export type PostVolumeSplitPoint = {
+  month: string;
+  characterai: number;
+  other: number;
+};
 
-export function loadPostVolume(): PostVolumePoint[] {
-  const filePath = path.join(process.cwd(), "data", "keyword_trends.json");
-  if (!fs.existsSync(filePath)) return [];
-
+function monthlyTotalPosts(filename: string): Record<string, number> {
+  const filePath = path.join(process.cwd(), "data", filename);
+  if (!fs.existsSync(filePath)) return {};
   let raw: Record<string, unknown>;
   try {
     raw = JSON.parse(fs.readFileSync(filePath, "utf8"));
   } catch (e) {
-    console.error("Failed to parse keyword_trends.json:", e);
-    return [];
+    console.error(`Failed to parse ${filename}:`, e);
+    return {};
   }
-
   const daily =
     (raw["_total_posts"] as Array<{ date: string; count: number }> | undefined) ??
     [];
-
   const byMonth: Record<string, number> = {};
   for (const e of daily) {
     const m = e.date.slice(0, 7); // "YYYY-MM"
     byMonth[m] = (byMonth[m] ?? 0) + e.count;
   }
+  return byMonth;
+}
 
-  // Drop the current partial month so the last bar is never a half-count.
+export function loadPostVolumeSplit(): PostVolumeSplitPoint[] {
+  const total = monthlyTotalPosts("keyword_trends.json");
+  const other = monthlyTotalPosts("composition_trends.json");
+  if (Object.keys(total).length === 0) return [];
+
+  // Drop the current partial month so the last point is never a half-count.
   const currentMonth = new Date().toISOString().slice(0, 7);
-  return Object.keys(byMonth)
+  return Object.keys(total)
     .sort()
     .filter((m) => m < currentMonth)
-    .map((m) => ({ month: m, posts: byMonth[m] }));
+    .map((m) => {
+      const o = other[m] ?? 0;
+      // characterai = full total − ex-CharacterAI total; clamp at 0 against
+      // any month present in one file but not the other.
+      const cai = Math.max(0, (total[m] ?? 0) - o);
+      return { month: m, characterai: cai, other: o };
+    });
 }

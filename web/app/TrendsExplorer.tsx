@@ -7,14 +7,18 @@ import TrendAtlas from "./TrendAtlas";
 
 type TimeRange = "6M" | "1Y" | "2Y" | "ALL";
 
-type Props = { themeData: ThemeData };
+type Props = { themeData: ThemeData; themeDataExclCai: ThemeData };
+type Scope = "all" | "excl-cai";
 
-export default function TrendsExplorer({ themeData }: Props) {
+export default function TrendsExplorer({ themeData, themeDataExclCai }: Props) {
   const [timeRange, setTimeRange] = useState<TimeRange>("1Y");
+  const [scope, setScope] = useState<Scope>("all");
   const { bp: rawBp, isMobileStrip: rawMobileStrip } = useBreakpoint();
   // Default to desktop during SSR/hydration to avoid layout flash
   const bp = rawBp ?? "desktop";
   const isMobileStrip = rawMobileStrip ?? false;
+
+  const activeData = scope === "all" ? themeData : themeDataExclCai;
 
   return (
     <div>
@@ -31,6 +35,39 @@ export default function TrendsExplorer({ themeData }: Props) {
           in posts across these communities, month by month.
         </p>
       </div>
+
+      {/* Community-scope toggle — CharacterAI dominates the post denominator
+          and swings on its own platform lifecycle, which mechanically moves
+          every theme rate. Excluding it shows the rate within the dedicated
+          communities. See docs/characterai_composition_fault_2026-05-16.md. */}
+      <div className="flex items-center gap-2 mb-2 flex-wrap">
+        <span style={{ fontSize: 12, color: "#64748B" }}>Communities:</span>
+        {(
+          [
+            ["all", "All tracked"],
+            ["excl-cai", "Excluding r/CharacterAI"],
+          ] as [Scope, string][]
+        ).map(([s, label]) => (
+          <button
+            key={s}
+            onClick={() => setScope(s)}
+            aria-pressed={scope === s}
+            className="h-9 sm:h-auto px-3 py-1 text-sm sm:text-xs font-medium rounded-md transition-colors"
+            style={{
+              backgroundColor: scope === s ? "#1A1D27" : "transparent",
+              color: scope === s ? "#F8FAFC" : "#94A3B8",
+              border: `1px solid ${scope === s ? "#2A2D3A" : "transparent"}`,
+            }}
+          >
+            {label}
+          </button>
+        ))}
+      </div>
+      <p className="mb-3" style={{ fontSize: 12, color: "#64748B", maxWidth: 720 }}>
+        {scope === "all"
+          ? "r / CharacterAI is roughly three-quarters of every post counted here, and it rises and falls on its own platform lifecycle — switch it off to see each rate within the dedicated companionship communities."
+          : "r / CharacterAI removed from both the keyword counts and the denominator. These are the rates within the dedicated companionship and recovery communities — the rises hold, and several are steeper here."}
+      </p>
 
       {/* Time range selector */}
       <div className="flex gap-1 mb-3">
@@ -66,7 +103,7 @@ export default function TrendsExplorer({ themeData }: Props) {
           keyword detection sensitivity differs by theme. Each panel begins at
           its own coverage-start date, and is a link to that theme&apos;s page.
         </p>
-        <TrendAtlas themeData={themeData} timeRange={timeRange} bp={bp} />
+        <TrendAtlas themeData={activeData} timeRange={timeRange} bp={bp} />
       </section>
 
       {/* Methodology + how-to-read — consolidated into one note, said once. */}

@@ -237,6 +237,17 @@ def _step_export(conn):
     os.replace(str(kw_trends_path), str(data_dir / "keyword_trends.json"))
     kw_trends_path = data_dir / "keyword_trends.json"
 
+    # Composition view: the same export with CharacterAI excluded. CharacterAI
+    # is 75-90% of post volume and swings on its own platform lifecycle; the
+    # ex-CharacterAI series is the dedicated-community signal. Additive — does
+    # not alter keyword_trends.json. See docs/characterai_composition_fault_2026-05-16.md.
+    comp_path = export_keyword_trends_json(
+        output_path=data_dir / "composition_trends.json.tmp", conn=conn,
+        exclude_subreddits=["CharacterAI"],
+    )
+    os.replace(str(comp_path), str(data_dir / "composition_trends.json"))
+    comp_path = data_dir / "composition_trends.json"
+
     meta_path = export_site_meta_json(output_path=data_dir / "site_meta.json.tmp", conn=conn)
     os.replace(str(meta_path), str(data_dir / "site_meta.json"))
     meta_path = data_dir / "site_meta.json"
@@ -255,6 +266,7 @@ def _step_export(conn):
     _atomic_copy(snap_path, web_data_dir / "snapshots.json")
     _atomic_copy(sub_path, web_data_dir / "subreddits.json")
     _atomic_copy(kw_trends_path, web_data_dir / "keyword_trends.json")
+    _atomic_copy(comp_path, web_data_dir / "composition_trends.json")
     _atomic_copy(meta_path, web_data_dir / "site_meta.json")
     _atomic_copy(health_path, web_data_dir / "theme_health.json")
     logger.info("Copied JSON to web/data/ for frontend")
