@@ -40,6 +40,9 @@ const THEME_CATEGORIES: Record<string, string[]> = {
   rupture:       ["rupture"],
 };
 
+// One point per MONTH (date is "YYYY-MM-01"). The charts only ever render the
+// monthly mean of the per-1k rate, so loadThemeData aggregates daily → monthly
+// server-side rather than shipping ~5,600 daily points per theme to the client.
 export type ThemeDataPoint = { date: string; value: number; hitsPerK: number };
 export type ThemeData = Record<string, ThemeDataPoint[]>;
 
@@ -122,14 +125,30 @@ export function loadThemeData(filename: string = "keyword_trends.json"): ThemeDa
       dates = dates.filter((d) => d >= themeCoverageStart!);
     }
 
-    result[themeId] = dates.map((date) => {
+    // Aggregate daily → monthly. The atlas and the per-theme chart both render
+    // the monthly mean of the daily per-1k rate (their monthlySeries() helper),
+    // so doing it here ships ~36 points per theme instead of ~5,600 — the chart
+    // is pixel-identical (monthlySeries on already-monthly data is a no-op).
+    const monthly: Record<
+      string,
+      { rateSum: number; n: number; count: number }
+    > = {};
+    for (const date of dates) {
       const total7d = totalPosts7dAvg[date] ?? 0;
-      return {
-        date,
-        value: rawByDate[date].count,
-        hitsPerK: total7d > 0 ? (rawByDate[date].avg / total7d) * 1000 : 0,
-      };
-    });
+      const hitsPerK = total7d > 0 ? (rawByDate[date].avg / total7d) * 1000 : 0;
+      const m = date.slice(0, 7) + "-01";
+      if (!monthly[m]) monthly[m] = { rateSum: 0, n: 0, count: 0 };
+      monthly[m].rateSum += hitsPerK;
+      monthly[m].n += 1;
+      monthly[m].count += rawByDate[date].count;
+    }
+    result[themeId] = Object.keys(monthly)
+      .sort()
+      .map((m) => ({
+        date: m,
+        value: monthly[m].count,
+        hitsPerK: monthly[m].rateSum / monthly[m].n,
+      }));
   }
   return result;
 }

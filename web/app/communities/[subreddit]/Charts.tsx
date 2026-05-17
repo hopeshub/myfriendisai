@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import {
   LineChart,
   Line,
@@ -97,20 +96,7 @@ function MetricChart({
   );
 }
 
-export default function Charts({ subreddit }: { subreddit: string }) {
-  const [snapshots, setSnapshots] = useState<Snapshot[] | null>(null);
-
-  useEffect(() => {
-    fetch(`/api/snapshots/${subreddit}`)
-      .then((r) => r.json())
-      .then(setSnapshots)
-      .catch(() => setSnapshots([]));
-  }, [subreddit]);
-
-  if (snapshots === null) {
-    return <p className="text-sm text-[#9AA7B8]">Loading…</p>;
-  }
-
+export default function Charts({ snapshots }: { snapshots: Snapshot[] }) {
   if (snapshots.length === 0) {
     return <p className="text-sm text-[#9AA7B8]">No snapshot data yet.</p>;
   }

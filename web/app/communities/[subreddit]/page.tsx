@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { getSubreddits, getCommunityActivity } from "@/lib/data";
+import { getSubreddits, getCommunityActivity, getSnapshotsForSubreddit } from "@/lib/data";
 import Charts from "./Charts";
 import CommunityActivityChart from "./CommunityActivityChart";
 
@@ -48,6 +48,10 @@ export default async function SubredditPage({
 
   const activity = getCommunityActivity();
   const activitySeries = activity.activity[subreddit] ?? [];
+  // Loaded server-side and passed to Charts as a prop — the snapshot data is
+  // baked into this statically-generated page, so there's no client-side
+  // fetch (and no 6.5 MB API parse) on every visit.
+  const snapshots = getSnapshotsForSubreddit(subreddit);
 
   return (
     <div className="max-w-[1080px] mx-auto px-4 sm:px-8 py-8">
@@ -92,7 +96,7 @@ export default async function SubredditPage({
         </p>
       </section>
 
-      <Charts subreddit={subreddit} />
+      <Charts snapshots={snapshots} />
 
       <p className="mt-10 text-xs text-[#6B7689] border-t border-[#2A2D3A] pt-4">
         <strong>Subscribers</strong> — Direct (Reddit API).{" "}
