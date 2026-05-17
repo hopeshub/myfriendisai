@@ -24,7 +24,7 @@ export default function Error({
       textAlign: "center",
       gap: "1rem",
     }}>
-      <h1 style={{ fontSize: "1.5rem", fontWeight: 600 }}>Something went wrong</h1>
+      <h1 style={{ fontSize: "1.5rem", fontWeight: 600 }}>This page didn&apos;t load</h1>
       <p style={{ opacity: 0.7, maxWidth: "40ch" }}>
         The page hit an unexpected error while loading. Try again — if it keeps happening, the daily data export may be mid-update.
       </p>

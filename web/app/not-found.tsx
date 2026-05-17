@@ -5,7 +5,8 @@ export default function NotFound() {
     <div className="max-w-xl mx-auto px-4 py-24 text-center">
       <h1 className="text-4xl font-bold mb-4">404</h1>
       <p className="text-muted mb-8">
-        This page doesn&apos;t exist. It might have been moved or removed.
+        There&apos;s no page at this address. The home page has the tracker;
+        the about page explains how it all works.
       </p>
       <Link
         href="/"

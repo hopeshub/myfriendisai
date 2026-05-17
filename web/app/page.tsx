@@ -54,8 +54,8 @@ export default function Home() {
             marginTop: 12,
           }}
         >
-          Not how common AI companionship is &mdash; but how this conversation
-          changes over time.
+          It can&apos;t tell you how common AI companionship is. It can show
+          you, month by month, how the conversation about it changes.
         </p>
       </header>
 
@@ -94,11 +94,11 @@ export default function Home() {
           The events that move the conversation
         </h2>
         <p style={{ ...intro, marginBottom: 16 }}>
-          This is where the instrument is sharpest. When a platform changes
-          underneath its users &mdash; an app removes a feature, a model is
-          retired &mdash; the language in these communities changes fast and
-          unmistakably. Each of these is a real event, paired with real posts
-          from the week it happened.
+          When a platform changes underneath its users &mdash; an app drops a
+          feature, a model is retired &mdash; the language in these communities
+          shifts within days. This is where the tracker sees most clearly: each
+          event below is real, paired with the posts people wrote the week it
+          happened.
         </p>
         <EventShowcase />
       </section>
