@@ -15,8 +15,9 @@ import { fontSize, sectionEyebrow } from "../../styles";
 // ── Per-theme page ───────────────────────────────────────────────────────────
 // The deeper "what is this and why" for one theme: a full-size chart, a plain-
 // language story anchored to the events, and a few real posts. Reached by
-// clicking a panel on the homepage atlas. Keyword lists live on the About page
-// (methodology); this page is for a reader, not an auditor.
+// clicking a panel on the homepage atlas. Each theme page also shows its own
+// keyword set with per-keyword precision, so a reader can see exactly which
+// validated terms define the theme and how clean each one tested.
 
 const MONTH_NAMES = [
   "Jan", "Feb", "Mar", "Apr", "May", "Jun",
@@ -135,7 +136,7 @@ export default async function ThemePage({
       <Link
         href="/"
         className="text-sm transition-colors"
-        style={{ color: "#94A3B8" }}
+        style={{ color: "#9AA7B8" }}
       >
         &larr; All themes
       </Link>
@@ -151,7 +152,7 @@ export default async function ThemePage({
           </span>
           {theme.label}
         </h1>
-        <p style={{ fontSize: fontSize.base, color: "#94A3B8", marginTop: 6 }}>
+        <p style={{ fontSize: fontSize.base, color: "#9AA7B8", marginTop: 6 }}>
           {theme.tagline}
         </p>
       </div>
@@ -174,7 +175,7 @@ export default async function ThemePage({
         style={{
           fontSize: fontSize.md,
           lineHeight: 1.7,
-          color: "#D3DAE3",
+          color: "#C8D0DC",
           marginTop: 18,
         }}
       >
@@ -183,7 +184,7 @@ export default async function ThemePage({
 
       {/* Most active communities — one quiet line */}
       {topSubs.length > 0 && (
-        <p style={{ fontSize: fontSize.base, color: "#8293A6", marginTop: 16 }}>
+        <p style={{ fontSize: fontSize.base, color: "#9AA7B8", marginTop: 16 }}>
           Most of this theme&apos;s posts come from a few communities &mdash;{" "}
           {topSubs.map((s, i) => (
             <span key={s.name}>
@@ -191,16 +192,86 @@ export default async function ThemePage({
               <Link
                 href={`/communities/${s.name}`}
                 className="hover:underline underline-offset-2"
-                style={{ color: "#CBD5E1" }}
+                style={{ color: "#C8D0DC" }}
               >
                 r/{s.name}
               </Link>
-              <span style={{ color: "#64748B" }}> {s.pct}%</span>
+              <span style={{ color: "#6B7689" }}> {s.pct}%</span>
             </span>
           ))}
           {" "}&mdash; so this line is a close reading of those rooms, not an
           even sweep across Reddit.
         </p>
+      )}
+
+      {/* The keywords that define this theme */}
+      {details && details.keywords.length > 0 && (
+        <div style={{ marginTop: 30 }}>
+          <div style={SECTION_LABEL}>The keywords</div>
+          <p
+            style={{
+              fontSize: fontSize.sm,
+              color: "#6B7689",
+              marginTop: 6,
+              lineHeight: 1.6,
+            }}
+          >
+            This theme is defined by these {details.keywords.length} validated
+            keywords &mdash; a post counts when its text matches one of them,
+            with no AI classifier. The percentage is the share of a
+            keyword&apos;s matches that were on-theme when hand-checked.
+          </p>
+          <div
+            style={{
+              display: "flex",
+              flexWrap: "wrap",
+              gap: 6,
+              marginTop: 12,
+            }}
+          >
+            {[...details.keywords]
+              .sort((a, b) => b.hits - a.hits)
+              .map((kw) => (
+                <span
+                  key={kw.term}
+                  style={{
+                    display: "inline-flex",
+                    alignItems: "baseline",
+                    gap: 6,
+                    backgroundColor: "#1A1D27",
+                    border: "1px solid #2A2D3A",
+                    borderRadius: 6,
+                    padding: "3px 9px",
+                    fontSize: fontSize.sm,
+                  }}
+                >
+                  <span style={{ color: "#C8D0DC" }}>{kw.term}</span>
+                  {kw.precision != null && (
+                    <span style={{ color: "#6B7689" }}>
+                      {Math.round(kw.precision)}%
+                    </span>
+                  )}
+                </span>
+              ))}
+          </div>
+          <p
+            style={{
+              fontSize: fontSize.xs,
+              color: "#6B7689",
+              marginTop: 12,
+              lineHeight: 1.6,
+            }}
+          >
+            These keywords are precision-first &mdash; they catch a clean,
+            checkable slice of the theme, not all of it.{" "}
+            <a
+              href="/about#verification"
+              style={{ color: "#9AA7B8", textDecoration: "underline" }}
+            >
+              How this is measured &rarr;
+            </a>
+          </p>
+        </div>
       )}
 
       {/* Example posts */}
@@ -209,7 +280,7 @@ export default async function ThemePage({
         <p
           style={{
             fontSize: fontSize.sm,
-            color: "#8293A6",
+            color: "#6B7689",
             marginTop: 6,
             lineHeight: 1.6,
           }}
@@ -237,7 +308,7 @@ export default async function ThemePage({
                     target="_blank"
                     rel="noopener noreferrer"
                     className="hover:underline underline-offset-2 transition-colors"
-                    style={{ fontSize: fontSize.base, color: "#CBD5E1" }}
+                    style={{ fontSize: fontSize.base, color: "#C8D0DC" }}
                   >
                     {inTitle
                       ? highlight(displayTitle, sp.matchedTerm, theme.color)
@@ -248,7 +319,7 @@ export default async function ThemePage({
                       style={{
                         fontSize: fontSize.sm,
                         lineHeight: 1.55,
-                        color: "#94A3B8",
+                        color: "#9AA7B8",
                         marginTop: 5,
                         borderLeft: "2px solid #2A2D3A",
                         paddingLeft: 10,
@@ -258,7 +329,7 @@ export default async function ThemePage({
                     </div>
                   )}
                   <div
-                    style={{ fontSize: fontSize.micro, color: "#8293A6", marginTop: 5 }}
+                    style={{ fontSize: fontSize.micro, color: "#6B7689", marginTop: 5 }}
                   >
                     r/{sp.subreddit} &middot; {fmtMonthYear(sp.date)}
                   </div>
@@ -267,14 +338,14 @@ export default async function ThemePage({
             })}
           </div>
         ) : (
-          <p style={{ fontSize: fontSize.base, color: "#8293A6", marginTop: 6 }}>
+          <p style={{ fontSize: fontSize.base, color: "#6B7689", marginTop: 6 }}>
             No example posts available yet.
           </p>
         )}
         <p
           style={{
             fontSize: fontSize.xs,
-            color: "#64748B",
+            color: "#6B7689",
             marginTop: 14,
             lineHeight: 1.6,
           }}
@@ -283,7 +354,7 @@ export default async function ThemePage({
           opens the original public Reddit post.{" "}
           <a
             href="/about#verification"
-            style={{ color: "#94A3B8", textDecoration: "underline" }}
+            style={{ color: "#9AA7B8", textDecoration: "underline" }}
           >
             How this is measured &rarr;
           </a>
@@ -325,7 +396,7 @@ export default async function ThemePage({
               className="transition-opacity hover:opacity-100"
               style={{
                 fontSize: fontSize.base,
-                color: "#94A3B8",
+                color: "#9AA7B8",
                 opacity: 0.85,
                 display: "inline-flex",
                 alignItems: "center",
