@@ -91,6 +91,49 @@ export default function RecoveryChart({
         ))}
       </div>
 
+      {/* Event legend — numbered, so the on-chart markers stay a single digit
+          and never clip or collide the way inline label text would. */}
+      <div
+        className="flex flex-wrap gap-x-4 gap-y-1"
+        style={{ fontSize: 12, color: "#6B7689", marginBottom: 10 }}
+      >
+        <span
+          style={{
+            textTransform: "uppercase",
+            letterSpacing: "0.05em",
+            fontSize: 11,
+          }}
+        >
+          Events
+        </span>
+        {RECOVERY_EVENTS.map((ev, i) => (
+          <span
+            key={ev.date}
+            style={{ display: "inline-flex", alignItems: "center", gap: 5 }}
+          >
+            <span
+              aria-hidden
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                justifyContent: "center",
+                width: 15,
+                height: 15,
+                borderRadius: 999,
+                fontSize: 10,
+                fontWeight: 700,
+                color: "#0F1117",
+                backgroundColor: "#C2974D",
+              }}
+            >
+              {i + 1}
+            </span>
+            <span style={{ color: "#C8D0DC" }}>{ev.label}</span>
+            <span>{fmtMonth(ev.date)}</span>
+          </span>
+        ))}
+      </div>
+
       <div style={{ height: 240 }}>
         <ResponsiveContainer width="100%" height="100%">
           <AreaChart data={data} margin={{ top: 24, right: 8, bottom: 2, left: 0 }}>
@@ -177,8 +220,9 @@ export default function RecoveryChart({
                 isAnimationActive={false}
               />
             ))}
-            {/* Minimalist Character.AI event markers. */}
-            {RECOVERY_EVENTS.map((ev) => (
+            {/* Character.AI event markers — numbered ticks (named in the
+                legend above) so a long label never overflows the plot. */}
+            {RECOVERY_EVENTS.map((ev, i) => (
               <ReferenceLine
                 key={ev.date}
                 x={ev.date}
@@ -187,10 +231,11 @@ export default function RecoveryChart({
                 strokeDasharray="4 3"
                 strokeWidth={1}
                 label={{
-                  value: ev.label,
+                  value: String(i + 1),
                   position: "top",
-                  fill: "#A8895A",
+                  fill: "#D4A862",
                   fontSize: 11,
+                  fontWeight: 700,
                 }}
               />
             ))}

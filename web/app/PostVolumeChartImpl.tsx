@@ -243,8 +243,8 @@ export default function PostVolumeChart({
       >
         The chart begins in 2023, where monthly counts become reliable &mdash;
         the post record itself reaches back to 2017. Each panel has its own
-        scale: at its 2024 peak r/CharacterAI was roughly five times the size of
-        every other tracked community combined.
+        scale: for years, r/CharacterAI alone was 75&ndash;90% of every post
+        counted here.
       </p>
     </div>
   );

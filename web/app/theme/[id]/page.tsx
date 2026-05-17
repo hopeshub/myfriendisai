@@ -105,7 +105,9 @@ export async function generateMetadata({
   if (!theme) return { title: "Theme — My Friend Is AI" };
   return {
     title: `${theme.label} — My Friend Is AI`,
-    description: theme.story,
+    // tagline, not story — story is a full paragraph that truncates
+    // mid-sentence in search results and social cards.
+    description: theme.tagline,
     openGraph: {
       title: `${theme.label} — My Friend Is AI`,
       description: theme.tagline,
@@ -294,10 +296,13 @@ export default async function ThemePage({
         {samples.length > 0 ? (
           <div style={{ marginTop: 6 }}>
             {samples.map((sp, i) => {
-              const inTitle = sp.title
+              const displayTitle = truncate(sp.title, 120);
+              // Test the *truncated* title — if truncation dropped the matched
+              // term, fall through to the excerpt so the post still shows its
+              // highlighted keyword rather than rendering with none.
+              const inTitle = displayTitle
                 .toLowerCase()
                 .includes(sp.matchedTerm.toLowerCase());
-              const displayTitle = truncate(sp.title, 120);
               return (
                 <div
                   key={sp.id}

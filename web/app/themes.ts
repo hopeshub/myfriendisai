@@ -89,9 +89,9 @@ export const THEMES: ThemeMeta[] = [
     color: ACTIVE_PALETTE.therapy,
     tagline: "Language of mental health support and emotional care",
     blurb:
-      "Gradually rising — and the noisiest theme, catching complaint alongside genuine use.",
+      "A gradual rise in describing an AI as emotional support — closely tied to the addiction theme.",
     story:
-      "Therapy language has risen gradually, as more people describe an AI as emotional support or a substitute for a therapist. It is the noisiest theme to measure: the same phrases that mark genuine therapeutic use also catch people arguing about it — “it’s not a real therapist” — so trust the overall direction more than the exact height.",
+      "Therapy language has risen gradually, as more people describe an AI as emotional support or a substitute for a therapist. It is hard to separate from the addiction theme: both track the same thing — leaning on an AI to meet an emotional need — and what divides them is the writer’s framing. A neutral or positive read (“it helps me cope”) lands as therapy; a negative one (“I can’t stop”) lands as addiction. The two lines share posts by design.",
   },
   {
     id: "addiction",

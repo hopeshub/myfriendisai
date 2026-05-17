@@ -192,10 +192,14 @@ export default function TrendAtlas({
           for (const r of series) byDate[r.date] = r.value;
           const themeStart = series[0]?.date;
 
-          const data = months.map((m) => ({
-            date: m,
-            value: themeStart && m >= themeStart ? byDate[m] ?? 0 : null,
-          }));
+          // Render each panel only from its own first measurable month.
+          // A late-starting theme (consciousness begins Apr 2025) otherwise
+          // shows a long empty stretch on the shared domain that reads as a
+          // broken chart; the "measurable from" footer note explains the
+          // shorter axis instead.
+          const data = months
+            .filter((m) => !themeStart || m >= themeStart)
+            .map((m) => ({ date: m, value: byDate[m] ?? 0 }));
           const startsLate =
             themeStart && months.length > 0 && themeStart > months[0];
 
