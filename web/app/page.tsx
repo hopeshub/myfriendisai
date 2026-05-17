@@ -120,13 +120,6 @@ export default function Home() {
           them is borrowed wholesale from substance recovery: relapse, cold
           turkey, day counts, &ldquo;X days clean.&rdquo;
         </p>
-        <p style={{ ...intro, marginBottom: 16 }}>
-          (The larger r/CharacterAIrunaways is left off the chart &mdash; it is
-          a leavers&apos; space, about switching platforms, not quitting.) This
-          is the addiction line from the atlas above &mdash; the
-          steepest-rising theme in the whole record &mdash; given somewhere to
-          live.
-        </p>
         <RecoverySection data={recoveryVolume} />
       </section>
     </div>
