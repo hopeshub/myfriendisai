@@ -48,7 +48,7 @@ const CHANGELOG = [
     date: "May 2026",
     title: "Theme accuracy re-checked",
     items: [
-      "Re-checked that keywords land on the theme they claim — about 1,800 tagged posts re-read by independent classifiers, then a sample re-coded by hand. Keywords reliably identify AI-companion discourse; sorting it into the right theme is tightest for sex/ERP and addiction, and holds up better for therapy and consciousness than a first, classifier-only pass had suggested. The re-check also confirmed that therapy and addiction are largely one subject — the same reliance on an AI, framed once as help and once as a problem. No keywords changed: the response to a fast-moving vocabulary is disclosure, not constant edits.",
+      "Re-checked that keywords land on the theme they claim — about 1,800 tagged posts re-read by a separate automated check, then a sample re-coded by hand. Keywords reliably identify AI-companion discourse; sorting it into the right theme is tightest for sex/ERP and addiction, and holds up better for therapy and consciousness than that first automated pass suggested. The re-check also confirmed that therapy and addiction are largely one subject — the same reliance on an AI, framed once as help and once as a problem. No keywords changed: the response to a fast-moving vocabulary is disclosure, not constant edits.",
     ],
     recent: true,
   },
@@ -243,9 +243,10 @@ export default function About() {
             </p>
             <p>
               And the gain really is small. I tested it: having an LLM re-check
-              each keyword match raised precision from roughly 80% to 88%, while
-              doing nothing for the posts the keywords never matched in the
-              first place. So the method stays plain on purpose. The careful
+              each keyword match raised precision — the share of matched posts
+              that genuinely belong to the theme — from roughly 80% to 88%,
+              while doing nothing for the posts the keywords never matched in
+              the first place. So the method stays plain on purpose. The careful
               work happens earlier, in validating each keyword by hand before it
               is ever allowed to count.
             </p>
@@ -381,14 +382,6 @@ export default function About() {
                   {" "}&mdash; in a hand-coded sample of 400 random posts, it
                   caught between a few percent and about a third of the posts
                   that genuinely belonged.
-                </>,
-                <>
-                  <span style={leadStyle}>
-                    It&apos;s weakest where the subject is most itself
-                  </span>
-                  {" "}&mdash; someone writing &ldquo;I love him&rdquo; about an
-                  AI in the same ordinary words they would use for a person is
-                  the hardest case of all to catch.
                 </>,
               ].map((item, i) => (
                 <li

@@ -147,7 +147,7 @@ export default function Charts({ snapshots }: { snapshots: Snapshot[] }) {
         </div>
         <div>
           <div className="text-2xl font-semibold tabular-nums text-[#F8FAFC]">{fmt(latest.posts_today)}</div>
-          <div className="text-xs text-[#9AA7B8] mt-0.5">Posts today</div>
+          <div className="text-xs text-[#9AA7B8] mt-0.5">Posts / day</div>
         </div>
         <div>
           <div className="text-2xl font-semibold tabular-nums text-[#F8FAFC]">{fmt(latest.avg_comments_per_post, 1)}</div>
