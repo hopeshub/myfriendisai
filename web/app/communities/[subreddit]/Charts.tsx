@@ -8,8 +8,9 @@ import dynamic from "next/dynamic";
 
 const Charts = dynamic(() => import("./ChartsImpl"), {
   ssr: false,
-  // Responsive: four metric charts stack on mobile, two-up from sm.
-  loading: () => <div className="min-h-[1050px] sm:min-h-[540px]" />,
+  // Responsive: stat cards + three metric charts that stack until lg,
+  // then sit three-up. Sized to the post-monthly-aggregation layout.
+  loading: () => <div className="min-h-[860px] lg:min-h-[400px]" />,
 });
 
 export default Charts;

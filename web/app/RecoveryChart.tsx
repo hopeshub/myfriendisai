@@ -8,7 +8,8 @@ import dynamic from "next/dynamic";
 
 const RecoveryChart = dynamic(() => import("./RecoveryChartImpl"), {
   ssr: false,
-  loading: () => <div style={{ minHeight: 264 }} />,
+  // Community legend + event legend + 240px chart.
+  loading: () => <div style={{ minHeight: 310 }} />,
 });
 
 export default RecoveryChart;
