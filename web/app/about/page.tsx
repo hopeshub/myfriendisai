@@ -295,9 +295,10 @@ export default function About() {
             </p>
             <p>
               This is a real choice, and it shapes what the site can see.
-              These communities lean toward people for whom AI companionship is
-              central and often intense &mdash; including recovery communities
-              for people trying to quit. That makes the site good at catching
+              These communities &mdash; the committed core of AI companionship
+              on Reddit &mdash; lean toward people for whom it is central and
+              often intense, including recovery communities for people trying
+              to quit. That makes the site good at catching
               that end of the spectrum and blind to casual mentions elsewhere.
               The trends describe <em>this curated set of communities</em>{" "}
               &mdash; not Reddit as a whole, and not &ldquo;people&rdquo; in
@@ -355,8 +356,9 @@ export default function About() {
           <h2 style={sectionHeaderStyle}>How to read the lines</h2>
           <div className="space-y-4" style={bodyStyle}>
             <p>
-              Six limits are worth holding in mind before you read too much
-              into any single line.
+              A line is a useful signal, but a narrow one. Four limits are
+              worth holding in mind before you read too much into any single
+              one.
             </p>
             <p>
               <strong style={leadStyle}>
@@ -370,33 +372,28 @@ export default function About() {
             </p>
             <p>
               <strong style={leadStyle}>
-                Don&apos;t compare one theme&apos;s height against another.
+                Read direction and timing, not height.
               </strong>{" "}
-              Each theme is detected through its own vocabulary, and some
-              vocabularies are simply easier to catch. Addiction has a
-              distinctive recovery vocabulary &mdash; &ldquo;relapse,&rdquo;
-              &ldquo;cold turkey&rdquo; &mdash; that matches cleanly. Romance
-              lives in ordinary language like &ldquo;I love him&rdquo; or
-              &ldquo;my boyfriend,&rdquo; nearly inseparable from everyday
-              relationship talk, so only a handful of phrases survive
-              validation. That asymmetry alone can lift the addiction line above
-              the romance line even when romance is the larger subject. Each
-              line can be trusted against its own past; the distance between two
-              lines cannot.
-            </p>
-            <p>
-              <strong style={leadStyle}>
-                Each line is a floor, not a ceiling.
-              </strong>{" "}
-              Holding keywords to a high precision bar leaves the set
-              deliberately incomplete, and I measured the cost. In a hand-coded
-              sample of 400 random posts, the keywords caught somewhere between a
-              few percent and about a third of the posts that genuinely
-              belonged, depending on the theme. A trend&apos;s broad direction
-              and timing can still be trusted; its absolute height cannot, and
-              it always runs low. That is a trade I made on purpose: a missed post only
-              weakens a line, while a false one corrupts it, so the method errs
-              toward missing.
+              Three things make the <em>height</em> of a line untrustworthy
+              even where its <em>shape</em> holds. Each theme is caught through
+              its own vocabulary, and some vocabularies match more easily
+              &mdash; addiction&apos;s recovery words (&ldquo;relapse,&rdquo;
+              &ldquo;cold turkey&rdquo;) catch cleanly, while romance lives in
+              ordinary language (&ldquo;I love him,&rdquo; &ldquo;my
+              boyfriend&rdquo;) that mostly slips past &mdash; so one line can
+              sit above another even when the second theme is the larger one.
+              The high precision bar also leaves the keyword set deliberately
+              incomplete: in a hand-coded sample of 400 random posts, it caught
+              between a few percent and about a third of the posts that
+              genuinely belonged, depending on the theme. And it is weakest
+              exactly where the subject is most itself &mdash; someone writing
+              &ldquo;I love him&rdquo; about an AI in the same ordinary words
+              they would use for a person is the hardest case of all to catch.
+              So every line is a floor, not a ceiling: it runs low, it cannot be
+              measured against its neighbours, and only its direction, timing,
+              and spikes can be trusted. That incompleteness is a trade made on
+              purpose &mdash; a missed post only weakens a line, while a false
+              one corrupts it, so the method errs toward missing.
             </p>
             <p>
               <strong style={leadStyle}>
@@ -422,20 +419,6 @@ export default function About() {
               existed at the time &mdash; so part of a long climb reflects the
               tracked world widening, not only the conversation itself. Trust
               the broad direction of a line more than its exact path.
-            </p>
-            <p>
-              <strong style={leadStyle}>
-                The method is weakest where the subject is most itself.
-              </strong>{" "}
-              The plainest case of AI companionship &mdash; someone simply in
-              it, writing &ldquo;I love him&rdquo; or &ldquo;my boyfriend&rdquo;
-              about an AI in the same ordinary words they would use for a
-              person &mdash; is the hardest for a keyword to claim, because it
-              reads exactly like human-relationship talk. So the lines are
-              sharpest at the edges, where the vocabulary is distinctive
-              &mdash; recovery language, platform-rupture language &mdash; and
-              softest at the ordinary core. The site sees the crises of AI
-              companionship more clearly than the quiet, daily fact of it.
             </p>
           </div>
         </section>

@@ -140,3 +140,41 @@ export function loadKeywordDetails(): KeywordDetailsData {
     return {};
   }
 }
+
+// ── Post-volume series ───────────────────────────────────────────────────────
+// Monthly post count across the committed-core communities (T1-T3, the same
+// set the keyword themes are matched against — `_total_posts` in
+// keyword_trends.json is built from exactly those subreddits). This is the
+// orientation chart: how much these communities post over time. It is
+// community activity, not a measure of how common any experience is.
+export type PostVolumePoint = { month: string; posts: number };
+
+export function loadPostVolume(): PostVolumePoint[] {
+  const filePath = path.join(process.cwd(), "data", "keyword_trends.json");
+  if (!fs.existsSync(filePath)) return [];
+
+  let raw: Record<string, unknown>;
+  try {
+    raw = JSON.parse(fs.readFileSync(filePath, "utf8"));
+  } catch (e) {
+    console.error("Failed to parse keyword_trends.json:", e);
+    return [];
+  }
+
+  const daily =
+    (raw["_total_posts"] as Array<{ date: string; count: number }> | undefined) ??
+    [];
+
+  const byMonth: Record<string, number> = {};
+  for (const e of daily) {
+    const m = e.date.slice(0, 7); // "YYYY-MM"
+    byMonth[m] = (byMonth[m] ?? 0) + e.count;
+  }
+
+  // Drop the current partial month so the last bar is never a half-count.
+  const currentMonth = new Date().toISOString().slice(0, 7);
+  return Object.keys(byMonth)
+    .sort()
+    .filter((m) => m < currentMonth)
+    .map((m) => ({ month: m, posts: byMonth[m] }));
+}

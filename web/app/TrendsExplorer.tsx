@@ -17,15 +17,18 @@ export default function TrendsExplorer({ themeData }: Props) {
   const isMobileStrip = rawMobileStrip ?? false;
 
   return (
-    <div className="max-w-[1536px] mx-auto px-4 sm:px-8 py-4 sm:py-5">
-      {/* Headline */}
+    <div>
+      {/* Section header — the page masthead lives in page.tsx; this is §3. */}
       <div className="mb-4">
-        <h1 className="text-[22px] sm:text-2xl lg:text-3xl font-bold text-[#F8FAFC] mb-1.5">
-          How AI-companion communities talk about AI
-        </h1>
-        <p className="text-sm sm:text-base text-[#94A3B8]">
-          Six recurring themes across a curated set of AI-companion subreddits
-          — traced through the words people use, going back to 2017.
+        <h2 className="text-xl sm:text-2xl font-semibold text-[#F8FAFC] mb-1">
+          How the conversation shifts inside them
+        </h2>
+        <p
+          className="text-sm sm:text-base text-[#94A3B8]"
+          style={{ maxWidth: 700 }}
+        >
+          Six recurring themes, and how often each one&apos;s language surfaces
+          in posts across these communities, month by month.
         </p>
       </div>
 
@@ -49,16 +52,6 @@ export default function TrendsExplorer({ themeData }: Props) {
         ))}
       </div>
 
-      {/* How to read the panels — a chart-reading note, kept with the chart
-          rather than in the masthead. */}
-      <p className="text-xs sm:text-sm text-[#64748B] mb-3">
-        Each line tracks how often a theme&apos;s language comes up in posts.
-        Some themes are easier to detect this way than others, so each panel
-        has its own scale — compare a line&apos;s{" "}
-        <span className="text-[#94A3B8]">shape over time</span>, not its
-        height against another theme.
-      </p>
-
       {/* Trend Atlas — small-multiples grid. A plain section, not a
           figure/role="img": the panels are links and must stay discoverable
           in the accessibility tree (role="img" would collapse them into one
@@ -76,7 +69,7 @@ export default function TrendsExplorer({ themeData }: Props) {
         <TrendAtlas themeData={themeData} timeRange={timeRange} bp={bp} />
       </section>
 
-      {/* Methodology note */}
+      {/* Methodology + how-to-read — consolidated into one note, said once. */}
       <p
         className="text-center"
         style={{
@@ -84,11 +77,15 @@ export default function TrendsExplorer({ themeData }: Props) {
           color: "#8293A6",
           marginTop: 16,
           marginBottom: 8,
+          maxWidth: 760,
+          marginLeft: "auto",
+          marginRight: "auto",
         }}
       >
-        Each line is the rate of validated-keyword mentions per 1,000 posts,
-        plotted as a monthly average of post text. Counted by keyword — no AI
-        classification.{" "}
+        Each panel is one theme&apos;s rate of validated-keyword mentions per
+        1,000 posts, by month &mdash; counted by keyword, no AI classification.
+        The panels have independent scales: read each line&apos;s shape and
+        timing, not its height against another.{" "}
         <a
           href="/about#verification"
           style={{ color: "#94A3B8", textDecoration: "underline" }}
