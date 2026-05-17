@@ -148,7 +148,13 @@ export default function CommunitiesTable({
                   )}
                 </td>
                 <td className="py-3 pr-4 hidden sm:table-cell">
-                  <Sparkline values={activity.activity[s.subreddit] ?? []} />
+                  <Link
+                    href={`/communities/${s.subreddit}#activity`}
+                    aria-label={`Full activity chart for r/${s.subreddit}`}
+                    className="inline-block opacity-80 hover:opacity-100 transition-opacity"
+                  >
+                    <Sparkline values={activity.activity[s.subreddit] ?? []} />
+                  </Link>
                 </td>
                 <td className="py-3 pr-4 hidden sm:table-cell">
                   <TierBadge tier={s.tier} />

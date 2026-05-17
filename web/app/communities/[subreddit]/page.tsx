@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { getSubreddits } from "@/lib/data";
+import { getSubreddits, getCommunityActivity } from "@/lib/data";
 import Charts from "./Charts";
+import CommunityActivityChart from "./CommunityActivityChart";
 
 const TIER_LABELS: Record<number, string> = {
   0: "Tier 0 — General AI",
@@ -45,6 +46,9 @@ export default async function SubredditPage({
   const meta = all.find((s) => s.subreddit === subreddit);
   if (!meta) notFound();
 
+  const activity = getCommunityActivity();
+  const activitySeries = activity.activity[subreddit] ?? [];
+
   return (
     <div className="max-w-[1080px] mx-auto px-4 sm:px-8 py-8">
       <div className="mb-2">
@@ -76,6 +80,17 @@ export default async function SubredditPage({
         Engagement metrics for a single community &mdash; size and activity over
         time, shown as context.
       </p>
+
+      <section id="activity" className="mt-8 scroll-mt-8">
+        <p className="text-xs text-[#6B7689] uppercase tracking-widest mb-3">
+          Monthly post volume
+        </p>
+        <CommunityActivityChart months={activity.months} values={activitySeries} />
+        <p className="text-xs text-[#6B7689] mt-2 max-w-2xl">
+          Posts per month since January 2023, to the last complete month &mdash;
+          the longest-range view of this community&apos;s activity.
+        </p>
+      </section>
 
       <Charts subreddit={subreddit} />
 
