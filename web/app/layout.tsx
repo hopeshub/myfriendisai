@@ -74,7 +74,7 @@ export default function RootLayout({
           <div className="max-w-[1080px] mx-auto px-4 sm:px-8 py-4 flex items-center justify-between">
             <Link
               href="/"
-              className={`text-lg tracking-tight hover:text-primary transition-colors ${GeistSans.className}`}
+              className={`text-lg tracking-tight hover:opacity-80 transition-opacity ${GeistSans.className}`}
             >
               <span style={{ fontWeight: 300, color: "#9AA7B8" }}>My Friend Is</span>
               {" "}
