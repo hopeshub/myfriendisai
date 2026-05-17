@@ -3,14 +3,15 @@ import Link from "next/link";
 import { getSubreddits, getCommunityActivity } from "@/lib/data";
 import CommunitiesTable from "./CommunitiesTable";
 
+// Derived at build time so the count never drifts from the data.
+const communityCount = getSubreddits().length;
+
 export const metadata: Metadata = {
   title: "Communities — My Friend Is AI",
-  description:
-    "Browse 26 Reddit communities tracked for AI companionship trends — sortable by subscribers, posts per day, and engagement metrics.",
+  description: `Browse ${communityCount} Reddit communities tracked for AI companionship trends — sortable by subscribers, posts per day, and engagement metrics.`,
   openGraph: {
     title: "Communities — My Friend Is AI",
-    description:
-      "Browse 26 Reddit communities tracked for AI companionship trends.",
+    description: `Browse ${communityCount} Reddit communities tracked for AI companionship trends.`,
   },
 };
 

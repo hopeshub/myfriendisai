@@ -51,19 +51,19 @@ function pickSamplePosts(
   const seen = new Set<string>();
   for (const kw of keywords) {
     if (out.length >= limit) break;
-    const free = kw.sample_posts.find((sp) => !seen.has(sp.title));
+    const free = kw.sample_posts.find((sp) => !seen.has(sp.id));
     if (free) {
       out.push({ ...free, matchedTerm: kw.term });
-      seen.add(free.title);
+      seen.add(free.id);
     }
   }
   if (out.length < limit) {
     for (const kw of keywords) {
       for (const sp of kw.sample_posts) {
         if (out.length >= limit) break;
-        if (!seen.has(sp.title)) {
+        if (!seen.has(sp.id)) {
           out.push({ ...sp, matchedTerm: kw.term });
-          seen.add(sp.title);
+          seen.add(sp.id);
         }
       }
       if (out.length >= limit) break;

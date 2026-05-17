@@ -104,7 +104,7 @@ export default function ThemeChart({
             onClick={() => setRange(r)}
             aria-pressed={range === r}
             aria-label={`Show ${r === "ALL" ? "all time" : `last ${r}`}`}
-            className="px-3 h-8 text-xs font-medium rounded-md transition-colors"
+            className="px-3 h-11 sm:h-8 text-xs font-medium rounded-md transition-colors"
             style={{
               backgroundColor: range === r ? "#0F1117" : "transparent",
               color: range === r ? "#F8FAFC" : "#9AA7B8",

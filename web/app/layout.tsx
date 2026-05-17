@@ -48,7 +48,7 @@ function getSiteMeta() {
     // Fallback is deliberately conservative — if you see this in prod, site_meta.json
     // is missing or malformed and the daily export pipeline needs investigation.
     console.error("Failed to load site_meta.json, using fallback:", e);
-    return { total_posts: 0, date_start: "2023-01-01", date_end: "" };
+    return { total_posts: 0, date_start: "2017-01-01", date_end: "" };
   }
 }
 

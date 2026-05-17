@@ -60,6 +60,9 @@ export default function RecoveryChart({
         ticks.push(d.month);
       }
     }
+    // Drop a leading partial-year tick — data starts mid-2023, so the first
+    // tick would otherwise label "2023" most of the way along the axis.
+    if (ticks.length && !ticks[0].endsWith("-01")) ticks.shift();
     return ticks;
   }, [data]);
 

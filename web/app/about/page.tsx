@@ -125,7 +125,7 @@ const subheadStyle: React.CSSProperties = {
 
 export default function About() {
   const stats = [
-    { value: getPostCount(), label: "posts analyzed" },
+    { value: getPostCount(), label: "posts collected" },
     { value: String(getCommunityCount()), label: "communities tracked" },
     { value: String(THEMES.length), label: "recurring themes" },
   ];

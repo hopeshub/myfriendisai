@@ -85,9 +85,13 @@ export default function CommunitiesTable({
   );
 
   const sorted = [...filtered].sort((a, b) => {
-    const av = a[sort.key] ?? -Infinity;
-    const bv = b[sort.key] ?? -Infinity;
-    return sort.asc ? (av as number) - (bv as number) : (bv as number) - (av as number);
+    const av = a[sort.key];
+    const bv = b[sort.key];
+    // Missing values always sort to the bottom, ascending or descending.
+    if (av == null && bv == null) return 0;
+    if (av == null) return 1;
+    if (bv == null) return -1;
+    return sort.asc ? av - bv : bv - av;
   });
 
   return (
