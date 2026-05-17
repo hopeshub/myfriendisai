@@ -65,9 +65,10 @@ export default function Home() {
           communities tracked here. It is the plainest measure in the project
           &mdash; a count of posts, no keyword judgement involved &mdash; and it
           answers the simplest question: are these communities growing? They
-          are. Read it as community activity, not a headcount of people: one
-          prolific user outposts ten quiet ones, and the early years run low
-          because public archives captured less of them.
+          are. Read it as community activity, not a headcount of people &mdash;
+          one prolific user outposts ten quiet ones. And treat the shaded years
+          before 2023 as a floor, not a count: public archives captured them
+          only partially, and one 2017&ndash;2019 stretch not at all.
         </p>
         <PostVolumeChart data={postVolume} />
       </section>
