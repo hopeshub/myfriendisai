@@ -85,7 +85,7 @@ export default function RootLayout({
             >
               <span style={{ fontWeight: 400, color: "#9AA7B8", fontStyle: "normal" }}>My Friend Is</span>
               {" "}
-              <span style={{ fontWeight: 600, color: "#F8FAFC", fontStyle: "italic" }}>AI</span>
+              <span style={{ fontWeight: 600, color: "#F8FAFC", fontStyle: "normal" }}>AI</span>
             </Link>
             <nav className="flex gap-6 text-sm text-muted">
               <Link
