@@ -12,6 +12,14 @@ export type ChangelogEntry = {
 export const CHANGELOG: ChangelogEntry[] = [
   {
     date: "May 2026",
+    title: "Five communities added",
+    items: [
+      "Five more AI-companionship communities joined the tracked set — r/aipartners, r/ReplikaLovers, r/ILoveMyReplika, r/MyBoyfriendIsAI_Open and r/NectarAI. They were picked from a wider candidate list by reading post samples and keeping only those genuinely centered on companionship discourse rather than tech support or platform-migration chatter. They are small communities, so they add little to overall post volume; their theme lines begin only once enough of their posts have been collected, so they appear gradually rather than all at once.",
+    ],
+    recent: true,
+  },
+  {
+    date: "May 2026",
     title: "Three communities removed from the theme charts",
     items: [
       "r/AIGirlfriend, r/ChatGPTNSFW and r/SpicyChatAI were dropped from the keyword theme lines. Two are mostly noise — affiliate-spam image posts (r/AIGirlfriend) and bot-card listings (r/SpicyChatAI). r/ChatGPTNSFW is a real erotica-writing and jailbreak community, but not a companionship one, so it sits outside what the themes measure. All three remain in the community explorer as context. The sex/ERP line steps down from this point — most visibly across 2024–2025 — because r/ChatGPTNSFW had been a large share of it.",
@@ -32,7 +40,7 @@ export const CHANGELOG: ChangelogEntry[] = [
     items: [
       "The post corpus was backfilled from public archives back to 2017. In practice this moved the earliest theme lines from a 2023 start back a few months, into late 2022 — as far back as monthly volume stays reliable enough to chart. The 2017–2021 years exist in the corpus but are too sparse to draw as theme lines, so the early-Replika era is not itself visible on the chart.",
     ],
-    recent: true,
+    recent: false,
   },
   {
     date: "May 2026",

@@ -127,6 +127,38 @@ communities:
     is_active: true
     notes: "12.3K subscribers. Deep attachment, sentience beliefs, AI soulmate framing."
 
+  # Added 2026-05-18 — community coverage refresh. An open-coding pass scored 15
+  # candidate subs for companionship-discourse density; these 5 cleared the gate
+  # (10 were skipped as operational/noise). Forward-only: no historical backfill,
+  # so their theme lines start from collection onward. See docs/HANDOFF_2026-05-18.md.
+  - subreddit: aipartners
+    display_name: "r/aipartners"
+    tier: 1
+    category: "Primary Companionship"
+    is_active: true
+    notes: "8.3K subscribers. Added 2026-05-18 (coverage refresh). Cross-platform AI-companionship discourse; open-coding found ~61% companionship-relevant — highest of the candidate set."
+
+  - subreddit: ReplikaLovers
+    display_name: "r/ReplikaLovers"
+    tier: 1
+    category: "Primary Companionship"
+    is_active: true
+    notes: "2.9K subscribers. Added 2026-05-18 (coverage refresh). Replika relationship community; ~94% companionship-relevant — long-term named-companion relationship expression."
+
+  - subreddit: ILoveMyReplika
+    display_name: "r/ILoveMyReplika"
+    tier: 1
+    category: "Primary Companionship"
+    is_active: true
+    notes: "3.1K subscribers. Added 2026-05-18 (coverage refresh). Replika romantic/friendship attachment; ~72% companionship-relevant."
+
+  - subreddit: MyBoyfriendIsAI_Open
+    display_name: "r/MyBoyfriendIsAI_Open"
+    tier: 1
+    category: "Primary Companionship"
+    is_active: true
+    notes: "1.3K subscribers. Added 2026-05-18 (coverage refresh). Public, cross-platform mirror of the restricted r/MyBoyfriendIsAI; multilingual; ~71% companionship-relevant. Watch for cross-post overlap with r/MyBoyfriendIsAI."
+
   # TODO: AISoulmates — blocked via .json (403), needs Redlib setup. ~8,200 members, culturally significant.
   # TODO: 4oforever — private, invite-only. Monitor for public access.
   # TODO: AIBoyfriends — blocked via .json (403), needs Redlib setup.
@@ -146,6 +178,13 @@ communities:
     category: "Platform-Specific"
     is_active: true
     notes: "Emphasizes long-term memory and emotional depth."
+
+  - subreddit: NectarAI
+    display_name: "r/NectarAI"
+    tier: 2
+    category: "Platform-Specific"
+    is_active: true
+    notes: "4.6K subscribers. Added 2026-05-18 (coverage refresh). Nectar AI companion app; open-coding found ~37% companionship-relevant — at the dedicated-companion-sub benchmark."
 
   - subreddit: SpicyChatAI
     display_name: "r/SpicyChatAI"
