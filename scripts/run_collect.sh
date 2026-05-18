@@ -37,7 +37,12 @@ echo "=== Collection finished at $(date -u '+%Y-%m-%d %H:%M:%S UTC') (exit code:
 # Get collection stats from the database
 posts_collected=0
 subreddits_ok=0
-subreddits_total=27
+# Total tracked communities — derived from config, not hardcoded, so it stays
+# correct as communities are added/deactivated.
+subreddits_total=$("$PROJECT_DIR/.venv/bin/python" -c "
+from src.config import load_communities
+print(len(load_communities()))
+" 2>/dev/null || echo 0)
 if [ $collect_exit -eq 0 ]; then
     posts_collected=$("$PROJECT_DIR/.venv/bin/python" -c "
 import sqlite3

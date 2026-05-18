@@ -26,7 +26,7 @@ from src.utils.rate_limiter import RateLimiter
 from src.db.schema import initialize as init_db
 from src.db.operations import export_snapshots_json, export_subreddits_json, export_site_meta_json, export_community_activity_json, sync_subreddit_config, update_contributor_metrics_for_date
 from src.collector import collect_subreddit
-from src.keyword_scanner import scan_subreddit_keywords, store_keyword_counts, export_keywords_json
+from src.keyword_scanner import scan_subreddit_keywords, store_keyword_counts
 from src.db.operations import export_keyword_trends_json, export_theme_health_json
 from src.keyword_matching import build_patterns, match_text
 
@@ -233,10 +233,6 @@ def _step_export(conn):
     os.replace(str(activity_path), str(data_dir / "community_activity.json"))
     activity_path = data_dir / "community_activity.json"
 
-    kw_path = export_keywords_json(output_path=data_dir / "keywords.json.tmp", conn=conn)
-    os.replace(str(kw_path), str(data_dir / "keywords.json"))
-    kw_path = data_dir / "keywords.json"
-
     kw_trends_path = export_keyword_trends_json(output_path=data_dir / "keyword_trends.json.tmp", conn=conn)
     os.replace(str(kw_trends_path), str(data_dir / "keyword_trends.json"))
     kw_trends_path = data_dir / "keyword_trends.json"
@@ -260,11 +256,9 @@ def _step_export(conn):
     os.replace(str(health_path), str(data_dir / "theme_health.json"))
     health_path = data_dir / "theme_health.json"
 
-    logger.info("Exported: %s, %s, %s, %s, %s, %s", snap_path, sub_path, kw_path, kw_trends_path, meta_path, health_path)
+    logger.info("Exported: %s, %s, %s, %s, %s", snap_path, sub_path, kw_trends_path, meta_path, health_path)
 
     # Copy to web/data/ atomically.
-    # Note: data/keywords.json is intentionally NOT copied — the frontend
-    # doesn't import it, and the 2.4 MB payload was dead weight on every request.
     web_data_dir = Path(__file__).parent.parent / "web" / "data"
     web_data_dir.mkdir(parents=True, exist_ok=True)
     _atomic_copy(snap_path, web_data_dir / "snapshots.json")

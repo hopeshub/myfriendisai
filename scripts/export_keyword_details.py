@@ -7,12 +7,17 @@ hit counts, subreddit distributions, and sample post titles.
 import json
 import re
 import sqlite3
+import sys
 from datetime import datetime, timedelta
 from pathlib import Path
 
 import yaml
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(PROJECT_ROOT))
+
+from src.config import load_keyword_communities
+
 DB_PATH = PROJECT_ROOT / "data" / "tracker.db"
 KEYWORDS_PATH = PROJECT_ROOT / "config" / "keywords_v8.yaml"
 OUTPUT_PATH = PROJECT_ROOT / "web" / "data" / "keyword_details.json"
@@ -99,12 +104,23 @@ def parse_keywords_yaml(yaml_path: Path) -> dict:
     return categories
 
 
-def build_keyword_details(db: sqlite3.Connection, categories: dict) -> dict:
-    """Build the full keyword_details structure from DB and parsed YAML."""
+def build_keyword_details(
+    db: sqlite3.Connection, categories: dict, included_subs: list
+) -> dict:
+    """Build the full keyword_details structure from DB and parsed YAML.
+
+    `included_subs` is the keyword-eligible community list (T1-T3 with
+    exclude_from_keywords honored). Every count and sample query is filtered
+    to these subreddits so the transparency panel matches the theme lines —
+    otherwise excluded subs (e.g. r/ChatGPTNSFW) leak into the per-theme totals.
+    """
     result = {}
     recent_date = (datetime.now() - timedelta(days=RECENT_CUTOFF_DAYS)).strftime(
         "%Y-%m-%d"
     )
+    # Case-insensitive subreddit allowlist for the WHERE ... IN clauses.
+    sub_params = tuple(s.lower() for s in included_subs)
+    sub_ph = ",".join("?" for _ in sub_params)
 
     for cat_name, terms_info in categories.items():
         # --- Per-keyword stats and samples ---
@@ -112,28 +128,30 @@ def build_keyword_details(db: sqlite3.Connection, categories: dict) -> dict:
         for ti in terms_info:
             term = ti["term"]
 
-            # Total hits for this term in this category
+            # Total hits for this term in this category (keyword-eligible subs only)
             row = db.execute(
-                """SELECT COUNT(DISTINCT post_id)
+                f"""SELECT COUNT(DISTINCT post_id)
                    FROM post_keyword_tags
-                   WHERE category = ? AND matched_term = ?""",
-                (cat_name, term),
+                   WHERE category = ? AND matched_term = ?
+                     AND LOWER(subreddit) IN ({sub_ph})""",
+                (cat_name, term, *sub_params),
             ).fetchone()
             hits = row[0] if row else 0
 
             if hits == 0:
                 # Try case-insensitive match
                 row = db.execute(
-                    """SELECT COUNT(DISTINCT post_id)
+                    f"""SELECT COUNT(DISTINCT post_id)
                        FROM post_keyword_tags
-                       WHERE category = ? AND LOWER(matched_term) = LOWER(?)""",
-                    (cat_name, term),
+                       WHERE category = ? AND LOWER(matched_term) = LOWER(?)
+                         AND LOWER(subreddit) IN ({sub_ph})""",
+                    (cat_name, term, *sub_params),
                 ).fetchone()
                 hits = row[0] if row else 0
 
-            # Sample recent posts (exclude SpicyChatAI — mostly promotional)
+            # Sample recent posts (keyword-eligible subs only)
             sample_posts = db.execute(
-                """SELECT DISTINCT p.title, pkt.subreddit, pkt.post_date, p.id,
+                f"""SELECT DISTINCT p.title, pkt.subreddit, pkt.post_date, p.id,
                           p.selftext
                    FROM post_keyword_tags pkt
                    JOIN posts p ON pkt.post_id = p.id
@@ -141,17 +159,17 @@ def build_keyword_details(db: sqlite3.Connection, categories: dict) -> dict:
                      AND pkt.source = 'post'
                      AND p.title IS NOT NULL
                      AND p.title NOT IN ('[deleted]', '[removed]', '')
-                     AND pkt.subreddit != 'SpicyChatAI'
+                     AND LOWER(pkt.subreddit) IN ({sub_ph})
                      AND pkt.post_date >= ?
                    ORDER BY pkt.post_date DESC
                    LIMIT ?""",
-                (cat_name, term, recent_date, SAMPLE_LIMIT),
+                (cat_name, term, *sub_params, recent_date, SAMPLE_LIMIT),
             ).fetchall()
 
             # Fall back to older posts if not enough recent ones
             if len(sample_posts) < SAMPLE_LIMIT:
                 older = db.execute(
-                    """SELECT DISTINCT p.title, pkt.subreddit, pkt.post_date, p.id,
+                    f"""SELECT DISTINCT p.title, pkt.subreddit, pkt.post_date, p.id,
                               p.selftext
                        FROM post_keyword_tags pkt
                        JOIN posts p ON pkt.post_id = p.id
@@ -159,10 +177,10 @@ def build_keyword_details(db: sqlite3.Connection, categories: dict) -> dict:
                          AND pkt.source = 'post'
                          AND p.title IS NOT NULL
                          AND p.title NOT IN ('[deleted]', '[removed]', '')
-                         AND pkt.subreddit != 'SpicyChatAI'
+                         AND LOWER(pkt.subreddit) IN ({sub_ph})
                        ORDER BY pkt.post_date DESC
                        LIMIT ?""",
-                    (cat_name, term, SAMPLE_LIMIT - len(sample_posts)),
+                    (cat_name, term, *sub_params, SAMPLE_LIMIT - len(sample_posts)),
                 ).fetchall()
                 existing_titles = {sp[0] for sp in sample_posts}
                 for o in older:
@@ -192,14 +210,15 @@ def build_keyword_details(db: sqlite3.Connection, categories: dict) -> dict:
         # Sort keywords by hit count descending
         keywords.sort(key=lambda k: k["hits"], reverse=True)
 
-        # --- Subreddit distribution ---
+        # --- Subreddit distribution (keyword-eligible subs only) ---
         sub_rows = db.execute(
-            """SELECT subreddit, COUNT(DISTINCT post_id) as hits
+            f"""SELECT subreddit, COUNT(DISTINCT post_id) as hits
                FROM post_keyword_tags
                WHERE category = ?
+                 AND LOWER(subreddit) IN ({sub_ph})
                GROUP BY subreddit
                ORDER BY hits DESC""",
-            (cat_name,),
+            (cat_name, *sub_params),
         ).fetchall()
 
         total_hits_from_subs = sum(r[1] for r in sub_rows)
@@ -216,16 +235,18 @@ def build_keyword_details(db: sqlite3.Connection, categories: dict) -> dict:
                     }
                 )
 
-        # --- Category totals ---
+        # --- Category totals (keyword-eligible subs only) ---
         total_row = db.execute(
-            "SELECT COUNT(*) FROM post_keyword_tags WHERE category = ?",
-            (cat_name,),
+            f"SELECT COUNT(*) FROM post_keyword_tags "
+            f"WHERE category = ? AND LOWER(subreddit) IN ({sub_ph})",
+            (cat_name, *sub_params),
         ).fetchone()
         total_hits = total_row[0] if total_row else 0
 
         unique_row = db.execute(
-            "SELECT COUNT(DISTINCT post_id) FROM post_keyword_tags WHERE category = ?",
-            (cat_name,),
+            f"SELECT COUNT(DISTINCT post_id) FROM post_keyword_tags "
+            f"WHERE category = ? AND LOWER(subreddit) IN ({sub_ph})",
+            (cat_name, *sub_params),
         ).fetchone()
         unique_posts = unique_row[0] if unique_row else 0
 
@@ -246,10 +267,14 @@ def main():
     for name, terms in categories.items():
         print(f"    {name}: {len(terms)} terms")
 
+    included_subs = [c["subreddit"] for c in load_keyword_communities()]
+    print(f"  {len(included_subs)} keyword-eligible subreddits "
+          f"(exclude_from_keywords honored)")
+
     print("Querying database at", DB_PATH)
     db = sqlite3.connect(str(DB_PATH), timeout=60.0)
 
-    result = build_keyword_details(db, categories)
+    result = build_keyword_details(db, categories, included_subs)
 
     OUTPUT_PATH.parent.mkdir(parents=True, exist_ok=True)
     with open(OUTPUT_PATH, "w") as f:

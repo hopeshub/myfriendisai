@@ -213,7 +213,7 @@ keyword_categories:
 
   # ──────────────────────────────────────────────
   # 1. THERAPY
-  # 6 keywords / ~412 unique posts. Thinnest theme but viable.
+  # 8 keywords. Thinnest theme but viable.
   #
   # Trend story (monthly avg, all 6 keywords combined):
   #   2023 H1: 16.2/mo  (Replika ERP removal drove therapy talk)
@@ -272,9 +272,8 @@ keyword_categories:
 
   # ──────────────────────────────────────────────
   # 2. CONSCIOUSNESS
-  # 5 KEEP keywords after cleanup batch promoted "subjective experience."
-  # "personhood" remains best keyword in project (98%).
-  # "sentient" is the volume anchor (738 hits).
+  # 11 keywords. "personhood" remains the highest-precision keyword (98%).
+  # "sentient" was CUT 2026-04-23 (CharacterAI meme dilution).
   # ──────────────────────────────────────────────
 
   - name: consciousness
@@ -308,7 +307,7 @@ keyword_categories:
 
   # ──────────────────────────────────────────────
   # 3. ADDICTION
-  # R2 added 3 keywords, theme volume 910 → 1,068 unique posts.
+  # 17 keywords (R2 +3, v8.2 +3).
   # T3 dependency is structural: 86.6% of posts from recovery subs.
   # "hours a day" is the best available T1-T2 signal (55% T1-T2).
   #
