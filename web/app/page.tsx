@@ -137,7 +137,7 @@ export default function Home() {
           className="font-display text-xl sm:text-2xl font-semibold text-[#F1F4F8]"
           style={{ marginBottom: 8, maxWidth: measure }}
         >
-          How the conversation shifts inside them
+          How the conversation shifts inside these communities
         </h2>
         <p style={{ ...intro, marginBottom: 16 }}>
           Six recurring themes, and how often each one&apos;s language surfaces
