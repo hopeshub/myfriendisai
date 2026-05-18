@@ -241,8 +241,8 @@ export default function About() {
             </p>
             <p>
               This is a real choice, and it shapes what the site can see.
-              These communities &mdash; the committed core of AI companionship
-              on Reddit &mdash; lean toward people for whom it is central and
+              These communities &mdash; where the AI is the relationship, not
+              the tool &mdash; lean toward people for whom it is central and
               often intense, including recovery communities for people trying
               to quit. That makes the site good at catching
               that end of the spectrum and blind to casual mentions elsewhere.
