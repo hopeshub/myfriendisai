@@ -100,8 +100,7 @@ export default async function Image() {
             color: "#94A3B8",
           }}
         >
-          myfriendisai.com — {POST_COUNT} posts from {COMMUNITY_COUNT} Reddit
-          communities
+          {`myfriendisai.com — ${POST_COUNT} posts from ${COMMUNITY_COUNT} Reddit communities`}
         </div>
       </div>
     ),
