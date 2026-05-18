@@ -44,41 +44,66 @@ export default function Home() {
         >
           When the AI is the relationship, not the tool
         </h1>
-        <p
-          className="rise-in"
-          style={{ ...intro, fontSize: 16, color: "#9AA7B8", animationDelay: "80ms" }}
-        >
-          A live record of the Reddit communities where AI companionship is the
-          central subject &mdash; from r/replika to r/MyBoyfriendIsAI to
-          communities for people trying to quit.
-        </p>
-        <p
-          className="rise-in"
-          style={{
-            ...intro,
-            fontSize: 16,
-            color: "#9AA7B8",
-            marginTop: 12,
-            animationDelay: "160ms",
-          }}
-        >
-          It tracks six recurring themes in how these communities talk, and the
-          platform events that move them.
-        </p>
-        <p
-          className="rise-in"
-          style={{
-            ...intro,
-            fontSize: 16,
-            color: "#9AA7B8",
-            fontWeight: 500,
-            marginTop: 12,
-            animationDelay: "240ms",
-          }}
-        >
-          It can&apos;t tell you how common AI companionship is. It can show
-          you, month by month, how the conversation about it changes.
-        </p>
+        <ul style={{ listStyleType: "none", padding: 0, margin: 0, maxWidth: measure }}>
+          {[
+            {
+              delay: "80ms",
+              fontWeight: 400,
+              body: (
+                <>
+                  A live record of the Reddit communities where AI
+                  companionship is the central subject &mdash; from r/replika
+                  to r/MyBoyfriendIsAI to communities for people trying to
+                  quit.
+                </>
+              ),
+            },
+            {
+              delay: "160ms",
+              fontWeight: 400,
+              body: (
+                <>
+                  It tracks six recurring themes in how these communities talk,
+                  and the platform events that move them.
+                </>
+              ),
+            },
+            {
+              delay: "240ms",
+              fontWeight: 500,
+              body: (
+                <>
+                  It can&apos;t tell you how common AI companionship is. It can
+                  show you, month by month, how the conversation about it
+                  changes.
+                </>
+              ),
+            },
+          ].map((item, i) => (
+            <li
+              key={i}
+              className="rise-in"
+              style={{
+                ...intro,
+                fontSize: 16,
+                color: "#9AA7B8",
+                fontWeight: item.fontWeight,
+                marginTop: i === 0 ? 0 : 12,
+                paddingLeft: 18,
+                position: "relative",
+                animationDelay: item.delay,
+              }}
+            >
+              <span
+                aria-hidden
+                style={{ position: "absolute", left: 0, color: "#6B7689" }}
+              >
+                &bull;
+              </span>
+              {item.body}
+            </li>
+          ))}
+        </ul>
       </header>
 
       {/* §1 — Orientation: post volume */}
