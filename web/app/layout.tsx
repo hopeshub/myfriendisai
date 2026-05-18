@@ -78,10 +78,10 @@ export default function RootLayout({
         <a href="#main" className="skip-link">Skip to content</a>
         <StaleDataBanner />
         <header className="border-b border-border">
-          <div className="max-w-[1080px] mx-auto px-4 sm:px-8 py-4 flex items-center justify-between">
+          <div className="max-w-[1080px] mx-auto px-4 sm:px-8 py-4 flex flex-col sm:flex-row items-start sm:items-center sm:justify-between gap-3 sm:gap-0">
             <Link
               href="/"
-              className="font-display text-lg tracking-tight hover:opacity-80 transition-opacity"
+              className="font-display text-lg tracking-tight whitespace-nowrap hover:opacity-80 transition-opacity"
             >
               <span style={{ fontWeight: 400, color: "#9AA7B8", fontStyle: "normal" }}>My Friend Is</span>
               {" "}
@@ -104,7 +104,7 @@ export default function RootLayout({
                 href="https://github.com/hopeshub/myfriendisai"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hover:text-foreground transition-colors"
+                className="whitespace-nowrap hover:text-foreground transition-colors"
               >
                 GitHub ↗
               </a>
