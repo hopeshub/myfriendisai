@@ -1,14 +1,19 @@
 #!/usr/bin/env bash
-# Two-tier backup of tracker.db:
-#   Tier 1 (local):    backup_db.sh -> WAL-safe timestamped snapshot on T9 (keeps 7)
-#   Tier 2 (off-site): restic -> encrypted, deduplicated repo in Backblaze B2
+# Off-site backup of tracker.db to Backblaze B2 via restic.
 #
-# Credentials (B2 keys + restic repo password) are sourced from
+# Self-contained — no external drive involved. Steps:
+#   1. WAL-safe staging copy of the DB on the internal disk
+#   2. integrity check on that copy
+#   3. restic backup of the copy to the encrypted B2 repo
+#   4. prune old B2 snapshots (keep 7 daily / 5 weekly / 12 monthly)
+#   5. delete the staging copy
+#
+# Credentials (B2 keys + restic repo password) come from
 # ~/.config/myfriendisai-backup.env (chmod 600, never committed).
 #
-# Scheduled daily via launchd (com.myfriendisai.backup-b2); can also be run
-# manually. Safe to run while the collection pipeline is active — sqlite3
-# .backup is WAL-safe and restic locks its own repo.
+# Scheduled daily via launchd (com.myfriendisai.backup-b2). Safe to run
+# while the collection pipeline is active — sqlite3 .backup is WAL-safe
+# and restic locks its own repo.
 
 set -euo pipefail
 cd "$(dirname "$0")/.."
@@ -17,12 +22,16 @@ cd "$(dirname "$0")/.."
 export PATH="/opt/homebrew/bin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH"
 
 CRED="$HOME/.config/myfriendisai-backup.env"
-T9_DIR="/Volumes/T9/myfriendisai-backup/db"
+DB="data/tracker.db"
+STAGING="data/tracker-staging.db"   # data/*.db is gitignored
 LOG="logs/backup_b2.log"
 
 mkdir -p logs
 [ -f "$LOG" ] && mv "$LOG" "$LOG.prev"
 exec >> "$LOG" 2>&1
+
+# Always remove the staging copy on exit — success, failure, or interrupt.
+trap 'rm -f "$STAGING" "$STAGING-shm" "$STAGING-wal"' EXIT
 
 fail() {
     echo "BACKUP_B2_ERR: $1"
@@ -36,29 +45,32 @@ echo "[$(date)] ===== B2 backup start ====="
 # shellcheck disable=SC1090
 source "$CRED"
 [ -n "${RESTIC_REPOSITORY:-}" ] || fail "RESTIC_REPOSITORY not set (bad credentials file)"
-[ -d "/Volumes/T9" ] || fail "T9 drive not mounted — cannot stage snapshot"
+[ -f "$DB" ] || fail "database not found: $DB"
 
-# ── Tier 1: local WAL-safe snapshot to T9 (timestamped, keeps last 7) ──
-echo "[$(date)] Tier 1: local snapshot via backup_db.sh ..."
-bash scripts/backup_db.sh "$T9_DIR" || fail "backup_db.sh (local snapshot) failed"
+# 1. WAL-safe staging copy on the internal disk. sqlite3 .backup produces a
+#    consistent snapshot even while the collector is writing to the live DB.
+echo "[$(date)] WAL-safe staging copy -> $STAGING"
+rm -f "$STAGING" "$STAGING-shm" "$STAGING-wal"
+sqlite3 "$DB" ".backup '$STAGING'" || fail "sqlite3 .backup failed"
+[ -f "$STAGING" ] || fail "staging copy was not created"
 
-# ── Tier 2: restic the newest snapshot to the encrypted B2 repo ──
-LATEST=$(ls -t "$T9_DIR"/tracker_*.db 2>/dev/null | head -1)
-[ -n "$LATEST" ] || fail "no T9 snapshot found to upload"
-echo "[$(date)] Tier 2: restic backup -> $RESTIC_REPOSITORY"
-echo "[$(date)]   source: $LATEST"
-restic backup "$LATEST" --tag tracker-db --host myfriendisai-collector \
+# 2. Integrity-check the copy before trusting it.
+echo "[$(date)] Verifying staging copy (quick_check) ..."
+qc=$(sqlite3 "$STAGING" "PRAGMA quick_check;" 2>&1)
+[ "$qc" = "ok" ] || fail "staging copy failed quick_check: $qc"
+
+# 3. restic backup the copy to the encrypted B2 repo.
+echo "[$(date)] restic backup -> $RESTIC_REPOSITORY"
+restic backup "$STAGING" --tag tracker-db --host myfriendisai-collector \
     || fail "restic backup failed"
 
-# ── Retention: prune old B2 snapshots ──
-# group-by host,tags (NOT the default host,paths): the source filename is
-# timestamped, so path-grouping would put every day in its own group and the
-# keep-policy would never prune. Tag-grouping treats all daily snapshots as
-# one series.
+# 4. Retention. group-by host,tags (NOT the default host,paths) so every
+#    daily snapshot counts as one series for the keep-policy.
 echo "[$(date)] Pruning B2 snapshots (keep 7 daily / 5 weekly / 12 monthly) ..."
 restic forget --tag tracker-db --group-by host,tags \
     --keep-daily 7 --keep-weekly 5 --keep-monthly 12 \
     --prune || fail "restic forget/prune failed"
 
+# 5. staging copy removed by the EXIT trap.
 echo "[$(date)] ===== B2 backup done ====="
 restic snapshots --tag tracker-db --compact --group-by host,tags 2>/dev/null | tail -8 || true
