@@ -149,9 +149,10 @@ export default function About() {
               focus: the parts of life with an AI companion that carry real
               weight, like intimacy, belief, dependence, and loss. There is no
               &ldquo;fun,&rdquo; &ldquo;creativity,&rdquo; or &ldquo;everyday
-              utility&rdquo; theme here. This is the lens the project looks
-              through; the list
-              below is what it was pointed at:
+              utility&rdquo; theme here &mdash; and everyday practical talk (bug
+              reports, tips, which app to use) is, in fact, most of what these
+              communities post. This is the lens the project looks through; the
+              list below is what it was pointed at:
             </p>
             <ul
               className="space-y-2"
