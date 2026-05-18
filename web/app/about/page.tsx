@@ -434,7 +434,7 @@ export default function About() {
               >
                 @hopes_revenge
               </a>
-              , the project&apos;s only point of contact.
+              .
             </p>
           </div>
         </section>
