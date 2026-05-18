@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { getSubreddits } from "@/lib/data";
+import { THEMES } from "./themes";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const subreddits = getSubreddits();
@@ -10,6 +11,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     lastModified: now,
     changeFrequency: "daily" as const,
     priority: 0.6,
+  }));
+
+  // The six theme pages — core content, second only to the homepage.
+  const themePages = THEMES.map((t) => ({
+    url: `https://myfriendisai.com/theme/${t.id}`,
+    lastModified: now,
+    changeFrequency: "daily" as const,
+    priority: 0.8,
   }));
 
   return [
@@ -31,6 +40,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "daily",
       priority: 0.7,
     },
+    ...themePages,
     ...communityPages,
   ];
 }
