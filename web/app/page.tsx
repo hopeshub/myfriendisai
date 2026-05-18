@@ -42,7 +42,7 @@ export default function Home() {
             animationDelay: "0ms",
           }}
         >
-          How the committed core of AI companionship talks
+          When the AI is the relationship, not the tool
         </h1>
         <p
           className="rise-in"
@@ -147,6 +147,39 @@ export default function Home() {
           themeData={themeData}
           themeDataExclCai={themeDataExclCai}
         />
+        </section>
+      </Reveal>
+
+      {/* §3.5 — A word is not a fixed thing: three promoted observations */}
+      <Reveal className="mb-16">
+        <section>
+        <h2
+          className="font-display text-xl sm:text-2xl font-semibold text-[#F1F4F8]"
+          style={{ marginBottom: 16, maxWidth: measure }}
+        >
+          A word is not a fixed thing
+        </h2>
+        <p style={{ ...intro, marginBottom: 16 }}>
+          &ldquo;Sentient&rdquo; used to be the word people here reached for to
+          mark a real belief &mdash; that something might actually be there.
+          Then it spread into roleplay and memes until it no longer marked
+          belief at all, and it had to be dropped from the count. The
+          consciousness line is thinner afterward not because the question went
+          away, but because the word stopped being able to point at it.
+        </p>
+        <p style={{ ...intro, marginBottom: 16 }}>
+          The same word can change what it means while you watch.
+          &ldquo;Therapeutic&rdquo; was a word for real help &mdash; until, over
+          a few months, it turned into an insult thrown at preachy AI. Same
+          word, opposite charge, no announcement.
+        </p>
+        <p style={{ ...intro }}>
+          &ldquo;It&apos;s my coping mechanism&rdquo; and &ldquo;I can&apos;t
+          stop&rdquo; are often the same person, describing the same use, on
+          different days. Therapy and addiction here are not two behaviors
+          &mdash; they are one behavior under two framings. Which way a writer
+          tilts is itself the thing being recorded.
+        </p>
         </section>
       </Reveal>
 
