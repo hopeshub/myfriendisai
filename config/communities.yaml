@@ -152,7 +152,8 @@ communities:
     tier: 2
     category: "Platform-Specific"
     is_active: true
-    notes: "Free NSFW AI characters, minimal moderation. 55K subscribers. (Previously tracked wrong sub r/SpicyChat with 294 subs.)"
+    exclude_from_keywords: true
+    notes: "Free NSFW AI characters. 55K subscribers. exclude_from_keywords 2026-05-18: re-examine found a bot-card marketplace + product/filter support forum — keyword tags were card-listing noise (same failure mode as JanitorAI/SillyTavern). Kept for community-explorer context. See docs/nsfw_scope_position.md."
 
   - subreddit: ChaiApp
     display_name: "r/ChaiApp"
@@ -180,14 +181,16 @@ communities:
     tier: 2
     category: "Platform-Specific"
     is_active: true
-    notes: "69K subscribers. NSFW (over_18: true) but accessible via .json. May be image-heavy — evaluate keyword noise after tagging."
+    exclude_from_keywords: true
+    notes: "69K subscribers. NSFW (over_18: true), accessible via .json. exclude_from_keywords 2026-05-18: re-examine found ~91% affiliate-spam image posts; keyword tags were marketing copy, not discourse. Kept for community-explorer context. See docs/nsfw_scope_position.md."
 
   - subreddit: ChatGPTNSFW
     display_name: "r/ChatGPTNSFW"
     tier: 2
     category: "Platform-Specific"
     is_active: true
-    notes: "77K subscribers. NSFW (over_18: true) but accessible via .json. Sexual/erotic ChatGPT use — evaluate after tagging."
+    exclude_from_keywords: true
+    notes: "77K subscribers. NSFW (over_18: true), accessible via .json. exclude_from_keywords 2026-05-18: re-examine found an erotica-writing/jailbreak community, not companionship — off-construct (real signal, no companion relationship). Kept for community-explorer context. See docs/nsfw_scope_position.md."
 
   # ===== TIER 3 — Recovery & Dependency =====
 

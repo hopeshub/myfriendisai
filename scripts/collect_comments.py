@@ -23,6 +23,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent))
 from src.reddit_client import RedditClient, RedditError, SubredditForbidden, SubredditNotFound
 from src.utils.rate_limiter import RateLimiter
 from src.db.schema import initialize as init_db
+from src.config import load_communities
 
 logging.basicConfig(
     level=logging.INFO,
@@ -31,8 +32,12 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-# Subreddits excluded from comment collection (same as keyword tagging exclusions)
-EXCLUDED_SUBREDDITS = {"JanitorAI_Official", "SillyTavernAI"}
+# Subreddits excluded from comment collection: mirrors the keyword-tagging
+# exclusions — the two never-tracked bot-card subs, plus any tracked community
+# flagged exclude_from_keywords in communities.yaml (so the lists can't drift).
+EXCLUDED_SUBREDDITS = {"JanitorAI_Official", "SillyTavernAI"} | {
+    c["subreddit"] for c in load_communities() if c.get("exclude_from_keywords")
+}
 
 # Bot authors whose comments are noise for thematic analysis
 BOT_AUTHORS = {

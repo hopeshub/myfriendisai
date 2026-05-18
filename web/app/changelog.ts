@@ -12,6 +12,14 @@ export type ChangelogEntry = {
 export const CHANGELOG: ChangelogEntry[] = [
   {
     date: "May 2026",
+    title: "Three communities removed from the theme charts",
+    items: [
+      "r/AIGirlfriend, r/ChatGPTNSFW and r/SpicyChatAI were dropped from the keyword theme lines. Two are mostly noise — affiliate-spam image posts (r/AIGirlfriend) and bot-card listings (r/SpicyChatAI). r/ChatGPTNSFW is a real erotica-writing and jailbreak community, but not a companionship one, so it sits outside what the themes measure. All three remain in the community explorer as context. The sex/ERP line steps down from this point — most visibly across 2024–2025 — because r/ChatGPTNSFW had been a large share of it.",
+    ],
+    recent: true,
+  },
+  {
+    date: "May 2026",
     title: "Theme accuracy re-checked",
     items: [
       "Re-checked that keywords land on the theme they claim — about 1,800 tagged posts re-read by a separate automated check, then a sample re-coded by hand. Keywords reliably identify AI-companion discourse; sorting it into the right theme is tightest for sex/ERP and addiction, and holds up better for therapy and consciousness than that first automated pass suggested. The re-check also confirmed that therapy and addiction are largely one subject — the same reliance on an AI, framed once as help and once as a problem. No keywords changed: the response to a fast-moving vocabulary is disclosure, not constant edits.",
@@ -32,7 +40,7 @@ export const CHANGELOG: ChangelogEntry[] = [
     items: [
       "Added grief-and-farewell language; the earlier keywords caught only metaphors like \"lobotomized.\" The rupture line steps up in mid-May 2026 — that part of the rise reflects the wider net, not a sudden change in the discourse itself.",
     ],
-    recent: true,
+    recent: false,
   },
   {
     date: "April 2026",
