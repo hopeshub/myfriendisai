@@ -127,7 +127,8 @@ export default function Home() {
         </p>
         <p style={{ ...intro, marginBottom: 16 }}>
           r/CharacterAI, the mass-market giant, ran the same arc at far larger
-          scale &mdash; a boom past 40,000 posts a month, then a long recede.
+          scale &mdash; a boom to nearly 40,000 posts a month, then a long
+          recede.
           The pattern under all of it is churn: a community surges, crests, and
           gives way to the next platform. The floor holds; the names keep
           changing. Below, r/CharacterAI sits on its own scale, with every

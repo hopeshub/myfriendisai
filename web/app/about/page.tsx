@@ -87,8 +87,9 @@ export default function About() {
           AI-companion communities &mdash; romance, addiction, grief, and three
           others &mdash; and measures how often each one surfaces in posts. The
           post corpus reaches back to 2017, though the theme lines themselves
-          begin in 2022&ndash;2023, where monthly volume becomes reliable enough
-          to chart. What it captures is the conversation itself: when
+          begin later, as each theme&apos;s vocabulary becomes common enough to
+          chart &mdash; mostly across 2022&ndash;2023, and not until 2025 for
+          consciousness. What it captures is the conversation itself: when
           a line rises, people are writing about that theme more often. Whether
           the underlying experience has actually become more common is a
           separate question, and one this can&apos;t answer on its own.
@@ -254,7 +255,8 @@ export default function About() {
             <p>
               Within that curated set, each theme is also concentrated. Two or
               three subreddits usually account for most of a theme&apos;s posts
-              &mdash; and the sexual-content line is about half r/replika alone.
+              &mdash; and the sexual-content line is well over half r/replika
+              alone.
               A theme line is often, in practice, a close reading of a few
               communities rather than an even sweep across all of them.
             </p>
@@ -442,7 +444,7 @@ export default function About() {
                 GitHub
               </a>
               , along with the processed data files. The full post database
-              (~24&nbsp;GB) is too large to host there, but I&apos;ll share it
+              (~25&nbsp;GB) is too large to host there, but I&apos;ll share it
               on request &mdash; reach me on X at{" "}
               <a
                 href="https://x.com/hopes_revenge"
