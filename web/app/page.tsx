@@ -117,9 +117,9 @@ export default function Home() {
           How the communities turned over
         </h2>
         <p style={{ ...intro, marginBottom: 16 }}>
-          Add up the posts across these communities and the total looks almost
-          flat &mdash; a few thousand a month, year after year. That flatness
-          hides a near-total turnover. In 2023, AI-companion Reddit was,
+          Add up the posts across these communities and the floor holds steady
+          &mdash; a few thousand a month, spiking only when a platform breaks.
+          What doesn&apos;t hold is the cast. In 2023, AI-companion Reddit was,
           basically, r/replika. Replika then emptied out &mdash; from 38,000
           posts a year to under 5,000 &mdash; and a new generation rose to take
           its place, post for post: r/NomiAI, r/KindroidAI, r/ChaiApp, a
