@@ -2,7 +2,7 @@
 // A tiny inline trend line for the Communities table — one community's monthly
 // post volume, normalized to its own min/max so the shape stays readable
 // whatever the community's size. Direction-only: read the shape, not the
-// height. Plain SVG, not Recharts — 26 of these in one table must stay light.
+// height. Plain SVG, not Recharts — 31 of these in one table must stay light.
 
 // Below this monthly peak a community has too little volume for its shape to
 // mean anything — normalizing would turn an eight-posts-ever community into a

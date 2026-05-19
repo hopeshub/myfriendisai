@@ -38,7 +38,8 @@ function getCommunityCount(): number {
     const list = JSON.parse(raw) as Array<{ subreddit: string }>;
     return new Set(list.map((s) => s.subreddit)).size;
   } catch {
-    return 26;
+    // Fallback only if subreddits.json is unreadable — keep in sync with the live count.
+    return 31;
   }
 }
 
