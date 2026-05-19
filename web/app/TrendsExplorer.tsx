@@ -43,28 +43,43 @@ export default function TrendsExplorer({ themeData, themeDataExclCai }: Props) {
           and swings on its own platform lifecycle, which mechanically moves
           every theme rate. Excluding it shows the rate within the dedicated
           communities. See docs/characterai_composition_fault_2026-05-16.md. */}
-      <div className="flex items-center gap-2 mb-2 flex-wrap">
+      {/* Community scope — a segmented control, deliberately styled as a
+          mode switch (not a loose filter like the time range below it):
+          toggling r/CharacterAI is a core methodological choice, not a
+          cosmetic option. */}
+      <div className="flex items-center gap-2.5 mb-2 flex-wrap">
         <span style={{ fontSize: 12, color: "#7E8B9E" }}>Communities:</span>
-        {(
-          [
-            ["all", "All tracked"],
-            ["excl-cai", "Excluding r/CharacterAI"],
-          ] as [Scope, string][]
-        ).map(([s, label]) => (
-          <button
-            key={s}
-            onClick={() => setScope(s)}
-            aria-pressed={scope === s}
-            className="h-9 sm:h-auto px-3 py-1 text-sm sm:text-xs font-medium rounded-md transition-colors"
-            style={{
-              backgroundColor: scope === s ? "#1A1D27" : "transparent",
-              color: scope === s ? "#F1F4F8" : "#9AA7B8",
-              border: `1px solid ${scope === s ? "#2A2D3A" : "transparent"}`,
-            }}
-          >
-            {label}
-          </button>
-        ))}
+        <div
+          role="group"
+          aria-label="Community scope"
+          style={{
+            display: "inline-flex",
+            padding: 2,
+            borderRadius: 8,
+            border: "1px solid #2A2D3A",
+            backgroundColor: "#13151C",
+          }}
+        >
+          {(
+            [
+              ["all", "All tracked"],
+              ["excl-cai", "Excluding r/CharacterAI"],
+            ] as [Scope, string][]
+          ).map(([s, label]) => (
+            <button
+              key={s}
+              onClick={() => setScope(s)}
+              aria-pressed={scope === s}
+              className="min-h-11 sm:min-h-0 px-3 py-1.5 text-sm sm:text-xs font-medium rounded-md transition-colors"
+              style={{
+                backgroundColor: scope === s ? "#252834" : "transparent",
+                color: scope === s ? "#F1F4F8" : "#9AA7B8",
+              }}
+            >
+              {label}
+            </button>
+          ))}
+        </div>
       </div>
       <p className="mb-3" style={{ fontSize: 12, color: "#7E8B9E", maxWidth: measure }}>
         {scope === "all"

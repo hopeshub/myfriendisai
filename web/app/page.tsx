@@ -5,6 +5,7 @@ import PostVolumeChart from "./PostVolumeChart";
 import EventShowcase from "./EventShowcase";
 import RecoverySection from "./RecoverySection";
 import { loadThemeData, loadCommunityComposition, loadRecoveryVolume } from "./themeData";
+import { THEMES } from "./themes";
 import { sectionEyebrow, introParagraph, measure } from "./styles";
 import { CHANGELOG } from "./changelog";
 
@@ -104,6 +105,29 @@ export default function Home() {
             </li>
           ))}
         </ul>
+
+        {/* Six-theme strip — a tappable index of the §3 atlas. Lets a reader
+            jump straight to one theme's chart and real posts without first
+            scrolling the whole narrative. */}
+        <nav
+          aria-label="The six tracked themes"
+          className="rise-in"
+          style={{ marginTop: 24, maxWidth: measure, animationDelay: "320ms" }}
+        >
+          <div style={{ ...sectionLabel, marginBottom: 8 }}>The six themes</div>
+          <div className="flex flex-wrap gap-2">
+            {THEMES.map((t) => (
+              <Link
+                key={t.id}
+                href={`/theme/${t.id}`}
+                className="inline-flex items-center gap-1.5 rounded-full border border-[#2A2D3A] px-3 py-1 min-h-11 sm:min-h-0 text-sm text-[#C8D0DC] transition-colors hover:border-[#3F4351] hover:bg-[#15171E] hover:text-[#F1F4F8]"
+              >
+                <span aria-hidden>{t.emoji}</span>
+                {t.label}
+              </Link>
+            ))}
+          </div>
+        </nav>
       </header>
 
       {/* §1 — Orientation: post volume */}
@@ -128,23 +152,21 @@ export default function Home() {
         <p style={{ ...intro, marginBottom: 16 }}>
           r/CharacterAI, the mass-market giant, ran the same arc at far larger
           scale &mdash; a boom to nearly 40,000 posts a month, then a long
-          recede.
-          The pattern under all of it is churn: a community surges, crests, and
+          recede. Underneath it all is churn: a community surges, crests, and
           gives way to the next platform. The floor holds; the names keep
-          changing. Below, r/CharacterAI sits on its own scale, with every
-          other community stacked beneath it &mdash; so the handover is visible.
-        </p>
-        <p style={{ ...intro, marginBottom: 16 }}>
-          One caution before the chart: a falling line means fewer posts in
-          that community &mdash; not necessarily fewer people. A conversation
-          can also move &mdash; to a Discord, an in-app forum, a general-AI
-          subreddit this tracker doesn&apos;t follow. The chart watches a room
-          empty out; it can&apos;t see where everyone went.
+          changing.
         </p>
         <PostVolumeChart
           characterai={communityComposition.characterai}
           composition={communityComposition.composition}
         />
+        <p style={{ ...intro, marginTop: 16 }}>
+          A falling line means fewer posts in that community &mdash; not
+          necessarily fewer people. The conversation can also move &mdash; to a
+          Discord, an in-app forum, a general-AI subreddit this tracker
+          doesn&apos;t follow. The chart watches a room empty out; it
+          can&apos;t see where everyone went.
+        </p>
         </section>
       </Reveal>
 
@@ -166,13 +188,11 @@ export default function Home() {
           happened.
         </p>
         <p style={{ ...intro, marginBottom: 16 }}>
-          Every event here is a rupture &mdash; and that is itself a finding
-          about the method. Rupture isn&apos;t the most important of the six
-          themes; it is the only one shaped like an event. Romance,
-          consciousness, therapy drift &mdash; no press release moves them, no
-          single day a platform pulled access. Rupture has those days. So an
-          event-driven section can only ever be rupture: a tracker built around
-          moments sees, most sharply, the discourse that arrives in moments.
+          Every event here is a rupture &mdash; itself a finding about the
+          method. Of the six themes, rupture is the only one shaped like an
+          event: romance, consciousness, and therapy drift, with no press
+          release behind them. A section built around moments can only be
+          about the theme that arrives in them.
         </p>
         <EventShowcase />
         </section>
@@ -190,7 +210,9 @@ export default function Home() {
         </h2>
         <p style={{ ...intro, marginBottom: 16 }}>
           Six recurring themes, and how often each one&apos;s language surfaces
-          in posts across these communities, month by month.
+          in posts across these communities, month by month. Each panel is
+          scaled to mentions per 1,000 posts &mdash; a value of 8 means roughly
+          8 of every 1,000 posts that month carried that theme&apos;s keywords.
         </p>
         <TrendsExplorer
           themeData={themeData}
@@ -258,11 +280,8 @@ export default function Home() {
         </p>
         <p style={{ ...intro }}>
           That is the thread under all three. The chart counts words, and
-          words come loose, flip, and hide. The lines are real; they are also
-          drawn by an instrument still learning the language it reads. The
-          section below is what one set of communities did with the second of
-          those framings &mdash; the people who named their own use an
-          addiction, and built somewhere to carry it.
+          words come loose, flip, and hide. The lines are real &mdash; and
+          also drawn by an instrument still learning the language it reads.
         </p>
         </section>
       </Reveal>
