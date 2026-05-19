@@ -253,9 +253,44 @@ export default async function ThemePage({
                       {Math.round(kw.precision)}%
                     </span>
                   )}
+                  {kw.status && (
+                    <span
+                      style={{
+                        color: "#8A93A3",
+                        fontStyle: "italic",
+                        fontSize: fontSize.xs,
+                      }}
+                    >
+                      {kw.status === "audit-gate-fail"
+                        ? "· contested"
+                        : kw.status === "researcher-accepted"
+                        ? "· judgment call"
+                        : "· low volume"}
+                    </span>
+                  )}
                 </span>
               ))}
           </div>
+          {details.keywords.some((kw) => kw.status) && (
+            <p
+              style={{
+                fontSize: fontSize.xs,
+                color: "#7E8B9E",
+                marginTop: 10,
+                lineHeight: 1.6,
+              }}
+            >
+              A few keywords carry a note.{" "}
+              <em style={{ color: "#9AA7B8" }}>contested</em> &mdash; an
+              independent re-read didn&apos;t consistently agree its matches
+              were on-theme, so its precision is less settled than the figure
+              suggests. <em style={{ color: "#9AA7B8" }}>judgment call</em>{" "}
+              &mdash; kept despite a score below the usual bar because its
+              false matches are few and predictable.{" "}
+              <em style={{ color: "#9AA7B8" }}>low volume</em> &mdash; too few
+              matches to score precisely.
+            </p>
+          )}
           <p
             style={{
               fontSize: fontSize.xs,

@@ -86,10 +86,67 @@ def parse_precision(comment_text: str) -> "float | None":
     return float(figures[-1]) if figures else None
 
 
+def detect_status(annotation_block: str) -> "str | None":
+    """Classify a keyword from its YAML annotation block into one display
+    status, or None for a clean (>=80%, audit-passing) keyword.
+
+    Mirrors the discipline check in
+    analysis/keyword_pipeline/audit_keyword_status.py — keep the two in sync.
+    """
+    lower = annotation_block.lower()
+    # "fail\b" so the plural "audit-gate failures" — a batch note about *other*
+    # keywords — is not mistaken for this keyword's own status.
+    if re.search(r"audit-gate fail\b", lower):
+        return "audit-gate-fail"
+    if "researcher-accepted" in lower or "researcher accepted" in lower:
+        return "researcher-accepted"
+    if "LOW VOLUME" in annotation_block or (
+        "low volume" in lower and "placeholder" in lower
+    ):
+        return "low-volume"
+    return None
+
+
+def parse_keyword_annotation(raw_lines: list, clean_term: str) -> tuple:
+    """Locate a keyword's YAML definition line and return (precision, status).
+
+    Reads the inline comment on the definition line plus any continuation
+    comment lines below it, so a status note on a wrapped comment is still
+    seen.
+    """
+    term_pattern = re.escape(clean_term)
+    for i, line in enumerate(raw_lines):
+        # Match YAML term definition lines: "- term" or '- "term"'
+        if not re.search(
+            rf"^\s*-\s*\"?{term_pattern}\"?\s*(#|$)", line, re.IGNORECASE
+        ):
+            continue
+        # Definition line + following continuation comment lines. A genuine
+        # continuation is indented deeper than the keyword's "-" (its "#"
+        # aligns under the inline comment); a section or batch comment sits at
+        # list-item indent, so the indent test keeps those out of the block.
+        def_indent = len(line) - len(line.lstrip())
+        block = [line]
+        for j in range(i + 1, min(i + 12, len(raw_lines))):
+            cont = raw_lines[j]
+            cont_indent = len(cont) - len(cont.lstrip())
+            if cont.lstrip().startswith("#") and cont_indent > def_indent:
+                block.append(cont)
+            else:
+                break
+        comment_match = re.search(r"#\s*(.+)", line)
+        precision = (
+            parse_precision(comment_match.group(1)) if comment_match else None
+        )
+        return precision, detect_status("\n".join(block))
+    return None, None
+
+
 def parse_keywords_yaml(yaml_path: Path) -> dict:
-    """Parse keywords YAML and extract terms with precision scores from comments."""
+    """Parse keywords YAML and extract per-term precision and display status."""
     raw_text = yaml_path.read_text()
     config = yaml.safe_load(raw_text)
+    raw_lines = raw_text.splitlines()
 
     categories = {}
     for cat in config["keyword_categories"]:
@@ -98,22 +155,10 @@ def parse_keywords_yaml(yaml_path: Path) -> dict:
         for term in cat["terms"]:
             # The term itself (strip quotes if present in YAML)
             clean_term = str(term).strip()
-
-            # Find the line in raw text to extract the inline comment
-            precision = None
-            for line in raw_text.splitlines():
-                # Match YAML term definition lines: "- term" or '- "term"'
-                term_pattern = re.escape(clean_term)
-                if re.search(
-                    rf"^\s*-\s*\"?{term_pattern}\"?\s", line, re.IGNORECASE
-                ):
-                    # Extract precision from comment portion
-                    comment_match = re.search(r"#\s*(.+)", line)
-                    if comment_match:
-                        precision = parse_precision(comment_match.group(1))
-                    break
-
-            terms.append({"term": clean_term, "precision": precision})
+            precision, status = parse_keyword_annotation(raw_lines, clean_term)
+            terms.append(
+                {"term": clean_term, "precision": precision, "status": status}
+            )
         categories[name] = terms
 
     return categories
@@ -214,6 +259,7 @@ def build_keyword_details(
                     "term": term,
                     "hits": hits,
                     "precision": ti["precision"],
+                    "status": ti["status"],
                     "sample_posts": [
                         {
                             "title": sp[0],

@@ -19,6 +19,9 @@ export type KeywordEntry = {
   term: string;
   hits: number;
   precision: number | null;
+  // Display status from the keyword's YAML annotation: "audit-gate-fail",
+  // "researcher-accepted", "low-volume", or null for a clean keyword.
+  status: string | null;
   sample_posts: SamplePost[];
 };
 export type SubredditEntry = { name: string; hits: number; pct: number };
