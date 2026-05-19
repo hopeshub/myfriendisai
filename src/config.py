@@ -1,5 +1,6 @@
 """Load and validate config/communities.yaml and config/keywords.yaml."""
 
+import hashlib
 from pathlib import Path
 import yaml
 
@@ -58,6 +59,26 @@ def load_keywords():
         raise ValueError("keywords.yaml validation errors:\n" + "\n".join(f"  - {e}" for e in errors))
 
     return categories
+
+
+def keyword_fingerprint(keyword_categories=None) -> str:
+    """A stable hash of the keyword set.
+
+    Used to detect when the keyword config has changed in a way that requires
+    re-tagging the historical corpus (otherwise a newly added keyword is only
+    ever applied to posts collected after the change). Sensitive to category
+    names and the exact set of terms; insensitive to ordering and to YAML
+    comments (so a precision-annotation edit does not trigger a re-tag).
+    """
+    if keyword_categories is None:
+        keyword_categories = load_keywords()
+    lines = []
+    for cat in keyword_categories:
+        name = str(cat["name"])
+        for term in cat.get("terms", []):
+            lines.append(f"{name}|{str(term).strip()}")
+    blob = "\n".join(sorted(lines))
+    return hashlib.sha256(blob.encode("utf-8")).hexdigest()
 
 
 if __name__ == "__main__":

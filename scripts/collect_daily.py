@@ -20,7 +20,7 @@ from pathlib import Path
 # Allow running from the project root
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
-from src.config import load_communities, load_keywords, load_keyword_communities
+from src.config import load_communities, load_keywords, load_keyword_communities, keyword_fingerprint
 from src.reddit_client import RedditClient
 from src.utils.rate_limiter import RateLimiter
 from src.db.schema import initialize as init_db
@@ -176,7 +176,27 @@ def _step_tag_posts(conn):
         )
         conn.commit()
 
-    return {"posts_scanned": scanned, "tags_added": tagged}
+    # Daily tagging only covers newly collected posts. If the keyword config
+    # has changed since the corpus was last fully tagged, historical posts are
+    # NOT retagged here — surface that so the gap doesn't go unnoticed.
+    current_fp = keyword_fingerprint(keyword_categories)
+    row = conn.execute(
+        "SELECT value FROM pipeline_meta WHERE key = 'keyword_fingerprint'"
+    ).fetchone()
+    stored_fp = row[0] if row else None
+    keyword_version_stale = stored_fp is not None and stored_fp != current_fp
+    if keyword_version_stale:
+        logger.warning(
+            "Keyword config changed since last full tagging — historical posts "
+            "are NOT retagged by daily collection. Run: "
+            ".venv/bin/python scripts/tag_keywords.py"
+        )
+
+    return {
+        "posts_scanned": scanned,
+        "tags_added": tagged,
+        "keyword_version_stale": keyword_version_stale,
+    }
 
 
 def _step_collect_comments(conn):

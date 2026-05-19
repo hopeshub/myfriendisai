@@ -14,6 +14,8 @@ from pathlib import Path
 ROOT = Path(__file__).parent.parent
 FAIL = False
 
+EXPECTED_THEMES = ["therapy", "consciousness", "addiction", "romance", "sexual_erp", "rupture"]
+
 
 def check(name, passed, detail=""):
     global FAIL
@@ -37,6 +39,11 @@ def main():
         "data/keyword_trends.json",
         "data/snapshots.json",
         "data/subreddits.json",
+        "data/community_activity.json",
+        "data/composition_trends.json",
+        "data/site_meta.json",
+        "data/theme_health.json",
+        "data/keyword_details.json",
     ]
     # Only validate web copies for files that are actually deployed to the frontend
     web_copies = [f"web/data/{Path(f).name}" for f in data_files]
@@ -59,8 +66,7 @@ def main():
     if kt_path.exists():
         kt = json.loads(kt_path.read_text())
 
-        expected_themes = ["therapy", "consciousness", "addiction", "romance", "sexual_erp", "rupture"]
-        for theme in expected_themes:
+        for theme in EXPECTED_THEMES:
             entries = kt.get(theme, [])
             check(f"{theme} theme", len(entries) > 100, f"{len(entries)} entries")
             if entries:
@@ -113,8 +119,49 @@ def main():
         check("no case-duplicate subreddits", dupes == 0,
               f"{dupes} duplicates" if dupes else "")
 
-    # ── 5. web/data matches data/ ──
-    print("\n5. Web data copies match source")
+    # ── 5. Frontend data exports (structure) ──
+    print("\n5. Frontend data exports")
+
+    cd_path = ROOT / "data/community_activity.json"
+    if cd_path.exists():
+        cd = json.loads(cd_path.read_text())
+        check("community_activity has months + activity",
+              isinstance(cd, dict) and bool(cd.get("months")) and bool(cd.get("activity")),
+              f"{len(cd.get('months', []))} months")
+
+    ct_path = ROOT / "data/composition_trends.json"
+    if ct_path.exists():
+        ct = json.loads(ct_path.read_text())
+        ct_themes = [t for t in EXPECTED_THEMES if t in ct]
+        check("composition_trends has all 6 themes", len(ct_themes) == 6, f"{len(ct_themes)}/6")
+
+    sm_path = ROOT / "data/site_meta.json"
+    if sm_path.exists():
+        sm = json.loads(sm_path.read_text())
+        check("site_meta has total_posts/date_start/date_end",
+              all(k in sm for k in ("total_posts", "date_start", "date_end")),
+              str(list(sm.keys())))
+        check("site_meta total_posts is plausible",
+              isinstance(sm.get("total_posts"), int) and sm.get("total_posts", 0) > 1_000_000,
+              f"total_posts={sm.get('total_posts')}")
+
+    th_path = ROOT / "data/theme_health.json"
+    if th_path.exists():
+        th = json.loads(th_path.read_text())
+        check("theme_health has themes block", bool(th.get("themes")),
+              f"{len(th.get('themes', {}))} themes")
+
+    kd_path = ROOT / "data/keyword_details.json"
+    if kd_path.exists():
+        kd = json.loads(kd_path.read_text())
+        kd_themes = [t for t in EXPECTED_THEMES if t in kd]
+        check("keyword_details has all 6 themes", len(kd_themes) == 6, f"{len(kd_themes)}/6")
+        empty = [t for t in kd_themes if not kd[t].get("keywords")]
+        check("keyword_details themes have keywords", len(empty) == 0,
+              f"empty: {empty}" if empty else "")
+
+    # ── 6. web/data matches data/ ──
+    print("\n6. Web data copies match source")
     for f in data_files:
         src = ROOT / f
         dst = ROOT / f"web/data/{Path(f).name}"
@@ -122,8 +169,8 @@ def main():
             match = src.read_bytes() == dst.read_bytes()
             check(f"{Path(f).name}", match, "mismatch!" if not match else "")
 
-    # ── 6. Frontend builds ──
-    print("\n6. Frontend build")
+    # ── 7. Frontend builds ──
+    print("\n7. Frontend build")
     import subprocess
     result = subprocess.run(
         ["npm", "run", "build"],

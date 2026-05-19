@@ -86,6 +86,15 @@ CREATE TABLE IF NOT EXISTS subreddit_config (
     is_active BOOLEAN DEFAULT 1
 );
 
+-- Small key/value store for pipeline state. Currently holds
+-- 'keyword_fingerprint': a hash of the keyword set the corpus was last
+-- fully tagged against, used to detect when historical posts need re-tagging.
+CREATE TABLE IF NOT EXISTS pipeline_meta (
+    key        TEXT PRIMARY KEY,
+    value      TEXT NOT NULL,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
 CREATE TABLE IF NOT EXISTS post_keyword_tags (
     id          INTEGER PRIMARY KEY AUTOINCREMENT,
     post_id     TEXT    NOT NULL,

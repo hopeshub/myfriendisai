@@ -134,6 +134,13 @@ export default function Home() {
           changing. Below, r/CharacterAI sits on its own scale, with every
           other community stacked beneath it &mdash; so the handover is visible.
         </p>
+        <p style={{ ...intro, marginBottom: 16 }}>
+          One caution before the chart: a falling line means fewer posts in
+          that community &mdash; not necessarily fewer people. A conversation
+          can also move &mdash; to a Discord, an in-app forum, a general-AI
+          subreddit this tracker doesn&apos;t follow. The chart watches a room
+          empty out; it can&apos;t see where everyone went.
+        </p>
         <PostVolumeChart
           characterai={communityComposition.characterai}
           composition={communityComposition.composition}

@@ -66,9 +66,24 @@ def make_excerpt(term: str, selftext, width: int = 150) -> "str | None":
 
 
 def parse_precision(comment_text: str) -> "float | None":
-    """Extract precision percentage from a YAML inline comment like '# 92.0%, 27 hits'."""
-    match = re.search(r"(\d+\.?\d*)%", comment_text)
-    return float(match.group(1)) if match else None
+    """Extract the keyword's current precision from a YAML inline comment.
+
+    A comment may chain several figures, e.g.
+        "73.0% -> 86.9% (2026-04-23) -> audit 60% (2026-05-12)."
+    Two distinct metrics appear: keyword *precision* (the share of matched
+    posts that are on-theme) and *audit agreement* (independent second-coder
+    agreement on a 20-post subsample) — a lower audit number does not lower
+    the precision. The badge shows precision, so audit-agreement figures are
+    stripped first; of the remaining precision figures the last one is taken,
+    since the comments are written chronologically (oldest -> newest).
+    """
+    # Drop audit-agreement figures: "audit [agreement] NN%" and "NN% audit ...".
+    stripped = re.sub(
+        r"audit[- ]?(?:agreement)?\s*\d+\.?\d*%", "", comment_text, flags=re.IGNORECASE
+    )
+    stripped = re.sub(r"\d+\.?\d*%\s*audit", "", stripped, flags=re.IGNORECASE)
+    figures = re.findall(r"(\d+\.?\d*)%", stripped)
+    return float(figures[-1]) if figures else None
 
 
 def parse_keywords_yaml(yaml_path: Path) -> dict:
