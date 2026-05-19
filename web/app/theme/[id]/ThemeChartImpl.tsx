@@ -86,7 +86,7 @@ export default function ThemeChart({
 
   if (!monthly.length) {
     return (
-      <div className="h-[240px] flex items-center justify-center text-sm text-[#6B7689]">
+      <div className="h-[240px] flex items-center justify-center text-sm text-[#7E8B9E]">
         No data yet.
       </div>
     );
@@ -116,11 +116,16 @@ export default function ThemeChart({
         ))}
       </div>
 
-      <div className="h-[240px] sm:h-[300px] w-full">
+      <div
+        className="h-[240px] sm:h-[300px] w-full"
+        role="img"
+        aria-label="Line chart of this theme's validated-keyword mentions per 1,000 posts, monthly, with platform events marked."
+      >
         <ResponsiveContainer width="100%" height="100%">
           <LineChart
             data={data}
             margin={{ top: 30, right: 14, bottom: 4, left: 0 }}
+            accessibilityLayer={false}
           >
             <CartesianGrid
               strokeDasharray="3 3"
@@ -131,7 +136,7 @@ export default function ThemeChart({
               dataKey="date"
               tickFormatter={fmtMonthShort}
               stroke="#2A2D3A"
-              tick={{ fill: "#6B7689", fontSize: 12 }}
+              tick={{ fill: "#7E8B9E", fontSize: 12 }}
               tickLine={false}
               axisLine={{ stroke: "#2A2D3A" }}
               minTickGap={48}
@@ -139,7 +144,7 @@ export default function ThemeChart({
             <YAxis
               width={44}
               stroke="transparent"
-              tick={{ fill: "#6B7689", fontSize: 12 }}
+              tick={{ fill: "#7E8B9E", fontSize: 12 }}
               tickLine={false}
               axisLine={false}
               domain={[0, "auto"]}
@@ -207,7 +212,7 @@ export default function ThemeChart({
         </ResponsiveContainer>
       </div>
 
-      <div style={{ fontSize: 11, color: "#6B7689", marginTop: 8 }}>
+      <div style={{ fontSize: 11, color: "#7E8B9E", marginTop: 8 }}>
         Validated-keyword mentions per 1,000 posts · monthly average · post text
         only
       </div>
@@ -232,7 +237,7 @@ export default function ThemeChart({
             <span
               style={{
                 fontSize: 11,
-                color: "#6B7689",
+                color: "#7E8B9E",
                 textTransform: "uppercase",
                 letterSpacing: "0.05em",
               }}
@@ -274,7 +279,7 @@ export default function ThemeChart({
             ))}
           </div>
           {hasMethodology && (
-            <div style={{ fontSize: 11, color: "#6B7689", marginTop: 7 }}>
+            <div style={{ fontSize: 11, color: "#7E8B9E", marginTop: 7 }}>
               A hollow marker is a change to our keyword set — a measurement
               change, not a real-world event.
             </div>

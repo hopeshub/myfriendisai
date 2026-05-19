@@ -198,7 +198,7 @@ export default async function ThemePage({
               >
                 r/{s.name}
               </Link>
-              <span style={{ color: "#6B7689" }}> {s.pct}%</span>
+              <span style={{ color: "#7E8B9E" }}> {s.pct}%</span>
             </span>
           ))}
           {" "}&mdash; so this line is a close reading of those rooms, not an
@@ -213,7 +213,7 @@ export default async function ThemePage({
           <p
             style={{
               fontSize: fontSize.sm,
-              color: "#6B7689",
+              color: "#7E8B9E",
               marginTop: 6,
               lineHeight: 1.6,
             }}
@@ -249,7 +249,7 @@ export default async function ThemePage({
                 >
                   <span style={{ color: "#C8D0DC" }}>{kw.term}</span>
                   {kw.precision != null && (
-                    <span style={{ color: "#6B7689" }}>
+                    <span style={{ color: "#7E8B9E" }}>
                       {Math.round(kw.precision)}%
                     </span>
                   )}
@@ -259,7 +259,7 @@ export default async function ThemePage({
           <p
             style={{
               fontSize: fontSize.xs,
-              color: "#6B7689",
+              color: "#7E8B9E",
               marginTop: 12,
               lineHeight: 1.6,
             }}
@@ -285,7 +285,7 @@ export default async function ThemePage({
         <p
           style={{
             fontSize: fontSize.sm,
-            color: "#6B7689",
+            color: "#7E8B9E",
             marginTop: 6,
             lineHeight: 1.6,
           }}
@@ -337,7 +337,7 @@ export default async function ThemePage({
                     </div>
                   )}
                   <div
-                    style={{ fontSize: fontSize.micro, color: "#6B7689", marginTop: 5 }}
+                    style={{ fontSize: fontSize.micro, color: "#7E8B9E", marginTop: 5 }}
                   >
                     r/{sp.subreddit} &middot; {fmtMonthYear(sp.date)}
                   </div>
@@ -346,14 +346,14 @@ export default async function ThemePage({
             })}
           </div>
         ) : (
-          <p style={{ fontSize: fontSize.base, color: "#6B7689", marginTop: 6 }}>
+          <p style={{ fontSize: fontSize.base, color: "#7E8B9E", marginTop: 6 }}>
             No example posts available yet.
           </p>
         )}
         <p
           style={{
             fontSize: fontSize.xs,
-            color: "#6B7689",
+            color: "#7E8B9E",
             marginTop: 14,
             lineHeight: 1.6,
           }}

@@ -140,7 +140,7 @@ function EventCard({
             eventIndex={spark.eventIndex}
             color={themeMeta(event.themes[0])?.color ?? "#9AA7B8"}
           />
-          <p style={{ fontSize: 11, color: "#6B7689", marginTop: 4, lineHeight: 1.5 }}>
+          <p style={{ fontSize: 11, color: "#7E8B9E", marginTop: 4, lineHeight: 1.5 }}>
             <span
               style={{
                 color: themeMeta(event.themes[0])?.color ?? "#9AA7B8",
@@ -196,7 +196,7 @@ function EventCard({
             <div
               style={{
                 fontSize: 11,
-                color: "#6B7689",
+                color: "#7E8B9E",
                 marginTop: 10,
                 display: "flex",
                 gap: 8,

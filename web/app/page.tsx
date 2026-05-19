@@ -96,7 +96,7 @@ export default function Home() {
             >
               <span
                 aria-hidden
-                style={{ position: "absolute", left: 0, color: "#6B7689" }}
+                style={{ position: "absolute", left: 0, color: "#7E8B9E" }}
               >
                 &bull;
               </span>
@@ -254,7 +254,7 @@ export default function Home() {
             borderTop: "1px solid #2A2D3A",
           }}
         >
-          <p style={{ fontSize: 13, lineHeight: 1.6, color: "#6B7689" }}>
+          <p style={{ fontSize: 13, lineHeight: 1.6, color: "#7E8B9E" }}>
             Updated daily. Most recent change &mdash; {CHANGELOG[0].title} (
             {CHANGELOG[0].date}).{" "}
             <Link

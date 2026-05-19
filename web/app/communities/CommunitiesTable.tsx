@@ -53,7 +53,7 @@ function SortButton({
   return (
     <button
       onClick={() => onSort(sortKey)}
-      className={`flex items-center gap-1 ml-auto py-2 min-h-11 sm:min-h-0 text-sm sm:text-xs hover:text-[#C8D0DC] transition-colors ${active ? "text-[#F8FAFC]" : "text-[#6B7689]"}`}
+      className={`flex items-center gap-1 ml-auto py-2 min-h-11 sm:min-h-0 text-sm sm:text-xs hover:text-[#C8D0DC] transition-colors ${active ? "text-[#F8FAFC]" : "text-[#7E8B9E]"}`}
     >
       {label}
       <span className="text-[11px]">{active ? (current.asc ? "↑" : "↓") : "↕"}</span>
@@ -117,9 +117,9 @@ export default function CommunitiesTable({
         <table className="w-full text-left">
           <thead>
             <tr className="text-xs uppercase tracking-wide border-b border-[#2A2D3A]">
-              <th className="pb-3 pr-4 font-medium text-[#6B7689]">Community</th>
-              <th className="pb-3 pr-4 font-medium text-[#6B7689] hidden sm:table-cell">Activity</th>
-              <th className="pb-3 pr-4 font-medium text-[#6B7689] hidden sm:table-cell">Tier</th>
+              <th className="pb-3 pr-4 font-medium text-[#7E8B9E]">Community</th>
+              <th className="pb-3 pr-4 font-medium text-[#7E8B9E] hidden sm:table-cell">Activity</th>
+              <th className="pb-3 pr-4 font-medium text-[#7E8B9E] hidden sm:table-cell">Tier</th>
               <th className="pb-3 pr-4 font-medium text-right">
                 <SortButton label="Subscribers" sortKey="subscribers" current={sort} onSort={handleSort} />
               </th>
@@ -148,7 +148,7 @@ export default function CommunitiesTable({
                     r/{s.subreddit}
                   </Link>
                   {s.category && (
-                    <div className="text-xs text-[#6B7689] mt-0.5">{s.category}</div>
+                    <div className="text-xs text-[#7E8B9E] mt-0.5">{s.category}</div>
                   )}
                 </td>
                 <td className="py-3 pr-4 hidden sm:table-cell">
@@ -178,7 +178,7 @@ export default function CommunitiesTable({
         <p className="text-sm text-[#9AA7B8] py-8 text-center">No communities in this category.</p>
       )}
 
-      <p className="mt-8 text-xs text-[#6B7689] hidden md:block">
+      <p className="mt-8 text-xs text-[#7E8B9E] hidden md:block">
         <strong>Activity</strong> — monthly post volume, Jan 2023 to the last
         complete month; each sparkline is on its own scale (read the shape, not
         the height).{" "}

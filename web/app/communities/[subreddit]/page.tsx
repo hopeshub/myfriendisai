@@ -86,11 +86,11 @@ export default async function SubredditPage({
       </p>
 
       <section id="activity" className="mt-8 scroll-mt-8">
-        <p className="text-xs text-[#6B7689] uppercase tracking-widest mb-3">
+        <p className="text-xs text-[#7E8B9E] uppercase tracking-widest mb-3">
           Monthly post volume
         </p>
         <CommunityActivityChart months={activity.months} values={activitySeries} />
-        <p className="text-xs text-[#6B7689] mt-2 max-w-2xl">
+        <p className="text-xs text-[#7E8B9E] mt-2 max-w-2xl">
           Posts per month since January 2023, to the last complete month &mdash;
           the longest-range view of this community&apos;s activity.
         </p>
@@ -98,7 +98,7 @@ export default async function SubredditPage({
 
       <Charts snapshots={snapshots} />
 
-      <p className="mt-10 text-xs text-[#6B7689] border-t border-[#2A2D3A] pt-4">
+      <p className="mt-10 text-xs text-[#7E8B9E] border-t border-[#2A2D3A] pt-4">
         <strong>Subscribers</strong> — Direct (Reddit API).{" "}
         <strong>Contributors / week</strong> — Derived: distinct authors of posts +
         comments in the 7 days ending on the snapshot date. Historical series uses

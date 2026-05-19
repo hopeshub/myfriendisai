@@ -126,7 +126,7 @@ export default function PostVolumeChart({
     return (
       <div
         style={{ height: 300 }}
-        className="flex items-center justify-center text-sm text-[#6B7689]"
+        className="flex items-center justify-center text-sm text-[#7E8B9E]"
       >
         No post-volume data yet.
       </div>
@@ -135,7 +135,7 @@ export default function PostVolumeChart({
 
   const axisProps = {
     stroke: "#2A2D3A",
-    tick: { fill: "#6B7689", fontSize: 11 },
+    tick: { fill: "#7E8B9E", fontSize: 11 },
     tickLine: false,
   };
 
@@ -177,14 +177,19 @@ export default function PostVolumeChart({
       <div style={{ fontSize: 14, fontWeight: 600, color: "#F1F4F8" }}>
         r/CharacterAI
       </div>
-      <div style={{ fontSize: 12, color: "#6B7689", marginBottom: 6 }}>
+      <div style={{ fontSize: 12, color: "#7E8B9E", marginBottom: 6 }}>
         The mass-market giant — boomed past 40k posts a month, then receded.
       </div>
-      <div style={{ height: 138 }}>
+      <div
+        style={{ height: 138 }}
+        role="img"
+        aria-label="Chart: r/CharacterAI monthly post volume from 2023 to 2026, rising past 40,000 posts a month then declining."
+      >
         <ResponsiveContainer width="100%" height="100%">
           <AreaChart
             data={characterai}
             margin={{ top: 14, right: 8, bottom: 2, left: 0 }}
+            accessibilityLayer={false}
           >
             <defs>
               <linearGradient id="pv-cai" x1="0" y1="0" x2="0" y2="1">
@@ -204,7 +209,7 @@ export default function PostVolumeChart({
             <YAxis
               width={40}
               stroke="transparent"
-              tick={{ fill: "#6B7689", fontSize: 11 }}
+              tick={{ fill: "#7E8B9E", fontSize: 11 }}
               tickLine={false}
               axisLine={false}
               tickFormatter={fmtCount}
@@ -264,7 +269,7 @@ export default function PostVolumeChart({
       <div
         style={{
           fontSize: 11,
-          color: "#6B7689",
+          color: "#7E8B9E",
           marginTop: 6,
           display: "flex",
           flexWrap: "wrap",
@@ -315,14 +320,19 @@ export default function PostVolumeChart({
       >
         Every other community
       </div>
-      <div style={{ fontSize: 12, color: "#6B7689", marginBottom: 6 }}>
+      <div style={{ fontSize: 12, color: "#7E8B9E", marginBottom: 6 }}>
         A steady floor &mdash; but watch r/replika give way to a new generation.
       </div>
-      <div style={{ height: 272 }}>
+      <div
+        style={{ height: 272 }}
+        role="img"
+        aria-label="Stacked area chart: monthly post volume of every non-CharacterAI companionship community. r/replika's share collapses while r/NomiAI, r/KindroidAI, r/ChaiApp and others rise to fill a steady floor."
+      >
         <ResponsiveContainer width="100%" height="100%">
           <AreaChart
             data={composition}
             margin={{ top: 6, right: 8, bottom: 2, left: 0 }}
+            accessibilityLayer={false}
           >
             <CartesianGrid strokeDasharray="3 3" stroke="#2A2D3A" vertical={false} />
             <XAxis
@@ -336,7 +346,7 @@ export default function PostVolumeChart({
             <YAxis
               width={40}
               stroke="transparent"
-              tick={{ fill: "#6B7689", fontSize: 11 }}
+              tick={{ fill: "#7E8B9E", fontSize: 11 }}
               tickLine={false}
               axisLine={false}
               tickFormatter={fmtCount}
@@ -498,7 +508,7 @@ export default function PostVolumeChart({
             marginTop: 2,
             textAlign: "center",
             fontSize: 11,
-            color: "#6B7689",
+            color: "#7E8B9E",
           }}
         >
           Isolating {BAND_LABEL[selected]} &mdash;{" "}
@@ -523,7 +533,7 @@ export default function PostVolumeChart({
       <p
         style={{
           fontSize: 11,
-          color: "#6B7689",
+          color: "#7E8B9E",
           marginTop: 8,
           textAlign: "center",
           maxWidth: measure,

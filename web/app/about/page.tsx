@@ -352,7 +352,7 @@ export default function About() {
                     listStyleType: "none",
                   }}
                 >
-                  <span style={{ color: "#6B7689" }} className="mr-1.5">
+                  <span style={{ color: "#7E8B9E" }} className="mr-1.5">
                     &bull;
                   </span>
                   {item}
@@ -436,6 +436,11 @@ export default function About() {
               </a>
               .
             </p>
+            <p>
+              The site uses Vercel&apos;s privacy-friendly analytics for
+              aggregate page-view counts &mdash; it sets no cookies, collects no
+              personal data, and does no cross-site tracking.
+            </p>
           </div>
         </section>
 
@@ -486,7 +491,7 @@ export default function About() {
                           listStyleType: "none",
                         }}
                       >
-                        <span style={{ color: "#6B7689" }} className="mr-1.5">
+                        <span style={{ color: "#7E8B9E" }} className="mr-1.5">
                           &bull;
                         </span>
                         {item}
@@ -500,7 +505,7 @@ export default function About() {
           <p
             style={{
               fontSize: fontSize.xs,
-              color: "#6B7689",
+              color: "#7E8B9E",
               marginTop: 20,
               paddingLeft: 24,
             }}

@@ -86,7 +86,7 @@ function EventLegend({
         <span
           style={{
             fontSize: 11,
-            color: "#6B7689",
+            color: "#7E8B9E",
             textTransform: "uppercase",
             letterSpacing: "0.05em",
           }}
@@ -118,12 +118,12 @@ function EventLegend({
               {e.num}
             </span>
             <span style={{ color: "#C8D0DC" }}>{e.label}</span>
-            <span style={{ color: "#6B7689" }}>{fmtMonthShort(e.date)}</span>
+            <span style={{ color: "#7E8B9E" }}>{fmtMonthShort(e.date)}</span>
           </span>
         ))}
       </div>
       {hasMethodology && (
-        <div style={{ fontSize: bp === "mobile" ? 14 : 11, color: "#6B7689", marginTop: 6 }}>
+        <div style={{ fontSize: bp === "mobile" ? 14 : 11, color: "#7E8B9E", marginTop: 6 }}>
           A hollow marker is a change to our keyword set — a measurement
           change, not a real-world event.
         </div>
@@ -239,6 +239,7 @@ export default function TrendAtlas({
                   <LineChart
                     data={data}
                     margin={{ top: 24, right: 8, bottom: 2, left: 0 }}
+                    accessibilityLayer={false}
                   >
                     <CartesianGrid
                       strokeDasharray="3 3"
@@ -249,7 +250,7 @@ export default function TrendAtlas({
                       dataKey="date"
                       tickFormatter={fmtMonthShort}
                       stroke="#2A2D3A"
-                      tick={{ fill: "#6B7689", fontSize: 11 }}
+                      tick={{ fill: "#7E8B9E", fontSize: 11 }}
                       tickLine={false}
                       axisLine={{ stroke: "#2A2D3A" }}
                       minTickGap={44}
@@ -257,7 +258,7 @@ export default function TrendAtlas({
                     <YAxis
                       width={36}
                       stroke="transparent"
-                      tick={{ fill: "#6B7689", fontSize: 11 }}
+                      tick={{ fill: "#7E8B9E", fontSize: 11 }}
                       tickLine={false}
                       axisLine={false}
                       domain={[0, "auto"]}
@@ -331,14 +332,14 @@ export default function TrendAtlas({
                 className="flex items-center justify-between"
                 style={{ marginTop: 2, minHeight: 16 }}
               >
-                <span style={{ fontSize: labelFs, color: "#6B7689" }}>
+                <span style={{ fontSize: labelFs, color: "#7E8B9E" }}>
                   {startsLate
                     ? `measurable from ${fmtMonthShort(themeStart!)}`
                     : ""}
                 </span>
                 <span
                   className="transition-colors group-hover:text-[#94A3B8]"
-                  style={{ fontSize: labelFs, color: "#6B7689" }}
+                  style={{ fontSize: labelFs, color: "#7E8B9E" }}
                 >
                   Explore {t.label} &rarr;
                 </span>

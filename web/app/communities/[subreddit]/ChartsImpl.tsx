@@ -68,28 +68,36 @@ function MetricChart({
 
   return (
     <div>
-      <p className="text-xs text-[#6B7689] uppercase tracking-widest mb-3">
+      <p className="text-xs text-[#7E8B9E] uppercase tracking-widest mb-3">
         {label}
       </p>
       {monthly.length === 0 ? (
-        <div className="h-[140px] flex items-center text-sm text-[#6B7689]">
+        <div className="h-[140px] flex items-center text-sm text-[#7E8B9E]">
           No data yet.
         </div>
       ) : (
+        <div
+          role="img"
+          aria-label={`Line chart: ${label}, monthly average across the collected history.`}
+        >
         <ResponsiveContainer width="100%" height={140}>
-          <LineChart data={monthly} margin={{ top: 4, right: 4, left: 0, bottom: 0 }}>
+          <LineChart
+            data={monthly}
+            margin={{ top: 4, right: 4, left: 0, bottom: 0 }}
+            accessibilityLayer={false}
+          >
             <CartesianGrid strokeDasharray="3 3" stroke="#2A2D3A" />
             <XAxis
               dataKey="date"
               tickFormatter={fmtTick}
-              tick={{ fontSize: 11, fill: "#6B7689" }}
+              tick={{ fontSize: 11, fill: "#7E8B9E" }}
               tickLine={false}
               axisLine={false}
               minTickGap={48}
               tickMargin={8}
             />
             <YAxis
-              tick={{ fontSize: 11, fill: "#6B7689" }}
+              tick={{ fontSize: 11, fill: "#7E8B9E" }}
               tickLine={false}
               axisLine={false}
               width={50}
@@ -133,6 +141,7 @@ function MetricChart({
             />
           </LineChart>
         </ResponsiveContainer>
+        </div>
       )}
     </div>
   );
@@ -167,7 +176,7 @@ export default function Charts({ snapshots }: { snapshots: Snapshot[] }) {
       </div>
 
       <div className="mt-10">
-        <p className="text-xs text-[#6B7689] mb-6">
+        <p className="text-xs text-[#7E8B9E] mb-6">
           Monthly averages across the collected history — the current figures
           are in the cards above.
         </p>

@@ -44,7 +44,7 @@ export default function TrendsExplorer({ themeData, themeDataExclCai }: Props) {
           every theme rate. Excluding it shows the rate within the dedicated
           communities. See docs/characterai_composition_fault_2026-05-16.md. */}
       <div className="flex items-center gap-2 mb-2 flex-wrap">
-        <span style={{ fontSize: 12, color: "#6B7689" }}>Communities:</span>
+        <span style={{ fontSize: 12, color: "#7E8B9E" }}>Communities:</span>
         {(
           [
             ["all", "All tracked"],
@@ -66,7 +66,7 @@ export default function TrendsExplorer({ themeData, themeDataExclCai }: Props) {
           </button>
         ))}
       </div>
-      <p className="mb-3" style={{ fontSize: 12, color: "#6B7689", maxWidth: measure }}>
+      <p className="mb-3" style={{ fontSize: 12, color: "#7E8B9E", maxWidth: measure }}>
         {scope === "all"
           ? "r/CharacterAI dominates this set — for years, 75–90% of every post counted here — and it rises and falls on its own platform lifecycle. Switch it off to see each rate within the dedicated companionship communities."
           : "r/CharacterAI removed from both the keyword counts and the denominator. These are the rates within the dedicated companionship and recovery communities — the rises hold, and several are steeper here."}
@@ -114,7 +114,7 @@ export default function TrendsExplorer({ themeData, themeDataExclCai }: Props) {
       <div
         style={{
           fontSize: isMobileStrip ? 14 : 12,
-          color: "#6B7689",
+          color: "#7E8B9E",
           marginTop: 16,
           marginBottom: 8,
           maxWidth: measure,

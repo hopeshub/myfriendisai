@@ -74,7 +74,7 @@ export default function RecoveryChart({
     return (
       <div
         style={{ height: 220 }}
-        className="flex items-center justify-center text-sm text-[#64748B]"
+        className="flex items-center justify-center text-sm text-[#7E8B9E]"
       >
         No recovery-community data yet.
       </div>
@@ -102,7 +102,7 @@ export default function RecoveryChart({
           and never clip or collide the way inline label text would. */}
       <div
         className="flex flex-wrap gap-x-4 gap-y-1"
-        style={{ fontSize: 12, color: "#6B7689", marginBottom: 10 }}
+        style={{ fontSize: 12, color: "#7E8B9E", marginBottom: 10 }}
       >
         <span
           style={{
@@ -141,9 +141,17 @@ export default function RecoveryChart({
         ))}
       </div>
 
-      <div style={{ height: 240 }}>
+      <div
+        style={{ height: 240 }}
+        role="img"
+        aria-label="Chart: monthly post volume across the recovery communities, near zero through 2023 then a steady climb."
+      >
         <ResponsiveContainer width="100%" height="100%">
-          <AreaChart data={data} margin={{ top: 24, right: 8, bottom: 2, left: 0 }}>
+          <AreaChart
+            data={data}
+            margin={{ top: 24, right: 8, bottom: 2, left: 0 }}
+            accessibilityLayer={false}
+          >
             <CartesianGrid
               strokeDasharray="3 3"
               stroke="#2A2D3A"
@@ -155,14 +163,14 @@ export default function RecoveryChart({
               interval={0}
               tickFormatter={(m: string) => m.slice(0, 4)}
               stroke="#2A2D3A"
-              tick={{ fill: "#64748B", fontSize: 11 }}
+              tick={{ fill: "#7E8B9E", fontSize: 11 }}
               tickLine={false}
               axisLine={{ stroke: "#2A2D3A" }}
             />
             <YAxis
               width={36}
               stroke="transparent"
-              tick={{ fill: "#64748B", fontSize: 11 }}
+              tick={{ fill: "#7E8B9E", fontSize: 11 }}
               tickLine={false}
               axisLine={false}
               allowDecimals={false}
@@ -206,7 +214,7 @@ export default function RecoveryChart({
                         </div>
                       );
                     })}
-                    <div style={{ color: "#64748B", marginTop: 2 }}>
+                    <div style={{ color: "#7E8B9E", marginTop: 2 }}>
                       total {total.toLocaleString()} posts
                     </div>
                   </div>

@@ -33,7 +33,7 @@ export default function RecoverySection({
       <p
         style={{
           fontSize: 12,
-          color: "#6B7689",
+          color: "#7E8B9E",
           marginTop: 8,
           marginBottom: 28,
           maxWidth: measure,
@@ -86,7 +86,7 @@ export default function RecoverySection({
             <div
               style={{
                 fontSize: 11,
-                color: "#6B7689",
+                color: "#7E8B9E",
                 marginTop: 10,
                 display: "flex",
                 gap: 8,

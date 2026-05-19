@@ -42,7 +42,7 @@ export const textColor = {
   heading: "#F1F4F8",
   body: "#C8D0DC",
   lead: "#9AA7B8",
-  caption: "#6B7689",
+  caption: "#7E8B9E",
   eyebrow: "#8293A6",
 } as const;
 

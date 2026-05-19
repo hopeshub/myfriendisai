@@ -61,7 +61,7 @@ export default function CommunityActivityChart({
     return (
       <div
         style={{ height: 200 }}
-        className="flex items-center justify-center text-sm text-[#6B7689]"
+        className="flex items-center justify-center text-sm text-[#7E8B9E]"
       >
         No monthly post data for this community yet.
       </div>
@@ -69,9 +69,17 @@ export default function CommunityActivityChart({
   }
 
   return (
-    <div style={{ height: 220 }}>
+    <div
+      style={{ height: 220 }}
+      role="img"
+      aria-label="Chart: this community's monthly post volume from 2023 to the latest complete month."
+    >
       <ResponsiveContainer width="100%" height="100%">
-        <AreaChart data={rows} margin={{ top: 8, right: 8, bottom: 2, left: 0 }}>
+        <AreaChart
+          data={rows}
+          margin={{ top: 8, right: 8, bottom: 2, left: 0 }}
+          accessibilityLayer={false}
+        >
           <defs>
             <linearGradient id="community-activity" x1="0" y1="0" x2="0" y2="1">
               <stop offset="0%" stopColor="#7C9CD0" stopOpacity={0.5} />
@@ -85,14 +93,14 @@ export default function CommunityActivityChart({
             interval={0}
             tickFormatter={(m: string) => m.slice(0, 4)}
             stroke="#2A2D3A"
-            tick={{ fill: "#6B7689", fontSize: 11 }}
+            tick={{ fill: "#7E8B9E", fontSize: 11 }}
             tickLine={false}
             axisLine={{ stroke: "#2A2D3A" }}
           />
           <YAxis
             width={44}
             stroke="transparent"
-            tick={{ fill: "#6B7689", fontSize: 11 }}
+            tick={{ fill: "#7E8B9E", fontSize: 11 }}
             tickLine={false}
             axisLine={false}
             tickFormatter={fmtCount}
