@@ -3,7 +3,6 @@
 import { useMemo } from "react";
 import Link from "next/link";
 import {
-  ResponsiveContainer,
   LineChart,
   Line,
   XAxis,
@@ -12,6 +11,7 @@ import {
   Tooltip,
   CartesianGrid,
 } from "recharts";
+import MeasuredChart from "@/app/MeasuredChart";
 import type { ThemeData } from "./themeData";
 import { THEMES, EVENTS } from "./themes";
 
@@ -234,9 +234,11 @@ export default function TrendAtlas({
                 {t.blurb}
               </p>
 
-              <div style={{ height: panelHeight }}>
-                <ResponsiveContainer width="100%" height="100%">
+              <MeasuredChart style={{ height: panelHeight }}>
+                {({ width, height }) => (
                   <LineChart
+                    width={width}
+                    height={height}
                     data={data}
                     margin={{ top: 24, right: 8, bottom: 2, left: 0 }}
                     accessibilityLayer={false}
@@ -324,8 +326,8 @@ export default function TrendAtlas({
                       connectNulls={false}
                     />
                   </LineChart>
-                </ResponsiveContainer>
-              </div>
+                )}
+              </MeasuredChart>
 
               {/* Footer row: coverage note (left) + page affordance (right) */}
               <div

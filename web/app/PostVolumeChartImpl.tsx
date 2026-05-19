@@ -2,7 +2,6 @@
 
 import { useMemo, useState } from "react";
 import {
-  ResponsiveContainer,
   AreaChart,
   Area,
   XAxis,
@@ -12,6 +11,7 @@ import {
   ReferenceLine,
   LabelList,
 } from "recharts";
+import MeasuredChart from "@/app/MeasuredChart";
 import type { CaiPoint, CompositionPoint } from "./themeData";
 import { measure } from "./styles";
 import { usePrefersReducedMotion } from "@/lib/usePrefersReducedMotion";
@@ -180,13 +180,15 @@ export default function PostVolumeChart({
       <div style={{ fontSize: 12, color: "#7E8B9E", marginBottom: 6 }}>
         The mass-market giant — boomed past 40k posts a month, then receded.
       </div>
-      <div
+      <MeasuredChart
         style={{ height: 138 }}
         role="img"
-        aria-label="Chart: r/CharacterAI monthly post volume from 2023 to 2026, rising past 40,000 posts a month then declining."
+        ariaLabel="Chart: r/CharacterAI monthly post volume from 2023 to 2026, rising past 40,000 posts a month then declining."
       >
-        <ResponsiveContainer width="100%" height="100%">
+        {({ width, height }) => (
           <AreaChart
+            width={width}
+            height={height}
             data={characterai}
             margin={{ top: 14, right: 8, bottom: 2, left: 0 }}
             accessibilityLayer={false}
@@ -264,8 +266,8 @@ export default function PostVolumeChart({
               />
             ))}
           </AreaChart>
-        </ResponsiveContainer>
-      </div>
+        )}
+      </MeasuredChart>
       <div
         style={{
           fontSize: 11,
@@ -323,13 +325,15 @@ export default function PostVolumeChart({
       <div style={{ fontSize: 12, color: "#7E8B9E", marginBottom: 6 }}>
         A steady floor &mdash; but watch r/replika give way to a new generation.
       </div>
-      <div
+      <MeasuredChart
         style={{ height: 272 }}
         role="img"
-        aria-label="Stacked area chart: monthly post volume of every non-CharacterAI companionship community. r/replika's share collapses while r/NomiAI, r/KindroidAI, r/ChaiApp and others rise to fill a steady floor."
+        ariaLabel="Stacked area chart: monthly post volume of every non-CharacterAI companionship community. r/replika's share collapses while r/NomiAI, r/KindroidAI, r/ChaiApp and others rise to fill a steady floor."
       >
-        <ResponsiveContainer width="100%" height="100%">
+        {({ width, height }) => (
           <AreaChart
+            width={width}
+            height={height}
             data={composition}
             margin={{ top: 6, right: 8, bottom: 2, left: 0 }}
             accessibilityLayer={false}
@@ -451,8 +455,8 @@ export default function PostVolumeChart({
               );
             })}
           </AreaChart>
-        </ResponsiveContainer>
-      </div>
+        )}
+      </MeasuredChart>
 
       {/* Legend — click an entry (or a band) to isolate that community */}
       <div

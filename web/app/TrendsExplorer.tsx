@@ -7,8 +7,8 @@ import { useBreakpoint } from "./useBreakpoint";
 import { measure } from "./styles";
 
 // Lazy-loaded so Recharts is not in the homepage's initial JS bundle.
-// ResponsiveContainer cannot server-render at a real width anyway, so the
-// SSR'd chart is discarded and re-rendered client-side regardless.
+// The chart measures its container width on the client and cannot
+// server-render at a real width anyway, so ssr:false loses nothing.
 const TrendAtlas = dynamic(() => import("./TrendAtlas"), {
   ssr: false,
   // Responsive: six theme panels — 1 column on mobile, 2 on tablet, 3 on

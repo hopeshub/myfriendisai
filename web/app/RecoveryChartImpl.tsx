@@ -2,7 +2,6 @@
 
 import { useMemo } from "react";
 import {
-  ResponsiveContainer,
   AreaChart,
   Area,
   XAxis,
@@ -11,6 +10,7 @@ import {
   CartesianGrid,
   ReferenceLine,
 } from "recharts";
+import MeasuredChart from "@/app/MeasuredChart";
 import type { RecoveryVolumePoint } from "./themeData";
 import { RECOVERY_COMMUNITIES, RECOVERY_EVENTS } from "./recoveryData";
 import { usePrefersReducedMotion } from "@/lib/usePrefersReducedMotion";
@@ -141,13 +141,15 @@ export default function RecoveryChart({
         ))}
       </div>
 
-      <div
+      <MeasuredChart
         style={{ height: 240 }}
         role="img"
-        aria-label="Chart: monthly post volume across the recovery communities, near zero through 2023 then a steady climb."
+        ariaLabel="Chart: monthly post volume across the recovery communities, near zero through 2023 then a steady climb."
       >
-        <ResponsiveContainer width="100%" height="100%">
+        {({ width, height }) => (
           <AreaChart
+            width={width}
+            height={height}
             data={data}
             margin={{ top: 24, right: 8, bottom: 2, left: 0 }}
             accessibilityLayer={false}
@@ -258,8 +260,8 @@ export default function RecoveryChart({
               />
             ))}
           </AreaChart>
-        </ResponsiveContainer>
-      </div>
+        )}
+      </MeasuredChart>
     </div>
   );
 }

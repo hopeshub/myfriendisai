@@ -6,9 +6,9 @@ import {
   XAxis,
   YAxis,
   Tooltip,
-  ResponsiveContainer,
   CartesianGrid,
 } from "recharts";
+import MeasuredChart from "@/app/MeasuredChart";
 import type { Snapshot } from "@/lib/types";
 import { usePrefersReducedMotion } from "@/lib/usePrefersReducedMotion";
 
@@ -76,12 +76,15 @@ function MetricChart({
           No data yet.
         </div>
       ) : (
-        <div
+        <MeasuredChart
+          style={{ height: 140 }}
           role="img"
-          aria-label={`Line chart: ${label}, monthly average across the collected history.`}
+          ariaLabel={`Line chart: ${label}, monthly average across the collected history.`}
         >
-        <ResponsiveContainer width="100%" height={140}>
+        {({ width, height }) => (
           <LineChart
+            width={width}
+            height={height}
             data={monthly}
             margin={{ top: 4, right: 4, left: 0, bottom: 0 }}
             accessibilityLayer={false}
@@ -140,8 +143,8 @@ function MetricChart({
               animationEasing="ease-out"
             />
           </LineChart>
-        </ResponsiveContainer>
-        </div>
+        )}
+        </MeasuredChart>
       )}
     </div>
   );

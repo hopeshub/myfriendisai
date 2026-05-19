@@ -2,7 +2,6 @@
 
 import { useMemo } from "react";
 import {
-  ResponsiveContainer,
   AreaChart,
   Area,
   XAxis,
@@ -10,6 +9,7 @@ import {
   Tooltip,
   CartesianGrid,
 } from "recharts";
+import MeasuredChart from "@/app/MeasuredChart";
 import { usePrefersReducedMotion } from "@/lib/usePrefersReducedMotion";
 
 // ── Community activity chart ─────────────────────────────────────────────────
@@ -69,13 +69,15 @@ export default function CommunityActivityChart({
   }
 
   return (
-    <div
+    <MeasuredChart
       style={{ height: 220 }}
       role="img"
-      aria-label="Chart: this community's monthly post volume from 2023 to the latest complete month."
+      ariaLabel="Chart: this community's monthly post volume from 2023 to the latest complete month."
     >
-      <ResponsiveContainer width="100%" height="100%">
+      {({ width, height }) => (
         <AreaChart
+          width={width}
+          height={height}
           data={rows}
           margin={{ top: 8, right: 8, bottom: 2, left: 0 }}
           accessibilityLayer={false}
@@ -148,7 +150,7 @@ export default function CommunityActivityChart({
             animationEasing="ease-out"
           />
         </AreaChart>
-      </ResponsiveContainer>
-    </div>
+      )}
+    </MeasuredChart>
   );
 }

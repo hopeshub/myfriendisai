@@ -2,7 +2,6 @@
 
 import { useMemo, useState } from "react";
 import {
-  ResponsiveContainer,
   LineChart,
   Line,
   XAxis,
@@ -11,6 +10,7 @@ import {
   Tooltip,
   CartesianGrid,
 } from "recharts";
+import MeasuredChart from "@/app/MeasuredChart";
 import { EVENTS } from "../../themes";
 
 // A single line chart for one theme's page. Same honest series as the homepage
@@ -116,13 +116,15 @@ export default function ThemeChart({
         ))}
       </div>
 
-      <div
+      <MeasuredChart
         className="h-[240px] sm:h-[300px] w-full"
         role="img"
-        aria-label="Line chart of this theme's validated-keyword mentions per 1,000 posts, monthly, with platform events marked."
+        ariaLabel="Line chart of this theme's validated-keyword mentions per 1,000 posts, monthly, with platform events marked."
       >
-        <ResponsiveContainer width="100%" height="100%">
+        {({ width, height }) => (
           <LineChart
+            width={width}
+            height={height}
             data={data}
             margin={{ top: 30, right: 14, bottom: 4, left: 0 }}
             accessibilityLayer={false}
@@ -209,8 +211,8 @@ export default function ThemeChart({
               connectNulls={false}
             />
           </LineChart>
-        </ResponsiveContainer>
-      </div>
+        )}
+      </MeasuredChart>
 
       <div style={{ fontSize: 11, color: "#7E8B9E", marginTop: 8 }}>
         Validated-keyword mentions per 1,000 posts · monthly average · post text
