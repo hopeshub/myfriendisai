@@ -59,7 +59,7 @@ const BAND_LABEL: Record<string, string> = Object.fromEntries(
 // r/CharacterAI's platform timeline — the events behind its rise and fall.
 const CAI_EVENTS = [
   { month: "2024-10", n: 1, label: "Lawsuit filed" },
-  { month: "2025-10", n: 2, label: "Under-18 limits" },
+  { month: "2025-10", n: 2, label: "New under-18 limits" },
 ];
 
 /** The first month of each calendar year — used for sparse x-axis ticks. */
@@ -265,15 +265,41 @@ export default function PostVolumeChart({
         style={{
           fontSize: 11,
           color: "#6B7689",
-          marginTop: 4,
+          marginTop: 6,
           display: "flex",
           flexWrap: "wrap",
-          gap: "2px 14px",
+          gap: "4px 14px",
+          justifyContent: "center",
+          alignItems: "center",
         }}
       >
+        <span style={{ textTransform: "uppercase", letterSpacing: "0.05em" }}>
+          r/CharacterAI
+        </span>
         {CAI_EVENTS.map((e) => (
-          <span key={e.month}>
-            {e.n}. {e.label} ({fmtMonth(e.month)})
+          <span
+            key={e.month}
+            style={{ display: "inline-flex", alignItems: "center", gap: 5 }}
+          >
+            <span
+              aria-hidden
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                justifyContent: "center",
+                width: 15,
+                height: 15,
+                borderRadius: 999,
+                fontSize: 10,
+                fontWeight: 700,
+                color: "#0F1117",
+                backgroundColor: "#C2974D",
+              }}
+            >
+              {e.n}
+            </span>
+            <span style={{ color: "#C8D0DC" }}>{e.label}</span>
+            <span>{fmtMonth(e.month)}</span>
           </span>
         ))}
       </div>
