@@ -9,27 +9,17 @@ import {
   YAxis,
   Tooltip,
   CartesianGrid,
-  ReferenceLine,
 } from "recharts";
-import type { PostVolumeSplitPoint } from "./themeData";
+import type { CaiPoint, CompositionPoint } from "./themeData";
 import { measure } from "./styles";
 import { usePrefersReducedMotion } from "@/lib/usePrefersReducedMotion";
 
-// ── Post-volume chart ────────────────────────────────────────────────────────
-// Two panels, each on its OWN y-scale: r/CharacterAI, and every other tracked
-// community. They are deliberately not stacked or on a shared axis —
-// CharacterAI is so much larger that a shared scale flattens the second panel
-// into an unreadable sliver. Separate scales let each be read on its own terms.
-//
-// The chart begins in 2023. The post corpus reaches back to 2017, but the
-// 2017-2022 years are sparse and partly archive-gapped — shown earlier as a
-// large shaded "patchy coverage" block that dominated the chart. Cropping to
-// the reliable era is cleaner and more honest than rendering two-thirds of the
-// chart as untrustworthy; the corpus extent is noted in the caption instead.
-//
-// The CharacterAI panel carries numbered event markers — the platform changes
-// behind its surge and fall — so the §1 thesis ("one platform's lifecycle, not
-// the category's") is legible on the chart itself, not only in the prose.
+// ── §1 post-volume chart ─────────────────────────────────────────────────────
+// Two stacked charts. Top: r/CharacterAI alone — it is 60-90% of all volume and
+// would crush everything else on a shared scale. Bottom: every other
+// companionship community as a stacked area, so the field's turnover is
+// legible — r/replika's 2023 dominance collapsing while a new generation
+// (Nomi, Kindroid, Chai, MyBoyfriendIsAI) rises to fill a roughly flat total.
 
 const MONTH_NAMES = [
   "Jan", "Feb", "Mar", "Apr", "May", "Jun",
@@ -46,81 +36,107 @@ function fmtCount(n: number): string {
   return String(n);
 }
 
-/** Every "YYYY-MM" from start to end inclusive. */
-function monthRange(start: string, end: string): string[] {
-  const out: string[] = [];
-  let [y, m] = start.split("-").map(Number);
-  const [ey, em] = end.split("-").map(Number);
-  while (y < ey || (y === ey && m <= em)) {
-    out.push(`${y}-${String(m).padStart(2, "0")}`);
-    m += 1;
-    if (m > 12) {
-      m = 1;
-      y += 1;
+// Stacked bands, declared bottom → top. r/replika sits at the bottom so its
+// collapse reads against a clean baseline; "Other" is the catch-all on top.
+type BandKey = keyof Omit<CompositionPoint, "month">;
+type Band = { key: BandKey; label: string; color: string };
+const BANDS: Band[] = [
+  { key: "replika", label: "r/replika", color: "#C99B5A" },
+  { key: "nomi", label: "r/NomiAI", color: "#7BA98D" },
+  { key: "kindroid", label: "r/KindroidAI", color: "#A98FC4" },
+  { key: "chai", label: "r/ChaiApp", color: "#6E9BC4" },
+  { key: "chatgptcomplaints", label: "r/ChatGPTcomplaints", color: "#CC7E72" },
+  { key: "myboyfriendisai", label: "r/MyBoyfriendIsAI", color: "#C77FA3" },
+  { key: "other", label: "Other communities", color: "#525A6B" },
+];
+const BAND_LABEL: Record<string, string> = Object.fromEntries(
+  BANDS.map((b) => [b.key, b.label]),
+);
+
+/** The first month of each calendar year — used for sparse x-axis ticks. */
+function yearTicks(months: string[]): string[] {
+  const seen = new Set<string>();
+  const ticks: string[] = [];
+  for (const m of months) {
+    const y = m.slice(0, 4);
+    if (!seen.has(y)) {
+      seen.add(y);
+      ticks.push(m);
     }
   }
-  return out;
+  return ticks;
 }
 
-// The chart starts here — the first month from which monthly post counts are
-// reliable. Earlier data exists in the corpus but is sparse / archive-gapped.
-const CHART_START = "2023-01";
+const tooltipBox: React.CSSProperties = {
+  backgroundColor: "#0F1117",
+  border: "1px solid #2A2D3A",
+  borderRadius: 6,
+  padding: "6px 9px",
+  fontSize: 11,
+};
 
-// r/CharacterAI's platform timeline — the events behind the surge and fall.
-type ChartEvent = { month: string; label: string };
-const CAI_EVENTS: ChartEvent[] = [
-  { month: "2024-10", label: "Lawsuit filed" },
-  { month: "2025-10", label: "New under-18 limits" },
-];
-
-type PanelRow = { month: string; value: number | null };
-
-function VolumePanel({
-  title,
-  caption,
-  rows,
-  yearTicks,
-  color,
-  gradientId,
-  events,
-  animate,
+export default function PostVolumeChart({
+  characterai,
+  composition,
 }: {
-  title: string;
-  caption: string;
-  rows: PanelRow[];
-  yearTicks: string[];
-  color: string;
-  gradientId: string;
-  events?: ChartEvent[];
-  animate: boolean;
+  characterai: CaiPoint[];
+  composition: CompositionPoint[];
 }) {
+  // Static chart — animates once on mount only.
+  const reducedMotion = usePrefersReducedMotion();
+  const animate = !reducedMotion;
+
+  const ticks = useMemo(
+    () => yearTicks(composition.map((d) => d.month)),
+    [composition],
+  );
+
+  if (composition.length === 0) {
+    return (
+      <div
+        style={{ height: 300 }}
+        className="flex items-center justify-center text-sm text-[#6B7689]"
+      >
+        No post-volume data yet.
+      </div>
+    );
+  }
+
+  const axisProps = {
+    stroke: "#2A2D3A",
+    tick: { fill: "#6B7689", fontSize: 11 },
+    tickLine: false,
+  };
+
   return (
     <div>
+      {/* r/CharacterAI — on its own scale */}
       <div style={{ fontSize: 14, fontWeight: 600, color: "#F1F4F8" }}>
-        {title}
+        r/CharacterAI
       </div>
       <div style={{ fontSize: 12, color: "#6B7689", marginBottom: 6 }}>
-        {caption}
+        The mass-market giant — boomed past 40k posts a month, then receded.
       </div>
-      <div style={{ height: 200 }}>
+      <div style={{ height: 132 }}>
         <ResponsiveContainer width="100%" height="100%">
-          <AreaChart data={rows} margin={{ top: 20, right: 8, bottom: 2, left: 0 }}>
+          <AreaChart
+            data={characterai}
+            margin={{ top: 6, right: 8, bottom: 2, left: 0 }}
+          >
             <defs>
-              <linearGradient id={gradientId} x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor={color} stopOpacity={0.5} />
-                <stop offset="100%" stopColor={color} stopOpacity={0.04} />
+              <linearGradient id="pv-cai" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor="#566173" stopOpacity={0.45} />
+                <stop offset="100%" stopColor="#566173" stopOpacity={0.04} />
               </linearGradient>
             </defs>
             <CartesianGrid strokeDasharray="3 3" stroke="#2A2D3A" vertical={false} />
             <XAxis
               dataKey="month"
-              ticks={yearTicks}
+              ticks={ticks}
               interval={0}
               tickFormatter={(m: string) => m.slice(0, 4)}
-              stroke="#2A2D3A"
-              tick={{ fill: "#6B7689", fontSize: 11 }}
-              tickLine={false}
               axisLine={{ stroke: "#2A2D3A" }}
+              {...axisProps}
             />
             <YAxis
               width={40}
@@ -133,22 +149,12 @@ function VolumePanel({
             <Tooltip
               cursor={{ stroke: "#475569", strokeWidth: 1 }}
               animationDuration={140}
-              animationEasing="ease-out"
               content={({ active, payload, label }) => {
                 if (!active || !payload?.length || payload[0].value == null) {
                   return null;
                 }
                 return (
-                  <div
-                    style={{
-                      backgroundColor: "#0F1117",
-                      border: "1px solid #2A2D3A",
-                      borderRadius: 6,
-                      padding: "4px 8px",
-                      fontSize: 11,
-                      whiteSpace: "nowrap",
-                    }}
-                  >
+                  <div style={{ ...tooltipBox, whiteSpace: "nowrap" }}>
                     <span style={{ color: "#9AA7B8" }}>
                       {fmtMonth(label as string)}
                     </span>
@@ -164,158 +170,163 @@ function VolumePanel({
             <Area
               type="monotone"
               dataKey="value"
-              stroke={color}
+              stroke="#566173"
               strokeWidth={2}
-              fill={`url(#${gradientId})`}
-              connectNulls={false}
+              fill="url(#pv-cai)"
               isAnimationActive={animate}
               animationDuration={700}
               animationEasing="ease-out"
             />
-            {/* Numbered platform-event markers — named in the legend below. */}
-            {events?.map((ev, i) => (
-              <ReferenceLine
-                key={ev.month}
-                x={ev.month}
-                stroke="#C2974D"
-                strokeOpacity={0.55}
-                strokeDasharray="4 3"
+          </AreaChart>
+        </ResponsiveContainer>
+      </div>
+
+      {/* Every other community — stacked composition */}
+      <div
+        style={{
+          fontSize: 14,
+          fontWeight: 600,
+          color: "#F1F4F8",
+          marginTop: 20,
+        }}
+      >
+        Every other community
+      </div>
+      <div style={{ fontSize: 12, color: "#6B7689", marginBottom: 6 }}>
+        A roughly flat total &mdash; but watch r/replika give way to a new
+        generation.
+      </div>
+      <div style={{ height: 264 }}>
+        <ResponsiveContainer width="100%" height="100%">
+          <AreaChart
+            data={composition}
+            margin={{ top: 6, right: 8, bottom: 2, left: 0 }}
+          >
+            <CartesianGrid strokeDasharray="3 3" stroke="#2A2D3A" vertical={false} />
+            <XAxis
+              dataKey="month"
+              ticks={ticks}
+              interval={0}
+              tickFormatter={(m: string) => m.slice(0, 4)}
+              axisLine={{ stroke: "#2A2D3A" }}
+              {...axisProps}
+            />
+            <YAxis
+              width={40}
+              stroke="transparent"
+              tick={{ fill: "#6B7689", fontSize: 11 }}
+              tickLine={false}
+              axisLine={false}
+              tickFormatter={fmtCount}
+            />
+            <Tooltip
+              cursor={{ stroke: "#475569", strokeWidth: 1 }}
+              animationDuration={140}
+              content={({ active, payload, label }) => {
+                if (!active || !payload?.length) return null;
+                const total = payload.reduce(
+                  (s, p) => s + ((p.value as number) ?? 0),
+                  0,
+                );
+                return (
+                  <div style={tooltipBox}>
+                    <div style={{ color: "#9AA7B8", marginBottom: 4 }}>
+                      {fmtMonth(label as string)}
+                    </div>
+                    {[...payload].reverse().map((p) => (
+                      <div
+                        key={p.dataKey as string}
+                        style={{
+                          display: "flex",
+                          justifyContent: "space-between",
+                          gap: 14,
+                          color: "#C8D0DC",
+                          lineHeight: 1.5,
+                        }}
+                      >
+                        <span>
+                          <span
+                            style={{
+                              display: "inline-block",
+                              width: 8,
+                              height: 8,
+                              borderRadius: 2,
+                              backgroundColor: p.color,
+                              marginRight: 5,
+                            }}
+                          />
+                          {BAND_LABEL[p.dataKey as string] ?? p.dataKey}
+                        </span>
+                        <span style={{ fontWeight: 600 }}>
+                          {((p.value as number) ?? 0).toLocaleString()}
+                        </span>
+                      </div>
+                    ))}
+                    <div
+                      style={{
+                        borderTop: "1px solid #2A2D3A",
+                        marginTop: 4,
+                        paddingTop: 4,
+                        display: "flex",
+                        justifyContent: "space-between",
+                        gap: 14,
+                        color: "#9AA7B8",
+                      }}
+                    >
+                      <span>Total</span>
+                      <span>{total.toLocaleString()}</span>
+                    </div>
+                  </div>
+                );
+              }}
+            />
+            {BANDS.map((b) => (
+              <Area
+                key={b.key}
+                type="monotone"
+                dataKey={b.key}
+                stackId="composition"
+                stroke={b.color}
                 strokeWidth={1}
-                label={{
-                  value: String(i + 1),
-                  position: "top",
-                  fill: "#D4A862",
-                  fontSize: 11,
-                  fontWeight: 700,
-                }}
+                fill={b.color}
+                fillOpacity={0.8}
+                isAnimationActive={animate}
+                animationDuration={700}
+                animationEasing="ease-out"
               />
             ))}
           </AreaChart>
         </ResponsiveContainer>
       </div>
-    </div>
-  );
-}
 
-export default function PostVolumeChart({
-  data,
-}: {
-  data: PostVolumeSplitPoint[];
-}) {
-  // No time-range/scope toggle on this chart — animates once on mount only.
-  const reducedMotion = usePrefersReducedMotion();
-
-  const { caiRows, otherRows, yearTicks } = useMemo(() => {
-    // Crop to the reliable era — 2023 onward.
-    const cropped = data.filter((d) => d.month >= CHART_START);
-    if (cropped.length === 0) {
-      return {
-        caiRows: [] as PanelRow[],
-        otherRows: [] as PanelRow[],
-        yearTicks: [] as string[],
-      };
-    }
-    const lookup: Record<string, PostVolumeSplitPoint> = {};
-    for (const d of cropped) lookup[d.month] = d;
-
-    const months = monthRange(cropped[0].month, cropped[cropped.length - 1].month);
-    const caiRows: PanelRow[] = months.map((m) => ({
-      month: m,
-      value: lookup[m] ? lookup[m].characterai : null,
-    }));
-    const otherRows: PanelRow[] = months.map((m) => ({
-      month: m,
-      value: lookup[m] ? lookup[m].other : null,
-    }));
-
-    const seen = new Set<string>();
-    const ticks: string[] = [];
-    for (const m of months) {
-      const y = m.slice(0, 4);
-      if (!seen.has(y)) {
-        seen.add(y);
-        ticks.push(m);
-      }
-    }
-
-    return { caiRows, otherRows, yearTicks: ticks };
-  }, [data]);
-
-  if (caiRows.length === 0) {
-    return (
-      <div
-        style={{ height: 220 }}
-        className="flex items-center justify-center text-sm text-[#6B7689]"
-      >
-        No post-volume data yet.
-      </div>
-    );
-  }
-
-  return (
-    <div>
-      <div className="grid gap-x-6 gap-y-5 sm:grid-cols-2">
-        <VolumePanel
-          title="r/CharacterAI"
-          caption="Surged, then contracted — one platform's lifecycle."
-          rows={caiRows}
-          yearTicks={yearTicks}
-          color="#566173"
-          gradientId="pv-cai"
-          events={CAI_EVENTS}
-          animate={!reducedMotion}
-        />
-        <VolumePanel
-          title="Every other tracked community"
-          caption="Held roughly steady, with spikes at platform events."
-          rows={otherRows}
-          yearTicks={yearTicks}
-          color="#7C9CD0"
-          gradientId="pv-other"
-          animate={!reducedMotion}
-        />
-      </div>
-
-      {/* Legend for the r/CharacterAI panel's numbered event markers. */}
+      {/* Legend for the stacked bands */}
       <div
         style={{
-          fontSize: 11,
-          color: "#6B7689",
           marginTop: 10,
           display: "flex",
           flexWrap: "wrap",
           gap: "4px 14px",
           justifyContent: "center",
-          alignItems: "center",
+          fontSize: 11,
+          color: "#9AA7B8",
         }}
       >
-        <span style={{ textTransform: "uppercase", letterSpacing: "0.05em" }}>
-          r/CharacterAI
-        </span>
-        {CAI_EVENTS.map((ev, i) => (
+        {BANDS.map((b) => (
           <span
-            key={ev.month}
+            key={b.key}
             style={{ display: "inline-flex", alignItems: "center", gap: 5 }}
           >
             <span
               aria-hidden
               style={{
-                display: "inline-flex",
-                alignItems: "center",
-                justifyContent: "center",
-                width: 15,
-                height: 15,
-                borderRadius: 999,
-                fontSize: 10,
-                fontWeight: 700,
-                color: "#0F1117",
-                backgroundColor: "#C2974D",
+                display: "inline-block",
+                width: 9,
+                height: 9,
+                borderRadius: 2,
+                backgroundColor: b.color,
               }}
-            >
-              {i + 1}
-            </span>
-            <span style={{ color: "#C8D0DC" }}>{ev.label}</span>
-            <span>{fmtMonth(ev.month)}</span>
+            />
+            {b.label}
           </span>
         ))}
       </div>
@@ -324,17 +335,15 @@ export default function PostVolumeChart({
         style={{
           fontSize: 11,
           color: "#6B7689",
-          marginTop: 6,
+          marginTop: 8,
           textAlign: "center",
           maxWidth: measure,
           marginLeft: "auto",
           marginRight: "auto",
         }}
       >
-        The chart begins in 2023, where monthly counts become reliable &mdash;
-        the post record itself reaches back to 2017. Each panel has its own
-        scale: for years, r/CharacterAI alone was 75&ndash;90% of every post
-        counted here.
+        Monthly post volume, from 2023 onward (where monthly counts become
+        reliable). Each chart has its own scale.
       </p>
     </div>
   );

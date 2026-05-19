@@ -164,58 +164,72 @@ export function loadKeywordDetails(): KeywordDetailsData {
   }
 }
 
-// ── Post-volume series, split by composition ─────────────────────────────────
-// Monthly post count across the committed-core communities (T1-T3), split into
-// r/CharacterAI and everything else. CharacterAI is 75-90% of the volume and
-// swings on its own platform lifecycle; the split keeps its rise-and-fall from
-// being misread as the whole category's. `characterai` is derived as the
-// difference between the full _total_posts (keyword_trends.json) and the
-// ex-CharacterAI _total_posts (composition_trends.json).
-// See docs/characterai_composition_fault_2026-05-16.md.
-export type PostVolumeSplitPoint = {
+// ── Community composition over time ──────────────────────────────────────────
+// Per-community monthly post volume, from community_activity.json. §1 shows
+// r/CharacterAI on its own (60-90% of all volume — it would crush a shared
+// scale) and every other companionship community as a stacked area, so the
+// field's turnover is visible: r/replika's 2023 dominance collapsing while a
+// new generation rises to fill a roughly flat total.
+
+export type CaiPoint = { month: string; value: number };
+export type CompositionPoint = {
   month: string;
-  characterai: number;
+  replika: number;
+  chai: number;
+  nomi: number;
+  kindroid: number;
+  chatgptcomplaints: number;
+  myboyfriendisai: number;
   other: number;
 };
+export type CommunityComposition = {
+  characterai: CaiPoint[];
+  composition: CompositionPoint[];
+};
 
-function monthlyTotalPosts(filename: string): Record<string, number> {
-  const filePath = path.join(process.cwd(), "data", filename);
-  if (!fs.existsSync(filePath)) return {};
-  let raw: Record<string, unknown>;
+export function loadCommunityComposition(): CommunityComposition {
+  const filePath = path.join(process.cwd(), "data", "community_activity.json");
+  if (!fs.existsSync(filePath)) return { characterai: [], composition: [] };
+  let raw: { months: string[]; activity: Record<string, number[]> };
   try {
     raw = JSON.parse(fs.readFileSync(filePath, "utf8"));
   } catch (e) {
-    console.error(`Failed to parse ${filename}:`, e);
-    return {};
+    console.error("Failed to parse community_activity.json:", e);
+    return { characterai: [], composition: [] };
   }
-  const daily =
-    (raw["_total_posts"] as Array<{ date: string; count: number }> | undefined) ??
-    [];
-  const byMonth: Record<string, number> = {};
-  for (const e of daily) {
-    const m = e.date.slice(0, 7); // "YYYY-MM"
-    byMonth[m] = (byMonth[m] ?? 0) + e.count;
-  }
-  return byMonth;
-}
+  const months = raw.months ?? [];
+  const activity = raw.activity ?? {};
+  if (months.length === 0) return { characterai: [], composition: [] };
 
-export function loadPostVolumeSplit(): PostVolumeSplitPoint[] {
-  const total = monthlyTotalPosts("keyword_trends.json");
-  const other = monthlyTotalPosts("composition_trends.json");
-  if (Object.keys(total).length === 0) return [];
+  const at = (sub: string, i: number) => activity[sub]?.[i] ?? 0;
 
-  // Drop the current partial month so the last point is never a half-count.
-  const currentMonth = new Date().toISOString().slice(0, 7);
-  return Object.keys(total)
-    .sort()
-    .filter((m) => m < currentMonth)
-    .map((m) => {
-      const o = other[m] ?? 0;
-      // characterai = full total − ex-CharacterAI total; clamp at 0 against
-      // any month present in one file but not the other.
-      const cai = Math.max(0, (total[m] ?? 0) - o);
-      return { month: m, characterai: cai, other: o };
-    });
+  // "Other" = every community in the file that is not r/CharacterAI (its own
+  // panel), not one of the six named bands, not an NSFW sub dropped from
+  // keyword tracking, and not a T0 general-AI sub. New keyword communities
+  // therefore fold into "Other" automatically.
+  const namedOrExcluded = new Set([
+    "CharacterAI", "replika", "ChaiApp", "NomiAI", "KindroidAI",
+    "ChatGPTcomplaints", "MyBoyfriendIsAI",
+    "AIGirlfriend", "ChatGPTNSFW", "SpicyChatAI",
+    "ChatGPT", "OpenAI", "ClaudeAI", "claudexplorers", "singularity",
+  ]);
+  const otherSubs = Object.keys(activity).filter((s) => !namedOrExcluded.has(s));
+
+  const characterai: CaiPoint[] = months.map((m, i) => ({
+    month: m,
+    value: at("CharacterAI", i),
+  }));
+  const composition: CompositionPoint[] = months.map((m, i) => ({
+    month: m,
+    replika: at("replika", i),
+    chai: at("ChaiApp", i),
+    nomi: at("NomiAI", i),
+    kindroid: at("KindroidAI", i),
+    chatgptcomplaints: at("ChatGPTcomplaints", i),
+    myboyfriendisai: at("MyBoyfriendIsAI", i),
+    other: otherSubs.reduce((s, sub) => s + at(sub, i), 0),
+  }));
+  return { characterai, composition };
 }
 
 // ── Recovery-community volume ────────────────────────────────────────────────

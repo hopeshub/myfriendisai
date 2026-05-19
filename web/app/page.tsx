@@ -4,7 +4,7 @@ import TrendsExplorer from "./TrendsExplorer";
 import PostVolumeChart from "./PostVolumeChart";
 import EventShowcase from "./EventShowcase";
 import RecoverySection from "./RecoverySection";
-import { loadThemeData, loadPostVolumeSplit, loadRecoveryVolume } from "./themeData";
+import { loadThemeData, loadCommunityComposition, loadRecoveryVolume } from "./themeData";
 import { sectionEyebrow, introParagraph, measure } from "./styles";
 import { CHANGELOG } from "./changelog";
 
@@ -24,7 +24,7 @@ const intro = introParagraph;
 export default function Home() {
   const themeData = loadThemeData();
   const themeDataExclCai = loadThemeData("composition_trends.json");
-  const postVolume = loadPostVolumeSplit();
+  const communityComposition = loadCommunityComposition();
   const recoveryVolume = loadRecoveryVolume();
 
   return (
@@ -114,22 +114,29 @@ export default function Home() {
           className="font-display text-xl sm:text-2xl font-semibold text-[#F1F4F8]"
           style={{ marginBottom: 8, maxWidth: measure }}
         >
-          How active these communities are
+          How the communities turned over
         </h2>
         <p style={{ ...intro, marginBottom: 16 }}>
-          Two views of the same months, each on its own scale. r/CharacterAI
-          &mdash; a mass-market roleplay platform that for years was
-          75&ndash;90% of every post counted here &mdash; surged and then
-          contracted on its own platform lifecycle: a lawsuit, new content
-          filters, users leaving.
+          Add up the posts across these communities and the total looks almost
+          flat &mdash; a few thousand a month, year after year. That flatness
+          hides a near-total turnover. In 2023, AI-companion Reddit was,
+          basically, r/replika. Replika then emptied out &mdash; from 38,000
+          posts a year to under 5,000 &mdash; and a new generation rose to take
+          its place, post for post: r/NomiAI, r/KindroidAI, r/ChaiApp, a
+          born-in-2024 r/MyBoyfriendIsAI.
         </p>
         <p style={{ ...intro, marginBottom: 16 }}>
-          Every other tracked community did something different &mdash; it held
-          roughly steady, drifting mildly upward, with spikes at the big
-          platform events. That contrast is the point: the steep fall in the
-          raw totals is one platform&apos;s story, not the category&apos;s.
+          r/CharacterAI, the mass-market giant, ran the same arc at far larger
+          scale &mdash; a boom past 40,000 posts a month, then a long recede.
+          The pattern under all of it is churn: a community surges, crests, and
+          gives way to the next platform. The headcount holds; the names keep
+          changing. Below, r/CharacterAI sits on its own scale, with every
+          other community stacked beneath it &mdash; so the handover is visible.
         </p>
-        <PostVolumeChart data={postVolume} />
+        <PostVolumeChart
+          characterai={communityComposition.characterai}
+          composition={communityComposition.composition}
+        />
         </section>
       </Reveal>
 
