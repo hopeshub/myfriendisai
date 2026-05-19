@@ -10,6 +10,8 @@ import {
   type ShowcaseEvent,
 } from "./eventShowcaseData";
 import { measure } from "./styles";
+import { loadThemeData } from "./themeData";
+import EventSparkline from "./EventSparkline";
 
 const MONTHS = [
   "Jan", "Feb", "Mar", "Apr", "May", "Jun",
@@ -25,7 +27,51 @@ function themeMeta(id: ThemeId) {
   return THEMES.find((t) => t.id === id);
 }
 
-function EventCard({ event }: { event: ShowcaseEvent }) {
+type Spark = { values: number[]; eventIndex: number };
+
+// The theme's monthly per-1k rate, windowed ±`radius` months around the event
+// month, plus the index of the event month within that window. Months with no
+// data (before a theme's coverage start, or in the future) are dropped, so a
+// recent event's window can be shorter than 2·radius+1.
+function windowedSeries(
+  series: { date: string; hitsPerK: number }[],
+  eventMonth: string,
+  radius = 6,
+): Spark | null {
+  const byMonth: Record<string, number> = {};
+  for (const p of series) byMonth[p.date.slice(0, 7)] = p.hitsPerK;
+
+  let [y, m] = eventMonth.split("-").map(Number);
+  m -= radius;
+  while (m <= 0) {
+    m += 12;
+    y -= 1;
+  }
+  const values: number[] = [];
+  let eventIndex = -1;
+  for (let i = 0; i < radius * 2 + 1; i++) {
+    const key = `${y}-${String(m).padStart(2, "0")}`;
+    if (key in byMonth) {
+      if (key === eventMonth) eventIndex = values.length;
+      values.push(byMonth[key]);
+    }
+    m += 1;
+    if (m > 12) {
+      m = 1;
+      y += 1;
+    }
+  }
+  if (eventIndex < 0 || values.length < 2) return null;
+  return { values, eventIndex };
+}
+
+function EventCard({
+  event,
+  spark,
+}: {
+  event: ShowcaseEvent;
+  spark: Spark | null;
+}) {
   return (
     <article
       style={{
@@ -85,6 +131,29 @@ function EventCard({ event }: { event: ShowcaseEvent }) {
       >
         {event.summary}
       </p>
+
+      {/* The theme line around this event — quote and curve corroborate */}
+      {spark && (
+        <div style={{ marginTop: 14, maxWidth: measure }}>
+          <EventSparkline
+            values={spark.values}
+            eventIndex={spark.eventIndex}
+            color={themeMeta(event.themes[0])?.color ?? "#9AA7B8"}
+          />
+          <p style={{ fontSize: 11, color: "#6B7689", marginTop: 4, lineHeight: 1.5 }}>
+            <span
+              style={{
+                color: themeMeta(event.themes[0])?.color ?? "#9AA7B8",
+                fontWeight: 600,
+              }}
+            >
+              {themeMeta(event.themes[0])?.label}
+            </span>{" "}
+            language &mdash; monthly rate, six months either side; the dashed
+            line marks the event.
+          </p>
+        </div>
+      )}
 
       {/* Real posts from the week it happened */}
       <div className="grid gap-3 sm:grid-cols-3" style={{ marginTop: 14 }}>
@@ -154,11 +223,14 @@ function EventCard({ event }: { event: ShowcaseEvent }) {
 }
 
 export default function EventShowcase() {
+  const themeData = loadThemeData();
   return (
     <div className="space-y-6">
-      {SHOWCASE_EVENTS.map((event) => (
-        <EventCard key={event.slug} event={event} />
-      ))}
+      {SHOWCASE_EVENTS.map((event) => {
+        const series = themeData[event.themes[0]] ?? [];
+        const spark = windowedSeries(series, event.date.slice(0, 7));
+        return <EventCard key={event.slug} event={event} spark={spark} />;
+      })}
     </div>
   );
 }

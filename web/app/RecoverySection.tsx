@@ -39,9 +39,11 @@ export default function RecoverySection({
           maxWidth: measure,
         }}
       >
-        Monthly posts across the two recovery communities, with key
-        Character.AI moments marked. The shape is the finding: near nothing
-        through 2023, then a steady climb.
+        Monthly posts across the two communities organized around quitting
+        &mdash; r/ChatbotAddiction and r/Character_AI_Recovery; the recovery
+        tier&apos;s other two subreddits are a platform-migration hub and one
+        too small to chart. Key Character.AI moments are marked. The shape is
+        the finding: near nothing through 2023, then a steady climb.
       </p>
 
       <div className="grid gap-3 sm:grid-cols-3" style={{ marginBottom: 24 }}>

@@ -53,7 +53,7 @@ function SortButton({
   return (
     <button
       onClick={() => onSort(sortKey)}
-      className={`flex items-center gap-1 ml-auto py-2 text-sm sm:text-xs hover:text-[#C8D0DC] transition-colors ${active ? "text-[#F8FAFC]" : "text-[#6B7689]"}`}
+      className={`flex items-center gap-1 ml-auto py-2 min-h-11 sm:min-h-0 text-sm sm:text-xs hover:text-[#C8D0DC] transition-colors ${active ? "text-[#F8FAFC]" : "text-[#6B7689]"}`}
     >
       {label}
       <span className="text-[11px]">{active ? (current.asc ? "↑" : "↓") : "↕"}</span>
@@ -178,7 +178,7 @@ export default function CommunitiesTable({
         <p className="text-sm text-[#9AA7B8] py-8 text-center">No communities in this category.</p>
       )}
 
-      <p className="mt-8 text-xs text-[#6B7689]">
+      <p className="mt-8 text-xs text-[#6B7689] hidden md:block">
         <strong>Activity</strong> — monthly post volume, Jan 2023 to the last
         complete month; each sparkline is on its own scale (read the shape, not
         the height).{" "}
