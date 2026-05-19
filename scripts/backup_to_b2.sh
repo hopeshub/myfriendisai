@@ -1,10 +1,11 @@
 #!/usr/bin/env bash
-# Off-site backup of tracker.db to Backblaze B2 via restic.
+# Off-site backup of tracker.db (plus CLAUDE.md and docs/archive/) to
+# Backblaze B2 via restic.
 #
 # Self-contained — no external drive involved. Steps:
 #   1. WAL-safe staging copy of the DB on the internal disk
 #   2. integrity check on that copy
-#   3. restic backup of the copy to the encrypted B2 repo
+#   3. restic backup of the copy + CLAUDE.md + docs/archive/ to the B2 repo
 #   4. prune old B2 snapshots (keep 7 daily / 5 weekly / 12 monthly)
 #   5. delete the staging copy
 #
@@ -59,9 +60,11 @@ echo "[$(date)] Verifying staging copy (quick_check) ..."
 qc=$(sqlite3 "$STAGING" "PRAGMA quick_check;" 2>&1)
 [ "$qc" = "ok" ] || fail "staging copy failed quick_check: $qc"
 
-# 3. restic backup the copy to the encrypted B2 repo.
+# 3. restic backup the copy to the encrypted B2 repo. CLAUDE.md and
+#    docs/archive/ ride along in the same snapshot — they are gitignored
+#    (public repo, internal notes), so this backup is their only off-site copy.
 echo "[$(date)] restic backup -> $RESTIC_REPOSITORY"
-restic backup "$STAGING" --tag tracker-db --host myfriendisai-collector \
+restic backup "$STAGING" CLAUDE.md docs/archive --tag tracker-db --host myfriendisai-collector \
     || fail "restic backup failed"
 
 # 4. Retention. group-by host,tags (NOT the default host,paths) so every
