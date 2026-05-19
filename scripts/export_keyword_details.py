@@ -128,6 +128,9 @@ def build_keyword_details(
     exclude_from_keywords honored). Every count and sample query is filtered
     to these subreddits so the transparency panel matches the theme lines —
     otherwise excluded subs (e.g. r/ChatGPTNSFW) leak into the per-theme totals.
+    Counts are also restricted to post-text matches (`source = 'post'`), so the
+    panel describes the same post-only metric the published chart shows rather
+    than mixing in comment-sourced tags.
     """
     result = {}
     recent_date = (datetime.now() - timedelta(days=RECENT_CUTOFF_DAYS)).strftime(
@@ -148,6 +151,7 @@ def build_keyword_details(
                 f"""SELECT COUNT(DISTINCT post_id)
                    FROM post_keyword_tags
                    WHERE category = ? AND matched_term = ?
+                     AND source = 'post'
                      AND LOWER(subreddit) IN ({sub_ph})""",
                 (cat_name, term, *sub_params),
             ).fetchone()
@@ -159,6 +163,7 @@ def build_keyword_details(
                     f"""SELECT COUNT(DISTINCT post_id)
                        FROM post_keyword_tags
                        WHERE category = ? AND LOWER(matched_term) = LOWER(?)
+                         AND source = 'post'
                          AND LOWER(subreddit) IN ({sub_ph})""",
                     (cat_name, term, *sub_params),
                 ).fetchone()
@@ -230,6 +235,7 @@ def build_keyword_details(
             f"""SELECT subreddit, COUNT(DISTINCT post_id) as hits
                FROM post_keyword_tags
                WHERE category = ?
+                 AND source = 'post'
                  AND LOWER(subreddit) IN ({sub_ph})
                GROUP BY subreddit
                ORDER BY hits DESC""",
@@ -253,14 +259,16 @@ def build_keyword_details(
         # --- Category totals (keyword-eligible subs only) ---
         total_row = db.execute(
             f"SELECT COUNT(*) FROM post_keyword_tags "
-            f"WHERE category = ? AND LOWER(subreddit) IN ({sub_ph})",
+            f"WHERE category = ? AND source = 'post' "
+            f"AND LOWER(subreddit) IN ({sub_ph})",
             (cat_name, *sub_params),
         ).fetchone()
         total_hits = total_row[0] if total_row else 0
 
         unique_row = db.execute(
             f"SELECT COUNT(DISTINCT post_id) FROM post_keyword_tags "
-            f"WHERE category = ? AND LOWER(subreddit) IN ({sub_ph})",
+            f"WHERE category = ? AND source = 'post' "
+            f"AND LOWER(subreddit) IN ({sub_ph})",
             (cat_name, *sub_params),
         ).fetchone()
         unique_posts = unique_row[0] if unique_row else 0

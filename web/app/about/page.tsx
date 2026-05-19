@@ -250,7 +250,10 @@ export default function About() {
               that end of the spectrum and blind to casual mentions elsewhere.
               The trends describe <em>this curated set of communities</em>{" "}
               &mdash; not Reddit as a whole, and not &ldquo;people&rdquo; in
-              general.
+              general. And the list holds still while the platforms keep
+              moving: a theme that fades here may have moved rather than
+              ended &mdash; to a newer app, a Discord, a general-AI subreddit
+              outside this set &mdash; and the site cannot tell those apart.
             </p>
             <p>
               Within that curated set, each theme is also concentrated. Two or

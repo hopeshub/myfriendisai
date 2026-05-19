@@ -58,18 +58,6 @@ CREATE TABLE IF NOT EXISTS keyword_hits (
     UNIQUE(subreddit, keyword, search_date)
 );
 
-CREATE TABLE IF NOT EXISTS keyword_counts (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    subreddit TEXT NOT NULL,
-    date TEXT NOT NULL,
-    category TEXT NOT NULL,
-    source TEXT NOT NULL DEFAULT 'post_title',
-    count INTEGER DEFAULT 0,
-    matched_terms TEXT,
-    post_sample_ids TEXT,
-    UNIQUE(subreddit, date, category, source)
-);
-
 CREATE TABLE IF NOT EXISTS scanned_posts (
     post_id TEXT NOT NULL,
     scan_date TEXT NOT NULL,
@@ -189,26 +177,6 @@ def get_connection(db_path: Path = DB_PATH) -> sqlite3.Connection:
 
 def _migrate(conn: sqlite3.Connection) -> None:
     """Run any needed schema migrations on an existing database."""
-    # Check if keyword_counts has source column
-    cols = [row[1] for row in conn.execute("PRAGMA table_info(keyword_counts)").fetchall()]
-    if "source" not in cols:
-        # Drop old table and recreate — keyword_counts data is regenerated daily
-        conn.execute("DROP TABLE IF EXISTS keyword_counts")
-        conn.execute("""
-            CREATE TABLE IF NOT EXISTS keyword_counts (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                subreddit TEXT NOT NULL,
-                date TEXT NOT NULL,
-                category TEXT NOT NULL,
-                source TEXT NOT NULL DEFAULT 'post_title',
-                count INTEGER DEFAULT 0,
-                matched_terms TEXT,
-                post_sample_ids TEXT,
-                UNIQUE(subreddit, date, category, source)
-            )
-        """)
-        conn.commit()
-
     # Create scanned_posts if it doesn't exist
     conn.execute("""
         CREATE TABLE IF NOT EXISTS scanned_posts (

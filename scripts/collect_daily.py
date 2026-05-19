@@ -26,7 +26,6 @@ from src.utils.rate_limiter import RateLimiter
 from src.db.schema import initialize as init_db
 from src.db.operations import export_snapshots_json, export_subreddits_json, export_site_meta_json, export_community_activity_json, sync_subreddit_config, update_contributor_metrics_for_date
 from src.collector import collect_subreddit
-from src.keyword_scanner import scan_subreddit_keywords, store_keyword_counts
 from src.db.operations import export_keyword_trends_json, export_theme_health_json
 from src.keyword_matching import build_patterns, match_text
 
@@ -40,8 +39,6 @@ logger = logging.getLogger(__name__)
 
 def _step_collect_posts(communities, client, conn):
     """Step 1: Collect subreddit data + posts."""
-    tier_map = {c["subreddit"]: c.get("tier") for c in communities}
-
     results = []
     for community in communities:
         subreddit = community["subreddit"]
@@ -82,27 +79,6 @@ def _step_collect_posts(communities, client, conn):
                 # forever (since a partial insert would later trip the >100 check).
                 logger.warning("  r/%s: pagination failed: %s — will retry next run", subreddit, e)
                 pagination_failures.append({"subreddit": subreddit, "error": str(e)})
-
-    # Keyword scanning (legacy keyword_scanner pipeline)
-    from datetime import date as date_cls
-    today = date_cls.today()
-    logger.info("Scanning posts for keyword matches...")
-    ok_subs = [r["subreddit"] for r in results if r["status"] == "ok"]
-    for subreddit in ok_subs:
-        tier = tier_map.get(subreddit)
-        kw_results = scan_subreddit_keywords(
-            subreddit, today, conn=conn, tier=tier, client=client,
-        )
-        store_keyword_counts(kw_results, conn=conn)
-        hits = sum(r["count"] for r in kw_results)
-        if hits > 0:
-            cats = {}
-            for r in kw_results:
-                if r["count"] > 0:
-                    cats[r["category"]] = cats.get(r["category"], 0) + r["count"]
-            cat_str = ", ".join(f"{k}={v}" for k, v in cats.items())
-            logger.info("  r/%s: %d keyword hits (%s)", subreddit, hits, cat_str)
-    logger.info("Keyword scanning complete")
 
     ok = [r for r in results if r["status"] == "ok"]
     errors = [r for r in results if r["status"] != "ok"]
