@@ -156,6 +156,11 @@ export default function TrendsExplorer({ themeData, themeDataExclCai }: Props) {
             Read each line&apos;s shape and timing, not its height against
             another.
           </li>
+          <li>
+            Platform events are marked on every panel as a shared time
+            reference &mdash; watch which lines move with them and which
+            don&apos;t. Only rupture reliably does.
+          </li>
         </ul>
         <p style={{ marginTop: 4 }}>
           <a

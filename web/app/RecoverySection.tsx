@@ -46,7 +46,7 @@ export default function RecoverySection({
         the finding: near nothing through 2023, then a steady climb.
       </p>
 
-      <div className="grid gap-3 sm:grid-cols-3" style={{ marginBottom: 24 }}>
+      <div className="grid gap-3 md:grid-cols-3" style={{ marginBottom: 24 }}>
         {RECOVERY_POSTS.map((p) => (
           <a
             key={p.id}

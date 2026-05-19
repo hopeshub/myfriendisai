@@ -329,7 +329,13 @@ export default async function ThemePage({
           highlighted.
         </p>
         {samples.length > 0 ? (
-          <div style={{ marginTop: 6 }}>
+          <ul
+            style={{
+              marginTop: 6,
+              listStyleType: "none",
+              padding: 0,
+            }}
+          >
             {samples.map((sp, i) => {
               const displayTitle = truncate(sp.title, 120);
               // Test the *truncated* title — if truncation dropped the matched
@@ -339,7 +345,7 @@ export default async function ThemePage({
                 .toLowerCase()
                 .includes(sp.matchedTerm.toLowerCase());
               return (
-                <div
+                <li
                   key={sp.id}
                   style={{
                     padding: "12px 0",
@@ -376,10 +382,10 @@ export default async function ThemePage({
                   >
                     r/{sp.subreddit} &middot; {fmtMonthYear(sp.date)}
                   </div>
-                </div>
+                </li>
               );
             })}
-          </div>
+          </ul>
         ) : (
           <p style={{ fontSize: fontSize.base, color: "#7E8B9E", marginTop: 6 }}>
             No example posts available yet.

@@ -61,21 +61,6 @@ a:focus-visible {
   border-radius: 4px;
 }
 
-.metric-card {
-  transition: transform 0.15s ease, background-color 0.15s ease, box-shadow 0.15s ease;
-}
-
-.metric-card:active {
-  transform: scale(0.96);
-}
-
-@media (hover: hover) {
-  .metric-card:hover {
-    background-color: #1F2233 !important;
-    box-shadow: 0 0 12px color-mix(in srgb, var(--card-color) 25%, transparent);
-  }
-}
-
 /* Mobile: prevent horizontal page scroll, enforce font floor */
 @media (max-width: 768px) {
   html, body {
@@ -199,7 +184,7 @@ a:focus-visible {
 
 /* Honour the OS "reduce motion" setting — neutralise all animation and
    transition sitewide. Prerequisite for the chart-reveal and section-reveal
-   motion; also covers the pre-existing .side-panel / .metric-card animations. */
+   motion; also covers the pre-existing .side-panel animation. */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

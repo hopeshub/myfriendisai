@@ -89,6 +89,12 @@ export default function RootLayout({
             </Link>
             <nav aria-label="Primary" className="flex gap-6 text-sm text-muted">
               <Link
+                href="/#themes"
+                className="hover:text-foreground transition-colors"
+              >
+                Themes
+              </Link>
+              <Link
                 href="/communities"
                 className="hover:text-foreground transition-colors"
               >

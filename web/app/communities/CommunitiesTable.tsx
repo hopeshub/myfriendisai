@@ -53,10 +53,17 @@ function SortButton({
   return (
     <button
       onClick={() => onSort(sortKey)}
+      aria-label={
+        active
+          ? `Sort by ${label} — currently ${current.asc ? "ascending" : "descending"}`
+          : `Sort by ${label}`
+      }
       className={`flex items-center gap-1 ml-auto py-2 min-h-11 sm:min-h-0 text-sm sm:text-xs hover:text-[#C8D0DC] transition-colors ${active ? "text-[#F8FAFC]" : "text-[#7E8B9E]"}`}
     >
       {label}
-      <span className="text-[11px]">{active ? (current.asc ? "↑" : "↓") : "↕"}</span>
+      <span aria-hidden className="text-[11px]">
+        {active ? (current.asc ? "↑" : "↓") : "↕"}
+      </span>
     </button>
   );
 }

@@ -156,7 +156,7 @@ function EventCard({
       )}
 
       {/* Real posts from the week it happened */}
-      <div className="grid gap-3 sm:grid-cols-3" style={{ marginTop: 14 }}>
+      <div className="grid gap-3 md:grid-cols-3" style={{ marginTop: 14 }}>
         {event.posts.map((p) => (
           <a
             key={p.id}

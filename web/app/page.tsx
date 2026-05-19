@@ -200,7 +200,7 @@ export default function Home() {
 
       {/* §3 — The theme atlas */}
       <Reveal className="mb-16">
-        <section>
+        <section id="themes" className="scroll-mt-8">
         <div style={sectionLabel}>The themes</div>
         <h2
           className="font-display text-xl sm:text-2xl font-semibold text-[#F1F4F8]"
