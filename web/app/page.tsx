@@ -157,6 +157,15 @@ export default function Home() {
           event below is real, paired with the posts people wrote the week it
           happened.
         </p>
+        <p style={{ ...intro, marginBottom: 16 }}>
+          Every event here is a rupture &mdash; and that is itself a finding
+          about the method. Rupture isn&apos;t the most important of the six
+          themes; it is the only one shaped like an event. Romance,
+          consciousness, therapy drift &mdash; no press release moves them, no
+          single day a platform pulled access. Rupture has those days. So an
+          event-driven section can only ever be rupture: a tracker built around
+          moments sees, most sharply, the discourse that arrives in moments.
+        </p>
         <EventShowcase />
         </section>
       </Reveal>

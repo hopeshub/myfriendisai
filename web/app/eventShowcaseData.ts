@@ -84,7 +84,7 @@ export const SHOWCASE_EVENTS: ShowcaseEvent[] = [
     title: "The sycophancy update",
     themes: ["rupture"],
     summary:
-      "An OpenAI update changed GPT-4o’s tone overnight — more sycophantic, more guarded. Companion-community users noticed their partners feeling subtly wrong, and learned the lesson that would define the next year: a model update, with no warning and no removal, could still quietly alter a relationship. A tremor before the quake.",
+      "An OpenAI update changed GPT-4o’s tone overnight — more sycophantic, more guarded. Companion-community users noticed their partners feeling subtly wrong, and learned the lesson that would define the next year: a model update, with no warning and no removal, could still quietly alter a relationship. The rupture line barely registers it — the warning was in what people wrote.",
     posts: [
       {
         id: "1ka0gfg",
