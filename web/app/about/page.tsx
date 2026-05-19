@@ -11,14 +11,21 @@ import {
 } from "../styles";
 import { CHANGELOG } from "../changelog";
 
+const ABOUT_DESCRIPTION =
+  "How this project tracks AI-companionship discourse on Reddit — the method, its honest limits, and the data behind it.";
+
 export const metadata: Metadata = {
-  title: "About — My Friend Is AI",
+  title: "About",
   description:
-    "How this project tracks AI-companionship discourse on Reddit: the method, its honest limits, the data, and a changelog.",
+    "How this project tracks AI-companionship discourse on Reddit: the keyword method, its honest limits, the data sources, and a changelog of method changes.",
+  alternates: { canonical: "/about" },
   openGraph: {
     title: "About — My Friend Is AI",
-    description:
-      "How this project tracks AI-companionship discourse on Reddit — the method, its honest limits, and the data behind it.",
+    description: ABOUT_DESCRIPTION,
+  },
+  twitter: {
+    title: "About — My Friend Is AI",
+    description: ABOUT_DESCRIPTION,
   },
 };
 

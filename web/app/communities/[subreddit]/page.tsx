@@ -20,13 +20,22 @@ export async function generateMetadata({
   const { subreddit } = await params;
   const all = getSubreddits();
   const meta = all.find((s) => s.subreddit === subreddit);
-  const tierLabel = meta?.tier != null ? TIER_LABELS[meta.tier] : "";
+  // The page itself 404s on an unknown slug — don't emit real-looking
+  // metadata for it.
+  if (!meta) return { title: "Community not found" };
+  const tierLabel = meta.tier != null ? TIER_LABELS[meta.tier] : "";
+  const ogDescription = `Engagement trends for r/${subreddit} on Reddit.`;
   return {
-    title: `r/${subreddit} — My Friend Is AI`,
+    title: `r/${subreddit}`,
     description: `Engagement trends for r/${subreddit}${tierLabel ? ` (${tierLabel})` : ""} — subscribers, posts per day, and comment activity over time.`,
+    alternates: { canonical: `/communities/${subreddit}` },
     openGraph: {
       title: `r/${subreddit} — My Friend Is AI`,
-      description: `Engagement trends for r/${subreddit} on Reddit.`,
+      description: ogDescription,
+    },
+    twitter: {
+      title: `r/${subreddit} — My Friend Is AI`,
+      description: ogDescription,
     },
   };
 }

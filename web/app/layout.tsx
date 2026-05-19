@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import Link from "next/link";
 import { readFileSync } from "fs";
 import { join } from "path";
@@ -22,14 +22,28 @@ const newsreader = Newsreader({
 });
 
 export const metadata: Metadata = {
-  title: "My Friend Is AI",
+  // `default` shows on the homepage (template is not applied to it); every
+  // other page passes a bare segment and the template adds the suffix.
+  title: {
+    default: "My Friend Is AI — Tracking AI Companion Discourse on Reddit",
+    template: "%s — My Friend Is AI",
+  },
   description:
     "A live tracker of how AI-companion Reddit communities talk — six recurring themes, from romance to dependence to loss, charted month by month across years of posts.",
   metadataBase: new URL("https://myfriendisai.com"),
+  applicationName: "My Friend Is AI",
+  authors: [{ name: "My Friend Is AI" }],
+  creator: "My Friend Is AI",
+  publisher: "My Friend Is AI",
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
     title: "My Friend Is AI",
+    // Kept under ~200 chars so the "discourse tracker, not a population
+    // estimate" caveat survives X's card-description truncation.
     description:
-      "A live, transparent record of how AI-companion Reddit communities talk — six recurring themes (romance, sex/ERP, consciousness, therapy, addiction, rupture), charted month by month from validated keyword matching. A discourse tracker, not a population estimate.",
+      "How AI-companion Reddit communities talk: six themes — romance, sex, consciousness, therapy, addiction, rupture — charted month by month. A discourse tracker, not a population estimate.",
     url: "https://myfriendisai.com",
     siteName: "My Friend Is AI",
     type: "website",
@@ -39,12 +53,19 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "My Friend Is AI",
     description:
-      "Tracking AI companion discourse on Reddit across six themes.",
+      "How AI-companion Reddit communities talk: six themes charted month by month. A discourse tracker, not a population estimate.",
   },
   robots: {
     index: true,
     follow: true,
   },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#0F1117",
+  colorScheme: "dark",
+  width: "device-width",
+  initialScale: 1,
 };
 
 function getSiteMeta() {
@@ -71,10 +92,35 @@ export default function RootLayout({
 
   return (
     <html lang="en">
-      <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-      </head>
       <body className={`antialiased ${inter.className} ${newsreader.variable}`}>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@graph": [
+                {
+                  "@type": "WebSite",
+                  "@id": "https://myfriendisai.com/#website",
+                  url: "https://myfriendisai.com",
+                  name: "My Friend Is AI",
+                  description:
+                    "A tracker of how AI-companion Reddit communities talk — six recurring themes charted month by month.",
+                  publisher: { "@id": "https://myfriendisai.com/#org" },
+                  inLanguage: "en-US",
+                },
+                {
+                  "@type": "Organization",
+                  "@id": "https://myfriendisai.com/#org",
+                  name: "My Friend Is AI",
+                  url: "https://myfriendisai.com",
+                  description:
+                    "An independent, one-person research project tracking AI-companionship discourse on Reddit.",
+                },
+              ],
+            }),
+          }}
+        />
         <a href="#main" className="skip-link">Skip to content</a>
         <StaleDataBanner />
         <header className="border-b border-border">

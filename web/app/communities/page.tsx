@@ -6,12 +6,19 @@ import CommunitiesTable from "./CommunitiesTable";
 // Derived at build time so the count never drifts from the data.
 const communityCount = getSubreddits().length;
 
+const COMMUNITIES_OG_DESCRIPTION = `Browse ${communityCount} Reddit communities tracked for AI companionship trends.`;
+
 export const metadata: Metadata = {
-  title: "Communities — My Friend Is AI",
+  title: "Communities",
   description: `Browse ${communityCount} Reddit communities tracked for AI companionship trends — sortable by subscribers, posts per day, and engagement metrics.`,
+  alternates: { canonical: "/communities" },
   openGraph: {
     title: "Communities — My Friend Is AI",
-    description: `Browse ${communityCount} Reddit communities tracked for AI companionship trends.`,
+    description: COMMUNITIES_OG_DESCRIPTION,
+  },
+  twitter: {
+    title: "Communities — My Friend Is AI",
+    description: COMMUNITIES_OG_DESCRIPTION,
   },
 };
 

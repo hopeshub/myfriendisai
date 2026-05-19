@@ -102,15 +102,22 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { id } = await params;
   const theme = THEMES.find((t) => t.id === id);
-  if (!theme) return { title: "Theme — My Friend Is AI" };
+  if (!theme) return { title: "Theme not found" };
+  // Tagline plus a fixed context clause — never the story paragraph, which
+  // truncates mid-sentence in search results and social cards. The clause
+  // adds the "Reddit" / "charted over time" keywords a bare tagline lacks.
+  const description = `${theme.tagline}, tracked across AI-companion Reddit communities and charted month by month.`;
   return {
-    title: `${theme.label} — My Friend Is AI`,
-    // tagline, not story — story is a full paragraph that truncates
-    // mid-sentence in search results and social cards.
-    description: theme.tagline,
+    title: theme.label,
+    description,
+    alternates: { canonical: `/theme/${theme.id}` },
     openGraph: {
       title: `${theme.label} — My Friend Is AI`,
-      description: theme.tagline,
+      description,
+    },
+    twitter: {
+      title: `${theme.label} — My Friend Is AI`,
+      description,
     },
   };
 }
