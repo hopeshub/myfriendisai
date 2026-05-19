@@ -91,7 +91,7 @@ export const THEMES: ThemeMeta[] = [
     blurb:
       "A gradual rise in describing an AI as emotional support — closely tied to the addiction theme.",
     story:
-      "Therapy language has risen gradually, as more people describe an AI as emotional support or a substitute for a therapist. It is hard to separate from the addiction theme: both track the same thing — leaning on an AI to meet an emotional need — and what divides them is the writer’s framing. A neutral or positive read (“it helps me cope”) lands as therapy; a negative one (“I can’t stop”) lands as addiction. The two lines share posts by design.",
+      "Therapy language has risen gradually, as more people describe an AI as emotional support or a substitute for a therapist. It is hard to separate from the addiction theme: both track the same thing — leaning on an AI to meet an emotional need — and what divides them is the writer’s framing. A neutral or positive read (“it helps me cope”) lands as therapy; a negative one (“I can’t stop”) lands as addiction. In the data the two lines barely overlap — but that is the keywords missing help-framing’s ordinary language, not a sign the themes are separate.",
   },
   {
     id: "addiction",

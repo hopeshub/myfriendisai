@@ -332,7 +332,9 @@ export default function About() {
                   cleanly; romance lives in ordinary language (&ldquo;I love
                   him,&rdquo; &ldquo;my boyfriend&rdquo;) that mostly slips
                   past, so one line can sit above another even when the second
-                  theme is the larger one.
+                  theme is the larger one &mdash; and this runs one way: a
+                  theme written in blunt, deliberate words reads higher than
+                  one written in ordinary language, whatever the truth beneath.
                 </>,
                 <>
                   <span style={leadStyle}>
@@ -374,10 +376,25 @@ export default function About() {
               through something hard &mdash; and what divides them is only how
               the writer frames it. &ldquo;It&apos;s my coping mechanism&rdquo;
               and &ldquo;I can&apos;t stop&rdquo; are the same use seen in two
-              lights. So the two lines share many of the same posts, by design;
-              a therapy post that looks like it belongs under addiction usually
-              belongs under both. Read them as a linked pair, and watch which
-              way the balance tips.
+              lights.
+            </p>
+            <p>
+              You might expect the two lines to share many posts, then. They
+              barely do &mdash; fewer than 1 in 50 posts is tagged on both
+              &mdash; and that is a limit of the instrument, not a fact about
+              the behavior. Addiction announces itself: &ldquo;relapse,&rdquo;
+              &ldquo;days clean,&rdquo; &ldquo;withdrawals&rdquo; are deliberate
+              words, and they match cleanly. Help-framing hides in ordinary
+              language &mdash; &ldquo;it got me through,&rdquo; &ldquo;a safe
+              space&rdquo; &mdash; and in a scattered vocabulary no keyword list
+              captures whole. So a post that holds both frames usually tags only
+              as addiction. We checked: hand-reading 90 posts the keywords had
+              filed as addiction-only, about a quarter visibly carried a help
+              frame the keywords missed. The overlap between these two themes is
+              real and large; this method cannot measure it. Read each line on
+              its own direction and timing, and do not read the gap between them
+              as a help-versus-problem balance &mdash; that balance exists, but
+              it is one these keywords are not equipped to weigh.
             </p>
             <p>
               <strong style={leadStyle}>
