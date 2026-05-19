@@ -191,35 +191,70 @@ export default function Home() {
         </section>
       </Reveal>
 
-      {/* §3.5 — A word is not a fixed thing: three promoted observations */}
+      {/* §3.5 — A word is not a fixed thing: how the instrument's words drift */}
       <Reveal className="mb-16">
         <section>
+        <div style={sectionLabel}>The instrument</div>
         <h2
           className="font-display text-xl sm:text-2xl font-semibold text-[#F1F4F8]"
-          style={{ marginBottom: 16, maxWidth: measure }}
+          style={{ marginBottom: 8, maxWidth: measure }}
         >
           A word is not a fixed thing
         </h2>
         <p style={{ ...intro, marginBottom: 16 }}>
-          &ldquo;Sentient&rdquo; used to be the word people here reached for to
-          mark a real belief &mdash; that something might actually be there.
-          Then it spread into roleplay and memes until it no longer marked
-          belief at all, and it had to be dropped from the count. The
-          consciousness line is thinner afterward not because the question went
-          away, but because the word stopped being able to point at it.
+          Every line on the chart above is built from words &mdash; and words
+          are the least fixed thing the project measures. They come loose from
+          their meaning, they flip while you watch, and sometimes two of them
+          name one behavior. Here is what that looked like, three times.
         </p>
         <p style={{ ...intro, marginBottom: 16 }}>
-          The same word can change what it means while you watch.
-          &ldquo;Therapeutic&rdquo; was a word for real help &mdash; until, over
-          a few months, it turned into an insult thrown at preachy AI. Same
-          word, opposite charge, no announcement.
+          <strong style={{ color: "#F1F4F8", fontWeight: 600 }}>
+            A word can come loose from what it names.
+          </strong>{" "}
+          &ldquo;Sentient&rdquo; was once the word people here reached for to
+          mark a real belief &mdash; that something might actually be there.
+          Then it spread into roleplay and Character.AI memes until it no
+          longer marked belief at all, and it had to be dropped from the count.
+          It is part of why the consciousness panel above begins so late and
+          runs so thin: not because the question went away, but because the
+          word that used to carry it stopped being able to point.
+        </p>
+        <p style={{ ...intro, marginBottom: 16 }}>
+          <strong style={{ color: "#F1F4F8", fontWeight: 600 }}>
+            A word can hold its place and flip its charge.
+          </strong>{" "}
+          &ldquo;Therapeutic&rdquo; was a word for real help. Then, over a few
+          months, people began turning it on exactly that &mdash; AI gone
+          preachy and over-careful &mdash; and often the word came to carry the
+          opposite of its old meaning. Same word, opposite charge, no
+          announcement. &ldquo;Sentient&rdquo; had to be dropped;
+          &ldquo;therapeutic&rdquo; is still counted, but now it is watched
+          &mdash; re-sampled every month, because the project learned the hard
+          way not to trust a word to hold still.
+        </p>
+        <p style={{ ...intro, marginBottom: 16 }}>
+          <strong style={{ color: "#F1F4F8", fontWeight: 600 }}>
+            Two words can name one behavior.
+          </strong>{" "}
+          &ldquo;It&apos;s my coping mechanism&rdquo; and &ldquo;I can&apos;t
+          stop&rdquo; are often the same person, describing the same use on
+          different days. Therapy and addiction here are not two behaviors
+          &mdash; they are one behavior under two framings. But the instrument
+          catches only the framings it has good words for, and it has far
+          better words for the problem than for the help: &ldquo;relapse&rdquo;
+          and &ldquo;days clean&rdquo; are deliberate and easy to catch, while
+          &ldquo;it got me through&rdquo; hides in ordinary language the
+          keywords slip past. So the two lines are not a scale to weigh one
+          side against the other. They are the same act, recorded twice
+          &mdash; and recorded unevenly.
         </p>
         <p style={{ ...intro }}>
-          &ldquo;It&apos;s my coping mechanism&rdquo; and &ldquo;I can&apos;t
-          stop&rdquo; are often the same person, describing the same use, on
-          different days. Therapy and addiction here are not two behaviors
-          &mdash; they are one behavior under two framings. Which way a writer
-          tilts is itself the thing being recorded.
+          That is the thread under all three. The chart counts words, and
+          words come loose, flip, and hide. The lines are real; they are also
+          drawn by an instrument still learning the language it reads. The
+          section below is what one set of communities did with the second of
+          those framings &mdash; the people who named their own use an
+          addiction, and built somewhere to carry it.
         </p>
         </section>
       </Reveal>

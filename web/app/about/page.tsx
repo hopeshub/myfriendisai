@@ -274,9 +274,9 @@ export default function About() {
               The vocabulary moves fast. &ldquo;Sentient&rdquo; was once the
               natural anchor word for the consciousness theme, until it spread
               into roleplay and Character.AI memes and stopped marking genuine
-              belief, so I dropped it. &ldquo;Therapeutic&rdquo; turned, over a
-              few months, from a word for real support into an insult aimed at
-              preachy AI. Every model release and content-policy change sends a
+              belief, so I dropped it. &ldquo;Therapeutic&rdquo; began to turn,
+              over a few months, from a word for real support into an insult
+              aimed at preachy AI. Every model release and content-policy change sends a
               fresh wave of language through these communities &mdash; Replika
               removing erotic roleplay in 2023, OpenAI retiring its 4o model in
               2026. A keyword that reads cleanly in January can be noise by

@@ -12,6 +12,14 @@ export type ChangelogEntry = {
 export const CHANGELOG: ChangelogEntry[] = [
   {
     date: "May 2026",
+    title: "How to read the therapy and addiction lines",
+    items: [
+      "A hand-check of 90 posts the keywords had filed as addiction tested how cleanly the two lines separate help from harm. About a quarter of them also carried a help framing the keywords had missed — help language hides in ordinary words (\"it got me through\"), while problem language announces itself (\"relapse,\" \"days clean\"). So the therapy and addiction lines can't be read against each other as a balance: the instrument hears the problem framing far more clearly than the help one. The homepage and About page were corrected to say this plainly.",
+    ],
+    recent: true,
+  },
+  {
+    date: "May 2026",
     title: "Five communities added",
     items: [
       "Five more AI-companionship communities joined the tracked set — r/aipartners, r/ReplikaLovers, r/ILoveMyReplika, r/MyBoyfriendIsAI_Open and r/NectarAI. They were picked from a wider candidate list by reading post samples and keeping only those genuinely centered on companionship discourse rather than tech support or platform-migration chatter. They are small communities, so they add little to overall post volume; their theme lines begin only once enough of their posts have been collected, so they appear gradually rather than all at once.",
