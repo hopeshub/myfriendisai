@@ -200,5 +200,5 @@ The 17 uncovered posts use event-descriptive vocabulary — `petition`, `removin
 - Audit classifications: `analysis/keyword_pipeline/results/audit_batch_emotional_loss_2026-05-12.txt`
 - DB: `data/tracker.db` (`llm_classifications` table, run_id `batch_2026-05-12`)
 - Theme rubric updates: `analysis/keyword_pipeline/theme_definitions.yaml` (rupture excludes, 2026-05-12 entries)
-- Retag script: `scripts/tag_new_rupture_keywords_2026-05-12.py`
+- Retag script: `scripts/archive/tag_new_rupture_keywords_2026-05-12.py`
 - Procedure: `analysis/keyword_pipeline/README.md`

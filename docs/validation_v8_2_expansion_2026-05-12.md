@@ -132,7 +132,7 @@ The 8 KEEPs all have audit agreement ≥85% AND primary precision ≥84%. These 
 - Mining script: `analysis/keyword_pipeline/build_mining_corpus.py`
 - Validation batch yaml: `analysis/keyword_pipeline/batch_v8_2_expansion.yaml`
 - Primary prompt: `analysis/keyword_pipeline/results/batch_v8_2_expansion_2026-05-12.md`
-- Tagging script: `scripts/tag_v8_2_keywords_2026-05-12.py`
+- Tagging script: `scripts/archive/tag_v8_2_keywords_2026-05-12.py`
 - Primary classifications: documented in conversation transcript; precision summary saved to `analysis/keyword_pipeline/results/classified_batch_v8_2_expansion_2026-05-12.txt`
 - Audit classifications: documented in conversation transcript
 - Procedure: `analysis/keyword_pipeline/README.md`

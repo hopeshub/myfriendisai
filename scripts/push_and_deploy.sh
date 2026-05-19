@@ -15,14 +15,12 @@
 # On any failure, a "PUSH_ERR: <message>" line is emitted so run_collect.sh
 # can extract a one-liner for status.json / the stale-data banner.
 
-cd /Users/walker/Projects/myfriendisai || { echo "PUSH_ERR: cannot cd to project"; exit 3; }
+cd "$(dirname "$0")/.." || { echo "PUSH_ERR: cannot cd to project"; exit 3; }
 
 export PATH="/opt/homebrew/bin:$PATH"
 
-# SSH-side timeouts replace the previous `timeout 300 git push` wrapper, which
-# silently broke for 21 days because macOS does not ship `timeout` and the
-# coreutils package was not installed. These options bound any stall to a
-# minute or two without requiring an external binary.
+# SSH-side timeouts bound any network stall to a minute or two without
+# requiring an external `timeout` binary (which macOS does not ship).
 export GIT_SSH_COMMAND="ssh -o ConnectTimeout=30 -o ServerAliveInterval=15 -o ServerAliveCountMax=4 -o BatchMode=yes"
 
 echo "=== Push & deploy started at $(date -u '+%Y-%m-%d %H:%M:%S UTC') ==="

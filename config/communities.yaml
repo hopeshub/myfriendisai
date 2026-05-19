@@ -12,7 +12,7 @@
 #   3 — Recovery & Dependency
 #
 # To add a new subreddit: add an entry here and re-run the backfill with
-#   .venv/bin/python scripts/backfill_pullpush.py --subreddit SubredditName
+#   .venv/bin/python scripts/backfill_arctic.py --subreddit SubredditName
 
 communities:
 

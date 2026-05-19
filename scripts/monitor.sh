@@ -34,7 +34,7 @@ while true; do
     echo -n "$(date) " > "$HEARTBEAT"
 
     # ── Pre-2023 backfill status ─────────────────────────
-    BACKFILL_PROCS=$(ps aux | grep -E "python.*backfill_pullpush" | grep -v grep | wc -l | tr -d ' ')
+    BACKFILL_PROCS=$(ps aux | grep -E "python.*backfill_arctic" | grep -v grep | wc -l | tr -d ' ')
     PRE_2023_N=$(sqlite3 "$DB" "SELECT COUNT(*) FROM posts WHERE created_utc < strftime('%s','2023-01-01');" 2>/dev/null)
     PRE_2023_LAST=$(sqlite3 "$DB" "SELECT MAX(created_at) FROM posts WHERE created_utc < strftime('%s','2023-01-01');" 2>/dev/null)
     PRE_2023_LAST_TS="${PRE_2023_LAST//T/ }"

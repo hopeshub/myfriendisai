@@ -1,6 +1,12 @@
 #!/usr/bin/env python3
 """Migration 003: Extend llm_classifications for production hybrid gating.
 
+NOTE (2026-05-15): the LLM-verification feature this migration supported was
+removed from the pipeline. The table and its ~14,800 audit rows are retained
+read-only (no code path writes to it now); see the inline note at
+src/db/operations.py:585 for the deprecation rationale. The migration is kept
+so a fresh DB rebuild reaches the same final schema as the production DB.
+
 Background: an existing llm_classifications table was created during the
 March 2026 validation effort with schema (post_id, theme, keyword,
 classification YES/NO, reason, model, classified_at, run_id) and ~10k rows

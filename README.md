@@ -13,7 +13,7 @@ It does **not** measure sentiment, prevalence, or how many people are actually i
 ## What it tracks
 
 - **31 subreddits** across 4 tiers: general AI (T0), primary companionship (T1), platform-specific (T2), and recovery/dependency (T3)
-- **6 keyword themes** — Romance, Sex/ERP, Consciousness, Therapy, Addiction, Rupture — matched against the 23 T1–T3 companion subreddits only (the 5 general-AI subs and 3 bot-noise subs are tracked but excluded from the theme lines)
+- **6 keyword themes** — Romance, Sex/ERP, Consciousness, Therapy, Addiction, Rupture — matched against the 23 T1–T3 companion subreddits only (the 5 general-AI subs and 3 NSFW subs that fell outside the companionship-construct gate are tracked for context but excluded from the theme lines — see `docs/nsfw_scope_position.md`)
 - **~4.0M posts** from 2017 to present, updated daily
 - **Keyword validation** — every keyword is manually scored against 100-post samples; only keywords at 80%+ precision are accepted (60-79% may be accepted when false positive patterns are well-defined)
 

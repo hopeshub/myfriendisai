@@ -28,7 +28,7 @@ echo "=== STATUS at $(date) ==="
 echo
 
 # ── Pre-2023 Arctic Shift backfill ────────────────────────────────
-BACKFILL_PROCS=$(ps aux | grep -E "python.*backfill_pullpush" | grep -v grep | wc -l | tr -d ' ')
+BACKFILL_PROCS=$(ps aux | grep -E "python.*backfill_arctic" | grep -v grep | wc -l | tr -d ' ')
 PRE_2023_N=$(sqlite3 "$DB" "SELECT COUNT(*) FROM posts WHERE created_utc < strftime('%s','2023-01-01');" 2>/dev/null)
 PRE_2023_LAST=$(sqlite3 "$DB" "SELECT MAX(created_at) FROM posts WHERE created_utc < strftime('%s','2023-01-01');" 2>/dev/null)
 PRE_2023_LAST_EPOCH=$(parse_ts "$PRE_2023_LAST")
@@ -63,7 +63,7 @@ echo
 
 # ── Quick health: any background python processes? ──
 echo "Python background jobs:"
-ps aux | grep python | grep -v grep | grep -E "backfill_pullpush" | awk '{print "  PID="$2, "CPU="$3"%", "MEM="$4"%", "RUNTIME="$10, $11}'
+ps aux | grep python | grep -v grep | grep -E "backfill_arctic" | awk '{print "  PID="$2, "CPU="$3"%", "MEM="$4"%", "RUNTIME="$10, $11}'
 echo
 
 echo "=== END STATUS ==="
