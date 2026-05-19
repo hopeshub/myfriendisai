@@ -24,12 +24,12 @@ const newsreader = Newsreader({
 export const metadata: Metadata = {
   title: "My Friend Is AI",
   description:
-    "A live, transparent tracker of explicit AI-companion language in curated Reddit communities — how themes like romance, dependency, personhood, sexual roleplay, therapeutic use, and loss rise and fall over time.",
+    "A live tracker of how AI-companion Reddit communities talk — six recurring themes, from romance to dependence to loss, charted month by month across years of posts.",
   metadataBase: new URL("https://myfriendisai.com"),
   openGraph: {
     title: "My Friend Is AI",
     description:
-      "A live, transparent tracker of explicit AI-companion language in curated Reddit communities, across six themes — romance, sex/ERP, consciousness, therapy, addiction, and rupture. A precision-first discourse tracker built from validated keyword matching, not a population estimate.",
+      "A live, transparent record of how AI-companion Reddit communities talk — six recurring themes (romance, sex/ERP, consciousness, therapy, addiction, rupture), charted month by month from validated keyword matching. A discourse tracker, not a population estimate.",
     url: "https://myfriendisai.com",
     siteName: "My Friend Is AI",
     type: "website",

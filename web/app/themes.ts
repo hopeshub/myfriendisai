@@ -102,7 +102,7 @@ export const THEMES: ThemeMeta[] = [
     blurb:
       "A steady climb, not an event spike — dependency language growing over time.",
     story:
-      "Addiction is a steady climb rather than an event spike. Unlike themes that jump on a single platform change, dependency language grows slowly and continuously — a rising number of people describing compulsive use, lost time, and attempts to cut back.",
+      "Addiction is a steady climb rather than an event spike. Unlike themes that jump on a single platform change, dependency language grows slowly and continuously — a rising number of people describing compulsive use, lost time, and attempts to cut back. Some of that climb is compositional, though: the recovery and quitting communities were founded across 2023–2024 and are dense with this vocabulary, so part of the rise is those rooms joining the tracked set, not addiction language increasing within it.",
   },
   {
     id: "rupture",
