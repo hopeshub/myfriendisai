@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Reveal from "./Reveal";
 import TrendsExplorer from "./TrendsExplorer";
 import PostVolumeChart from "./PostVolumeChart";
 import EventShowcase from "./EventShowcase";
@@ -131,7 +130,7 @@ export default function Home() {
       </header>
 
       {/* §1 — Orientation: post volume */}
-      <Reveal className="mb-16">
+      <div className="mb-16">
         <section>
         <div style={sectionLabel}>The communities</div>
         <h2
@@ -168,10 +167,10 @@ export default function Home() {
           can&apos;t see where everyone went.
         </p>
         </section>
-      </Reveal>
+      </div>
 
       {/* §2 — Events */}
-      <Reveal className="mb-16">
+      <div className="mb-16">
         <section>
         <div style={sectionLabel}>What happened</div>
         <h2
@@ -196,10 +195,10 @@ export default function Home() {
         </p>
         <EventShowcase />
         </section>
-      </Reveal>
+      </div>
 
       {/* §3 — The theme atlas */}
-      <Reveal className="mb-16">
+      <div className="mb-16">
         <section id="themes" className="scroll-mt-8">
         <div style={sectionLabel}>The themes</div>
         <h2
@@ -219,10 +218,10 @@ export default function Home() {
           themeDataExclCai={themeDataExclCai}
         />
         </section>
-      </Reveal>
+      </div>
 
       {/* §3.5 — A word is not a fixed thing: how the instrument's words drift */}
-      <Reveal className="mb-16">
+      <div className="mb-16">
         <section>
         <div style={sectionLabel}>The instrument</div>
         <h2
@@ -284,10 +283,10 @@ export default function Home() {
           also drawn by an instrument still learning the language it reads.
         </p>
         </section>
-      </Reveal>
+      </div>
 
       {/* §4 — The recovery counter-current */}
-      <Reveal>
+      <div>
         <section>
         <div style={sectionLabel}>A counter-current</div>
         <h2
@@ -304,11 +303,11 @@ export default function Home() {
         </p>
         <RecoverySection data={recoveryVolume} />
         </section>
-      </Reveal>
+      </div>
 
       {/* Changelog teaser — a quiet sign that the instrument is actively
           tended; the full list lives on the About page. */}
-      <Reveal>
+      <div>
         <div
           style={{
             marginTop: 56,
@@ -327,7 +326,7 @@ export default function Home() {
             </Link>
           </p>
         </div>
-      </Reveal>
+      </div>
     </div>
   );
 }

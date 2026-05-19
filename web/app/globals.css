@@ -108,26 +108,6 @@ a:focus-visible {
   animation: riseIn 500ms ease-out both;
 }
 
-/* Section reveal: fade + 12px rise, applied by the IntersectionObserver only
-   after the client confirms it can observe. The element is server-rendered
-   fully visible; `.reveal-pending` hides it (added synchronously before
-   paint), and `.reveal-in` plays it back. If JS never runs, neither class is
-   applied and the element stays visible. */
-@keyframes revealIn {
-  from {
-    opacity: 0;
-    transform: translateY(12px);
-  }
-}
-
-.reveal-pending {
-  opacity: 0;
-}
-
-.reveal-in {
-  animation: revealIn 450ms ease-out both;
-}
-
 /* Theme Health snapshot grid: single column on mobile, 2-col on tablet+.
    Prevents long values like "r/ChatGPTcomplaints (61%)" from wrapping
    awkwardly on iPhone-sized viewports. */
@@ -183,8 +163,8 @@ a:focus-visible {
 }
 
 /* Honour the OS "reduce motion" setting — neutralise all animation and
-   transition sitewide. Prerequisite for the chart-reveal and section-reveal
-   motion; also covers the pre-existing .side-panel animation. */
+   transition sitewide — covering the masthead rise-in and the pre-existing
+   .side-panel animation. */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
