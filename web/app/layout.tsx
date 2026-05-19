@@ -87,7 +87,7 @@ export default function RootLayout({
               {" "}
               <span style={{ fontWeight: 600, color: "#F8FAFC", fontStyle: "normal" }}>AI</span>
             </Link>
-            <nav className="flex gap-6 text-sm text-muted">
+            <nav aria-label="Primary" className="flex gap-6 text-sm text-muted">
               <Link
                 href="/communities"
                 className="hover:text-foreground transition-colors"
@@ -112,7 +112,7 @@ export default function RootLayout({
           </div>
         </header>
 
-        <main id="main">{children}</main>
+        <main id="main" tabIndex={-1}>{children}</main>
 
         <footer className="border-t border-border mt-20">
           <div className="max-w-[1080px] mx-auto px-4 sm:px-8 py-8 text-sm text-muted flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
@@ -124,7 +124,7 @@ export default function RootLayout({
                 updated daily
               </span>
             </div>
-            <nav className="flex gap-5">
+            <nav aria-label="Footer" className="flex gap-5">
               <Link href="/about" className="hover:text-foreground transition-colors">
                 About
               </Link>

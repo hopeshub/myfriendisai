@@ -193,7 +193,7 @@ export default async function ThemePage({
               {i > 0 && ", "}
               <Link
                 href={`/communities/${s.name}`}
-                className="hover:underline underline-offset-2"
+                className="underline underline-offset-2"
                 style={{ color: "#C8D0DC" }}
               >
                 r/{s.name}
