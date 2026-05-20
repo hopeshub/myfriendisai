@@ -320,16 +320,23 @@ export default function Home() {
         >
           The argument is upstream
         </h2>
-        <p style={{ ...intro, marginBottom: 28 }}>
+        <p style={{ ...intro, marginBottom: 16 }}>
           Next door, a new infrastructure is forming. Subreddits built to
-          argue about AI as a cultural project &mdash; most barely existed
-          in 2023; together they now host more than ten thousand posts a
-          month. Few of those posts name AI companionship directly;
-          &ldquo;AI bros&rdquo; appears in titles here roughly ten times
-          more often than &ldquo;AI girlfriend.&rdquo; The posture these
-          communities police &mdash; that taking a chatbot seriously is a
-          category mistake worth mocking &mdash; is the air the communities
-          on this site already breathe.
+          argue about AI as a cultural project barely existed in 2023;
+          together they now host more than ten thousand posts a month
+          &mdash; nearly nine times the 2023 rate. The two largest are
+          r/antiAI and r/aiwars &mdash; anti and ostensibly neutral
+          &mdash; growing in near-lockstep, with smaller pro-AI rooms
+          filling in behind them. Both sides are organizing. The fight
+          is real.
+        </p>
+        <p style={{ ...intro, marginBottom: 28 }}>
+          Almost none of it is about AI companionship. &ldquo;AI bros&rdquo;
+          appears in titles here roughly ten times more often than
+          &ldquo;AI girlfriend.&rdquo; But the posture is the same one
+          &mdash; that taking a chatbot seriously is a category mistake
+          worth mocking &mdash; and it is already the air the communities
+          on this site breathe.
         </p>
         <AmbientSection />
         </section>
