@@ -10,7 +10,7 @@ import {
   YAxis,
   Tooltip,
   CartesianGrid,
-  LabelList,
+  ReferenceDot,
 } from "recharts";
 import MeasuredChart from "@/app/MeasuredChart";
 import type { AmbientTopPoint, AmbientStackPoint } from "./themeData";
@@ -120,9 +120,15 @@ export default function AmbientChart({
     [stack],
   );
 
-  // Widest-month index per stack band, for the direct in-band label.
-  const widest = useMemo(() => {
-    const w: Record<string, number> = {};
+  // Per-band label anchor: the data-space (x, y) point where the band's
+  // in-chart label should sit. x = the month where the band is widest;
+  // y = the cumulative midpoint of that band at that month (so the label
+  // lands in the body of the colored band, not at the boundary above it).
+  // Rendered via <ReferenceDot r={0} label={...} /> so Recharts handles
+  // the data-to-pixel mapping.
+  const anchors = useMemo(() => {
+    type Anchor = { x: string; y: number; label: string; color: string };
+    const out: Anchor[] = [];
     for (const b of STACK_BANDS) {
       let bestIdx = 0;
       let bestVal = -1;
@@ -133,9 +139,22 @@ export default function AmbientChart({
           bestIdx = i;
         }
       });
-      w[b.key] = bestIdx;
+      if (bestVal <= 200) continue; // skip too-thin bands
+      const point = stack[bestIdx];
+      // Cumulative sum of all bands below b at this month, plus half of b.
+      let cumulative = 0;
+      for (const lower of STACK_BANDS) {
+        if (lower.key === b.key) break;
+        cumulative += point[lower.key];
+      }
+      out.push({
+        x: point.month,
+        y: cumulative + bestVal / 2,
+        label: b.label,
+        color: b.color,
+      });
     }
-    return w;
+    return out;
   }, [stack]);
 
   if (stack.length === 0 || top.length === 0) {
@@ -155,35 +174,6 @@ export default function AmbientChart({
     tickLine: false,
   };
 
-  const bandLabel =
-    (b: { key: StackKey; label: string }, dimmed: boolean) =>
-    (props: {
-      x?: number | string;
-      y?: number | string;
-      index?: number;
-      value?: number | string;
-    }) => {
-      if (props.index !== widest[b.key] || Number(props.value ?? 0) <= 200) {
-        return <g />;
-      }
-      return (
-        <text
-          x={props.x ?? 0}
-          y={Number(props.y ?? 0) + 12}
-          textAnchor="middle"
-          fontSize={10}
-          fontWeight={700}
-          fill="#F8FAFC"
-          stroke="#0F1117"
-          strokeWidth={3}
-          paintOrder="stroke"
-          opacity={dimmed ? 0.15 : 0.95}
-          style={{ pointerEvents: "none" }}
-        >
-          {b.label}
-        </text>
-      );
-    };
 
   return (
     <div>
@@ -482,16 +472,37 @@ export default function AmbientChart({
                   isAnimationActive={animate}
                   animationDuration={700}
                   animationEasing="ease-out"
-                >
-                  <LabelList
-                    dataKey={b.key}
-                    content={
-                      bandLabel(b, dimmed) as React.ComponentProps<
-                        typeof LabelList
-                      >["content"]
-                    }
-                  />
-                </Area>
+                />
+              );
+            })}
+            {/* In-band labels: positioned at the data-space midpoint of each
+                band at its widest month, so the label lands in the body of
+                the colored band rather than at the boundary above it. */}
+            {anchors.map((a) => {
+              const isSelected = selected != null;
+              const matchKey = STACK_BANDS.find(
+                (b) => b.label === a.label,
+              )?.key;
+              const dimmed = isSelected && matchKey !== selected;
+              return (
+                <ReferenceDot
+                  key={a.label}
+                  x={a.x}
+                  y={a.y}
+                  r={0}
+                  ifOverflow="extendDomain"
+                  label={{
+                    value: a.label,
+                    fill: "#F8FAFC",
+                    fontSize: 10,
+                    fontWeight: 700,
+                    stroke: "#0F1117",
+                    strokeWidth: 3,
+                    paintOrder: "stroke",
+                    opacity: dimmed ? 0.15 : 0.95,
+                    position: "center",
+                  }}
+                />
               );
             })}
           </AreaChart>
