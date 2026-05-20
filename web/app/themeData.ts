@@ -294,3 +294,60 @@ export function loadRecoveryVolume(): RecoveryVolumePoint[] {
       return row;
     });
 }
+
+// ── Ambient T4 cluster — monthly post volume by sub ─────────────────────────
+// Powers the §5 chart. The two giants (antiAI, aiwars) sit in a top line
+// panel; five mid-tier subs are stacked underneath. r/trueantiAI (~50/mo)
+// and r/ProAI (~40/mo) are too small to register as bands and are mentioned
+// in the caption instead. Read engagement, not opinion — these subs are
+// excluded from every keyword measurement (see CLAUDE.md §2.1 LOCKED).
+
+export type AmbientTopPoint = {
+  month: string;
+  antiAI: number;
+  aiwars: number;
+};
+export type AmbientStackPoint = {
+  month: string;
+  DefendingAIArt: number;
+  BetterOffline: number;
+  ArtistHate: number;
+  AIDangers: number;
+  FuckAI: number;
+};
+export type AmbientData = {
+  top: AmbientTopPoint[];
+  stack: AmbientStackPoint[];
+};
+
+export function loadAmbientCohort(): AmbientData {
+  const filePath = path.join(process.cwd(), "data", "community_activity.json");
+  if (!fs.existsSync(filePath)) return { top: [], stack: [] };
+  let raw: { months: string[]; activity: Record<string, number[]> };
+  try {
+    raw = JSON.parse(fs.readFileSync(filePath, "utf8"));
+  } catch (e) {
+    console.error("Failed to parse community_activity.json for ambient:", e);
+    return { top: [], stack: [] };
+  }
+  const months = raw.months ?? [];
+  const activity = raw.activity ?? {};
+  if (months.length === 0) return { top: [], stack: [] };
+
+  const at = (sub: string, i: number) => activity[sub]?.[i] ?? 0;
+
+  const top: AmbientTopPoint[] = months.map((m, i) => ({
+    month: m,
+    antiAI: at("antiAI", i),
+    aiwars: at("aiwars", i),
+  }));
+  const stack: AmbientStackPoint[] = months.map((m, i) => ({
+    month: m,
+    DefendingAIArt: at("DefendingAIArt", i),
+    BetterOffline: at("BetterOffline", i),
+    ArtistHate: at("ArtistHate", i),
+    AIDangers: at("AIDangers", i),
+    FuckAI: at("FuckAI", i),
+  }));
+  return { top, stack };
+}

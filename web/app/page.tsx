@@ -307,9 +307,9 @@ export default function Home() {
       </div>
 
       {/* §5 — The room next door: the AI culture-war communities. The
-          editorial point lives in the closing paragraph: the antis are
-          loud about everything except this. The only fight against AI
-          companions on Reddit is the one in §4 above. */}
+          chart is the editorial centerpiece — two giants compounding, five
+          smaller rooms filling in around them. The closer line in the
+          chart caption ties it back to §4. */}
       <div style={{ marginTop: 56 }}>
         <section>
         <div style={sectionLabel}>The room next door</div>
@@ -320,11 +320,11 @@ export default function Home() {
           The opposition is in-house
         </h2>
         <p style={{ ...intro, marginBottom: 28 }}>
-          Next door sits a louder cluster: subreddits built to argue about
-          AI as a cultural project &mdash; six anti-AI, two pro-AI, one
-          debate arena. More than half a million subscribers between them.
-          Almost none of it is about AI companionship. The fight that names
-          this site is happening above.
+          Next door, a new infrastructure is forming. Subreddits built to
+          argue about AI as a cultural project &mdash; most barely existed
+          in 2023; together they now host more than ten thousand posts a
+          month. Almost none of those posts are about AI companionship. The
+          fight that names this site is happening above.
         </p>
         <AmbientSection />
         </section>
