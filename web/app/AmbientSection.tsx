@@ -205,8 +205,8 @@ export default function AmbientSection() {
         as a cultural project; they are not a sample of mainstream AI
         sentiment. The <em>% on companions</em> column is the share of a
         50-post sample (May 2026) where AI companionship was the primary
-        topic; the loudest anti-AI sub touched it in roughly one post in
-        seventeen. The pro-AI side looks thin because most pro-AI energy on
+        topic. Even the loudest anti-AI sub touched it in roughly one post
+        in seventeen. The pro-AI side looks thin because most pro-AI energy on
         Reddit lives in product communities (r/ChatGPT, r/ClaudeAI,
         r/singularity) &mdash; people using the thing, not arguing for it.
         The fight against AI companionship, as far as Reddit shows it, is
