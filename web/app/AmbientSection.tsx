@@ -38,12 +38,15 @@ export default function AmbientSection() {
         </span>{" "}
         Engagement, not opinion &mdash; these communities take sides about AI
         as a cultural project; they are not a sample of mainstream AI
-        sentiment. The pro-AI side of the cluster looks thinner because most
-        pro-AI energy on Reddit lives in product communities (r/ChatGPT,
-        r/ClaudeAI, r/singularity) &mdash; people using the thing, not
-        arguing for it. The fight against AI companionship, as far as Reddit
-        shows it, is happening in §4 above: inside the communities
-        themselves.
+        sentiment. The pro-AI side looks thinner because most pro-AI energy
+        on Reddit lives in product communities (r/ChatGPT, r/ClaudeAI,
+        r/singularity) &mdash; people using the thing, not arguing for it.
+        The judgment these subs make explicit &mdash; that AI is not the
+        kind of thing one has a relationship with &mdash; is what §4&apos;s
+        recovery cluster records being absorbed inward. Same posture,
+        different target. Reddit shows the explicit and the absorbed
+        versions; the ambient version that connects them is not something
+        this site can measure.
       </p>
     </div>
   );

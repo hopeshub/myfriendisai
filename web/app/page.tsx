@@ -307,9 +307,10 @@ export default function Home() {
       </div>
 
       {/* §5 — The room next door: the AI culture-war communities. The
-          chart is the editorial centerpiece — two giants compounding, five
-          smaller rooms filling in around them. The closer line in the
-          chart caption ties it back to §4. */}
+          chart shows the infrastructure forming; the editorial point is
+          that what these subs police is upstream of AI companionship,
+          not aimed at it. §4 records that posture being absorbed inward;
+          the closing disclosure fences what Reddit can and can't show. */}
       <div style={{ marginTop: 56 }}>
         <section>
         <div style={sectionLabel}>The room next door</div>
@@ -317,14 +318,18 @@ export default function Home() {
           className="font-display text-xl sm:text-2xl font-semibold text-[#F1F4F8]"
           style={{ marginBottom: 8, maxWidth: measure }}
         >
-          The opposition is in-house
+          The argument is upstream
         </h2>
         <p style={{ ...intro, marginBottom: 28 }}>
           Next door, a new infrastructure is forming. Subreddits built to
           argue about AI as a cultural project &mdash; most barely existed
           in 2023; together they now host more than ten thousand posts a
-          month. Almost none of those posts are about AI companionship. The
-          fight that names this site is happening above.
+          month. Few of those posts name AI companionship directly;
+          &ldquo;AI bros&rdquo; appears in titles here roughly ten times
+          more often than &ldquo;AI girlfriend.&rdquo; The posture these
+          communities police &mdash; that taking a chatbot seriously is a
+          category mistake worth mocking &mdash; is the air the communities
+          on this site already breathe.
         </p>
         <AmbientSection />
         </section>

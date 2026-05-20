@@ -599,8 +599,8 @@ export default function AmbientChart({
           fontStyle: "italic",
         }}
       >
-        Half a million subscribers arguing about AI. Almost none of them
-        arguing about this.
+        Half a million subscribers arguing about AI. Rarely about AI
+        companionship &mdash; often about the kind of person who would.
       </p>
 
       <p
