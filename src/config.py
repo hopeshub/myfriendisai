@@ -18,7 +18,7 @@ def load_communities():
     for i, c in enumerate(communities):
         if not c.get("subreddit"):
             errors.append(f"communities[{i}]: missing 'subreddit'")
-        if c.get("tier") not in (0, 1, 2, 3, "adjacent"):
+        if c.get("tier") not in (0, 1, 2, 3, 4, "adjacent"):
             errors.append(f"r/{c.get('subreddit')}: invalid tier '{c.get('tier')}'")
         if not c.get("category"):
             errors.append(f"r/{c.get('subreddit')}: missing 'category'")
@@ -32,12 +32,16 @@ def load_communities():
 def load_keyword_communities():
     """Load communities eligible for keyword trend calculations.
 
-    Filters to T1-T3 subs only (excludes T0 general AI subs) and
-    respects the exclude_from_keywords flag (e.g. bot-listing-heavy subs).
+    Filters to T1-T3 subs only (excludes T0 general AI subs and T4 ambient
+    discourse-climate subs) and respects the exclude_from_keywords flag
+    (e.g. bot-listing-heavy subs). The explicit tier check is defense-in-depth:
+    every T4 sub also carries exclude_from_keywords=true, but tightening the
+    filter from `tier >= 1` to `tier in (1, 2, 3)` means an accidentally-flagged
+    T4 sub still can't slip into the keyword pipeline.
     """
     return [
         c for c in load_communities()
-        if c.get("tier", 0) >= 1 and not c.get("exclude_from_keywords", False)
+        if c.get("tier") in (1, 2, 3) and not c.get("exclude_from_keywords", False)
     ]
 
 

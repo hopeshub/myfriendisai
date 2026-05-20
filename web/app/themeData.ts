@@ -1,5 +1,6 @@
 import fs from "fs";
 import path from "path";
+import { getSubreddits } from "@/lib/data";
 
 // Server-side loaders for the keyword trend data. Shared by the homepage
 // (app/page.tsx) and the per-theme pages (app/theme/[id]/page.tsx) so the
@@ -208,15 +209,23 @@ export function loadCommunityComposition(): CommunityComposition {
 
   // "Other" = every community in the file that is not r/CharacterAI (its own
   // panel), not one of the six named bands, not an NSFW sub dropped from
-  // keyword tracking, and not a T0 general-AI sub. New keyword communities
-  // therefore fold into "Other" automatically.
+  // keyword tracking, not a T0 general-AI sub, and not a T4 ambient
+  // discourse-climate sub. New keyword communities (T1/T2/T3) therefore fold
+  // into "Other" automatically; ambient anti-AI/pro-AI subs do NOT — they
+  // appear on /communities for context but never in the companion-volume
+  // composition.
   const namedOrExcluded = new Set([
     "CharacterAI", "replika", "ChaiApp", "NomiAI", "KindroidAI",
     "ChatGPTcomplaints", "MyBoyfriendIsAI",
     "AIGirlfriend", "ChatGPTNSFW", "SpicyChatAI",
     "ChatGPT", "OpenAI", "ClaudeAI", "claudexplorers", "singularity",
   ]);
-  const otherSubs = Object.keys(activity).filter((s) => !namedOrExcluded.has(s));
+  const ambientSubs = new Set(
+    getSubreddits().filter((s) => s.tier === 4).map((s) => s.subreddit),
+  );
+  const otherSubs = Object.keys(activity).filter(
+    (s) => !namedOrExcluded.has(s) && !ambientSubs.has(s),
+  );
 
   const characterai: CaiPoint[] = months.map((m, i) => ({
     month: m,

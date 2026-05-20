@@ -3,6 +3,7 @@ import TrendsExplorer from "./TrendsExplorer";
 import PostVolumeChart from "./PostVolumeChart";
 import EventShowcase from "./EventShowcase";
 import RecoverySection from "./RecoverySection";
+import AmbientSection from "./AmbientSection";
 import { loadThemeData, loadCommunityComposition, loadRecoveryVolume } from "./themeData";
 import { THEMES } from "./themes";
 import { sectionEyebrow, introParagraph, measure } from "./styles";
@@ -302,6 +303,32 @@ export default function Home() {
           recovery: relapse, cold turkey, &ldquo;X days clean.&rdquo;
         </p>
         <RecoverySection data={recoveryVolume} />
+        </section>
+      </div>
+
+      {/* §5 — The room next door: the AI culture-war communities. The
+          editorial point lives in the closing paragraph: the antis are
+          loud about everything except this. The only fight against AI
+          companions on Reddit is the one in §4 above. */}
+      <div style={{ marginTop: 56 }}>
+        <section>
+        <div style={sectionLabel}>The room next door</div>
+        <h2
+          className="font-display text-xl sm:text-2xl font-semibold text-[#F1F4F8]"
+          style={{ marginBottom: 8, maxWidth: measure }}
+        >
+          The opposition is in-house
+        </h2>
+        <p style={{ ...intro, marginBottom: 28 }}>
+          Around the companion communities sits a louder cluster of
+          subreddits whose charter is to argue about AI as a cultural
+          project &mdash; six anti-AI advocacy spaces, two pro-AI, one
+          explicit debate floor. Together, more than half a million
+          subscribers. Almost none of it is about AI companionship. The
+          fight that names this site is happening above; this is the room
+          next door.
+        </p>
+        <AmbientSection />
         </section>
       </div>
 

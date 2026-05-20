@@ -10,6 +10,8 @@
 #   1 — Primary Companionship (AI companionship is central topic)
 #   2 — Platform-Specific Companion Products
 #   3 — Recovery & Dependency
+#   4 — Ambient / Discourse Climate (anti-AI + pro-AI counter-subs;
+#       tracked as context only, never keyword-tagged)
 #
 # To add a new subreddit: add an entry here and re-run the backfill with
 #   .venv/bin/python scripts/backfill_arctic.py --subreddit SubredditName
@@ -260,3 +262,145 @@ communities:
     category: "Recovery & Dependency"
     is_active: true
     notes: "18K subscribers. Ex-Character.AI users, migration, disillusionment."
+
+  # ===== TIER 4 — Ambient / Discourse Climate (secondary context) =====
+  # Added 2026-05-20 to track the surrounding AI-culture communities — pro-AI
+  # and anti-AI cultural-expression subs plus the explicit debate-floor sub —
+  # that frame the cultural climate AI companionship sits inside.
+  #
+  # ── THE LOCKED CRITERION (the two-stage gate) ─────────────────────────────
+  #
+  # A subreddit belongs in T4 if BOTH stages pass:
+  #
+  #   (1) CHARTER TEST — the sub's charter is to advocate FOR or AGAINST AI as
+  #       a cultural project. A stranger reading the public_description and the
+  #       top 50 post titles can identify the sub's side. Technical-research
+  #       communities (alignment, ML engineering) fail at stage 1 even if their
+  #       members are AI-skeptical in effect.
+  #
+  #   (2) EXPRESSION-NOT-INFRASTRUCTURE TEST — the sub functions as a space for
+  #       cultural EXPRESSION (individuals venting, grieving, arguing, advocating)
+  #       rather than as movement-coordination INFRASTRUCTURE (officer roles,
+  #       treaty / ballot / event organizing, recruitment for an advocacy org,
+  #       named-figure intellectual lineage operating as community identity).
+  #       Organized advocacy organizations fail at stage 2.
+  #
+  # The test is applied to the COMMUNITY itself, not to individual members.
+  # Individual-level distinctions dissolve (PauseAI volunteers and r/antiAI
+  # posters overlap demographically); the sub-level distinction holds because
+  # we're filtering at the infrastructure level.
+  #
+  # ── WHY TWO STAGES ────────────────────────────────────────────────────────
+  # Stage 1 alone admitted r/ControlProblem (alignment research wearing some
+  # doom valence). Stage 1 + practice-check admitted r/PauseAI (legitimate
+  # advocacy charter, but the sub IS the volunteer-coordination space for an
+  # international-treaty org — that's infrastructure, not expression). Adding
+  # stage 2 catches both kinds of mistake symmetrically: it removes PauseAI
+  # (anti-side movement infrastructure), eacc (pro-side movement subculture),
+  # and accelerate (e/acc identity-marker enclave). Applied symmetrically by
+  # design — the founder's intuition was "not the Yudkowsky / Berkeley Light-
+  # haven crowd," which is the demographic gloss; the principled version is
+  # "not movement-coordination infrastructure on EITHER side."
+  #
+  # ── WHAT THIS IS NOT ──────────────────────────────────────────────────────
+  # T4 is NOT a measurement of mainstream AI cultural sentiment. The site does
+  # not claim to sample what ordinary people think about AI. T4 shows that this
+  # cluster of cultural-expression communities exists, how each is sized, and
+  # how each is moving. Read engagement, not a population estimate.
+  #
+  # Tracked as CONTEXT ONLY — appears in /communities under three "Ambient"
+  # categories (Anti-AI, Pro-AI, Debate Arena) but excluded from the theme
+  # atlas, the per-1k denominator, composition_trends.json, and every keyword
+  # export. All carry exclude_from_keywords: true; load_keyword_communities()
+  # gates them out by tier (in (1,2,3)) as a second fence. Forward-only.
+  #
+  # ── REJECTED ENTRIES (with rationale, so they don't get re-proposed) ──────
+  # Failed stage 1 (technical/non-advocacy):
+  #   r/ControlProblem (51K) — AI alignment research; charter quotes
+  #     Yudkowsky/Scott Alexander; top posts are fellowship applications.
+  #   r/AcceleratingAI (2.5K) — charter passes (pro-AI) but practice is a
+  #     single-author arxiv-paper firehose with ~0 comment engagement.
+  # Failed stage 2 (movement infrastructure):
+  #   r/PauseAI (5.4K) — charter is to coordinate volunteers for an inter-
+  #     national AI-pause treaty. Treaty advocacy = movement infrastructure.
+  #   r/eacc (2.1K) — the reddit home of the e/acc movement; named-figure
+  #     intellectual lineage (Andreessen, Beff Jezos, Nick Land/CCRU) operates
+  #     as community identity.
+  #   r/accelerate (60K) — "AI-Positive Techno-Accelerationist High-Fidelity
+  #     Epistemic Enclave"; epistemic-enclave framing is e/acc identity-marker
+  #     behavior. Keeping it would owe a written reason that doesn't also
+  #     re-admit eacc; no such reason exists.
+  #
+  # Full rationale + scoping pass methodology: docs/anti_ai_cluster_scoping_2026-05-20.md
+
+  - subreddit: antiAI
+    display_name: "r/antiAI"
+    tier: 4
+    category: "Ambient — Anti-AI"
+    is_active: true
+    exclude_from_keywords: true
+    notes: "185K subscribers. The main anti-AI hub. Long-form charter: 'A place for people who believe that the continued development of artificial intelligence will negatively affect the human race.' Open-coding 2026-05-20 (n=50): 22% anti-AI-art, 22% anti-hype, 20% AI-doom, 18% anti-jobs, 6% companionship-mockery."
+
+  - subreddit: FuckAI
+    display_name: "r/FuckAI"
+    tier: 4
+    category: "Ambient — Anti-AI"
+    is_active: true
+    exclude_from_keywords: true
+    notes: "19K subscribers. Added 2026-05-20 (sharpening pass — missed in first sweep). Charter: 'Dedicated to exposing all the bad about AI, and how harmful it is to actual human workers, artists, writers, and everything else that an AI can ruin.' Pure anti-AI advocacy."
+
+  - subreddit: ArtistHate
+    display_name: "r/ArtistHate"
+    tier: 4
+    category: "Ambient — Anti-AI"
+    is_active: true
+    exclude_from_keywords: true
+    notes: "33K subscribers. Anti-AI-art axis (paired antagonist to r/DefendingAIArt; both founded Dec 2022). Charter: 'pro-artist subreddit made to showcase, prove and expose increasing hate against artists.' Open-coding 2026-05-20: 64% anti-AI-art, 14% anti-hype, 12% anti-jobs, 2% companionship-mockery."
+
+  - subreddit: AIDangers
+    display_name: "r/AIDangers"
+    tier: 4
+    category: "Ambient — Anti-AI"
+    is_active: true
+    exclude_from_keywords: true
+    notes: "39K subscribers. AI-doom + anti-AI-cultural-critique. Charter explicitly mocks techno-optimists: 'If you are a true techno-optimist… you understand how this is not like the other technologies and how ridiculous it is to think of it as a tool.' Open-coding 2026-05-20: 46% anti-hype, 44% AI-doom, 6% companionship — cultural framing not technical alignment."
+
+  - subreddit: BetterOffline
+    display_name: "r/BetterOffline"
+    tier: 4
+    category: "Ambient — Anti-AI"
+    is_active: true
+    exclude_from_keywords: true
+    notes: "40K subscribers. Ed Zitron's audience — anti-AI-hype, hyperscaler-economics, bubble critique. Charter is podcast-fan-sub neutral but dominant discourse is anti-AI advocacy (84% anti-hype/bubble per 2026-05-20 sample)."
+
+  - subreddit: trueantiAI
+    display_name: "r/trueantiAI"
+    tier: 4
+    category: "Ambient — Anti-AI"
+    is_active: true
+    exclude_from_keywords: true
+    notes: "653 subscribers. Added 2026-05-20 (sharpening pass). Sister sub of r/antiAI with stricter no-AI-content policy. Charter: 'No AI generated material of any sort should be posted unless there is contextual cause… such as an insightful critique.' Small but clean charter."
+
+  - subreddit: aiwars
+    display_name: "r/aiwars"
+    tier: 4
+    category: "Ambient — Debate Arena"
+    is_active: true
+    exclude_from_keywords: true
+    notes: "144K subscribers. The explicit pro-vs-anti AI debate floor — not a side, the arena itself. Charter: 'Following news and developments on ALL sides of the AI art debate (and more).' Recategorized 2026-05-20 (sharpening pass) — forcing it into Anti-AI by measured valence would misrepresent the charter."
+
+  - subreddit: DefendingAIArt
+    display_name: "r/DefendingAIArt"
+    tier: 4
+    category: "Ambient — Pro-AI"
+    is_active: true
+    exclude_from_keywords: true
+    notes: "63K subscribers. Pro-AI-art counter-sub to r/ArtistHate (both founded Dec 2022 within days of each other). Charter: 'Fighting misinformation and attempts at legislation against AI generated artwork.' Rule 2: 'This Sub is a space for Pro-AI activism. For debate, go to r/aiwars.'"
+
+  - subreddit: ProAI
+    display_name: "r/ProAI"
+    tier: 4
+    category: "Ambient — Pro-AI"
+    is_active: true
+    exclude_from_keywords: true
+    notes: "662 subscribers. Added 2026-05-20 (sharpening pass). Cleanest pro-AI advocacy charter on Reddit: 'A subreddit for people who are Pro-Artificial Intelligence. We're an AI-Maximalist, High-Fidelity Epistemic Enclave. We exclude anyone who isn't pro-AI. Anti-AI, Luddites and Decels are not welcome.' Small but on-axis."

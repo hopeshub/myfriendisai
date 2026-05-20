@@ -10,6 +10,7 @@ const TIER_LABELS: Record<number, string> = {
   1: "Tier 1 — Primary Companionship",
   2: "Tier 2 — Platform-Specific",
   3: "Tier 3 — Recovery & Dependency",
+  4: "Tier 4 — Ambient / Discourse Climate",
 };
 
 export async function generateMetadata({

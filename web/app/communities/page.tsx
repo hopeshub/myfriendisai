@@ -42,7 +42,9 @@ export default function Communities() {
         >
           theme tracker
         </Link>
-        .
+        . The two &ldquo;Ambient&rdquo; categories show the surrounding AI
+        discourse climate &mdash; anti-AI and pro-AI counter-communities. They
+        are tracked as context only and do not feed the theme atlas.
       </p>
       <CommunitiesTable subreddits={subreddits} activity={activity} />
     </div>

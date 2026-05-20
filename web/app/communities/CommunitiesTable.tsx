@@ -20,6 +20,7 @@ const TIER_LABELS: Record<number, string> = {
   1: "Companion",
   2: "Platform",
   3: "Recovery",
+  4: "Ambient",
 };
 
 const TIER_COLORS: Record<number, string> = {
@@ -27,6 +28,7 @@ const TIER_COLORS: Record<number, string> = {
   1: "bg-blue-400/10 text-blue-300",
   2: "bg-violet-400/10 text-violet-300",
   3: "bg-red-400/10 text-red-300",
+  4: "bg-amber-400/10 text-amber-300",
 };
 
 function TierBadge({ tier }: { tier: number | null }) {
