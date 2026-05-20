@@ -320,13 +320,11 @@ export default function Home() {
           The opposition is in-house
         </h2>
         <p style={{ ...intro, marginBottom: 28 }}>
-          Around the companion communities sits a louder cluster of
-          subreddits whose charter is to argue about AI as a cultural
-          project &mdash; six anti-AI advocacy spaces, two pro-AI, one
-          explicit debate floor. Together, more than half a million
-          subscribers. Almost none of it is about AI companionship. The
-          fight that names this site is happening above; this is the room
-          next door.
+          Next door sits a louder cluster: subreddits built to argue about
+          AI as a cultural project &mdash; six anti-AI, two pro-AI, one
+          debate arena. More than half a million subscribers between them.
+          Almost none of it is about AI companionship. The fight that names
+          this site is happening above.
         </p>
         <AmbientSection />
         </section>

@@ -103,8 +103,8 @@ export default function AmbientSection() {
         >
           <span>Community</span>
           <span style={{ textAlign: "right" }}>Subs</span>
-          <span style={{ textAlign: "right" }} title="Share of recent posts that touch AI companionship as a topic (2026-05-20 open-coding pass, n=50 per sub)">
-            On companions
+          <span style={{ textAlign: "right" }} title="Share of recent posts where AI companionship was the primary topic (50-post sample per sub, May 2026)">
+            % on companions
           </span>
           <span style={{ textAlign: "right" }}>Trend</span>
         </div>
@@ -201,16 +201,16 @@ export default function AmbientSection() {
         <span style={{ color: "#F1F4F8", fontWeight: 600 }}>
           What this is and isn&apos;t.
         </span>{" "}
-        Engagement, not opinion &mdash; these communities are charter-driven
-        culture-war spaces, not a sample of mainstream AI sentiment. The{" "}
-        <em>on companions</em> column is the share of a 50-post sample (May
-        2026) where AI companionship was the primary topic; even the loudest
-        anti-AI sub only touched it in roughly one post in seventeen. The
-        pro-AI side looks thin because most pro-AI energy on Reddit lives in
-        product communities (r/ChatGPT, r/ClaudeAI, r/singularity) &mdash;
-        people using the thing, not arguing for it. The fight against AI
-        companionship, as far as Reddit shows it, is happening in §4 above:
-        inside the communities themselves.
+        Engagement, not opinion &mdash; these communities take sides about AI
+        as a cultural project; they are not a sample of mainstream AI
+        sentiment. The <em>% on companions</em> column is the share of a
+        50-post sample (May 2026) where AI companionship was the primary
+        topic; the loudest anti-AI sub touched it in roughly one post in
+        seventeen. The pro-AI side looks thin because most pro-AI energy on
+        Reddit lives in product communities (r/ChatGPT, r/ClaudeAI,
+        r/singularity) &mdash; people using the thing, not arguing for it.
+        The fight against AI companionship, as far as Reddit shows it, is
+        happening in §4 above: inside the communities themselves.
       </p>
     </div>
   );
