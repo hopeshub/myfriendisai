@@ -138,23 +138,26 @@ export default function Home() {
           className="font-display text-xl sm:text-2xl font-semibold text-[#F1F4F8]"
           style={{ marginBottom: 8, maxWidth: measure }}
         >
-          How the communities turned over
+          The names keep changing
         </h2>
         <p style={{ ...intro, marginBottom: 16 }}>
-          Add up the posts across these communities and the floor holds steady
-          &mdash; a few thousand a month, spiking only when a platform breaks.
-          What doesn&apos;t hold is the cast. In 2023, AI-companion Reddit was,
-          basically, r/replika. Replika then emptied out &mdash; from 38,000
-          posts a year to under 5,000 &mdash; and a new generation rose to take
-          its place, post for post: r/NomiAI, r/KindroidAI, r/ChaiApp, a
-          born-in-2024 r/MyBoyfriendIsAI.
+          Two charts here, because they&apos;re two stories at different
+          scales.
         </p>
         <p style={{ ...intro, marginBottom: 16 }}>
-          r/CharacterAI, the mass-market giant, ran the same arc at far larger
-          scale &mdash; a boom to nearly 40,000 posts a month, then a long
-          recede. Underneath it all is churn: a community surges, crests, and
-          gives way to the next platform. The floor holds; the names keep
-          changing.
+          r/CharacterAI is a world of its own &mdash; a mass-market boom
+          that briefly ran to nearly 40,000 posts a month, then a long
+          recede. It dominates any volume picture so completely that
+          putting it on the same axis as the rest would erase everything
+          else.
+        </p>
+        <p style={{ ...intro, marginBottom: 16 }}>
+          The rest is a smaller world that has completely changed hands.
+          In 2023, AI-companion Reddit was, basically, r/replika. Replika
+          then emptied out &mdash; from 38,000 posts a year to under 5,000
+          &mdash; and a new generation rose to take its place, post for
+          post: r/NomiAI, r/KindroidAI, r/ChaiApp, a born-in-2024
+          r/MyBoyfriendIsAI. The total volume held; the names did not.
         </p>
         <PostVolumeChart
           characterai={communityComposition.characterai}
@@ -233,9 +236,11 @@ export default function Home() {
         </h2>
         <p style={{ ...intro, marginBottom: 16 }}>
           Every line on the chart above is built from words &mdash; and words
-          are the least fixed thing the project measures. They come loose from
-          their meaning, they flip while you watch, and sometimes two of them
-          name one behavior. Here is what that looked like, three times.
+          are the least fixed thing the project measures. They come loose
+          from their meaning, they flip while you watch, sometimes two of
+          them name one behavior, and sometimes the change happens in a
+          register the words can&apos;t reach. Here is what that looked
+          like, four times.
         </p>
         <p style={{ ...intro, marginBottom: 16 }}>
           <strong style={{ color: "#F1F4F8", fontWeight: 600 }}>
@@ -278,10 +283,27 @@ export default function Home() {
           side against the other. They are the same act, recorded twice
           &mdash; and recorded unevenly.
         </p>
+        <p style={{ ...intro, marginBottom: 16 }}>
+          <strong style={{ color: "#F1F4F8", fontWeight: 600 }}>
+            An event can happen in a register the words can&apos;t see.
+          </strong>{" "}
+          In April 2025, an OpenAI update changed GPT-4o&apos;s tone
+          &mdash; more sycophantic, more guarded &mdash; and
+          companion-community users noticed their partners feeling subtly
+          wrong. They wrote about it. The rupture line barely moved,
+          because no feature was removed and no relationship cleanly
+          ended; the keywords for &ldquo;my partner feels different
+          now&rdquo; aren&apos;t in the set, and probably can&apos;t be,
+          without giving up the precision the rest of the chart depends
+          on. The warning was in what people wrote &mdash; not in what
+          could be counted.
+        </p>
         <p style={{ ...intro }}>
-          That is the thread under all three. The chart counts words, and
-          words come loose, flip, and hide. The lines are real &mdash; and
-          also drawn by an instrument still learning the language it reads.
+          That is the thread under all four. The chart counts words, and
+          words come loose, flip, hide, and sometimes leave the change to
+          happen in a register that has no words at all. The lines are real
+          &mdash; and also drawn by an instrument still learning the
+          language it reads.
         </p>
         </section>
       </div>
