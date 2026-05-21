@@ -324,11 +324,11 @@ export default function Home() {
           Next door, a new infrastructure is forming. Subreddits built to
           argue about AI as a cultural project barely existed in 2023;
           together they now host more than ten thousand posts a month
-          &mdash; nearly nine times the 2023 rate. The two largest are
-          r/antiAI and r/aiwars &mdash; anti and ostensibly neutral
-          &mdash; growing in near-lockstep, with smaller pro-AI rooms
-          filling in behind them. Both sides are organizing. The fight
-          is real.
+          &mdash; nearly nine times the 2023 rate. r/aiwars is the only
+          all-sides debate floor; everyone else is a partisan room.
+          r/antiAI, founded in early 2025, is already the largest of
+          them, with pro-AI rooms filling in alongside. Both sides are
+          organizing. The fight is real.
         </p>
         <p style={{ ...intro, marginBottom: 28 }}>
           Almost none of it is about AI companionship. &ldquo;AI bros&rdquo;

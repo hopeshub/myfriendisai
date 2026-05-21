@@ -296,19 +296,22 @@ export function loadRecoveryVolume(): RecoveryVolumePoint[] {
 }
 
 // ── Ambient T4 cluster — monthly post volume by sub ─────────────────────────
-// Powers the §5 chart. The two giants (antiAI, aiwars) sit in a top line
-// panel; five mid-tier subs are stacked underneath. r/trueantiAI (~50/mo)
-// and r/ProAI (~40/mo) are too small to register as bands and are mentioned
-// in the caption instead. Read engagement, not opinion — these subs are
-// excluded from every keyword measurement (see CLAUDE.md §2.1 LOCKED).
+// Powers the §5 chart. r/aiwars (the all-sides debate arena) sits alone in
+// the top line panel; every partisan room — r/antiAI plus the five mid-tier
+// subs — is stacked underneath, with r/antiAI as the dominant band. The
+// arena/partisan split makes a structural distinction visible: aiwars is
+// not a side, the others are. r/trueantiAI (~50/mo) and r/ProAI (~40/mo)
+// are too small to register as bands and are mentioned in the caption
+// instead. Read engagement, not opinion — these subs are excluded from
+// every keyword measurement (see CLAUDE.md §2.1 LOCKED).
 
 export type AmbientTopPoint = {
   month: string;
-  antiAI: number;
   aiwars: number;
 };
 export type AmbientStackPoint = {
   month: string;
+  antiAI: number;
   DefendingAIArt: number;
   BetterOffline: number;
   ArtistHate: number;
@@ -338,11 +341,11 @@ export function loadAmbientCohort(): AmbientData {
 
   const top: AmbientTopPoint[] = months.map((m, i) => ({
     month: m,
-    antiAI: at("antiAI", i),
     aiwars: at("aiwars", i),
   }));
   const stack: AmbientStackPoint[] = months.map((m, i) => ({
     month: m,
+    antiAI: at("antiAI", i),
     DefendingAIArt: at("DefendingAIArt", i),
     BetterOffline: at("BetterOffline", i),
     ArtistHate: at("ArtistHate", i),

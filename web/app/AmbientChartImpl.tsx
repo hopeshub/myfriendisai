@@ -59,18 +59,20 @@ const COMPANION_DENSITY: Record<string, number> = {
   DefendingAIArt: 0,
 };
 
-// Top panel — the two giants as parallel lines (not a stack; they're not
-// composing a whole, they're independent communities tracking each other).
+// Top panel — r/aiwars alone. It's the explicit all-sides debate floor,
+// structurally different from the partisan rooms below: not a side, the
+// arena. Splitting it off keeps that distinction visible.
 const TOP_LINES: { key: keyof AmbientTopPoint; label: string; color: string }[] = [
-  { key: "antiAI", label: "r/antiAI", color: "#C99B5A" }, // warm tan
   { key: "aiwars", label: "r/aiwars", color: "#6E9BC4" }, // slate blue
 ];
 
-// Bottom panel — declared bottom → top in the stacked composition. Largest
-// & most-stable bands go on the bottom so the growing newer ones sit on top
-// where they're easier to see.
+// Bottom panel — every partisan room, stacked. r/antiAI sits at the bottom
+// because it's the largest current band (started 2025 from zero and is now
+// the cluster's biggest single growth story); building the stack on top of
+// it lets the smaller subs sit above its growth curve where they're legible.
 type StackKey = keyof Omit<AmbientStackPoint, "month">;
 const STACK_BANDS: { key: StackKey; label: string; color: string }[] = [
+  { key: "antiAI",          label: "r/antiAI",          color: "#C99B5A" }, // warm tan
   { key: "ArtistHate",      label: "r/ArtistHate",      color: "#CC7E72" }, // coral
   { key: "DefendingAIArt",  label: "r/DefendingAIArt",  color: "#7BA98D" }, // sage
   { key: "BetterOffline",   label: "r/BetterOffline",   color: "#C77FA3" }, // pink
@@ -177,18 +179,18 @@ export default function AmbientChart({
 
   return (
     <div>
-      {/* Top panel — the two giants, as parallel lines */}
+      {/* Top panel — r/aiwars alone (the explicit debate floor) */}
       <div style={{ fontSize: 14, fontWeight: 600, color: "#F1F4F8" }}>
-        The two giants
+        The debate floor
       </div>
       <div style={{ fontSize: 12, color: "#7E8B9E", marginBottom: 6 }}>
-        r/antiAI and r/aiwars &mdash; the two largest, growing roughly in
-        parallel since mid-2024.
+        r/aiwars &mdash; the only sub in the cluster whose charter is
+        all-sides, not a side. Growing on the same curve as the partisans.
       </div>
       <MeasuredChart
         style={{ height: 200 }}
         role="img"
-        ariaLabel="Line chart: r/antiAI and r/aiwars monthly post volume from 2023 to 2026, both lines compounding past 3,000 posts per month."
+        ariaLabel="Line chart: r/aiwars monthly post volume from 2023 to 2026, compounding past 3,000 posts per month."
       >
         {({ width, height }) => (
           <LineChart
@@ -322,7 +324,7 @@ export default function AmbientChart({
         ))}
       </div>
 
-      {/* Bottom panel — the rooms forming around them */}
+      {/* Bottom panel — every partisan room, stacked */}
       <div
         style={{
           fontSize: 14,
@@ -331,16 +333,16 @@ export default function AmbientChart({
           marginTop: 28,
         }}
       >
-        The rooms forming around them
+        The partisan rooms
       </div>
       <div style={{ fontSize: 12, color: "#7E8B9E", marginBottom: 6 }}>
-        Five smaller subs &mdash; some pre-existing, some founded mid-cluster
-        &mdash; filling in below the giants.
+        Six anti-AI subs and two pro-AI subs, stacked. r/antiAI (founded
+        2025) is now the largest; the others fill in around it.
       </div>
       <MeasuredChart
         style={{ height: 240 }}
         role="img"
-        ariaLabel="Stacked area chart: monthly post volume of five mid-tier ambient subs — r/DefendingAIArt, r/BetterOffline, r/ArtistHate, r/AIDangers, r/FuckAI."
+        ariaLabel="Stacked area chart: monthly post volume of the partisan ambient subs — r/antiAI, r/ArtistHate, r/DefendingAIArt, r/BetterOffline, r/FuckAI, r/AIDangers — with r/antiAI as the dominant band growing from zero in early 2025."
       >
         {({ width, height }) => (
           <AreaChart
