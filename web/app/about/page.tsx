@@ -30,12 +30,15 @@ export const metadata: Metadata = {
 };
 
 function getPostCount(): string {
+  // If site_meta.json is unreadable, render "—" rather than a hardcoded
+  // number — a stale fallback would silently misstate the corpus size,
+  // and the about page is exactly where readers go to verify it.
   try {
     const raw = readFileSync(join(process.cwd(), "data", "site_meta.json"), "utf-8");
     const meta = JSON.parse(raw) as { total_posts: number };
     return `~${(meta.total_posts / 1_000_000).toFixed(1)}M`;
   } catch {
-    return "~4.0M";
+    return "—";
   }
 }
 
@@ -261,6 +264,14 @@ export default function About() {
               moving: a theme that fades here may have moved rather than
               ended &mdash; to a newer app, a Discord, a general-AI subreddit
               outside this set &mdash; and the site cannot tell those apart.
+            </p>
+            <p>
+              One name on the list might look out of place: r/ChatGPTcomplaints.
+              It is tracked as a companion community because of what its members
+              write, not what it&apos;s called &mdash; it was the organizing hub
+              for the #Keep4o protests when OpenAI retired GPT-4o, and a large
+              share of its posts read like rupture-grief for a model people
+              had built a relationship with.
             </p>
             <p>
               Within that curated set, each theme is also concentrated. Two or

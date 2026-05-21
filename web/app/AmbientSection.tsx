@@ -42,9 +42,9 @@ export default function AmbientSection() {
         on Reddit lives in product communities (r/ChatGPT, r/ClaudeAI,
         r/singularity) &mdash; people using the thing, not arguing for it.
         The judgment these subs make explicit &mdash; that AI is not the
-        kind of thing one has a relationship with &mdash; is what §4&apos;s
-        recovery cluster records being absorbed inward. Same posture,
-        different target. Reddit shows the explicit and the absorbed
+        kind of thing one has a relationship with &mdash; is what the
+        recovery communities above record being absorbed inward. Same
+        posture, different target. Reddit shows the explicit and the absorbed
         versions; the ambient version that connects them is not something
         this site can measure.
       </p>
