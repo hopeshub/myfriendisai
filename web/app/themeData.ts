@@ -121,12 +121,21 @@ export function loadThemeData(filename: string = "keyword_trends.json"): ThemeDa
 
     // Clip current partial month
     const currentMonth = new Date().toISOString().slice(0, 7); // "YYYY-MM"
-    let dates = Object.keys(rawByDate).sort().filter((d) => d.slice(0, 7) < currentMonth);
 
-    // Apply coverage_start filter: drop dates before the theme's coverage_start.
-    // Researchers reading the raw JSON still see the full series.
+    // Walk the CORPUS calendar (_total_posts dates), not just hit-days: the
+    // export omits days with zero hits, and averaging only over hit-days
+    // biased sparse months upward (worst in early-coverage months). A day the
+    // corpus has posts but the theme has no hits is a real 0, and must pull
+    // the monthly mean down. Days with no collection at all stay absent.
+    // coverage_start bounds the walk; without one (no reliable coverage yet)
+    // fall back to hit-days only rather than emitting years of zeros.
+    let dates: string[];
     if (themeCoverageStart) {
-      dates = dates.filter((d) => d >= themeCoverageStart!);
+      dates = totalEntries
+        .map((e) => e.date)
+        .filter((d) => d >= themeCoverageStart! && d.slice(0, 7) < currentMonth);
+    } else {
+      dates = Object.keys(rawByDate).sort().filter((d) => d.slice(0, 7) < currentMonth);
     }
 
     // Aggregate daily → monthly. The atlas and the per-theme chart both render
@@ -138,13 +147,14 @@ export function loadThemeData(filename: string = "keyword_trends.json"): ThemeDa
       { rateSum: number; n: number; count: number }
     > = {};
     for (const date of dates) {
+      const day = rawByDate[date] ?? { count: 0, avg: 0 };
       const total7d = totalPosts7dAvg[date] ?? 0;
-      const hitsPerK = total7d > 0 ? (rawByDate[date].avg / total7d) * 1000 : 0;
+      const hitsPerK = total7d > 0 ? (day.avg / total7d) * 1000 : 0;
       const m = date.slice(0, 7) + "-01";
       if (!monthly[m]) monthly[m] = { rateSum: 0, n: 0, count: 0 };
       monthly[m].rateSum += hitsPerK;
       monthly[m].n += 1;
-      monthly[m].count += rawByDate[date].count;
+      monthly[m].count += day.count;
     }
     result[themeId] = Object.keys(monthly)
       .sort()
@@ -245,10 +255,12 @@ export function loadCommunityComposition(): CommunityComposition {
 }
 
 // ── Recovery-community volume ────────────────────────────────────────────────
-// Monthly post volume for the four T3 recovery / quitting communities, read
-// from snapshots.json (posts_today, recomputed from the posts table). These
-// communities are the counter-current to AI companionship: organized quitting
-// and peer support. See the recovery section on the homepage.
+// Monthly post volume for the recovery / quitting communities, read from
+// community_activity.json (post-table based). snapshots.json was the previous
+// source, but snapshot rows only exist for days the collector reached Reddit —
+// the 2026-05-29..06-09 outage left a hole there that the posts table (Arctic
+// Shift-recovered) doesn't have. These communities are the counter-current to
+// AI companionship: organized quitting and peer support.
 // The two genuine recovery communities. r/AI_Addiction (too small) and
 // r/CharacterAIrunaways (migration, not recovery) are deliberately excluded —
 // see recoveryData.ts.
@@ -260,39 +272,26 @@ export const RECOVERY_SUBS = [
 export type RecoveryVolumePoint = { month: string; [sub: string]: string | number };
 
 export function loadRecoveryVolume(): RecoveryVolumePoint[] {
-  const filePath = path.join(process.cwd(), "data", "snapshots.json");
+  const filePath = path.join(process.cwd(), "data", "community_activity.json");
   if (!fs.existsSync(filePath)) return [];
-  let snaps: Array<{
-    subreddit: string;
-    snapshot_date: string;
-    posts_today: number | null;
-  }>;
+  let raw: { months: string[]; activity: Record<string, number[]> };
   try {
-    snaps = JSON.parse(fs.readFileSync(filePath, "utf8"));
+    raw = JSON.parse(fs.readFileSync(filePath, "utf8"));
   } catch (e) {
-    console.error("Failed to parse snapshots.json:", e);
+    console.error("Failed to parse community_activity.json for recovery:", e);
     return [];
   }
-
-  const recovery = new Set<string>(RECOVERY_SUBS);
-  const byMonth: Record<string, Record<string, number>> = {};
-  for (const s of snaps) {
-    if (!recovery.has(s.subreddit)) continue;
-    const m = s.snapshot_date.slice(0, 7);
-    if (!byMonth[m]) byMonth[m] = {};
-    byMonth[m][s.subreddit] =
-      (byMonth[m][s.subreddit] ?? 0) + (s.posts_today ?? 0);
-  }
+  const months = raw.months ?? [];
+  const activity = raw.activity ?? {};
 
   const currentMonth = new Date().toISOString().slice(0, 7);
-  return Object.keys(byMonth)
-    .sort()
-    .filter((m) => m < currentMonth)
-    .map((m) => {
-      const row: RecoveryVolumePoint = { month: m };
-      for (const sub of RECOVERY_SUBS) row[sub] = byMonth[m][sub] ?? 0;
+  return months
+    .map((m, i) => {
+      const row: RecoveryVolumePoint = { month: m.slice(0, 7) };
+      for (const sub of RECOVERY_SUBS) row[sub] = activity[sub]?.[i] ?? 0;
       return row;
-    });
+    })
+    .filter((r) => r.month < currentMonth);
 }
 
 // ── Ambient T4 cluster — monthly post volume by sub ─────────────────────────

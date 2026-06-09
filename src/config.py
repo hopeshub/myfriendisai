@@ -7,7 +7,7 @@ import yaml
 CONFIG_DIR = Path(__file__).parent.parent / "config"
 
 
-def load_communities():
+def _load_all_communities():
     path = CONFIG_DIR / "communities.yaml"
     with open(path) as f:
         data = yaml.safe_load(f)
@@ -26,7 +26,12 @@ def load_communities():
     if errors:
         raise ValueError("communities.yaml validation errors:\n" + "\n".join(f"  - {e}" for e in errors))
 
-    return [c for c in communities if c.get("is_active", True)]
+    return communities
+
+
+def load_communities():
+    """Communities to actively collect from (excludes deactivated/banned subs)."""
+    return [c for c in _load_all_communities() if c.get("is_active", True)]
 
 
 def load_keyword_communities():
@@ -38,9 +43,13 @@ def load_keyword_communities():
     every T4 sub also carries exclude_from_keywords=true, but tightening the
     filter from `tier >= 1` to `tier in (1, 2, 3)` means an accidentally-flagged
     T4 sub still can't slip into the keyword pipeline.
+
+    Deliberately ignores is_active: a deactivated sub (e.g. r/HeavenGF, banned
+    by Reddit ~May 2026) stops being COLLECTED, but its historical posts stay
+    in the corpus — numerator and denominator — per the documented invariant.
     """
     return [
-        c for c in load_communities()
+        c for c in _load_all_communities()
         if c.get("tier") in (1, 2, 3) and not c.get("exclude_from_keywords", False)
     ]
 
