@@ -225,7 +225,7 @@ def expand_more_comments(client, subreddit, post_id, stubs, stats):
         try:
             # Try /api/morechildren.json
             data = client._get(
-                "https://www.reddit.com/api/morechildren.json",
+                f"{client.base_url}/api/morechildren.json",
                 params={
                     "api_type": "json",
                     "link_id": f"t3_{post_id}",
@@ -271,7 +271,7 @@ def expand_more_comments(client, subreddit, post_id, stubs, stats):
             try:
                 stats["requests"] += 1
                 fallback_data = client._get(
-                    f"https://www.reddit.com/r/{subreddit}/comments/{post_id}.json",
+                    f"{client.base_url}/r/{subreddit}/comments/{post_id}.json",
                     params={"limit": 500},
                 )
                 if isinstance(fallback_data, list) and len(fallback_data) > 1:
@@ -301,7 +301,7 @@ def collect_comments_for_post(client, conn, post_id, subreddit, num_comments, st
     stats["requests"] += 1
 
     # Fetch comment tree
-    url = f"https://www.reddit.com/r/{subreddit}/comments/{post_id}.json"
+    url = f"{client.base_url}/r/{subreddit}/comments/{post_id}.json"
     data = client._get(url)
 
     if not isinstance(data, list) or len(data) < 2:

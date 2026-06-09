@@ -49,7 +49,7 @@ function getCommunityCount(): number {
     return new Set(list.map((s) => s.subreddit)).size;
   } catch {
     // Fallback only if subreddits.json is unreadable — keep in sync with the live count.
-    return 31;
+    return 40;
   }
 }
 
@@ -455,7 +455,7 @@ export default function About() {
             </p>
             <p>
               One known seam in the recent data: Reddit ended unauthenticated
-              data access without notice on May 30, 2026, which paused daily
+              data access without notice in late May 2026, which paused daily
               collection from May 29 to June 9, 2026. Posts for those days were
               recovered from the Arctic Shift archive, so post volume and theme
               trends are complete &mdash; but per-day subscriber and

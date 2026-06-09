@@ -678,16 +678,29 @@ def export_keyword_trends_json(
         # Sort months chronologically
         months = sorted(monthly_post_only.keys())
         # Find first month where this month and every subsequent COMPLETE
-        # month clears the threshold (current month excluded from check).
+        # calendar month clears the threshold (current month excluded). Walk
+        # the full calendar range — a month with zero tags is absent from
+        # monthly_post_only and must count as 0, not be skipped.
+        def _month_range(start: str, end: str):
+            y, m = int(start[:4]), int(start[5:7])
+            ey, em = int(end[:4]), int(end[5:7])
+            while (y, m) <= (ey, em):
+                yield f"{y:04d}-{m:02d}"
+                m += 1
+                if m == 13:
+                    m, y = 1, y + 1
+
+        completed = [m for m in months if m != current_month]
         chosen: Optional[str] = None
-        for i, month in enumerate(months):
-            if monthly_post_only[month] < COVERAGE_THRESHOLD:
-                continue
-            # Check all subsequent completed months
-            later = [m for m in months[i + 1:] if m != current_month]
-            if all(monthly_post_only[m] >= COVERAGE_THRESHOLD for m in later):
-                chosen = month
-                break
+        if completed:
+            last_complete = completed[-1]
+            for month in completed:
+                if monthly_post_only[month] < COVERAGE_THRESHOLD:
+                    continue
+                if all(monthly_post_only.get(m, 0) >= COVERAGE_THRESHOLD
+                       for m in _month_range(month, last_complete)):
+                    chosen = month
+                    break
         # Convert YYYY-MM to YYYY-MM-01 for ISO consistency
         coverage_start[category] = f"{chosen}-01" if chosen else None
     result["_coverage_start"] = coverage_start

@@ -104,7 +104,10 @@ def _step_collect_posts_arctic(communities, conn):
     from src.db.operations import insert_posts
 
     before_epoch = int(time.time())
-    after_epoch = before_epoch - 36 * 3600
+    # 72h window (not 36h): Arctic Shift is an archive with ingestion lag, so a
+    # post created 30h ago may not be archived yet. The overlap on consecutive
+    # fallback days is absorbed by INSERT OR IGNORE.
+    after_epoch = before_epoch - 72 * 3600
 
     ok = 0
     errors = []
@@ -112,8 +115,14 @@ def _step_collect_posts_arctic(communities, conn):
     for community in communities:
         subreddit = community["subreddit"]
         try:
-            raw = fetch_posts(subreddit, after_epoch, before_epoch)
+            raw, truncated = fetch_posts(subreddit, after_epoch, before_epoch)
+            if truncated:
+                raise RuntimeError("Arctic Shift window truncated (partial data)")
             parsed = [parse_arctic_post(p) for p in raw]
+            # Force canonical casing — Arctic Shift returns e.g. "antiai", which
+            # case-sensitive IN(...) filters downstream would silently drop.
+            for p in parsed:
+                p["subreddit"] = subreddit
             inserted = insert_posts(parsed, conn=conn)
             conn.commit()
             total_inserted += inserted
@@ -139,9 +148,13 @@ def _step_tag_posts(conn):
     patterns = build_patterns(keyword_categories)
     logger.info("Loaded %d patterns across %d categories", len(patterns), len(keyword_categories))
 
-    # Load already-tagged post IDs
+    # Load post IDs already scanned against post text. source='post' only:
+    # a post that gained comment-propagated tags before its own text was ever
+    # scanned must not be skipped here.
     tagged_ids = set(
-        r[0] for r in conn.execute("SELECT DISTINCT post_id FROM post_keyword_tags").fetchall()
+        r[0] for r in conn.execute(
+            "SELECT DISTINCT post_id FROM post_keyword_tags WHERE source = 'post'"
+        ).fetchall()
     )
     logger.info("  %d posts already tagged, will skip", len(tagged_ids))
 
@@ -375,7 +388,7 @@ def _main_inner():
     # recover post volume from the Arctic Shift archive so the theme trends
     # stay fresh. Snapshots and comments are not recoverable here.
     fallback_used = False
-    if post_stats["errors"] > (post_stats["total"] or 1) / 2:
+    if post_stats["errors"] >= (post_stats["total"] or 1) / 2:
         logger.warning("=" * 60)
         logger.warning("STEP 1b: Reddit failed for %d/%d subs — falling back to Arctic Shift",
                        post_stats["errors"], post_stats["total"])

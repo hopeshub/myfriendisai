@@ -22,9 +22,21 @@ jobs:
       - name: Check status.json freshness
         run: |
           set -euo pipefail
-          status=$(curl -fsS --max-time 30 https://myfriendisai.com/status.json)
+          status=$(curl -fsS --max-time 30 --retry 3 --retry-all-errors --retry-delay 30 https://myfriendisai.com/status.json)
           echo "$status"
-          last_push=$(echo "$status" | jq -er '.last_successful_push')
+
+          last_push=$(echo "$status" | jq -r '.last_successful_push // empty')
+          if [ -z "$last_push" ]; then
+            echo "::error::last_successful_push is null/empty — the pipeline has never pushed or status.json is corrupt."
+            exit 1
+          fi
+
+          consec=$(echo "$status" | jq -r '.consecutive_push_failures // 0')
+          if [ "$consec" -ge 2 ]; then
+            echo "::error::status.json reports ${consec} consecutive runs without a successful push. Check the collection Mac (logs/collect_daily.log, logs/failures.log)."
+            exit 1
+          fi
+
           now_epoch=$(date -u +%s)
           push_epoch=$(date -u -d "$last_push" +%s)
           age_hours=$(( (now_epoch - push_epoch) / 3600 ))

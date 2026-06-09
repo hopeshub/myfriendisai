@@ -13,6 +13,24 @@ STATUS_FILE="$PROJECT_DIR/web/public/status.json"
 
 export PATH="/opt/homebrew/bin:$PATH"
 
+# Wrapper-level lock: collect_daily.py has its own flock, but without this a
+# manual run overlapping the 6am job rotates the live log mid-run, overwrites
+# status.json with a false failure, and can collide in git. mkdir is atomic;
+# a stored PID lets us clear stale locks after a crash/power-cut.
+LOCK_DIR="$PROJECT_DIR/data/.run_collect.lock.d"
+if ! mkdir "$LOCK_DIR" 2>/dev/null; then
+    other_pid=$(cat "$LOCK_DIR/pid" 2>/dev/null || echo "")
+    if [ -n "$other_pid" ] && kill -0 "$other_pid" 2>/dev/null; then
+        echo "run_collect.sh already running (pid $other_pid) — exiting." >&2
+        exit 0
+    fi
+    # Stale lock (no live process) — take it over.
+    rm -rf "$LOCK_DIR"
+    mkdir "$LOCK_DIR" || exit 1
+fi
+echo $$ > "$LOCK_DIR/pid"
+trap 'rm -rf "$LOCK_DIR"' EXIT
+
 # Prevent macOS from sleeping during the pipeline (can take 3-5 hours).
 # -s = prevent sleep even on AC power; -w $$ = release when this script exits.
 caffeinate -s -w $$ &
@@ -108,6 +126,10 @@ if push_ok:
     last_push = now
     last_err = ""
 else:
+    # Deliberate semantics: counts consecutive RUNS WITHOUT a successful push,
+    # including days where collection failed and push was never attempted —
+    # it is the "site has not been refreshed" staleness counter, not a count
+    # of push attempts that errored.
     consec = prev_consec + 1
     last_push = prev_last_push
 

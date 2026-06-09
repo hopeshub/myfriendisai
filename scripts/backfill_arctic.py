@@ -56,16 +56,22 @@ REQUEST_DELAY = 2.0  # seconds between requests
 
 
 def fetch_posts(subreddit: str, after_epoch: int, before_epoch: int,
-                on_batch=None) -> list[dict]:
+                on_batch=None) -> "tuple[list[dict], bool]":
     """Fetch all posts for a subreddit in a time window, paginating automatically.
 
+    Returns (posts, truncated). `truncated` is True when the window ended
+    abnormally (non-200, exhausted retries) — callers must treat the window
+    as incomplete rather than silently accepting partial data.
+
     If `on_batch` is provided, it's called with each new batch as it arrives —
-    use this for incremental DB inserts so crashes don't lose work.
+    use this for incremental DB inserts so crashes don't lose work. on_batch
+    failures propagate: an insert error is a DB problem, not a skippable blip.
     """
     all_posts = []
     cursor = after_epoch
     retries = 0
     max_retries = 5
+    truncated = False
 
     while cursor < before_epoch:
         params = {
@@ -86,19 +92,26 @@ def fetch_posts(subreddit: str, after_epoch: int, before_epoch: int,
         except requests.RequestException as e:
             retries += 1
             if retries > max_retries:
-                logger.error("  r/%s: gave up after %d network errors", subreddit, max_retries)
+                logger.error("  r/%s: gave up after %d network errors — window TRUNCATED", subreddit, max_retries)
+                truncated = True
                 break
             logger.warning("  Network error fetching r/%s (retry %d): %s", subreddit, retries, e)
             time.sleep(5 * retries)
             continue
 
         if resp.status_code == 429:
-            logger.warning("  Rate limited, backing off 60s...")
+            retries += 1
+            if retries > max_retries:
+                logger.error("  r/%s: still rate-limited after %d retries — window TRUNCATED", subreddit, max_retries)
+                truncated = True
+                break
+            logger.warning("  Rate limited, backing off 60s (retry %d)...", retries)
             time.sleep(60)
             continue
 
         if resp.status_code != 200:
-            logger.warning("  HTTP %d for r/%s, skipping batch", resp.status_code, subreddit)
+            logger.warning("  HTTP %d for r/%s — window TRUNCATED", resp.status_code, subreddit)
+            truncated = True
             break
 
         retries = 0  # reset on success
@@ -123,17 +136,14 @@ def fetch_posts(subreddit: str, after_epoch: int, before_epoch: int,
 
         # Incremental insert so a crash doesn't lose all work
         if on_batch is not None:
-            try:
-                on_batch(posts)
-            except Exception as e:
-                logger.warning("    on_batch failed at cursor %s: %s", cursor_date, e)
+            on_batch(posts)
 
         if len(posts) < BATCH_SIZE:
             break  # Last page
 
         time.sleep(REQUEST_DELAY)
 
-    return all_posts
+    return all_posts, truncated
 
 
 def parse_arctic_post(p: dict) -> dict:
@@ -181,21 +191,30 @@ def backfill_subreddit(subreddit: str, after_epoch: int, before_epoch: int, conn
     def on_batch(batch_posts: list[dict]) -> None:
         nonlocal total_fetched, total_inserted
         parsed = [parse_arctic_post(p) for p in batch_posts]
+        # Arctic Shift can return non-canonical subreddit casing (e.g. "antiai");
+        # case-sensitive IN(...) filters downstream silently drop such rows, so
+        # force the canonical config name.
+        for p in parsed:
+            p["subreddit"] = subreddit
         inserted = insert_posts(parsed, conn=conn)
         conn.commit()
         total_fetched += len(parsed)
         total_inserted += inserted
 
-    raw_posts = fetch_posts(subreddit, after_epoch, before_epoch, on_batch=on_batch)
+    raw_posts, truncated = fetch_posts(subreddit, after_epoch, before_epoch, on_batch=on_batch)
+
+    if truncated:
+        logger.warning("  r/%s: window TRUNCATED — re-run this window (%s to %s)",
+                       subreddit, after_date, before_date)
 
     if not raw_posts:
         logger.info("  r/%s: no posts found", subreddit)
-        return {"subreddit": subreddit, "fetched": 0, "inserted": 0}
+        return {"subreddit": subreddit, "fetched": 0, "inserted": 0, "truncated": truncated}
 
     logger.info("  r/%s: %d fetched, %d new inserted",
                 subreddit, total_fetched, total_inserted)
 
-    return {"subreddit": subreddit, "fetched": total_fetched, "inserted": total_inserted}
+    return {"subreddit": subreddit, "fetched": total_fetched, "inserted": total_inserted, "truncated": truncated}
 
 
 def main():
@@ -241,6 +260,9 @@ def main():
     total_fetched = sum(r["fetched"] for r in results)
     total_inserted = sum(r["inserted"] for r in results)
     empty = [r["subreddit"] for r in results if r["fetched"] == 0]
+    truncated_subs = [r["subreddit"] for r in results if r.get("truncated")]
+    if truncated_subs:
+        logger.warning("  TRUNCATED windows (re-run these): %s", ", ".join(truncated_subs))
 
     logger.info("=" * 60)
     logger.info("BACKFILL COMPLETE")

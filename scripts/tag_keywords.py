@@ -108,10 +108,13 @@ def main():
         logger.info("Re-tag mode: not skipping already-tagged posts "
                     "(INSERT OR IGNORE dedupes existing rows)")
     else:
-        # Find already-tagged post IDs so we can skip them
+        # Find post IDs already scanned against post text (source='post' only —
+        # comment-propagated tags must not exempt a post from text scanning)
         logger.info("Loading already-tagged post IDs...")
         tagged_ids = set(
-            r[0] for r in conn.execute("SELECT DISTINCT post_id FROM post_keyword_tags").fetchall()
+            r[0] for r in conn.execute(
+                "SELECT DISTINCT post_id FROM post_keyword_tags WHERE source = 'post'"
+            ).fetchall()
         )
         logger.info("  %d posts already tagged, will skip", len(tagged_ids))
 
@@ -125,6 +128,12 @@ def main():
     where_clause = f"FROM posts WHERE subreddit IN ({placeholders})"
     params: list = list(keyword_subs)
     if args.subreddit:
+        if args.subreddit not in keyword_subs:
+            logger.error(
+                "r/%s is not keyword-eligible (T1-T3 without exclude_from_keywords) — "
+                "refusing to tag it into post_keyword_tags", args.subreddit,
+            )
+            return 1
         where_clause = "FROM posts WHERE subreddit = ?"
         params = [args.subreddit]
     if args.since:
@@ -245,4 +254,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())

@@ -79,9 +79,13 @@ export default function ThemeChart({
     if (!data.length) return [];
     const first = data[0].date;
     const last = data[data.length - 1].date;
-    return EVENTS.filter((e) => e.date >= first && e.date <= last).map(
-      (e, i) => ({ ...e, num: i + 1 }),
-    );
+    // Month-granularity compare: the axis holds "YYYY-MM-01" values, so a
+    // full-date compare drops events after the 1st of the latest month.
+    return EVENTS.filter(
+      (e) =>
+        e.date.slice(0, 7) >= first.slice(0, 7) &&
+        e.date.slice(0, 7) <= last.slice(0, 7),
+    ).map((e, i) => ({ ...e, num: i + 1 }));
   }, [data]);
 
   if (!monthly.length) {
@@ -156,7 +160,7 @@ export default function ThemeChart({
             {events.map((e) => (
               <ReferenceLine
                 key={e.date}
-                x={e.date}
+                x={`${e.date.slice(0, 7)}-01`}
                 stroke="#C2974D"
                 strokeOpacity={0.7}
                 strokeDasharray={e.methodology ? "2 3" : "5 3"}

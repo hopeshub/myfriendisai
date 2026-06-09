@@ -168,12 +168,14 @@ export default function TrendAtlas({
   const labelFs = bp === "mobile" ? 14 : 11;
 
   // Events that fall inside the visible window, numbered 1..n in order — so
-  // the legend never shows a gap like "3, 4, 5".
+  // the legend never shows a gap like "3, 4, 5". Compare at month granularity:
+  // the axis holds "YYYY-MM-01" values, so a full-date compare drops any
+  // event after the 1st of the latest month.
   const numberedEvents: NumberedEvent[] = EVENTS.filter(
     (e) =>
       months.length > 0 &&
-      e.date >= months[0] &&
-      e.date <= months[months.length - 1],
+      e.date.slice(0, 7) >= months[0].slice(0, 7) &&
+      e.date.slice(0, 7) <= months[months.length - 1].slice(0, 7),
   ).map((e, i) => ({ ...e, num: i + 1 }));
 
   return (
@@ -270,7 +272,7 @@ export default function TrendAtlas({
                     {numberedEvents.map((e) => (
                       <ReferenceLine
                         key={e.date}
-                        x={e.date}
+                        x={`${e.date.slice(0, 7)}-01`}
                         stroke="#C2974D"
                         strokeOpacity={0.7}
                         strokeDasharray={e.methodology ? "2 3" : "5 3"}

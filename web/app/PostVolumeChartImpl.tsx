@@ -548,7 +548,7 @@ export default function PostVolumeChart({
         Monthly post volume, from 2023 onward (where monthly counts become
         reliable). Each chart has its own scale &mdash; click a community,
         below or on the chart, to isolate its band. &ldquo;Other&rdquo; groups
-        eleven smaller subreddits, the largest being r/Paradot, r/SoulmateAI,
+        the smaller subreddits, the largest being r/Paradot, r/SoulmateAI,
         r/Character_AI_Recovery, r/CharacterAIrunaways, and r/BeyondThePromptAI.
       </p>
     </div>
