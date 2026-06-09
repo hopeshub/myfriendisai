@@ -1,0 +1,35 @@
+name: Data staleness alert
+
+# Checks the live site's status.json daily and fails (triggering a GitHub
+# notification email to the repo owner) when the last successful push is
+# older than 56 hours. The deployed status.json lags one push behind the
+# collector by design, so <56h is normal operation; >56h means at least two
+# consecutive daily pipelines have failed to publish.
+#
+# This exists because the 2026-05-29 Reddit .json shutdown broke collection
+# for 12 days before anyone noticed — the Mac-local notifications never
+# reached a traveling owner.
+
+on:
+  schedule:
+    - cron: "0 17 * * *" # daily, ~4h after the 06:00 PT collection window
+  workflow_dispatch:
+
+jobs:
+  check-freshness:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check status.json freshness
+        run: |
+          set -euo pipefail
+          status=$(curl -fsS --max-time 30 https://myfriendisai.com/status.json)
+          echo "$status"
+          last_push=$(echo "$status" | jq -er '.last_successful_push')
+          now_epoch=$(date -u +%s)
+          push_epoch=$(date -u -d "$last_push" +%s)
+          age_hours=$(( (now_epoch - push_epoch) / 3600 ))
+          echo "Last successful push: $last_push (${age_hours}h ago)"
+          if [ "$age_hours" -gt 56 ]; then
+            echo "::error::Site data is stale — last successful push was ${age_hours}h ago. Check the collection Mac (logs/collect_daily.log, logs/failures.log)."
+            exit 1
+          fi

@@ -22,7 +22,6 @@ sys.path.insert(0, str(Path(__file__).parent.parent))
 
 from src.config import load_communities, load_keywords, load_keyword_communities, keyword_fingerprint
 from src.reddit_client import RedditClient
-from src.utils.rate_limiter import RateLimiter
 from src.db.schema import initialize as init_db
 from src.db.operations import export_snapshots_json, export_subreddits_json, export_site_meta_json, export_community_activity_json, sync_subreddit_config, update_contributor_metrics_for_date
 from src.collector import collect_subreddit
@@ -89,6 +88,47 @@ def _step_collect_posts(communities, client, conn):
         "errors": len(errors),
         "total": len(communities),
         "posts_collected": total_posts,
+        "error_details": errors,
+    }
+
+
+def _step_collect_posts_arctic(communities, conn):
+    """Fallback for Step 1: pull the last 36h of posts from Arctic Shift.
+
+    Used when Reddit collection fails for a majority of subreddits (e.g. the
+    2026-05-30 unauthenticated-.json shutdown). Keeps post volume and theme
+    trends fresh; subreddit snapshots (subscribers/active users) and comments
+    are NOT recoverable this way and stay empty for the day.
+    """
+    from scripts.backfill_arctic import fetch_posts, parse_arctic_post
+    from src.db.operations import insert_posts
+
+    before_epoch = int(time.time())
+    after_epoch = before_epoch - 36 * 3600
+
+    ok = 0
+    errors = []
+    total_inserted = 0
+    for community in communities:
+        subreddit = community["subreddit"]
+        try:
+            raw = fetch_posts(subreddit, after_epoch, before_epoch)
+            parsed = [parse_arctic_post(p) for p in raw]
+            inserted = insert_posts(parsed, conn=conn)
+            conn.commit()
+            total_inserted += inserted
+            ok += 1
+            logger.info("  r/%s: %d fetched, %d new inserted (arctic fallback)",
+                        subreddit, len(raw), inserted)
+        except Exception as e:
+            logger.warning("  r/%s: arctic fallback failed: %s", subreddit, e)
+            errors.append({"subreddit": subreddit, "status": "arctic_error", "error": str(e)})
+
+    return {
+        "ok": ok,
+        "errors": len(errors),
+        "total": len(communities),
+        "posts_collected": total_inserted,
         "error_details": errors,
     }
 
@@ -312,7 +352,8 @@ def _main_inner():
 
     conn = init_db()
     sync_subreddit_config(communities, conn=conn)
-    client = RedditClient(rate_limiter=RateLimiter(min_interval=6.0))
+    # No explicit rate limiter: the client picks 1.5s (OAuth) or 6s (unauth).
+    client = RedditClient()
 
     step_times = {}
     failed_steps = []
@@ -325,9 +366,29 @@ def _main_inner():
         post_stats = _step_collect_posts(communities, client, conn)
     except Exception:
         logger.exception("Step 1 (post collection) failed")
-        post_stats = {"ok": 0, "errors": 0, "total": len(communities), "posts_collected": 0, "error_details": []}
+        post_stats = {"ok": 0, "errors": len(communities), "total": len(communities), "posts_collected": 0, "error_details": []}
         failed_steps.append("post_collection")
     step_times["post_collection"] = time.time() - t0
+
+    # ── Step 1b: Arctic Shift fallback ──────────────────────────────────
+    # If Reddit failed for a majority of subs (auth outage, policy change),
+    # recover post volume from the Arctic Shift archive so the theme trends
+    # stay fresh. Snapshots and comments are not recoverable here.
+    fallback_used = False
+    if post_stats["errors"] > (post_stats["total"] or 1) / 2:
+        logger.warning("=" * 60)
+        logger.warning("STEP 1b: Reddit failed for %d/%d subs — falling back to Arctic Shift",
+                       post_stats["errors"], post_stats["total"])
+        t0 = time.time()
+        try:
+            arctic_stats = _step_collect_posts_arctic(communities, conn)
+            fallback_used = True
+            post_stats = arctic_stats
+            if "post_collection" in failed_steps:
+                failed_steps.remove("post_collection")
+        except Exception:
+            logger.exception("Step 1b (arctic fallback) failed")
+        step_times["arctic_fallback"] = time.time() - t0
 
     # ── Step 2: Tag posts ───────────────────────────────────────────────
     logger.info("=" * 60)
@@ -395,10 +456,17 @@ def _main_inner():
     logger.info("=" * 60)
     logger.info("Daily pipeline complete:")
     logger.info(
-        "  1. Post collection:      %.1f min (%d posts collected)",
+        "  1. Post collection:      %.1f min (%d posts collected)%s",
         step_times["post_collection"] / 60,
         post_stats.get("posts_collected", 0),
+        " [via ARCTIC SHIFT FALLBACK — no snapshots today]" if fallback_used else "",
     )
+    if fallback_used:
+        logger.warning(
+            "Arctic Shift fallback served today's posts (%.1f min) — Reddit access is broken; "
+            "subscriber/active-user snapshots and comment collection did not run.",
+            step_times.get("arctic_fallback", 0) / 60,
+        )
     logger.info(
         "  2. Post keyword tagging: %.1f min (%d tags added)",
         step_times["post_tagging"] / 60,
