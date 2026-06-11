@@ -5987,10 +5987,17 @@
     },
     {
       "date": "2026-06-10",
-      "count": 2,
-      "count_7d_avg": 6.86,
-      "count_post_only": 2,
-      "count_post_only_7d_avg": 6.86
+      "count": 4,
+      "count_7d_avg": 7.14,
+      "count_post_only": 4,
+      "count_post_only_7d_avg": 7.14
+    },
+    {
+      "date": "2026-06-11",
+      "count": 1,
+      "count_7d_avg": 6.43,
+      "count_post_only": 1,
+      "count_post_only_7d_avg": 6.43
     }
   ],
   "consciousness": [
@@ -8154,6 +8161,13 @@
       "date": "2026-06-07",
       "count": 1,
       "count_7d_avg": 1.86,
+      "count_post_only": 1,
+      "count_post_only_7d_avg": 1.57
+    },
+    {
+      "date": "2026-06-10",
+      "count": 1,
+      "count_7d_avg": 1.57,
       "count_post_only": 1,
       "count_post_only_7d_avg": 1.57
     }
@@ -16215,6 +16229,13 @@
       "count_7d_avg": 2.86,
       "count_post_only": 3,
       "count_post_only_7d_avg": 2.86
+    },
+    {
+      "date": "2026-06-11",
+      "count": 1,
+      "count_7d_avg": 2.43,
+      "count_post_only": 1,
+      "count_post_only_7d_avg": 2.43
     }
   ],
   "rupture": [
@@ -24624,6 +24645,20 @@
       "count_7d_avg": 6.29,
       "count_post_only": 2,
       "count_post_only_7d_avg": 6.29
+    },
+    {
+      "date": "2026-06-10",
+      "count": 1,
+      "count_7d_avg": 5.86,
+      "count_post_only": 1,
+      "count_post_only_7d_avg": 5.86
+    },
+    {
+      "date": "2026-06-11",
+      "count": 1,
+      "count_7d_avg": 4.57,
+      "count_post_only": 1,
+      "count_post_only_7d_avg": 4.57
     }
   ],
   "sexual_erp": [
@@ -33439,6 +33474,13 @@
       "count_7d_avg": 2.14,
       "count_post_only": 3,
       "count_post_only_7d_avg": 2.14
+    },
+    {
+      "date": "2026-06-10",
+      "count": 1,
+      "count_7d_avg": 1.86,
+      "count_post_only": 1,
+      "count_post_only_7d_avg": 1.86
     }
   ],
   "therapy": [
@@ -51210,7 +51252,11 @@
     },
     {
       "date": "2026-06-10",
-      "count": 297
+      "count": 391
+    },
+    {
+      "date": "2026-06-11",
+      "count": 75
     }
   ],
   "_coverage_start": {

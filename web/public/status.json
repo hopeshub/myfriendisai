@@ -1,11 +1,11 @@
 {
-  "last_collection": "2026-06-09T18:51:46Z",
-  "posts_collected": 1293,
-  "subreddits_ok": 40,
+  "last_collection": "2026-06-11T13:54:36Z",
+  "posts_collected": 733,
+  "subreddits_ok": 9,
   "subreddits_total": 40,
   "collection_succeeded": true,
-  "push_succeeded": true,
-  "last_successful_push": "2026-06-09T18:51:46Z",
-  "consecutive_push_failures": 0,
-  "last_push_error": null
+  "push_succeeded": false,
+  "last_successful_push": "2026-06-10T13:59:15Z",
+  "consecutive_push_failures": 1,
+  "last_push_error": "pre-deploy validation failed"
 }
