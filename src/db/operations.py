@@ -146,6 +146,31 @@ def insert_posts(posts: list[dict], conn: Optional[sqlite3.Connection] = None) -
     return inserted
 
 
+def insert_comments(comments: list[dict], conn: Optional[sqlite3.Connection] = None) -> int:
+    """Insert comments, skipping duplicates. Returns count of new rows inserted."""
+    _conn = conn or get_connection()
+    inserted = 0
+    try:
+        for c in comments:
+            result = _conn.execute(
+                """
+                INSERT OR IGNORE INTO comments
+                    (id, post_id, subreddit, author, body, score, depth,
+                     parent_id, created_utc, permalink)
+                VALUES
+                    (:id, :post_id, :subreddit, :author, :body, :score, :depth,
+                     :parent_id, :created_utc, :permalink)
+                """,
+                c,
+            )
+            inserted += result.rowcount
+        _conn.commit()
+    finally:
+        if conn is None:
+            _conn.close()
+    return inserted
+
+
 def get_snapshots(
     subreddit: str,
     start_date: Optional[date] = None,

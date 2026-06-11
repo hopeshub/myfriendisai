@@ -457,12 +457,16 @@ export default function About() {
               One known seam in the recent data: Reddit ended unauthenticated
               data access without notice in late May 2026, which paused daily
               collection from May 29 to June 9, 2026. Posts for those days were
-              recovered from the Arctic Shift archive, so post volume and theme
-              trends are complete &mdash; but per-day subscriber and
-              active-user figures for that window could not be reconstructed,
-              and comments on posts from those days were not collected (the
-              theme lines lean on post text alone there, as they do for all
-              pre-March-2026 data).
+              recovered from the Arctic Shift archive, and comments followed in
+              a second recovery pass, so post volume, theme trends, and
+              comment-sourced tags are all complete across the window. Per-day
+              subscriber and active-user figures could not be reconstructed and
+              remain blank there. Since this episode, daily collection runs on
+              the archive rather than on Reddit directly, and the archive
+              captures comment threads somewhat more completely than the old
+              once-per-post snapshot did &mdash; so the default theme lines run
+              a touch fuller from late May 2026 onward. The post-text-only
+              control series is unaffected.
             </p>
             <p>
               The code, the keyword lists, and every validation record are

@@ -62,6 +62,7 @@ def main():
 
     # ── 2. keyword_trends.json structure ──
     print("\n2. Keyword trends structure")
+    latest_post_date = None
     kt_path = ROOT / "data/keyword_trends.json"
     if kt_path.exists():
         kt = json.loads(kt_path.read_text())
@@ -89,6 +90,8 @@ def main():
             check("no zero-count days (last 30)", len(zeros) == 0,
                   f"{len(zeros)} zero days" if zeros else "")
 
+            latest_post_date = max(e["date"] for e in total_posts)
+
     # ── 3. snapshots.json structure ──
     print("\n3. Snapshots")
     snap_path = ROOT / "data/snapshots.json"
@@ -99,11 +102,18 @@ def main():
         check("has subreddits", len(subs) >= 20, f"{len(subs)} subreddits")
         check("has date range", len(dates) > 100, f"{len(dates)} dates")
 
-        # Check for recent data
+        # Check for recent data. In arctic mode (no Reddit access) snapshots
+        # are legitimately frozen — what must stay fresh is the post data, so
+        # fall back to the keyword-trends post series before failing.
         latest_date = max(dates)
         from datetime import date, timedelta
         stale_cutoff = (date.today() - timedelta(days=3)).isoformat()
-        check("data is fresh", latest_date >= stale_cutoff, f"latest={latest_date}")
+        if latest_date >= stale_cutoff:
+            check("data is fresh", True, f"latest={latest_date}")
+        else:
+            posts_fresh = latest_post_date is not None and latest_post_date >= stale_cutoff
+            check("data is fresh (posts; snapshots paused — arctic mode)", posts_fresh,
+                  f"posts latest={latest_post_date}, snapshots latest={latest_date}")
 
     # ── 4. subreddits.json ──
     print("\n4. Subreddits")
