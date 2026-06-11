@@ -386,6 +386,111 @@ def aggregate_posts_to_snapshots(conn: Optional[sqlite3.Connection] = None) -> i
             _conn.close()
 
 
+def create_arctic_snapshot_rows(
+    snapshot_date: date,
+    subreddits: list,
+    conn: Optional[sqlite3.Connection] = None,
+) -> int:
+    """Create snapshot rows from our own posts table for a day Reddit gave us nothing.
+
+    posts_today and unique_authors are computed from the posts table over the
+    UTC calendar day (created_utc). subscribers/active_users stay NULL — they
+    are unobservable without Reddit and must not be fabricated.
+    avg_comments_per_post is left NULL here and filled at +6d maturity by
+    update_arctic_comment_averages; avg_score_per_post stays NULL permanently
+    (archive scores are captured at creation, ~0).
+
+    INSERT OR IGNORE: days that already have a real (Reddit-sourced) row are
+    untouched, so this is safe to run over a trailing window every day.
+    Returns the number of rows created.
+    """
+    from datetime import datetime, time as dtime, timedelta, timezone
+
+    _conn = conn or get_connection()
+    try:
+        win_start = int(datetime.combine(snapshot_date, dtime.min, tzinfo=timezone.utc).timestamp())
+        win_end = int(datetime.combine(snapshot_date + timedelta(days=1), dtime.min, tzinfo=timezone.utc).timestamp())
+        rows = _conn.execute(
+            """
+            SELECT subreddit,
+                   COUNT(*) AS n,
+                   COUNT(DISTINCT CASE WHEN author IS NOT NULL AND author != ''
+                                       AND author != '[deleted]' THEN author END) AS ua
+            FROM posts
+            WHERE created_utc >= ? AND created_utc < ?
+            GROUP BY subreddit
+            """,
+            (win_start, win_end),
+        ).fetchall()
+        by_sub = {r["subreddit"]: (r["n"], r["ua"]) for r in rows}
+
+        created = 0
+        for sub in subreddits:
+            n, ua = by_sub.get(sub, (0, 0))
+            result = _conn.execute(
+                """
+                INSERT OR IGNORE INTO subreddit_snapshots
+                    (subreddit, snapshot_date, data_source, posts_today, unique_authors)
+                VALUES (?, ?, 'arctic_shift', ?, ?)
+                """,
+                (sub, snapshot_date.isoformat(), n, ua or None),
+            )
+            created += result.rowcount
+        _conn.commit()
+        return created
+    finally:
+        if conn is None:
+            _conn.close()
+
+
+def update_arctic_comment_averages(
+    snapshot_date: date,
+    conn: Optional[sqlite3.Connection] = None,
+) -> int:
+    """Fill avg_comments_per_post on arctic snapshot rows from our comments table.
+
+    Computed as the mean number of collected comments per post created on that
+    UTC day. Call only for days old enough that comment accrual is essentially
+    finished (the caller uses +6 days, matching the old Reddit-path maturity
+    window). Only touches data_source='arctic_shift' rows — real Reddit
+    observations are never overwritten. Returns rows updated.
+    """
+    from datetime import datetime, time as dtime, timedelta, timezone
+
+    _conn = conn or get_connection()
+    try:
+        win_start = int(datetime.combine(snapshot_date, dtime.min, tzinfo=timezone.utc).timestamp())
+        win_end = int(datetime.combine(snapshot_date + timedelta(days=1), dtime.min, tzinfo=timezone.utc).timestamp())
+        rows = _conn.execute(
+            """
+            SELECT p.subreddit, ROUND(AVG(
+                (SELECT COUNT(*) FROM comments c WHERE c.post_id = p.id)
+            ), 2) AS avg_c
+            FROM posts p
+            WHERE p.created_utc >= ? AND p.created_utc < ?
+            GROUP BY p.subreddit
+            """,
+            (win_start, win_end),
+        ).fetchall()
+
+        updated = 0
+        for r in rows:
+            result = _conn.execute(
+                """
+                UPDATE subreddit_snapshots
+                SET avg_comments_per_post = ?
+                WHERE subreddit = ? AND snapshot_date = ? AND data_source = 'arctic_shift'
+                """,
+                (r["avg_c"], r["subreddit"], snapshot_date.isoformat()),
+            )
+            updated += result.rowcount
+        _conn.commit()
+        return updated
+    finally:
+        if conn is None:
+            _conn.close()
+
+
 def export_site_meta_json(
     output_path: Optional[Path] = None,
     conn: Optional[sqlite3.Connection] = None,
@@ -427,15 +532,33 @@ def export_subreddits_json(
     output_path: Optional[Path] = None,
     conn: Optional[sqlite3.Connection] = None,
 ) -> Path:
-    """Write frontend-ready subreddit metadata JSON (latest snapshot per active subreddit)."""
+    """Write frontend-ready subreddit metadata JSON (latest snapshot per active subreddit).
+
+    Per-column latest-non-NULL: arctic-mode rows legitimately lack subscribers,
+    active_users, and score/comment averages (Reddit-only observables), so each
+    of those columns falls back to its most recent observed value instead of
+    going blank the day Reddit access breaks.
+    """
     path = output_path or DATA_DIR / "subreddits.json"
     path.parent.mkdir(parents=True, exist_ok=True)
     _conn = conn or get_connection()
     try:
         rows = _conn.execute(
             """
-            SELECT s.subreddit, s.snapshot_date, s.subscribers, s.active_users,
-                   s.posts_today, s.avg_comments_per_post, s.avg_score_per_post,
+            SELECT s.subreddit, s.snapshot_date,
+                   (SELECT subscribers FROM subreddit_snapshots
+                    WHERE subreddit = s.subreddit AND subscribers IS NOT NULL
+                    ORDER BY snapshot_date DESC LIMIT 1) AS subscribers,
+                   (SELECT active_users FROM subreddit_snapshots
+                    WHERE subreddit = s.subreddit AND active_users IS NOT NULL
+                    ORDER BY snapshot_date DESC LIMIT 1) AS active_users,
+                   s.posts_today,
+                   (SELECT avg_comments_per_post FROM subreddit_snapshots
+                    WHERE subreddit = s.subreddit AND avg_comments_per_post IS NOT NULL
+                    ORDER BY snapshot_date DESC LIMIT 1) AS avg_comments_per_post,
+                   (SELECT avg_score_per_post FROM subreddit_snapshots
+                    WHERE subreddit = s.subreddit AND avg_score_per_post IS NOT NULL
+                    ORDER BY snapshot_date DESC LIMIT 1) AS avg_score_per_post,
                    s.unique_authors, s.unique_post_authors_7d,
                    s.unique_comment_authors_7d, s.unique_contributors_7d,
                    c.category, c.tier, c.display_name

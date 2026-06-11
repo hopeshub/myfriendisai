@@ -155,25 +155,35 @@ export default function Charts({ snapshots }: { snapshots: Snapshot[] }) {
     return <p className="text-sm text-[#9AA7B8]">No snapshot data yet.</p>;
   }
 
-  const latest = snapshots.at(-1)!;
+  // Per-field latest non-null: archive-sourced snapshot rows legitimately
+  // lack Reddit-only observables (subscribers; comment averages mature with
+  // a 6-day lag), so each card shows its most recent known value rather
+  // than blanking whenever the newest row has a hole.
+  const lastKnown = (key: keyof Snapshot): number | null => {
+    for (let i = snapshots.length - 1; i >= 0; i--) {
+      const v = snapshots[i][key];
+      if (typeof v === "number") return v;
+    }
+    return null;
+  };
 
   return (
     <>
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-8 p-6 bg-[#1A1D27] rounded-xl">
         <div>
-          <div className="text-2xl font-semibold tabular-nums text-[#F8FAFC]">{fmt(latest.subscribers)}</div>
+          <div className="text-2xl font-semibold tabular-nums text-[#F8FAFC]">{fmt(lastKnown("subscribers"))}</div>
           <div className="text-xs text-[#9AA7B8] mt-0.5">Subscribers</div>
         </div>
         <div>
-          <div className="text-2xl font-semibold tabular-nums text-[#F8FAFC]">{fmt(latest.unique_contributors_7d)}</div>
+          <div className="text-2xl font-semibold tabular-nums text-[#F8FAFC]">{fmt(lastKnown("unique_contributors_7d"))}</div>
           <div className="text-xs text-[#9AA7B8] mt-0.5">Contributors / week</div>
         </div>
         <div>
-          <div className="text-2xl font-semibold tabular-nums text-[#F8FAFC]">{fmt(latest.posts_today)}</div>
+          <div className="text-2xl font-semibold tabular-nums text-[#F8FAFC]">{fmt(lastKnown("posts_today"))}</div>
           <div className="text-xs text-[#9AA7B8] mt-0.5">Posts / day</div>
         </div>
         <div>
-          <div className="text-2xl font-semibold tabular-nums text-[#F8FAFC]">{fmt(latest.avg_comments_per_post, 1)}</div>
+          <div className="text-2xl font-semibold tabular-nums text-[#F8FAFC]">{fmt(lastKnown("avg_comments_per_post"), 1)}</div>
           <div className="text-xs text-[#9AA7B8] mt-0.5">Avg comments / post</div>
         </div>
       </div>

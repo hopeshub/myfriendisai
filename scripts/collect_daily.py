@@ -195,6 +195,55 @@ def _step_collect_comments_arctic(communities, conn):
     }
 
 
+def _step_heal_snapshots(communities, conn):
+    """Step 1c: self-heal snapshot rows from our own data (trailing 14 days).
+
+    Reddit-sourced snapshot rows stop appearing whenever Reddit access breaks.
+    For any day in the trailing window with no row, build one from the posts
+    table (posts_today, unique_authors) + the comments table (7d contributor
+    metrics; avg comments/post once a day is 6+ days old and its threads have
+    finished accruing). subscribers/active_users stay NULL — unobservable
+    without Reddit. Idempotent: INSERT OR IGNORE never touches real rows.
+    """
+    from datetime import date as date_cls, timedelta
+    from src.db.operations import (
+        create_arctic_snapshot_rows, update_arctic_comment_averages,
+    )
+
+    subs = [c["subreddit"] for c in communities]
+    today = date_cls.today()
+    rows_created = 0
+    for offset in range(13, 0, -1):  # past days; today's row + its contributor
+        d = today - timedelta(days=offset)  # metrics are handled by Step 4b
+        # Cheap existence guard: the aggregation behind create/update does a
+        # full posts-table scan per date, so skip dates already fully healed.
+        existing = conn.execute(
+            "SELECT COUNT(*) FROM subreddit_snapshots WHERE snapshot_date = ?",
+            (d.isoformat(),),
+        ).fetchone()[0]
+        if existing >= len(subs):
+            continue
+        created = create_arctic_snapshot_rows(d, subs, conn=conn)
+        if created:
+            update_contributor_metrics_for_date(d, conn=conn)
+            rows_created += created
+    create_arctic_snapshot_rows(today, subs, conn=conn)
+
+    avgs_updated = 0
+    for offset in range(6, 14):  # refresh the maturity boundary + healed days
+        d = today - timedelta(days=offset)
+        pending = conn.execute(
+            "SELECT COUNT(*) FROM subreddit_snapshots "
+            "WHERE snapshot_date = ? AND data_source = 'arctic_shift' "
+            "AND avg_comments_per_post IS NULL",
+            (d.isoformat(),),
+        ).fetchone()[0]
+        if pending:
+            avgs_updated += update_arctic_comment_averages(d, conn=conn)
+
+    return {"rows_created": rows_created, "comment_avgs_updated": avgs_updated}
+
+
 def _step_tag_posts(conn):
     """Step 2: Tag posts with keyword categories (tag_keywords.py logic)."""
     keyword_categories = load_keywords()
@@ -471,6 +520,21 @@ def _main_inner():
             except Exception:
                 logger.exception("Step 1b (arctic fallback) failed")
             step_times["arctic_fallback"] = time.time() - t0
+
+    # ── Step 1c: Self-heal snapshot rows ────────────────────────────────
+    # Must run AFTER Step 1/1b: real Reddit rows insert first, so the
+    # INSERT OR IGNORE here only fills genuinely missing days.
+    logger.info("=" * 60)
+    logger.info("STEP 1c: Self-healing snapshot rows (trailing 14 days)")
+    t0 = time.time()
+    try:
+        heal_stats = _step_heal_snapshots(communities, conn)
+        logger.info("  %d snapshot rows created, %d comment averages filled",
+                    heal_stats["rows_created"], heal_stats["comment_avgs_updated"])
+    except Exception:
+        logger.exception("Step 1c (snapshot self-heal) failed")
+        failed_steps.append("snapshot_heal")
+    step_times["snapshot_heal"] = time.time() - t0
 
     # ── Step 2: Tag posts ───────────────────────────────────────────────
     logger.info("=" * 60)
