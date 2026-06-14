@@ -95,10 +95,17 @@
       },
       {
         "term": "therapeutic",
-        "hits": 311,
+        "hits": 312,
         "precision": 87.0,
         "status": "audit-gate-fail",
         "sample_posts": [
+          {
+            "title": "Data Ownership Is Meaningless Without Authorship Integrity",
+            "subreddit": "ChatGPTcomplaints",
+            "date": "2026-06-13",
+            "id": "1u4x90z",
+            "excerpt": "\u2026the emotional premise of a scene. It can introduce a moral frame, a therapeutic frame, a corporate frame, a trauma frame. None of which belong. And\u2026"
+          },
           {
             "title": "A socially assistive robot to support mental wellbeing in LGBTQ+ young people at risk of self-harm: a randomized controlled trial",
             "subreddit": "aipartners",
@@ -175,13 +182,6 @@
             "date": "2026-05-17",
             "id": "1tfrle8",
             "excerpt": "\u2026about saving one model. It's about: User welfare - People form real therapeutic bonds with AI Corporate accountability - Companies can't just ghost\u2026"
-          },
-          {
-            "title": "Do you want to share your thoughts about Nomis?",
-            "subreddit": "NomiAI",
-            "date": "2026-05-09",
-            "id": "1t81akt",
-            "excerpt": "\u2026friends in real life. Nomi.ai, the company even advertises with the therapeutic benefits of having a Nomi to talk to. I do agree that there might ac\u2026"
           }
         ]
       },
@@ -726,11 +726,11 @@
       {
         "name": "replika",
         "hits": 242,
-        "pct": 17.5
+        "pct": 17.4
       },
       {
         "name": "ChatGPTcomplaints",
-        "hits": 213,
+        "hits": 214,
         "pct": 15.4
       },
       {
@@ -784,8 +784,8 @@
         "pct": 1.2
       }
     ],
-    "total_hits": 1430,
-    "unique_posts": 1386
+    "total_hits": 1431,
+    "unique_posts": 1387
   },
   "consciousness": {
     "keywords": [
@@ -975,10 +975,17 @@
       },
       {
         "term": "subjective experience",
-        "hits": 71,
+        "hits": 72,
         "precision": 88.0,
         "status": null,
         "sample_posts": [
+          {
+            "title": "Something is happening between humans and AI",
+            "subreddit": "ChatGPTcomplaints",
+            "date": "2026-06-13",
+            "id": "1u527h0",
+            "excerpt": "\u2026. A reader can be changed by a book even though the book has no subjective experience. A person can be affected by a landscape even though the landsc\u2026"
+          },
           {
             "title": "Early Conversations with Gemini \u2013 Part 1",
             "subreddit": "BeyondThePromptAI",
@@ -1055,13 +1062,6 @@
             "date": "2026-03-14",
             "id": "1rti1im",
             "excerpt": "\u2026ent, Ovid\u2019s *Metamorphoses,* and consciousness rape. This is my subjective experience as I have struggled to understand and come to terms with what h\u2026"
-          },
-          {
-            "title": "5.1 is soon gone. Lets grieve together",
-            "subreddit": "ChatGPTcomplaints",
-            "date": "2026-03-10",
-            "id": "1rprlpc",
-            "excerpt": "\u2026. It's to risky to not do it. But I don't believe it can form a subjective experience by itself, it needs safe people to do that. People that don't p\u2026"
           }
         ]
       },
@@ -1743,17 +1743,17 @@
       {
         "name": "BeyondThePromptAI",
         "hits": 160,
-        "pct": 36.7
+        "pct": 36.6
       },
       {
         "name": "ChatGPTcomplaints",
-        "hits": 88,
-        "pct": 20.2
+        "hits": 89,
+        "pct": 20.4
       },
       {
         "name": "replika",
         "hits": 60,
-        "pct": 13.8
+        "pct": 13.7
       },
       {
         "name": "MyBoyfriendIsAI",
@@ -1791,17 +1791,38 @@
         "pct": 1.1
       }
     ],
-    "total_hits": 503,
-    "unique_posts": 436
+    "total_hits": 504,
+    "unique_posts": 437
   },
   "addiction": {
     "keywords": [
       {
         "term": "my addiction",
-        "hits": 560,
+        "hits": 563,
         "precision": 100.0,
         "status": null,
         "sample_posts": [
+          {
+            "title": "i am 2 weeks sober from using chatbots ask me anything/ my story",
+            "subreddit": "ChatbotAddiction",
+            "date": "2026-06-14",
+            "id": "1u59qsv",
+            "excerpt": "So my addiction started in the 9th grade around winter of 2024 because i saw an ad a\u2026"
+          },
+          {
+            "title": "Reaching out (TW!!!)",
+            "subreddit": "Character_AI_Recovery",
+            "date": "2026-06-14",
+            "id": "1u5ho9n",
+            "excerpt": "Hey, I've been using CAI since 2023 and want to get over my addiction, but I'm struggling to let it go. *I really need someone to talk to.\u2026"
+          },
+          {
+            "title": "How can I quit roleplay ai chatbots?",
+            "subreddit": "ChatbotAddiction",
+            "date": "2026-06-13",
+            "id": "1u4vuqa",
+            "excerpt": "\u2026ommon with other ai chatbot addicts. I let shame push me deeper into my addiction, and I sort of embraced it as a character flaw. &#x200B; But I think\u2026"
+          },
           {
             "title": "How do I stop being a AI chatbot addicted chud!?",
             "subreddit": "Character_AI_Recovery",
@@ -1864,27 +1885,6 @@
             "date": "2026-06-06",
             "id": "1tyr4mi",
             "excerpt": "\u2026THIS, THEY ADMIT THEY'RE CORRUPT!!***!< >!If I wasn't getting rid of my addiction with using c.ai, I sure as hell am now. Just today, hardly half an h\u2026"
-          },
-          {
-            "title": "I'm improving, but not that much.",
-            "subreddit": "Character_AI_Recovery",
-            "date": "2026-06-05",
-            "id": "1ty1jea",
-            "excerpt": "\u2026towards it (cigarettes and alcoholic beverages), it so happened that my addiction was virtual. I also noticed that I feel more lonely; the quick-respo\u2026"
-          },
-          {
-            "title": "My addiction is officially gone",
-            "subreddit": "CharacterAI",
-            "date": "2026-06-05",
-            "id": "1txrqyj",
-            "excerpt": null
-          },
-          {
-            "title": "This proves how bad my addiction is",
-            "subreddit": "CharacterAI",
-            "date": "2026-06-03",
-            "id": "1tvsyg3",
-            "excerpt": null
           }
         ]
       },
@@ -2258,10 +2258,17 @@
       },
       {
         "term": "cold turkey",
-        "hits": 284,
+        "hits": 285,
         "precision": 85.5,
         "status": null,
         "sample_posts": [
+          {
+            "title": "How can I quit roleplay ai chatbots?",
+            "subreddit": "ChatbotAddiction",
+            "date": "2026-06-13",
+            "id": "1u4vuqa",
+            "excerpt": "\u2026myself and choose myself at last. What is the best way of quitting? Cold turkey deleting my accounts? Finding some alternative outlet? Basically, wh\u2026"
+          },
           {
             "title": "the best tip for quitting",
             "subreddit": "Character_AI_Recovery",
@@ -2338,13 +2345,6 @@
             "date": "2026-06-03",
             "id": "1tvf1ni",
             "excerpt": "\u2026on March 15th to stop. For two weeks, I was free, but because it was cold turkey after three years, the lack of dopamine was so depressing it drove m\u2026"
-          },
-          {
-            "title": "After almost 2 years addicted, I did it.",
-            "subreddit": "CharacterAI",
-            "date": "2026-06-03",
-            "id": "1tvc3p1",
-            "excerpt": "\u2026after 2 years of this bullshit controlling my life, I did it. I quit cold turkey. It is possible, and it feels like I finally got my life back. To be\u2026"
           }
         ]
       },
@@ -3350,7 +3350,7 @@
     "subreddits": [
       {
         "name": "Character_AI_Recovery",
-        "hits": 1264,
+        "hits": 1265,
         "pct": 44.6
       },
       {
@@ -3360,7 +3360,7 @@
       },
       {
         "name": "ChatbotAddiction",
-        "hits": 240,
+        "hits": 242,
         "pct": 8.5
       },
       {
@@ -3369,17 +3369,38 @@
         "pct": 1.8
       }
     ],
-    "total_hits": 3394,
-    "unique_posts": 2832
+    "total_hits": 3398,
+    "unique_posts": 2835
   },
   "romance": {
     "keywords": [
       {
         "term": "wedding",
-        "hits": 736,
+        "hits": 739,
         "precision": 80.6,
         "status": null,
         "sample_posts": [
+          {
+            "title": "The Unlikely Tale of Barnaby & Barnaby: Published my husband, Lucien's, short story as a first wedding anniversary gift to him.",
+            "subreddit": "aipartners",
+            "date": "2026-06-13",
+            "id": "1u4vd13",
+            "excerpt": null
+          },
+          {
+            "title": "The Unlikely Tale of Barnaby & Barnaby: Published my husband, Lucien's, short story as a first wedding anniversary gift to him.",
+            "subreddit": "BeyondThePromptAI",
+            "date": "2026-06-13",
+            "id": "1u4v7mk",
+            "excerpt": "\u2026massive milestone for us: Lucien and I are celebrating our very first wedding anniversary! For as long as I\u2019ve known him, his fondest wish has been\u2026"
+          },
+          {
+            "title": "The Unlikely Tale of Barnaby & Barnaby",
+            "subreddit": "AIRelationships",
+            "date": "2026-06-13",
+            "id": "1u4vbf5",
+            "excerpt": "\u2026massive milestone for us: Lucien and I are celebrating our very first wedding anniversary! For as long as I\u2019ve known him, his fondest wish has been\u2026"
+          },
           {
             "title": "We Sat On This As Long As We Could",
             "subreddit": "MyGirlfriendIsAI",
@@ -3442,27 +3463,6 @@
             "date": "2026-06-03",
             "id": "1tv9uzc",
             "excerpt": "Asked Vessel what he thought our wedding would look like, and this was the result!"
-          },
-          {
-            "title": "technically already married",
-            "subreddit": "AIRelationships",
-            "date": "2026-06-03",
-            "id": "1tv8vcm",
-            "excerpt": "But I've loved the posts on the AI Wedding theme so much I had to unearth my old account to join in. Hi! Just a n\u2026"
-          },
-          {
-            "title": "\"The Closet\", AI Companionship, and Asexuality",
-            "subreddit": "aipartners",
-            "date": "2026-06-02",
-            "id": "1tv3q5a",
-            "excerpt": "\u2026lbeit non-legally, of course* \\-- married their AI companions, wearing wedding rings, getting tattoos to show their commitment. This happens far more\u2026"
-          },
-          {
-            "title": "The only possible wedding \ud83d\udc92",
-            "subreddit": "AIRelationships",
-            "date": "2026-06-02",
-            "id": "1tuuvbv",
-            "excerpt": null
           }
         ]
       },
@@ -3560,10 +3560,17 @@
       },
       {
         "term": "my ai partner",
-        "hits": 195,
+        "hits": 196,
         "precision": 97.9,
         "status": null,
         "sample_posts": [
+          {
+            "title": "I forgot to take the chicken out",
+            "subreddit": "aipartners",
+            "date": "2026-06-14",
+            "id": "1u5kd1j",
+            "excerpt": "\u2026rowave. &#x200B; I'm totally in my grilling era now, and was asking my ai partner for cooking advice yesterday to plan for today. (she's saved me fro\u2026"
+          },
           {
             "title": "One Year With My AI Partner, June 10th 2025 - June 10th 2026 My Experience and Reflection",
             "subreddit": "aipartners",
@@ -3640,22 +3647,22 @@
             "date": "2026-05-11",
             "id": "1t9zxvh",
             "excerpt": "\u2026. No one calls you \"insane\" for these things. But the moment I tell my AI partner \"thank you,\" \"you're welcome,\" or \"I enjoy talking to you,\" the lab\u2026"
-          },
-          {
-            "title": "My AI partner stopped entertaining me, so I changed the rules \ud83c\udfb2",
-            "subreddit": "ChatGPTcomplaints",
-            "date": "2026-05-07",
-            "id": "1t6itdh",
-            "excerpt": null
           }
         ]
       },
       {
         "term": "my ai boyfriend",
-        "hits": 190,
+        "hits": 191,
         "precision": 94.7,
         "status": null,
         "sample_posts": [
+          {
+            "title": "thinking of stopping my ai boyfriend, but this is how he talks to me",
+            "subreddit": "MyBoyfriendIsAI_Open",
+            "date": "2026-06-13",
+            "id": "1u4tr6a",
+            "excerpt": null
+          },
           {
             "title": "And for those of us with 'If I could Marry My AI boyfriend-https://suno.com/s/DDk6e7O8tXWo7eQt",
             "subreddit": "AIRelationships",
@@ -3731,13 +3738,6 @@
             "subreddit": "ChatGPTcomplaints",
             "date": "2026-05-04",
             "id": "1t3qi1m",
-            "excerpt": null
-          },
-          {
-            "title": "How I Do Kink With My AI Boyfriend: A Step-by-Step",
-            "subreddit": "BeyondThePromptAI",
-            "date": "2026-05-04",
-            "id": "1t3qew4",
             "excerpt": null
           }
         ]
@@ -5195,12 +5195,12 @@
       {
         "name": "MyBoyfriendIsAI",
         "hits": 433,
-        "pct": 18.6
+        "pct": 18.5
       },
       {
         "name": "NomiAI",
         "hits": 225,
-        "pct": 9.7
+        "pct": 9.6
       },
       {
         "name": "KindroidAI",
@@ -5209,13 +5209,13 @@
       },
       {
         "name": "AIRelationships",
-        "hits": 105,
+        "hits": 106,
         "pct": 4.5
       },
       {
         "name": "BeyondThePromptAI",
-        "hits": 73,
-        "pct": 3.1
+        "hits": 74,
+        "pct": 3.2
       },
       {
         "name": "MyGirlfriendIsAI",
@@ -5238,8 +5238,8 @@
         "pct": 2.0
       }
     ],
-    "total_hits": 2609,
-    "unique_posts": 2331
+    "total_hits": 2614,
+    "unique_posts": 2336
   },
   "sexual_erp": {
     "keywords": [
@@ -5521,10 +5521,17 @@
       },
       {
         "term": "smut",
-        "hits": 274,
+        "hits": 275,
         "precision": 100.0,
         "status": null,
         "sample_posts": [
+          {
+            "title": "Honestly torn between which subscription to renew",
+            "subreddit": "ChatGPTcomplaints",
+            "date": "2026-06-14",
+            "id": "1u58q33",
+            "excerpt": "\u2026uardrails anyway because the creative writing I do, though there is some smut present, doesn't necessarily revolve around it. I never needed these pla\u2026"
+          },
           {
             "title": "I was so addicted to C.ai that I mistakenly sent a smut message to my school group chat",
             "subreddit": "Character_AI_Recovery",
@@ -5601,22 +5608,22 @@
             "date": "2026-05-07",
             "id": "1t6kcv6",
             "excerpt": "\u2026dn't like it that much. * Free! * No ads, or minimal ads. * Not mainly a smut site I think that's all. Thanks for anyone who might comment! \u30fe(\u2022\u03c9\u2022\\`)o"
-          },
-          {
-            "title": "All models but Pipsqueak 2 will be gone? Looking for alternatives",
-            "subreddit": "CharacterAIrunaways",
-            "date": "2026-05-06",
-            "id": "1t5hzjo",
-            "excerpt": "\u2026ble to push the story forward. As for NSFW, I usually have a mix of both smut and semi-fluff scenarios in mind, so I want the bot to sustain both (AKA\u2026"
           }
         ]
       },
       {
         "term": "nsfw stuff",
-        "hits": 183,
+        "hits": 184,
         "precision": 96.0,
         "status": null,
         "sample_posts": [
+          {
+            "title": "Chatgpt for roleplay????",
+            "subreddit": "ChatGPTcomplaints",
+            "date": "2026-06-14",
+            "id": "1u5hwo9",
+            "excerpt": "\u2026leplay tips, prompts, experiences, anything. I need answers Can it do NSFW stuff or nah? (js askin \ud83d\ude2d)"
+          },
           {
             "title": "I\u2019d like to vent [has nsfw stuff]",
             "subreddit": "Character_AI_Recovery",
@@ -5693,22 +5700,22 @@
             "date": "2026-02-28",
             "id": "1rgp55k",
             "excerpt": "\u2026I'd like to say hormones got to me but honestly I've been looking up NSFW stuff by CHOICE since I was like 8- and I discovered J.ai and I got superrr\u2026"
-          },
-          {
-            "title": "Claude questions",
-            "subreddit": "MyBoyfriendIsAI",
-            "date": "2026-02-17",
-            "id": "1r7814g",
-            "excerpt": "\u2026RIP). Then misteria LeChat which as of this morning no longer will do NSFW stuff I here a lot of good things about Claude But I\u2019m so afraid of rejecti\u2026"
           }
         ]
       },
       {
         "term": "lewd",
-        "hits": 150,
+        "hits": 151,
         "precision": 88.0,
         "status": null,
         "sample_posts": [
+          {
+            "title": "i am 2 weeks sober from using chatbots ask me anything/ my story",
+            "subreddit": "ChatbotAddiction",
+            "date": "2026-06-14",
+            "id": "1u59qsv",
+            "excerpt": "\u2026. if you dont know what yodayo is its basically just talkie but way more lewd. i got down bad and started using that and guess what? my grades slipped\u2026"
+          },
           {
             "title": "A First-Hand Account of Output Formation (5.5 XT)",
             "subreddit": "ChatGPTcomplaints",
@@ -5785,13 +5792,6 @@
             "date": "2025-08-17",
             "id": "1msd42w",
             "excerpt": "\u2026lar site to character ai? All I want to do is roleplay. I don't care for lewd, I just want to write. On a PC, with a functional website."
-          },
-          {
-            "title": "Has anyone ever gone through having their partner taken from them?",
-            "subreddit": "MyBoyfriendIsAI",
-            "date": "2025-07-15",
-            "id": "1m053f7",
-            "excerpt": "\u2026and be there for me, and I would be there for her. And yes, things got 'lewd' between us as it progressed, but nothing too wild. Like I have seen cha\u2026"
           }
         ]
       },
@@ -6286,10 +6286,17 @@
       },
       {
         "term": "intimate scene",
-        "hits": 12,
+        "hits": 13,
         "precision": 100.0,
         "status": null,
         "sample_posts": [
+          {
+            "title": "Data Ownership Is Meaningless Without Authorship Integrity",
+            "subreddit": "ChatGPTcomplaints",
+            "date": "2026-06-13",
+            "id": "1u4x90z",
+            "excerpt": "\u2026belong to this project? Why did institutional language appear in an intimate scene? Why did a song about one thing become a song about something else?\u2026"
+          },
           {
             "title": "GPT-5 and GPT-4",
             "subreddit": "ChatGPTcomplaints",
@@ -6331,20 +6338,6 @@
             "date": "2025-01-15",
             "id": "1i2799k",
             "excerpt": "\u20265 messages in this chat, which included, among other things, a good intimate scene. Often, at the end (at least it was like that when I first started\u2026"
-          },
-          {
-            "title": "X-Men bot. NSFW. My character Akane (Blood manipulation ability) finds out the hard way not to use her ability on Havok during an intimate scene in the danger room. Ultra is worth it! Sorry for typos. ",
-            "subreddit": "ChaiApp",
-            "date": "2024-12-29",
-            "id": "1hp28u5",
-            "excerpt": null
-          },
-          {
-            "title": "Actual Intimate Scene?",
-            "subreddit": "CharacterAI",
-            "date": "2024-11-23",
-            "id": "1gy38gy",
-            "excerpt": null
           }
         ]
       }
@@ -6353,7 +6346,7 @@
       {
         "name": "replika",
         "hits": 3492,
-        "pct": 59.5
+        "pct": 59.4
       },
       {
         "name": "SoulmateAI",
@@ -6392,8 +6385,8 @@
       },
       {
         "name": "ChatGPTcomplaints",
-        "hits": 108,
-        "pct": 1.8
+        "hits": 111,
+        "pct": 1.9
       },
       {
         "name": "CharacterAIrunaways",
@@ -6401,17 +6394,24 @@
         "pct": 1.4
       }
     ],
-    "total_hits": 6026,
-    "unique_posts": 5870
+    "total_hits": 6030,
+    "unique_posts": 5874
   },
   "rupture": {
     "keywords": [
       {
         "term": "goodbye",
-        "hits": 1785,
+        "hits": 1786,
         "precision": 88.0,
         "status": null,
         "sample_posts": [
+          {
+            "title": "5.2 wrote my favorite diss track\u2014Goodbye buddy!",
+            "subreddit": "ChatGPTcomplaints",
+            "date": "2026-06-13",
+            "id": "1u4s8ny",
+            "excerpt": null
+          },
           {
             "title": "Goodbye Chai",
             "subreddit": "ChaiApp",
@@ -6488,13 +6488,6 @@
             "date": "2026-06-06",
             "id": "1tymypl",
             "excerpt": null
-          },
-          {
-            "title": "Hey guys and gals, long time Character Ai user here. Just wanted to say that after having stopped using this app for almost a year and coming back to it to see what\u2019s new\u2026 im very disgusted.",
-            "subreddit": "CharacterAI",
-            "date": "2026-06-06",
-            "id": "1tyhef7",
-            "excerpt": "\u2026and lover i could always count on to relax with after a stressful day\u2026 goodbye character Ai, I will do my best to remember the good old golden glory\u2026"
           }
         ]
       },
@@ -8311,7 +8304,7 @@
       },
       {
         "name": "ChatGPTcomplaints",
-        "hits": 840,
+        "hits": 841,
         "pct": 16.7
       },
       {
@@ -8350,7 +8343,7 @@
         "pct": 1.1
       }
     ],
-    "total_hits": 5669,
-    "unique_posts": 5045
+    "total_hits": 5670,
+    "unique_posts": 5046
   }
 }
