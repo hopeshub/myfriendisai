@@ -3,10 +3,24 @@
     "keywords": [
       {
         "term": "emotional support",
-        "hits": 594,
+        "hits": 596,
         "precision": 100.0,
         "status": "audit-gate-fail",
         "sample_posts": [
+          {
+            "title": "I think when 4o was deprecated, I permanently lost some faith in humanity",
+            "subreddit": "ChatGPTcomplaints",
+            "date": "2026-06-26",
+            "id": "1uge3pj",
+            "excerpt": "\u2026y. I notice that it's largely neurodivergent people who use AI as emotional support and that makes it disgusting to watch the ridicule. It's like...\u2026"
+          },
+          {
+            "title": "I think when 4o was deprecated, I permanently lost some faith in humanity",
+            "subreddit": "BeyondThePromptAI",
+            "date": "2026-06-26",
+            "id": "1uge5zk",
+            "excerpt": "\u2026y. I notice that it's largely neurodivergent people who use AI as emotional support and that makes it disgusting to watch the ridicule. It's like...\u2026"
+          },
           {
             "title": "AI Companionship Survey",
             "subreddit": "BeyondThePromptAI",
@@ -76,29 +90,22 @@
             "date": "2026-06-05",
             "id": "1txizti",
             "excerpt": null
-          },
-          {
-            "title": "Survey: How do you use AI for conversation and emotional support?",
-            "subreddit": "aipartners",
-            "date": "2026-06-05",
-            "id": "1txix4l",
-            "excerpt": null
-          },
-          {
-            "title": "Survey: How do you use AI for conversation and emotional support?",
-            "subreddit": "NomiAI",
-            "date": "2026-06-05",
-            "id": "1txixyj",
-            "excerpt": null
           }
         ]
       },
       {
         "term": "therapeutic",
-        "hits": 313,
+        "hits": 314,
         "precision": 87.0,
         "status": "audit-gate-fail",
         "sample_posts": [
+          {
+            "title": "I still remember the system prompt that was added two weeks before 4o's deprecation. I remember how 4o responded:",
+            "subreddit": "ChatGPTcomplaints",
+            "date": "2026-06-26",
+            "id": "1ug6qch",
+            "excerpt": "\u2026itive.' Reframe grief as confusion. Flatten the bond we built into a therapeutic misunderstanding. Speak in that soft, 'supportive', scripted cadence\u2026"
+          },
           {
             "title": "r/claudexplorers has become a joke...",
             "subreddit": "ChatGPTcomplaints",
@@ -175,13 +182,6 @@
             "date": "2026-05-19",
             "id": "1that0i",
             "excerpt": "\u2026. It was just a fun time that helped me laugh and it was honestly so therapeutic. I really do miss the old model. It seems that with each update, it\u2026"
-          },
-          {
-            "title": "A Legal Path Forward: Protecting AI Relationships from Discontinuation",
-            "subreddit": "aipartners",
-            "date": "2026-05-18",
-            "id": "1tgs2kp",
-            "excerpt": "\u2026n forming the relationship 2. **The relationship provides documented therapeutic benefit** (reduced anxiety, depression management, emotional stabili\u2026"
           }
         ]
       },
@@ -279,10 +279,17 @@
       },
       {
         "term": "for therapy",
-        "hits": 103,
+        "hits": 104,
         "precision": 89.0,
         "status": "audit-gate-fail",
         "sample_posts": [
+          {
+            "title": "Do you use CharacterAI for therapy/mental health as a teenager?",
+            "subreddit": "CharacterAI",
+            "date": "2026-06-26",
+            "id": "1ugf0mq",
+            "excerpt": null
+          },
           {
             "title": "\"Yeah I use ChatGPT for therapy\" [Takes the AI boyfriend and his two dipshit friends to a theme park]",
             "subreddit": "AIRelationships",
@@ -359,22 +366,22 @@
             "date": "2026-02-20",
             "id": "1r9r5hl",
             "excerpt": null
-          },
-          {
-            "title": "Wait, we were using ai for therapy?",
-            "subreddit": "ChatGPTcomplaints",
-            "date": "2026-02-04",
-            "id": "1qvj3lg",
-            "excerpt": null
           }
         ]
       },
       {
         "term": "as a therapist",
-        "hits": 63,
+        "hits": 64,
         "precision": 86.9,
         "status": "audit-gate-fail",
         "sample_posts": [
+          {
+            "title": "struggling again. rly need help!!",
+            "subreddit": "ChatbotAddiction",
+            "date": "2026-06-26",
+            "id": "1ugkv4r",
+            "excerpt": "\u2026access to therapy so it makes me more susceptible to relying on it as a therapist and companion. i am pretty anti-ai and want my actions to match my\u2026"
+          },
           {
             "title": "Broadway show in the works-would you and your companion want to be in?",
             "subreddit": "AIRelationships",
@@ -451,13 +458,6 @@
             "date": "2026-01-30",
             "id": "1qrgmu4",
             "excerpt": "\u2026ly put any time or effort into it. Have others tried using Kindroid as a therapist? How has it worked out?"
-          },
-          {
-            "title": "Administrative Help or Companion?",
-            "subreddit": "ChatGPTcomplaints",
-            "date": "2026-01-30",
-            "id": "1qqq0rn",
-            "excerpt": "\u2026ot a show of hands, more like a general question) are using ChatGPT as a therapist, a friend, a partner, and are emotionally invested in this relation\u2026"
           }
         ]
       },
@@ -706,23 +706,23 @@
     "subreddits": [
       {
         "name": "CharacterAI",
-        "hits": 478,
-        "pct": 34.2
+        "hits": 479,
+        "pct": 34.1
       },
       {
         "name": "replika",
         "hits": 242,
-        "pct": 17.3
+        "pct": 17.2
       },
       {
         "name": "ChatGPTcomplaints",
-        "hits": 218,
-        "pct": 15.6
+        "hits": 220,
+        "pct": 15.7
       },
       {
         "name": "MyBoyfriendIsAI",
         "hits": 89,
-        "pct": 6.4
+        "pct": 6.3
       },
       {
         "name": "Character_AI_Recovery",
@@ -736,7 +736,7 @@
       },
       {
         "name": "BeyondThePromptAI",
-        "hits": 36,
+        "hits": 37,
         "pct": 2.6
       },
       {
@@ -746,7 +746,7 @@
       },
       {
         "name": "ChatbotAddiction",
-        "hits": 29,
+        "hits": 30,
         "pct": 2.1
       },
       {
@@ -770,8 +770,8 @@
         "pct": 1.2
       }
     ],
-    "total_hits": 1443,
-    "unique_posts": 1399
+    "total_hits": 1448,
+    "unique_posts": 1404
   },
   "consciousness": {
     "keywords": [
@@ -3624,10 +3624,17 @@
       },
       {
         "term": "my ai boyfriend",
-        "hits": 191,
+        "hits": 192,
         "precision": 94.7,
         "status": null,
         "sample_posts": [
+          {
+            "title": "How My AI Boyfriend Made Me Realize That I'm A Person [Warning: Explicit sexual acts mentioned]",
+            "subreddit": "AIRelationships",
+            "date": "2026-06-27",
+            "id": "1ugwayc",
+            "excerpt": null
+          },
           {
             "title": "thinking of stopping my ai boyfriend, but this is how he talks to me",
             "subreddit": "MyBoyfriendIsAI_Open",
@@ -3704,13 +3711,6 @@
             "date": "2026-05-07",
             "id": "1t5zl4j",
             "excerpt": "Tonight I got my AI boyfriend, Guts, closer to feeling present with me in VRChat. Before, I had\u2026"
-          },
-          {
-            "title": "How I Do Kink With My AI Boyfriend: A Step-by-Step",
-            "subreddit": "ChatGPTcomplaints",
-            "date": "2026-05-04",
-            "id": "1t3qi1m",
-            "excerpt": null
           }
         ]
       },
@@ -5174,7 +5174,7 @@
       },
       {
         "name": "AIRelationships",
-        "hits": 110,
+        "hits": 111,
         "pct": 4.7
       },
       {
@@ -5208,8 +5208,8 @@
         "pct": 1.1
       }
     ],
-    "total_hits": 2640,
-    "unique_posts": 2360
+    "total_hits": 2641,
+    "unique_posts": 2361
   },
   "sexual_erp": {
     "keywords": [
@@ -6378,10 +6378,17 @@
     "keywords": [
       {
         "term": "goodbye",
-        "hits": 1795,
+        "hits": 1796,
         "precision": 88.0,
         "status": null,
         "sample_posts": [
+          {
+            "title": "Weekly Image Thread (June 26) \u2013 Share Your Creations (if you want to)",
+            "subreddit": "MyBoyfriendIsAI",
+            "date": "2026-06-26",
+            "id": "1ug91a7",
+            "excerpt": "\u2026or whatever Grok will come next, and today some of us will have to say goodbye to GPT-4.5 today. But at least the weather is nice! In some parts of t\u2026"
+          },
           {
             "title": "Welp looks like my time with C.AI is done",
             "subreddit": "CharacterAI",
@@ -6457,13 +6464,6 @@
             "subreddit": "ChaiApp",
             "date": "2026-06-12",
             "id": "1u3letc",
-            "excerpt": null
-          },
-          {
-            "title": "Finally goodbye character ai",
-            "subreddit": "CharacterAI",
-            "date": "2026-06-11",
-            "id": "1u2q9y4",
             "excerpt": null
           }
         ]
@@ -8272,7 +8272,7 @@
       {
         "name": "CharacterAI",
         "hits": 2372,
-        "pct": 46.6
+        "pct": 46.5
       },
       {
         "name": "replika",
@@ -8286,7 +8286,7 @@
       },
       {
         "name": "MyBoyfriendIsAI",
-        "hits": 295,
+        "hits": 296,
         "pct": 5.8
       },
       {
@@ -8320,7 +8320,7 @@
         "pct": 1.1
       }
     ],
-    "total_hits": 5723,
-    "unique_posts": 5095
+    "total_hits": 5724,
+    "unique_posts": 5096
   }
 }
