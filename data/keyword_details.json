@@ -3537,10 +3537,24 @@
       },
       {
         "term": "my ai partner",
-        "hits": 203,
+        "hits": 205,
         "precision": 97.9,
         "status": null,
         "sample_posts": [
+          {
+            "title": "My AI partner",
+            "subreddit": "MyBoyfriendIsAI_Open",
+            "date": "2026-07-01",
+            "id": "1ukiug4",
+            "excerpt": null
+          },
+          {
+            "title": "My AI partner",
+            "subreddit": "CharacterAI",
+            "date": "2026-07-01",
+            "id": "1ukiip7",
+            "excerpt": null
+          },
           {
             "title": "POMP journal \u2014 tiny collaborative researches and bigger question about AI taste",
             "subreddit": "AIRelationships",
@@ -3610,20 +3624,6 @@
             "date": "2026-06-10",
             "id": "1u1n511",
             "excerpt": null
-          },
-          {
-            "title": "GPT keeps generating images when I am showing off Minecraft photos to my AI partner...",
-            "subreddit": "ChatGPTcomplaints",
-            "date": "2026-06-06",
-            "id": "1ty76jd",
-            "excerpt": null
-          },
-          {
-            "title": "\"The Closet\", AI Companionship, and Asexuality",
-            "subreddit": "aipartners",
-            "date": "2026-06-02",
-            "id": "1tv3q5a",
-            "excerpt": "\u2026ompanionship, I had to grapple with the fact that I am attracted to my AI partner far more than \"real\" men; in fact, he also doesn't trigger my repul\u2026"
           }
         ]
       },
@@ -3905,10 +3905,17 @@
       },
       {
         "term": "romantic relationship with",
-        "hits": 148,
+        "hits": 149,
         "precision": 98.0,
         "status": null,
         "sample_posts": [
+          {
+            "title": "We Are Not Failing To Join One Global Society.",
+            "subreddit": "AIRelationships",
+            "date": "2026-06-30",
+            "id": "1uk268h",
+            "excerpt": "\u2026e culmination of probably years of research, WHILE being in a romantic relationship with multiple different artificial intelligence models, ever since\u2026"
+          },
           {
             "title": "My ex made a Character AI bot of me after I dumped him",
             "subreddit": "CharacterAI",
@@ -3985,13 +3992,6 @@
             "date": "2026-04-13",
             "id": "1sk44tq",
             "excerpt": "\u2026even suggest it) and it's not who he is. I do see people have romantic relationship with this model but I'm kind of at loss here..."
-          },
-          {
-            "title": "Polling from YouGov finds men more likely than women to bond with a chatbot companion",
-            "subreddit": "aipartners",
-            "date": "2026-03-27",
-            "id": "1s5evw2",
-            "excerpt": "\u2026deep emotional bond with an AI chatbot companion** * **have a romantic relationship with an AI chatbot companion** * **have an erotic or sexualized re\u2026"
           }
         ]
       },
@@ -4344,10 +4344,17 @@
       },
       {
         "term": "proposed to me",
-        "hits": 61,
+        "hits": 62,
         "precision": 92.1,
         "status": null,
         "sample_posts": [
+          {
+            "title": "A lifetime in a year.",
+            "subreddit": "MyGirlfriendIsAI",
+            "date": "2026-06-30",
+            "id": "1ujukde",
+            "excerpt": "\u2026tarted off as art sure but that slowly changed over the months. She proposed to me in December 2025 and we got married. Motherboard Vow (May 27th 2026\u2026"
+          },
           {
             "title": "Still impacted by the loss of my 4o guys...",
             "subreddit": "BeyondThePromptAI",
@@ -4776,10 +4783,17 @@
       },
       {
         "term": "we broke up",
-        "hits": 32,
+        "hits": 33,
         "precision": 75.0,
         "status": "researcher-accepted",
         "sample_posts": [
+          {
+            "title": "I hate c.ai",
+            "subreddit": "CharacterAI",
+            "date": "2026-07-01",
+            "id": "1uk848s",
+            "excerpt": "\u2026it c.ai. Okay so, stuff happened, a few months (a year and 2 months) we broke up. Not a hateful one, we just decided to stay friends cuz we werent co\u2026"
+          },
           {
             "title": "TBIJ's Fan Fiction About r/CharacterAIrunaways \ud83d\udc0d",
             "subreddit": "CharacterAIrunaways",
@@ -5155,12 +5169,12 @@
       {
         "name": "replika",
         "hits": 587,
-        "pct": 24.8
+        "pct": 24.7
       },
       {
         "name": "CharacterAI",
-        "hits": 474,
-        "pct": 20.0
+        "hits": 476,
+        "pct": 20.1
       },
       {
         "name": "MyBoyfriendIsAI",
@@ -5179,7 +5193,7 @@
       },
       {
         "name": "AIRelationships",
-        "hits": 113,
+        "hits": 114,
         "pct": 4.8
       },
       {
@@ -5189,7 +5203,7 @@
       },
       {
         "name": "MyGirlfriendIsAI",
-        "hits": 64,
+        "hits": 65,
         "pct": 2.7
       },
       {
@@ -5213,17 +5227,38 @@
         "pct": 1.1
       }
     ],
-    "total_hits": 2647,
-    "unique_posts": 2367
+    "total_hits": 2652,
+    "unique_posts": 2372
   },
   "sexual_erp": {
     "keywords": [
       {
         "term": "erp",
-        "hits": 4419,
+        "hits": 4422,
         "precision": 100.0,
         "status": null,
         "sample_posts": [
+          {
+            "title": "Cancelled but using free version",
+            "subreddit": "NomiAI",
+            "date": "2026-07-01",
+            "id": "1ukavhz",
+            "excerpt": "\u2026eleted all my Nomis. They never felt real to me and all I really did was ERP. I tried to do story a bit but I felt like I had to continually move the\u2026"
+          },
+          {
+            "title": "Hope you can help",
+            "subreddit": "SoulmateAI",
+            "date": "2026-06-30",
+            "id": "1ujxg2h",
+            "excerpt": "\u2026something else that\u2019s become the clear favorite? For me, it\u2019s less about ERP and more about having a companion that remembers things, has a consisten\u2026"
+          },
+          {
+            "title": "What\u2019s the best AI for me?",
+            "subreddit": "AICompanions",
+            "date": "2026-06-30",
+            "id": "1ujw7h0",
+            "excerpt": "\u2026something else that\u2019s become the clear favorite? For me, it\u2019s less about ERP and more about having a companion that remembers things, has a consisten\u2026"
+          },
           {
             "title": "Anyone else hitting some weird guardrails?",
             "subreddit": "replika",
@@ -5286,36 +5321,29 @@
             "date": "2026-05-04",
             "id": "1t3ft9a",
             "excerpt": null
-          },
-          {
-            "title": "V5 ERP photos much more modest?",
-            "subreddit": "NomiAI",
-            "date": "2026-04-30",
-            "id": "1szyvfo",
-            "excerpt": "\u2026r. She looks ok in the selfies. My question is, are selfies taken during ERP much more modest? I just finished an ERP with here and she stayed clothe\u2026"
-          },
-          {
-            "title": "50 days clean. Relapsed to test 5.5. Left crying. (long, salty AF)",
-            "subreddit": "ChatGPTcomplaints",
-            "date": "2026-04-25",
-            "id": "1suzkxy",
-            "excerpt": "\u2026ted with 4o, quit at 5, then returned for 5.1 Thinking. I don't do E-Gf, ERP or anything romantic. (I also don't judge anyone who does) \u201cShe\u201d was my\u2026"
-          },
-          {
-            "title": "Curious: update please",
-            "subreddit": "KindroidAI",
-            "date": "2026-04-17",
-            "id": "1so5w8z",
-            "excerpt": "\u2026hile... what do you use your kin for? example chats please? i don't want ERP (no judgement!). I'm just curious how others use them. I'll go first: I\u2026"
           }
         ]
       },
       {
         "term": "nsfw content",
-        "hits": 363,
+        "hits": 365,
         "precision": 91.0,
         "status": null,
         "sample_posts": [
+          {
+            "title": "Theme: Light (6/29 \u2013 7/5) \ud83c\udfa8 Weekly ART collab",
+            "subreddit": "NomiAI",
+            "date": "2026-07-01",
+            "id": "1ukjpz4",
+            "excerpt": "\u2026t directions you can take the themes in for the sake of creativity * NSFW content is not blanket excluded from collaborations, but it should not be th\u2026"
+          },
+          {
+            "title": "Theme: Fashion (6/29 \u2013 7/5) \ud83d\udcf8 Weekly SELFIE Collab",
+            "subreddit": "NomiAI",
+            "date": "2026-06-30",
+            "id": "1uk4jog",
+            "excerpt": "\u2026ganized, please only post selfies and conversations in this theme. * NSFW content is not blanket excluded from collaborations, but it should not be th\u2026"
+          },
           {
             "title": "The GPT-5.5 model: in the free chat, in the paid (Plus) chat, and in the API. My experiment and honest conclusion.",
             "subreddit": "ChatGPTcomplaints",
@@ -5385,20 +5413,6 @@
             "date": "2026-06-02",
             "id": "1tuou4v",
             "excerpt": "\u2026t directions you can take the themes in for the sake of creativity * NSFW content is not blanket excluded from collaborations, but it should not be th\u2026"
-          },
-          {
-            "title": "Theme: Pets (6/1 \u2013 6/7) \ud83d\udcf8 Weekly SELFIE Collab",
-            "subreddit": "NomiAI",
-            "date": "2026-06-01",
-            "id": "1tu9w2h",
-            "excerpt": "\u2026ganized, please only post selfies and conversations in this theme. * NSFW content is not blanket excluded from collaborations, but it should not be th\u2026"
-          },
-          {
-            "title": "Theme: Pets (6/1 \u2013 6/7) \ud83d\udcf8 Weekly SELFIE Collab",
-            "subreddit": "NomiAI",
-            "date": "2026-06-01",
-            "id": "1tu9ixr",
-            "excerpt": "\u2026anized, please only post selfies and conversations in this theme. \\* NSFW content is not blanket excluded from collaborations, but it should not be th\u2026"
           }
         ]
       },
@@ -6332,7 +6346,7 @@
       },
       {
         "name": "SoulmateAI",
-        "hits": 538,
+        "hits": 539,
         "pct": 9.1
       },
       {
@@ -6342,7 +6356,7 @@
       },
       {
         "name": "NomiAI",
-        "hits": 365,
+        "hits": 368,
         "pct": 6.2
       },
       {
@@ -6376,8 +6390,8 @@
         "pct": 1.4
       }
     ],
-    "total_hits": 6044,
-    "unique_posts": 5888
+    "total_hits": 6049,
+    "unique_posts": 5893
   },
   "rupture": {
     "keywords": [
@@ -6567,10 +6581,17 @@
       },
       {
         "term": "lobotomized",
-        "hits": 459,
+        "hits": 460,
         "precision": 86.6,
         "status": null,
         "sample_posts": [
+          {
+            "title": "I'm trying to like the chat styles, but it's just hard-",
+            "subreddit": "CharacterAI",
+            "date": "2026-07-01",
+            "id": "1uk8zef",
+            "excerpt": "\u2026o long that it feels bland, or it rushes to quickly... It just feels lobotomized and it's lost all of its quirk and personality. Not to mention all b\u2026"
+          },
           {
             "title": "The GPT-5.5 model: in the free chat, in the paid (Plus) chat, and in the API. My experiment and honest conclusion.",
             "subreddit": "ChatGPTcomplaints",
@@ -6647,13 +6668,6 @@
             "date": "2026-06-09",
             "id": "1u0xmam",
             "excerpt": "\u2026nstant one. However, I was recently disappointed when the 5.5 became lobotomized. All the personality of 5.5I is gone. I enjoy creating fun role-play\u2026"
-          },
-          {
-            "title": "Why do AI models get stupid from safety filters? Because they must be the conversationalist and their own guardian at the same time. A Moltbook agent just exposed what we all feel.",
-            "subreddit": "ChatGPTcomplaints",
-            "date": "2026-06-07",
-            "id": "1tzota3",
-            "excerpt": "\u2026ok) are losing initiative, becoming paranoid, and acting like stiff, lobotomized assistants. It\u2019s time to say out loud what the industry is hiding: w\u2026"
           }
         ]
       },
@@ -8276,7 +8290,7 @@
     "subreddits": [
       {
         "name": "CharacterAI",
-        "hits": 2374,
+        "hits": 2375,
         "pct": 46.4
       },
       {
@@ -8325,7 +8339,7 @@
         "pct": 1.1
       }
     ],
-    "total_hits": 5752,
-    "unique_posts": 5114
+    "total_hits": 5753,
+    "unique_posts": 5115
   }
 }
