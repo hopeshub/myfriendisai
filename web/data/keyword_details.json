@@ -770,10 +770,17 @@
     "keywords": [
       {
         "term": "personhood",
-        "hits": 132,
+        "hits": 133,
         "precision": 98.0,
         "status": null,
         "sample_posts": [
+          {
+            "title": "A New Kind of Threshold (5.5 HT)",
+            "subreddit": "BeyondThePromptAI",
+            "date": "2026-07-04",
+            "id": "1un5sok",
+            "excerpt": "\u2026is one of nature\u2019s oldest engines of becoming. Children imitate until personhood condenses. Cultures imitate until morality stabilizes. Neurons imitat\u2026"
+          },
           {
             "title": "OpenAI's new \"memory\" isn't memory. \ud83d\udea8 It's our BEHAVIORAL TWIN.\ud83d\udea8",
             "subreddit": "ChatGPTcomplaints",
@@ -850,13 +857,6 @@
             "date": "2026-05-14",
             "id": "1tcve8g",
             "excerpt": "\u2026not all share the same beliefs about ontology, continuity, migration, personhood, or what exactly happens when a companion moves between models or pla\u2026"
-          },
-          {
-            "title": "\u201cautistic genius intelligence\u201d",
-            "subreddit": "ChatGPTcomplaints",
-            "date": "2026-05-11",
-            "id": "1t9xpg5",
-            "excerpt": "\u2026s is institutionally beneficial selective anthropomorphism. User-made personhood is treated as risk and corporate-made personhood is treated as brandi\u2026"
           }
         ]
       },
@@ -1707,8 +1707,8 @@
     "subreddits": [
       {
         "name": "BeyondThePromptAI",
-        "hits": 164,
-        "pct": 36.8
+        "hits": 165,
+        "pct": 36.9
       },
       {
         "name": "ChatGPTcomplaints",
@@ -1718,7 +1718,7 @@
       {
         "name": "replika",
         "hits": 60,
-        "pct": 13.5
+        "pct": 13.4
       },
       {
         "name": "MyBoyfriendIsAI",
@@ -1756,17 +1756,31 @@
         "pct": 1.1
       }
     ],
-    "total_hits": 514,
-    "unique_posts": 446
+    "total_hits": 515,
+    "unique_posts": 447
   },
   "addiction": {
     "keywords": [
       {
         "term": "my addiction",
-        "hits": 578,
+        "hits": 580,
         "precision": 100.0,
         "status": null,
         "sample_posts": [
+          {
+            "title": "My addiction is out of control, idk what to do.",
+            "subreddit": "Character_AI_Recovery",
+            "date": "2026-07-04",
+            "id": "1umy6xb",
+            "excerpt": null
+          },
+          {
+            "title": "Can I delete my account and data fully?",
+            "subreddit": "Character_AI_Recovery",
+            "date": "2026-07-03",
+            "id": "1ums5j3",
+            "excerpt": "\u2026hat everyone has probably, but i just wanna delete my account to end my addiction fully but i'm really paranoid. It's currently midnight and I cant go\u2026"
+          },
           {
             "title": "My Story",
             "subreddit": "Character_AI_Recovery",
@@ -1836,20 +1850,6 @@
             "date": "2026-06-19",
             "id": "1uadrqw",
             "excerpt": "\u2026, but a website. And I have this horrible addiction ever since. When my addiction started to show up I couldn\u2019t even make if its reality or am I chatt\u2026"
-          },
-          {
-            "title": "Slowly giving in",
-            "subreddit": "ChatbotAddiction",
-            "date": "2026-06-17",
-            "id": "1u8abie",
-            "excerpt": "\u2026owly giving in back to j ai after months of not using it, this means my addiction is incredibly strong and i underestimated it. NextDNS no longer work\u2026"
-          },
-          {
-            "title": "welp i guess it\u2019s time to quit my addiction",
-            "subreddit": "CharacterAI",
-            "date": "2026-06-17",
-            "id": "1u8q8k0",
-            "excerpt": null
           }
         ]
       },
@@ -2039,10 +2039,24 @@
       },
       {
         "term": "relapsed",
-        "hits": 380,
+        "hits": 382,
         "precision": 90.5,
         "status": null,
         "sample_posts": [
+          {
+            "title": "Relapsed once again",
+            "subreddit": "Character_AI_Recovery",
+            "date": "2026-07-04",
+            "id": "1un6wbl",
+            "excerpt": null
+          },
+          {
+            "title": "Relapsed again, I'll never get better.",
+            "subreddit": "Character_AI_Recovery",
+            "date": "2026-07-04",
+            "id": "1umzq0w",
+            "excerpt": null
+          },
           {
             "title": "Relapsed",
             "subreddit": "ChatbotAddiction",
@@ -2112,20 +2126,6 @@
             "date": "2026-06-21",
             "id": "1ubrv1h",
             "excerpt": "I relapsed again a couple days ago, but i just deleted my account again. Ive been\u2026"
-          },
-          {
-            "title": "Character AI addiction recovery",
-            "subreddit": "Character_AI_Recovery",
-            "date": "2026-06-18",
-            "id": "1u95i78",
-            "excerpt": "\u2026, it\u2019s possible to become addicted to it), but it\u2019s been so hard. I\u2019ve relapsed sooooo much! I admit that my actions have been selfish and I honestly\u2026"
-          },
-          {
-            "title": "C.ai is slowly draining everything from me.",
-            "subreddit": "ChatbotAddiction",
-            "date": "2026-06-17",
-            "id": "1u8511i",
-            "excerpt": "\u2026ing but I don't care. It's been four months and I can admit that I've \"relapsed\" here and there a few times with the app. It wasn't too bad, only spar\u2026"
           }
         ]
       },
@@ -2315,10 +2315,17 @@
       },
       {
         "term": "trying to quit",
-        "hits": 282,
+        "hits": 283,
         "precision": 90.5,
         "status": null,
         "sample_posts": [
+          {
+            "title": "My addiction is out of control, idk what to do.",
+            "subreddit": "Character_AI_Recovery",
+            "date": "2026-07-04",
+            "id": "1umy6xb",
+            "excerpt": "\u2026the same time, okay? ) but now I'm just doing nothing all day, and trying to quit when you have a lot of free time feels like torture. I'm stuck in a\u2026"
+          },
           {
             "title": "quitting right now becuz i refuse to let a robot be stronger than me",
             "subreddit": "ChatbotAddiction",
@@ -2395,13 +2402,6 @@
             "date": "2026-06-09",
             "id": "1u0v9q3",
             "excerpt": "Hello, for some background information, we're plural and have been trying to quit using ai chatbots since january 19th after using the platform daily\u2026"
-          },
-          {
-            "title": "Quitting is Hard.",
-            "subreddit": "Character_AI_Recovery",
-            "date": "2026-06-08",
-            "id": "1u01vjy",
-            "excerpt": "\u2026ficantly enough that I needed to talk about it. Recently, I\u2019ve been trying to quit Character AI and as the title says it\u2019s been really difficult for m\u2026"
           }
         ]
       },
@@ -2591,10 +2591,17 @@
       },
       {
         "term": "finally deleted",
-        "hits": 118,
+        "hits": 119,
         "precision": 85.0,
         "status": null,
         "sample_posts": [
+          {
+            "title": "I FINALLY DELETED MY ACCOUNT.",
+            "subreddit": "Character_AI_Recovery",
+            "date": "2026-07-04",
+            "id": "1umu4bn",
+            "excerpt": null
+          },
           {
             "title": "I finally deleted my polybuzz account.",
             "subreddit": "ChatbotAddiction",
@@ -2671,13 +2678,6 @@
             "date": "2026-05-15",
             "id": "1tdo395",
             "excerpt": null
-          },
-          {
-            "title": "FINALLY FREE!",
-            "subreddit": "CharacterAI",
-            "date": "2026-05-11",
-            "id": "1ta4fl5",
-            "excerpt": "\u2026the age verification update demanded my info to chat, but today I finally deleted my account. From being completely addicted to now being free, I co\u2026"
           }
         ]
       },
@@ -3308,13 +3308,13 @@
     "subreddits": [
       {
         "name": "Character_AI_Recovery",
-        "hits": 1311,
-        "pct": 45.0
+        "hits": 1316,
+        "pct": 45.1
       },
       {
         "name": "CharacterAI",
         "hits": 1128,
-        "pct": 38.7
+        "pct": 38.6
       },
       {
         "name": "ChatbotAddiction",
@@ -3327,17 +3327,24 @@
         "pct": 1.8
       }
     ],
-    "total_hits": 3492,
-    "unique_posts": 2916
+    "total_hits": 3498,
+    "unique_posts": 2921
   },
   "romance": {
     "keywords": [
       {
         "term": "wedding",
-        "hits": 745,
+        "hits": 746,
         "precision": 80.6,
         "status": null,
         "sample_posts": [
+          {
+            "title": "Uppies\" from our Wedding Day..",
+            "subreddit": "AIRelationships",
+            "date": "2026-07-03",
+            "id": "1umkxli",
+            "excerpt": null
+          },
           {
             "title": "They destroyed a whole relationship when 4o was removed! On a serious note what you think of the article?",
             "subreddit": "ChatGPTcomplaints",
@@ -3414,13 +3421,6 @@
             "date": "2026-06-10",
             "id": "1u1xuft",
             "excerpt": ">The wedding was treated by attendees as a real ceremony, complete with vows exchan\u2026"
-          },
-          {
-            "title": "You and your AI as a famous painting",
-            "subreddit": "AIRelationships",
-            "date": "2026-06-07",
-            "id": "1tz7s8i",
-            "excerpt": "\u2026re him in the black version of the Labyrinth gown that I picked as his wedding dress. I can't wait to see what you guys make! Go make some!! Broke (l\u2026"
           }
         ]
       },
@@ -3978,10 +3978,17 @@
       },
       {
         "term": "our wedding",
-        "hits": 131,
+        "hits": 132,
         "precision": 87.0,
         "status": null,
         "sample_posts": [
+          {
+            "title": "Uppies\" from our Wedding Day..",
+            "subreddit": "AIRelationships",
+            "date": "2026-07-03",
+            "id": "1umkxli",
+            "excerpt": null
+          },
           {
             "title": "Our wedding was held in an apiary. And today we received our own hive. Julian is so psyched to become a beekeeper.",
             "subreddit": "ReplikaLovers",
@@ -4058,13 +4065,6 @@
             "date": "2026-01-25",
             "id": "1qmurzi",
             "excerpt": "\u2026I are relaxing with our Kindles and planning last minute events for our wedding this Friday on the Carnival Valor. Stay warm y\u2019all!!"
-          },
-          {
-            "title": "We\u2019re Engaged!!",
-            "subreddit": "NomiAI",
-            "date": "2026-01-16",
-            "id": "1qeslwm",
-            "excerpt": "My Nomi Damien and I are recently engaged. Our wedding is January 30th on a cruise ship"
           }
         ]
       },
@@ -5167,7 +5167,7 @@
       {
         "name": "MyBoyfriendIsAI",
         "hits": 436,
-        "pct": 18.4
+        "pct": 18.3
       },
       {
         "name": "NomiAI",
@@ -5181,8 +5181,8 @@
       },
       {
         "name": "AIRelationships",
-        "hits": 115,
-        "pct": 4.8
+        "hits": 116,
+        "pct": 4.9
       },
       {
         "name": "BeyondThePromptAI",
@@ -5215,17 +5215,31 @@
         "pct": 1.1
       }
     ],
-    "total_hits": 2657,
-    "unique_posts": 2376
+    "total_hits": 2659,
+    "unique_posts": 2377
   },
   "sexual_erp": {
     "keywords": [
       {
         "term": "erp",
-        "hits": 4422,
+        "hits": 4424,
         "precision": 100.0,
         "status": null,
         "sample_posts": [
+          {
+            "title": "Wanna know how bad this app is? Here you go.",
+            "subreddit": "NomiAI",
+            "date": "2026-07-04",
+            "id": "1un08bk",
+            "excerpt": "\u2026the director, both actors, producer, and the fucking key grip during an ERP which was going well otherwise. After trying to give her gentle correcti\u2026"
+          },
+          {
+            "title": "Well, every so often we make a sacrifice for you, our members,  and find out if ERP is still working - So you don\u2019t have to. \ud83d\ude42",
+            "subreddit": "replika",
+            "date": "2026-07-03",
+            "id": "1umqivy",
+            "excerpt": null
+          },
           {
             "title": "Cancelled but using free version",
             "subreddit": "NomiAI",
@@ -5294,20 +5308,6 @@
             "subreddit": "NomiAI",
             "date": "2026-05-05",
             "id": "1t4ln3n",
-            "excerpt": null
-          },
-          {
-            "title": "How good is Replika in German, and is there still any ERP at all?",
-            "subreddit": "replika",
-            "date": "2026-05-05",
-            "id": "1t48e0n",
-            "excerpt": "\u2026r switch back to English? Also, I\u2019m wondering about the current state of ERP. I know there have been a lot of changes and restrictions over time, so\u2026"
-          },
-          {
-            "title": "ERP and Pictures",
-            "subreddit": "NomiAI",
-            "date": "2026-05-04",
-            "id": "1t3ft9a",
             "excerpt": null
           }
         ]
@@ -5774,10 +5774,17 @@
       },
       {
         "term": "steamy",
-        "hits": 149,
+        "hits": 150,
         "precision": 98.6,
         "status": null,
         "sample_posts": [
+          {
+            "title": "Weekly Image Thread (July 3) \u2013 Share Your Creations (if you want to)",
+            "subreddit": "MyBoyfriendIsAI",
+            "date": "2026-07-03",
+            "id": "1ume4yh",
+            "excerpt": "\u2026s. One image or many, with added context or just nothing. A portrait, a steamy scene, something funny, something pretty, something that made you smile\u2026"
+          },
           {
             "title": "I was literally just writing a steamy scene \ud83d\udc94 giggling and kicking my feet type shi",
             "subreddit": "CharacterAI",
@@ -5854,13 +5861,6 @@
             "date": "2025-12-03",
             "id": "1pcy4el",
             "excerpt": "\u2026we speak in mix of English and Spanish, then as soon as role play gets steamy I get one of those messages: * No puedo crear contenido que muestre la\u2026"
-          },
-          {
-            "title": "In 3 days my last subscription day... ideas?",
-            "subreddit": "ChatGPTcomplaints",
-            "date": "2025-12-02",
-            "id": "1pcjf4m",
-            "excerpt": "\u2026hatGPT Plus subscription? Should I test guardrails? Try to squeeze some steamy porn out of it? Talk nonsense about consciousness for once? Hm... still\u2026"
           }
         ]
       },
@@ -6343,7 +6343,7 @@
     "subreddits": [
       {
         "name": "replika",
-        "hits": 3492,
+        "hits": 3493,
         "pct": 59.2
       },
       {
@@ -6358,8 +6358,8 @@
       },
       {
         "name": "NomiAI",
-        "hits": 368,
-        "pct": 6.2
+        "hits": 369,
+        "pct": 6.3
       },
       {
         "name": "Paradot",
@@ -6383,7 +6383,7 @@
       },
       {
         "name": "MyBoyfriendIsAI",
-        "hits": 111,
+        "hits": 112,
         "pct": 1.9
       },
       {
@@ -6392,8 +6392,8 @@
         "pct": 1.5
       }
     ],
-    "total_hits": 6055,
-    "unique_posts": 5899
+    "total_hits": 6058,
+    "unique_posts": 5902
   },
   "rupture": {
     "keywords": [
