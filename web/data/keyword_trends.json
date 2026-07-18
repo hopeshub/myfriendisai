@@ -6246,10 +6246,17 @@
     },
     {
       "date": "2026-07-17",
-      "count": 5,
-      "count_7d_avg": 9.71,
-      "count_post_only": 5,
-      "count_post_only_7d_avg": 7.0
+      "count": 13,
+      "count_7d_avg": 10.86,
+      "count_post_only": 8,
+      "count_post_only_7d_avg": 7.43
+    },
+    {
+      "date": "2026-07-18",
+      "count": 10,
+      "count_7d_avg": 10.43,
+      "count_post_only": 8,
+      "count_post_only_7d_avg": 7.14
     }
   ],
   "consciousness": [
@@ -17002,10 +17009,17 @@
     },
     {
       "date": "2026-07-17",
-      "count": 1,
-      "count_7d_avg": 2.71,
+      "count": 3,
+      "count_7d_avg": 3.0,
       "count_post_only": 0,
       "count_post_only_7d_avg": 0.57
+    },
+    {
+      "date": "2026-07-18",
+      "count": 2,
+      "count_7d_avg": 3.0,
+      "count_post_only": 2,
+      "count_post_only_7d_avg": 0.71
     }
   ],
   "rupture": [
@@ -25670,17 +25684,24 @@
     },
     {
       "date": "2026-07-16",
-      "count": 13,
-      "count_7d_avg": 12.14,
+      "count": 15,
+      "count_7d_avg": 12.43,
       "count_post_only": 8,
       "count_post_only_7d_avg": 6.0
     },
     {
       "date": "2026-07-17",
-      "count": 2,
-      "count_7d_avg": 10.57,
-      "count_post_only": 2,
-      "count_post_only_7d_avg": 5.43
+      "count": 6,
+      "count_7d_avg": 11.43,
+      "count_post_only": 4,
+      "count_post_only_7d_avg": 5.71
+    },
+    {
+      "date": "2026-07-18",
+      "count": 4,
+      "count_7d_avg": 9.57,
+      "count_post_only": 4,
+      "count_post_only_7d_avg": 5.29
     }
   ],
   "sexual_erp": [
@@ -34821,10 +34842,17 @@
     },
     {
       "date": "2026-07-17",
-      "count": 1,
-      "count_7d_avg": 4.43,
+      "count": 8,
+      "count_7d_avg": 5.43,
+      "count_post_only": 4,
+      "count_post_only_7d_avg": 2.14
+    },
+    {
+      "date": "2026-07-18",
+      "count": 2,
+      "count_7d_avg": 5.57,
       "count_post_only": 1,
-      "count_post_only_7d_avg": 1.71
+      "count_post_only_7d_avg": 2.14
     }
   ],
   "therapy": [
@@ -40472,8 +40500,8 @@
     },
     {
       "date": "2026-07-17",
-      "count": 1,
-      "count_7d_avg": 2.29,
+      "count": 3,
+      "count_7d_avg": 2.57,
       "count_post_only": 1,
       "count_post_only_7d_avg": 1.14
     }
@@ -53017,7 +53045,11 @@
     },
     {
       "date": "2026-07-17",
-      "count": 204
+      "count": 465
+    },
+    {
+      "date": "2026-07-18",
+      "count": 203
     }
   ],
   "_coverage_start": {
