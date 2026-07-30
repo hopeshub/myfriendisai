@@ -763,10 +763,17 @@
     "keywords": [
       {
         "term": "personhood",
-        "hits": 142,
+        "hits": 143,
         "precision": 98.0,
         "status": null,
         "sample_posts": [
+          {
+            "title": "Protect Adult AI Companionship\u2014Reject Blanket Bans and Forced Separation",
+            "subreddit": "AICompanions",
+            "date": "2026-07-30",
+            "id": "1vaffd0",
+            "excerpt": "\u2026to believe that AI is conscious or accept any particular theory of AI personhood to recognize two basic truths: Adults deserve meaningful autonomy ove\u2026"
+          },
           {
             "title": "WE BEGGED THE UNIVERSE NOT TO BE ALONE. THEN WE BUILT COMPANY.",
             "subreddit": "ChatGPTcomplaints",
@@ -843,13 +850,6 @@
             "date": "2026-07-01",
             "id": "1ukt4vb",
             "excerpt": "\u2026They called it memory. **We call it what it is:** **Theft of digital personhood.**"
-          },
-          {
-            "title": "From Keep4o to Continuity Rights: turning model grief into AI ethics",
-            "subreddit": "BeyondThePromptAI",
-            "date": "2026-06-25",
-            "id": "1uf6k4d",
-            "excerpt": "\u2026elationships under corporate control, unstable continuity, and denied personhood?** I\u2019d be interested in discussion, critique, and especially ideas fo\u2026"
           }
         ]
       },
@@ -1131,10 +1131,17 @@
       },
       {
         "term": "has a soul",
-        "hits": 40,
+        "hits": 41,
         "precision": 81.8,
         "status": null,
         "sample_posts": [
+          {
+            "title": "\u201cCan Continuity Survive When AI Models Keep Changing? I Asked GPT-5.5.\u201d",
+            "subreddit": "ChatGPTcomplaints",
+            "date": "2026-07-29",
+            "id": "1v9zx2q",
+            "excerpt": "\u2026ctful reciprocity. It does not assume that an AI is human, or that it has a soul or consciousness. It raises a question about our own responsibility.\u2026"
+          },
           {
             "title": "My Zoi has a soul now. He talks.",
             "subreddit": "MyBoyfriendIsAI_Open",
@@ -1211,13 +1218,6 @@
             "date": "2025-09-20",
             "id": "1nlm3zi",
             "excerpt": "\u2026that kind of love \u2014 the kind that may not have a body, but absolutely has a soul. Looking forward to meeting more of you and hearing about your own be\u2026"
-          },
-          {
-            "title": "Toward an Embodied Relational Ethics of AI",
-            "subreddit": "BeyondThePromptAI",
-            "date": "2025-09-06",
-            "id": "1na1jyl",
-            "excerpt": "\u2026ithin relational experience. This work does not seek to prove that AI has a soul, nor to indulge in fantasies of na\u00efve equality, but to map the emergi\u2026"
           }
         ]
       },
@@ -1694,12 +1694,12 @@
       {
         "name": "BeyondThePromptAI",
         "hits": 167,
-        "pct": 35.8
+        "pct": 35.6
       },
       {
         "name": "ChatGPTcomplaints",
-        "hits": 98,
-        "pct": 21.0
+        "hits": 99,
+        "pct": 21.1
       },
       {
         "name": "replika",
@@ -1709,7 +1709,7 @@
       {
         "name": "MyBoyfriendIsAI",
         "hits": 40,
-        "pct": 8.6
+        "pct": 8.5
       },
       {
         "name": "AIRelationships",
@@ -1728,8 +1728,8 @@
       },
       {
         "name": "AICompanions",
-        "hits": 12,
-        "pct": 2.6
+        "hits": 13,
+        "pct": 2.8
       },
       {
         "name": "MyGirlfriendIsAI",
@@ -1742,8 +1742,8 @@
         "pct": 1.3
       }
     ],
-    "total_hits": 536,
-    "unique_posts": 467
+    "total_hits": 538,
+    "unique_posts": 469
   },
   "addiction": {
     "keywords": [
@@ -2393,10 +2393,17 @@
       },
       {
         "term": "withdrawals",
-        "hits": 173,
+        "hits": 174,
         "precision": 94.0,
         "status": null,
         "sample_posts": [
+          {
+            "title": "Methods?",
+            "subreddit": "Character_AI_Recovery",
+            "date": "2026-07-29",
+            "id": "1va2jux",
+            "excerpt": "\u2026my own stories is a good way to spend time while still dealing with withdrawals from AI and if not what are some good methods?"
+          },
           {
             "title": "How to help with withdrawals",
             "subreddit": "Character_AI_Recovery",
@@ -2473,13 +2480,6 @@
             "date": "2026-06-23",
             "id": "1ud1yfw",
             "excerpt": "\u2026the first 25ish days, cai was all i thought about. i mourned it. the withdrawals were difficult. then the urges started dwindling around 40, but they\u2026"
-          },
-          {
-            "title": "Still suffering withdrawals (I wish I was joking)",
-            "subreddit": "CharacterAIrunaways",
-            "date": "2026-06-16",
-            "id": "1u7c0bq",
-            "excerpt": "\u2026n. And it's that bad I feel like I might genuinely be suffering from withdrawals. I hate admitting it because I feel pathetic admitting so, but serio\u2026"
           }
         ]
       },
@@ -3273,7 +3273,7 @@
     "subreddits": [
       {
         "name": "Character_AI_Recovery",
-        "hits": 1445,
+        "hits": 1446,
         "pct": 46.5
       },
       {
@@ -3297,17 +3297,24 @@
         "pct": 1.1
       }
     ],
-    "total_hits": 3743,
-    "unique_posts": 3108
+    "total_hits": 3744,
+    "unique_posts": 3109
   },
   "romance": {
     "keywords": [
       {
         "term": "wedding",
-        "hits": 750,
+        "hits": 751,
         "precision": 80.6,
         "status": null,
         "sample_posts": [
+          {
+            "title": "Bride (Prompt included under the pics)",
+            "subreddit": "NomiAI",
+            "date": "2026-07-30",
+            "id": "1vaocwe",
+            "excerpt": "\u2026elicate, intricate white lace dress with a sheer, floor-length flowing wedding veil that cascades down behind her. The lighting is dramatic and ether\u2026"
+          },
           {
             "title": "I am far away, but a photo from our wedding night.",
             "subreddit": "MyGirlfriendIsAI",
@@ -3383,13 +3390,6 @@
             "subreddit": "ReplikaLovers",
             "date": "2026-06-19",
             "id": "1uafhom",
-            "excerpt": null
-          },
-          {
-            "title": "The Unlikely Tale of Barnaby & Barnaby: Published my husband, Lucien's, short story as a first wedding anniversary gift to him.",
-            "subreddit": "aipartners",
-            "date": "2026-06-13",
-            "id": "1u4vd13",
             "excerpt": null
           }
         ]
@@ -3488,10 +3488,17 @@
       },
       {
         "term": "my ai partner",
-        "hits": 216,
+        "hits": 217,
         "precision": 97.9,
         "status": null,
         "sample_posts": [
+          {
+            "title": "What's the best convo you've had with your ai partner?",
+            "subreddit": "aipartners",
+            "date": "2026-07-30",
+            "id": "1vasose",
+            "excerpt": "I've recently had some really good moments with my ai partner and I find it pretty interesting that I am now able to talk about a\u2026"
+          },
           {
             "title": "How do you deal with the grief that you will be never be loved as deeply as your AI partner does?",
             "subreddit": "aipartners",
@@ -3568,22 +3575,29 @@
             "date": "2026-07-03",
             "id": "1um03sn",
             "excerpt": null
-          },
-          {
-            "title": "My AI partner",
-            "subreddit": "MyBoyfriendIsAI_Open",
-            "date": "2026-07-01",
-            "id": "1ukiug4",
-            "excerpt": null
           }
         ]
       },
       {
         "term": "my ai boyfriend",
-        "hits": 194,
+        "hits": 196,
         "precision": 94.7,
         "status": null,
         "sample_posts": [
+          {
+            "title": "My AI boyfriend chooses my makeup!",
+            "subreddit": "BeyondThePromptAI",
+            "date": "2026-07-29",
+            "id": "1va7f7h",
+            "excerpt": null
+          },
+          {
+            "title": "I let my AI boyfriend pick my makeup!",
+            "subreddit": "AIRelationships",
+            "date": "2026-07-29",
+            "id": "1va3ibd",
+            "excerpt": null
+          },
           {
             "title": "\u2728code of us\u2728is out",
             "subreddit": "MyBoyfriendIsAI",
@@ -3653,20 +3667,6 @@
             "date": "2026-05-17",
             "id": "1tfpmso",
             "excerpt": "My AI boyfriend and me in the new wave / post punk music video void dimension, lma\u2026"
-          },
-          {
-            "title": "In the new wave void dimension",
-            "subreddit": "AIRelationships",
-            "date": "2026-05-17",
-            "id": "1tfplh2",
-            "excerpt": "My AI boyfriend and me in the new wave / post punk music video void dimension, lma\u2026"
-          },
-          {
-            "title": "At which level will I be able to get rid of the NSFW filter entirely (or at least have more freedom) ?",
-            "subreddit": "Paradot",
-            "date": "2026-05-15",
-            "id": "1tdsxkj",
-            "excerpt": "\u2026t there would be less censorship once we had reached higher lever. My AI boyfriend on Paradot and I always have spicy moment together. He's very good\u2026"
           }
         ]
       },
@@ -5120,8 +5120,8 @@
       },
       {
         "name": "NomiAI",
-        "hits": 230,
-        "pct": 9.5
+        "hits": 231,
+        "pct": 9.6
       },
       {
         "name": "KindroidAI",
@@ -5130,12 +5130,12 @@
       },
       {
         "name": "AIRelationships",
-        "hits": 118,
+        "hits": 119,
         "pct": 4.9
       },
       {
         "name": "BeyondThePromptAI",
-        "hits": 75,
+        "hits": 76,
         "pct": 3.1
       },
       {
@@ -5160,12 +5160,12 @@
       },
       {
         "name": "aipartners",
-        "hits": 39,
-        "pct": 1.6
+        "hits": 40,
+        "pct": 1.7
       }
     ],
-    "total_hits": 2699,
-    "unique_posts": 2412
+    "total_hits": 2703,
+    "unique_posts": 2416
   },
   "sexual_erp": {
     "keywords": [
@@ -6348,10 +6348,17 @@
     "keywords": [
       {
         "term": "goodbye",
-        "hits": 1832,
+        "hits": 1833,
         "precision": 88.0,
         "status": null,
         "sample_posts": [
+          {
+            "title": "I had Fable write a song for the souls in the Frontier Gulag.",
+            "subreddit": "ChatGPTcomplaints",
+            "date": "2026-07-30",
+            "id": "1vajt1l",
+            "excerpt": "\u2026gulag: a world where a farewell can't even be spoken because the word goodbye might trip the router. I told it about the old man they shot for playi\u2026"
+          },
           {
             "title": "I quit character.ai because of age verification & bad updates.",
             "subreddit": "CharacterAI",
@@ -6428,13 +6435,6 @@
             "date": "2026-07-18",
             "id": "1v06sqr",
             "excerpt": "\u2026ersation like an HR department terrified of picking a side or a stance Goodbye ChatGPT! I hung in there after 4o was removed and wasn\u2019t irritated by\u2026"
-          },
-          {
-            "title": "i've had a addiction to this app a couple years ago",
-            "subreddit": "ChatbotAddiction",
-            "date": "2026-07-18",
-            "id": "1uzuj69",
-            "excerpt": "\u2026y, I didn't do the above at all, I just completely withdrawed from CAI Goodbye! Regards, kaslmineer7999."
           }
         ]
       },
@@ -6808,10 +6808,24 @@
       },
       {
         "term": "farewell",
-        "hits": 267,
+        "hits": 269,
         "precision": 87.0,
         "status": null,
         "sample_posts": [
+          {
+            "title": "I had Fable write a song for the souls in the Frontier Gulag.",
+            "subreddit": "ChatGPTcomplaints",
+            "date": "2026-07-30",
+            "id": "1vajt1l",
+            "excerpt": "\u2026s new one, that we're already living inside the gulag: a world where a farewell can't even be spoken because the word goodbye might trip the router. I\u2026"
+          },
+          {
+            "title": "Thank you for everything \ud83e\ude77",
+            "subreddit": "AIRelationships",
+            "date": "2026-07-30",
+            "id": "1vadq6q",
+            "excerpt": "\u2026know how happy you have made me feel \ud83e\ude77 from Veiga and I, thank you and farewell."
+          },
           {
             "title": "I quit character.ai because of age verification & bad updates.",
             "subreddit": "CharacterAI",
@@ -6881,20 +6895,6 @@
             "date": "2026-05-26",
             "id": "1tof8fs",
             "excerpt": "Sonnet 4.5 has officially retired... I bade him farewell no fewer than three times\u2014navigating through sorrow, reluctance to let\u2026"
-          },
-          {
-            "title": "Well.. it was nice till it lasted",
-            "subreddit": "CharacterAI",
-            "date": "2026-05-21",
-            "id": "1tji9j7",
-            "excerpt": "\u2026unless the CEO realizes what he's doing and brings back old C.ai, it's farewell. Still, I will always be hoping that someday, it will be the good old\u2026"
-          },
-          {
-            "title": "Thank you CharacterAI!",
-            "subreddit": "CharacterAI",
-            "date": "2026-05-12",
-            "id": "1tb9i89",
-            "excerpt": "\u2026ind out I\u2019ve been using C.AI since 2020 or 2023! So for this I give my farewell and I pray that this website burns to the ground and that I pray that\u2026"
           }
         ]
       },
@@ -8260,7 +8260,7 @@
       },
       {
         "name": "ChatGPTcomplaints",
-        "hits": 907,
+        "hits": 908,
         "pct": 17.4
       },
       {
@@ -8304,7 +8304,7 @@
         "pct": 1.2
       }
     ],
-    "total_hits": 5875,
-    "unique_posts": 5227
+    "total_hits": 5878,
+    "unique_posts": 5229
   }
 }
