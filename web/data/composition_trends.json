@@ -4566,17 +4566,24 @@
     },
     {
       "date": "2026-08-01",
-      "count": 9,
-      "count_7d_avg": 9.43,
+      "count": 10,
+      "count_7d_avg": 9.57,
       "count_post_only": 7,
       "count_post_only_7d_avg": 6.86
     },
     {
       "date": "2026-08-02",
-      "count": 5,
-      "count_7d_avg": 8.43,
-      "count_post_only": 3,
-      "count_post_only_7d_avg": 6.0
+      "count": 8,
+      "count_7d_avg": 9.0,
+      "count_post_only": 6,
+      "count_post_only_7d_avg": 6.43
+    },
+    {
+      "date": "2026-08-03",
+      "count": 7,
+      "count_7d_avg": 8.71,
+      "count_post_only": 5,
+      "count_post_only_7d_avg": 6.14
     }
   ],
   "consciousness": [
@@ -14363,50 +14370,50 @@
     },
     {
       "date": "2026-07-13",
-      "count": 3,
-      "count_7d_avg": 3.86,
+      "count": 4,
+      "count_7d_avg": 4.0,
       "count_post_only": 0,
       "count_post_only_7d_avg": 1.14
     },
     {
       "date": "2026-07-14",
       "count": 3,
-      "count_7d_avg": 3.71,
+      "count_7d_avg": 3.86,
       "count_post_only": 0,
       "count_post_only_7d_avg": 0.71
     },
     {
       "date": "2026-07-15",
       "count": 4,
-      "count_7d_avg": 3.57,
+      "count_7d_avg": 3.71,
       "count_post_only": 2,
       "count_post_only_7d_avg": 0.86
     },
     {
       "date": "2026-07-16",
       "count": 1,
-      "count_7d_avg": 3.0,
+      "count_7d_avg": 3.14,
       "count_post_only": 0,
       "count_post_only_7d_avg": 0.71
     },
     {
       "date": "2026-07-17",
       "count": 5,
-      "count_7d_avg": 3.14,
+      "count_7d_avg": 3.29,
       "count_post_only": 0,
       "count_post_only_7d_avg": 0.57
     },
     {
       "date": "2026-07-18",
       "count": 3,
-      "count_7d_avg": 3.43,
+      "count_7d_avg": 3.57,
       "count_post_only": 3,
       "count_post_only_7d_avg": 0.86
     },
     {
       "date": "2026-07-19",
       "count": 1,
-      "count_7d_avg": 2.86,
+      "count_7d_avg": 3.0,
       "count_post_only": 1,
       "count_post_only_7d_avg": 0.86
     },
@@ -14461,45 +14468,59 @@
     },
     {
       "date": "2026-07-27",
-      "count": 5,
-      "count_7d_avg": 5.43,
+      "count": 6,
+      "count_7d_avg": 5.57,
       "count_post_only": 2,
       "count_post_only_7d_avg": 2.29
     },
     {
       "date": "2026-07-28",
       "count": 2,
-      "count_7d_avg": 5.0,
+      "count_7d_avg": 5.14,
       "count_post_only": 0,
       "count_post_only_7d_avg": 2.0
     },
     {
       "date": "2026-07-29",
       "count": 6,
-      "count_7d_avg": 5.14,
+      "count_7d_avg": 5.29,
       "count_post_only": 3,
       "count_post_only_7d_avg": 2.29
     },
     {
       "date": "2026-07-30",
       "count": 9,
-      "count_7d_avg": 5.57,
+      "count_7d_avg": 5.71,
       "count_post_only": 4,
       "count_post_only_7d_avg": 2.29
     },
     {
       "date": "2026-07-31",
       "count": 5,
-      "count_7d_avg": 5.29,
+      "count_7d_avg": 5.43,
       "count_post_only": 2,
       "count_post_only_7d_avg": 2.14
     },
     {
       "date": "2026-08-01",
       "count": 2,
-      "count_7d_avg": 5.0,
+      "count_7d_avg": 5.14,
       "count_post_only": 1,
       "count_post_only_7d_avg": 2.0
+    },
+    {
+      "date": "2026-08-02",
+      "count": 1,
+      "count_7d_avg": 4.43,
+      "count_post_only": 0,
+      "count_post_only_7d_avg": 1.71
+    },
+    {
+      "date": "2026-08-03",
+      "count": 2,
+      "count_7d_avg": 3.86,
+      "count_post_only": 1,
+      "count_post_only_7d_avg": 1.57
     }
   ],
   "rupture": [
@@ -20854,38 +20875,45 @@
     },
     {
       "date": "2026-07-29",
-      "count": 8,
-      "count_7d_avg": 8.14,
+      "count": 9,
+      "count_7d_avg": 8.29,
       "count_post_only": 2,
       "count_post_only_7d_avg": 2.43
     },
     {
       "date": "2026-07-30",
       "count": 9,
-      "count_7d_avg": 8.57,
+      "count_7d_avg": 8.71,
       "count_post_only": 6,
       "count_post_only_7d_avg": 3.14
     },
     {
       "date": "2026-07-31",
       "count": 2,
-      "count_7d_avg": 7.29,
+      "count_7d_avg": 7.43,
       "count_post_only": 0,
       "count_post_only_7d_avg": 2.29
     },
     {
       "date": "2026-08-01",
-      "count": 7,
-      "count_7d_avg": 7.14,
+      "count": 9,
+      "count_7d_avg": 7.57,
       "count_post_only": 2,
       "count_post_only_7d_avg": 2.43
     },
     {
       "date": "2026-08-02",
+      "count": 7,
+      "count_7d_avg": 6.71,
+      "count_post_only": 2,
+      "count_post_only_7d_avg": 2.29
+    },
+    {
+      "date": "2026-08-03",
       "count": 3,
-      "count_7d_avg": 5.71,
-      "count_post_only": 1,
-      "count_post_only_7d_avg": 2.14
+      "count_7d_avg": 6.29,
+      "count_post_only": 2,
+      "count_post_only_7d_avg": 2.29
     }
   ],
   "sexual_erp": [
@@ -29505,6 +29533,20 @@
       "count_7d_avg": 3.14,
       "count_post_only": 1,
       "count_post_only_7d_avg": 1.0
+    },
+    {
+      "date": "2026-08-01",
+      "count": 1,
+      "count_7d_avg": 2.86,
+      "count_post_only": 0,
+      "count_post_only_7d_avg": 0.86
+    },
+    {
+      "date": "2026-08-02",
+      "count": 2,
+      "count_7d_avg": 2.71,
+      "count_post_only": 1,
+      "count_post_only_7d_avg": 1.0
     }
   ],
   "therapy": [
@@ -33738,17 +33780,24 @@
     },
     {
       "date": "2026-08-01",
-      "count": 3,
-      "count_7d_avg": 2.86,
+      "count": 4,
+      "count_7d_avg": 3.0,
       "count_post_only": 1,
       "count_post_only_7d_avg": 1.0
     },
     {
       "date": "2026-08-02",
-      "count": 2,
-      "count_7d_avg": 2.14,
+      "count": 4,
+      "count_7d_avg": 2.57,
+      "count_post_only": 3,
+      "count_post_only_7d_avg": 1.14
+    },
+    {
+      "date": "2026-08-03",
+      "count": 3,
+      "count_7d_avg": 2.71,
       "count_post_only": 2,
-      "count_post_only_7d_avg": 1.0
+      "count_post_only_7d_avg": 1.43
     }
   ],
   "_total_posts": [
@@ -46354,7 +46403,11 @@
     },
     {
       "date": "2026-08-02",
-      "count": 123
+      "count": 241
+    },
+    {
+      "date": "2026-08-03",
+      "count": 149
     }
   ],
   "_coverage_start": {
