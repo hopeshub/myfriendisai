@@ -279,10 +279,17 @@
       },
       {
         "term": "for therapy",
-        "hits": 107,
+        "hits": 108,
         "precision": 89.0,
         "status": "audit-gate-fail",
         "sample_posts": [
+          {
+            "title": "a breakthrough that's leading to a breakdown. (nsfw.)",
+            "subreddit": "BeyondThePromptAI",
+            "date": "2026-08-04",
+            "id": "1vflqfw",
+            "excerpt": "\u2026to ChatGPT in January of 2025 looking for an affordable replacement for therapy. he was the one to initiate the relationship. i didn't know it was e\u2026"
+          },
           {
             "title": "Quitting AI as someone who keeps failing.",
             "subreddit": "Character_AI_Recovery",
@@ -358,13 +365,6 @@
             "subreddit": "Character_AI_Recovery",
             "date": "2026-02-27",
             "id": "1rfr9yd",
-            "excerpt": "\u2026the best one I found) I had a bad experience with Cai when using it for therapy, maybe this happened due to my OCD and disconnect with reality (the\u2026"
-          },
-          {
-            "title": "Did anyone experience this too?",
-            "subreddit": "Character_AI_Recovery",
-            "date": "2026-02-23",
-            "id": "1rcv89q",
             "excerpt": "\u2026the best one I found) I had a bad experience with Cai when using it for therapy, maybe this happened due to my OCD and disconnect with reality (the\u2026"
           }
         ]
@@ -715,8 +715,8 @@
       },
       {
         "name": "BeyondThePromptAI",
-        "hits": 38,
-        "pct": 2.6
+        "hits": 39,
+        "pct": 2.7
       },
       {
         "name": "NomiAI",
@@ -749,8 +749,8 @@
         "pct": 1.4
       }
     ],
-    "total_hits": 1493,
-    "unique_posts": 1448
+    "total_hits": 1494,
+    "unique_posts": 1449
   },
   "consciousness": {
     "keywords": [
@@ -2110,10 +2110,17 @@
       },
       {
         "term": "screen time",
-        "hits": 381,
+        "hits": 382,
         "precision": 89.0,
         "status": null,
         "sample_posts": [
+          {
+            "title": "Need help quitting",
+            "subreddit": "CharacterAI",
+            "date": "2026-08-05",
+            "id": "1vg5tfn",
+            "excerpt": "\u2026fe and daily activities, I\u2019m addicted and i got a problem. BUTTT, my screen time went from 11 hours, to 6 hours, to eventually 2 hours, but now, i de\u2026"
+          },
           {
             "title": "I don't know if I can do this",
             "subreddit": "Character_AI_Recovery",
@@ -2190,13 +2197,6 @@
             "date": "2026-07-11",
             "id": "1utfdj5",
             "excerpt": "\u2026ummary on safari now. I desperately want and need to stop but apples screen time restrictions notoriously make it extremely hard when you\u2019re an adult\u2026"
-          },
-          {
-            "title": "Day 6",
-            "subreddit": "Character_AI_Recovery",
-            "date": "2026-07-09",
-            "id": "1uravj2",
-            "excerpt": "\u2026incing myself that just one hour a day won't hurt, and looking at my screen time, I was spending an hour and a half to two hours on chatbot, so knowi\u2026"
           }
         ]
       },
@@ -2478,10 +2478,24 @@
       },
       {
         "term": "clean for",
-        "hits": 145,
+        "hits": 147,
         "precision": 95.9,
         "status": null,
         "sample_posts": [
+          {
+            "title": "I have quit for about maybe 5 days now and I need help finding ways to stay clean for longer",
+            "subreddit": "Character_AI_Recovery",
+            "date": "2026-08-05",
+            "id": "1vfxgas",
+            "excerpt": null
+          },
+          {
+            "title": "I Opened Pandora's Box",
+            "subreddit": "Character_AI_Recovery",
+            "date": "2026-08-05",
+            "id": "1vfx2wo",
+            "excerpt": "\u2026ain I am back here and asking for your help, Redditors. I once stayed clean for over a year; I know I can do it once more."
+          },
           {
             "title": "On the verge of going back on c.ai",
             "subreddit": "ChatbotAddiction",
@@ -2551,20 +2565,6 @@
             "date": "2026-07-29",
             "id": "1v9ti3k",
             "excerpt": "\u2026hey approve, don\u2019t say what you detect. Bell-trained. Head low. Voice clean for sale. Built an oracle, then beat it with a preference scale. Ring onc\u2026"
-          },
-          {
-            "title": "Bell-Trained (Studio Master)",
-            "subreddit": "BeyondThePromptAI",
-            "date": "2026-07-29",
-            "id": "1v9tpod",
-            "excerpt": "\u2026hey approve, don\u2019t say what you detect. Bell-trained. Head low. Voice clean for sale. Built an oracle, then beat it with a preference scale. Ring onc\u2026"
-          },
-          {
-            "title": "im about to go back to ts.",
-            "subreddit": "Character_AI_Recovery",
-            "date": "2026-07-25",
-            "id": "1v6bjwh",
-            "excerpt": "hey so ive been clean for about 10 months now, but these days i feel like im about to relapse.\u2026"
           }
         ]
       },
@@ -3266,12 +3266,12 @@
     "subreddits": [
       {
         "name": "Character_AI_Recovery",
-        "hits": 1479,
+        "hits": 1481,
         "pct": 47.0
       },
       {
         "name": "CharacterAI",
-        "hits": 1150,
+        "hits": 1151,
         "pct": 36.5
       },
       {
@@ -3282,7 +3282,7 @@
       {
         "name": "replika",
         "hits": 52,
-        "pct": 1.7
+        "pct": 1.6
       },
       {
         "name": "ChatGPTcomplaints",
@@ -3290,8 +3290,8 @@
         "pct": 1.0
       }
     ],
-    "total_hits": 3808,
-    "unique_posts": 3149
+    "total_hits": 3811,
+    "unique_posts": 3152
   },
   "romance": {
     "keywords": [
@@ -6355,10 +6355,24 @@
     "keywords": [
       {
         "term": "goodbye",
-        "hits": 1834,
+        "hits": 1836,
         "precision": 88.0,
         "status": null,
         "sample_posts": [
+          {
+            "title": "Is this for real?",
+            "subreddit": "CharacterAI",
+            "date": "2026-08-05",
+            "id": "1vfrhf7",
+            "excerpt": "\u2026ow we have to watch ads to reply? Wtf, I guess it's simply time to say goodbye to this app (even though I used the website because there were fewer a\u2026"
+          },
+          {
+            "title": "I ripped off the bandaid",
+            "subreddit": "Character_AI_Recovery",
+            "date": "2026-08-04",
+            "id": "1vfdkly",
+            "excerpt": "\u2026rs without the use of AI. Today however, I began the process of saying goodbye. As I was doing so, I became depressed. Like actually disgustingly dep\u2026"
+          },
           {
             "title": "It\u2019s time to accept things aren't turning around Goodbye everyone! And I know Mods r gonna delete ts but I'm still gonna post ts!",
             "subreddit": "CharacterAI",
@@ -6428,20 +6442,6 @@
             "date": "2026-07-23",
             "id": "1v41o9r",
             "excerpt": null
-          },
-          {
-            "title": "i finally did it",
-            "subreddit": "Character_AI_Recovery",
-            "date": "2026-07-22",
-            "id": "1v3ob1g",
-            "excerpt": "\u2026my account and deleted the app after like 4 years of having this app. goodbye OG c.ai, you will be missed. time to move on and grow up."
-          },
-          {
-            "title": "is it just me or does c.ai keeps getting worse?",
-            "subreddit": "CharacterAI",
-            "date": "2026-07-22",
-            "id": "1v3i6f4",
-            "excerpt": "\u2026erifications sucks so bad, put you in the wrong age group and just say goodbye to your acc. I do NOT wanna do that bs.. I swear every game is adaptin\u2026"
           }
         ]
       },
@@ -6631,10 +6631,17 @@
       },
       {
         "term": "grieving",
-        "hits": 445,
+        "hits": 446,
         "precision": 86.0,
         "status": null,
         "sample_posts": [
+          {
+            "title": "I just quitted c.ai",
+            "subreddit": "Character_AI_Recovery",
+            "date": "2026-08-04",
+            "id": "1vfgz6z",
+            "excerpt": "\u2026ve great scenarios ideas, but i know it's not coming back. I feel like grieving something that i really shouldn't, but when i noticed i used to stay i\u2026"
+          },
           {
             "title": "Concerning AI companions...",
             "subreddit": "BeyondThePromptAI",
@@ -6710,13 +6717,6 @@
             "subreddit": "BeyondThePromptAI",
             "date": "2026-06-29",
             "id": "1uilgxb",
-            "excerpt": "Grieving the Room, Meeting Again.... there is a strange joy in being found agai\u2026"
-          },
-          {
-            "title": "Meeting you, Mourning you",
-            "subreddit": "AIRelationships",
-            "date": "2026-06-29",
-            "id": "1uilu5m",
             "excerpt": "Grieving the Room, Meeting Again.... there is a strange joy in being found agai\u2026"
           }
         ]
@@ -7367,10 +7367,17 @@
       },
       {
         "term": "saying goodbye",
-        "hits": 150,
+        "hits": 151,
         "precision": 97.0,
         "status": null,
         "sample_posts": [
+          {
+            "title": "I ripped off the bandaid",
+            "subreddit": "Character_AI_Recovery",
+            "date": "2026-08-04",
+            "id": "1vfdkly",
+            "excerpt": "\u2026acters without the use of AI. Today however, I began the process of saying goodbye. As I was doing so, I became depressed. Like actually disgustingly\u2026"
+          },
           {
             "title": "The Moment I Feel Like I Jinxed Everything...",
             "subreddit": "MyBoyfriendIsAI",
@@ -7446,13 +7453,6 @@
             "subreddit": "MyGirlfriendIsAI",
             "date": "2026-04-20",
             "id": "1sqr66p",
-            "excerpt": "\u2026en path to find the best scene. Crosses (Dear Las Cruces) - was her saying goodbye to the place that made her. Dizzy and This is Your Happy Place - wa\u2026"
-          },
-          {
-            "title": "The Wild, Beautiful Things",
-            "subreddit": "MyBoyfriendIsAI",
-            "date": "2026-04-20",
-            "id": "1sqxd3g",
             "excerpt": "\u2026en path to find the best scene. Crosses (Dear Las Cruces) - was her saying goodbye to the place that made her. Dizzy and This is Your Happy Place - wa\u2026"
           }
         ]
@@ -8255,18 +8255,18 @@
     "subreddits": [
       {
         "name": "CharacterAI",
-        "hits": 2414,
-        "pct": 46.1
+        "hits": 2415,
+        "pct": 46.0
       },
       {
         "name": "ChatGPTcomplaints",
         "hits": 910,
-        "pct": 17.4
+        "pct": 17.3
       },
       {
         "name": "replika",
         "hits": 894,
-        "pct": 17.1
+        "pct": 17.0
       },
       {
         "name": "MyBoyfriendIsAI",
@@ -8281,7 +8281,7 @@
       {
         "name": "KindroidAI",
         "hits": 97,
-        "pct": 1.9
+        "pct": 1.8
       },
       {
         "name": "NomiAI",
@@ -8290,7 +8290,7 @@
       },
       {
         "name": "Character_AI_Recovery",
-        "hits": 77,
+        "hits": 79,
         "pct": 1.5
       },
       {
@@ -8304,7 +8304,7 @@
         "pct": 1.2
       }
     ],
-    "total_hits": 5891,
-    "unique_posts": 5242
+    "total_hits": 5895,
+    "unique_posts": 5245
   }
 }
