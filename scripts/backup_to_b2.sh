@@ -32,7 +32,7 @@ mkdir -p logs
 exec >> "$LOG" 2>&1
 
 # Always remove the staging copy on exit — success, failure, or interrupt.
-trap 'rm -f "$STAGING" "$STAGING-shm" "$STAGING-wal"' EXIT
+trap 'rm -f "$STAGING" "$STAGING-shm" "$STAGING-wal" "$STAGING-journal"' EXIT
 
 fail() {
     echo "BACKUP_B2_ERR: $1"
@@ -48,10 +48,24 @@ source "$CRED"
 [ -n "${RESTIC_REPOSITORY:-}" ] || fail "RESTIC_REPOSITORY not set (bad credentials file)"
 [ -f "$DB" ] || fail "database not found: $DB"
 
+# 0. Disk-space precheck. Staging writes a full copy of the DB to the same
+#    volume, and restic then needs scratch space for temp pack files on top of
+#    that. Checking up front turns a silent mid-run "no space left on device"
+#    (which cost 18 days of backups in Aug 2026) into an obvious, actionable
+#    failure before any 25 GB copy is attempted.
+SCRATCH_GIB=3
+db_bytes=$(stat -f%z "$DB")
+need_bytes=$(( db_bytes + SCRATCH_GIB * 1024 * 1024 * 1024 ))
+free_bytes=$(( $(df -k . | awk 'NR==2 {print $4}') * 1024 ))
+if [ "$free_bytes" -lt "$need_bytes" ]; then
+    fail "insufficient disk: need $(( need_bytes / 1024**3 )) GiB (DB $(( db_bytes / 1024**3 )) GiB + ${SCRATCH_GIB} GiB restic scratch), have $(( free_bytes / 1024**3 )) GiB free"
+fi
+echo "[$(date)] Disk precheck OK — need $(( need_bytes / 1024**3 )) GiB, have $(( free_bytes / 1024**3 )) GiB free"
+
 # 1. WAL-safe staging copy on the internal disk. sqlite3 .backup produces a
 #    consistent snapshot even while the collector is writing to the live DB.
 echo "[$(date)] WAL-safe staging copy -> $STAGING"
-rm -f "$STAGING" "$STAGING-shm" "$STAGING-wal"
+rm -f "$STAGING" "$STAGING-shm" "$STAGING-wal" "$STAGING-journal"
 sqlite3 "$DB" ".backup '$STAGING'" || fail "sqlite3 .backup failed"
 [ -f "$STAGING" ] || fail "staging copy was not created"
 
@@ -74,6 +88,13 @@ restic forget --tag tracker-db --group-by host,tags \
     --keep-daily 7 --keep-weekly 5 --keep-monthly 12 \
     --prune || fail "restic forget/prune failed"
 
-# 5. staging copy removed by the EXIT trap.
+# 5. Record success so the daily pipeline can publish backup freshness in
+#    status.json, which the GitHub Actions alert reads. Without this the only
+#    failure signal is a local notification — which is how an 18-day backup
+#    outage went unnoticed in Jul-Aug 2026. logs/ is gitignored, so this is
+#    local state, not committed data.
+date -u '+%Y-%m-%dT%H:%M:%SZ' > logs/last_backup_success
+
+# 6. staging copy removed by the EXIT trap.
 echo "[$(date)] ===== B2 backup done ====="
 restic snapshots --tag tracker-db --compact --group-by host,tags 2>/dev/null | tail -8 || true

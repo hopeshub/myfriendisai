@@ -118,6 +118,16 @@ try:
 except Exception:
     prev = {}
 
+# Backup freshness. backup_to_b2.sh (14:00 daily) stamps this file on success;
+# publishing it here is what lets the GH Actions alert cover backups and not
+# just collection pushes. Note this value is read at collection time and the
+# file is committed on the NEXT run, so a healthy system can still publish a
+# stamp ~48h old — the alert threshold accounts for that.
+try:
+    last_backup = open("logs/last_backup_success").read().strip() or None
+except Exception:
+    last_backup = None
+
 prev_consec = int(prev.get("consecutive_push_failures") or 0)
 prev_last_push = prev.get("last_successful_push")
 
@@ -143,6 +153,7 @@ out = {
     "last_successful_push": last_push,
     "consecutive_push_failures": consec,
     "last_push_error": last_err or None,
+    "last_successful_backup": last_backup,
 }
 with open(status_path, "w") as f:
     json.dump(out, f, indent=2)

@@ -11,6 +11,7 @@ venv/
 data/*.db
 data/*.db-shm
 data/*.db-wal
+data/*.db-journal
 web/data/*.db
 data/test_*.db
 data/test_*.json

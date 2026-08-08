@@ -45,3 +45,31 @@ jobs:
             echo "::error::Site data is stale — last successful push was ${age_hours}h ago. Check the collection Mac (logs/collect_daily.log, logs/failures.log)."
             exit 1
           fi
+
+      - name: Check off-site backup freshness
+        run: |
+          set -euo pipefail
+          status=$(curl -fsS --max-time 30 --retry 3 --retry-all-errors --retry-delay 30 https://myfriendisai.com/status.json)
+
+          # backup_to_b2.sh (14:00 daily) stamps logs/last_backup_success on
+          # success; the collector publishes it here the following run. That
+          # double lag means a HEALTHY system can publish a stamp ~48h old, so
+          # the threshold is 72h — i.e. roughly two consecutive failed backups.
+          #
+          # This step exists because a full disk broke backups for 18 days in
+          # Jul-Aug 2026 with zero external signal: the collection alert above
+          # stayed green the entire time, because collection was fine.
+          last_backup=$(echo "$status" | jq -r '.last_successful_backup // empty')
+          if [ -z "$last_backup" ]; then
+            echo "::warning::status.json has no last_successful_backup. Expected only before the first stamped backup; if this persists, backups are not running."
+            exit 0
+          fi
+
+          now_epoch=$(date -u +%s)
+          backup_epoch=$(date -u -d "$last_backup" +%s)
+          age_hours=$(( (now_epoch - backup_epoch) / 3600 ))
+          echo "Last successful backup: $last_backup (${age_hours}h ago)"
+          if [ "$age_hours" -gt 72 ]; then
+            echo "::error::Off-site backup is stale — last successful B2 snapshot was ${age_hours}h ago. Check logs/backup_b2.log and free disk space on the collection Mac."
+            exit 1
+          fi
