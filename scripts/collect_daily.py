@@ -117,8 +117,6 @@ def _step_collect_posts_arctic(communities, conn):
         subreddit = community["subreddit"]
         try:
             raw, truncated = fetch_posts(subreddit, after_epoch, before_epoch)
-            if truncated:
-                raise RuntimeError("Arctic Shift window truncated (partial data)")
             parsed = [parse_arctic_post(p) for p in raw]
             # Force canonical casing — Arctic Shift returns e.g. "antiai", which
             # case-sensitive IN(...) filters downstream would silently drop.
@@ -127,9 +125,19 @@ def _step_collect_posts_arctic(communities, conn):
             inserted = insert_posts(parsed, conn=conn)
             conn.commit()
             total_inserted += inserted
-            ok += 1
-            logger.info("  r/%s: %d fetched, %d new inserted (arctic fallback)",
-                        subreddit, len(raw), inserted)
+            if truncated:
+                # Keep the partial window. The 72h window is re-walked daily, so
+                # a short day is usually refilled tomorrow — but discarding the
+                # rows guarantees the gap instead of risking it. Still recorded
+                # as an error so the run summary flags the window as incomplete.
+                logger.warning("  r/%s: %d fetched, %d new inserted — window INCOMPLETE (partial data kept)",
+                               subreddit, len(raw), inserted)
+                errors.append({"subreddit": subreddit, "status": "arctic_partial",
+                               "error": "window truncated; partial data kept"})
+            else:
+                ok += 1
+                logger.info("  r/%s: %d fetched, %d new inserted (arctic fallback)",
+                            subreddit, len(raw), inserted)
         except Exception as e:
             logger.warning("  r/%s: arctic fallback failed: %s", subreddit, e)
             errors.append({"subreddit": subreddit, "status": "arctic_error", "error": str(e)})
@@ -172,15 +180,24 @@ def _step_collect_comments_arctic(communities, conn):
         subreddit = community["subreddit"]
         try:
             raw, truncated = fetch_comments(subreddit, after_epoch, before_epoch)
-            if truncated:
-                raise RuntimeError("Arctic Shift comment window truncated (partial data)")
             parsed = [parse_arctic_comment(c) for c in filter_comments(raw)]
             inserted, orphans = insert_comments_for_known_posts(parsed, subreddit, conn)
             total_inserted += inserted
             total_orphans += orphans
-            ok += 1
-            logger.info("  r/%s: %d comments fetched, %d new inserted, %d orphans (arctic)",
-                        subreddit, len(raw), inserted, orphans)
+            if truncated:
+                # Keep the partial window — see the note in the posts step. This
+                # matters more for comments: they are collected by creation time
+                # in a rolling 72h window, so a discarded day ages out and is
+                # unrecoverable. Discarding is how r/CharacterAI (a T1 sub whose
+                # comment-sourced tags feed published theme counts) lost days.
+                logger.warning("  r/%s: %d comments fetched, %d new inserted, %d orphans — window INCOMPLETE (partial data kept)",
+                               subreddit, len(raw), inserted, orphans)
+                errors.append({"subreddit": subreddit,
+                               "error": "comment window truncated; partial data kept"})
+            else:
+                ok += 1
+                logger.info("  r/%s: %d comments fetched, %d new inserted, %d orphans (arctic)",
+                            subreddit, len(raw), inserted, orphans)
         except Exception as e:
             logger.warning("  r/%s: arctic comment collection failed: %s", subreddit, e)
             errors.append({"subreddit": subreddit, "error": str(e)})

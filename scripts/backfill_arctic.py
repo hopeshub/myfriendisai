@@ -62,6 +62,14 @@ USER_AGENT = "ai-companion-tracker/1.0 (research project; backfill)"
 BATCH_SIZE = 100
 REQUEST_DELAY = 2.0  # seconds between requests
 
+# Statuses that mean "the server is busy, try again", not "your request is bad".
+# Arctic Shift signals overload with HTTP 422 and the body
+# {"data": null, "error": "Timeout. Maybe slow down a bit"} — confirmed by
+# probe on 2026-08-07. It is NOT a validation error and NOT a pagination-depth
+# limit: a cold single-sub walk reaches 8900+ items fine, while the daily run
+# (40 subs back to back) trips it partway through the busiest subs.
+RETRYABLE_STATUS = (422, 429, 500, 502, 503, 504)
+
 
 def fetch_posts(subreddit: str, after_epoch: int, before_epoch: int,
                 on_batch=None) -> "tuple[list[dict], bool]":
@@ -123,14 +131,22 @@ def _fetch_window(api_base: str, subreddit: str, after_epoch: int, before_epoch:
             time.sleep(5 * retries)
             continue
 
-        if resp.status_code == 429:
+        # Retry transient overload instead of abandoning the window. Before
+        # 2026-08-07 only 429 was retried and every other non-200 ended the
+        # walk immediately, so a single 422 "slow down a bit" cost a whole
+        # subreddit's day — r/ClaudeAI went 4 days with no comments that way.
+        if resp.status_code in RETRYABLE_STATUS:
             retries += 1
+            detail = resp.text[:120].replace("\n", " ")
             if retries > max_retries:
-                logger.error("  r/%s: still rate-limited after %d retries — window TRUNCATED", subreddit, max_retries)
+                logger.error("  r/%s: HTTP %d after %d retries — window TRUNCATED (%s)",
+                             subreddit, resp.status_code, max_retries, detail)
                 truncated = True
                 break
-            logger.warning("  Rate limited, backing off 60s (retry %d)...", retries)
-            time.sleep(60)
+            wait = 60 if resp.status_code == 429 else min(15 * retries, 90)
+            logger.warning("  r/%s: HTTP %d — backing off %ds (retry %d/%d): %s",
+                           subreddit, resp.status_code, wait, retries, max_retries, detail)
+            time.sleep(wait)
             continue
 
         if resp.status_code != 200:
