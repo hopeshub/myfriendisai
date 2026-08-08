@@ -59,10 +59,16 @@ jobs:
           # This step exists because a full disk broke backups for 18 days in
           # Jul-Aug 2026 with zero external signal: the collection alert above
           # stayed green the entire time, because collection was fine.
+          # As of 2026-08-09 every published status.json carries this field
+          # (the stamp file exists and run_collect.sh always publishes it), so
+          # absence is itself a failure — a missing stamp file or a status
+          # writer regression — not a benign pre-first-backup state. Erroring
+          # here closes the blind spot where a totally-dead stamp path could
+          # warn forever without paging anyone.
           last_backup=$(echo "$status" | jq -r '.last_successful_backup // empty')
           if [ -z "$last_backup" ]; then
-            echo "::warning::status.json has no last_successful_backup. Expected only before the first stamped backup; if this persists, backups are not running."
-            exit 0
+            echo "::error::status.json has no last_successful_backup — the backup stamp path is broken (missing logs/last_backup_success or a status-writer regression). Check the collection Mac."
+            exit 1
           fi
 
           now_epoch=$(date -u +%s)

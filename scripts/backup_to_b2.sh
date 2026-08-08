@@ -48,19 +48,40 @@ source "$CRED"
 [ -n "${RESTIC_REPOSITORY:-}" ] || fail "RESTIC_REPOSITORY not set (bad credentials file)"
 [ -f "$DB" ] || fail "database not found: $DB"
 
-# 0. Disk-space precheck. Staging writes a full copy of the DB to the same
-#    volume, and restic then needs scratch space for temp pack files on top of
-#    that. Checking up front turns a silent mid-run "no space left on device"
-#    (which cost 18 days of backups in Aug 2026) into an obvious, actionable
-#    failure before any 25 GB copy is attempted.
+# 0. Disk-space precheck. Staging writes a full copy of the DB, and restic
+#    needs scratch space for temp pack files on top of that. Checking up front
+#    turns a silent mid-run "no space left on device" (which cost 18 days of
+#    backups in Aug 2026) into an obvious, actionable failure before any
+#    25 GB copy is attempted.
+#
+#    Fallback (2026-08-08): the DB has outgrown the internal disk — a same-
+#    volume staging copy needs 2x the DB size free and that headroom no longer
+#    exists, so the internal path fails every day until the DB-slimming
+#    migration (CLAUDE.md §6) lands. When internal space is short AND the T9
+#    external drive is mounted, stage there instead. This is a fallback, not
+#    the primary path: the original "no external drive" design intent stands,
+#    and if T9 is absent we still fail loudly rather than silently skipping.
 SCRATCH_GIB=3
+T9_STAGING_DIR="/Volumes/T9/myfriendisai-safety"
 db_bytes=$(stat -f%z "$DB")
 need_bytes=$(( db_bytes + SCRATCH_GIB * 1024 * 1024 * 1024 ))
 free_bytes=$(( $(df -k . | awk 'NR==2 {print $4}') * 1024 ))
 if [ "$free_bytes" -lt "$need_bytes" ]; then
-    fail "insufficient disk: need $(( need_bytes / 1024**3 )) GiB (DB $(( db_bytes / 1024**3 )) GiB + ${SCRATCH_GIB} GiB restic scratch), have $(( free_bytes / 1024**3 )) GiB free"
+    # Internal disk can't hold the staging copy — try the T9 fallback.
+    # restic temp packs still use the internal disk, so require SCRATCH_GIB
+    # free there and DB-size + margin free on T9.
+    t9_free_bytes=$(( $(df -k "$T9_STAGING_DIR" 2>/dev/null | awk 'NR==2 {print $4}' || echo 0) * 1024 ))
+    if [ -d "$T9_STAGING_DIR" ] \
+        && [ "$t9_free_bytes" -gt $(( db_bytes + 2 * 1024 * 1024 * 1024 )) ] \
+        && [ "$free_bytes" -gt $(( SCRATCH_GIB * 1024 * 1024 * 1024 )) ]; then
+        STAGING="$T9_STAGING_DIR/tracker-staging.db"
+        echo "[$(date)] Internal disk short (need $(( need_bytes / 1024**3 )) GiB, have $(( free_bytes / 1024**3 )) GiB) — staging on T9 instead"
+    else
+        fail "insufficient disk: need $(( need_bytes / 1024**3 )) GiB (DB $(( db_bytes / 1024**3 )) GiB + ${SCRATCH_GIB} GiB restic scratch), have $(( free_bytes / 1024**3 )) GiB free, and T9 fallback unavailable"
+    fi
+else
+    echo "[$(date)] Disk precheck OK — need $(( need_bytes / 1024**3 )) GiB, have $(( free_bytes / 1024**3 )) GiB free"
 fi
-echo "[$(date)] Disk precheck OK — need $(( need_bytes / 1024**3 )) GiB, have $(( free_bytes / 1024**3 )) GiB free"
 
 # 1. WAL-safe staging copy on the internal disk. sqlite3 .backup produces a
 #    consistent snapshot even while the collector is writing to the live DB.
