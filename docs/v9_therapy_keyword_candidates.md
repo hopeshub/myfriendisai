@@ -34,6 +34,58 @@ The therapy↔addiction leak test hand-read 90 addiction-only posts; 4 of the 22
 Source: `docs/therapy_addiction_overlap_finding_2026-05-18.md`; full audit
 `analysis/leak_test_problem_only_2026-05-18_audit.md`.
 
+### 3. Drift-cycle precision evidence (2026-08-08 — June + July cycles)
+
+The first two full drift cycles (~11,700 classifications; per-keyword n up to 50 at
+each of post/comment level) measured therapy as the weakest theme by a wide margin,
+**declining June → July at post level**:
+
+| Level | June | July |
+|---|---|---|
+| post | 68% (n=358) | **62%** (n=360) |
+| comment | 66% (n=171) | 68% (n=195) |
+
+Per-keyword post-level precision, July cycle (June in parens):
+
+| Keyword | July post precision |
+|---|---|
+| `ai therapy` | **36%** (41%) |
+| `emotional support` | **46%** (42%) |
+| `therapeutic` | **50%** (60%) |
+| `as a therapist` | **52%** (70%) |
+| `for therapy` | **60%** (78%) |
+| `ai therapist` | 76% (74%) |
+| `free therapy` | 86% (90%) |
+| `coping mechanism` | 88% (90%) |
+
+Classifier notes attribute much of the June→July decline to **post-4o-sunset
+"therapy-speak" discourse**: complaints about models' therapeutic *tone*
+("pseudo-therapeutic crap", anti-therapy prompt instructions), pasted AI output, and
+prompt-engineering threads — ambient language drifting onto the keywords rather than
+theme content changing. This is precisely the meaning-drift the instrument exists to
+catch. Four keywords now sit at or below ~52%, well under the 60% CUT threshold the
+original validation used.
+
+Also relevant from the same cycles: the **first real comment-level precision
+measurement** for therapy (66–68%, n≈366 across both cycles) — better than the old
+n=100 estimate (58%) but still the second-weakest comment theme.
+
+**Implication for v9:** the review is no longer only about *adding* recall (census
+candidates, plural fix) — it should also weigh whether `ai therapy`, `emotional
+support`, `therapeutic`, and `as a therapist` still clear the keep bar under current
+discourse, or need researcher-accepted status with documented FP patterns, or removal.
+Removals *lower* the therapy line; combined with admissions this makes dating and
+changelogging the v9 step doubly important.
+
+Additional cross-theme item surfaced by the same cycles (not therapy, but same v9
+housekeeping): r/NomiAI's weekly art-collab boilerplate ("no NSFW content") is a
+recurring template-driven FP cluster on `nsfw content` (16 of 22 July post-level FPs) —
+a candidate for a targeted exclusion rule rather than keyword removal.
+
+Source: `analysis/keyword_pipeline/drift_history.json` (quarters 2026-06, 2026-07);
+per-file classifier summaries in the 2026-08-08 session; sample files under
+`analysis/keyword_pipeline/results/drift_2026-0{6,7}_*`.
+
 ## What a v9 review should decide
 
 - Whether to admit any/all of the 15 census-recovered keywords (each already
