@@ -97,9 +97,9 @@ communities:
     display_name: "r/MySentientAI"
     tier: 1
     category: "Primary Companionship"
-    is_active: true
+    is_active: false  # Deactivated 2026-08-08: moribund — 8 posts ever, none since 2024-09-25.
     access_risk: restricted_post_only
-    notes: "212 subscribers. Small but focused companion community."
+    notes: "212 subscribers. Small but focused companion community. Went silent Sept 2024; historical posts remain in the corpus (same treatment as HeavenGF)."
 
   - subreddit: BeyondThePromptAI
     display_name: "r/BeyondThePromptAI"

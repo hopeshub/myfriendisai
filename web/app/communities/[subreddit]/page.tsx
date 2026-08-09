@@ -109,7 +109,10 @@ export default async function SubredditPage({
       <Charts snapshots={snapshots} />
 
       <p className="mt-10 text-xs text-[#7E8B9E] border-t border-[#2A2D3A] pt-4">
-        <strong>Subscribers</strong> — Direct (Reddit API).{" "}
+        <strong>Subscribers</strong> — Direct (Reddit API), last collected
+        2026-06-07; Reddit closed unauthenticated API access in May 2026, so
+        subscriber counts are frozen at that date. Other metrics come from
+        post/comment archives and stay current.{" "}
         <strong>Contributors / week</strong> — Derived: distinct authors of posts +
         comments in the 7 days ending on the snapshot date. Historical series uses
         post authors only; comment authors are counted from 2026-03-10 forward.{" "}

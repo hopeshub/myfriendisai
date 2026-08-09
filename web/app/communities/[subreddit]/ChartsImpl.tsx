@@ -172,7 +172,7 @@ export default function Charts({ snapshots }: { snapshots: Snapshot[] }) {
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-8 p-6 bg-[#1A1D27] rounded-xl">
         <div>
           <div className="text-2xl font-semibold tabular-nums text-[#F8FAFC]">{fmt(lastKnown("subscribers"))}</div>
-          <div className="text-xs text-[#9AA7B8] mt-0.5">Subscribers</div>
+          <div className="text-xs text-[#9AA7B8] mt-0.5">Subscribers (Jun 2026)</div>
         </div>
         <div>
           <div className="text-2xl font-semibold tabular-nums text-[#F8FAFC]">{fmt(lastKnown("unique_contributors_7d"))}</div>

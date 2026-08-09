@@ -130,7 +130,7 @@ export default function CommunitiesTable({
               <th className="pb-3 pr-4 font-medium text-[#7E8B9E] hidden sm:table-cell">Activity</th>
               <th className="pb-3 pr-4 font-medium text-[#7E8B9E] hidden sm:table-cell">Tier</th>
               <th className="pb-3 pr-4 font-medium text-right">
-                <SortButton label="Subscribers" sortKey="subscribers" current={sort} onSort={handleSort} />
+                <SortButton label="Subscribers (Jun 2026)" sortKey="subscribers" current={sort} onSort={handleSort} />
               </th>
               <th className="pb-3 pr-4 font-medium text-right">
                 <SortButton label="Contributors/wk" sortKey="unique_contributors_7d" current={sort} onSort={handleSort} />
@@ -191,7 +191,10 @@ export default function CommunitiesTable({
         <strong>Activity</strong> — monthly post volume, Jan 2023 to the last
         complete month; each sparkline is on its own scale (read the shape, not
         the height).{" "}
-        <strong>Subscribers</strong> — Direct (Reddit API).{" "}
+        <strong>Subscribers</strong> — Direct (Reddit API), last collected
+        2026-06-07; Reddit closed unauthenticated API access in May 2026, so
+        subscriber counts are frozen at that date. All other columns come from
+        post/comment archives and stay current.{" "}
         <strong>Contributors/wk</strong> — Derived (distinct post + comment authors over the
         past 7 days; comment authors counted from 2026-03-10 onward).{" "}
         <strong>Posts/day</strong> — Inferred (posts in past 24h).{" "}
