@@ -22,8 +22,8 @@ CREATE TABLE IF NOT EXISTS subreddit_snapshots (
     unique_post_authors_7d INTEGER,
     unique_comment_authors_7d INTEGER,
     unique_contributors_7d INTEGER,
-    raw_about_json TEXT,
-    raw_listing_json TEXT,
+    -- raw_about_json / raw_listing_json dropped 2026-08-08 (DB slimming);
+    -- historical blobs: /Volumes/T9/myfriendisai-safety/raw-archive-2026-08-08/
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     UNIQUE(subreddit, snapshot_date)
 );
@@ -42,7 +42,9 @@ CREATE TABLE IF NOT EXISTS posts (
     url TEXT,
     collected_date DATE NOT NULL,
     data_source TEXT NOT NULL DEFAULT 'json_endpoint',
-    raw_json TEXT,
+    -- raw_json dropped 2026-08-08 (DB slimming); historical blobs archived to
+    -- /Volumes/T9/myfriendisai-safety/raw-archive-2026-08-08/, arctic raw
+    -- re-fetchable from Arctic Shift at any time.
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 

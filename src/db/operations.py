@@ -74,7 +74,13 @@ def insert_snapshot(
     data_source: str = "json_endpoint",
     conn: Optional[sqlite3.Connection] = None,
 ) -> None:
-    """Insert or replace a subreddit snapshot row."""
+    """Insert or replace a subreddit snapshot row.
+
+    raw_about_json / raw_listing_json are accepted for caller compatibility but
+    NO LONGER PERSISTED — the raw columns were dropped in the 2026-08-08
+    DB-slimming migration (historical blobs archived to
+    /Volumes/T9/myfriendisai-safety/raw-archive-2026-08-08/).
+    """
     _conn = conn or get_connection()
     try:
         _conn.execute(
@@ -82,11 +88,11 @@ def insert_snapshot(
             INSERT INTO subreddit_snapshots
                 (subreddit, snapshot_date, data_source, subscribers, active_users,
                  visitors_7d, contributions_7d, posts_today, avg_comments_per_post,
-                 avg_score_per_post, unique_authors, raw_about_json, raw_listing_json)
+                 avg_score_per_post, unique_authors)
             VALUES
                 (:subreddit, :snapshot_date, :data_source, :subscribers, :active_users,
                  :visitors_7d, :contributions_7d, :posts_today, :avg_comments_per_post,
-                 :avg_score_per_post, :unique_authors, :raw_about_json, :raw_listing_json)
+                 :avg_score_per_post, :unique_authors)
             ON CONFLICT(subreddit, snapshot_date) DO UPDATE SET
                 subscribers=excluded.subscribers,
                 active_users=excluded.active_users,
@@ -95,9 +101,7 @@ def insert_snapshot(
                 posts_today=excluded.posts_today,
                 avg_comments_per_post=excluded.avg_comments_per_post,
                 avg_score_per_post=excluded.avg_score_per_post,
-                unique_authors=excluded.unique_authors,
-                raw_about_json=excluded.raw_about_json,
-                raw_listing_json=excluded.raw_listing_json
+                unique_authors=excluded.unique_authors
             """,
             {
                 "subreddit": subreddit,
@@ -111,8 +115,6 @@ def insert_snapshot(
                 "avg_comments_per_post": metrics.get("avg_comments_per_post"),
                 "avg_score_per_post": metrics.get("avg_score_per_post"),
                 "unique_authors": metrics.get("unique_authors"),
-                "raw_about_json": raw_about_json,
-                "raw_listing_json": raw_listing_json,
             },
         )
         _conn.commit()
@@ -122,7 +124,13 @@ def insert_snapshot(
 
 
 def insert_posts(posts: list[dict], conn: Optional[sqlite3.Connection] = None) -> int:
-    """Insert posts, skipping duplicates. Returns count of new rows inserted."""
+    """Insert posts, skipping duplicates. Returns count of new rows inserted.
+
+    A "raw_json" key in the post dicts is tolerated but NOT persisted — the
+    column was dropped in the 2026-08-08 DB-slimming migration (historical
+    blobs archived to /Volumes/T9/myfriendisai-safety/raw-archive-2026-08-08/;
+    arctic-sourced raw is re-fetchable from Arctic Shift at any time).
+    """
     _conn = conn or get_connection()
     inserted = 0
     try:
@@ -131,10 +139,10 @@ def insert_posts(posts: list[dict], conn: Optional[sqlite3.Connection] = None) -
                 """
                 INSERT OR IGNORE INTO posts
                     (id, subreddit, title, author, created_utc, score, num_comments,
-                     upvote_ratio, is_self, selftext, url, collected_date, data_source, raw_json)
+                     upvote_ratio, is_self, selftext, url, collected_date, data_source)
                 VALUES
                     (:id, :subreddit, :title, :author, :created_utc, :score, :num_comments,
-                     :upvote_ratio, :is_self, :selftext, :url, :collected_date, :data_source, :raw_json)
+                     :upvote_ratio, :is_self, :selftext, :url, :collected_date, :data_source)
                 """,
                 p,
             )
