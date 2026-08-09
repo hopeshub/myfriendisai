@@ -169,8 +169,13 @@ def write_sample_file(path: Path, rows, term: str, theme: str, level: str, quart
 
 
 # ── RECORD ────────────────────────────────────────────────────────────────
+# Theme is matched against the six known theme names explicitly — a greedy
+# [a-z_]+ split is ambiguous for multi-word keyword slugs (e.g.
+# drift_2026-06_therapy_for_therapy_post parsed as theme "therapy_for",
+# slug "therapy"), which silently skipped every multi-word keyword in the
+# 2026-08-08 record run before this fix.
 RESULT_FILENAME_RE = re.compile(
-    r"drift_(?P<quarter>\d{4}-(?:Q\d|\d{2}))_(?P<theme>[a-z_]+)_(?P<slug>[A-Za-z0-9_-]+)_(?P<level>post|comment)_results\.txt$"
+    r"drift_(?P<quarter>\d{4}-(?:Q\d|\d{2}))_(?P<theme>therapy|consciousness|addiction|romance|sexual_erp|rupture)_(?P<slug>[A-Za-z0-9_-]+)_(?P<level>post|comment)_results\.txt$"
 )
 RESULT_LINE_RE = re.compile(r"^\s*(\d+)\s*[\.\)]?\s*(TP|FP)\b", re.IGNORECASE)
 

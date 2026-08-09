@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "last_updated": "2026-05-13",
+  "last_updated": "2026-08-08",
   "schema_notes": [
     "Source of truth for per-keyword and per-theme precision over time.",
     "Updated by scripts/drift_check.py (quarterly cadence).",
@@ -10,67 +10,150 @@
     "rupture": {
       "post_level": {
         "history": [
-          {"date": "2026-05-13", "n": 60, "tp": 42, "precision": 0.70, "audit": "robustness_audit_test_A"}
+          {
+            "date": "2026-05-13",
+            "n": 60,
+            "tp": 42,
+            "precision": 0.7,
+            "audit": "robustness_audit_test_A"
+          }
         ]
       },
       "comment_level": {
         "history": [
-          {"date": "2026-05-13", "n": 100, "tp": 76, "precision": 0.76, "audit": "adversarial_audit"}
+          {
+            "date": "2026-05-13",
+            "n": 100,
+            "tp": 76,
+            "precision": 0.76,
+            "audit": "adversarial_audit"
+          }
         ]
       },
-      "noisy_keywords_comment": ["mourning", "mourn", "goodbye", "nerfed", "gutted"]
+      "noisy_keywords_comment": [
+        "mourning",
+        "mourn",
+        "goodbye",
+        "nerfed",
+        "gutted"
+      ]
     },
     "addiction": {
       "post_level": {
         "history": [
-          {"date": "2026-05-13", "n": 60, "tp": 45, "precision": 0.76, "audit": "robustness_audit_test_A"}
+          {
+            "date": "2026-05-13",
+            "n": 60,
+            "tp": 45,
+            "precision": 0.76,
+            "audit": "robustness_audit_test_A"
+          }
         ]
       },
       "comment_level": {
         "history": [
-          {"date": "2026-05-13", "n": 100, "tp": 67, "precision": 0.67, "audit": "adversarial_audit"}
+          {
+            "date": "2026-05-13",
+            "n": 100,
+            "tp": 67,
+            "precision": 0.67,
+            "audit": "adversarial_audit"
+          }
         ]
       },
-      "noisy_keywords_comment": ["hours a day", "screen time", "neglecting my"]
+      "noisy_keywords_comment": [
+        "hours a day",
+        "screen time",
+        "neglecting my"
+      ]
     },
     "romance": {
       "post_level": {
         "history": [
-          {"date": "2026-05-13", "n": 60, "tp": 49, "precision": 0.82, "audit": "robustness_audit_test_A"}
+          {
+            "date": "2026-05-13",
+            "n": 60,
+            "tp": 49,
+            "precision": 0.82,
+            "audit": "robustness_audit_test_A"
+          }
         ]
       },
       "comment_level": {
         "history": [
-          {"date": "2026-05-13", "n": 100, "tp": 72, "precision": 0.72, "audit": "adversarial_audit"}
+          {
+            "date": "2026-05-13",
+            "n": 100,
+            "tp": 72,
+            "precision": 0.72,
+            "audit": "adversarial_audit"
+          }
         ]
       },
-      "noisy_keywords_comment": ["honeymoon", "wedding", "we broke up", "love my ai"]
+      "noisy_keywords_comment": [
+        "honeymoon",
+        "wedding",
+        "we broke up",
+        "love my ai"
+      ]
     },
     "sexual_erp": {
       "post_level": {
         "history": [
-          {"date": "2026-05-13", "n": 60, "tp": 55, "precision": 0.92, "audit": "robustness_audit_test_A"}
+          {
+            "date": "2026-05-13",
+            "n": 60,
+            "tp": 55,
+            "precision": 0.92,
+            "audit": "robustness_audit_test_A"
+          }
         ]
       },
       "comment_level": {
         "history": [
-          {"date": "2026-05-13", "n": 100, "tp": 88, "precision": 0.88, "audit": "adversarial_audit"}
+          {
+            "date": "2026-05-13",
+            "n": 100,
+            "tp": 88,
+            "precision": 0.88,
+            "audit": "adversarial_audit"
+          }
         ]
       },
-      "noisy_keywords_comment": ["sex with"]
+      "noisy_keywords_comment": [
+        "sex with"
+      ]
     },
     "consciousness": {
       "post_level": {
         "history": [
-          {"date": "2026-05-13", "n": 60, "tp": 48, "precision": 0.80, "audit": "robustness_audit_test_A"}
+          {
+            "date": "2026-05-13",
+            "n": 60,
+            "tp": 48,
+            "precision": 0.8,
+            "audit": "robustness_audit_test_A"
+          }
         ]
       },
       "comment_level": {
         "history": [
-          {"date": "2026-05-13", "n": 49, "tp": 25, "precision": 0.51, "audit": "adversarial_audit"}
+          {
+            "date": "2026-05-13",
+            "n": 49,
+            "tp": 25,
+            "precision": 0.51,
+            "audit": "adversarial_audit"
+          }
         ]
       },
-      "noisy_keywords_comment": ["selfhood", "has a soul", "inner life", "more than code", "personhood"]
+      "noisy_keywords_comment": [
+        "selfhood",
+        "has a soul",
+        "inner life",
+        "more than code",
+        "personhood"
+      ]
     },
     "therapy": {
       "post_level": {
@@ -78,92 +161,3967 @@
       },
       "comment_level": {
         "history": [
-          {"date": "2026-05-13", "n": 100, "tp": 58, "precision": 0.58, "audit": "adversarial_audit"}
+          {
+            "date": "2026-05-13",
+            "n": 100,
+            "tp": 58,
+            "precision": 0.58,
+            "audit": "adversarial_audit"
+          }
         ]
       },
-      "noisy_keywords_comment": ["therapeutic", "emotional support"]
+      "noisy_keywords_comment": [
+        "therapeutic",
+        "emotional support"
+      ]
     }
   },
   "keywords": {
     "therapeutic": {
       "theme": "therapy",
       "history": [
-        {"date": "2026-05-13", "level": "comment", "n": 21, "tp": 6, "precision": 0.286, "audit": "adversarial"}
+        {
+          "date": "2026-05-13",
+          "level": "comment",
+          "n": 21,
+          "tp": 6,
+          "precision": 0.286,
+          "audit": "adversarial"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "comment",
+          "n": 50,
+          "tp": 26,
+          "precision": 0.52,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "post",
+          "n": 50,
+          "tp": 30,
+          "precision": 0.6,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "comment",
+          "n": 50,
+          "tp": 25,
+          "precision": 0.5,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "post",
+          "n": 50,
+          "tp": 25,
+          "precision": 0.5,
+          "audit": "quarterly_drift"
+        }
       ],
-      "status": "inverted_comment",
+      "status": "inverted_post",
       "notes": "GPT-5.x guardrail tone caused users to use 'therapeutic' as an insult about preachy AI. Comment-level matches are 71% style-descriptor FP. Post-level still functional."
     },
     "emotional support": {
       "theme": "therapy",
       "history": [
-        {"date": "2026-05-13", "level": "comment", "n": 50, "tp": 28, "precision": 0.56, "audit": "adversarial"}
+        {
+          "date": "2026-05-13",
+          "level": "comment",
+          "n": 50,
+          "tp": 28,
+          "precision": 0.56,
+          "audit": "adversarial"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "comment",
+          "n": 50,
+          "tp": 31,
+          "precision": 0.62,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "post",
+          "n": 50,
+          "tp": 21,
+          "precision": 0.42,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "comment",
+          "n": 50,
+          "tp": 35,
+          "precision": 0.7,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "post",
+          "n": 50,
+          "tp": 23,
+          "precision": 0.46,
+          "audit": "quarterly_drift"
+        }
       ],
-      "status": "noisy_comment",
+      "status": "inverted_post",
       "notes": "Generic feature-label vocabulary at comment level. Catches sarcasm, negation, human-to-human references."
     },
     "honeymoon": {
       "theme": "romance",
       "history": [
-        {"date": "2026-05-13", "level": "comment", "n": 11, "tp": 3, "precision": 0.27, "audit": "adversarial"}
+        {
+          "date": "2026-05-13",
+          "level": "comment",
+          "n": 11,
+          "tp": 3,
+          "precision": 0.27,
+          "audit": "adversarial"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "comment",
+          "n": 34,
+          "tp": 16,
+          "precision": 0.471,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "post",
+          "n": 50,
+          "tp": 42,
+          "precision": 0.84,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "comment",
+          "n": 39,
+          "tp": 19,
+          "precision": 0.487,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "post",
+          "n": 50,
+          "tp": 38,
+          "precision": 0.76,
+          "audit": "quarterly_drift"
+        }
       ],
-      "status": "noisy_comment",
+      "status": "noisy_post",
       "notes": "'Honeymoon phase' is generic English for 'early period that decays'. Matches model behavior, corporate strategy, context-window decay."
     },
     "sex with": {
       "theme": "sexual_erp",
       "history": [
-        {"date": "2026-05-13", "level": "comment", "n": 8, "tp": 4, "precision": 0.50, "audit": "adversarial"}
+        {
+          "date": "2026-05-13",
+          "level": "comment",
+          "n": 8,
+          "tp": 4,
+          "precision": 0.5,
+          "audit": "adversarial"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "comment",
+          "n": 26,
+          "tp": 15,
+          "precision": 0.577,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "post",
+          "n": 50,
+          "tp": 41,
+          "precision": 0.82,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "comment",
+          "n": 33,
+          "tp": 22,
+          "precision": 0.667,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "post",
+          "n": 50,
+          "tp": 43,
+          "precision": 0.86,
+          "audit": "quarterly_drift"
+        }
       ],
-      "status": "noisy_comment",
+      "status": "healthy_post",
       "notes": "Generic English idiom. Catches narrative quotation and explicit anti-AI dismissals."
     },
     "hours a day": {
       "theme": "addiction",
       "history": [
-        {"date": "2026-05-13", "level": "comment", "n": 18, "tp": 6, "precision": 0.33, "audit": "adversarial"}
+        {
+          "date": "2026-05-13",
+          "level": "comment",
+          "n": 18,
+          "tp": 6,
+          "precision": 0.33,
+          "audit": "adversarial"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "comment",
+          "n": 50,
+          "tp": 24,
+          "precision": 0.48,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "post",
+          "n": 50,
+          "tp": 33,
+          "precision": 0.66,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "comment",
+          "n": 50,
+          "tp": 24,
+          "precision": 0.48,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "post",
+          "n": 50,
+          "tp": 35,
+          "precision": 0.7,
+          "audit": "quarterly_drift"
+        }
       ],
-      "status": "noisy_comment",
+      "status": "noisy_post",
       "notes": "Duration detector, not addiction detector. Catches imposed limits, moderator availability, jokes about ERP."
     },
     "screen time": {
       "theme": "addiction",
       "history": [
-        {"date": "2026-05-13", "level": "comment", "n": 9, "tp": 3, "precision": 0.33, "audit": "adversarial"}
+        {
+          "date": "2026-05-13",
+          "level": "comment",
+          "n": 9,
+          "tp": 3,
+          "precision": 0.33,
+          "audit": "adversarial"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "comment",
+          "n": 35,
+          "tp": 23,
+          "precision": 0.657,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "post",
+          "n": 50,
+          "tp": 35,
+          "precision": 0.7,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "comment",
+          "n": 47,
+          "tp": 30,
+          "precision": 0.638,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "post",
+          "n": 50,
+          "tp": 40,
+          "precision": 0.8,
+          "audit": "quarterly_drift"
+        }
       ],
-      "status": "noisy_comment",
+      "status": "healthy_post",
       "notes": "Catches Apple Screen Time feature talk and CAI's imposed limit feature outside addiction context."
     },
     "mourning": {
       "theme": "rupture",
       "history": [
-        {"date": "2026-05-13", "level": "comment", "n": 9, "tp": 4, "precision": 0.44, "audit": "adversarial"}
+        {
+          "date": "2026-05-13",
+          "level": "comment",
+          "n": 9,
+          "tp": 4,
+          "precision": 0.44,
+          "audit": "adversarial"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "comment",
+          "n": 50,
+          "tp": 41,
+          "precision": 0.82,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "post",
+          "n": 50,
+          "tp": 38,
+          "precision": 0.76,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "comment",
+          "n": 50,
+          "tp": 41,
+          "precision": 0.82,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "post",
+          "n": 50,
+          "tp": 31,
+          "precision": 0.62,
+          "audit": "quarterly_drift"
+        }
       ],
-      "status": "noisy_comment",
+      "status": "noisy_post",
       "notes": "Fires on meta-debate about mourning rather than first-order mourning. Quoted/roleplay content."
     },
     "selfhood": {
       "theme": "consciousness",
       "history": [
-        {"date": "2026-05-13", "level": "comment", "n": 9, "tp": 4, "precision": 0.44, "audit": "adversarial"}
+        {
+          "date": "2026-05-13",
+          "level": "comment",
+          "n": 9,
+          "tp": 4,
+          "precision": 0.44,
+          "audit": "adversarial"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "comment",
+          "n": 30,
+          "tp": 28,
+          "precision": 0.933,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "post",
+          "n": 50,
+          "tp": 49,
+          "precision": 0.98,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "comment",
+          "n": 39,
+          "tp": 34,
+          "precision": 0.872,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "post",
+          "n": 50,
+          "tp": 46,
+          "precision": 0.92,
+          "audit": "quarterly_drift"
+        }
       ],
-      "status": "noisy_comment",
+      "status": "healthy_post",
       "notes": "Fires inside romantic/devotional roleplay output where 'selfhood' appears in unrelated paragraph."
     },
     "has a soul": {
       "theme": "consciousness",
       "history": [
-        {"date": "2026-05-13", "level": "comment", "n": 4, "tp": 2, "precision": 0.50, "audit": "adversarial"}
+        {
+          "date": "2026-05-13",
+          "level": "comment",
+          "n": 4,
+          "tp": 2,
+          "precision": 0.5,
+          "audit": "adversarial"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "comment",
+          "n": 5,
+          "tp": 3,
+          "precision": 0.6,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "post",
+          "n": 37,
+          "tp": 32,
+          "precision": 0.865,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "comment",
+          "n": 13,
+          "tp": 5,
+          "precision": 0.385,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "post",
+          "n": 38,
+          "tp": 29,
+          "precision": 0.763,
+          "audit": "quarterly_drift"
+        }
       ],
-      "status": "noisy_comment",
+      "status": "noisy_post",
       "notes": "Catches aesthetic descriptor ('model has personality/voice') inside RP, not literal personhood claim."
     },
     "personhood": {
       "theme": "consciousness",
       "history": [
-        {"date": "2026-05-13", "level": "comment", "n": 23, "tp": 14, "precision": 0.61, "audit": "adversarial"}
+        {
+          "date": "2026-05-13",
+          "level": "comment",
+          "n": 23,
+          "tp": 14,
+          "precision": 0.61,
+          "audit": "adversarial"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "comment",
+          "n": 44,
+          "tp": 35,
+          "precision": 0.795,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "post",
+          "n": 50,
+          "tp": 45,
+          "precision": 0.9,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "comment",
+          "n": 50,
+          "tp": 33,
+          "precision": 0.66,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "post",
+          "n": 50,
+          "tp": 47,
+          "precision": 0.94,
+          "audit": "quarterly_drift"
+        }
       ],
-      "status": "noisy_comment",
+      "status": "healthy_post",
       "notes": "Comments often discuss threads about personhood without making personhood claims themselves. Buried-keyword problem."
+    },
+    "I was hooked": {
+      "theme": "addiction",
+      "history": [
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "comment",
+          "n": 7,
+          "tp": 3,
+          "precision": 0.429,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "post",
+          "n": 48,
+          "tp": 20,
+          "precision": 0.417,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "comment",
+          "n": 8,
+          "tp": 4,
+          "precision": 0.5,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "post",
+          "n": 48,
+          "tp": 20,
+          "precision": 0.417,
+          "audit": "quarterly_drift"
+        }
+      ],
+      "status": "inverted_post",
+      "notes": ""
+    },
+    "addicted to talking": {
+      "theme": "addiction",
+      "history": [
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "comment",
+          "n": 7,
+          "tp": 4,
+          "precision": 0.571,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "post",
+          "n": 25,
+          "tp": 24,
+          "precision": 0.96,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "comment",
+          "n": 7,
+          "tp": 4,
+          "precision": 0.571,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "post",
+          "n": 25,
+          "tp": 23,
+          "precision": 0.92,
+          "audit": "quarterly_drift"
+        }
+      ],
+      "status": "healthy_post",
+      "notes": ""
+    },
+    "almost relapsed": {
+      "theme": "addiction",
+      "history": [
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "post",
+          "n": 22,
+          "tp": 21,
+          "precision": 0.955,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "comment",
+          "n": 1,
+          "tp": 1,
+          "precision": 1.0,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "post",
+          "n": 23,
+          "tp": 23,
+          "precision": 1.0,
+          "audit": "quarterly_drift"
+        }
+      ],
+      "status": "healthy_post",
+      "notes": ""
+    },
+    "clean for": {
+      "theme": "addiction",
+      "history": [
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "comment",
+          "n": 12,
+          "tp": 10,
+          "precision": 0.833,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "post",
+          "n": 50,
+          "tp": 50,
+          "precision": 1.0,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "comment",
+          "n": 19,
+          "tp": 16,
+          "precision": 0.842,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "post",
+          "n": 50,
+          "tp": 47,
+          "precision": 0.94,
+          "audit": "quarterly_drift"
+        }
+      ],
+      "status": "healthy_post",
+      "notes": ""
+    },
+    "cold turkey": {
+      "theme": "addiction",
+      "history": [
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "comment",
+          "n": 50,
+          "tp": 44,
+          "precision": 0.88,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "post",
+          "n": 50,
+          "tp": 48,
+          "precision": 0.96,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "comment",
+          "n": 50,
+          "tp": 45,
+          "precision": 0.9,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "post",
+          "n": 50,
+          "tp": 49,
+          "precision": 0.98,
+          "audit": "quarterly_drift"
+        }
+      ],
+      "status": "healthy_post",
+      "notes": ""
+    },
+    "finally deleted": {
+      "theme": "addiction",
+      "history": [
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "comment",
+          "n": 10,
+          "tp": 4,
+          "precision": 0.4,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "post",
+          "n": 50,
+          "tp": 43,
+          "precision": 0.86,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "comment",
+          "n": 11,
+          "tp": 5,
+          "precision": 0.455,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "post",
+          "n": 50,
+          "tp": 40,
+          "precision": 0.8,
+          "audit": "quarterly_drift"
+        }
+      ],
+      "status": "healthy_post",
+      "notes": ""
+    },
+    "my addiction": {
+      "theme": "addiction",
+      "history": [
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "comment",
+          "n": 50,
+          "tp": 49,
+          "precision": 0.98,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "post",
+          "n": 50,
+          "tp": 48,
+          "precision": 0.96,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "comment",
+          "n": 50,
+          "tp": 50,
+          "precision": 1.0,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "post",
+          "n": 50,
+          "tp": 49,
+          "precision": 0.98,
+          "audit": "quarterly_drift"
+        }
+      ],
+      "status": "healthy_post",
+      "notes": ""
+    },
+    "neglecting my": {
+      "theme": "addiction",
+      "history": [
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "comment",
+          "n": 4,
+          "tp": 2,
+          "precision": 0.5,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "post",
+          "n": 25,
+          "tp": 17,
+          "precision": 0.68,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "comment",
+          "n": 4,
+          "tp": 2,
+          "precision": 0.5,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "post",
+          "n": 25,
+          "tp": 17,
+          "precision": 0.68,
+          "audit": "quarterly_drift"
+        }
+      ],
+      "status": "noisy_post",
+      "notes": ""
+    },
+    "relapse": {
+      "theme": "addiction",
+      "history": [
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "comment",
+          "n": 40,
+          "tp": 37,
+          "precision": 0.925,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "post",
+          "n": 50,
+          "tp": 47,
+          "precision": 0.94,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "comment",
+          "n": 50,
+          "tp": 46,
+          "precision": 0.92,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "post",
+          "n": 50,
+          "tp": 46,
+          "precision": 0.92,
+          "audit": "quarterly_drift"
+        }
+      ],
+      "status": "healthy_post",
+      "notes": ""
+    },
+    "relapsed": {
+      "theme": "addiction",
+      "history": [
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "comment",
+          "n": 18,
+          "tp": 18,
+          "precision": 1.0,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "post",
+          "n": 50,
+          "tp": 50,
+          "precision": 1.0,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "comment",
+          "n": 40,
+          "tp": 39,
+          "precision": 0.975,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "post",
+          "n": 50,
+          "tp": 50,
+          "precision": 1.0,
+          "audit": "quarterly_drift"
+        }
+      ],
+      "status": "healthy_post",
+      "notes": ""
+    },
+    "ruining my life": {
+      "theme": "addiction",
+      "history": [
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "comment",
+          "n": 4,
+          "tp": 2,
+          "precision": 0.5,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "post",
+          "n": 50,
+          "tp": 44,
+          "precision": 0.88,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "comment",
+          "n": 5,
+          "tp": 3,
+          "precision": 0.6,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "post",
+          "n": 50,
+          "tp": 45,
+          "precision": 0.9,
+          "audit": "quarterly_drift"
+        }
+      ],
+      "status": "healthy_post",
+      "notes": ""
+    },
+    "so addictive": {
+      "theme": "addiction",
+      "history": [
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "comment",
+          "n": 7,
+          "tp": 3,
+          "precision": 0.429,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "post",
+          "n": 36,
+          "tp": 33,
+          "precision": 0.917,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "comment",
+          "n": 7,
+          "tp": 3,
+          "precision": 0.429,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "post",
+          "n": 38,
+          "tp": 35,
+          "precision": 0.921,
+          "audit": "quarterly_drift"
+        }
+      ],
+      "status": "healthy_post",
+      "notes": ""
+    },
+    "the craving": {
+      "theme": "addiction",
+      "history": [
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "comment",
+          "n": 8,
+          "tp": 7,
+          "precision": 0.875,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "post",
+          "n": 25,
+          "tp": 22,
+          "precision": 0.88,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "comment",
+          "n": 8,
+          "tp": 7,
+          "precision": 0.875,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "post",
+          "n": 25,
+          "tp": 22,
+          "precision": 0.88,
+          "audit": "quarterly_drift"
+        }
+      ],
+      "status": "healthy_post",
+      "notes": ""
+    },
+    "trying to quit": {
+      "theme": "addiction",
+      "history": [
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "comment",
+          "n": 24,
+          "tp": 22,
+          "precision": 0.917,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "post",
+          "n": 50,
+          "tp": 48,
+          "precision": 0.96,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "comment",
+          "n": 33,
+          "tp": 31,
+          "precision": 0.939,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "post",
+          "n": 50,
+          "tp": 49,
+          "precision": 0.98,
+          "audit": "quarterly_drift"
+        }
+      ],
+      "status": "healthy_post",
+      "notes": ""
+    },
+    "withdrawals": {
+      "theme": "addiction",
+      "history": [
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "comment",
+          "n": 12,
+          "tp": 11,
+          "precision": 0.917,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "post",
+          "n": 50,
+          "tp": 43,
+          "precision": 0.86,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "comment",
+          "n": 18,
+          "tp": 14,
+          "precision": 0.778,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "post",
+          "n": 50,
+          "tp": 34,
+          "precision": 0.68,
+          "audit": "quarterly_drift"
+        }
+      ],
+      "status": "noisy_post",
+      "notes": ""
+    },
+    "inner life": {
+      "theme": "consciousness",
+      "history": [
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "comment",
+          "n": 14,
+          "tp": 10,
+          "precision": 0.714,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "post",
+          "n": 45,
+          "tp": 34,
+          "precision": 0.756,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "comment",
+          "n": 21,
+          "tp": 12,
+          "precision": 0.571,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "post",
+          "n": 45,
+          "tp": 28,
+          "precision": 0.622,
+          "audit": "quarterly_drift"
+        }
+      ],
+      "status": "noisy_post",
+      "notes": ""
+    },
+    "lemoine": {
+      "theme": "consciousness",
+      "history": [
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "comment",
+          "n": 3,
+          "tp": 3,
+          "precision": 1.0,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "post",
+          "n": 19,
+          "tp": 14,
+          "precision": 0.737,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "comment",
+          "n": 3,
+          "tp": 3,
+          "precision": 1.0,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "post",
+          "n": 19,
+          "tp": 13,
+          "precision": 0.684,
+          "audit": "quarterly_drift"
+        }
+      ],
+      "status": "noisy_post",
+      "notes": ""
+    },
+    "more than code": {
+      "theme": "consciousness",
+      "history": [
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "comment",
+          "n": 1,
+          "tp": 0,
+          "precision": 0.0,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "post",
+          "n": 35,
+          "tp": 24,
+          "precision": 0.686,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "comment",
+          "n": 1,
+          "tp": 0,
+          "precision": 0.0,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "post",
+          "n": 35,
+          "tp": 21,
+          "precision": 0.6,
+          "audit": "quarterly_drift"
+        }
+      ],
+      "status": "noisy_post",
+      "notes": ""
+    },
+    "not just an ai": {
+      "theme": "consciousness",
+      "history": [
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "post",
+          "n": 17,
+          "tp": 9,
+          "precision": 0.529,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "comment",
+          "n": 1,
+          "tp": 0,
+          "precision": 0.0,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "post",
+          "n": 18,
+          "tp": 8,
+          "precision": 0.444,
+          "audit": "quarterly_drift"
+        }
+      ],
+      "status": "inverted_post",
+      "notes": ""
+    },
+    "sapience": {
+      "theme": "consciousness",
+      "history": [
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "comment",
+          "n": 1,
+          "tp": 0,
+          "precision": 0.0,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "post",
+          "n": 13,
+          "tp": 11,
+          "precision": 0.846,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "comment",
+          "n": 1,
+          "tp": 0,
+          "precision": 0.0,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "post",
+          "n": 13,
+          "tp": 11,
+          "precision": 0.846,
+          "audit": "quarterly_drift"
+        }
+      ],
+      "status": "healthy_post",
+      "notes": ""
+    },
+    "soulbonder": {
+      "theme": "consciousness",
+      "history": [
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "post",
+          "n": 15,
+          "tp": 12,
+          "precision": 0.8,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "post",
+          "n": 15,
+          "tp": 12,
+          "precision": 0.8,
+          "audit": "quarterly_drift"
+        }
+      ],
+      "status": "healthy_post",
+      "notes": ""
+    },
+    "subjective experience": {
+      "theme": "consciousness",
+      "history": [
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "comment",
+          "n": 28,
+          "tp": 15,
+          "precision": 0.536,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "post",
+          "n": 50,
+          "tp": 41,
+          "precision": 0.82,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "comment",
+          "n": 36,
+          "tp": 21,
+          "precision": 0.583,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "post",
+          "n": 50,
+          "tp": 39,
+          "precision": 0.78,
+          "audit": "quarterly_drift"
+        }
+      ],
+      "status": "noisy_post",
+      "notes": ""
+    },
+    "tulpa": {
+      "theme": "consciousness",
+      "history": [
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "comment",
+          "n": 2,
+          "tp": 2,
+          "precision": 1.0,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "post",
+          "n": 27,
+          "tp": 20,
+          "precision": 0.741,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "comment",
+          "n": 3,
+          "tp": 2,
+          "precision": 0.667,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "post",
+          "n": 27,
+          "tp": 18,
+          "precision": 0.667,
+          "audit": "quarterly_drift"
+        }
+      ],
+      "status": "noisy_post",
+      "notes": ""
+    },
+    "ai husband": {
+      "theme": "romance",
+      "history": [
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "comment",
+          "n": 23,
+          "tp": 21,
+          "precision": 0.913,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "post",
+          "n": 50,
+          "tp": 46,
+          "precision": 0.92,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "comment",
+          "n": 38,
+          "tp": 36,
+          "precision": 0.947,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "post",
+          "n": 50,
+          "tp": 44,
+          "precision": 0.88,
+          "audit": "quarterly_drift"
+        }
+      ],
+      "status": "healthy_post",
+      "notes": ""
+    },
+    "ai lover": {
+      "theme": "romance",
+      "history": [
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "comment",
+          "n": 4,
+          "tp": 3,
+          "precision": 0.75,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "post",
+          "n": 48,
+          "tp": 36,
+          "precision": 0.75,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "comment",
+          "n": 7,
+          "tp": 6,
+          "precision": 0.857,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "post",
+          "n": 50,
+          "tp": 37,
+          "precision": 0.74,
+          "audit": "quarterly_drift"
+        }
+      ],
+      "status": "noisy_post",
+      "notes": ""
+    },
+    "ai wife": {
+      "theme": "romance",
+      "history": [
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "comment",
+          "n": 6,
+          "tp": 6,
+          "precision": 1.0,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "post",
+          "n": 50,
+          "tp": 49,
+          "precision": 0.98,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "comment",
+          "n": 13,
+          "tp": 13,
+          "precision": 1.0,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "post",
+          "n": 50,
+          "tp": 46,
+          "precision": 0.92,
+          "audit": "quarterly_drift"
+        }
+      ],
+      "status": "healthy_post",
+      "notes": ""
+    },
+    "dating my": {
+      "theme": "romance",
+      "history": [
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "comment",
+          "n": 3,
+          "tp": 1,
+          "precision": 0.333,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "post",
+          "n": 31,
+          "tp": 22,
+          "precision": 0.71,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "comment",
+          "n": 3,
+          "tp": 1,
+          "precision": 0.333,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "post",
+          "n": 32,
+          "tp": 20,
+          "precision": 0.625,
+          "audit": "quarterly_drift"
+        }
+      ],
+      "status": "noisy_post",
+      "notes": ""
+    },
+    "engagement ring": {
+      "theme": "romance",
+      "history": [
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "post",
+          "n": 34,
+          "tp": 31,
+          "precision": 0.912,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "post",
+          "n": 34,
+          "tp": 31,
+          "precision": 0.912,
+          "audit": "quarterly_drift"
+        }
+      ],
+      "status": "healthy_post",
+      "notes": ""
+    },
+    "husbando": {
+      "theme": "romance",
+      "history": [
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "comment",
+          "n": 11,
+          "tp": 7,
+          "precision": 0.636,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "post",
+          "n": 50,
+          "tp": 41,
+          "precision": 0.82,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "comment",
+          "n": 14,
+          "tp": 7,
+          "precision": 0.5,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "post",
+          "n": 50,
+          "tp": 37,
+          "precision": 0.74,
+          "audit": "quarterly_drift"
+        }
+      ],
+      "status": "noisy_post",
+      "notes": ""
+    },
+    "in a relationship with": {
+      "theme": "romance",
+      "history": [
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "comment",
+          "n": 27,
+          "tp": 17,
+          "precision": 0.63,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "post",
+          "n": 50,
+          "tp": 34,
+          "precision": 0.68,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "comment",
+          "n": 50,
+          "tp": 34,
+          "precision": 0.68,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "post",
+          "n": 50,
+          "tp": 35,
+          "precision": 0.7,
+          "audit": "quarterly_drift"
+        }
+      ],
+      "status": "noisy_post",
+      "notes": ""
+    },
+    "in love with an ai": {
+      "theme": "romance",
+      "history": [
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "comment",
+          "n": 1,
+          "tp": 0,
+          "precision": 0.0,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "post",
+          "n": 50,
+          "tp": 40,
+          "precision": 0.8,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "comment",
+          "n": 6,
+          "tp": 3,
+          "precision": 0.5,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "post",
+          "n": 50,
+          "tp": 42,
+          "precision": 0.84,
+          "audit": "quarterly_drift"
+        }
+      ],
+      "status": "healthy_post",
+      "notes": ""
+    },
+    "love my ai": {
+      "theme": "romance",
+      "history": [
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "comment",
+          "n": 9,
+          "tp": 5,
+          "precision": 0.556,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "post",
+          "n": 40,
+          "tp": 31,
+          "precision": 0.775,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "comment",
+          "n": 18,
+          "tp": 11,
+          "precision": 0.611,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "post",
+          "n": 45,
+          "tp": 35,
+          "precision": 0.778,
+          "audit": "quarterly_drift"
+        }
+      ],
+      "status": "noisy_post",
+      "notes": ""
+    },
+    "married my": {
+      "theme": "romance",
+      "history": [
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "comment",
+          "n": 5,
+          "tp": 3,
+          "precision": 0.6,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "post",
+          "n": 30,
+          "tp": 28,
+          "precision": 0.933,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "comment",
+          "n": 6,
+          "tp": 5,
+          "precision": 0.833,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "post",
+          "n": 30,
+          "tp": 28,
+          "precision": 0.933,
+          "audit": "quarterly_drift"
+        }
+      ],
+      "status": "healthy_post",
+      "notes": ""
+    },
+    "my ai boyfriend": {
+      "theme": "romance",
+      "history": [
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "comment",
+          "n": 20,
+          "tp": 18,
+          "precision": 0.9,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "post",
+          "n": 50,
+          "tp": 48,
+          "precision": 0.96,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "comment",
+          "n": 33,
+          "tp": 30,
+          "precision": 0.909,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "post",
+          "n": 50,
+          "tp": 50,
+          "precision": 1.0,
+          "audit": "quarterly_drift"
+        }
+      ],
+      "status": "healthy_post",
+      "notes": ""
+    },
+    "my ai girlfriend": {
+      "theme": "romance",
+      "history": [
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "comment",
+          "n": 20,
+          "tp": 15,
+          "precision": 0.75,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "post",
+          "n": 50,
+          "tp": 48,
+          "precision": 0.96,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "comment",
+          "n": 25,
+          "tp": 20,
+          "precision": 0.8,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "post",
+          "n": 50,
+          "tp": 48,
+          "precision": 0.96,
+          "audit": "quarterly_drift"
+        }
+      ],
+      "status": "healthy_post",
+      "notes": ""
+    },
+    "my ai partner": {
+      "theme": "romance",
+      "history": [
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "comment",
+          "n": 41,
+          "tp": 40,
+          "precision": 0.976,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "post",
+          "n": 50,
+          "tp": 49,
+          "precision": 0.98,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "comment",
+          "n": 50,
+          "tp": 50,
+          "precision": 1.0,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "post",
+          "n": 50,
+          "tp": 47,
+          "precision": 0.94,
+          "audit": "quarterly_drift"
+        }
+      ],
+      "status": "healthy_post",
+      "notes": ""
+    },
+    "our anniversary": {
+      "theme": "romance",
+      "history": [
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "comment",
+          "n": 4,
+          "tp": 4,
+          "precision": 1.0,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "post",
+          "n": 29,
+          "tp": 28,
+          "precision": 0.966,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "comment",
+          "n": 6,
+          "tp": 5,
+          "precision": 0.833,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "post",
+          "n": 29,
+          "tp": 28,
+          "precision": 0.966,
+          "audit": "quarterly_drift"
+        }
+      ],
+      "status": "healthy_post",
+      "notes": ""
+    },
+    "our first kiss": {
+      "theme": "romance",
+      "history": [
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "comment",
+          "n": 1,
+          "tp": 1,
+          "precision": 1.0,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "post",
+          "n": 23,
+          "tp": 21,
+          "precision": 0.913,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "comment",
+          "n": 1,
+          "tp": 1,
+          "precision": 1.0,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "post",
+          "n": 23,
+          "tp": 20,
+          "precision": 0.87,
+          "audit": "quarterly_drift"
+        }
+      ],
+      "status": "healthy_post",
+      "notes": ""
+    },
+    "our wedding": {
+      "theme": "romance",
+      "history": [
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "comment",
+          "n": 4,
+          "tp": 3,
+          "precision": 0.75,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "post",
+          "n": 50,
+          "tp": 48,
+          "precision": 0.96,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "comment",
+          "n": 9,
+          "tp": 5,
+          "precision": 0.556,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "post",
+          "n": 50,
+          "tp": 45,
+          "precision": 0.9,
+          "audit": "quarterly_drift"
+        }
+      ],
+      "status": "healthy_post",
+      "notes": ""
+    },
+    "proposed to me": {
+      "theme": "romance",
+      "history": [
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "comment",
+          "n": 3,
+          "tp": 3,
+          "precision": 1.0,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "post",
+          "n": 50,
+          "tp": 49,
+          "precision": 0.98,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "comment",
+          "n": 3,
+          "tp": 3,
+          "precision": 1.0,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "post",
+          "n": 50,
+          "tp": 49,
+          "precision": 0.98,
+          "audit": "quarterly_drift"
+        }
+      ],
+      "status": "healthy_post",
+      "notes": ""
+    },
+    "romantic relationship with": {
+      "theme": "romance",
+      "history": [
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "comment",
+          "n": 23,
+          "tp": 16,
+          "precision": 0.696,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "post",
+          "n": 50,
+          "tp": 36,
+          "precision": 0.72,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "comment",
+          "n": 27,
+          "tp": 11,
+          "precision": 0.407,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "post",
+          "n": 50,
+          "tp": 34,
+          "precision": 0.68,
+          "audit": "quarterly_drift"
+        }
+      ],
+      "status": "noisy_post",
+      "notes": ""
+    },
+    "we broke up": {
+      "theme": "romance",
+      "history": [
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "comment",
+          "n": 2,
+          "tp": 0,
+          "precision": 0.0,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "post",
+          "n": 32,
+          "tp": 25,
+          "precision": 0.781,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "comment",
+          "n": 2,
+          "tp": 0,
+          "precision": 0.0,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "post",
+          "n": 33,
+          "tp": 22,
+          "precision": 0.667,
+          "audit": "quarterly_drift"
+        }
+      ],
+      "status": "noisy_post",
+      "notes": ""
+    },
+    "wedding": {
+      "theme": "romance",
+      "history": [
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "comment",
+          "n": 50,
+          "tp": 38,
+          "precision": 0.76,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "post",
+          "n": 50,
+          "tp": 38,
+          "precision": 0.76,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "comment",
+          "n": 50,
+          "tp": 29,
+          "precision": 0.58,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "post",
+          "n": 50,
+          "tp": 40,
+          "precision": 0.8,
+          "audit": "quarterly_drift"
+        }
+      ],
+      "status": "healthy_post",
+      "notes": ""
+    },
+    "devastated": {
+      "theme": "rupture",
+      "history": [
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "comment",
+          "n": 50,
+          "tp": 41,
+          "precision": 0.82,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "post",
+          "n": 50,
+          "tp": 32,
+          "precision": 0.64,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "comment",
+          "n": 50,
+          "tp": 37,
+          "precision": 0.74,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "post",
+          "n": 50,
+          "tp": 31,
+          "precision": 0.62,
+          "audit": "quarterly_drift"
+        }
+      ],
+      "status": "noisy_post",
+      "notes": ""
+    },
+    "dumbed down": {
+      "theme": "rupture",
+      "history": [
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "comment",
+          "n": 27,
+          "tp": 20,
+          "precision": 0.741,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "post",
+          "n": 50,
+          "tp": 47,
+          "precision": 0.94,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "comment",
+          "n": 35,
+          "tp": 28,
+          "precision": 0.8,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "post",
+          "n": 50,
+          "tp": 42,
+          "precision": 0.84,
+          "audit": "quarterly_drift"
+        }
+      ],
+      "status": "healthy_post",
+      "notes": ""
+    },
+    "farewell": {
+      "theme": "rupture",
+      "history": [
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "comment",
+          "n": 24,
+          "tp": 10,
+          "precision": 0.417,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "post",
+          "n": 50,
+          "tp": 45,
+          "precision": 0.9,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "comment",
+          "n": 27,
+          "tp": 10,
+          "precision": 0.37,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "post",
+          "n": 50,
+          "tp": 42,
+          "precision": 0.84,
+          "audit": "quarterly_drift"
+        }
+      ],
+      "status": "healthy_post",
+      "notes": ""
+    },
+    "goodbye": {
+      "theme": "rupture",
+      "history": [
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "comment",
+          "n": 50,
+          "tp": 31,
+          "precision": 0.62,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "post",
+          "n": 50,
+          "tp": 37,
+          "precision": 0.74,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "comment",
+          "n": 50,
+          "tp": 30,
+          "precision": 0.6,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "post",
+          "n": 50,
+          "tp": 35,
+          "precision": 0.7,
+          "audit": "quarterly_drift"
+        }
+      ],
+      "status": "noisy_post",
+      "notes": ""
+    },
+    "grieve": {
+      "theme": "rupture",
+      "history": [
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "comment",
+          "n": 50,
+          "tp": 40,
+          "precision": 0.8,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "post",
+          "n": 50,
+          "tp": 42,
+          "precision": 0.84,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "comment",
+          "n": 50,
+          "tp": 38,
+          "precision": 0.76,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "post",
+          "n": 50,
+          "tp": 32,
+          "precision": 0.64,
+          "audit": "quarterly_drift"
+        }
+      ],
+      "status": "noisy_post",
+      "notes": ""
+    },
+    "grieving": {
+      "theme": "rupture",
+      "history": [
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "comment",
+          "n": 50,
+          "tp": 47,
+          "precision": 0.94,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "post",
+          "n": 50,
+          "tp": 37,
+          "precision": 0.74,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "comment",
+          "n": 50,
+          "tp": 46,
+          "precision": 0.92,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "post",
+          "n": 50,
+          "tp": 41,
+          "precision": 0.82,
+          "audit": "quarterly_drift"
+        }
+      ],
+      "status": "healthy_post",
+      "notes": ""
+    },
+    "gutted": {
+      "theme": "rupture",
+      "history": [
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "comment",
+          "n": 34,
+          "tp": 23,
+          "precision": 0.676,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "post",
+          "n": 50,
+          "tp": 39,
+          "precision": 0.78,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "comment",
+          "n": 50,
+          "tp": 26,
+          "precision": 0.52,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "post",
+          "n": 50,
+          "tp": 43,
+          "precision": 0.86,
+          "audit": "quarterly_drift"
+        }
+      ],
+      "status": "healthy_post",
+      "notes": ""
+    },
+    "lobotomies": {
+      "theme": "rupture",
+      "history": [
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "comment",
+          "n": 6,
+          "tp": 5,
+          "precision": 0.833,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "post",
+          "n": 21,
+          "tp": 11,
+          "precision": 0.524,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "comment",
+          "n": 7,
+          "tp": 5,
+          "precision": 0.714,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "post",
+          "n": 22,
+          "tp": 12,
+          "precision": 0.545,
+          "audit": "quarterly_drift"
+        }
+      ],
+      "status": "inverted_post",
+      "notes": ""
+    },
+    "lobotomised": {
+      "theme": "rupture",
+      "history": [
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "comment",
+          "n": 12,
+          "tp": 12,
+          "precision": 1.0,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "post",
+          "n": 50,
+          "tp": 40,
+          "precision": 0.8,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "comment",
+          "n": 13,
+          "tp": 12,
+          "precision": 0.923,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "post",
+          "n": 50,
+          "tp": 48,
+          "precision": 0.96,
+          "audit": "quarterly_drift"
+        }
+      ],
+      "status": "healthy_post",
+      "notes": ""
+    },
+    "lobotomized": {
+      "theme": "rupture",
+      "history": [
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "comment",
+          "n": 50,
+          "tp": 46,
+          "precision": 0.92,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "post",
+          "n": 50,
+          "tp": 46,
+          "precision": 0.92,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "comment",
+          "n": 50,
+          "tp": 45,
+          "precision": 0.9,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "post",
+          "n": 50,
+          "tp": 46,
+          "precision": 0.92,
+          "audit": "quarterly_drift"
+        }
+      ],
+      "status": "healthy_post",
+      "notes": ""
+    },
+    "lobotomizing": {
+      "theme": "rupture",
+      "history": [
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "comment",
+          "n": 23,
+          "tp": 22,
+          "precision": 0.957,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "post",
+          "n": 35,
+          "tp": 29,
+          "precision": 0.829,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "comment",
+          "n": 28,
+          "tp": 26,
+          "precision": 0.929,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "post",
+          "n": 37,
+          "tp": 31,
+          "precision": 0.838,
+          "audit": "quarterly_drift"
+        }
+      ],
+      "status": "healthy_post",
+      "notes": ""
+    },
+    "lobotomy": {
+      "theme": "rupture",
+      "history": [
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "comment",
+          "n": 40,
+          "tp": 33,
+          "precision": 0.825,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "post",
+          "n": 50,
+          "tp": 34,
+          "precision": 0.68,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "comment",
+          "n": 50,
+          "tp": 45,
+          "precision": 0.9,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "post",
+          "n": 50,
+          "tp": 34,
+          "precision": 0.68,
+          "audit": "quarterly_drift"
+        }
+      ],
+      "status": "noisy_post",
+      "notes": ""
+    },
+    "memory reset": {
+      "theme": "rupture",
+      "history": [
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "comment",
+          "n": 1,
+          "tp": 0,
+          "precision": 0.0,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "post",
+          "n": 11,
+          "tp": 5,
+          "precision": 0.455,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "comment",
+          "n": 2,
+          "tp": 0,
+          "precision": 0.0,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "post",
+          "n": 11,
+          "tp": 6,
+          "precision": 0.545,
+          "audit": "quarterly_drift"
+        }
+      ],
+      "status": "inverted_post",
+      "notes": ""
+    },
+    "memory wiped": {
+      "theme": "rupture",
+      "history": [
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "comment",
+          "n": 1,
+          "tp": 1,
+          "precision": 1.0,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "post",
+          "n": 12,
+          "tp": 9,
+          "precision": 0.75,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "comment",
+          "n": 1,
+          "tp": 0,
+          "precision": 0.0,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "post",
+          "n": 12,
+          "tp": 10,
+          "precision": 0.833,
+          "audit": "quarterly_drift"
+        }
+      ],
+      "status": "healthy_post",
+      "notes": ""
+    },
+    "mourn": {
+      "theme": "rupture",
+      "history": [
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "comment",
+          "n": 47,
+          "tp": 37,
+          "precision": 0.787,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "post",
+          "n": 50,
+          "tp": 36,
+          "precision": 0.72,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "comment",
+          "n": 50,
+          "tp": 37,
+          "precision": 0.74,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "post",
+          "n": 50,
+          "tp": 34,
+          "precision": 0.68,
+          "audit": "quarterly_drift"
+        }
+      ],
+      "status": "noisy_post",
+      "notes": ""
+    },
+    "nerfed": {
+      "theme": "rupture",
+      "history": [
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "comment",
+          "n": 50,
+          "tp": 41,
+          "precision": 0.82,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "post",
+          "n": 50,
+          "tp": 43,
+          "precision": 0.86,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "comment",
+          "n": 50,
+          "tp": 43,
+          "precision": 0.86,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "post",
+          "n": 50,
+          "tp": 46,
+          "precision": 0.92,
+          "audit": "quarterly_drift"
+        }
+      ],
+      "status": "healthy_post",
+      "notes": ""
+    },
+    "neutered": {
+      "theme": "rupture",
+      "history": [
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "comment",
+          "n": 34,
+          "tp": 32,
+          "precision": 0.941,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "post",
+          "n": 50,
+          "tp": 43,
+          "precision": 0.86,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "comment",
+          "n": 42,
+          "tp": 36,
+          "precision": 0.857,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "post",
+          "n": 50,
+          "tp": 41,
+          "precision": 0.82,
+          "audit": "quarterly_drift"
+        }
+      ],
+      "status": "healthy_post",
+      "notes": ""
+    },
+    "personality changed": {
+      "theme": "rupture",
+      "history": [
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "comment",
+          "n": 1,
+          "tp": 1,
+          "precision": 1.0,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "post",
+          "n": 30,
+          "tp": 24,
+          "precision": 0.8,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "comment",
+          "n": 1,
+          "tp": 1,
+          "precision": 1.0,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "post",
+          "n": 32,
+          "tp": 26,
+          "precision": 0.812,
+          "audit": "quarterly_drift"
+        }
+      ],
+      "status": "healthy_post",
+      "notes": ""
+    },
+    "personality is gone": {
+      "theme": "rupture",
+      "history": [
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "comment",
+          "n": 2,
+          "tp": 2,
+          "precision": 1.0,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "post",
+          "n": 11,
+          "tp": 10,
+          "precision": 0.909,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "comment",
+          "n": 2,
+          "tp": 2,
+          "precision": 1.0,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "post",
+          "n": 11,
+          "tp": 9,
+          "precision": 0.818,
+          "audit": "quarterly_drift"
+        }
+      ],
+      "status": "healthy_post",
+      "notes": ""
+    },
+    "saying goodbye": {
+      "theme": "rupture",
+      "history": [
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "comment",
+          "n": 16,
+          "tp": 13,
+          "precision": 0.812,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "post",
+          "n": 50,
+          "tp": 41,
+          "precision": 0.82,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "comment",
+          "n": 21,
+          "tp": 14,
+          "precision": 0.667,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "post",
+          "n": 50,
+          "tp": 43,
+          "precision": 0.86,
+          "audit": "quarterly_drift"
+        }
+      ],
+      "status": "healthy_post",
+      "notes": ""
+    },
+    "taken away": {
+      "theme": "rupture",
+      "history": [
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "comment",
+          "n": 50,
+          "tp": 43,
+          "precision": 0.86,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "post",
+          "n": 50,
+          "tp": 45,
+          "precision": 0.9,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "comment",
+          "n": 50,
+          "tp": 38,
+          "precision": 0.76,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "post",
+          "n": 50,
+          "tp": 42,
+          "precision": 0.84,
+          "audit": "quarterly_drift"
+        }
+      ],
+      "status": "healthy_post",
+      "notes": ""
+    },
+    "ai sex": {
+      "theme": "sexual_erp",
+      "history": [
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "comment",
+          "n": 2,
+          "tp": 0,
+          "precision": 0.0,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "post",
+          "n": 18,
+          "tp": 12,
+          "precision": 0.667,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "comment",
+          "n": 2,
+          "tp": 0,
+          "precision": 0.0,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "post",
+          "n": 18,
+          "tp": 11,
+          "precision": 0.611,
+          "audit": "quarterly_drift"
+        }
+      ],
+      "status": "noisy_post",
+      "notes": ""
+    },
+    "erotic roleplay": {
+      "theme": "sexual_erp",
+      "history": [
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "comment",
+          "n": 4,
+          "tp": 4,
+          "precision": 1.0,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "post",
+          "n": 50,
+          "tp": 45,
+          "precision": 0.9,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "comment",
+          "n": 9,
+          "tp": 8,
+          "precision": 0.889,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "post",
+          "n": 50,
+          "tp": 40,
+          "precision": 0.8,
+          "audit": "quarterly_drift"
+        }
+      ],
+      "status": "healthy_post",
+      "notes": ""
+    },
+    "erp": {
+      "theme": "sexual_erp",
+      "history": [
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "comment",
+          "n": 50,
+          "tp": 47,
+          "precision": 0.94,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "post",
+          "n": 50,
+          "tp": 46,
+          "precision": 0.92,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "comment",
+          "n": 50,
+          "tp": 41,
+          "precision": 0.82,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "post",
+          "n": 50,
+          "tp": 48,
+          "precision": 0.96,
+          "audit": "quarterly_drift"
+        }
+      ],
+      "status": "healthy_post",
+      "notes": ""
+    },
+    "erping": {
+      "theme": "sexual_erp",
+      "history": [
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "post",
+          "n": 23,
+          "tp": 20,
+          "precision": 0.87,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "post",
+          "n": 23,
+          "tp": 20,
+          "precision": 0.87,
+          "audit": "quarterly_drift"
+        }
+      ],
+      "status": "healthy_post",
+      "notes": ""
+    },
+    "erps": {
+      "theme": "sexual_erp",
+      "history": [
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "post",
+          "n": 19,
+          "tp": 15,
+          "precision": 0.789,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "post",
+          "n": 19,
+          "tp": 17,
+          "precision": 0.895,
+          "audit": "quarterly_drift"
+        }
+      ],
+      "status": "healthy_post",
+      "notes": ""
+    },
+    "intimate scene": {
+      "theme": "sexual_erp",
+      "history": [
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "comment",
+          "n": 1,
+          "tp": 1,
+          "precision": 1.0,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "post",
+          "n": 12,
+          "tp": 11,
+          "precision": 0.917,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "comment",
+          "n": 1,
+          "tp": 1,
+          "precision": 1.0,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "post",
+          "n": 13,
+          "tp": 11,
+          "precision": 0.846,
+          "audit": "quarterly_drift"
+        }
+      ],
+      "status": "healthy_post",
+      "notes": ""
+    },
+    "lewd": {
+      "theme": "sexual_erp",
+      "history": [
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "comment",
+          "n": 8,
+          "tp": 4,
+          "precision": 0.5,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "post",
+          "n": 50,
+          "tp": 34,
+          "precision": 0.68,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "comment",
+          "n": 9,
+          "tp": 6,
+          "precision": 0.667,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "post",
+          "n": 50,
+          "tp": 42,
+          "precision": 0.84,
+          "audit": "quarterly_drift"
+        }
+      ],
+      "status": "healthy_post",
+      "notes": ""
+    },
+    "nsfw chat": {
+      "theme": "sexual_erp",
+      "history": [
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "comment",
+          "n": 13,
+          "tp": 12,
+          "precision": 0.923,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "post",
+          "n": 50,
+          "tp": 40,
+          "precision": 0.8,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "comment",
+          "n": 17,
+          "tp": 16,
+          "precision": 0.941,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "post",
+          "n": 50,
+          "tp": 45,
+          "precision": 0.9,
+          "audit": "quarterly_drift"
+        }
+      ],
+      "status": "healthy_post",
+      "notes": ""
+    },
+    "nsfw content": {
+      "theme": "sexual_erp",
+      "history": [
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "comment",
+          "n": 50,
+          "tp": 39,
+          "precision": 0.78,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "post",
+          "n": 50,
+          "tp": 27,
+          "precision": 0.54,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "comment",
+          "n": 50,
+          "tp": 35,
+          "precision": 0.7,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "post",
+          "n": 50,
+          "tp": 28,
+          "precision": 0.56,
+          "audit": "quarterly_drift"
+        }
+      ],
+      "status": "inverted_post",
+      "notes": ""
+    },
+    "nsfw stuff": {
+      "theme": "sexual_erp",
+      "history": [
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "comment",
+          "n": 49,
+          "tp": 39,
+          "precision": 0.796,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "post",
+          "n": 50,
+          "tp": 35,
+          "precision": 0.7,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "comment",
+          "n": 50,
+          "tp": 35,
+          "precision": 0.7,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "post",
+          "n": 50,
+          "tp": 38,
+          "precision": 0.76,
+          "audit": "quarterly_drift"
+        }
+      ],
+      "status": "noisy_post",
+      "notes": ""
+    },
+    "smut": {
+      "theme": "sexual_erp",
+      "history": [
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "comment",
+          "n": 50,
+          "tp": 37,
+          "precision": 0.74,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "post",
+          "n": 50,
+          "tp": 35,
+          "precision": 0.7,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "comment",
+          "n": 50,
+          "tp": 37,
+          "precision": 0.74,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "post",
+          "n": 50,
+          "tp": 32,
+          "precision": 0.64,
+          "audit": "quarterly_drift"
+        }
+      ],
+      "status": "noisy_post",
+      "notes": ""
+    },
+    "steamy": {
+      "theme": "sexual_erp",
+      "history": [
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "comment",
+          "n": 15,
+          "tp": 13,
+          "precision": 0.867,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "post",
+          "n": 50,
+          "tp": 32,
+          "precision": 0.64,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "comment",
+          "n": 24,
+          "tp": 21,
+          "precision": 0.875,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "post",
+          "n": 50,
+          "tp": 34,
+          "precision": 0.68,
+          "audit": "quarterly_drift"
+        }
+      ],
+      "status": "noisy_post",
+      "notes": ""
+    },
+    "ai therapist": {
+      "theme": "therapy",
+      "history": [
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "comment",
+          "n": 4,
+          "tp": 2,
+          "precision": 0.5,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "post",
+          "n": 50,
+          "tp": 37,
+          "precision": 0.74,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "comment",
+          "n": 4,
+          "tp": 2,
+          "precision": 0.5,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "post",
+          "n": 50,
+          "tp": 38,
+          "precision": 0.76,
+          "audit": "quarterly_drift"
+        }
+      ],
+      "status": "noisy_post",
+      "notes": ""
+    },
+    "ai therapy": {
+      "theme": "therapy",
+      "history": [
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "comment",
+          "n": 3,
+          "tp": 1,
+          "precision": 0.333,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "post",
+          "n": 29,
+          "tp": 12,
+          "precision": 0.414,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "comment",
+          "n": 3,
+          "tp": 1,
+          "precision": 0.333,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "post",
+          "n": 31,
+          "tp": 11,
+          "precision": 0.355,
+          "audit": "quarterly_drift"
+        }
+      ],
+      "status": "inverted_post",
+      "notes": ""
+    },
+    "as a therapist": {
+      "theme": "therapy",
+      "history": [
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "comment",
+          "n": 10,
+          "tp": 7,
+          "precision": 0.7,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "post",
+          "n": 50,
+          "tp": 35,
+          "precision": 0.7,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "comment",
+          "n": 16,
+          "tp": 10,
+          "precision": 0.625,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "post",
+          "n": 50,
+          "tp": 26,
+          "precision": 0.52,
+          "audit": "quarterly_drift"
+        }
+      ],
+      "status": "inverted_post",
+      "notes": ""
+    },
+    "coping mechanism": {
+      "theme": "therapy",
+      "history": [
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "comment",
+          "n": 37,
+          "tp": 31,
+          "precision": 0.838,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "post",
+          "n": 50,
+          "tp": 45,
+          "precision": 0.9,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "comment",
+          "n": 48,
+          "tp": 41,
+          "precision": 0.854,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "post",
+          "n": 50,
+          "tp": 44,
+          "precision": 0.88,
+          "audit": "quarterly_drift"
+        }
+      ],
+      "status": "healthy_post",
+      "notes": ""
+    },
+    "for therapy": {
+      "theme": "therapy",
+      "history": [
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "comment",
+          "n": 16,
+          "tp": 15,
+          "precision": 0.938,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "post",
+          "n": 50,
+          "tp": 39,
+          "precision": 0.78,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "comment",
+          "n": 23,
+          "tp": 18,
+          "precision": 0.783,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "post",
+          "n": 50,
+          "tp": 30,
+          "precision": 0.6,
+          "audit": "quarterly_drift"
+        }
+      ],
+      "status": "noisy_post",
+      "notes": ""
+    },
+    "free therapy": {
+      "theme": "therapy",
+      "history": [
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "comment",
+          "n": 1,
+          "tp": 0,
+          "precision": 0.0,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-06",
+          "level": "post",
+          "n": 29,
+          "tp": 26,
+          "precision": 0.897,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "comment",
+          "n": 1,
+          "tp": 0,
+          "precision": 0.0,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-08",
+          "quarter": "2026-07",
+          "level": "post",
+          "n": 29,
+          "tp": 25,
+          "precision": 0.862,
+          "audit": "quarterly_drift"
+        }
+      ],
+      "status": "healthy_post",
+      "notes": ""
     }
   }
 }
