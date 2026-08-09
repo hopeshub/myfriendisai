@@ -1,11 +1,12 @@
 {
-  "last_collection": "2026-08-07T13:24:16Z",
-  "posts_collected": 801,
+  "last_collection": "2026-08-08T13:52:08Z",
+  "posts_collected": 701,
   "subreddits_ok": 40,
   "subreddits_total": 40,
   "collection_succeeded": true,
   "push_succeeded": true,
-  "last_successful_push": "2026-08-07T13:24:16Z",
+  "last_successful_push": "2026-08-08T13:52:08Z",
   "consecutive_push_failures": 0,
-  "last_push_error": null
+  "last_push_error": null,
+  "last_successful_backup": "2026-08-08T01:54:08Z"
 }
