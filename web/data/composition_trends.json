@@ -4699,10 +4699,17 @@
     },
     {
       "date": "2026-08-20",
-      "count": 4,
-      "count_7d_avg": 8.14,
-      "count_post_only": 3,
-      "count_post_only_7d_avg": 7.29
+      "count": 7,
+      "count_7d_avg": 8.57,
+      "count_post_only": 5,
+      "count_post_only_7d_avg": 7.57
+    },
+    {
+      "date": "2026-08-21",
+      "count": 2,
+      "count_7d_avg": 7.14,
+      "count_post_only": 2,
+      "count_post_only_7d_avg": 6.43
     }
   ],
   "consciousness": [
@@ -7249,10 +7256,17 @@
     },
     {
       "date": "2026-08-19",
+      "count": 2,
+      "count_7d_avg": 3.29,
+      "count_post_only": 1,
+      "count_post_only_7d_avg": 1.43
+    },
+    {
+      "date": "2026-08-20",
       "count": 1,
       "count_7d_avg": 3.14,
       "count_post_only": 1,
-      "count_post_only_7d_avg": 1.43
+      "count_post_only_7d_avg": 1.57
     }
   ],
   "romance": [
@@ -14853,10 +14867,24 @@
     },
     {
       "date": "2026-08-19",
-      "count": 3,
-      "count_7d_avg": 4.71,
+      "count": 4,
+      "count_7d_avg": 4.86,
       "count_post_only": 1,
       "count_post_only_7d_avg": 2.0
+    },
+    {
+      "date": "2026-08-20",
+      "count": 5,
+      "count_7d_avg": 4.86,
+      "count_post_only": 5,
+      "count_post_only_7d_avg": 2.43
+    },
+    {
+      "date": "2026-08-21",
+      "count": 4,
+      "count_7d_avg": 4.43,
+      "count_post_only": 3,
+      "count_post_only_7d_avg": 2.43
     }
   ],
   "rupture": [
@@ -21358,17 +21386,24 @@
     },
     {
       "date": "2026-08-19",
-      "count": 10,
-      "count_7d_avg": 7.71,
+      "count": 12,
+      "count_7d_avg": 8.0,
       "count_post_only": 4,
       "count_post_only_7d_avg": 3.0
     },
     {
       "date": "2026-08-20",
-      "count": 1,
-      "count_7d_avg": 7.0,
-      "count_post_only": 0,
-      "count_post_only_7d_avg": 2.29
+      "count": 6,
+      "count_7d_avg": 8.0,
+      "count_post_only": 2,
+      "count_post_only_7d_avg": 2.57
+    },
+    {
+      "date": "2026-08-21",
+      "count": 2,
+      "count_7d_avg": 6.43,
+      "count_post_only": 1,
+      "count_post_only_7d_avg": 2.0
     }
   ],
   "sexual_erp": [
@@ -30114,6 +30149,20 @@
       "count_7d_avg": 4.14,
       "count_post_only": 1,
       "count_post_only_7d_avg": 1.71
+    },
+    {
+      "date": "2026-08-20",
+      "count": 1,
+      "count_7d_avg": 3.57,
+      "count_post_only": 0,
+      "count_post_only_7d_avg": 1.43
+    },
+    {
+      "date": "2026-08-21",
+      "count": 3,
+      "count_7d_avg": 3.29,
+      "count_post_only": 2,
+      "count_post_only_7d_avg": 1.14
     }
   ],
   "therapy": [
@@ -34410,45 +34459,52 @@
     },
     {
       "date": "2026-08-14",
-      "count": 1,
-      "count_7d_avg": 2.14,
+      "count": 2,
+      "count_7d_avg": 2.29,
       "count_post_only": 1,
       "count_post_only_7d_avg": 1.14
     },
     {
       "date": "2026-08-15",
       "count": 3,
-      "count_7d_avg": 2.43,
+      "count_7d_avg": 2.57,
       "count_post_only": 1,
       "count_post_only_7d_avg": 1.14
     },
     {
       "date": "2026-08-16",
       "count": 2,
-      "count_7d_avg": 2.57,
+      "count_7d_avg": 2.71,
       "count_post_only": 1,
       "count_post_only_7d_avg": 1.29
     },
     {
       "date": "2026-08-17",
       "count": 3,
-      "count_7d_avg": 2.43,
+      "count_7d_avg": 2.57,
       "count_post_only": 0,
       "count_post_only_7d_avg": 0.86
     },
     {
       "date": "2026-08-18",
       "count": 3,
-      "count_7d_avg": 2.29,
+      "count_7d_avg": 2.43,
       "count_post_only": 2,
       "count_post_only_7d_avg": 0.71
     },
     {
       "date": "2026-08-19",
       "count": 3,
-      "count_7d_avg": 2.57,
+      "count_7d_avg": 2.71,
       "count_post_only": 2,
       "count_post_only_7d_avg": 1.0
+    },
+    {
+      "date": "2026-08-20",
+      "count": 3,
+      "count_7d_avg": 2.71,
+      "count_post_only": 2,
+      "count_post_only_7d_avg": 1.29
     }
   ],
   "_total_posts": [
@@ -47126,7 +47182,11 @@
     },
     {
       "date": "2026-08-20",
-      "count": 104
+      "count": 209
+    },
+    {
+      "date": "2026-08-21",
+      "count": 97
     }
   ],
   "_coverage_start": {
