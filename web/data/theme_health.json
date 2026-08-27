@@ -27,18 +27,20 @@
       },
       "top5_authors_pct": 1.1,
       "post_precision": {
-        "date": "2026-05-13",
-        "n": 60,
-        "tp": 42,
-        "precision": 0.7,
-        "audit": "robustness_audit_test_A"
+        "date": "2026-08-08",
+        "quarter": "2026-07",
+        "n": 925,
+        "tp": 725,
+        "precision": 0.784,
+        "audit": "quarterly_drift"
       },
       "comment_precision": {
-        "date": "2026-05-13",
-        "n": 100,
-        "tp": 76,
-        "precision": 0.76,
-        "audit": "adversarial_audit"
+        "date": "2026-08-08",
+        "quarter": "2026-07",
+        "n": 729,
+        "tp": 560,
+        "precision": 0.768,
+        "audit": "quarterly_drift"
       },
       "noisy_keywords_comment": [
         "mourning",
@@ -73,18 +75,20 @@
       },
       "top5_authors_pct": 2.5,
       "post_precision": {
-        "date": "2026-05-13",
-        "n": 60,
-        "tp": 45,
-        "precision": 0.76,
-        "audit": "robustness_audit_test_A"
+        "date": "2026-08-08",
+        "quarter": "2026-07",
+        "n": 734,
+        "tp": 624,
+        "precision": 0.85,
+        "audit": "quarterly_drift"
       },
       "comment_precision": {
-        "date": "2026-05-13",
-        "n": 100,
-        "tp": 67,
-        "precision": 0.67,
-        "audit": "adversarial_audit"
+        "date": "2026-08-08",
+        "quarter": "2026-07",
+        "n": 408,
+        "tp": 324,
+        "precision": 0.794,
+        "audit": "quarterly_drift"
       },
       "noisy_keywords_comment": [
         "hours a day",
@@ -117,18 +121,20 @@
       },
       "top5_authors_pct": 4.8,
       "post_precision": {
-        "date": "2026-05-13",
-        "n": 60,
-        "tp": 49,
-        "precision": 0.82,
-        "audit": "robustness_audit_test_A"
+        "date": "2026-08-08",
+        "quarter": "2026-07",
+        "n": 926,
+        "tp": 776,
+        "precision": 0.838,
+        "audit": "quarterly_drift"
       },
       "comment_precision": {
-        "date": "2026-05-13",
-        "n": 100,
-        "tp": 72,
-        "precision": 0.72,
-        "audit": "adversarial_audit"
+        "date": "2026-08-08",
+        "quarter": "2026-07",
+        "n": 400,
+        "tp": 289,
+        "precision": 0.723,
+        "audit": "quarterly_drift"
       },
       "noisy_keywords_comment": [
         "honeymoon",
@@ -162,18 +168,20 @@
       },
       "top5_authors_pct": 4.3,
       "post_precision": {
-        "date": "2026-05-13",
-        "n": 60,
-        "tp": 55,
-        "precision": 0.92,
-        "audit": "robustness_audit_test_A"
+        "date": "2026-08-08",
+        "quarter": "2026-07",
+        "n": 523,
+        "tp": 409,
+        "precision": 0.782,
+        "audit": "quarterly_drift"
       },
       "comment_precision": {
-        "date": "2026-05-13",
-        "n": 100,
-        "tp": 88,
-        "precision": 0.88,
-        "audit": "adversarial_audit"
+        "date": "2026-08-08",
+        "quarter": "2026-07",
+        "n": 295,
+        "tp": 222,
+        "precision": 0.753,
+        "audit": "quarterly_drift"
       },
       "noisy_keywords_comment": [
         "sex with"
@@ -204,18 +212,20 @@
       },
       "top5_authors_pct": 15.8,
       "post_precision": {
-        "date": "2026-05-13",
-        "n": 60,
-        "tp": 48,
-        "precision": 0.8,
-        "audit": "robustness_audit_test_A"
+        "date": "2026-08-08",
+        "quarter": "2026-07",
+        "n": 360,
+        "tp": 272,
+        "precision": 0.756,
+        "audit": "quarterly_drift"
       },
       "comment_precision": {
-        "date": "2026-05-13",
-        "n": 49,
-        "tp": 25,
-        "precision": 0.51,
-        "audit": "adversarial_audit"
+        "date": "2026-08-08",
+        "quarter": "2026-07",
+        "n": 168,
+        "tp": 110,
+        "precision": 0.655,
+        "audit": "quarterly_drift"
       },
       "noisy_keywords_comment": [
         "selfhood",
@@ -249,13 +259,21 @@
         "pct": 8.8
       },
       "top5_authors_pct": 3.1,
-      "post_precision": null,
+      "post_precision": {
+        "date": "2026-08-08",
+        "quarter": "2026-07",
+        "n": 360,
+        "tp": 222,
+        "precision": 0.617,
+        "audit": "quarterly_drift"
+      },
       "comment_precision": {
-        "date": "2026-05-13",
-        "n": 100,
-        "tp": 58,
-        "precision": 0.58,
-        "audit": "adversarial_audit"
+        "date": "2026-08-08",
+        "quarter": "2026-07",
+        "n": 195,
+        "tp": 132,
+        "precision": 0.677,
+        "audit": "quarterly_drift"
       },
       "noisy_keywords_comment": [
         "therapeutic",

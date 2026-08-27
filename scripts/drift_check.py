@@ -233,13 +233,103 @@ def slug_to_term(slug: str, theme: str) -> Optional[str]:
     return None
 
 
+# Theme-level rollups use POOLED aggregation: precision = ΣTP / ΣN across
+# every keyword sample file for that theme+level+quarter, rather than a mean
+# of per-keyword precisions. Because `build` draws a fixed N per keyword
+# (~26/keyword in practice, regardless of that keyword's corpus volume),
+# pooling is already ≈ equal-keyword weighting — it is *not* volume-weighted
+# toward high-frequency keywords. This matches how the June/July 2026
+# theme-level figures quoted in CLAUDE.md §2.3 and the project docs were
+# computed by hand, so the recorded numbers stay comparable to those.
+def _upsert_theme_entry(history: dict, theme: str, level: str, entry: dict):
+    """Append (or replace, keyed on quarter) a theme-level history entry.
+
+    Idempotent: re-running `record` for the same quarter overwrites the
+    existing entry for that quarter+level instead of appending a duplicate.
+    """
+    t = history.setdefault("themes", {}).setdefault(theme, {})
+    lvl = t.setdefault(f"{level}_level", {})
+    hist = lvl.setdefault("history", [])
+    for i, existing in enumerate(hist):
+        if existing.get("quarter") == entry.get("quarter"):
+            hist[i] = entry
+            return "replaced"
+    hist.append(entry)
+    return "added"
+
+
+def aggregate_theme_rollups(history: dict, results: list, today: str):
+    """Pool TP/N per (theme, level, quarter) and write theme-level entries."""
+    pooled = defaultdict(lambda: {"tp": 0, "n": 0, "keywords": 0})
+    for r in results:
+        acc = pooled[(r["theme"], r["level"], r["quarter"])]
+        acc["tp"] += r["tp"]
+        acc["n"] += r["n"]
+        acc["keywords"] += 1
+
+    for (theme, level, quarter), acc in sorted(pooled.items()):
+        if acc["n"] == 0:
+            continue
+        precision = acc["tp"] / acc["n"]
+        action = _upsert_theme_entry(history, theme, level, {
+            "date": today,
+            "quarter": quarter,
+            "n": acc["n"],
+            "tp": acc["tp"],
+            "precision": round(precision, 3),
+            "audit": "quarterly_drift",
+        })
+        print(f"  THEME {theme:14s} {level:7s} {quarter}: "
+              f"{acc['tp']}/{acc['n']} = {precision:.1%} "
+              f"({acc['keywords']} keywords, {action})")
+
+
+def backfill_theme_rollups(history: dict, quarters: list, entry_date: str):
+    """One-time reconstruction of theme-level rollups from keyword history.
+
+    The 2026-06 / 2026-07 cycles were recorded before cmd_record wrote
+    theme-level rollups, so their pooled figures are rebuilt here from the
+    per-keyword n/tp already stored in history["keywords"].
+    """
+    results = []
+    for term, kw in history.get("keywords", {}).items():
+        theme = kw.get("theme")
+        for e in kw.get("history", []):
+            if e.get("quarter") in quarters and theme:
+                results.append({
+                    "theme": theme,
+                    "level": e["level"],
+                    "quarter": e["quarter"],
+                    "n": e["n"],
+                    "tp": e["tp"],
+                })
+    if not results:
+        print(f"  No keyword history found for quarters {quarters}")
+        return
+    aggregate_theme_rollups(history, results, entry_date)
+
+
 def cmd_record(args):
     history = load_drift_history()
     history.setdefault("themes", {})
     history.setdefault("keywords", {})
 
+    if args.backfill_themes:
+        quarters = [q.strip() for q in args.backfill_themes.split(",") if q.strip()]
+        print(f"Backfilling theme-level rollups for quarters: {', '.join(quarters)}")
+        backfill_theme_rollups(history, quarters, args.backfill_date)
+        history["last_updated"] = history.get("last_updated") or date.today().isoformat()
+        DRIFT_HISTORY.write_text(json.dumps(history, indent=2))
+        print(f"\nUpdated {DRIFT_HISTORY}")
+        return
+
+    if not args.files:
+        print("record: nothing to do — pass --files or --backfill-themes")
+        return
+
     today = date.today().isoformat()
     parsed_count = 0
+    parsed_results = []
     for fpath in args.files:
         p = Path(fpath)
         if not p.exists():
@@ -271,7 +361,14 @@ def cmd_record(args):
         else:
             kw["status"] = "healthy_" + parsed["level"]
         parsed_count += 1
+        parsed_results.append(parsed)
         print(f"  OK {term} ({parsed['level']}): {parsed['tp']}/{parsed['n']} = {parsed['precision']:.1%}")
+
+    # Pooled per-theme rollups from this run's files (see comment above).
+    if parsed_results:
+        print("")
+        aggregate_theme_rollups(history, parsed_results, today)
+
     history["last_updated"] = today
     DRIFT_HISTORY.write_text(json.dumps(history, indent=2))
     print(f"\nRecorded {parsed_count} keyword measurements.")
@@ -334,7 +431,21 @@ def main():
     b.set_defaults(func=cmd_build)
 
     r = sub.add_parser("record", help="Parse agent classification result files.")
-    r.add_argument("--files", nargs="+", required=True, help="Result .txt files")
+    r.add_argument("--files", nargs="+", default=None, help="Result .txt files")
+    r.add_argument(
+        "--backfill-themes",
+        default=None,
+        metavar="QUARTERS",
+        help="One-time: rebuild pooled theme-level rollups for these comma-separated "
+             "quarters (e.g. 2026-06,2026-07) from existing per-keyword history. "
+             "Does not read result files.",
+    )
+    r.add_argument(
+        "--backfill-date",
+        default="2026-08-08",
+        help="Date stamped on backfilled theme entries (default: 2026-08-08, when "
+             "the June/July cycles were recorded).",
+    )
     r.set_defaults(func=cmd_record)
 
     rep = sub.add_parser("report", help="Print current drift status.")

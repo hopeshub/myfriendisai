@@ -16,6 +16,22 @@
             "tp": 42,
             "precision": 0.7,
             "audit": "robustness_audit_test_A"
+          },
+          {
+            "date": "2026-08-08",
+            "quarter": "2026-06",
+            "n": 920,
+            "tp": 733,
+            "precision": 0.797,
+            "audit": "quarterly_drift"
+          },
+          {
+            "date": "2026-08-08",
+            "quarter": "2026-07",
+            "n": 925,
+            "tp": 725,
+            "precision": 0.784,
+            "audit": "quarterly_drift"
           }
         ]
       },
@@ -27,6 +43,22 @@
             "tp": 76,
             "precision": 0.76,
             "audit": "adversarial_audit"
+          },
+          {
+            "date": "2026-08-08",
+            "quarter": "2026-06",
+            "n": 668,
+            "tp": 541,
+            "precision": 0.81,
+            "audit": "quarterly_drift"
+          },
+          {
+            "date": "2026-08-08",
+            "quarter": "2026-07",
+            "n": 729,
+            "tp": 560,
+            "precision": 0.768,
+            "audit": "quarterly_drift"
           }
         ]
       },
@@ -47,6 +79,22 @@
             "tp": 45,
             "precision": 0.76,
             "audit": "robustness_audit_test_A"
+          },
+          {
+            "date": "2026-08-08",
+            "quarter": "2026-06",
+            "n": 731,
+            "tp": 626,
+            "precision": 0.856,
+            "audit": "quarterly_drift"
+          },
+          {
+            "date": "2026-08-08",
+            "quarter": "2026-07",
+            "n": 734,
+            "tp": 624,
+            "precision": 0.85,
+            "audit": "quarterly_drift"
           }
         ]
       },
@@ -58,6 +106,22 @@
             "tp": 67,
             "precision": 0.67,
             "audit": "adversarial_audit"
+          },
+          {
+            "date": "2026-08-08",
+            "quarter": "2026-06",
+            "n": 338,
+            "tp": 263,
+            "precision": 0.778,
+            "audit": "quarterly_drift"
+          },
+          {
+            "date": "2026-08-08",
+            "quarter": "2026-07",
+            "n": 408,
+            "tp": 324,
+            "precision": 0.794,
+            "audit": "quarterly_drift"
           }
         ]
       },
@@ -76,6 +140,22 @@
             "tp": 49,
             "precision": 0.82,
             "audit": "robustness_audit_test_A"
+          },
+          {
+            "date": "2026-08-08",
+            "quarter": "2026-06",
+            "n": 917,
+            "tp": 790,
+            "precision": 0.862,
+            "audit": "quarterly_drift"
+          },
+          {
+            "date": "2026-08-08",
+            "quarter": "2026-07",
+            "n": 926,
+            "tp": 776,
+            "precision": 0.838,
+            "audit": "quarterly_drift"
           }
         ]
       },
@@ -87,6 +167,22 @@
             "tp": 72,
             "precision": 0.72,
             "audit": "adversarial_audit"
+          },
+          {
+            "date": "2026-08-08",
+            "quarter": "2026-06",
+            "n": 291,
+            "tp": 217,
+            "precision": 0.746,
+            "audit": "quarterly_drift"
+          },
+          {
+            "date": "2026-08-08",
+            "quarter": "2026-07",
+            "n": 400,
+            "tp": 289,
+            "precision": 0.723,
+            "audit": "quarterly_drift"
           }
         ]
       },
@@ -106,6 +202,22 @@
             "tp": 55,
             "precision": 0.92,
             "audit": "robustness_audit_test_A"
+          },
+          {
+            "date": "2026-08-08",
+            "quarter": "2026-06",
+            "n": 522,
+            "tp": 393,
+            "precision": 0.753,
+            "audit": "quarterly_drift"
+          },
+          {
+            "date": "2026-08-08",
+            "quarter": "2026-07",
+            "n": 523,
+            "tp": 409,
+            "precision": 0.782,
+            "audit": "quarterly_drift"
           }
         ]
       },
@@ -117,6 +229,22 @@
             "tp": 88,
             "precision": 0.88,
             "audit": "adversarial_audit"
+          },
+          {
+            "date": "2026-08-08",
+            "quarter": "2026-06",
+            "n": 268,
+            "tp": 211,
+            "precision": 0.787,
+            "audit": "quarterly_drift"
+          },
+          {
+            "date": "2026-08-08",
+            "quarter": "2026-07",
+            "n": 295,
+            "tp": 222,
+            "precision": 0.753,
+            "audit": "quarterly_drift"
           }
         ]
       },
@@ -133,6 +261,22 @@
             "tp": 48,
             "precision": 0.8,
             "audit": "robustness_audit_test_A"
+          },
+          {
+            "date": "2026-08-08",
+            "quarter": "2026-06",
+            "n": 358,
+            "tp": 291,
+            "precision": 0.813,
+            "audit": "quarterly_drift"
+          },
+          {
+            "date": "2026-08-08",
+            "quarter": "2026-07",
+            "n": 360,
+            "tp": 272,
+            "precision": 0.756,
+            "audit": "quarterly_drift"
           }
         ]
       },
@@ -144,6 +288,22 @@
             "tp": 25,
             "precision": 0.51,
             "audit": "adversarial_audit"
+          },
+          {
+            "date": "2026-08-08",
+            "quarter": "2026-06",
+            "n": 128,
+            "tp": 96,
+            "precision": 0.75,
+            "audit": "quarterly_drift"
+          },
+          {
+            "date": "2026-08-08",
+            "quarter": "2026-07",
+            "n": 168,
+            "tp": 110,
+            "precision": 0.655,
+            "audit": "quarterly_drift"
           }
         ]
       },
@@ -157,7 +317,24 @@
     },
     "therapy": {
       "post_level": {
-        "history": []
+        "history": [
+          {
+            "date": "2026-08-08",
+            "quarter": "2026-06",
+            "n": 358,
+            "tp": 245,
+            "precision": 0.684,
+            "audit": "quarterly_drift"
+          },
+          {
+            "date": "2026-08-08",
+            "quarter": "2026-07",
+            "n": 360,
+            "tp": 222,
+            "precision": 0.617,
+            "audit": "quarterly_drift"
+          }
+        ]
       },
       "comment_level": {
         "history": [
@@ -167,6 +344,22 @@
             "tp": 58,
             "precision": 0.58,
             "audit": "adversarial_audit"
+          },
+          {
+            "date": "2026-08-08",
+            "quarter": "2026-06",
+            "n": 171,
+            "tp": 113,
+            "precision": 0.661,
+            "audit": "quarterly_drift"
+          },
+          {
+            "date": "2026-08-08",
+            "quarter": "2026-07",
+            "n": 195,
+            "tp": 132,
+            "precision": 0.677,
+            "audit": "quarterly_drift"
           }
         ]
       },
