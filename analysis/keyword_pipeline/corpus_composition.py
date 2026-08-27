@@ -16,7 +16,7 @@ from pathlib import Path
 
 DB = Path(__file__).resolve().parents[2] / "data" / "tracker.db"
 EXCLUDED_AUTHORS = {"SoulmateAI_Dev"}   # mirrors src/db/operations.py
-LAST_COMPLETE_MONTH = "2026-04"         # May 2026 is still in progress
+LAST_COMPLETE_MONTH = "2026-07"         # August 2026 is still in progress
 VOLUME_FLOOR = 200                      # min posts/month for a sub to count in sub-equal
 
 THEMES = ["romance", "sexual_erp", "consciousness", "therapy", "addiction", "rupture"]

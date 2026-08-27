@@ -276,7 +276,7 @@ export default function About() {
             <p>
               Within that curated set, each theme is also concentrated. Two or
               three subreddits usually account for most of a theme&apos;s posts
-              &mdash; and the sexual-content line is well over half r/replika
+              &mdash; and the sexual-content line is roughly half r/replika
               alone.
               A theme line is often, in practice, a close reading of a few
               communities rather than an even sweep across all of them.
