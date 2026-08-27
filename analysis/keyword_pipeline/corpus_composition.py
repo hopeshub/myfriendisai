@@ -10,11 +10,13 @@ T1-T3 active subreddits, the one platform-dev author excluded. Monthly buckets.
 Run from the repo root:  python3 analysis/keyword_pipeline/corpus_composition.py
 """
 
+import re
 import sqlite3
 from collections import defaultdict
 from pathlib import Path
 
 DB = Path(__file__).resolve().parents[2] / "data" / "tracker.db"
+COMMUNITIES_YAML = Path(__file__).resolve().parents[2] / "config" / "communities.yaml"
 EXCLUDED_AUTHORS = {"SoulmateAI_Dev"}   # mirrors src/db/operations.py
 LAST_COMPLETE_MONTH = "2026-07"         # August 2026 is still in progress
 VOLUME_FLOOR = 200                      # min posts/month for a sub to count in sub-equal
@@ -53,6 +55,25 @@ def months_between(start, end):
     return out
 
 
+def keyword_excluded_subs():
+    """Subs flagged exclude_from_keywords in communities.yaml, lowercased.
+
+    subreddit_config has no exclusion column, so without this filter the
+    corpus silently included r/AIGirlfriend, r/SpicyChatAI and r/ChatGPTNSFW's
+    pre-2026-05-18 tags — which the published exports exclude. (Found and
+    fixed 2026-08-27; the 2026-05-16 run had the same inflation.) Light line
+    parser instead of pyyaml so the script stays dependency-free.
+    """
+    excluded, current = set(), None
+    for line in COMMUNITIES_YAML.read_text().splitlines():
+        m = re.match(r"\s*-\s*subreddit:\s*[\"']?([A-Za-z0-9_]+)", line)
+        if m:
+            current = m.group(1).lower()
+        elif re.match(r"\s*exclude_from_keywords:\s*true", line) and current:
+            excluded.add(current)
+    return excluded
+
+
 def load(conn):
     """Return (tier, tagged, posts) keyed by lowercased subreddit.
 
@@ -60,12 +81,14 @@ def load(conn):
     tagged: theme -> sub -> month -> distinct tagged-post count
     posts:  sub -> month -> total post count
     """
+    excluded = keyword_excluded_subs()
     tier = {}
     for sub, t in conn.execute(
         "SELECT subreddit, tier FROM subreddit_config "
         "WHERE is_active=1 AND tier BETWEEN 1 AND 3"
     ):
-        tier[sub.lower()] = t
+        if sub.lower() not in excluded:
+            tier[sub.lower()] = t
     corpus = set(tier)
 
     # Distinct tagged posts (post source only), deduped to (theme, sub, month, post).
