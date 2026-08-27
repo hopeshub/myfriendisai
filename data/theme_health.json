@@ -1,6 +1,6 @@
 {
   "generated_at": "2026-08-27",
-  "drift_last_updated": "2026-08-08",
+  "drift_last_updated": "2026-08-27",
   "themes": {
     "rupture": {
       "total_post_tags": 5333,
@@ -27,19 +27,19 @@
       },
       "top5_authors_pct": 1.1,
       "post_precision": {
-        "date": "2026-08-08",
-        "quarter": "2026-07",
-        "n": 925,
-        "tp": 725,
-        "precision": 0.784,
+        "date": "2026-08-27",
+        "quarter": "2026-08",
+        "n": 926,
+        "tp": 784,
+        "precision": 0.847,
         "audit": "quarterly_drift"
       },
       "comment_precision": {
-        "date": "2026-08-08",
-        "quarter": "2026-07",
-        "n": 729,
-        "tp": 560,
-        "precision": 0.768,
+        "date": "2026-08-27",
+        "quarter": "2026-08",
+        "n": 800,
+        "tp": 642,
+        "precision": 0.802,
         "audit": "quarterly_drift"
       },
       "noisy_keywords_comment": [
@@ -75,19 +75,19 @@
       },
       "top5_authors_pct": 2.5,
       "post_precision": {
-        "date": "2026-08-08",
-        "quarter": "2026-07",
-        "n": 734,
-        "tp": 624,
-        "precision": 0.85,
+        "date": "2026-08-27",
+        "quarter": "2026-08",
+        "n": 741,
+        "tp": 627,
+        "precision": 0.846,
         "audit": "quarterly_drift"
       },
       "comment_precision": {
-        "date": "2026-08-08",
-        "quarter": "2026-07",
-        "n": 408,
-        "tp": 324,
-        "precision": 0.794,
+        "date": "2026-08-27",
+        "quarter": "2026-08",
+        "n": 474,
+        "tp": 385,
+        "precision": 0.812,
         "audit": "quarterly_drift"
       },
       "noisy_keywords_comment": [
@@ -121,19 +121,19 @@
       },
       "top5_authors_pct": 4.8,
       "post_precision": {
-        "date": "2026-08-08",
-        "quarter": "2026-07",
-        "n": 926,
-        "tp": 776,
-        "precision": 0.838,
+        "date": "2026-08-27",
+        "quarter": "2026-08",
+        "n": 931,
+        "tp": 826,
+        "precision": 0.887,
         "audit": "quarterly_drift"
       },
       "comment_precision": {
-        "date": "2026-08-08",
-        "quarter": "2026-07",
-        "n": 400,
-        "tp": 289,
-        "precision": 0.723,
+        "date": "2026-08-27",
+        "quarter": "2026-08",
+        "n": 479,
+        "tp": 385,
+        "precision": 0.804,
         "audit": "quarterly_drift"
       },
       "noisy_keywords_comment": [
@@ -168,19 +168,19 @@
       },
       "top5_authors_pct": 4.3,
       "post_precision": {
-        "date": "2026-08-08",
-        "quarter": "2026-07",
-        "n": 523,
-        "tp": 409,
-        "precision": 0.782,
+        "date": "2026-08-27",
+        "quarter": "2026-08",
+        "n": 524,
+        "tp": 436,
+        "precision": 0.832,
         "audit": "quarterly_drift"
       },
       "comment_precision": {
-        "date": "2026-08-08",
-        "quarter": "2026-07",
-        "n": 295,
-        "tp": 222,
-        "precision": 0.753,
+        "date": "2026-08-27",
+        "quarter": "2026-08",
+        "n": 330,
+        "tp": 262,
+        "precision": 0.794,
         "audit": "quarterly_drift"
       },
       "noisy_keywords_comment": [
@@ -212,19 +212,19 @@
       },
       "top5_authors_pct": 15.8,
       "post_precision": {
-        "date": "2026-08-08",
-        "quarter": "2026-07",
-        "n": 360,
-        "tp": 272,
-        "precision": 0.756,
+        "date": "2026-08-27",
+        "quarter": "2026-08",
+        "n": 369,
+        "tp": 317,
+        "precision": 0.859,
         "audit": "quarterly_drift"
       },
       "comment_precision": {
-        "date": "2026-08-08",
-        "quarter": "2026-07",
-        "n": 168,
-        "tp": 110,
-        "precision": 0.655,
+        "date": "2026-08-27",
+        "quarter": "2026-08",
+        "n": 209,
+        "tp": 147,
+        "precision": 0.703,
         "audit": "quarterly_drift"
       },
       "noisy_keywords_comment": [
@@ -260,19 +260,19 @@
       },
       "top5_authors_pct": 3.1,
       "post_precision": {
-        "date": "2026-08-08",
-        "quarter": "2026-07",
+        "date": "2026-08-27",
+        "quarter": "2026-08",
         "n": 360,
-        "tp": 222,
-        "precision": 0.617,
+        "tp": 239,
+        "precision": 0.664,
         "audit": "quarterly_drift"
       },
       "comment_precision": {
-        "date": "2026-08-08",
-        "quarter": "2026-07",
-        "n": 195,
-        "tp": 132,
-        "precision": 0.677,
+        "date": "2026-08-27",
+        "quarter": "2026-08",
+        "n": 212,
+        "tp": 151,
+        "precision": 0.712,
         "audit": "quarterly_drift"
       },
       "noisy_keywords_comment": [

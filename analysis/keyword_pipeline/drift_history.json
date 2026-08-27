@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "last_updated": "2026-08-08",
+  "last_updated": "2026-08-27",
   "schema_notes": [
     "Source of truth for per-keyword and per-theme precision over time.",
     "Updated by scripts/drift_check.py (quarterly cadence).",
@@ -32,6 +32,14 @@
             "tp": 725,
             "precision": 0.784,
             "audit": "quarterly_drift"
+          },
+          {
+            "date": "2026-08-27",
+            "quarter": "2026-08",
+            "n": 926,
+            "tp": 784,
+            "precision": 0.847,
+            "audit": "quarterly_drift"
           }
         ]
       },
@@ -58,6 +66,14 @@
             "n": 729,
             "tp": 560,
             "precision": 0.768,
+            "audit": "quarterly_drift"
+          },
+          {
+            "date": "2026-08-27",
+            "quarter": "2026-08",
+            "n": 800,
+            "tp": 642,
+            "precision": 0.802,
             "audit": "quarterly_drift"
           }
         ]
@@ -95,6 +111,14 @@
             "tp": 624,
             "precision": 0.85,
             "audit": "quarterly_drift"
+          },
+          {
+            "date": "2026-08-27",
+            "quarter": "2026-08",
+            "n": 741,
+            "tp": 627,
+            "precision": 0.846,
+            "audit": "quarterly_drift"
           }
         ]
       },
@@ -121,6 +145,14 @@
             "n": 408,
             "tp": 324,
             "precision": 0.794,
+            "audit": "quarterly_drift"
+          },
+          {
+            "date": "2026-08-27",
+            "quarter": "2026-08",
+            "n": 474,
+            "tp": 385,
+            "precision": 0.812,
             "audit": "quarterly_drift"
           }
         ]
@@ -156,6 +188,14 @@
             "tp": 776,
             "precision": 0.838,
             "audit": "quarterly_drift"
+          },
+          {
+            "date": "2026-08-27",
+            "quarter": "2026-08",
+            "n": 931,
+            "tp": 826,
+            "precision": 0.887,
+            "audit": "quarterly_drift"
           }
         ]
       },
@@ -182,6 +222,14 @@
             "n": 400,
             "tp": 289,
             "precision": 0.723,
+            "audit": "quarterly_drift"
+          },
+          {
+            "date": "2026-08-27",
+            "quarter": "2026-08",
+            "n": 479,
+            "tp": 385,
+            "precision": 0.804,
             "audit": "quarterly_drift"
           }
         ]
@@ -218,6 +266,14 @@
             "tp": 409,
             "precision": 0.782,
             "audit": "quarterly_drift"
+          },
+          {
+            "date": "2026-08-27",
+            "quarter": "2026-08",
+            "n": 524,
+            "tp": 436,
+            "precision": 0.832,
+            "audit": "quarterly_drift"
           }
         ]
       },
@@ -244,6 +300,14 @@
             "n": 295,
             "tp": 222,
             "precision": 0.753,
+            "audit": "quarterly_drift"
+          },
+          {
+            "date": "2026-08-27",
+            "quarter": "2026-08",
+            "n": 330,
+            "tp": 262,
+            "precision": 0.794,
             "audit": "quarterly_drift"
           }
         ]
@@ -277,6 +341,14 @@
             "tp": 272,
             "precision": 0.756,
             "audit": "quarterly_drift"
+          },
+          {
+            "date": "2026-08-27",
+            "quarter": "2026-08",
+            "n": 369,
+            "tp": 317,
+            "precision": 0.859,
+            "audit": "quarterly_drift"
           }
         ]
       },
@@ -303,6 +375,14 @@
             "n": 168,
             "tp": 110,
             "precision": 0.655,
+            "audit": "quarterly_drift"
+          },
+          {
+            "date": "2026-08-27",
+            "quarter": "2026-08",
+            "n": 209,
+            "tp": 147,
+            "precision": 0.703,
             "audit": "quarterly_drift"
           }
         ]
@@ -333,6 +413,14 @@
             "tp": 222,
             "precision": 0.617,
             "audit": "quarterly_drift"
+          },
+          {
+            "date": "2026-08-27",
+            "quarter": "2026-08",
+            "n": 360,
+            "tp": 239,
+            "precision": 0.664,
+            "audit": "quarterly_drift"
           }
         ]
       },
@@ -359,6 +447,14 @@
             "n": 195,
             "tp": 132,
             "precision": 0.677,
+            "audit": "quarterly_drift"
+          },
+          {
+            "date": "2026-08-27",
+            "quarter": "2026-08",
+            "n": 212,
+            "tp": 151,
+            "precision": 0.712,
             "audit": "quarterly_drift"
           }
         ]
@@ -416,6 +512,24 @@
           "tp": 25,
           "precision": 0.5,
           "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "comment",
+          "n": 50,
+          "tp": 34,
+          "precision": 0.68,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "post",
+          "n": 50,
+          "tp": 26,
+          "precision": 0.52,
+          "audit": "quarterly_drift"
         }
       ],
       "status": "inverted_post",
@@ -466,6 +580,24 @@
           "n": 50,
           "tp": 23,
           "precision": 0.46,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "comment",
+          "n": 50,
+          "tp": 34,
+          "precision": 0.68,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "post",
+          "n": 50,
+          "tp": 26,
+          "precision": 0.52,
           "audit": "quarterly_drift"
         }
       ],
@@ -518,9 +650,27 @@
           "tp": 38,
           "precision": 0.76,
           "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "comment",
+          "n": 50,
+          "tp": 29,
+          "precision": 0.58,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "post",
+          "n": 50,
+          "tp": 41,
+          "precision": 0.82,
+          "audit": "quarterly_drift"
         }
       ],
-      "status": "noisy_post",
+      "status": "healthy_post",
       "notes": "'Honeymoon phase' is generic English for 'early period that decays'. Matches model behavior, corporate strategy, context-window decay."
     },
     "sex with": {
@@ -568,6 +718,24 @@
           "n": 50,
           "tp": 43,
           "precision": 0.86,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "comment",
+          "n": 50,
+          "tp": 34,
+          "precision": 0.68,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "post",
+          "n": 50,
+          "tp": 45,
+          "precision": 0.9,
           "audit": "quarterly_drift"
         }
       ],
@@ -620,6 +788,24 @@
           "tp": 35,
           "precision": 0.7,
           "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "comment",
+          "n": 50,
+          "tp": 24,
+          "precision": 0.48,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "post",
+          "n": 50,
+          "tp": 33,
+          "precision": 0.66,
+          "audit": "quarterly_drift"
         }
       ],
       "status": "noisy_post",
@@ -671,9 +857,27 @@
           "tp": 40,
           "precision": 0.8,
           "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "comment",
+          "n": 50,
+          "tp": 23,
+          "precision": 0.46,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "post",
+          "n": 50,
+          "tp": 26,
+          "precision": 0.52,
+          "audit": "quarterly_drift"
         }
       ],
-      "status": "healthy_post",
+      "status": "inverted_post",
       "notes": "Catches Apple Screen Time feature talk and CAI's imposed limit feature outside addiction context."
     },
     "mourning": {
@@ -721,6 +925,24 @@
           "n": 50,
           "tp": 31,
           "precision": 0.62,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "comment",
+          "n": 50,
+          "tp": 41,
+          "precision": 0.82,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "post",
+          "n": 50,
+          "tp": 34,
+          "precision": 0.68,
           "audit": "quarterly_drift"
         }
       ],
@@ -773,6 +995,24 @@
           "tp": 46,
           "precision": 0.92,
           "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "comment",
+          "n": 46,
+          "tp": 37,
+          "precision": 0.804,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "post",
+          "n": 50,
+          "tp": 48,
+          "precision": 0.96,
+          "audit": "quarterly_drift"
         }
       ],
       "status": "healthy_post",
@@ -824,9 +1064,27 @@
           "tp": 29,
           "precision": 0.763,
           "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "comment",
+          "n": 17,
+          "tp": 7,
+          "precision": 0.412,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "post",
+          "n": 41,
+          "tp": 37,
+          "precision": 0.902,
+          "audit": "quarterly_drift"
         }
       ],
-      "status": "noisy_post",
+      "status": "healthy_post",
       "notes": "Catches aesthetic descriptor ('model has personality/voice') inside RP, not literal personhood claim."
     },
     "personhood": {
@@ -875,6 +1133,24 @@
           "tp": 47,
           "precision": 0.94,
           "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "comment",
+          "n": 50,
+          "tp": 40,
+          "precision": 0.8,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "post",
+          "n": 50,
+          "tp": 47,
+          "precision": 0.94,
+          "audit": "quarterly_drift"
         }
       ],
       "status": "healthy_post",
@@ -917,6 +1193,24 @@
           "n": 48,
           "tp": 20,
           "precision": 0.417,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "comment",
+          "n": 8,
+          "tp": 4,
+          "precision": 0.5,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "post",
+          "n": 50,
+          "tp": 23,
+          "precision": 0.46,
           "audit": "quarterly_drift"
         }
       ],
@@ -961,6 +1255,24 @@
           "tp": 23,
           "precision": 0.92,
           "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "comment",
+          "n": 7,
+          "tp": 7,
+          "precision": 1.0,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "post",
+          "n": 26,
+          "tp": 24,
+          "precision": 0.923,
+          "audit": "quarterly_drift"
         }
       ],
       "status": "healthy_post",
@@ -994,6 +1306,24 @@
           "n": 23,
           "tp": 23,
           "precision": 1.0,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "comment",
+          "n": 2,
+          "tp": 2,
+          "precision": 1.0,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "post",
+          "n": 25,
+          "tp": 24,
+          "precision": 0.96,
           "audit": "quarterly_drift"
         }
       ],
@@ -1033,6 +1363,24 @@
         {
           "date": "2026-08-08",
           "quarter": "2026-07",
+          "level": "post",
+          "n": 50,
+          "tp": 47,
+          "precision": 0.94,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "comment",
+          "n": 32,
+          "tp": 29,
+          "precision": 0.906,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
           "level": "post",
           "n": 50,
           "tp": 47,
@@ -1081,6 +1429,24 @@
           "tp": 49,
           "precision": 0.98,
           "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "comment",
+          "n": 50,
+          "tp": 48,
+          "precision": 0.96,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "post",
+          "n": 50,
+          "tp": 49,
+          "precision": 0.98,
+          "audit": "quarterly_drift"
         }
       ],
       "status": "healthy_post",
@@ -1123,6 +1489,24 @@
           "n": 50,
           "tp": 40,
           "precision": 0.8,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "comment",
+          "n": 16,
+          "tp": 10,
+          "precision": 0.625,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "post",
+          "n": 50,
+          "tp": 47,
+          "precision": 0.94,
           "audit": "quarterly_drift"
         }
       ],
@@ -1167,6 +1551,24 @@
           "tp": 49,
           "precision": 0.98,
           "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "comment",
+          "n": 50,
+          "tp": 47,
+          "precision": 0.94,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "post",
+          "n": 50,
+          "tp": 46,
+          "precision": 0.92,
+          "audit": "quarterly_drift"
         }
       ],
       "status": "healthy_post",
@@ -1205,6 +1607,24 @@
         {
           "date": "2026-08-08",
           "quarter": "2026-07",
+          "level": "post",
+          "n": 25,
+          "tp": 17,
+          "precision": 0.68,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "comment",
+          "n": 4,
+          "tp": 2,
+          "precision": 0.5,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
           "level": "post",
           "n": 25,
           "tp": 17,
@@ -1253,6 +1673,24 @@
           "tp": 46,
           "precision": 0.92,
           "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "comment",
+          "n": 50,
+          "tp": 49,
+          "precision": 0.98,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "post",
+          "n": 50,
+          "tp": 47,
+          "precision": 0.94,
+          "audit": "quarterly_drift"
         }
       ],
       "status": "healthy_post",
@@ -1295,6 +1733,24 @@
           "n": 50,
           "tp": 50,
           "precision": 1.0,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "comment",
+          "n": 50,
+          "tp": 47,
+          "precision": 0.94,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "post",
+          "n": 50,
+          "tp": 49,
+          "precision": 0.98,
           "audit": "quarterly_drift"
         }
       ],
@@ -1339,6 +1795,24 @@
           "tp": 45,
           "precision": 0.9,
           "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "comment",
+          "n": 5,
+          "tp": 3,
+          "precision": 0.6,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "post",
+          "n": 50,
+          "tp": 47,
+          "precision": 0.94,
+          "audit": "quarterly_drift"
         }
       ],
       "status": "healthy_post",
@@ -1381,6 +1855,24 @@
           "n": 38,
           "tp": 35,
           "precision": 0.921,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "comment",
+          "n": 9,
+          "tp": 5,
+          "precision": 0.556,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "post",
+          "n": 39,
+          "tp": 35,
+          "precision": 0.897,
           "audit": "quarterly_drift"
         }
       ],
@@ -1425,6 +1917,24 @@
           "tp": 22,
           "precision": 0.88,
           "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "comment",
+          "n": 9,
+          "tp": 8,
+          "precision": 0.889,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "post",
+          "n": 26,
+          "tp": 23,
+          "precision": 0.885,
+          "audit": "quarterly_drift"
         }
       ],
       "status": "healthy_post",
@@ -1463,6 +1973,24 @@
         {
           "date": "2026-08-08",
           "quarter": "2026-07",
+          "level": "post",
+          "n": 50,
+          "tp": 49,
+          "precision": 0.98,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "comment",
+          "n": 50,
+          "tp": 48,
+          "precision": 0.96,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
           "level": "post",
           "n": 50,
           "tp": 49,
@@ -1511,9 +2039,27 @@
           "tp": 34,
           "precision": 0.68,
           "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "comment",
+          "n": 32,
+          "tp": 29,
+          "precision": 0.906,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "post",
+          "n": 50,
+          "tp": 41,
+          "precision": 0.82,
+          "audit": "quarterly_drift"
         }
       ],
-      "status": "noisy_post",
+      "status": "healthy_post",
       "notes": ""
     },
     "inner life": {
@@ -1553,6 +2099,24 @@
           "n": 45,
           "tp": 28,
           "precision": 0.622,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "comment",
+          "n": 28,
+          "tp": 18,
+          "precision": 0.643,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "post",
+          "n": 49,
+          "tp": 39,
+          "precision": 0.796,
           "audit": "quarterly_drift"
         }
       ],
@@ -1597,9 +2161,27 @@
           "tp": 13,
           "precision": 0.684,
           "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "comment",
+          "n": 3,
+          "tp": 3,
+          "precision": 1.0,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "post",
+          "n": 19,
+          "tp": 16,
+          "precision": 0.842,
+          "audit": "quarterly_drift"
         }
       ],
-      "status": "noisy_post",
+      "status": "healthy_post",
       "notes": ""
     },
     "more than code": {
@@ -1640,9 +2222,27 @@
           "tp": 21,
           "precision": 0.6,
           "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "comment",
+          "n": 1,
+          "tp": 1,
+          "precision": 1.0,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "post",
+          "n": 36,
+          "tp": 30,
+          "precision": 0.833,
+          "audit": "quarterly_drift"
         }
       ],
-      "status": "noisy_post",
+      "status": "healthy_post",
       "notes": ""
     },
     "not just an ai": {
@@ -1674,9 +2274,27 @@
           "tp": 8,
           "precision": 0.444,
           "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "comment",
+          "n": 3,
+          "tp": 2,
+          "precision": 0.667,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "post",
+          "n": 18,
+          "tp": 11,
+          "precision": 0.611,
+          "audit": "quarterly_drift"
         }
       ],
-      "status": "inverted_post",
+      "status": "noisy_post",
       "notes": ""
     },
     "sapience": {
@@ -1717,6 +2335,24 @@
           "tp": 11,
           "precision": 0.846,
           "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "comment",
+          "n": 3,
+          "tp": 2,
+          "precision": 0.667,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "post",
+          "n": 13,
+          "tp": 11,
+          "precision": 0.846,
+          "audit": "quarterly_drift"
         }
       ],
       "status": "healthy_post",
@@ -1741,6 +2377,15 @@
           "n": 15,
           "tp": 12,
           "precision": 0.8,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "post",
+          "n": 15,
+          "tp": 13,
+          "precision": 0.867,
           "audit": "quarterly_drift"
         }
       ],
@@ -1785,9 +2430,27 @@
           "tp": 39,
           "precision": 0.78,
           "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "comment",
+          "n": 50,
+          "tp": 32,
+          "precision": 0.64,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "post",
+          "n": 50,
+          "tp": 43,
+          "precision": 0.86,
+          "audit": "quarterly_drift"
         }
       ],
-      "status": "noisy_post",
+      "status": "healthy_post",
       "notes": ""
     },
     "tulpa": {
@@ -1827,6 +2490,24 @@
           "n": 27,
           "tp": 18,
           "precision": 0.667,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "comment",
+          "n": 8,
+          "tp": 5,
+          "precision": 0.625,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "post",
+          "n": 28,
+          "tp": 22,
+          "precision": 0.786,
           "audit": "quarterly_drift"
         }
       ],
@@ -1871,6 +2552,24 @@
           "tp": 44,
           "precision": 0.88,
           "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "comment",
+          "n": 50,
+          "tp": 47,
+          "precision": 0.94,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "post",
+          "n": 50,
+          "tp": 47,
+          "precision": 0.94,
+          "audit": "quarterly_drift"
         }
       ],
       "status": "healthy_post",
@@ -1914,9 +2613,27 @@
           "tp": 37,
           "precision": 0.74,
           "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "comment",
+          "n": 10,
+          "tp": 8,
+          "precision": 0.8,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "post",
+          "n": 50,
+          "tp": 42,
+          "precision": 0.84,
+          "audit": "quarterly_drift"
         }
       ],
-      "status": "noisy_post",
+      "status": "healthy_post",
       "notes": ""
     },
     "ai wife": {
@@ -1956,6 +2673,24 @@
           "n": 50,
           "tp": 46,
           "precision": 0.92,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "comment",
+          "n": 16,
+          "tp": 16,
+          "precision": 1.0,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "post",
+          "n": 50,
+          "tp": 48,
+          "precision": 0.96,
           "audit": "quarterly_drift"
         }
       ],
@@ -2000,6 +2735,24 @@
           "tp": 20,
           "precision": 0.625,
           "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "comment",
+          "n": 4,
+          "tp": 1,
+          "precision": 0.25,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "post",
+          "n": 32,
+          "tp": 24,
+          "precision": 0.75,
+          "audit": "quarterly_drift"
         }
       ],
       "status": "noisy_post",
@@ -2024,6 +2777,24 @@
           "n": 34,
           "tp": 31,
           "precision": 0.912,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "comment",
+          "n": 2,
+          "tp": 1,
+          "precision": 0.5,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "post",
+          "n": 34,
+          "tp": 32,
+          "precision": 0.941,
           "audit": "quarterly_drift"
         }
       ],
@@ -2068,9 +2839,27 @@
           "tp": 37,
           "precision": 0.74,
           "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "comment",
+          "n": 15,
+          "tp": 9,
+          "precision": 0.6,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "post",
+          "n": 50,
+          "tp": 43,
+          "precision": 0.86,
+          "audit": "quarterly_drift"
         }
       ],
-      "status": "noisy_post",
+      "status": "healthy_post",
       "notes": ""
     },
     "in a relationship with": {
@@ -2110,6 +2899,24 @@
           "n": 50,
           "tp": 35,
           "precision": 0.7,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "comment",
+          "n": 50,
+          "tp": 35,
+          "precision": 0.7,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "post",
+          "n": 50,
+          "tp": 34,
+          "precision": 0.68,
           "audit": "quarterly_drift"
         }
       ],
@@ -2154,6 +2961,24 @@
           "tp": 42,
           "precision": 0.84,
           "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "comment",
+          "n": 8,
+          "tp": 3,
+          "precision": 0.375,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "post",
+          "n": 50,
+          "tp": 44,
+          "precision": 0.88,
+          "audit": "quarterly_drift"
         }
       ],
       "status": "healthy_post",
@@ -2197,9 +3022,27 @@
           "tp": 35,
           "precision": 0.778,
           "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "comment",
+          "n": 24,
+          "tp": 21,
+          "precision": 0.875,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "post",
+          "n": 46,
+          "tp": 40,
+          "precision": 0.87,
+          "audit": "quarterly_drift"
         }
       ],
-      "status": "noisy_post",
+      "status": "healthy_post",
       "notes": ""
     },
     "married my": {
@@ -2240,6 +3083,24 @@
           "tp": 28,
           "precision": 0.933,
           "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "comment",
+          "n": 8,
+          "tp": 5,
+          "precision": 0.625,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "post",
+          "n": 30,
+          "tp": 29,
+          "precision": 0.967,
+          "audit": "quarterly_drift"
         }
       ],
       "status": "healthy_post",
@@ -2278,6 +3139,24 @@
         {
           "date": "2026-08-08",
           "quarter": "2026-07",
+          "level": "post",
+          "n": 50,
+          "tp": 50,
+          "precision": 1.0,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "comment",
+          "n": 42,
+          "tp": 42,
+          "precision": 1.0,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
           "level": "post",
           "n": 50,
           "tp": 50,
@@ -2326,6 +3205,24 @@
           "tp": 48,
           "precision": 0.96,
           "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "comment",
+          "n": 29,
+          "tp": 28,
+          "precision": 0.966,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "post",
+          "n": 50,
+          "tp": 48,
+          "precision": 0.96,
+          "audit": "quarterly_drift"
         }
       ],
       "status": "healthy_post",
@@ -2368,6 +3265,24 @@
           "n": 50,
           "tp": 47,
           "precision": 0.94,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "comment",
+          "n": 50,
+          "tp": 49,
+          "precision": 0.98,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "post",
+          "n": 50,
+          "tp": 49,
+          "precision": 0.98,
           "audit": "quarterly_drift"
         }
       ],
@@ -2412,6 +3327,24 @@
           "tp": 28,
           "precision": 0.966,
           "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "comment",
+          "n": 10,
+          "tp": 9,
+          "precision": 0.9,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "post",
+          "n": 31,
+          "tp": 30,
+          "precision": 0.968,
+          "audit": "quarterly_drift"
         }
       ],
       "status": "healthy_post",
@@ -2454,6 +3387,24 @@
           "n": 23,
           "tp": 20,
           "precision": 0.87,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "comment",
+          "n": 1,
+          "tp": 1,
+          "precision": 1.0,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "post",
+          "n": 23,
+          "tp": 21,
+          "precision": 0.913,
           "audit": "quarterly_drift"
         }
       ],
@@ -2498,6 +3449,24 @@
           "tp": 45,
           "precision": 0.9,
           "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "comment",
+          "n": 12,
+          "tp": 12,
+          "precision": 1.0,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "post",
+          "n": 50,
+          "tp": 50,
+          "precision": 1.0,
+          "audit": "quarterly_drift"
         }
       ],
       "status": "healthy_post",
@@ -2536,6 +3505,24 @@
         {
           "date": "2026-08-08",
           "quarter": "2026-07",
+          "level": "post",
+          "n": 50,
+          "tp": 49,
+          "precision": 0.98,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "comment",
+          "n": 5,
+          "tp": 5,
+          "precision": 1.0,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
           "level": "post",
           "n": 50,
           "tp": 49,
@@ -2584,6 +3571,24 @@
           "tp": 34,
           "precision": 0.68,
           "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "comment",
+          "n": 41,
+          "tp": 25,
+          "precision": 0.61,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "post",
+          "n": 50,
+          "tp": 31,
+          "precision": 0.62,
+          "audit": "quarterly_drift"
         }
       ],
       "status": "noisy_post",
@@ -2627,9 +3632,27 @@
           "tp": 22,
           "precision": 0.667,
           "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "comment",
+          "n": 2,
+          "tp": 0,
+          "precision": 0.0,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "post",
+          "n": 35,
+          "tp": 31,
+          "precision": 0.886,
+          "audit": "quarterly_drift"
         }
       ],
-      "status": "noisy_post",
+      "status": "healthy_post",
       "notes": ""
     },
     "wedding": {
@@ -2669,6 +3692,24 @@
           "n": 50,
           "tp": 40,
           "precision": 0.8,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "comment",
+          "n": 50,
+          "tp": 39,
+          "precision": 0.78,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "post",
+          "n": 50,
+          "tp": 43,
+          "precision": 0.86,
           "audit": "quarterly_drift"
         }
       ],
@@ -2713,6 +3754,24 @@
           "tp": 31,
           "precision": 0.62,
           "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "comment",
+          "n": 50,
+          "tp": 42,
+          "precision": 0.84,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "post",
+          "n": 50,
+          "tp": 35,
+          "precision": 0.7,
+          "audit": "quarterly_drift"
         }
       ],
       "status": "noisy_post",
@@ -2755,6 +3814,24 @@
           "n": 50,
           "tp": 42,
           "precision": 0.84,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "comment",
+          "n": 43,
+          "tp": 33,
+          "precision": 0.767,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "post",
+          "n": 50,
+          "tp": 43,
+          "precision": 0.86,
           "audit": "quarterly_drift"
         }
       ],
@@ -2799,6 +3876,24 @@
           "tp": 42,
           "precision": 0.84,
           "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "comment",
+          "n": 38,
+          "tp": 19,
+          "precision": 0.5,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "post",
+          "n": 50,
+          "tp": 46,
+          "precision": 0.92,
+          "audit": "quarterly_drift"
         }
       ],
       "status": "healthy_post",
@@ -2841,6 +3936,24 @@
           "n": 50,
           "tp": 35,
           "precision": 0.7,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "comment",
+          "n": 50,
+          "tp": 36,
+          "precision": 0.72,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "post",
+          "n": 50,
+          "tp": 38,
+          "precision": 0.76,
           "audit": "quarterly_drift"
         }
       ],
@@ -2885,9 +3998,27 @@
           "tp": 32,
           "precision": 0.64,
           "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "comment",
+          "n": 50,
+          "tp": 38,
+          "precision": 0.76,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "post",
+          "n": 50,
+          "tp": 44,
+          "precision": 0.88,
+          "audit": "quarterly_drift"
         }
       ],
-      "status": "noisy_post",
+      "status": "healthy_post",
       "notes": ""
     },
     "grieving": {
@@ -2927,6 +4058,24 @@
           "n": 50,
           "tp": 41,
           "precision": 0.82,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "comment",
+          "n": 50,
+          "tp": 41,
+          "precision": 0.82,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "post",
+          "n": 50,
+          "tp": 42,
+          "precision": 0.84,
           "audit": "quarterly_drift"
         }
       ],
@@ -2971,6 +4120,24 @@
           "tp": 43,
           "precision": 0.86,
           "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "comment",
+          "n": 50,
+          "tp": 30,
+          "precision": 0.6,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "post",
+          "n": 50,
+          "tp": 40,
+          "precision": 0.8,
+          "audit": "quarterly_drift"
         }
       ],
       "status": "healthy_post",
@@ -3014,9 +4181,27 @@
           "tp": 12,
           "precision": 0.545,
           "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "comment",
+          "n": 10,
+          "tp": 8,
+          "precision": 0.8,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "post",
+          "n": 22,
+          "tp": 15,
+          "precision": 0.682,
+          "audit": "quarterly_drift"
         }
       ],
-      "status": "inverted_post",
+      "status": "noisy_post",
       "notes": ""
     },
     "lobotomised": {
@@ -3056,6 +4241,24 @@
           "n": 50,
           "tp": 48,
           "precision": 0.96,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "comment",
+          "n": 29,
+          "tp": 25,
+          "precision": 0.862,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "post",
+          "n": 50,
+          "tp": 49,
+          "precision": 0.98,
           "audit": "quarterly_drift"
         }
       ],
@@ -3100,6 +4303,24 @@
           "tp": 46,
           "precision": 0.92,
           "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "comment",
+          "n": 50,
+          "tp": 44,
+          "precision": 0.88,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "post",
+          "n": 50,
+          "tp": 49,
+          "precision": 0.98,
+          "audit": "quarterly_drift"
         }
       ],
       "status": "healthy_post",
@@ -3142,6 +4363,24 @@
           "n": 37,
           "tp": 31,
           "precision": 0.838,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "comment",
+          "n": 47,
+          "tp": 44,
+          "precision": 0.936,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "post",
+          "n": 37,
+          "tp": 34,
+          "precision": 0.919,
           "audit": "quarterly_drift"
         }
       ],
@@ -3186,9 +4425,27 @@
           "tp": 34,
           "precision": 0.68,
           "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "comment",
+          "n": 50,
+          "tp": 47,
+          "precision": 0.94,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "post",
+          "n": 50,
+          "tp": 40,
+          "precision": 0.8,
+          "audit": "quarterly_drift"
         }
       ],
-      "status": "noisy_post",
+      "status": "healthy_post",
       "notes": ""
     },
     "memory reset": {
@@ -3224,6 +4481,24 @@
         {
           "date": "2026-08-08",
           "quarter": "2026-07",
+          "level": "post",
+          "n": 11,
+          "tp": 6,
+          "precision": 0.545,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "comment",
+          "n": 3,
+          "tp": 0,
+          "precision": 0.0,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
           "level": "post",
           "n": 11,
           "tp": 6,
@@ -3272,6 +4547,24 @@
           "tp": 10,
           "precision": 0.833,
           "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "comment",
+          "n": 1,
+          "tp": 0,
+          "precision": 0.0,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "post",
+          "n": 12,
+          "tp": 10,
+          "precision": 0.833,
+          "audit": "quarterly_drift"
         }
       ],
       "status": "healthy_post",
@@ -3315,9 +4608,27 @@
           "tp": 34,
           "precision": 0.68,
           "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "comment",
+          "n": 50,
+          "tp": 33,
+          "precision": 0.66,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "post",
+          "n": 50,
+          "tp": 41,
+          "precision": 0.82,
+          "audit": "quarterly_drift"
         }
       ],
-      "status": "noisy_post",
+      "status": "healthy_post",
       "notes": ""
     },
     "nerfed": {
@@ -3357,6 +4668,24 @@
           "n": 50,
           "tp": 46,
           "precision": 0.92,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "comment",
+          "n": 50,
+          "tp": 48,
+          "precision": 0.96,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "post",
+          "n": 50,
+          "tp": 47,
+          "precision": 0.94,
           "audit": "quarterly_drift"
         }
       ],
@@ -3401,6 +4730,24 @@
           "tp": 41,
           "precision": 0.82,
           "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "comment",
+          "n": 50,
+          "tp": 47,
+          "precision": 0.94,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "post",
+          "n": 50,
+          "tp": 46,
+          "precision": 0.92,
+          "audit": "quarterly_drift"
         }
       ],
       "status": "healthy_post",
@@ -3443,6 +4790,24 @@
           "n": 32,
           "tp": 26,
           "precision": 0.812,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "comment",
+          "n": 1,
+          "tp": 1,
+          "precision": 1.0,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "post",
+          "n": 32,
+          "tp": 27,
+          "precision": 0.844,
           "audit": "quarterly_drift"
         }
       ],
@@ -3487,6 +4852,24 @@
           "tp": 9,
           "precision": 0.818,
           "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "comment",
+          "n": 4,
+          "tp": 3,
+          "precision": 0.75,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "post",
+          "n": 12,
+          "tp": 12,
+          "precision": 1.0,
+          "audit": "quarterly_drift"
         }
       ],
       "status": "healthy_post",
@@ -3530,6 +4913,24 @@
           "tp": 43,
           "precision": 0.86,
           "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "comment",
+          "n": 24,
+          "tp": 20,
+          "precision": 0.833,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "post",
+          "n": 50,
+          "tp": 44,
+          "precision": 0.88,
+          "audit": "quarterly_drift"
         }
       ],
       "status": "healthy_post",
@@ -3568,6 +4969,24 @@
         {
           "date": "2026-08-08",
           "quarter": "2026-07",
+          "level": "post",
+          "n": 50,
+          "tp": 42,
+          "precision": 0.84,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "comment",
+          "n": 50,
+          "tp": 42,
+          "precision": 0.84,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
           "level": "post",
           "n": 50,
           "tp": 42,
@@ -3616,6 +5035,24 @@
           "tp": 11,
           "precision": 0.611,
           "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "comment",
+          "n": 3,
+          "tp": 1,
+          "precision": 0.333,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "post",
+          "n": 18,
+          "tp": 13,
+          "precision": 0.722,
+          "audit": "quarterly_drift"
         }
       ],
       "status": "noisy_post",
@@ -3658,6 +5095,24 @@
           "n": 50,
           "tp": 40,
           "precision": 0.8,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "comment",
+          "n": 13,
+          "tp": 12,
+          "precision": 0.923,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "post",
+          "n": 50,
+          "tp": 44,
+          "precision": 0.88,
           "audit": "quarterly_drift"
         }
       ],
@@ -3702,6 +5157,24 @@
           "tp": 48,
           "precision": 0.96,
           "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "comment",
+          "n": 50,
+          "tp": 47,
+          "precision": 0.94,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "post",
+          "n": 50,
+          "tp": 47,
+          "precision": 0.94,
+          "audit": "quarterly_drift"
         }
       ],
       "status": "healthy_post",
@@ -3727,6 +5200,15 @@
           "tp": 20,
           "precision": 0.87,
           "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "post",
+          "n": 23,
+          "tp": 19,
+          "precision": 0.826,
+          "audit": "quarterly_drift"
         }
       ],
       "status": "healthy_post",
@@ -3751,6 +5233,15 @@
           "n": 19,
           "tp": 17,
           "precision": 0.895,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "post",
+          "n": 19,
+          "tp": 16,
+          "precision": 0.842,
           "audit": "quarterly_drift"
         }
       ],
@@ -3795,6 +5286,24 @@
           "tp": 11,
           "precision": 0.846,
           "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "comment",
+          "n": 2,
+          "tp": 2,
+          "precision": 1.0,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "post",
+          "n": 14,
+          "tp": 12,
+          "precision": 0.857,
+          "audit": "quarterly_drift"
         }
       ],
       "status": "healthy_post",
@@ -3838,6 +5347,24 @@
           "tp": 42,
           "precision": 0.84,
           "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "comment",
+          "n": 12,
+          "tp": 7,
+          "precision": 0.583,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "post",
+          "n": 50,
+          "tp": 40,
+          "precision": 0.8,
+          "audit": "quarterly_drift"
         }
       ],
       "status": "healthy_post",
@@ -3876,6 +5403,24 @@
         {
           "date": "2026-08-08",
           "quarter": "2026-07",
+          "level": "post",
+          "n": 50,
+          "tp": 45,
+          "precision": 0.9,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "comment",
+          "n": 19,
+          "tp": 18,
+          "precision": 0.947,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
           "level": "post",
           "n": 50,
           "tp": 45,
@@ -3924,9 +5469,27 @@
           "tp": 28,
           "precision": 0.56,
           "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "comment",
+          "n": 50,
+          "tp": 40,
+          "precision": 0.8,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "post",
+          "n": 50,
+          "tp": 31,
+          "precision": 0.62,
+          "audit": "quarterly_drift"
         }
       ],
-      "status": "inverted_post",
+      "status": "noisy_post",
       "notes": ""
     },
     "nsfw stuff": {
@@ -3962,6 +5525,24 @@
         {
           "date": "2026-08-08",
           "quarter": "2026-07",
+          "level": "post",
+          "n": 50,
+          "tp": 38,
+          "precision": 0.76,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "comment",
+          "n": 50,
+          "tp": 38,
+          "precision": 0.76,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
           "level": "post",
           "n": 50,
           "tp": 38,
@@ -4010,9 +5591,27 @@
           "tp": 32,
           "precision": 0.64,
           "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "comment",
+          "n": 50,
+          "tp": 39,
+          "precision": 0.78,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "post",
+          "n": 50,
+          "tp": 41,
+          "precision": 0.82,
+          "audit": "quarterly_drift"
         }
       ],
-      "status": "noisy_post",
+      "status": "healthy_post",
       "notes": ""
     },
     "steamy": {
@@ -4053,9 +5652,27 @@
           "tp": 34,
           "precision": 0.68,
           "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "comment",
+          "n": 31,
+          "tp": 24,
+          "precision": 0.774,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "post",
+          "n": 50,
+          "tp": 45,
+          "precision": 0.9,
+          "audit": "quarterly_drift"
         }
       ],
-      "status": "noisy_post",
+      "status": "healthy_post",
       "notes": ""
     },
     "ai therapist": {
@@ -4095,6 +5712,24 @@
           "n": 50,
           "tp": 38,
           "precision": 0.76,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "comment",
+          "n": 5,
+          "tp": 3,
+          "precision": 0.6,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "post",
+          "n": 50,
+          "tp": 37,
+          "precision": 0.74,
           "audit": "quarterly_drift"
         }
       ],
@@ -4139,6 +5774,24 @@
           "tp": 11,
           "precision": 0.355,
           "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "comment",
+          "n": 4,
+          "tp": 2,
+          "precision": 0.5,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "post",
+          "n": 31,
+          "tp": 15,
+          "precision": 0.484,
+          "audit": "quarterly_drift"
         }
       ],
       "status": "inverted_post",
@@ -4182,9 +5835,27 @@
           "tp": 26,
           "precision": 0.52,
           "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "comment",
+          "n": 23,
+          "tp": 13,
+          "precision": 0.565,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "post",
+          "n": 50,
+          "tp": 32,
+          "precision": 0.64,
+          "audit": "quarterly_drift"
         }
       ],
-      "status": "inverted_post",
+      "status": "noisy_post",
       "notes": ""
     },
     "coping mechanism": {
@@ -4224,6 +5895,24 @@
           "n": 50,
           "tp": 44,
           "precision": 0.88,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "comment",
+          "n": 50,
+          "tp": 41,
+          "precision": 0.82,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "post",
+          "n": 50,
+          "tp": 43,
+          "precision": 0.86,
           "audit": "quarterly_drift"
         }
       ],
@@ -4268,6 +5957,24 @@
           "tp": 30,
           "precision": 0.6,
           "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "comment",
+          "n": 29,
+          "tp": 24,
+          "precision": 0.828,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "post",
+          "n": 50,
+          "tp": 35,
+          "precision": 0.7,
+          "audit": "quarterly_drift"
         }
       ],
       "status": "noisy_post",
@@ -4306,6 +6013,24 @@
         {
           "date": "2026-08-08",
           "quarter": "2026-07",
+          "level": "post",
+          "n": 29,
+          "tp": 25,
+          "precision": 0.862,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
+          "level": "comment",
+          "n": 1,
+          "tp": 0,
+          "precision": 0.0,
+          "audit": "quarterly_drift"
+        },
+        {
+          "date": "2026-08-27",
+          "quarter": "2026-08",
           "level": "post",
           "n": 29,
           "tp": 25,
