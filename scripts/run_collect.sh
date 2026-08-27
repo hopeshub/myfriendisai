@@ -106,8 +106,11 @@ if [ "$push_succeeded" = false ] && [ $collect_exit -eq 0 ]; then
 fi
 
 "$PROJECT_DIR/.venv/bin/python" - "$STATUS_FILE" "$now" "$posts_collected" "$subreddits_ok" "$subreddits_total" "$collection_succeeded_bool" "$push_succeeded" "$last_push_error" <<'EOPY'
+import glob
 import json
+import os
 import sys
+import time
 
 status_path, now, posts, ok, total, collection_ok, push_ok, last_err = sys.argv[1:9]
 collection_ok = collection_ok == "true"
@@ -127,6 +130,34 @@ try:
     last_backup = open("logs/last_backup_success").read().strip() or None
 except Exception:
     last_backup = None
+
+# Per-run telemetry from collect_daily.py (duration, Arctic Shift throttling,
+# rows inserted). The collector deletes this file when it starts and rewrites it
+# when it finishes, so "absent" means the run died mid-way — publish nulls
+# rather than last run's numbers.
+try:
+    run_stats = json.load(open("logs/last_run_stats.json"))
+except Exception:
+    run_stats = {}
+
+# Drift-check backlog: sample files staged by the monthly launchd build
+# (scripts/run_drift_build.sh) that no Claude Code session has classified yet —
+# a classified sample has a `<name>_results.txt` sibling. Published so the GH
+# Actions alert can nag; twice the classification sat for weeks unnoticed
+# because the only signal was a one-shot macOS notification.
+drift_backlog_files = 0
+drift_backlog_days = 0
+try:
+    pending = [
+        p for p in glob.glob("analysis/keyword_pipeline/results/drift_*.md")
+        if not os.path.exists(p[:-3] + "_results.txt")
+    ]
+    drift_backlog_files = len(pending)
+    if pending:
+        oldest = min(os.path.getmtime(p) for p in pending)
+        drift_backlog_days = int((time.time() - oldest) // 86400)
+except Exception:
+    pass
 
 prev_consec = int(prev.get("consecutive_push_failures") or 0)
 prev_last_push = prev.get("last_successful_push")
@@ -154,6 +185,14 @@ out = {
     "consecutive_push_failures": consec,
     "last_push_error": last_err or None,
     "last_successful_backup": last_backup,
+    # Added 2026-08-27. Consumers must tolerate these being absent (older
+    # published files) or null (a run that died before writing its stats).
+    "run_duration_seconds": run_stats.get("run_duration_seconds"),
+    "arctic_throttle_events": run_stats.get("arctic_throttle_events"),
+    "posts_inserted": run_stats.get("posts_inserted"),
+    "comments_collected": run_stats.get("comments_collected"),
+    "drift_backlog_files": drift_backlog_files,
+    "drift_backlog_days": drift_backlog_days,
 }
 with open(status_path, "w") as f:
     json.dump(out, f, indent=2)

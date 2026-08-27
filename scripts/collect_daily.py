@@ -35,6 +35,21 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
+# Rolling window re-walked by the arctic path every run, for posts AND comments.
+# 7 days (was 72h until 2026-08-27): each run re-walks the whole window and every
+# insert is INSERT OR IGNORE on a primary key, so an Arctic Shift outage shorter
+# than the window self-heals on the next successful run instead of leaving a
+# permanent hole — previously anything missed after ~3 days was unrecoverable
+# without a manual backfill. 7 days is also the documented safe Arctic Shift
+# chunk size (deeper windows trip pagination errors), so it is the widest
+# window that still needs no per-sub chunking.
+ARCTIC_WINDOW_HOURS = 7 * 24
+
+# Per-run telemetry handed to run_collect.sh's status writer (which publishes it
+# in web/public/status.json). In logs/ because logs/ is gitignored — data/*.json
+# is committed by push_and_deploy.sh and this file is machine-local state.
+RUN_STATS_PATH = Path(__file__).parent.parent / "logs" / "last_run_stats.json"
+
 
 def _step_collect_posts(communities, client, conn):
     """Step 1: Collect subreddit data + posts."""
@@ -105,10 +120,11 @@ def _step_collect_posts_arctic(communities, conn):
     from src.db.operations import insert_posts
 
     before_epoch = int(time.time())
-    # 72h window (not 36h): Arctic Shift is an archive with ingestion lag, so a
-    # post created 30h ago may not be archived yet. The overlap on consecutive
-    # fallback days is absorbed by INSERT OR IGNORE.
-    after_epoch = before_epoch - 72 * 3600
+    # Wide window (not 36h): Arctic Shift is an archive with ingestion lag, so a
+    # post created 30h ago may not be archived yet, and a bad archive day should
+    # be recoverable by the next good one. The overlap on consecutive days is
+    # absorbed by INSERT OR IGNORE. See ARCTIC_WINDOW_HOURS.
+    after_epoch = before_epoch - ARCTIC_WINDOW_HOURS * 3600
 
     ok = 0
     errors = []
@@ -126,7 +142,7 @@ def _step_collect_posts_arctic(communities, conn):
             conn.commit()
             total_inserted += inserted
             if truncated:
-                # Keep the partial window. The 72h window is re-walked daily, so
+                # Keep the partial window. The window is re-walked daily, so
                 # a short day is usually refilled tomorrow — but discarding the
                 # rows guarantees the gap instead of risking it. Still recorded
                 # as an error so the run summary flags the window as incomplete.
@@ -157,10 +173,11 @@ def _step_collect_comments_arctic(communities, conn):
     The Reddit path snapshots a post's comment tree once, 5-6 days after the
     post. Arctic Shift archives comments within seconds of creation (and its
     copy of each post predates any comments, so posts.num_comments-based
-    eligibility can't work). Instead: pull all comments *created* in the last
-    72h per sub — same lag rationale as the post fallback — and attach them to
-    posts already in the DB. Run daily, this converges on the same corpus with
-    no per-post bookkeeping; INSERT OR IGNORE absorbs the window overlap.
+    eligibility can't work). Instead: pull all comments *created* inside
+    ARCTIC_WINDOW_HOURS per sub — same lag rationale as the post fallback — and
+    attach them to posts already in the DB. Run daily, this converges on the
+    same corpus with no per-post bookkeeping; INSERT OR IGNORE absorbs the
+    window overlap.
     """
     from scripts.backfill_arctic import (
         fetch_comments, parse_arctic_comment, filter_comments,
@@ -169,7 +186,7 @@ def _step_collect_comments_arctic(communities, conn):
     from scripts.collect_comments import EXCLUDED_SUBREDDITS
 
     before_epoch = int(time.time())
-    after_epoch = before_epoch - 72 * 3600
+    after_epoch = before_epoch - ARCTIC_WINDOW_HOURS * 3600
 
     eligible = [c for c in communities if c["subreddit"] not in EXCLUDED_SUBREDDITS]
     ok = 0
@@ -187,7 +204,7 @@ def _step_collect_comments_arctic(communities, conn):
             if truncated:
                 # Keep the partial window — see the note in the posts step. This
                 # matters more for comments: they are collected by creation time
-                # in a rolling 72h window, so a discarded day ages out and is
+                # in a rolling window, so a discarded day ages out and is
                 # unrecoverable. Discarding is how r/CharacterAI (a T1 sub whose
                 # comment-sourced tags feed published theme counts) lost days.
                 logger.warning("  r/%s: %d comments fetched, %d new inserted, %d orphans — window INCOMPLETE (partial data kept)",
@@ -373,6 +390,33 @@ def _step_compute_contributors(conn):
     return {"rows_updated": rows_updated}
 
 
+def _arctic_throttle_events() -> int:
+    """Arctic Shift retry / backoff / truncation events counted this run.
+
+    Reads the counters off the already-imported module rather than importing it,
+    so a Reddit-mode run (which never touches Arctic Shift) reports 0 without
+    pulling the backfill module in.
+    """
+    mod = sys.modules.get("scripts.backfill_arctic")
+    return mod.throttle_event_total() if mod else 0
+
+
+def _write_run_stats(stats: dict):
+    """Publish per-run telemetry for run_collect.sh's status writer.
+
+    Written last, and deleted at the start of every run, so a crashed pipeline
+    leaves no file and the status writer publishes nulls rather than yesterday's
+    numbers.
+    """
+    import json
+    RUN_STATS_PATH.parent.mkdir(parents=True, exist_ok=True)
+    tmp = RUN_STATS_PATH.with_suffix(".json.tmp")
+    with open(tmp, "w") as f:
+        json.dump(stats, f, indent=2)
+        f.write("\n")
+    os.replace(str(tmp), str(RUN_STATS_PATH))
+
+
 def _atomic_copy(src: Path, dst: Path):
     """Copy src to dst atomically: write to .tmp then rename."""
     tmp = dst.with_suffix(dst.suffix + ".tmp")
@@ -479,6 +523,11 @@ def main():
 
 def _main_inner():
     pipeline_start = time.time()
+    # Clear last run's telemetry up front — see _write_run_stats.
+    try:
+        RUN_STATS_PATH.unlink()
+    except FileNotFoundError:
+        pass
     communities = load_communities()
     logger.info("Loaded %d active communities from config", len(communities))
 
@@ -667,7 +716,27 @@ def _main_inner():
         "  Total Reddit requests:   %d",
         comment_stats.get("requests", 0),  # post collection requests not tracked separately
     )
+    throttle_events = _arctic_throttle_events()
+    logger.info(
+        "  Arctic throttle events:  %d",
+        throttle_events,
+    )
     logger.info("=" * 60)
+
+    # Hand this run's numbers to run_collect.sh, which publishes them in
+    # status.json — Arctic Shift health and run cost become visible from the
+    # live site instead of only in this log.
+    # Telemetry must never be able to fail a run that otherwise succeeded.
+    try:
+        _write_run_stats({
+            "run_duration_seconds": round(total_duration),
+            "arctic_mode": arctic_mode,
+            "arctic_throttle_events": throttle_events,
+            "posts_inserted": post_stats.get("posts_collected", 0),
+            "comments_collected": comment_stats.get("comments_collected", 0),
+        })
+    except Exception:
+        logger.exception("Failed to write run stats (%s) — continuing", RUN_STATS_PATH)
 
     if post_stats.get("error_details"):
         logger.warning("%d subreddit(s) had issues:", post_stats["errors"])

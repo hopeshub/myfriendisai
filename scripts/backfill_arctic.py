@@ -70,6 +70,25 @@ REQUEST_DELAY = 2.0  # seconds between requests
 # (40 subs back to back) trips it partway through the busiest subs.
 RETRYABLE_STATUS = (422, 429, 500, 502, 503, 504)
 
+# Arctic Shift health telemetry, counted in-process by _fetch_window.
+# collect_daily.py snapshots the total into logs/last_run_stats.json, which
+# run_collect.sh publishes in status.json — so a degrading archive is visible
+# from the live site instead of only in logs/collect_daily.log. Counters are
+# per-process (each daily run is a fresh process); reset_throttle_events()
+# exists for long-lived callers and tests.
+THROTTLE_EVENTS = {"retryable_status": 0, "network_error": 0, "truncated_windows": 0}
+
+
+def reset_throttle_events() -> None:
+    """Zero the Arctic Shift throttle counters."""
+    for key in THROTTLE_EVENTS:
+        THROTTLE_EVENTS[key] = 0
+
+
+def throttle_event_total() -> int:
+    """Total backoff / retry / truncation events since the last reset."""
+    return sum(THROTTLE_EVENTS.values())
+
 
 def fetch_posts(subreddit: str, after_epoch: int, before_epoch: int,
                 on_batch=None) -> "tuple[list[dict], bool]":
@@ -123,6 +142,7 @@ def _fetch_window(api_base: str, subreddit: str, after_epoch: int, before_epoch:
             )
         except requests.RequestException as e:
             retries += 1
+            THROTTLE_EVENTS["network_error"] += 1
             if retries > max_retries:
                 logger.error("  r/%s: gave up after %d network errors — window TRUNCATED", subreddit, max_retries)
                 truncated = True
@@ -137,6 +157,7 @@ def _fetch_window(api_base: str, subreddit: str, after_epoch: int, before_epoch:
         # subreddit's day — r/ClaudeAI went 4 days with no comments that way.
         if resp.status_code in RETRYABLE_STATUS:
             retries += 1
+            THROTTLE_EVENTS["retryable_status"] += 1
             detail = resp.text[:120].replace("\n", " ")
             if retries > max_retries:
                 logger.error("  r/%s: HTTP %d after %d retries — window TRUNCATED (%s)",
@@ -182,6 +203,9 @@ def _fetch_window(api_base: str, subreddit: str, after_epoch: int, before_epoch:
             break  # Last page
 
         time.sleep(REQUEST_DELAY)
+
+    if truncated:
+        THROTTLE_EVENTS["truncated_windows"] += 1
 
     return all_posts, truncated
 

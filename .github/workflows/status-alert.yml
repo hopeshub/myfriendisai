@@ -79,3 +79,33 @@ jobs:
             echo "::error::Off-site backup is stale — last successful B2 snapshot was ${age_hours}h ago. Check logs/backup_b2.log and free disk space on the collection Mac."
             exit 1
           fi
+
+      # Runs last: a drift backlog is a chore, not an outage, and failing here
+      # must not hide the collection/backup checks above.
+      - name: Check drift-check backlog
+        run: |
+          set -euo pipefail
+          status=$(curl -fsS --max-time 30 --retry 3 --retry-all-errors --retry-delay 30 https://myfriendisai.com/status.json)
+
+          # The monthly launchd build (13th, noon) stages drift sample files; a
+          # Claude Code session classifies them and writes _results.txt
+          # siblings. status.json publishes how many are still unclassified and
+          # how old the oldest one is. Twice the classification sat for weeks
+          # because the only reminder was a macOS notification on the
+          # collection Mac. A cycle builds on the 13th, so >7 days means the
+          # month's samples were staged and then ignored.
+          #
+          # Absent field = a status.json published before 2026-08-27; skip
+          # rather than fail, since the collector will add it on its next run.
+          days=$(echo "$status" | jq -r '.drift_backlog_days // empty')
+          if [ -z "$days" ]; then
+            echo "::notice::status.json has no drift_backlog_days yet (pre-2026-08-27 status file) — skipping."
+            exit 0
+          fi
+
+          files=$(echo "$status" | jq -r '.drift_backlog_files // 0')
+          echo "Drift backlog: ${files} unclassified sample file(s), oldest ${days} day(s) old"
+          if [ "$days" -gt 7 ]; then
+            echo "::error::Drift-check backlog — ${files} staged sample file(s) unclassified, oldest ${days} days old. Open Claude Code on the collection Mac and ask it to run the drift check (classify → record → report)."
+            exit 1
+          fi
