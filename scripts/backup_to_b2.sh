@@ -95,11 +95,14 @@ echo "[$(date)] Verifying staging copy (quick_check) ..."
 qc=$(sqlite3 "$STAGING" "PRAGMA quick_check;" 2>&1)
 [ "$qc" = "ok" ] || fail "staging copy failed quick_check: $qc"
 
-# 3. restic backup the copy to the encrypted B2 repo. CLAUDE.md and
-#    docs/archive/ ride along in the same snapshot — they are gitignored
-#    (public repo, internal notes), so this backup is their only off-site copy.
+# 3. restic backup the copy to the encrypted B2 repo. CLAUDE.md, docs/archive/
+#    and the host-rebuild runbook ride along in the same snapshot — they are
+#    gitignored (public repo, internal notes), so this backup is their only
+#    off-site copy. The runbook especially: it is the recover-from-a-dead-Mac
+#    document, so it must live off-machine.
 echo "[$(date)] restic backup -> $RESTIC_REPOSITORY"
-restic backup "$STAGING" CLAUDE.md docs/archive --tag tracker-db --host myfriendisai-collector \
+restic backup "$STAGING" CLAUDE.md docs/archive docs/collection_host_rebuild_runbook.md \
+    --tag tracker-db --host myfriendisai-collector \
     || fail "restic backup failed"
 
 # 4. Retention. group-by host,tags (NOT the default host,paths) so every

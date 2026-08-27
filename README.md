@@ -1,6 +1,6 @@
 # My Friend Is AI
 
-An independent, one-person research dashboard tracking how people talk about AI companionship across Reddit. Visualizes validated-keyword trends across 23 companion subreddits (drawn from 31 tracked communities) using daily snapshots and regex matching, normalized per 1,000 posts. The chart uses keyword counts only — there is no AI classification in it.
+An independent, one-person research dashboard tracking how people talk about AI companionship across Reddit. Visualizes validated-keyword trends across 22 companion subreddits (drawn from 39 live tracked communities) using daily snapshots and regex matching, normalized per 1,000 posts. The chart uses keyword counts only — there is no AI classification in it.
 
 **Live site:** [myfriendisai.com](https://myfriendisai.com)
 
@@ -12,14 +12,14 @@ It does **not** measure sentiment, prevalence, or how many people are actually i
 
 ## What it tracks
 
-- **31 subreddits** across 4 tiers: general AI (T0), primary companionship (T1), platform-specific (T2), and recovery/dependency (T3)
-- **6 keyword themes** — Romance, Sex/ERP, Consciousness, Therapy, Addiction, Rupture — matched against the 23 T1–T3 companion subreddits only (the 5 general-AI subs and 3 NSFW subs that fell outside the companionship-construct gate are tracked for context but excluded from the theme lines — see `docs/nsfw_scope_position.md`)
+- **41 subreddits** across 5 tiers: general AI (T0), primary companionship (T1), platform-specific (T2), recovery/dependency (T3), and ambient discourse climate (T4, context only) — 39 currently live
+- **6 keyword themes** — Romance, Sex/ERP, Consciousness, Therapy, Addiction, Rupture — matched against the 22 T1–T3 companion subreddits only (the 5 general-AI subs, the 9 ambient T4 subs, and the 3 NSFW subs that fell outside the companionship-construct gate are tracked for context but excluded from the theme lines — see `docs/nsfw_scope_position.md`)
 - **~4.0M posts** from 2017 to present, updated daily
 - **Keyword validation** — every keyword is manually scored against 100-post samples; only keywords at 80%+ precision are accepted (60-79% may be accepted when false positive patterns are well-defined)
 
 ## How the data works
 
-Posts and comments are collected daily via Reddit's public `.json` endpoints. Each post is tagged against validated keyword lists using regex matching with word-boundary constraints. The published chart shows raw keyword counts — there is no AI classification in it. (An LLM verification layer was built and evaluated in May 2026; it is not used in the chart, because it corrects precision while the project's larger accuracy gap is recall — see the [About page](https://myfriendisai.com/about) for the full reasoning.) Trends are normalized to mentions per 1,000 posts.
+Posts and comments are collected daily from the Arctic Shift community archive (Reddit shut off public `.json` access in May 2026). Each post is tagged against validated keyword lists using regex matching with word-boundary constraints. The published chart shows raw keyword counts — there is no AI classification in it. (An LLM verification layer was built and evaluated in May 2026; it is not used in the chart, because it corrects precision while the project's larger accuracy gap is recall — see the [About page](https://myfriendisai.com/about) for the full reasoning.) Trends are normalized to mentions per 1,000 posts.
 
 Historical data (2017 – early 2026) was backfilled from public Reddit archives (PullPush and Arctic Shift). Forward-looking comment collection began March 2026.
 

@@ -55,6 +55,9 @@ CLAUDE.md
 docs/archive/
 docs/HANDOFF_*.md
 docs/CC_PROMPT_*.md
+# Host-rebuild runbook: operational detail (credential paths, host layout) stays
+# local; rides along in the B2 restic snapshot so it survives the machine.
+docs/collection_host_rebuild_runbook.md
 docs/about_page_disclosure_draft_2026-05-15.md
 docs/chart_redesign_plan_2026-05-15.md
 docs/cost_estimation_retrospective_2026-05-15.md
