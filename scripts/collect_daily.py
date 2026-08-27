@@ -501,6 +501,23 @@ def _step_export(conn):
         logger.error("keyword_details export failed (rc=%d): %s", detail_result.returncode, detail_result.stderr)
         raise RuntimeError(f"export_keyword_details.py failed with rc={detail_result.returncode}")
 
+    # Versioned public dataset (web/public/dataset/v1/). Derived from the JSON
+    # exports written above, so it can never disagree with the published chart.
+    # Deterministic: regenerating over unchanged numbers rewrites nothing.
+    dataset_result = subprocess.run(
+        [sys.executable, str(Path(__file__).parent / "export_public_dataset.py")],
+        capture_output=True, text=True, timeout=600,
+    )
+    if dataset_result.returncode == 0:
+        logger.info("Exported public dataset v1: %s", dataset_result.stdout.strip())
+    else:
+        # Non-fatal: the bundle is a durability artifact, not a site surface.
+        # A failure here must not block publishing the day's collection — but
+        # it is logged at ERROR so it surfaces in the daily log rather than
+        # going stale silently.
+        logger.error("public dataset export failed (rc=%d): %s",
+                     dataset_result.returncode, dataset_result.stderr)
+
 
 def main():
     # Acquire lockfile to prevent overlapping runs

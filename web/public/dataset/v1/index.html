@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>My Friend Is AI — public aggregate dataset (v1)</title>
+<meta name="description" content="Downloadable aggregate dataset behind the charts at myfriendisai.com: monthly per-theme keyword counts and monthly per-community post volumes.">
+<style>
+  :root { color-scheme: dark; }
+  body { background:#0F1117; color:#C4CEDB; margin:0;
+         font:16px/1.65 ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif; }
+  main { max-width:720px; margin:0 auto; padding:40px 20px 64px; }
+  h1 { color:#F8FAFC; font-size:26px; font-weight:600; margin:0 0 6px; }
+  .eyebrow { color:#F59E0B; font-size:12px; letter-spacing:.08em;
+             text-transform:uppercase; margin-bottom:10px; }
+  p { margin:0 0 16px; }
+  a { color:#F1F4F8; }
+  table { border-collapse:collapse; width:100%; margin:0 0 24px; font-size:15px; }
+  th, td { text-align:left; padding:9px 10px; border-bottom:1px solid #1E293B;
+           vertical-align:top; }
+  th { color:#9AA7B8; font-weight:500; font-size:13px; }
+  td.n { font-variant-numeric:tabular-nums; white-space:nowrap; color:#9AA7B8; }
+  .note { color:#7E8B9E; font-size:14px; }
+  hr { border:0; border-top:1px solid #1E293B; margin:28px 0; }
+</style>
+</head>
+<body>
+<main>
+  <div class="eyebrow">Public dataset v1</div>
+  <h1>My Friend Is AI — aggregate dataset</h1>
+  <p>The numbers behind the charts at <a href="/">myfriendisai.com</a>, as plain
+  CSV and JSON. Data through <strong>2026-07</strong>; the in-progress
+  calendar month is excluded.</p>
+  <p>Derived counts only — no post text, no titles, no usernames, no post IDs.</p>
+
+  <table>
+    <thead><tr><th>File</th><th>Rows</th><th>What it is</th></tr></thead>
+    <tbody>
+      <tr><td><a href="monthly_theme_counts.csv">monthly_theme_counts.csv</a> ·
+              <a href="monthly_theme_counts.json">.json</a></td>
+          <td class="n">238</td>
+          <td>Per theme per month: published keyword count, denominator, rate per 1,000.</td></tr>
+      <tr><td><a href="monthly_community_volumes.csv">monthly_community_volumes.csv</a> ·
+              <a href="monthly_community_volumes.json">.json</a></td>
+          <td class="n">1,677</td>
+          <td>Per tracked community per month: post volume, with tier.</td></tr>
+      <tr><td><a href="README.md">README.md</a></td><td class="n">—</td>
+          <td>Column-by-column schema, provenance, and how to read the numbers.</td></tr>
+      <tr><td><a href="METHODOLOGY.md">METHODOLOGY.md</a></td><td class="n">—</td>
+          <td>Standalone statement of scope, method, validation, and limits.</td></tr>
+      <tr><td><a href="manifest.json">manifest.json</a></td><td class="n">—</td>
+          <td>Version, generation timestamp, row counts, SHA-256 hashes.</td></tr>
+    </tbody>
+  </table>
+
+  <hr>
+  <p class="note"><strong>Read these as a floor, not a ceiling.</strong> The
+  keyword instrument is precision-first: a hand-coded audit put per-theme recall
+  between about 3% and 32%. Shape and timing are approximately honest; magnitude
+  is an undercount, and it is uneven across themes, so theme heights are not
+  comparable to each other. <a href="METHODOLOGY.md">METHODOLOGY.md</a> and the
+  site's <a href="/about">About page</a> state the limits in full.</p>
+  <p class="note">Licensed <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.
+  Cite as: Bockley, W. (2026). <em>My Friend Is AI: Reddit discourse tracker for
+  AI companionship communities</em> — public aggregate dataset v1.
+  myfriendisai.com. Code and validation records:
+  <a href="https://github.com/hopeshub/myfriendisai">github.com/hopeshub/myfriendisai</a>.</p>
+</main>
+</body>
+</html>

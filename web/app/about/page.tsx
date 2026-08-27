@@ -493,6 +493,18 @@ export default function About() {
               .
             </p>
             <p>
+              The aggregate dataset behind the charts is downloadable as plain
+              CSV and JSON at{" "}
+              <a href="/dataset/v1/" className={linkClass}>
+                /dataset/v1/
+              </a>{" "}
+              &mdash; monthly counts per theme and monthly post volume per
+              community, with a schema and a standalone methodology document
+              alongside them. It is derived numbers only: no post text, no
+              usernames. It updates with the site, and it is meant to stay
+              readable on its own if this site ever stops.
+            </p>
+            <p>
               The site uses Vercel&apos;s privacy-friendly analytics for
               aggregate page-view counts &mdash; it sets no cookies, collects no
               personal data, and does no cross-site tracking.

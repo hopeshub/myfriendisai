@@ -1,0 +1,52 @@
+{
+  "dataset": "myfriendisai-aggregates",
+  "version": "v1",
+  "generated_at": "2026-08-27T21:09:17Z",
+  "data_through": "2026-07",
+  "license": "CC BY 4.0",
+  "license_url": "https://creativecommons.org/licenses/by/4.0/",
+  "source": "https://myfriendisai.com/dataset/v1/",
+  "repository": "https://github.com/hopeshub/myfriendisai",
+  "contains_raw_reddit_content": false,
+  "files": [
+    {
+      "name": "METHODOLOGY.md",
+      "bytes": 29792,
+      "sha256": "4c49fa5e3b3ef07e7b34995a4b5e31645d1e82cde9df559f6579af86b5db0346"
+    },
+    {
+      "name": "README.md",
+      "bytes": 7040,
+      "sha256": "8de6e65988ef452744c85327c09a16ea9eca8e3c08e853f2d8ca6e565b34b5e1"
+    },
+    {
+      "name": "index.html",
+      "bytes": 3779,
+      "sha256": "bc957180eaf6f72f53ce315413eab7dec33bbc6433c3c67cfe4e6d0da6765dc4"
+    },
+    {
+      "name": "monthly_community_volumes.csv",
+      "bytes": 137941,
+      "sha256": "5da2e56b8d58cb94528cc077531dd1329411c9016e07dc6e679541e5fc36bc82",
+      "rows": 1677
+    },
+    {
+      "name": "monthly_community_volumes.json",
+      "bytes": 412694,
+      "sha256": "9ea44996bba18f6f11dcb05139ae2e944ccddc821e8b24fc28913997045b397f",
+      "rows": 1677
+    },
+    {
+      "name": "monthly_theme_counts.csv",
+      "bytes": 13058,
+      "sha256": "079fadfb754d6fa3aa7166faab5131d26df32113a02296732f9f8aeed0ed2bdc",
+      "rows": 238
+    },
+    {
+      "name": "monthly_theme_counts.json",
+      "bytes": 61393,
+      "sha256": "7326e6879af2418a7e2d966c8fbf3a342b67808ca4a4c1c096ba71110944bf52",
+      "rows": 238
+    }
+  ]
+}

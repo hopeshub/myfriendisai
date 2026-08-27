@@ -43,7 +43,14 @@ if [ "$data_changed" = true ]; then
         exit 1
     fi
 
+    # web/public/dataset/ is the versioned public aggregate export (the
+    # durability bundle). It is regenerated from the same JSON files, so it
+    # only changes when the numbers do — but it must ride along in the same
+    # commit, and `git add` on the directory picks up new files too.
     git add data/*.json web/data/*.json web/public/status.json
+    if [ -d web/public/dataset ]; then
+        git add web/public/dataset
+    fi
     if ! git commit -m "Daily data update $(date -u '+%Y-%m-%d')"; then
         echo "PUSH_ERR: git commit failed"
         echo "=== Push & deploy ABORTED (commit) ==="

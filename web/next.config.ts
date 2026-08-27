@@ -27,6 +27,16 @@ const nextConfig: NextConfig = {
       },
     ];
   },
+  // The public aggregate dataset (the durability bundle) is a folder of static
+  // files under public/dataset/. Next serves public/ by exact path only and
+  // does no directory-index resolution, so /dataset/v1 would 404 despite
+  // index.html sitting right there. This rewrite makes the bundle URL — the
+  // one printed in the dataset's own README and citation — actually open.
+  async rewrites() {
+    return [
+      { source: "/dataset/:version", destination: "/dataset/:version/index.html" },
+    ];
+  },
 };
 
 export default nextConfig;

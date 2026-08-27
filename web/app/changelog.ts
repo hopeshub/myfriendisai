@@ -11,6 +11,14 @@ export type ChangelogEntry = {
 
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    date: "August 2026",
+    title: "The dataset behind the charts is now downloadable",
+    items: [
+      "The aggregate numbers behind every chart — monthly counts and rates per theme, and monthly post volume per community — are now published as plain CSV and JSON at /dataset/v1/, alongside a standalone methodology document and a schema. It is derived numbers only: no post text, no usernames. It regenerates with the daily pipeline, and it is built to stay readable on its own even if the site itself ever stops. Licensed CC BY 4.0.",
+    ],
+    recent: true,
+  },
+  {
     date: "May 2026",
     title: "How to read the therapy and addiction lines",
     items: [

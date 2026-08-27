@@ -1,0 +1,83 @@
+name: Wayback Machine snapshot
+
+# Asks the Internet Archive to capture the site's key pages once a month, so
+# the published record survives the loss of the host, the domain, or the repo.
+# Part of the durability bundle alongside the versioned dataset export at
+# /dataset/v1/ and docs/METHODOLOGY.md.
+#
+# Deliberately tolerant: Save Page Now is a free, heavily-rate-limited public
+# service that 429s and 5xxs routinely. A failed capture this month is not
+# worth a red X in the Actions tab — the next month's run will catch it — so
+# every failure is a warning, and the job only fails if EVERY url failed
+# (which points at the site being down, not at SPN being busy).
+#
+# No secrets required: the anonymous /save/ endpoint is used.
+
+on:
+  schedule:
+    - cron: "0 9 15 * *" # 09:00 UTC on the 15th of each month
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  snapshot:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Request Save Page Now captures
+        run: |
+          set -uo pipefail
+
+          urls=(
+            "https://myfriendisai.com/"
+            "https://myfriendisai.com/communities"
+            "https://myfriendisai.com/about"
+            "https://myfriendisai.com/dataset/v1/manifest.json"
+          )
+
+          ok=0
+          failed=0
+
+          for url in "${urls[@]}"; do
+            success=false
+            for attempt in 1 2; do
+              echo "Requesting capture of ${url} (attempt ${attempt})..."
+              # SPN can legitimately take a couple of minutes on a cold page.
+              code=$(curl -sS -o /tmp/spn_body -w '%{http_code}' \
+                       --max-time 180 \
+                       -A "myfriendisai-archival-bot/1.0 (+https://myfriendisai.com)" \
+                       "https://web.archive.org/save/${url}" || echo "000")
+
+              if [ "$code" = "200" ] || [ "$code" = "302" ]; then
+                echo "  OK (HTTP ${code})"
+                success=true
+                break
+              fi
+
+              echo "::warning::Save Page Now returned HTTP ${code} for ${url} (attempt ${attempt})"
+              head -c 400 /tmp/spn_body || true
+              echo
+              if [ "$attempt" -eq 1 ]; then
+                # One retry, after a pause long enough to clear a short
+                # rate-limit window.
+                sleep 60
+              fi
+            done
+
+            if [ "$success" = true ]; then
+              ok=$((ok + 1))
+            else
+              failed=$((failed + 1))
+              echo "::warning::Could not archive ${url} this cycle; next month's run will retry."
+            fi
+
+            # Space the requests out — SPN rate-limits per client.
+            sleep 20
+          done
+
+          echo "Archived ${ok} url(s); ${failed} failed."
+          if [ "$ok" -eq 0 ]; then
+            echo "::error::Every Save Page Now request failed. Either the Internet Archive is down or myfriendisai.com is unreachable."
+            exit 1
+          fi
