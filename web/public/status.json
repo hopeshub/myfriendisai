@@ -1,12 +1,18 @@
 {
-  "last_collection": "2026-08-27T13:25:09Z",
-  "posts_collected": 703,
+  "last_collection": "2026-08-28T13:50:34Z",
+  "posts_collected": 687,
   "subreddits_ok": 39,
   "subreddits_total": 39,
   "collection_succeeded": true,
   "push_succeeded": true,
-  "last_successful_push": "2026-08-27T13:25:09Z",
+  "last_successful_push": "2026-08-28T13:50:34Z",
   "consecutive_push_failures": 0,
   "last_push_error": null,
-  "last_successful_backup": "2026-08-26T21:01:24Z"
+  "last_successful_backup": "2026-08-27T21:01:22Z",
+  "run_duration_seconds": 3025,
+  "arctic_throttle_events": 0,
+  "posts_inserted": 1564,
+  "comments_collected": 12614,
+  "drift_backlog_files": 0,
+  "drift_backlog_days": 0
 }
