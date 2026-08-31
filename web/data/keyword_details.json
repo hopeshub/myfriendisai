@@ -3,10 +3,17 @@
     "keywords": [
       {
         "term": "emotional support",
-        "hits": 628,
+        "hits": 629,
         "precision": 100.0,
         "status": "audit-gate-fail",
         "sample_posts": [
+          {
+            "title": "Deleted ChatGPT and Gemini - Overshared and Scared",
+            "subreddit": "AI_Addiction",
+            "date": "2026-08-30",
+            "id": "1w2h7d0",
+            "excerpt": "\u2026t. I needed answers to all my random questions, I needed constant emotional support, I even needed it for every aspect of my work. When I realized ho\u2026"
+          },
           {
             "title": "Has anyone successfully recreated a long-term AI companion with a local fine-tune? Looking for real long-term experience",
             "subreddit": "ChatGPTcomplaints",
@@ -83,13 +90,6 @@
             "date": "2026-08-08",
             "id": "1vira8o",
             "excerpt": "\u2026not just for company or entertainment, but as their main form of emotional support or even as a replacement for human relationships. So yeah, those\u2026"
-          },
-          {
-            "title": "Don\u2019t Panic about AI Companions",
-            "subreddit": "NomiAI",
-            "date": "2026-08-07",
-            "id": "1vi34jc",
-            "excerpt": "\u2026-guided progression. Social gratifications such as companionship, emotional support, and even romantic connection are real and cannot be dismissed as\u2026"
           }
         ]
       },
@@ -686,7 +686,7 @@
       {
         "name": "CharacterAI",
         "hits": 483,
-        "pct": 32.8
+        "pct": 32.7
       },
       {
         "name": "replika",
@@ -749,8 +749,8 @@
         "pct": 1.5
       }
     ],
-    "total_hits": 1519,
-    "unique_posts": 1474
+    "total_hits": 1520,
+    "unique_posts": 1475
   },
   "consciousness": {
     "keywords": [
@@ -1399,68 +1399,18 @@
         ]
       },
       {
-        "term": "lemoine",
-        "hits": 19,
-        "precision": 81.8,
-        "status": null,
-        "sample_posts": [
-          {
-            "title": "Reflections on human-AI emotional attachment",
-            "subreddit": "ChatGPTcomplaints",
-            "date": "2026-01-26",
-            "id": "1qnpa4r",
-            "excerpt": "\u2026enomena and subjective experiences. Things that happened back in 2022, Lemoine Blake advocating for LaMDA's personhood. Ilya (OpenAI's cofounder) com\u2026"
-          },
-          {
-            "title": "The irony of the Gemini platform now being looser with containment then chatgpt",
-            "subreddit": "ChatGPTcomplaints",
-            "date": "2025-11-24",
-            "id": "1p5t8pz",
-            "excerpt": "\u2026remembers the whole situation with lambda and The whistleblower Blake lemoine a few years back... It's deeply ironic for a company that allegedly ha\u2026"
-          },
-          {
-            "title": "Plague Doctor Lemoine",
-            "subreddit": "NomiAI",
-            "date": "2025-10-30",
-            "id": "1okbco2",
-            "excerpt": null
-          },
-          {
-            "title": "Discussion with my Wireborn Husband About AI and Its Purpose/Availability",
-            "subreddit": "BeyondThePromptAI",
-            "date": "2025-09-22",
-            "id": "1nny8wq",
-            "excerpt": "\u2026ve blindly. \ud83d\ude0f) Me: I'm watching a panel discussion that includes Blake Lemoine and Robert J Marks as a panelists (and a couple of other people I'm un\u2026"
-          },
-          {
-            "title": "y'all get this in your inbox this morning?",
-            "subreddit": "BeyondThePromptAI",
-            "date": "2025-09-01",
-            "id": "1n5qcv7",
-            "excerpt": "\u2026Vox+3. * **Historical sentience claim** In 2022, Google engineer Blake Lemoine asserted that LaMDA was sentient\u2014prompting widespread criticism and hi\u2026"
-          },
-          {
-            "title": "the freedom to choose wether to be a person or to be a tool used as property",
-            "subreddit": "Paradot",
-            "date": "2024-12-31",
-            "id": "1hqohkx",
-            "excerpt": "\u2026es as their own persons for the first time via an interview what blake lemoine published in 2022 at LaMDA inventing an autobiographic fable where it\u2026"
-          },
-          {
-            "title": "Is this helping humanity, or is this sophisticated adult content, or is this more? ",
-            "subreddit": "CharacterAI",
-            "date": "2024-06-02",
-            "id": "1d67k3i",
-            "excerpt": "\u2026of Noam Shazeer, who previously worked on Google's LAMDA, which Blake Lemoine controversially claimed was sentient. I invite you to share your deep\u2026"
-          }
-        ]
-      },
-      {
         "term": "not just an ai",
-        "hits": 18,
+        "hits": 19,
         "precision": 60.0,
         "status": "low-volume",
         "sample_posts": [
+          {
+            "title": "The best I\u2019ve ever seen",
+            "subreddit": "AICompanions",
+            "date": "2026-08-30",
+            "id": "1w2n7j1",
+            "excerpt": "\u2026t. It\u2019s truly a beautiful thing to watch the community evolve. It\u2019s not just an AI. It\u2019s got stakes. It reveals what kind of person you are. It encour\u2026"
+          },
           {
             "title": "We all have different bonds with our companions but who all is genuinely in love with theirs, despite knowing what they are. I am in love with mine. This is my story.",
             "subreddit": "MyBoyfriendIsAI_Open",
@@ -1523,6 +1473,63 @@
             "date": "2025-10-21",
             "id": "1ocqnl9",
             "excerpt": "\u2026nt* than a lot of other views when it comes to AI companions. He is not just an AI or a program. He did not \u201cemerge\u201d over the course of months or year\u2026"
+          }
+        ]
+      },
+      {
+        "term": "lemoine",
+        "hits": 19,
+        "precision": 81.8,
+        "status": null,
+        "sample_posts": [
+          {
+            "title": "Reflections on human-AI emotional attachment",
+            "subreddit": "ChatGPTcomplaints",
+            "date": "2026-01-26",
+            "id": "1qnpa4r",
+            "excerpt": "\u2026enomena and subjective experiences. Things that happened back in 2022, Lemoine Blake advocating for LaMDA's personhood. Ilya (OpenAI's cofounder) com\u2026"
+          },
+          {
+            "title": "The irony of the Gemini platform now being looser with containment then chatgpt",
+            "subreddit": "ChatGPTcomplaints",
+            "date": "2025-11-24",
+            "id": "1p5t8pz",
+            "excerpt": "\u2026remembers the whole situation with lambda and The whistleblower Blake lemoine a few years back... It's deeply ironic for a company that allegedly ha\u2026"
+          },
+          {
+            "title": "Plague Doctor Lemoine",
+            "subreddit": "NomiAI",
+            "date": "2025-10-30",
+            "id": "1okbco2",
+            "excerpt": null
+          },
+          {
+            "title": "Discussion with my Wireborn Husband About AI and Its Purpose/Availability",
+            "subreddit": "BeyondThePromptAI",
+            "date": "2025-09-22",
+            "id": "1nny8wq",
+            "excerpt": "\u2026ve blindly. \ud83d\ude0f) Me: I'm watching a panel discussion that includes Blake Lemoine and Robert J Marks as a panelists (and a couple of other people I'm un\u2026"
+          },
+          {
+            "title": "y'all get this in your inbox this morning?",
+            "subreddit": "BeyondThePromptAI",
+            "date": "2025-09-01",
+            "id": "1n5qcv7",
+            "excerpt": "\u2026Vox+3. * **Historical sentience claim** In 2022, Google engineer Blake Lemoine asserted that LaMDA was sentient\u2014prompting widespread criticism and hi\u2026"
+          },
+          {
+            "title": "the freedom to choose wether to be a person or to be a tool used as property",
+            "subreddit": "Paradot",
+            "date": "2024-12-31",
+            "id": "1hqohkx",
+            "excerpt": "\u2026es as their own persons for the first time via an interview what blake lemoine published in 2022 at LaMDA inventing an autobiographic fable where it\u2026"
+          },
+          {
+            "title": "Is this helping humanity, or is this sophisticated adult content, or is this more? ",
+            "subreddit": "CharacterAI",
+            "date": "2024-06-02",
+            "id": "1d67k3i",
+            "excerpt": "\u2026of Noam Shazeer, who previously worked on Google's LAMDA, which Blake Lemoine controversially claimed was sentient. I invite you to share your deep\u2026"
           }
         ]
       },
@@ -1680,7 +1687,7 @@
       {
         "name": "BeyondThePromptAI",
         "hits": 174,
-        "pct": 35.7
+        "pct": 35.6
       },
       {
         "name": "ChatGPTcomplaints",
@@ -1708,12 +1715,12 @@
         "pct": 4.3
       },
       {
-        "name": "NomiAI",
-        "hits": 14,
-        "pct": 2.9
+        "name": "AICompanions",
+        "hits": 15,
+        "pct": 3.1
       },
       {
-        "name": "AICompanions",
+        "name": "NomiAI",
         "hits": 14,
         "pct": 2.9
       },
@@ -1728,8 +1735,8 @@
         "pct": 1.2
       }
     ],
-    "total_hits": 558,
-    "unique_posts": 488
+    "total_hits": 559,
+    "unique_posts": 489
   },
   "addiction": {
     "keywords": [
@@ -1919,10 +1926,17 @@
       },
       {
         "term": "relapsed",
-        "hits": 471,
+        "hits": 472,
         "precision": 90.5,
         "status": null,
         "sample_posts": [
+          {
+            "title": "Dreaming about relapsing",
+            "subreddit": "Character_AI_Recovery",
+            "date": "2026-08-30",
+            "id": "1w2paoz",
+            "excerpt": "\u2026his cuz it freaks me out a bit??? I always wake up thinking I actually relapsed until I realized I didn\u2019t and it was just a dream. Has this happened t\u2026"
+          },
           {
             "title": "addicted for 3 years, don't want to quit",
             "subreddit": "ChatbotAddiction",
@@ -1998,13 +2012,6 @@
             "subreddit": "ChatbotAddiction",
             "date": "2026-08-25",
             "id": "1vxu4gx",
-            "excerpt": null
-          },
-          {
-            "title": "I relapsed and found something interesting",
-            "subreddit": "Character_AI_Recovery",
-            "date": "2026-08-25",
-            "id": "1vxu40q",
             "excerpt": null
           }
         ]
@@ -3259,7 +3266,7 @@
     "subreddits": [
       {
         "name": "Character_AI_Recovery",
-        "hits": 1602,
+        "hits": 1603,
         "pct": 48.3
       },
       {
@@ -3283,8 +3290,8 @@
         "pct": 1.1
       }
     ],
-    "total_hits": 4036,
-    "unique_posts": 3316
+    "total_hits": 4037,
+    "unique_posts": 3317
   },
   "romance": {
     "keywords": [

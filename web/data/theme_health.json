@@ -1,10 +1,10 @@
 {
-  "generated_at": "2026-08-30",
+  "generated_at": "2026-08-31",
   "drift_last_updated": "2026-08-27",
   "themes": {
     "rupture": {
       "total_post_tags": 5340,
-      "total_comment_tags": 2111,
+      "total_comment_tags": 2123,
       "top_sub_post": {
         "subreddit": "CharacterAI",
         "n": 2444,
@@ -12,8 +12,8 @@
       },
       "top_sub_comment": {
         "subreddit": "ChatGPTcomplaints",
-        "n": 1199,
-        "pct": 56.8
+        "n": 1209,
+        "pct": 56.9
       },
       "top_day": {
         "date": "2024-09-24",
@@ -51,17 +51,17 @@
       ]
     },
     "addiction": {
-      "total_post_tags": 3316,
-      "total_comment_tags": 994,
+      "total_post_tags": 3317,
+      "total_comment_tags": 1000,
       "top_sub_post": {
         "subreddit": "Character_AI_Recovery",
-        "n": 1602,
+        "n": 1603,
         "pct": 48.3
       },
       "top_sub_comment": {
         "subreddit": "CharacterAI",
-        "n": 420,
-        "pct": 42.3
+        "n": 421,
+        "pct": 42.1
       },
       "top_day": {
         "date": "2026-06-08",
@@ -98,7 +98,7 @@
     },
     "romance": {
       "total_post_tags": 2489,
-      "total_comment_tags": 747,
+      "total_comment_tags": 752,
       "top_sub_post": {
         "subreddit": "replika",
         "n": 587,
@@ -106,7 +106,7 @@
       },
       "top_sub_comment": {
         "subreddit": "aipartners",
-        "n": 184,
+        "n": 185,
         "pct": 24.6
       },
       "top_day": {
@@ -145,7 +145,7 @@
     },
     "sexual_erp": {
       "total_post_tags": 5991,
-      "total_comment_tags": 870,
+      "total_comment_tags": 871,
       "top_sub_post": {
         "subreddit": "replika",
         "n": 3500,
@@ -154,7 +154,7 @@
       "top_sub_comment": {
         "subreddit": "ChatGPTcomplaints",
         "n": 272,
-        "pct": 31.3
+        "pct": 31.2
       },
       "top_day": {
         "date": "2023-02-11",
@@ -188,12 +188,12 @@
       ]
     },
     "consciousness": {
-      "total_post_tags": 488,
+      "total_post_tags": 489,
       "total_comment_tags": 286,
       "top_sub_post": {
         "subreddit": "BeyondThePromptAI",
         "n": 174,
-        "pct": 35.7
+        "pct": 35.6
       },
       "top_sub_comment": {
         "subreddit": "ChatGPTcomplaints",
@@ -210,7 +210,7 @@
         "n": 43,
         "pct": 8.8
       },
-      "top5_authors_pct": 15.8,
+      "top5_authors_pct": 15.7,
       "post_precision": {
         "date": "2026-08-27",
         "quarter": "2026-08",
@@ -236,12 +236,12 @@
       ]
     },
     "therapy": {
-      "total_post_tags": 1474,
+      "total_post_tags": 1475,
       "total_comment_tags": 439,
       "top_sub_post": {
         "subreddit": "CharacterAI",
         "n": 483,
-        "pct": 32.8
+        "pct": 32.7
       },
       "top_sub_comment": {
         "subreddit": "ChatGPTcomplaints",
