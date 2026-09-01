@@ -1,8 +1,8 @@
 {
   "dataset": "myfriendisai-aggregates",
   "version": "v1",
-  "generated_at": "2026-08-27T21:09:17Z",
-  "data_through": "2026-07",
+  "generated_at": "2026-09-01T14:10:25Z",
+  "data_through": "2026-08",
   "license": "CC BY 4.0",
   "license_url": "https://creativecommons.org/licenses/by/4.0/",
   "source": "https://myfriendisai.com/dataset/v1/",
@@ -17,36 +17,36 @@
     {
       "name": "README.md",
       "bytes": 7040,
-      "sha256": "8de6e65988ef452744c85327c09a16ea9eca8e3c08e853f2d8ca6e565b34b5e1"
+      "sha256": "e7ec2870bcfc2218fb9335182ddc1c0a2fecfaa70cf1b95bec24ef1baa6c0828"
     },
     {
       "name": "index.html",
       "bytes": 3779,
-      "sha256": "bc957180eaf6f72f53ce315413eab7dec33bbc6433c3c67cfe4e6d0da6765dc4"
+      "sha256": "02d6378bb04014153041784157f2516435ba2110274633e60fdf756c6bc4084d"
     },
     {
       "name": "monthly_community_volumes.csv",
-      "bytes": 137941,
-      "sha256": "5da2e56b8d58cb94528cc077531dd1329411c9016e07dc6e679541e5fc36bc82",
-      "rows": 1677
+      "bytes": 141174,
+      "sha256": "c1c4e024d6a1cc98ab721a404b05f176384373c40eec01f4488f026082794403",
+      "rows": 1716
     },
     {
       "name": "monthly_community_volumes.json",
-      "bytes": 412694,
-      "sha256": "9ea44996bba18f6f11dcb05139ae2e944ccddc821e8b24fc28913997045b397f",
-      "rows": 1677
+      "bytes": 422311,
+      "sha256": "c02929cb9de593f8aa9893dc03e5d5fb3c69056961c2694ca656645d36148755",
+      "rows": 1716
     },
     {
       "name": "monthly_theme_counts.csv",
-      "bytes": 13058,
-      "sha256": "079fadfb754d6fa3aa7166faab5131d26df32113a02296732f9f8aeed0ed2bdc",
-      "rows": 238
+      "bytes": 13390,
+      "sha256": "a4c2f7e4f51714e27005886150275035dda4916bd2ec65b24a935a0b63b9e57a",
+      "rows": 244
     },
     {
       "name": "monthly_theme_counts.json",
-      "bytes": 61393,
-      "sha256": "7326e6879af2418a7e2d966c8fbf3a342b67808ca4a4c1c096ba71110944bf52",
-      "rows": 238
+      "bytes": 62937,
+      "sha256": "a9faf43d834be6e7c3671a9b4b7b0648d867ceeb024814fafd9cdddfb464d4c4",
+      "rows": 244
     }
   ]
 }

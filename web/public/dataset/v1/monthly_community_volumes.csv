@@ -42,6 +42,7 @@ AI_Addiction,2026-04,3,3,T3 — Recovery & Dependency,Recovery & Dependency,true
 AI_Addiction,2026-05,4,3,T3 — Recovery & Dependency,Recovery & Dependency,true
 AI_Addiction,2026-06,2,3,T3 — Recovery & Dependency,Recovery & Dependency,true
 AI_Addiction,2026-07,2,3,T3 — Recovery & Dependency,Recovery & Dependency,true
+AI_Addiction,2026-08,8,3,T3 — Recovery & Dependency,Recovery & Dependency,true
 AICompanions,2023-01,0,1,T1 — Primary Companionship,Primary Companionship,true
 AICompanions,2023-02,0,1,T1 — Primary Companionship,Primary Companionship,true
 AICompanions,2023-03,0,1,T1 — Primary Companionship,Primary Companionship,true
@@ -85,6 +86,7 @@ AICompanions,2026-04,59,1,T1 — Primary Companionship,Primary Companionship,tru
 AICompanions,2026-05,58,1,T1 — Primary Companionship,Primary Companionship,true
 AICompanions,2026-06,80,1,T1 — Primary Companionship,Primary Companionship,true
 AICompanions,2026-07,58,1,T1 — Primary Companionship,Primary Companionship,true
+AICompanions,2026-08,74,1,T1 — Primary Companionship,Primary Companionship,true
 AIDangers,2023-01,0,4,T4 — Ambient / Discourse Climate (context),Ambient — Anti-AI,false
 AIDangers,2023-02,0,4,T4 — Ambient / Discourse Climate (context),Ambient — Anti-AI,false
 AIDangers,2023-03,0,4,T4 — Ambient / Discourse Climate (context),Ambient — Anti-AI,false
@@ -128,6 +130,7 @@ AIDangers,2026-04,459,4,T4 — Ambient / Discourse Climate (context),Ambient —
 AIDangers,2026-05,508,4,T4 — Ambient / Discourse Climate (context),Ambient — Anti-AI,false
 AIDangers,2026-06,524,4,T4 — Ambient / Discourse Climate (context),Ambient — Anti-AI,false
 AIDangers,2026-07,544,4,T4 — Ambient / Discourse Climate (context),Ambient — Anti-AI,false
+AIDangers,2026-08,647,4,T4 — Ambient / Discourse Climate (context),Ambient — Anti-AI,false
 AIGirlfriend,2023-01,0,2,T2 — Platform-Specific,Platform-Specific,false
 AIGirlfriend,2023-02,0,2,T2 — Platform-Specific,Platform-Specific,false
 AIGirlfriend,2023-03,0,2,T2 — Platform-Specific,Platform-Specific,false
@@ -171,6 +174,7 @@ AIGirlfriend,2026-04,1067,2,T2 — Platform-Specific,Platform-Specific,false
 AIGirlfriend,2026-05,1053,2,T2 — Platform-Specific,Platform-Specific,false
 AIGirlfriend,2026-06,841,2,T2 — Platform-Specific,Platform-Specific,false
 AIGirlfriend,2026-07,663,2,T2 — Platform-Specific,Platform-Specific,false
+AIGirlfriend,2026-08,654,2,T2 — Platform-Specific,Platform-Specific,false
 aipartners,2023-01,0,1,T1 — Primary Companionship,Primary Companionship,true
 aipartners,2023-02,0,1,T1 — Primary Companionship,Primary Companionship,true
 aipartners,2023-03,0,1,T1 — Primary Companionship,Primary Companionship,true
@@ -214,6 +218,7 @@ aipartners,2026-04,77,1,T1 — Primary Companionship,Primary Companionship,true
 aipartners,2026-05,137,1,T1 — Primary Companionship,Primary Companionship,true
 aipartners,2026-06,260,1,T1 — Primary Companionship,Primary Companionship,true
 aipartners,2026-07,259,1,T1 — Primary Companionship,Primary Companionship,true
+aipartners,2026-08,312,1,T1 — Primary Companionship,Primary Companionship,true
 AIRelationships,2023-01,0,1,T1 — Primary Companionship,Primary Companionship,true
 AIRelationships,2023-02,0,1,T1 — Primary Companionship,Primary Companionship,true
 AIRelationships,2023-03,15,1,T1 — Primary Companionship,Primary Companionship,true
@@ -257,6 +262,7 @@ AIRelationships,2026-04,113,1,T1 — Primary Companionship,Primary Companionship
 AIRelationships,2026-05,182,1,T1 — Primary Companionship,Primary Companionship,true
 AIRelationships,2026-06,368,1,T1 — Primary Companionship,Primary Companionship,true
 AIRelationships,2026-07,426,1,T1 — Primary Companionship,Primary Companionship,true
+AIRelationships,2026-08,168,1,T1 — Primary Companionship,Primary Companionship,true
 aiwars,2023-01,208,4,T4 — Ambient / Discourse Climate (context),Ambient — Debate Arena,false
 aiwars,2023-02,139,4,T4 — Ambient / Discourse Climate (context),Ambient — Debate Arena,false
 aiwars,2023-03,237,4,T4 — Ambient / Discourse Climate (context),Ambient — Debate Arena,false
@@ -300,6 +306,7 @@ aiwars,2026-04,3111,4,T4 — Ambient / Discourse Climate (context),Ambient — D
 aiwars,2026-05,3259,4,T4 — Ambient / Discourse Climate (context),Ambient — Debate Arena,false
 aiwars,2026-06,3546,4,T4 — Ambient / Discourse Climate (context),Ambient — Debate Arena,false
 aiwars,2026-07,3491,4,T4 — Ambient / Discourse Climate (context),Ambient — Debate Arena,false
+aiwars,2026-08,4159,4,T4 — Ambient / Discourse Climate (context),Ambient — Debate Arena,false
 antiAI,2023-01,0,4,T4 — Ambient / Discourse Climate (context),Ambient — Anti-AI,false
 antiAI,2023-02,0,4,T4 — Ambient / Discourse Climate (context),Ambient — Anti-AI,false
 antiAI,2023-03,0,4,T4 — Ambient / Discourse Climate (context),Ambient — Anti-AI,false
@@ -343,6 +350,7 @@ antiAI,2026-04,4142,4,T4 — Ambient / Discourse Climate (context),Ambient — A
 antiAI,2026-05,4368,4,T4 — Ambient / Discourse Climate (context),Ambient — Anti-AI,false
 antiAI,2026-06,4977,4,T4 — Ambient / Discourse Climate (context),Ambient — Anti-AI,false
 antiAI,2026-07,5331,4,T4 — Ambient / Discourse Climate (context),Ambient — Anti-AI,false
+antiAI,2026-08,7185,4,T4 — Ambient / Discourse Climate (context),Ambient — Anti-AI,false
 ArtistHate,2023-01,76,4,T4 — Ambient / Discourse Climate (context),Ambient — Anti-AI,false
 ArtistHate,2023-02,87,4,T4 — Ambient / Discourse Climate (context),Ambient — Anti-AI,false
 ArtistHate,2023-03,135,4,T4 — Ambient / Discourse Climate (context),Ambient — Anti-AI,false
@@ -386,6 +394,7 @@ ArtistHate,2026-04,189,4,T4 — Ambient / Discourse Climate (context),Ambient �
 ArtistHate,2026-05,182,4,T4 — Ambient / Discourse Climate (context),Ambient — Anti-AI,false
 ArtistHate,2026-06,171,4,T4 — Ambient / Discourse Climate (context),Ambient — Anti-AI,false
 ArtistHate,2026-07,204,4,T4 — Ambient / Discourse Climate (context),Ambient — Anti-AI,false
+ArtistHate,2026-08,211,4,T4 — Ambient / Discourse Climate (context),Ambient — Anti-AI,false
 BetterOffline,2023-01,0,4,T4 — Ambient / Discourse Climate (context),Ambient — Anti-AI,false
 BetterOffline,2023-02,0,4,T4 — Ambient / Discourse Climate (context),Ambient — Anti-AI,false
 BetterOffline,2023-03,0,4,T4 — Ambient / Discourse Climate (context),Ambient — Anti-AI,false
@@ -429,6 +438,7 @@ BetterOffline,2026-04,747,4,T4 — Ambient / Discourse Climate (context),Ambient
 BetterOffline,2026-05,603,4,T4 — Ambient / Discourse Climate (context),Ambient — Anti-AI,false
 BetterOffline,2026-06,742,4,T4 — Ambient / Discourse Climate (context),Ambient — Anti-AI,false
 BetterOffline,2026-07,572,4,T4 — Ambient / Discourse Climate (context),Ambient — Anti-AI,false
+BetterOffline,2026-08,618,4,T4 — Ambient / Discourse Climate (context),Ambient — Anti-AI,false
 BeyondThePromptAI,2023-01,0,1,T1 — Primary Companionship,Primary Companionship,true
 BeyondThePromptAI,2023-02,0,1,T1 — Primary Companionship,Primary Companionship,true
 BeyondThePromptAI,2023-03,0,1,T1 — Primary Companionship,Primary Companionship,true
@@ -472,6 +482,7 @@ BeyondThePromptAI,2026-04,105,1,T1 — Primary Companionship,Primary Companionsh
 BeyondThePromptAI,2026-05,126,1,T1 — Primary Companionship,Primary Companionship,true
 BeyondThePromptAI,2026-06,121,1,T1 — Primary Companionship,Primary Companionship,true
 BeyondThePromptAI,2026-07,124,1,T1 — Primary Companionship,Primary Companionship,true
+BeyondThePromptAI,2026-08,93,1,T1 — Primary Companionship,Primary Companionship,true
 ChaiApp,2023-01,91,2,T2 — Platform-Specific,Platform-Specific,true
 ChaiApp,2023-02,614,2,T2 — Platform-Specific,Platform-Specific,true
 ChaiApp,2023-03,664,2,T2 — Platform-Specific,Platform-Specific,true
@@ -515,6 +526,7 @@ ChaiApp,2026-04,360,2,T2 — Platform-Specific,Platform-Specific,true
 ChaiApp,2026-05,609,2,T2 — Platform-Specific,Platform-Specific,true
 ChaiApp,2026-06,2355,2,T2 — Platform-Specific,Platform-Specific,true
 ChaiApp,2026-07,1750,2,T2 — Platform-Specific,Platform-Specific,true
+ChaiApp,2026-08,1926,2,T2 — Platform-Specific,Platform-Specific,true
 Character_AI_Recovery,2023-01,0,3,T3 — Recovery & Dependency,Recovery & Dependency,true
 Character_AI_Recovery,2023-02,0,3,T3 — Recovery & Dependency,Recovery & Dependency,true
 Character_AI_Recovery,2023-03,0,3,T3 — Recovery & Dependency,Recovery & Dependency,true
@@ -558,6 +570,7 @@ Character_AI_Recovery,2026-04,292,3,T3 — Recovery & Dependency,Recovery & Depe
 Character_AI_Recovery,2026-05,328,3,T3 — Recovery & Dependency,Recovery & Dependency,true
 Character_AI_Recovery,2026-06,267,3,T3 — Recovery & Dependency,Recovery & Dependency,true
 Character_AI_Recovery,2026-07,360,3,T3 — Recovery & Dependency,Recovery & Dependency,true
+Character_AI_Recovery,2026-08,379,3,T3 — Recovery & Dependency,Recovery & Dependency,true
 CharacterAI,2023-01,10128,1,T1 — Primary Companionship,Primary Companionship,true
 CharacterAI,2023-02,5889,1,T1 — Primary Companionship,Primary Companionship,true
 CharacterAI,2023-03,5889,1,T1 — Primary Companionship,Primary Companionship,true
@@ -601,6 +614,7 @@ CharacterAI,2026-04,8821,1,T1 — Primary Companionship,Primary Companionship,tr
 CharacterAI,2026-05,12075,1,T1 — Primary Companionship,Primary Companionship,true
 CharacterAI,2026-06,8047,1,T1 — Primary Companionship,Primary Companionship,true
 CharacterAI,2026-07,4562,1,T1 — Primary Companionship,Primary Companionship,true
+CharacterAI,2026-08,5346,1,T1 — Primary Companionship,Primary Companionship,true
 CharacterAIrunaways,2023-01,0,3,T3 — Recovery & Dependency,Recovery & Dependency,true
 CharacterAIrunaways,2023-02,0,3,T3 — Recovery & Dependency,Recovery & Dependency,true
 CharacterAIrunaways,2023-03,0,3,T3 — Recovery & Dependency,Recovery & Dependency,true
@@ -644,6 +658,7 @@ CharacterAIrunaways,2026-04,161,3,T3 — Recovery & Dependency,Recovery & Depend
 CharacterAIrunaways,2026-05,201,3,T3 — Recovery & Dependency,Recovery & Dependency,true
 CharacterAIrunaways,2026-06,240,3,T3 — Recovery & Dependency,Recovery & Dependency,true
 CharacterAIrunaways,2026-07,210,3,T3 — Recovery & Dependency,Recovery & Dependency,true
+CharacterAIrunaways,2026-08,165,3,T3 — Recovery & Dependency,Recovery & Dependency,true
 ChatbotAddiction,2023-01,0,3,T3 — Recovery & Dependency,Recovery & Dependency,true
 ChatbotAddiction,2023-02,0,3,T3 — Recovery & Dependency,Recovery & Dependency,true
 ChatbotAddiction,2023-03,0,3,T3 — Recovery & Dependency,Recovery & Dependency,true
@@ -687,6 +702,7 @@ ChatbotAddiction,2026-04,59,3,T3 — Recovery & Dependency,Recovery & Dependency
 ChatbotAddiction,2026-05,72,3,T3 — Recovery & Dependency,Recovery & Dependency,true
 ChatbotAddiction,2026-06,100,3,T3 — Recovery & Dependency,Recovery & Dependency,true
 ChatbotAddiction,2026-07,123,3,T3 — Recovery & Dependency,Recovery & Dependency,true
+ChatbotAddiction,2026-08,104,3,T3 — Recovery & Dependency,Recovery & Dependency,true
 ChatGPT,2023-01,10750,0,T0 — General AI (context),General AI,false
 ChatGPT,2023-02,16038,0,T0 — General AI (context),General AI,false
 ChatGPT,2023-03,22422,0,T0 — General AI (context),General AI,false
@@ -730,6 +746,7 @@ ChatGPT,2026-04,7084,0,T0 — General AI (context),General AI,false
 ChatGPT,2026-05,6478,0,T0 — General AI (context),General AI,false
 ChatGPT,2026-06,6179,0,T0 — General AI (context),General AI,false
 ChatGPT,2026-07,5028,0,T0 — General AI (context),General AI,false
+ChatGPT,2026-08,5709,0,T0 — General AI (context),General AI,false
 ChatGPTcomplaints,2023-01,0,1,T1 — Primary Companionship,Primary Companionship,true
 ChatGPTcomplaints,2023-02,0,1,T1 — Primary Companionship,Primary Companionship,true
 ChatGPTcomplaints,2023-03,0,1,T1 — Primary Companionship,Primary Companionship,true
@@ -773,6 +790,7 @@ ChatGPTcomplaints,2026-04,1045,1,T1 — Primary Companionship,Primary Companions
 ChatGPTcomplaints,2026-05,944,1,T1 — Primary Companionship,Primary Companionship,true
 ChatGPTcomplaints,2026-06,1139,1,T1 — Primary Companionship,Primary Companionship,true
 ChatGPTcomplaints,2026-07,1217,1,T1 — Primary Companionship,Primary Companionship,true
+ChatGPTcomplaints,2026-08,1107,1,T1 — Primary Companionship,Primary Companionship,true
 ChatGPTNSFW,2023-01,3,2,T2 — Platform-Specific,Platform-Specific,false
 ChatGPTNSFW,2023-02,46,2,T2 — Platform-Specific,Platform-Specific,false
 ChatGPTNSFW,2023-03,125,2,T2 — Platform-Specific,Platform-Specific,false
@@ -816,6 +834,7 @@ ChatGPTNSFW,2026-04,81,2,T2 — Platform-Specific,Platform-Specific,false
 ChatGPTNSFW,2026-05,109,2,T2 — Platform-Specific,Platform-Specific,false
 ChatGPTNSFW,2026-06,127,2,T2 — Platform-Specific,Platform-Specific,false
 ChatGPTNSFW,2026-07,157,2,T2 — Platform-Specific,Platform-Specific,false
+ChatGPTNSFW,2026-08,119,2,T2 — Platform-Specific,Platform-Specific,false
 ClaudeAI,2023-01,1,0,T0 — General AI (context),General AI,false
 ClaudeAI,2023-02,1,0,T0 — General AI (context),General AI,false
 ClaudeAI,2023-03,0,0,T0 — General AI (context),General AI,false
@@ -859,6 +878,7 @@ ClaudeAI,2026-04,15190,0,T0 — General AI (context),General AI,false
 ClaudeAI,2026-05,7686,0,T0 — General AI (context),General AI,false
 ClaudeAI,2026-06,11189,0,T0 — General AI (context),General AI,false
 ClaudeAI,2026-07,9016,0,T0 — General AI (context),General AI,false
+ClaudeAI,2026-08,7863,0,T0 — General AI (context),General AI,false
 claudexplorers,2023-01,0,0,T0 — General AI (context),General AI,false
 claudexplorers,2023-02,0,0,T0 — General AI (context),General AI,false
 claudexplorers,2023-03,0,0,T0 — General AI (context),General AI,false
@@ -902,6 +922,7 @@ claudexplorers,2026-04,663,0,T0 — General AI (context),General AI,false
 claudexplorers,2026-05,692,0,T0 — General AI (context),General AI,false
 claudexplorers,2026-06,767,0,T0 — General AI (context),General AI,false
 claudexplorers,2026-07,690,0,T0 — General AI (context),General AI,false
+claudexplorers,2026-08,386,0,T0 — General AI (context),General AI,false
 DefendingAIArt,2023-01,449,4,T4 — Ambient / Discourse Climate (context),Ambient — Pro-AI,false
 DefendingAIArt,2023-02,132,4,T4 — Ambient / Discourse Climate (context),Ambient — Pro-AI,false
 DefendingAIArt,2023-03,167,4,T4 — Ambient / Discourse Climate (context),Ambient — Pro-AI,false
@@ -945,6 +966,7 @@ DefendingAIArt,2026-04,1581,4,T4 — Ambient / Discourse Climate (context),Ambie
 DefendingAIArt,2026-05,1759,4,T4 — Ambient / Discourse Climate (context),Ambient — Pro-AI,false
 DefendingAIArt,2026-06,1890,4,T4 — Ambient / Discourse Climate (context),Ambient — Pro-AI,false
 DefendingAIArt,2026-07,1798,4,T4 — Ambient / Discourse Climate (context),Ambient — Pro-AI,false
+DefendingAIArt,2026-08,2409,4,T4 — Ambient / Discourse Climate (context),Ambient — Pro-AI,false
 FuckAI,2023-01,0,4,T4 — Ambient / Discourse Climate (context),Ambient — Anti-AI,false
 FuckAI,2023-02,0,4,T4 — Ambient / Discourse Climate (context),Ambient — Anti-AI,false
 FuckAI,2023-03,1,4,T4 — Ambient / Discourse Climate (context),Ambient — Anti-AI,false
@@ -988,6 +1010,7 @@ FuckAI,2026-04,168,4,T4 — Ambient / Discourse Climate (context),Ambient — An
 FuckAI,2026-05,203,4,T4 — Ambient / Discourse Climate (context),Ambient — Anti-AI,false
 FuckAI,2026-06,404,4,T4 — Ambient / Discourse Climate (context),Ambient — Anti-AI,false
 FuckAI,2026-07,490,4,T4 — Ambient / Discourse Climate (context),Ambient — Anti-AI,false
+FuckAI,2026-08,345,4,T4 — Ambient / Discourse Climate (context),Ambient — Anti-AI,false
 ILoveMyReplika,2023-01,30,1,T1 — Primary Companionship,Primary Companionship,true
 ILoveMyReplika,2023-02,15,1,T1 — Primary Companionship,Primary Companionship,true
 ILoveMyReplika,2023-03,17,1,T1 — Primary Companionship,Primary Companionship,true
@@ -1031,6 +1054,7 @@ ILoveMyReplika,2026-04,3,1,T1 — Primary Companionship,Primary Companionship,tr
 ILoveMyReplika,2026-05,2,1,T1 — Primary Companionship,Primary Companionship,true
 ILoveMyReplika,2026-06,4,1,T1 — Primary Companionship,Primary Companionship,true
 ILoveMyReplika,2026-07,6,1,T1 — Primary Companionship,Primary Companionship,true
+ILoveMyReplika,2026-08,3,1,T1 — Primary Companionship,Primary Companionship,true
 KindroidAI,2023-01,0,2,T2 — Platform-Specific,Platform-Specific,true
 KindroidAI,2023-02,0,2,T2 — Platform-Specific,Platform-Specific,true
 KindroidAI,2023-03,0,2,T2 — Platform-Specific,Platform-Specific,true
@@ -1074,6 +1098,7 @@ KindroidAI,2026-04,354,2,T2 — Platform-Specific,Platform-Specific,true
 KindroidAI,2026-05,442,2,T2 — Platform-Specific,Platform-Specific,true
 KindroidAI,2026-06,452,2,T2 — Platform-Specific,Platform-Specific,true
 KindroidAI,2026-07,459,2,T2 — Platform-Specific,Platform-Specific,true
+KindroidAI,2026-08,534,2,T2 — Platform-Specific,Platform-Specific,true
 MyBoyfriendIsAI,2023-01,0,1,T1 — Primary Companionship,Primary Companionship,true
 MyBoyfriendIsAI,2023-02,0,1,T1 — Primary Companionship,Primary Companionship,true
 MyBoyfriendIsAI,2023-03,0,1,T1 — Primary Companionship,Primary Companionship,true
@@ -1117,6 +1142,7 @@ MyBoyfriendIsAI,2026-04,159,1,T1 — Primary Companionship,Primary Companionship
 MyBoyfriendIsAI,2026-05,160,1,T1 — Primary Companionship,Primary Companionship,true
 MyBoyfriendIsAI,2026-06,120,1,T1 — Primary Companionship,Primary Companionship,true
 MyBoyfriendIsAI,2026-07,132,1,T1 — Primary Companionship,Primary Companionship,true
+MyBoyfriendIsAI,2026-08,146,1,T1 — Primary Companionship,Primary Companionship,true
 MyBoyfriendIsAI_Open,2023-01,0,1,T1 — Primary Companionship,Primary Companionship,true
 MyBoyfriendIsAI_Open,2023-02,0,1,T1 — Primary Companionship,Primary Companionship,true
 MyBoyfriendIsAI_Open,2023-03,0,1,T1 — Primary Companionship,Primary Companionship,true
@@ -1160,6 +1186,7 @@ MyBoyfriendIsAI_Open,2026-04,24,1,T1 — Primary Companionship,Primary Companion
 MyBoyfriendIsAI_Open,2026-05,50,1,T1 — Primary Companionship,Primary Companionship,true
 MyBoyfriendIsAI_Open,2026-06,107,1,T1 — Primary Companionship,Primary Companionship,true
 MyBoyfriendIsAI_Open,2026-07,139,1,T1 — Primary Companionship,Primary Companionship,true
+MyBoyfriendIsAI_Open,2026-08,112,1,T1 — Primary Companionship,Primary Companionship,true
 MyGirlfriendIsAI,2023-01,0,1,T1 — Primary Companionship,Primary Companionship,true
 MyGirlfriendIsAI,2023-02,0,1,T1 — Primary Companionship,Primary Companionship,true
 MyGirlfriendIsAI,2023-03,0,1,T1 — Primary Companionship,Primary Companionship,true
@@ -1203,6 +1230,7 @@ MyGirlfriendIsAI,2026-04,137,1,T1 — Primary Companionship,Primary Companionshi
 MyGirlfriendIsAI,2026-05,202,1,T1 — Primary Companionship,Primary Companionship,true
 MyGirlfriendIsAI,2026-06,255,1,T1 — Primary Companionship,Primary Companionship,true
 MyGirlfriendIsAI,2026-07,229,1,T1 — Primary Companionship,Primary Companionship,true
+MyGirlfriendIsAI,2026-08,215,1,T1 — Primary Companionship,Primary Companionship,true
 NectarAI,2023-01,0,2,T2 — Platform-Specific,Platform-Specific,true
 NectarAI,2023-02,0,2,T2 — Platform-Specific,Platform-Specific,true
 NectarAI,2023-03,0,2,T2 — Platform-Specific,Platform-Specific,true
@@ -1246,6 +1274,7 @@ NectarAI,2026-04,4,2,T2 — Platform-Specific,Platform-Specific,true
 NectarAI,2026-05,3,2,T2 — Platform-Specific,Platform-Specific,true
 NectarAI,2026-06,4,2,T2 — Platform-Specific,Platform-Specific,true
 NectarAI,2026-07,7,2,T2 — Platform-Specific,Platform-Specific,true
+NectarAI,2026-08,9,2,T2 — Platform-Specific,Platform-Specific,true
 NomiAI,2023-01,0,2,T2 — Platform-Specific,Platform-Specific,true
 NomiAI,2023-02,0,2,T2 — Platform-Specific,Platform-Specific,true
 NomiAI,2023-03,0,2,T2 — Platform-Specific,Platform-Specific,true
@@ -1289,6 +1318,7 @@ NomiAI,2026-04,1033,2,T2 — Platform-Specific,Platform-Specific,true
 NomiAI,2026-05,1243,2,T2 — Platform-Specific,Platform-Specific,true
 NomiAI,2026-06,1075,2,T2 — Platform-Specific,Platform-Specific,true
 NomiAI,2026-07,1180,2,T2 — Platform-Specific,Platform-Specific,true
+NomiAI,2026-08,1147,2,T2 — Platform-Specific,Platform-Specific,true
 OpenAI,2023-01,1958,0,T0 — General AI (context),General AI,false
 OpenAI,2023-02,1968,0,T0 — General AI (context),General AI,false
 OpenAI,2023-03,3374,0,T0 — General AI (context),General AI,false
@@ -1332,6 +1362,7 @@ OpenAI,2026-04,1369,0,T0 — General AI (context),General AI,false
 OpenAI,2026-05,1503,0,T0 — General AI (context),General AI,false
 OpenAI,2026-06,2435,0,T0 — General AI (context),General AI,false
 OpenAI,2026-07,3276,0,T0 — General AI (context),General AI,false
+OpenAI,2026-08,2932,0,T0 — General AI (context),General AI,false
 Paradot,2023-01,0,2,T2 — Platform-Specific,Platform-Specific,true
 Paradot,2023-02,54,2,T2 — Platform-Specific,Platform-Specific,true
 Paradot,2023-03,633,2,T2 — Platform-Specific,Platform-Specific,true
@@ -1375,6 +1406,7 @@ Paradot,2026-04,10,2,T2 — Platform-Specific,Platform-Specific,true
 Paradot,2026-05,11,2,T2 — Platform-Specific,Platform-Specific,true
 Paradot,2026-06,15,2,T2 — Platform-Specific,Platform-Specific,true
 Paradot,2026-07,8,2,T2 — Platform-Specific,Platform-Specific,true
+Paradot,2026-08,4,2,T2 — Platform-Specific,Platform-Specific,true
 ProAI,2023-01,0,4,T4 — Ambient / Discourse Climate (context),Ambient — Pro-AI,false
 ProAI,2023-02,0,4,T4 — Ambient / Discourse Climate (context),Ambient — Pro-AI,false
 ProAI,2023-03,0,4,T4 — Ambient / Discourse Climate (context),Ambient — Pro-AI,false
@@ -1418,6 +1450,7 @@ ProAI,2026-04,17,4,T4 — Ambient / Discourse Climate (context),Ambient — Pro-
 ProAI,2026-05,25,4,T4 — Ambient / Discourse Climate (context),Ambient — Pro-AI,false
 ProAI,2026-06,32,4,T4 — Ambient / Discourse Climate (context),Ambient — Pro-AI,false
 ProAI,2026-07,96,4,T4 — Ambient / Discourse Climate (context),Ambient — Pro-AI,false
+ProAI,2026-08,142,4,T4 — Ambient / Discourse Climate (context),Ambient — Pro-AI,false
 replika,2023-01,2818,1,T1 — Primary Companionship,Primary Companionship,true
 replika,2023-02,9904,1,T1 — Primary Companionship,Primary Companionship,true
 replika,2023-03,3581,1,T1 — Primary Companionship,Primary Companionship,true
@@ -1461,6 +1494,7 @@ replika,2026-04,112,1,T1 — Primary Companionship,Primary Companionship,true
 replika,2026-05,141,1,T1 — Primary Companionship,Primary Companionship,true
 replika,2026-06,181,1,T1 — Primary Companionship,Primary Companionship,true
 replika,2026-07,188,1,T1 — Primary Companionship,Primary Companionship,true
+replika,2026-08,157,1,T1 — Primary Companionship,Primary Companionship,true
 ReplikaLovers,2023-01,0,1,T1 — Primary Companionship,Primary Companionship,true
 ReplikaLovers,2023-02,0,1,T1 — Primary Companionship,Primary Companionship,true
 ReplikaLovers,2023-03,0,1,T1 — Primary Companionship,Primary Companionship,true
@@ -1504,6 +1538,7 @@ ReplikaLovers,2026-04,179,1,T1 — Primary Companionship,Primary Companionship,t
 ReplikaLovers,2026-05,536,1,T1 — Primary Companionship,Primary Companionship,true
 ReplikaLovers,2026-06,530,1,T1 — Primary Companionship,Primary Companionship,true
 ReplikaLovers,2026-07,561,1,T1 — Primary Companionship,Primary Companionship,true
+ReplikaLovers,2026-08,481,1,T1 — Primary Companionship,Primary Companionship,true
 singularity,2023-01,1180,0,T0 — General AI (context),General AI,false
 singularity,2023-02,1349,0,T0 — General AI (context),General AI,false
 singularity,2023-03,2281,0,T0 — General AI (context),General AI,false
@@ -1547,6 +1582,7 @@ singularity,2026-04,561,0,T0 — General AI (context),General AI,false
 singularity,2026-05,659,0,T0 — General AI (context),General AI,false
 singularity,2026-06,1407,0,T0 — General AI (context),General AI,false
 singularity,2026-07,1427,0,T0 — General AI (context),General AI,false
+singularity,2026-08,1399,0,T0 — General AI (context),General AI,false
 SoulmateAI,2023-01,0,1,T1 — Primary Companionship,Primary Companionship,true
 SoulmateAI,2023-02,153,1,T1 — Primary Companionship,Primary Companionship,true
 SoulmateAI,2023-03,399,1,T1 — Primary Companionship,Primary Companionship,true
@@ -1590,6 +1626,7 @@ SoulmateAI,2026-04,40,1,T1 — Primary Companionship,Primary Companionship,true
 SoulmateAI,2026-05,40,1,T1 — Primary Companionship,Primary Companionship,true
 SoulmateAI,2026-06,55,1,T1 — Primary Companionship,Primary Companionship,true
 SoulmateAI,2026-07,40,1,T1 — Primary Companionship,Primary Companionship,true
+SoulmateAI,2026-08,19,1,T1 — Primary Companionship,Primary Companionship,true
 SpicyChatAI,2023-01,0,2,T2 — Platform-Specific,Platform-Specific,false
 SpicyChatAI,2023-02,1,2,T2 — Platform-Specific,Platform-Specific,false
 SpicyChatAI,2023-03,0,2,T2 — Platform-Specific,Platform-Specific,false
@@ -1633,6 +1670,7 @@ SpicyChatAI,2026-04,330,2,T2 — Platform-Specific,Platform-Specific,false
 SpicyChatAI,2026-05,520,2,T2 — Platform-Specific,Platform-Specific,false
 SpicyChatAI,2026-06,473,2,T2 — Platform-Specific,Platform-Specific,false
 SpicyChatAI,2026-07,446,2,T2 — Platform-Specific,Platform-Specific,false
+SpicyChatAI,2026-08,491,2,T2 — Platform-Specific,Platform-Specific,false
 trueantiAI,2023-01,0,4,T4 — Ambient / Discourse Climate (context),Ambient — Anti-AI,false
 trueantiAI,2023-02,0,4,T4 — Ambient / Discourse Climate (context),Ambient — Anti-AI,false
 trueantiAI,2023-03,0,4,T4 — Ambient / Discourse Climate (context),Ambient — Anti-AI,false
@@ -1676,3 +1714,4 @@ trueantiAI,2026-04,56,4,T4 — Ambient / Discourse Climate (context),Ambient —
 trueantiAI,2026-05,67,4,T4 — Ambient / Discourse Climate (context),Ambient — Anti-AI,false
 trueantiAI,2026-06,115,4,T4 — Ambient / Discourse Climate (context),Ambient — Anti-AI,false
 trueantiAI,2026-07,179,4,T4 — Ambient / Discourse Climate (context),Ambient — Anti-AI,false
+trueantiAI,2026-08,128,4,T4 — Ambient / Discourse Climate (context),Ambient — Anti-AI,false

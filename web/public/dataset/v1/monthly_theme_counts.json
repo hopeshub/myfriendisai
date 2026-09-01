@@ -12,7 +12,7 @@
     "days_observed",
     "coverage_start"
   ],
-  "row_count": 238,
+  "row_count": 244,
   "rows": [
     {
       "theme": "romance",
@@ -451,6 +451,16 @@
       "eligible_posts": 12040,
       "rate_per_1k": 4.2359,
       "rate_per_1k_charted": 4.1697,
+      "days_observed": 31,
+      "coverage_start": "2022-12-01"
+    },
+    {
+      "theme": "romance",
+      "month": "2026-08",
+      "post_only_count": 72,
+      "eligible_posts": 12509,
+      "rate_per_1k": 5.7559,
+      "rate_per_1k_charted": 5.7245,
       "days_observed": 31,
       "coverage_start": "2022-12-01"
     },
@@ -935,6 +945,16 @@
       "coverage_start": "2022-08-01"
     },
     {
+      "theme": "sexual_erp",
+      "month": "2026-08",
+      "post_only_count": 45,
+      "eligible_posts": 12509,
+      "rate_per_1k": 3.5974,
+      "rate_per_1k_charted": 3.5118,
+      "days_observed": 31,
+      "coverage_start": "2022-08-01"
+    },
+    {
       "theme": "consciousness",
       "month": "2025-04",
       "post_only_count": 5,
@@ -1091,6 +1111,16 @@
       "eligible_posts": 12040,
       "rate_per_1k": 2.1595,
       "rate_per_1k_charted": 1.9062,
+      "days_observed": 31,
+      "coverage_start": "2025-04-01"
+    },
+    {
+      "theme": "consciousness",
+      "month": "2026-08",
+      "post_only_count": 18,
+      "eligible_posts": 12509,
+      "rate_per_1k": 1.439,
+      "rate_per_1k_charted": 1.5341,
       "days_observed": 31,
       "coverage_start": "2025-04-01"
     },
@@ -1525,6 +1555,16 @@
       "coverage_start": "2023-01-01"
     },
     {
+      "theme": "therapy",
+      "month": "2026-08",
+      "post_only_count": 33,
+      "eligible_posts": 12509,
+      "rate_per_1k": 2.6381,
+      "rate_per_1k_charted": 2.6928,
+      "days_observed": 31,
+      "coverage_start": "2023-01-01"
+    },
+    {
       "theme": "addiction",
       "month": "2023-01",
       "post_only_count": 5,
@@ -1951,6 +1991,16 @@
       "eligible_posts": 12040,
       "rate_per_1k": 18.4385,
       "rate_per_1k_charted": 17.5582,
+      "days_observed": 31,
+      "coverage_start": "2023-01-01"
+    },
+    {
+      "theme": "addiction",
+      "month": "2026-08",
+      "post_only_count": 197,
+      "eligible_posts": 12509,
+      "rate_per_1k": 15.7487,
+      "rate_per_1k_charted": 16.2744,
       "days_observed": 31,
       "coverage_start": "2023-01-01"
     },
@@ -2391,6 +2441,16 @@
       "eligible_posts": 12040,
       "rate_per_1k": 10.0498,
       "rate_per_1k_charted": 10.3861,
+      "days_observed": 31,
+      "coverage_start": "2022-12-01"
+    },
+    {
+      "theme": "rupture",
+      "month": "2026-08",
+      "post_only_count": 108,
+      "eligible_posts": 12509,
+      "rate_per_1k": 8.6338,
+      "rate_per_1k_charted": 8.5567,
       "days_observed": 31,
       "coverage_start": "2022-12-01"
     }
