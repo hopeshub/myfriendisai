@@ -1,7 +1,7 @@
 {
   "dataset": "myfriendisai-aggregates",
   "version": "v1",
-  "generated_at": "2026-09-01T14:10:25Z",
+  "generated_at": "2026-09-03T13:57:07Z",
   "data_through": "2026-08",
   "license": "CC BY 4.0",
   "license_url": "https://creativecommons.org/licenses/by/4.0/",
@@ -39,13 +39,13 @@
     {
       "name": "monthly_theme_counts.csv",
       "bytes": 13390,
-      "sha256": "a4c2f7e4f51714e27005886150275035dda4916bd2ec65b24a935a0b63b9e57a",
+      "sha256": "51837a95866ea90e749e9a1187493e2e17938ee9750d9e2d3df626b60b2a403e",
       "rows": 244
     },
     {
       "name": "monthly_theme_counts.json",
       "bytes": 62937,
-      "sha256": "a9faf43d834be6e7c3671a9b4b7b0648d867ceeb024814fafd9cdddfb464d4c4",
+      "sha256": "4d073c2d23ce22d141e88e5416bda88f0e231f6a8859369eec255d7b68aadb8e",
       "rows": 244
     }
   ]
