@@ -6603,10 +6603,17 @@
     },
     {
       "date": "2026-09-06",
-      "count": 5,
-      "count_7d_avg": 5.43,
-      "count_post_only": 4,
-      "count_post_only_7d_avg": 3.14
+      "count": 8,
+      "count_7d_avg": 5.86,
+      "count_post_only": 7,
+      "count_post_only_7d_avg": 3.57
+    },
+    {
+      "date": "2026-09-07",
+      "count": 4,
+      "count_7d_avg": 6.0,
+      "count_post_only": 3,
+      "count_post_only_7d_avg": 3.71
     }
   ],
   "consciousness": [
@@ -18003,10 +18010,10 @@
     },
     {
       "date": "2026-09-06",
-      "count": 1,
-      "count_7d_avg": 5.57,
-      "count_post_only": 0,
-      "count_post_only_7d_avg": 1.71
+      "count": 6,
+      "count_7d_avg": 6.29,
+      "count_post_only": 2,
+      "count_post_only_7d_avg": 2.0
     }
   ],
   "rupture": [
@@ -27035,8 +27042,8 @@
     },
     {
       "date": "2026-09-06",
-      "count": 3,
-      "count_7d_avg": 8.29,
+      "count": 5,
+      "count_7d_avg": 8.57,
       "count_post_only": 1,
       "count_post_only_7d_avg": 2.86
     }
@@ -36522,23 +36529,30 @@
     },
     {
       "date": "2026-09-04",
-      "count": 2,
-      "count_7d_avg": 2.86,
+      "count": 3,
+      "count_7d_avg": 3.0,
       "count_post_only": 1,
       "count_post_only_7d_avg": 0.86
     },
     {
       "date": "2026-09-05",
       "count": 4,
-      "count_7d_avg": 3.0,
+      "count_7d_avg": 3.14,
       "count_post_only": 0,
       "count_post_only_7d_avg": 0.71
     },
     {
       "date": "2026-09-06",
-      "count": 3,
-      "count_7d_avg": 3.29,
-      "count_post_only": 2,
+      "count": 6,
+      "count_7d_avg": 3.86,
+      "count_post_only": 3,
+      "count_post_only_7d_avg": 1.14
+    },
+    {
+      "date": "2026-09-07",
+      "count": 1,
+      "count_7d_avg": 3.14,
+      "count_post_only": 1,
       "count_post_only_7d_avg": 1.0
     }
   ],
@@ -42516,10 +42530,17 @@
     },
     {
       "date": "2026-09-06",
-      "count": 2,
-      "count_7d_avg": 1.71,
-      "count_post_only": 2,
-      "count_post_only_7d_avg": 1.0
+      "count": 5,
+      "count_7d_avg": 2.14,
+      "count_post_only": 5,
+      "count_post_only_7d_avg": 1.43
+    },
+    {
+      "date": "2026-09-07",
+      "count": 1,
+      "count_7d_avg": 2.14,
+      "count_post_only": 1,
+      "count_post_only_7d_avg": 1.57
     }
   ],
   "_total_posts": [
@@ -55265,7 +55286,11 @@
     },
     {
       "date": "2026-09-06",
-      "count": 165
+      "count": 335
+    },
+    {
+      "date": "2026-09-07",
+      "count": 138
     }
   ],
   "_coverage_start": {
