@@ -5,6 +5,7 @@ the post+comment default, and that scope filtering / dedup / rolling
 averages match the contract documented in src/db/operations.py.
 """
 
+import calendar
 import json
 import sqlite3
 from pathlib import Path
@@ -110,12 +111,17 @@ def test_out_of_scope_subs_excluded(conn_and_patches):
 
 
 def test_rolling_average_over_7_day_window(conn_and_patches):
-    """One hit per day for 8 consecutive days → rolling avg stays 1.0."""
+    """One hit per day for 8 consecutive days → rolling avg stays 1.0.
+
+    Each post is created on the day it is tagged, so the corpus calendar (the
+    window's index) is exactly those 8 days.
+    """
     conn, tmp_path = conn_and_patches
+    base = calendar.timegm((2026, 3, 1, 12, 0, 0))
     dates = [f"2026-03-{i:02d}" for i in range(1, 9)]
     for i, d in enumerate(dates):
         pid = f"p{i}"
-        _seed_post(conn, pid, created_utc=1_760_000_000 + i)
+        _seed_post(conn, pid, created_utc=base + i * 86_400)
         _seed_tag(conn, pid, "romance", "my ai boyfriend", d, "post")
     conn.commit()
 
@@ -124,6 +130,69 @@ def test_rolling_average_over_7_day_window(conn_and_patches):
         assert entry["count"] == 1
         assert entry["count_7d_avg"] == 1.0
         assert entry["count_post_only_7d_avg"] == 1.0
+
+
+def test_rolling_average_window_is_the_corpus_calendar(conn_and_patches):
+    """The 7-day mean is over CORPUS days, not over the theme's hit-days.
+
+    Regression for the defect where `count_post_only_7d_avg` was a mean over
+    the last 7 entries of the category's own series: zero-hit days are absent
+    from that series, so three consecutive hit-days averaged to 1.0 no matter
+    how empty the surrounding week was. With the corpus calendar as the index
+    a hitless corpus day is a real 0 and the divisor is the window length.
+    """
+    conn, tmp_path = conn_and_patches
+
+    # Gapless corpus calendar: one post every day, 2026-03-01 .. 2026-03-20.
+    base = calendar.timegm((2026, 3, 1, 12, 0, 0))
+    days = [f"2026-03-{d:02d}" for d in range(1, 21)]
+    for i, d in enumerate(days):
+        _seed_post(conn, f"corpus{i}", created_utc=base + i * 86_400)
+
+    # Theme hits on three consecutive days only, then nothing for a week.
+    hit_days = ["2026-03-10", "2026-03-11", "2026-03-12"]
+    for i, d in enumerate(hit_days):
+        pid = f"hit{i}"
+        _seed_post(conn, pid, created_utc=calendar.timegm(
+            (2026, 3, 10 + i, 13, 0, 0)))
+        _seed_tag(conn, pid, "therapy", "therapist", d, "post")
+    conn.commit()
+
+    data = _run_export(conn, tmp_path)
+
+    # The corpus calendar is gapless, so it is the denominator's index too.
+    assert [e["date"] for e in data["_total_posts"]] == days
+    # Zero-hit days are NOT emitted as entries (keeps the export small).
+    assert [e["date"] for e in data["therapy"]] == hit_days
+
+    by_date = {e["date"]: e for e in data["therapy"]}
+    # 2026-03-10 is the 10th corpus day, so the window is the full 7 days
+    # 03-04..03-10 and holds exactly one hit.
+    assert by_date["2026-03-10"]["count_post_only_7d_avg"] == round(1 / 7, 2)
+    assert by_date["2026-03-11"]["count_post_only_7d_avg"] == round(2 / 7, 2)
+    # The day the old hit-day window reported as 1.0:
+    assert by_date["2026-03-12"]["count_post_only_7d_avg"] == round(3 / 7, 2)
+    assert by_date["2026-03-12"]["count_post_only_7d_avg"] != 1.0
+    # The post+comment series shares the definition.
+    assert by_date["2026-03-12"]["count_7d_avg"] == round(3 / 7, 2)
+
+
+def test_rolling_average_window_ramps_up_at_start_of_corpus(conn_and_patches):
+    """At the very start of the corpus the window is short, as it is for the
+    denominator: calendar[max(0, i-6) : i+1] has fewer than 7 entries."""
+    conn, tmp_path = conn_and_patches
+    base = calendar.timegm((2026, 3, 1, 12, 0, 0))
+    for i in range(5):
+        pid = f"p{i}"
+        _seed_post(conn, pid, created_utc=base + i * 86_400)
+        _seed_tag(conn, pid, "romance", "my ai boyfriend", f"2026-03-{i + 1:02d}", "post")
+    conn.commit()
+
+    data = _run_export(conn, tmp_path)
+    by_date = {e["date"]: e for e in data["romance"]}
+    # Day 1 of the corpus: window length 1. Day 5: window length 5.
+    assert by_date["2026-03-01"]["count_post_only_7d_avg"] == 1.0
+    assert by_date["2026-03-05"]["count_post_only_7d_avg"] == 1.0
 
 
 def test_total_posts_series_included(conn_and_patches):

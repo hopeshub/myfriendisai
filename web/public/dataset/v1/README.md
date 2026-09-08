@@ -8,7 +8,12 @@ site goes away.
 
 - **Version:** v1
 - **Data through:** 2026-08 (the in-progress calendar month is excluded)
-- **Generated at:** see `manifest.json`
+- **Generated at:** see `manifest.json`. `generated_at` is the time the
+  bundle's *content* last changed, not the time of the last run: a
+  regeneration whose files are byte-identical carries the previous timestamp
+  forward unchanged, so a daily rebuild over unmoved numbers leaves no diff.
+  A `generated_at` older than the last collection day means nothing published
+  here has moved since then.
 - **Canonical location:** <https://myfriendisai.com/dataset/v1/>
 
 Every figure here is a **derived count**. The bundle contains no post text,
@@ -42,10 +47,10 @@ meaningful.
 | `theme` | Direct | One of `romance`, `sexual_erp`, `consciousness`, `therapy`, `addiction`, `rupture`. |
 | `month` | Direct | Calendar month, `YYYY-MM`. |
 | `post_only_count` | Derived | Distinct posts in that month whose **own title or body** matched at least one validated keyword for the theme. This is the published series. Keyword hits found only in a post's *comments* are deliberately excluded — comment tagging began 2026-03-18, so including them puts a step artifact in the series at that date. |
-| `eligible_posts` | Derived | All posts collected that month across the communities in the theme-measurement scope (T1–T3, minus the communities excluded from keyword tracking). This is the per-1k denominator. |
+| `eligible_posts` | Derived | All posts collected that month across the communities in the theme-measurement scope (T1–T3, minus the communities excluded from keyword tracking). This is the per-1k denominator. Posts by one platform-developer account (the r/SoulmateAI creator, 89 posts) are excluded from every theme numerator but remain in this denominator. |
 | `rate_per_1k` | Derived | `post_only_count / eligible_posts * 1000`. The plain monthly rate. |
-| `rate_per_1k_charted` | Derived | The value the site's chart plots: the mean over the month's days of the daily rate, where both numerator and denominator are 7-day trailing means. Smoothing keeps low-volume days from spiking the line. It is close to `rate_per_1k` but not identical; use `rate_per_1k` for analysis and `rate_per_1k_charted` to reproduce the chart. |
-| `days_observed` | Derived | Days in that month present in the corpus calendar. Below ~28 means the collector missed days. |
+| `rate_per_1k_charted` | Derived | The value the site's chart plots: the mean over the month's days of the daily rate, where both numerator and denominator are 7-day trailing means over the same window. That window is the last 7 days of the corpus calendar up to and including the day in question — a day on which posts were collected but the theme was not mentioned counts as a zero in the numerator, not as a missing day. Because it is an unweighted mean of daily rates, it can differ from `rate_per_1k` in months whose daily post volume is uneven: 87 of 244 rows differ by more than 10%, the largest gap being 80% (addiction 2023-01). Use `rate_per_1k` for analysis and `rate_per_1k_charted` to reproduce the chart. |
+| `days_observed` | Derived | The number of corpus-calendar days in that month — days on which at least one post was collected from the theme-measurement scope. It is not clipped at `coverage_start`. Below ~28 means the collector missed days. |
 | `coverage_start` | Derived | The theme's first reliably-measurable month (see below). Constant per theme; repeated on each row for convenience. |
 
 **Coverage gating.** Each theme's rows begin at its `coverage_start` — the
@@ -76,8 +81,8 @@ becomes reliable) through the last complete month.
 | `in_theme_measurement` | Derived | `true` when the community counts toward `monthly_theme_counts` — i.e. tier 1–3 and not excluded from keyword tracking. T0 general-AI and T4 ambient communities are tracked for context only and are always `false`, as are the three explicitness-scope exclusions. |
 
 This table covers the communities currently being collected. Two communities
-that were tracked and later deactivated — r/HeavenGF (banned by Reddit, ~May
-2026) and r/MySentientAI (moribund) — keep their historical posts in the
+that were tracked and later deactivated — r/HeavenGF (removed from Reddit —
+deleted or renamed — ~May 2026) and r/MySentientAI (moribund) — keep their historical posts in the
 corpus and in the theme denominator, but do not appear here.
 
 ---
@@ -85,8 +90,9 @@ corpus and in the theme denominator, but do not appear here.
 ## Reading these numbers honestly
 
 **The counts are a floor, not a ceiling.** The keyword instrument is
-precision-first: it would rather miss a real post than admit a false one. A
-hand-coded audit of 400 posts put per-theme recall between about 3% and 32%.
+precision-first: it would rather miss a real post than admit a false one. An
+audit of 400 posts — classified by a language model, with the missed posts
+spot-checked by hand — put per-theme recall between 0% and 32%.
 Shape and timing are approximately honest; absolute magnitude is a clear
 undercount, and the undercount is uneven across themes.
 
@@ -96,8 +102,9 @@ written in ordinary language (romance: "I love him") whatever the truth
 beneath. Read each theme against itself — direction, timing, spikes.
 
 **Measured per-theme precision** (share of matched posts genuinely about the
-theme, re-measured 2026-05-16): addiction ~97%, sexual_erp ~96%,
-consciousness ~87%, romance ~86%, therapy ~80%, rupture ~77%.
+theme), as the 2026-05-16 census / the latest drift cycle (2026-08-27), both
+LLM-graded (the census against a 72-post human anchor): romance ~86% / 89% (n=931), sexual_erp ~96% / 83% (n=524), consciousness ~87% / 86% (n=369), therapy ~68% / 66% (n=360), addiction ~97% / 85% (n=741), rupture ~77% / 85% (n=926). The therapy line is published below the
+project's 80% keep gate, with that caveat stated rather than hidden.
 
 **It counts language, not people.** A rising line means the theme's
 vocabulary appeared more often in these communities. It does not establish

@@ -118,3 +118,29 @@ def test_posts_outside_day_window_excluded(conn):
         "SELECT posts_today FROM subreddit_snapshots WHERE subreddit = 'replika'"
     ).fetchone()
     assert row["posts_today"] == 1
+
+
+def test_comment_averages_skip_communities_outside_comment_scope(conn):
+    # r/antiAI is exclude_from_keywords, so its comments are never collected.
+    # With no scope restriction the fill would write a fabricated 0.0 for it
+    # (mean of zero collected comments); with the scope passed, its row must
+    # stay NULL while an in-scope community is filled normally.
+    _insert_post(conn, "p1", "replika", DAY)
+    conn.execute(
+        "INSERT INTO comments (id, post_id, subreddit, body, created_utc) VALUES (?, ?, ?, ?, ?)",
+        ("c1", "p1", "replika", "text", _epoch(DAY + timedelta(days=1))),
+    )
+    _insert_post(conn, "p2", "antiAI", DAY)
+
+    create_arctic_snapshot_rows(DAY, ["replika", "antiAI"], conn=conn)
+    updated = update_arctic_comment_averages(DAY, conn=conn, subreddits=["replika"])
+    assert updated == 1
+
+    rows = {
+        r["subreddit"]: r["avg_comments_per_post"]
+        for r in conn.execute(
+            "SELECT subreddit, avg_comments_per_post FROM subreddit_snapshots"
+        ).fetchall()
+    }
+    assert rows["replika"] == 1.0
+    assert rows["antiAI"] is None

@@ -263,17 +263,24 @@ def _step_heal_snapshots(communities, conn):
             rows_created += created
     create_arctic_snapshot_rows(today, subs, conn=conn)
 
+    # Comment averages are only meaningful where comments are collected;
+    # collect_comments.py skips the exclude_from_keywords communities, so the
+    # fill must too — otherwise those rows get a fabricated 0.0 (12 communities
+    # showed a false collapse to zero from June 2026 until this guard).
+    comment_subs = [c["subreddit"] for c in communities if not c.get("exclude_from_keywords")]
+    comment_placeholders = ",".join("?" for _ in comment_subs)
     avgs_updated = 0
     for offset in range(6, 14):  # refresh the maturity boundary + healed days
         d = today - timedelta(days=offset)
         pending = conn.execute(
             "SELECT COUNT(*) FROM subreddit_snapshots "
             "WHERE snapshot_date = ? AND data_source = 'arctic_shift' "
-            "AND avg_comments_per_post IS NULL",
-            (d.isoformat(),),
+            "AND avg_comments_per_post IS NULL "
+            f"AND subreddit IN ({comment_placeholders})",
+            (d.isoformat(), *comment_subs),
         ).fetchone()[0]
         if pending:
-            avgs_updated += update_arctic_comment_averages(d, conn=conn)
+            avgs_updated += update_arctic_comment_averages(d, conn=conn, subreddits=comment_subs)
 
     return {"rows_created": rows_created, "comment_avgs_updated": avgs_updated}
 

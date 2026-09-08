@@ -1,7 +1,7 @@
 {
   "dataset": "myfriendisai-aggregates",
   "version": "v1",
-  "generated_at": "2026-09-03T13:57:07Z",
+  "generated_at": "2026-09-08T12:58:47Z",
   "data_through": "2026-08",
   "license": "CC BY 4.0",
   "license_url": "https://creativecommons.org/licenses/by/4.0/",
@@ -11,18 +11,18 @@
   "files": [
     {
       "name": "METHODOLOGY.md",
-      "bytes": 29792,
-      "sha256": "4c49fa5e3b3ef07e7b34995a4b5e31645d1e82cde9df559f6579af86b5db0346"
+      "bytes": 33476,
+      "sha256": "b3c5b71921c2b3c8b8f98ed68145e5e99cfc85655e3a46b773fc0ad7b6d57da5"
     },
     {
       "name": "README.md",
-      "bytes": 7040,
-      "sha256": "e7ec2870bcfc2218fb9335182ddc1c0a2fecfaa70cf1b95bec24ef1baa6c0828"
+      "bytes": 8415,
+      "sha256": "614850ef8c6124c47490777bcf1dc8231852a73bdcca3bd280ded2f5b8dc6a90"
     },
     {
       "name": "index.html",
-      "bytes": 3779,
-      "sha256": "02d6378bb04014153041784157f2516435ba2110274633e60fdf756c6bc4084d"
+      "bytes": 4440,
+      "sha256": "3521553d9e11a098af14d7b08dbae27b33185f7a41a9b6e63ee965084dd98035"
     },
     {
       "name": "monthly_community_volumes.csv",
@@ -32,20 +32,20 @@
     },
     {
       "name": "monthly_community_volumes.json",
-      "bytes": 422311,
-      "sha256": "c02929cb9de593f8aa9893dc03e5d5fb3c69056961c2694ca656645d36148755",
+      "bytes": 418879,
+      "sha256": "477d594efa91eec9ab769b77473c225493fcddd72938500d2fd6ef62b08e06d7",
       "rows": 1716
     },
     {
       "name": "monthly_theme_counts.csv",
-      "bytes": 13390,
-      "sha256": "51837a95866ea90e749e9a1187493e2e17938ee9750d9e2d3df626b60b2a403e",
+      "bytes": 13382,
+      "sha256": "c699d713f452d1ed1670473f8e241d38fe678d3a674b925806b9f8c0a3f46dc5",
       "rows": 244
     },
     {
       "name": "monthly_theme_counts.json",
-      "bytes": 62937,
-      "sha256": "4d073c2d23ce22d141e88e5416bda88f0e231f6a8859369eec255d7b68aadb8e",
+      "bytes": 62929,
+      "sha256": "cdfb07002d53f2619a3e6733aa51d845adb7f001dadd55ea10a30ba8a9d96436",
       "rows": 244
     }
   ]

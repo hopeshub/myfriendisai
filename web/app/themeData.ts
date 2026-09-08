@@ -66,11 +66,11 @@ export function loadThemeData(filename: string = "keyword_trends.json"): ThemeDa
     return {};
   }
 
-  // Total posts per day, plus a trailing 7-entry rolling mean used as the
-  // rate denominator. The numerator (count_post_only_7d_avg) is already a
-  // 7-entry trailing mean; smoothing the denominator the same way keeps the
-  // displayed rate from spiking on low-volume days — numerator and denominator
-  // now share a window.
+  // Total posts per day (the CORPUS CALENDAR), plus a trailing 7-entry
+  // rolling mean used as the rate denominator. W(d) — the last 7 corpus
+  // calendar dates up to and including d — is the one window definition on
+  // this page: the numerator below is rolled over exactly the same slice, so
+  // numerator and denominator genuinely share a window.
   const totalEntries = (
     (raw["_total_posts"] as Array<{ date: string; count: number }> | undefined) ?? []
   )
@@ -99,24 +99,31 @@ export function loadThemeData(filename: string = "keyword_trends.json"): ThemeDa
       }
     }
 
-    // Sum the POST-ONLY series across merged categories. Post-only is the
-    // longitudinally comparable series: comment tagging only began March 2026,
-    // so the post+comment series has a step artifact there. There is no
+    // Sum the POST-ONLY daily counts across merged categories. Post-only is
+    // the longitudinally comparable series: comment tagging only began March
+    // 2026, so the post+comment series has a step artifact there. There is no
     // LLM-classified series in the published chart.
-    const rawByDate: Record<string, { count: number; avg: number }> = {};
+    const postOnlyByDate: Record<string, number> = {};
     for (const cat of categories) {
-      type Entry = {
-        date: string;
-        count: number;
-        count_post_only?: number;
-        count_post_only_7d_avg?: number;
-      };
+      type Entry = { date: string; count: number; count_post_only?: number };
       for (const e of (raw[cat] as Entry[] | undefined) ?? []) {
-        if (!rawByDate[e.date]) rawByDate[e.date] = { count: 0, avg: 0 };
-        const postOnly = e.count_post_only ?? e.count;
-        rawByDate[e.date].count += postOnly;
-        rawByDate[e.date].avg += e.count_post_only_7d_avg ?? postOnly;
+        postOnlyByDate[e.date] =
+          (postOnlyByDate[e.date] ?? 0) + (e.count_post_only ?? e.count);
       }
+    }
+
+    // The numerator's 7-day trailing mean, rolled over the SAME corpus
+    // calendar slice as the denominator: mean over W(d) of the theme's daily
+    // post-only count, with a corpus day the theme did not hit counting as a
+    // real 0. The export's pre-computed count_post_only_7d_avg is deliberately
+    // not used here: before 2026-09 it was a mean over the last 7 entries of
+    // the theme's own hit-day series, a window that could span months.
+    const numerator7dAvg: Record<string, number> = {};
+    for (let i = 0; i < totalEntries.length; i++) {
+      const window = totalEntries.slice(Math.max(0, i - 6), i + 1);
+      let sum = 0;
+      for (const e of window) sum += postOnlyByDate[e.date] ?? 0;
+      numerator7dAvg[totalEntries[i].date] = sum / window.length;
     }
 
     // Clip current partial month
@@ -135,7 +142,7 @@ export function loadThemeData(filename: string = "keyword_trends.json"): ThemeDa
         .map((e) => e.date)
         .filter((d) => d >= themeCoverageStart! && d.slice(0, 7) < currentMonth);
     } else {
-      dates = Object.keys(rawByDate).sort().filter((d) => d.slice(0, 7) < currentMonth);
+      dates = Object.keys(postOnlyByDate).sort().filter((d) => d.slice(0, 7) < currentMonth);
     }
 
     // Aggregate daily → monthly. The atlas and the per-theme chart both render
@@ -147,14 +154,14 @@ export function loadThemeData(filename: string = "keyword_trends.json"): ThemeDa
       { rateSum: number; n: number; count: number }
     > = {};
     for (const date of dates) {
-      const day = rawByDate[date] ?? { count: 0, avg: 0 };
+      const num7d = numerator7dAvg[date] ?? 0;
       const total7d = totalPosts7dAvg[date] ?? 0;
-      const hitsPerK = total7d > 0 ? (day.avg / total7d) * 1000 : 0;
+      const hitsPerK = total7d > 0 ? (num7d / total7d) * 1000 : 0;
       const m = date.slice(0, 7) + "-01";
       if (!monthly[m]) monthly[m] = { rateSum: 0, n: 0, count: 0 };
       monthly[m].rateSum += hitsPerK;
       monthly[m].n += 1;
-      monthly[m].count += day.count;
+      monthly[m].count += postOnlyByDate[date] ?? 0;
     }
     result[themeId] = Object.keys(monthly)
       .sort()
@@ -180,7 +187,8 @@ export function loadKeywordDetails(): KeywordDetailsData {
 
 // ── Community composition over time ──────────────────────────────────────────
 // Per-community monthly post volume, from community_activity.json. §1 shows
-// r/CharacterAI on its own (60-90% of all volume — it would crush a shared
+// r/CharacterAI on its own (roughly 35–90% of theme-measurement post volume
+// month to month, below half in most 2026 months — it would crush a shared
 // scale) and every other companionship community as a stacked area, so the
 // field's turnover is visible: r/replika's 2023 dominance collapsing while a
 // new generation rises to fill a roughly flat total.

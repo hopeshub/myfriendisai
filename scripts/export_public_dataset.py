@@ -33,7 +33,7 @@ import hashlib
 import io
 import json
 import sys
-from datetime import date, datetime, timezone
+from datetime import datetime, timezone
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
@@ -51,6 +51,20 @@ DATASET_URL = "https://myfriendisai.com/dataset/v1/"
 
 # The six published themes, in the order the site lists them.
 THEMES = ["romance", "sexual_erp", "consciousness", "therapy", "addiction", "rupture"]
+
+# Theme → source categories in keyword_trends.json, mirroring THEME_CATEGORIES
+# in web/app/themeData.ts. Every theme is a single category today, but the site
+# sums merged categories and takes the earliest coverage_start across them, so
+# the export must do the same or it would silently diverge the day a theme gains
+# a second category.
+THEME_CATEGORIES = {
+    "romance": ["romance"],
+    "sexual_erp": ["sexual_erp"],
+    "consciousness": ["consciousness"],
+    "therapy": ["therapy"],
+    "addiction": ["addiction"],
+    "rupture": ["rupture"],
+}
 
 TIER_LABELS = {
     0: "T0 — General AI (context)",
@@ -72,9 +86,64 @@ def _current_month():
     """The in-progress calendar month, which is clipped from both tables.
 
     Mirrors themeData.ts, which drops the partial month so the last point
-    on every chart is a complete month.
+    on every chart is a complete month. UTC, because themeData.ts uses
+    ``new Date().toISOString()`` — on a host west of UTC a local-time
+    ``date.today()`` would clip a month the site still shows for a few hours
+    at every month boundary.
     """
-    return date.today().strftime("%Y-%m")
+    return datetime.now(timezone.utc).strftime("%Y-%m")
+
+
+# The 2026-05-16 census values, LLM-graded against a 72-post human anchor.
+# The therapy figure is the as-is v8 set (~68%); the ~87% sometimes quoted is
+# a rebuilt v9 set that has not shipped. See docs/METHODOLOGY.md §4.4.
+CENSUS_PRECISION_2026_05 = {
+    "addiction": 97, "sexual_erp": 96, "consciousness": 87,
+    "romance": 86, "therapy": 68, "rupture": 77,
+}
+
+
+def precision_paragraph():
+    """The README's per-theme precision paragraph.
+
+    Pairs the fixed May 2026 census with the latest drift-cycle post precision
+    from data/theme_health.json (regenerated on every collection run), so the
+    README never quotes a superseded number as current. Falls back to the
+    census alone if theme_health.json is unavailable.
+    """
+    latest = {}
+    stamp = None
+    try:
+        health = _load_json(DATA_DIR / "theme_health.json")
+        for theme, t in (health.get("themes") or {}).items():
+            pp = t.get("post_precision") or {}
+            if pp.get("precision") is not None and pp.get("n"):
+                latest[theme] = (round(pp["precision"] * 100), pp["n"])
+                stamp = pp.get("date") or stamp
+    except (OSError, ValueError):
+        latest = {}
+    parts = []
+    for theme in THEMES:
+        census = CENSUS_PRECISION_2026_05.get(theme)
+        if theme in latest:
+            parts.append(f"{theme} ~{census}% / {latest[theme][0]}% (n={latest[theme][1]:,})")
+        else:
+            parts.append(f"{theme} ~{census}%")
+    if latest:
+        head = (
+            "**Measured per-theme precision** (share of matched posts genuinely about the\n"
+            f"theme), as the 2026-05-16 census / the latest drift cycle ({stamp}), both\n"
+            "LLM-graded (the census against a 72-post human anchor): "
+        )
+    else:
+        head = (
+            "**Measured per-theme precision** (share of matched posts genuinely about the\n"
+            "theme, 2026-05-16 census, LLM-graded against a 72-post human anchor): "
+        )
+    return (
+        head + ", ".join(parts) + ". The therapy line is published below the\n"
+        "project's 80% keep gate, with that caveat stated rather than hidden."
+    )
 
 
 def _round(x, places=4):
@@ -91,37 +160,65 @@ def build_theme_rows(trends):
     complete month. Walking the corpus calendar rather than the theme's
     hit-days matters: the trends export omits zero-hit days, and averaging
     over hit-days only would bias sparse months upward.
+
+    The smoothing window is defined once, for both sides of the rate:
+    ``W(d)`` = the last 7 entries of the corpus calendar up to and including
+    ``d``. The numerator is the mean over ``W(d)`` of the theme's daily
+    ``count_post_only`` (a corpus day with no theme hits is a real 0); the
+    denominator is the mean over ``W(d)`` of total posts. The export
+    deliberately re-rolls the numerator here instead of reading the trends
+    file's ``count_post_only_7d_avg``: before 2026-09 that field was a mean
+    over the last 7 entries of the theme's own hit-day series, a "7-day"
+    window that could span months.
     """
     total_entries = sorted(trends.get("_total_posts", []), key=lambda e: e["date"])
     totals = {e["date"]: e["count"] for e in total_entries}
 
-    # Trailing 7-entry mean of the denominator. Index-based (not calendar-
-    # based), matching themeData.ts: the numerator's count_post_only_7d_avg
-    # is built the same way, so numerator and denominator share a window.
+    # Trailing 7-entry mean of the denominator over the corpus calendar.
     total_7d = {}
     for i, entry in enumerate(total_entries):
         window = total_entries[max(0, i - 6): i + 1]
         total_7d[entry["date"]] = sum(e["count"] for e in window) / len(window)
+
+    # Corpus-calendar days per month, for days_observed. Counted over the whole
+    # calendar, not just the walked stretch: the column reports collection
+    # coverage of the month, so it must not shrink because a theme's
+    # coverage_start lands mid-month.
+    corpus_days = {}
+    for e in total_entries:
+        m = e["date"][:7]
+        corpus_days[m] = corpus_days.get(m, 0) + 1
 
     coverage_start = trends.get("_coverage_start", {}) or {}
     current_month = _current_month()
 
     rows = []
     for theme in THEMES:
-        series = trends.get(theme) or []
         # count_post_only is the PUBLISHED series. The combined post+comment
         # `count` carries a step artifact at 2026-03-18 (when comment tagging
         # began) and is not longitudinally comparable. Fall back to `count`
         # for older export vintages that predate the post-only split.
+        # Accumulate across every category mapping to this theme, and take the
+        # earliest of their coverage starts — both mirroring themeData.ts.
         by_date = {}
-        for e in series:
-            post_only = e.get("count_post_only", e["count"])
-            by_date[e["date"]] = {
-                "count": post_only,
-                "avg": e.get("count_post_only_7d_avg", post_only),
-            }
+        cs = None
+        for cat in THEME_CATEGORIES.get(theme, [theme]):
+            for e in trends.get(cat) or []:
+                post_only = e.get("count_post_only", e["count"])
+                by_date[e["date"]] = by_date.get(e["date"], 0) + post_only
+            cat_cs = coverage_start.get(cat)
+            if cat_cs and (cs is None or cat_cs < cs):
+                cs = cat_cs
 
-        cs = coverage_start.get(theme)
+        # The numerator's 7-day trailing mean, over the same corpus-calendar
+        # slice the denominator uses.
+        num_7d = {}
+        for i, entry in enumerate(total_entries):
+            window = total_entries[max(0, i - 6): i + 1]
+            num_7d[entry["date"]] = (
+                sum(by_date.get(e["date"], 0) for e in window) / len(window)
+            )
+
         if cs:
             dates = [
                 e["date"] for e in total_entries
@@ -134,14 +231,13 @@ def build_theme_rows(trends):
 
         monthly = {}
         for d in dates:
-            day = by_date.get(d, {"count": 0, "avg": 0})
             denom = total_7d.get(d, 0)
-            rate = (day["avg"] / denom) * 1000 if denom > 0 else 0.0
+            rate = (num_7d.get(d, 0) / denom) * 1000 if denom > 0 else 0.0
             m = d[:7]
             bucket = monthly.setdefault(
                 m, {"count": 0, "eligible": 0, "rate_sum": 0.0, "days": 0}
             )
-            bucket["count"] += day["count"]
+            bucket["count"] += by_date.get(d, 0)
             bucket["eligible"] += totals.get(d, 0)
             bucket["rate_sum"] += rate
             bucket["days"] += 1
@@ -156,10 +252,37 @@ def build_theme_rows(trends):
                 "eligible_posts": b["eligible"],
                 "rate_per_1k": _round(simple),
                 "rate_per_1k_charted": _round(b["rate_sum"] / b["days"]) if b["days"] else 0.0,
-                "days_observed": b["days"],
+                "days_observed": corpus_days.get(m, b["days"]),
                 "coverage_start": cs or "",
             })
     return rows
+
+
+def charted_vs_plain_stats(rows):
+    """How far `rate_per_1k_charted` sits from `rate_per_1k`, for the README.
+
+    The charted value is an unweighted mean of daily rates, so it diverges from
+    the plain monthly ratio in months whose daily post volume is uneven. The
+    README quotes these numbers so the claim cannot go stale.
+    """
+    n_over_10pct = 0
+    worst = {"pct": 0.0, "theme": "", "month": ""}
+    for r in rows:
+        plain = r["rate_per_1k"]
+        if not plain:
+            continue
+        rel = abs(r["rate_per_1k_charted"] - plain) / plain
+        if rel > 0.10:
+            n_over_10pct += 1
+        if rel > worst["pct"]:
+            worst = {"pct": rel, "theme": r["theme"], "month": r["month"]}
+    return {
+        "n_rows": len(rows),
+        "n_over_10pct": n_over_10pct,
+        "max_pct": round(worst["pct"] * 100),
+        "max_theme": worst["theme"],
+        "max_month": worst["month"],
+    }
 
 
 # ── monthly community volumes ────────────────────────────────────────────
@@ -198,19 +321,35 @@ def build_community_rows(activity):
                 "tier": tier if tier is not None else "",
                 "tier_label": TIER_LABELS.get(tier, ""),
                 "category": c.get("category", ""),
-                "in_theme_measurement": "true" if in_measurement else "false",
+                # A real JSON boolean, not the string "true"/"false": a string
+                # is truthy either way, so `rows.filter(r => r.in_theme_
+                # measurement)` silently kept every row. _csv_bytes renders it
+                # back to lowercase true/false so the CSV is unchanged.
+                "in_theme_measurement": bool(in_measurement),
             })
     return rows
 
 
 # ── writers ──────────────────────────────────────────────────────────────
 
+def _csv_cell(value):
+    """CSV rendering of one field.
+
+    Python's csv writer would stringify a bool as "True"/"False"; the CSV has
+    always carried lowercase JSON-style `true`/`false`, and reproducers diff
+    against it, so keep that rendering byte-for-byte.
+    """
+    if isinstance(value, bool):
+        return "true" if value else "false"
+    return value
+
+
 def _csv_bytes(rows, columns):
     buf = io.StringIO(newline="")
     writer = csv.DictWriter(buf, fieldnames=columns, lineterminator="\n")
     writer.writeheader()
     for r in rows:
-        writer.writerow(r)
+        writer.writerow({c: _csv_cell(r.get(c)) for c in columns})
     return buf.getvalue().encode("utf-8")
 
 
@@ -249,7 +388,12 @@ site goes away.
 
 - **Version:** {version}
 - **Data through:** {data_through} (the in-progress calendar month is excluded)
-- **Generated at:** see `manifest.json`
+- **Generated at:** see `manifest.json`. `generated_at` is the time the
+  bundle's *content* last changed, not the time of the last run: a
+  regeneration whose files are byte-identical carries the previous timestamp
+  forward unchanged, so a daily rebuild over unmoved numbers leaves no diff.
+  A `generated_at` older than the last collection day means nothing published
+  here has moved since then.
 - **Canonical location:** <{url}>
 
 Every figure here is a **derived count**. The bundle contains no post text,
@@ -283,10 +427,10 @@ meaningful.
 | `theme` | Direct | One of `romance`, `sexual_erp`, `consciousness`, `therapy`, `addiction`, `rupture`. |
 | `month` | Direct | Calendar month, `YYYY-MM`. |
 | `post_only_count` | Derived | Distinct posts in that month whose **own title or body** matched at least one validated keyword for the theme. This is the published series. Keyword hits found only in a post's *comments* are deliberately excluded — comment tagging began 2026-03-18, so including them puts a step artifact in the series at that date. |
-| `eligible_posts` | Derived | All posts collected that month across the communities in the theme-measurement scope (T1–T3, minus the communities excluded from keyword tracking). This is the per-1k denominator. |
+| `eligible_posts` | Derived | All posts collected that month across the communities in the theme-measurement scope (T1–T3, minus the communities excluded from keyword tracking). This is the per-1k denominator. Posts by one platform-developer account (the r/SoulmateAI creator, 89 posts) are excluded from every theme numerator but remain in this denominator. |
 | `rate_per_1k` | Derived | `post_only_count / eligible_posts * 1000`. The plain monthly rate. |
-| `rate_per_1k_charted` | Derived | The value the site's chart plots: the mean over the month's days of the daily rate, where both numerator and denominator are 7-day trailing means. Smoothing keeps low-volume days from spiking the line. It is close to `rate_per_1k` but not identical; use `rate_per_1k` for analysis and `rate_per_1k_charted` to reproduce the chart. |
-| `days_observed` | Derived | Days in that month present in the corpus calendar. Below ~28 means the collector missed days. |
+| `rate_per_1k_charted` | Derived | The value the site's chart plots: the mean over the month's days of the daily rate, where both numerator and denominator are 7-day trailing means over the same window. That window is the last 7 days of the corpus calendar up to and including the day in question — a day on which posts were collected but the theme was not mentioned counts as a zero in the numerator, not as a missing day. Because it is an unweighted mean of daily rates, it can differ from `rate_per_1k` in months whose daily post volume is uneven: {n_over_10pct} of {n_rows} rows differ by more than 10%, the largest gap being {max_pct}% ({max_theme} {max_month}). Use `rate_per_1k` for analysis and `rate_per_1k_charted` to reproduce the chart. |
+| `days_observed` | Derived | The number of corpus-calendar days in that month — days on which at least one post was collected from the theme-measurement scope. It is not clipped at `coverage_start`. Below ~28 means the collector missed days. |
 | `coverage_start` | Derived | The theme's first reliably-measurable month (see below). Constant per theme; repeated on each row for convenience. |
 
 **Coverage gating.** Each theme's rows begin at its `coverage_start` — the
@@ -317,8 +461,8 @@ becomes reliable) through the last complete month.
 | `in_theme_measurement` | Derived | `true` when the community counts toward `monthly_theme_counts` — i.e. tier 1–3 and not excluded from keyword tracking. T0 general-AI and T4 ambient communities are tracked for context only and are always `false`, as are the three explicitness-scope exclusions. |
 
 This table covers the communities currently being collected. Two communities
-that were tracked and later deactivated — r/HeavenGF (banned by Reddit, ~May
-2026) and r/MySentientAI (moribund) — keep their historical posts in the
+that were tracked and later deactivated — r/HeavenGF (removed from Reddit —
+deleted or renamed — ~May 2026) and r/MySentientAI (moribund) — keep their historical posts in the
 corpus and in the theme denominator, but do not appear here.
 
 ---
@@ -326,8 +470,9 @@ corpus and in the theme denominator, but do not appear here.
 ## Reading these numbers honestly
 
 **The counts are a floor, not a ceiling.** The keyword instrument is
-precision-first: it would rather miss a real post than admit a false one. A
-hand-coded audit of 400 posts put per-theme recall between about 3% and 32%.
+precision-first: it would rather miss a real post than admit a false one. An
+audit of 400 posts — classified by a language model, with the missed posts
+spot-checked by hand — put per-theme recall between 0% and 32%.
 Shape and timing are approximately honest; absolute magnitude is a clear
 undercount, and the undercount is uneven across themes.
 
@@ -336,9 +481,7 @@ vocabulary (addiction: "relapse", "cold turkey") reads higher than one
 written in ordinary language (romance: "I love him") whatever the truth
 beneath. Read each theme against itself — direction, timing, spikes.
 
-**Measured per-theme precision** (share of matched posts genuinely about the
-theme, re-measured 2026-05-16): addiction ~97%, sexual_erp ~96%,
-consciousness ~87%, romance ~86%, therapy ~80%, rupture ~77%.
+{precision_paragraph}
 
 **It counts language, not people.** A rising line means the theme's
 vocabulary appeared more often in these communities. It does not establish
@@ -406,38 +549,47 @@ INDEX_TEMPLATE = """\
 <main>
   <div class="eyebrow">Public dataset {version}</div>
   <h1>My Friend Is AI — aggregate dataset</h1>
-  <p>The numbers behind the charts at <a href="/">myfriendisai.com</a>, as plain
+  <p>The numbers behind the charts at <a href="https://myfriendisai.com/">myfriendisai.com</a>, as plain
   CSV and JSON. Data through <strong>{data_through}</strong>; the in-progress
   calendar month is excluded.</p>
   <p>Derived counts only — no post text, no titles, no usernames, no post IDs.</p>
 
+  <!-- File links are root-absolute (/dataset/{version}/…), not relative:
+       Next redirects /dataset/{version}/ to /dataset/{version} (308) before the
+       rewrite serves this file, so a relative href would resolve one directory
+       up and 404. In a downloaded copy of the bundle the files sit next to this
+       page under those same names. The two site links are full URLs so a
+       downloaded copy still reaches the site. -->
+  <div style="overflow-x:auto">
   <table>
     <thead><tr><th>File</th><th>Rows</th><th>What it is</th></tr></thead>
     <tbody>
-      <tr><td><a href="monthly_theme_counts.csv">monthly_theme_counts.csv</a> ·
-              <a href="monthly_theme_counts.json">.json</a></td>
+      <tr><td><a href="/dataset/{version}/monthly_theme_counts.csv">monthly_theme_counts.csv</a> ·
+              <a href="/dataset/{version}/monthly_theme_counts.json">.json</a></td>
           <td class="n">{theme_rows}</td>
           <td>Per theme per month: published keyword count, denominator, rate per 1,000.</td></tr>
-      <tr><td><a href="monthly_community_volumes.csv">monthly_community_volumes.csv</a> ·
-              <a href="monthly_community_volumes.json">.json</a></td>
+      <tr><td><a href="/dataset/{version}/monthly_community_volumes.csv">monthly_community_volumes.csv</a> ·
+              <a href="/dataset/{version}/monthly_community_volumes.json">.json</a></td>
           <td class="n">{community_rows}</td>
           <td>Per tracked community per month: post volume, with tier.</td></tr>
-      <tr><td><a href="README.md">README.md</a></td><td class="n">—</td>
+      <tr><td><a href="/dataset/{version}/README.md">README.md</a></td><td class="n">—</td>
           <td>Column-by-column schema, provenance, and how to read the numbers.</td></tr>
-      <tr><td><a href="METHODOLOGY.md">METHODOLOGY.md</a></td><td class="n">—</td>
+      <tr><td><a href="/dataset/{version}/METHODOLOGY.md">METHODOLOGY.md</a></td><td class="n">—</td>
           <td>Standalone statement of scope, method, validation, and limits.</td></tr>
-      <tr><td><a href="manifest.json">manifest.json</a></td><td class="n">—</td>
+      <tr><td><a href="/dataset/{version}/manifest.json">manifest.json</a></td><td class="n">—</td>
           <td>Version, generation timestamp, row counts, SHA-256 hashes.</td></tr>
     </tbody>
   </table>
+  </div>
 
   <hr>
   <p class="note"><strong>Read these as a floor, not a ceiling.</strong> The
-  keyword instrument is precision-first: a hand-coded audit put per-theme recall
-  between about 3% and 32%. Shape and timing are approximately honest; magnitude
+  keyword instrument is precision-first: an audit of 400 posts (classified by a
+  language model, spot-checked by hand) put per-theme recall between 0% and 32%.
+  Shape and timing are approximately honest; magnitude
   is an undercount, and it is uneven across themes, so theme heights are not
-  comparable to each other. <a href="METHODOLOGY.md">METHODOLOGY.md</a> and the
-  site's <a href="/about">About page</a> state the limits in full.</p>
+  comparable to each other. <a href="/dataset/{version}/METHODOLOGY.md">METHODOLOGY.md</a> and the
+  site's <a href="https://myfriendisai.com/about">About page</a> state the limits in full.</p>
   <p class="note">Licensed <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.
   Cite as: Bockley, W. (2026). <em>My Friend Is AI: Reddit discourse tracker for
   AI companionship communities</em> — public aggregate dataset {version}.
@@ -493,12 +645,21 @@ def main():
         community_rows, community_cols,
         "Monthly post volume per tracked community, with tier.",
     )
+    # Quantify charted-vs-plain at export time so the README sentence about
+    # the gap can never go stale.
+    charted = charted_vs_plain_stats(theme_rows)
     contents["README.md"] = README_TEMPLATE.format(
         version=DATASET_VERSION,
         url=DATASET_URL,
         data_through=data_through,
         theme_rows=f"{len(theme_rows):,}",
         community_rows=f"{len(community_rows):,}",
+        n_rows=charted["n_rows"],
+        n_over_10pct=charted["n_over_10pct"],
+        max_pct=charted["max_pct"],
+        max_theme=charted["max_theme"],
+        max_month=charted["max_month"],
+        precision_paragraph=precision_paragraph(),
     ).encode("utf-8")
 
     contents["index.html"] = INDEX_TEMPLATE.format(

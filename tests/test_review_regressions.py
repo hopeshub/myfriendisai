@@ -104,9 +104,12 @@ def test_client_oauth_mode_with_creds(monkeypatch):
 # ── 3. Arctic Shift fetch: truncation and 429 retries ───────────────────────
 
 class _FakeResp:
-    def __init__(self, status_code, payload=None):
+    def __init__(self, status_code, payload=None, text=""):
         self.status_code = status_code
         self._payload = payload or {}
+        # backfill_arctic logs resp.text[:120] on a retryable status, so the
+        # fake has to carry a body like the real requests.Response does.
+        self.text = text
 
     def json(self):
         return self._payload
@@ -114,7 +117,14 @@ class _FakeResp:
 
 def test_fetch_posts_non_200_is_truncated(monkeypatch):
     import scripts.backfill_arctic as ba
-    monkeypatch.setattr(ba.requests, "get", lambda *a, **k: _FakeResp(422))
+    # 404 is deliberately NOT in RETRYABLE_STATUS (422/429/5xx are), so this
+    # exercises the "give up immediately" branch the test name describes.
+    # 422 was added to RETRYABLE_STATUS on 2026-08-07 and would instead walk
+    # the retry-exhaustion path — a duplicate of the 429 test below.
+    monkeypatch.setattr(ba.requests, "get",
+                        lambda *a, **k: _FakeResp(404, text="not found"))
+    # Patched defensively: the non-retryable branch must not sleep at all.
+    monkeypatch.setattr(ba.time, "sleep", lambda s: None)
     posts, truncated = ba.fetch_posts("replika", 1_000, 2_000)
     assert posts == []
     assert truncated is True
@@ -182,36 +192,80 @@ def test_fallback_counts_truncated_window_as_error(monkeypatch, mem_conn):
 
 # ── 5. coverage_start: gap months count as zero ──────────────────────────────
 
+def _seed_tagged_month(conn, month, n=5):
+    """Seed `n` tagged romance posts into calendar month "YYYY-MM"."""
+    for i in range(n):
+        day = f"{month}-{i % 5 + 2:02d}"
+        pid = f"p{month}{i}"
+        conn.execute(
+            "INSERT INTO posts (id, subreddit, created_utc, collected_date) "
+            "VALUES (?, 'replika', strftime('%s', ?), ?)",
+            (pid, day, day),
+        )
+        conn.execute(
+            "INSERT INTO post_keyword_tags (post_id, subreddit, category, "
+            "matched_term, post_date, source) VALUES (?, 'replika', 'romance', "
+            "'kw', ?, 'post')",
+            (pid, day),
+        )
+
+
+def _month_offset(months_back):
+    """The calendar month `months_back` months before the current UTC month."""
+    from datetime import datetime, timezone
+    today = datetime.now(timezone.utc).date()
+    y, m = today.year, today.month - months_back
+    while m <= 0:
+        m += 12
+        y -= 1
+    return f"{y:04d}-{m:02d}"
+
+
+def _coverage_start(tmp_path, conn):
+    from src.db.operations import export_keyword_trends_json
+    out = tmp_path / "kt.json"
+    export_keyword_trends_json(output_path=out, conn=conn)
+    return json.loads(out.read_text())["_coverage_start"]
+
+
 def test_coverage_start_rejects_candidate_before_gap_month(tmp_path, monkeypatch, mem_conn):
     import src.config as config_mod
     monkeypatch.setattr(config_mod, "load_keyword_communities",
                         lambda: [{"subreddit": "replika"}])
 
-    # 5 tagged posts in 2025-01, ZERO in 2025-02, 5 in 2025-03.
-    # The documented rule ("every later completed month >= 5") must treat the
-    # empty gap month as 0 and reject 2025-01 as coverage_start.
-    def seed(month, day_base, n):
-        for i in range(n):
-            pid = f"p{month}{i}"
-            mem_conn.execute(
-                "INSERT INTO posts (id, subreddit, created_utc, collected_date) "
-                "VALUES (?, 'replika', strftime('%s', ?), ?)",
-                (pid, f"2025-{month}-0{day_base + i % 5 + 1}", "2025-12-01"),
-            )
-            mem_conn.execute(
-                "INSERT INTO post_keyword_tags (post_id, subreddit, category, "
-                "matched_term, post_date, source) VALUES (?, 'replika', 'romance', "
-                "'kw', ?, 'post')",
-                (pid, f"2025-{month}-0{day_base + i % 5 + 1}"),
-            )
-
-    seed("01", 1, 5)
-    seed("03", 1, 5)
+    # 5 tagged posts in 2025-01, ZERO in 2025-02, 5 in 2025-03, and nothing
+    # ever since. The documented rule ("every later completed month >= 5")
+    # runs to the last completed CALENDAR month, so the gap month 2025-02
+    # disqualifies 2025-01 AND every completed month after 2025-03 (all zero)
+    # disqualifies 2025-03 too. A theme whose vocabulary died out has no
+    # reliably-measurable start.
+    _seed_tagged_month(mem_conn, "2025-01")
+    _seed_tagged_month(mem_conn, "2025-03")
     mem_conn.commit()
 
-    from src.db.operations import export_keyword_trends_json
-    out = tmp_path / "kt.json"
-    export_keyword_trends_json(output_path=out, conn=mem_conn)
-    cs = json.loads(out.read_text())["_coverage_start"]
-    assert cs["romance"] == "2025-03-01", \
-        f"gap month 2025-02 must disqualify 2025-01 (got {cs['romance']})"
+    cs = _coverage_start(tmp_path, mem_conn)
+    assert cs["romance"] is None, \
+        ("2025-02 must disqualify 2025-01, and the zero months after 2025-03 "
+         f"must disqualify 2025-03 (got {cs['romance']})")
+
+
+def test_coverage_start_accepts_series_running_to_last_completed_month(
+    tmp_path, monkeypatch, mem_conn
+):
+    """Same gap rule, but the series continues to the last completed month."""
+    import src.config as config_mod
+    monkeypatch.setattr(config_mod, "load_keyword_communities",
+                        lambda: [{"subreddit": "replika"}])
+
+    # Offsets are months back from the current (in-progress) month, so M-1 is
+    # the last completed month. M-4 clears the threshold but M-3 is an empty
+    # gap month, so the first month that survives the rule is M-2: it and
+    # every later completed month (M-1) clear 5.
+    for back in (4, 2, 1):
+        _seed_tagged_month(mem_conn, _month_offset(back))
+    mem_conn.commit()
+
+    cs = _coverage_start(tmp_path, mem_conn)
+    assert cs["romance"] == f"{_month_offset(2)}-01", \
+        (f"expected {_month_offset(2)}-01 (gap at {_month_offset(3)} "
+         f"disqualifies {_month_offset(4)}); got {cs['romance']}")

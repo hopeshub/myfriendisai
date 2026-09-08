@@ -28,38 +28,47 @@
 <main>
   <div class="eyebrow">Public dataset v1</div>
   <h1>My Friend Is AI — aggregate dataset</h1>
-  <p>The numbers behind the charts at <a href="/">myfriendisai.com</a>, as plain
+  <p>The numbers behind the charts at <a href="https://myfriendisai.com/">myfriendisai.com</a>, as plain
   CSV and JSON. Data through <strong>2026-08</strong>; the in-progress
   calendar month is excluded.</p>
   <p>Derived counts only — no post text, no titles, no usernames, no post IDs.</p>
 
+  <!-- File links are root-absolute (/dataset/v1/…), not relative:
+       Next redirects /dataset/v1/ to /dataset/v1 (308) before the
+       rewrite serves this file, so a relative href would resolve one directory
+       up and 404. In a downloaded copy of the bundle the files sit next to this
+       page under those same names. The two site links are full URLs so a
+       downloaded copy still reaches the site. -->
+  <div style="overflow-x:auto">
   <table>
     <thead><tr><th>File</th><th>Rows</th><th>What it is</th></tr></thead>
     <tbody>
-      <tr><td><a href="monthly_theme_counts.csv">monthly_theme_counts.csv</a> ·
-              <a href="monthly_theme_counts.json">.json</a></td>
+      <tr><td><a href="/dataset/v1/monthly_theme_counts.csv">monthly_theme_counts.csv</a> ·
+              <a href="/dataset/v1/monthly_theme_counts.json">.json</a></td>
           <td class="n">244</td>
           <td>Per theme per month: published keyword count, denominator, rate per 1,000.</td></tr>
-      <tr><td><a href="monthly_community_volumes.csv">monthly_community_volumes.csv</a> ·
-              <a href="monthly_community_volumes.json">.json</a></td>
+      <tr><td><a href="/dataset/v1/monthly_community_volumes.csv">monthly_community_volumes.csv</a> ·
+              <a href="/dataset/v1/monthly_community_volumes.json">.json</a></td>
           <td class="n">1,716</td>
           <td>Per tracked community per month: post volume, with tier.</td></tr>
-      <tr><td><a href="README.md">README.md</a></td><td class="n">—</td>
+      <tr><td><a href="/dataset/v1/README.md">README.md</a></td><td class="n">—</td>
           <td>Column-by-column schema, provenance, and how to read the numbers.</td></tr>
-      <tr><td><a href="METHODOLOGY.md">METHODOLOGY.md</a></td><td class="n">—</td>
+      <tr><td><a href="/dataset/v1/METHODOLOGY.md">METHODOLOGY.md</a></td><td class="n">—</td>
           <td>Standalone statement of scope, method, validation, and limits.</td></tr>
-      <tr><td><a href="manifest.json">manifest.json</a></td><td class="n">—</td>
+      <tr><td><a href="/dataset/v1/manifest.json">manifest.json</a></td><td class="n">—</td>
           <td>Version, generation timestamp, row counts, SHA-256 hashes.</td></tr>
     </tbody>
   </table>
+  </div>
 
   <hr>
   <p class="note"><strong>Read these as a floor, not a ceiling.</strong> The
-  keyword instrument is precision-first: a hand-coded audit put per-theme recall
-  between about 3% and 32%. Shape and timing are approximately honest; magnitude
+  keyword instrument is precision-first: an audit of 400 posts (classified by a
+  language model, spot-checked by hand) put per-theme recall between 0% and 32%.
+  Shape and timing are approximately honest; magnitude
   is an undercount, and it is uneven across themes, so theme heights are not
-  comparable to each other. <a href="METHODOLOGY.md">METHODOLOGY.md</a> and the
-  site's <a href="/about">About page</a> state the limits in full.</p>
+  comparable to each other. <a href="/dataset/v1/METHODOLOGY.md">METHODOLOGY.md</a> and the
+  site's <a href="https://myfriendisai.com/about">About page</a> state the limits in full.</p>
   <p class="note">Licensed <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.
   Cite as: Bockley, W. (2026). <em>My Friend Is AI: Reddit discourse tracker for
   AI companionship communities</em> — public aggregate dataset v1.

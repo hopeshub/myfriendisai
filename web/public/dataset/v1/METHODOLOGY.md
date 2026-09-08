@@ -6,7 +6,7 @@ assumes no access to the live site, the repository, or any other document.*
 
 **Project:** My Friend Is AI — <https://myfriendisai.com>
 **Code and validation records:** <https://github.com/hopeshub/myfriendisai>
-**Document version:** 1.0 · 2026-08-27
+**Document version:** 1.1 · 2026-09-08
 **Instrument version:** keyword set v8 (92 keywords, locked)
 
 ---
@@ -181,18 +181,22 @@ language made them too noisy.
 
 ### 2.6 Deactivated communities
 
-Two configured communities are no longer collected: **r/HeavenGF** (banned by
-Reddit, ~May 2026; deactivated 2026-05-14) and **r/MySentientAI** (deactivated
-2026-08-08 as moribund — 8 posts ever). Their historical posts remain in the
-corpus, in both the theme numerators and the denominator. Deactivation stops
-collection; it never retroactively removes data.
+Two configured communities are no longer collected: **r/HeavenGF** (removed from
+Reddit — deleted or renamed — ~May 2026; deactivated 2026-05-14) and
+**r/MySentientAI** (deactivated 2026-08-08 as moribund — 8 posts ever). Their
+historical posts remain in the corpus, in both the theme numerators and the
+denominator. Deactivation stops collection; it never retroactively removes data.
 
 ### 2.7 Corpus extent
 
 The post corpus reaches back to **2017** via archive backfill: the early Replika
-years, COVID-era growth, and the ChatGPT precondition era. As of 2026-08 it
-holds roughly 4.4 million posts. Per-theme coverage gating (§5) means a theme's
-chart line still begins only where its vocabulary becomes measurable.
+years, COVID-era growth, and the ChatGPT precondition era. As of early September
+2026 it holds roughly 4.4 million posts — every post collected from all 41
+configured communities, the T0 and T4 context tiers included. That figure is
+published in the site footer and in `data/site_meta.json`; the public bundle
+(§13) tabulates community volume only from 2023-01, so the corpus total cannot
+be reproduced from it. Per-theme coverage gating (§6.1) means a theme's chart
+line still begins only where its vocabulary becomes measurable.
 
 Communities added after launch are **forward-only** — no backfill — because a
 backfilled addition would inject a step into the historical series.
@@ -235,8 +239,10 @@ because a model was retrained.
 The gain forgone was measured, not assumed: an LLM re-check layer over each
 keyword match was built and evaluated in May 2026. It raised precision from
 roughly 80% to 88% and did nothing at all for the posts the keywords never
-matched. It was dropped. The only LLM code retained in the project is the
-drift-check sampler (§8), which never touches a published number.
+matched. It was dropped. The drift check (§8) is the only language model in the
+ongoing pipeline; the May 2026 recall audit (§5) and precision census (§4.4)
+were LLM-graded too, the census against a 72-post human anchor. No language
+model touches a published number.
 
 ---
 
@@ -263,7 +269,7 @@ scoring sheets.
 | ≥ 80% | **KEEP** |
 | 60–79% | **REVIEW** — researcher decides |
 | < 60% | **CUT** |
-| < 10 hits | **LOW VOLUME** — held out |
+| < 10 hits | **LOW VOLUME** — retained as a flagged placeholder; precision not reliably measurable |
 
 ### 4.3 The researcher-accepted band
 
@@ -286,17 +292,25 @@ Current researcher-accepted keywords: `we broke up` (romance),
 
 ### 4.4 Measured precision
 
-Per-theme topical precision, re-measured 2026-05-16 by full-census
-re-measurement plus a 72-post human gold anchor:
+Per-theme topical precision, from the 2026-05-16 full-census re-measurement and
+from the most recent per-keyword drift cycle:
 
-| Theme | Post precision |
-|---|---|
-| addiction | ~97% |
-| sexual_erp | ~96% |
-| consciousness | ~87% |
-| romance | ~86% |
-| therapy | ~80% |
-| rupture | ~77% |
+| Theme | 2026-05-16 census | 2026-08 drift cycle (n) |
+|---|---|---|
+| addiction | ~97% | 84.6% (n=741) |
+| sexual_erp | ~96% | 83.2% (n=524) |
+| consciousness | ~87% | 85.9% (n=369) |
+| romance | ~86% | 88.7% (n=931) |
+| therapy | ~68% | 66.4% (n=360) |
+| rupture | ~77% | 84.7% (n=926) |
+
+Both columns are LLM-graded — the census anchored on 72 human-coded posts, the
+drift cycle drawn from a larger and more recent sample and re-measured monthly.
+
+The therapy census figure is sometimes quoted as ~87%. That number belongs to a
+rebuilt therapy keyword set specified in May 2026 that has not shipped; the
+published line is the v8 set as-is, at ~68% — below the §4.2 KEEP gate. The
+therapy line is published with that caveat rather than quietly.
 
 Earlier small-sample (n≈20) screens had run 10–15 points low; those figures are
 superseded.
@@ -313,8 +327,9 @@ Comment-derived tags do not enter the published series (§7).
 Precision was bought with recall, and the price was measured.
 
 **Method.** A stratified random sample of 400 posts from T1–T3 (200 random
-across all communities, 40 each from five theme-rich communities) was
-hand-classified for all six themes under the topical reading. Recall =
+across all communities, 40 each from five theme-rich communities) was classified
+for all six themes under the topical reading by five parallel LLM agents, with
+the posts the keywords had missed spot-checked by hand. Recall =
 (classified-YES ∩ keyword-tagged) / classified-YES.
 
 **Result (2026-05-13):**
@@ -328,8 +343,9 @@ hand-classified for all six themes under the topical reading. Recall =
 | rupture | 101 | 3 | **3%** | 1–8% |
 | consciousness | 8 | 0 | **0%** | 0–32% |
 
-The confidence intervals are wide because the YES counts are small; treat the
-point estimates with that uncertainty.
+Recall runs 0–32% across the six themes: consciousness caught none of its eight
+classified-YES posts. The confidence intervals are wide because the YES counts
+are small; treat the point estimates with that uncertainty.
 
 **Where the missed posts live.** The gap concentrates in four structural
 categories:
@@ -346,7 +362,7 @@ categories:
    compulsion via context, not vocabulary.
 
 In r/MyBoyfriendIsAI — a community literally about AI boyfriends — the keyword
-set tags roughly 5% of posts as romance where a human reader classifies ~95%.
+set tags roughly 5% of posts as romance where the classifier reads ~95%.
 That gap *is* the precision-first trade-off, quantified.
 
 **What follows for reading the chart:**
@@ -388,18 +404,35 @@ shifting.
 
 The denominator is all posts collected from the theme-measurement scope (T1–T3
 minus the flagged exclusions) on the same day. Numerator and denominator are
-both smoothed with a **7-day trailing mean** so they share a window and the
-displayed rate does not spike on low-volume days. The chart plots the mean of
-the daily smoothed rate over each calendar month; the in-progress month is
-clipped.
+both smoothed with a **7-day trailing mean** taken over the same seven-entry
+window of the corpus calendar — a day that has posts but no theme hits counts as
+a zero, not as a skipped day — so the two genuinely share a window and the
+displayed rate does not spike on low-volume days. The chart plots the unweighted
+mean of the daily smoothed rate over each calendar month; the in-progress month
+is clipped. Because that monthly value is an unweighted mean of daily rates, it
+can differ from the plain monthly ratio of hits to eligible posts in months
+whose daily volume is uneven; the plain ratio is what the public dataset's
+`rate_per_1k` column reports.
+
+Until September 2026 the numerator's window ran over the theme's *hit-days*
+only, skipping days with no hits, which inflated sparse periods and zeroed the
+days after a spike. The correction is disclosed in the site's changelog.
+
+One account is excluded from every theme numerator: the developer of one tracked
+companion platform, whose 89 posts — 57 of them keyword-tagged sex/ERP — would
+otherwise read as user discourse. The exclusion is numerator-only: those posts
+still count in the per-1,000 denominator, in the per-theme health export, and in
+the per-keyword transparency counts.
 
 ### 6.3 Volume weighting is deliberate
 
 The denominator is post-volume-weighted, not community-equal. One community —
-r/CharacterAI — is 60–90% of total post volume, so it dominates the aggregate.
-This is a documented posture, not a bug: the alternative (weighting each
-community equally) gives every small community outsized influence and produces a
-line that swings on the arrival of a new sub.
+r/CharacterAI — runs between 35% and 91% of theme-measurement post volume month
+to month, 74.8% pooled across 2023-01 to 2026-08, above 60% in most months
+through 2025 and 38–51% in June–August 2026, so it dominates the aggregate. This
+is a documented posture, not a bug: the alternative (weighting each community
+equally) gives every small community outsized influence and produces a line that
+swings on the arrival of a new sub.
 
 Because volume weighting *is* a choice, the site publishes a second series with
 r/CharacterAI removed, so the dedicated-community signal can be read separately
@@ -408,9 +441,11 @@ from the largest community's platform lifecycle.
 A leave-one-community-out check (2026-08) records the largest single-community
 dependencies: sexual_erp on r/replika (level −50% when removed), addiction on
 r/Character_AI_Recovery (−51%), consciousness on r/BeyondThePromptAI (−41%),
-romance on r/MyBoyfriendIsAI (−20%). Under alternative reweightings all six
-themes fall below 0.9 correlation on at least one scheme — which is precisely
-why the line is read direction-only.
+romance on r/MyBoyfriendIsAI (−20%) — computed from the project's internal
+per-community theme tags, window through 2026-07; the public bundle has no
+per-community theme table, so these cannot be reproduced from it. Under
+alternative reweightings all six themes fall below 0.9 correlation on at least
+one scheme — which is precisely why the line is read direction-only.
 
 ### 6.4 Theme concentration
 
@@ -418,14 +453,17 @@ Within the curated set, each theme is concentrated. Top-3 community share per
 theme (window through 2026-07): romance 61%, sexual_erp 76%, consciousness 70%,
 therapy 66%, addiction 93%, rupture 80%. The sexual_erp line is 59% r/replika
 alone. A theme line is often, in practice, a close reading of two or three
-communities rather than an even sweep.
+communities rather than an even sweep. These shares, like the leave-one-out
+figures above, come from the project's internal per-community theme tags (window
+through 2026-07) and cannot be reproduced from the public bundle, which carries
+no per-community theme table.
 
 ### 6.5 The set of communities grew over time
 
 In the early years almost every tracked community was a primary companionship
 subreddit. Platform-specific and recovery communities were smaller or did not
 exist. Tier share of corpus posts (T1/T2/T3): 2024 = 85.9/13.6/0.5,
-2025 = 82.1/16.3/1.6, 2026-to-date = 77.6/18.7/3.7.
+2025 = 82.1/16.3/1.6, 2026 (January–July) = 77.6/18.7/3.7.
 
 Each line is measured against whatever communities existed at the time, so part
 of a long climb reflects the tracked world widening rather than the conversation
@@ -447,7 +485,11 @@ Two series are therefore exported for every theme:
 **The published chart uses post-only.** Comment tagging began part-way through
 the record, so the combined series carries a step artifact at 2026-03-18 and is
 not longitudinally comparable. Backfilled data predating that date was tagged on
-post text only, so the two series converge for older posts by construction.
+post text only, so the two series are nearly identical for older posts — but not
+identical by construction: a comment written after 2026-03-18 on an older post
+propagates a tag dated to the parent post, and 48 pre-2026-03-18 dates differ
+between the two series in the committed export. The published post-only series
+is unaffected.
 
 The public dataset accompanying this document also publishes the post-only
 series, for the same reason.
@@ -469,13 +511,17 @@ agreement is the right statistic here because it is robust to a constant
 classifier bias — the check answers "has this keyword's meaning moved?", not
 "what is its absolute precision today?".
 
-The sampling half is automated and scheduled; the classification and reporting
-half is run manually. Results accumulate in a drift history file in the
-repository, and a per-theme health export (precision, concentration metrics,
+The sampling half is automated and scheduled monthly; the classification and
+reporting half is run by hand, and has sometimes covered two months' samples in
+a single pass. Results accumulate in a drift history file in the repository —
+which still labels its cycles `quarterly_drift`, a holdover from the earlier
+cadence — and a per-theme health export (precision, concentration metrics,
 noisy-keyword flags) is regenerated on every collection run for audit.
 
-The drift check is the only component of the project that uses a language model,
-and it feeds no published number — it flags keywords for human review.
+The drift check is the only language model in the ongoing pipeline; the May 2026
+recall audit (§5) and precision census (§4.4) were LLM-graded as well, the
+census against a 72-post human anchor. It feeds no published number — it flags
+keywords for human review.
 
 ---
 
@@ -485,7 +531,7 @@ and it feeds no published number — it flags keywords for human review.
 |---|---|---|
 | 2017 – early 2026 | Public Reddit archives (PullPush, then Arctic Shift) | Historical backfill. The further back a post goes, the more likely its text was removed or deleted before the archive captured it. |
 | from 2026-03 | Reddit public `.json` endpoints, daily | Unauthenticated, rate-limited |
-| 2026-05-29 → 2026-06-09 | **collection gap** | Reddit disabled unauthenticated `.json` access globally on 2026-05-30 with no announcement; every endpoint began returning 403 |
+| 2026-05-29 → 2026-06-09 | **collection gap** | Reddit disabled unauthenticated `.json` access globally on 2026-05-30 with no announcement; every endpoint began returning 403. The 2026-05-29 run had already failed, so the last good collection was 2026-05-28 |
 | 2026-06-09 → 2026-06-11 | Reddit OAuth (app-only token) | Same endpoints, bearer-authenticated |
 | from 2026-06-11 | **Arctic Shift archive, daily** ("arctic-first") | Permanent mode as of 2026-08-08 |
 
@@ -500,8 +546,11 @@ filed in June 2026 and never acknowledged; the project's judgment as of
 2026-08-08 is that this route is closed. Two consequences the reader should
 know:
 
-1. **Subscriber counts are frozen at 2026-06-07** and active-user counts are
-   permanently null. The site labels subscriber figures with that date.
+1. **Subscriber counts are frozen** at the last snapshot collected —
+   2026-05-28 for 30 of the 39 live communities, and 2026-06-07 (the one
+   snapshot recovered inside the gap) for the nine ambient-tier communities —
+   and active-user counts are permanently null. The site labels subscriber
+   figures accordingly.
 2. The archive path collects comments *continuously by creation window* rather
    than by the one-shot per-post snapshot the Reddit path used. This is strictly
    more complete, so the *post+comment* series runs a touch fuller from late May
@@ -537,7 +586,7 @@ composite looks authoritative and is fragile.
 1. **It counts language, not people or feelings.** A rising addiction line means
    addiction-related language appears more often. It does not establish that
    more people are addicted, nor how they feel about it.
-2. **Every line is a floor.** Measured recall is 3–32% per theme (§5). Magnitude
+2. **Every line is a floor.** Measured recall is 0–32% per theme (§5). Magnitude
    is a clear undercount.
 3. **Theme heights are not comparable to each other.** Vocabularies catch
    unevenly, in one direction: blunt, deliberate vocabulary reads higher than

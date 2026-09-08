@@ -4,7 +4,7 @@ import json
 import sqlite3
 from datetime import date
 from pathlib import Path
-from typing import Optional
+from typing import List, Optional
 
 from src.db.schema import get_connection
 
@@ -454,6 +454,7 @@ def create_arctic_snapshot_rows(
 def update_arctic_comment_averages(
     snapshot_date: date,
     conn: Optional[sqlite3.Connection] = None,
+    subreddits: Optional[List[str]] = None,
 ) -> int:
     """Fill avg_comments_per_post on arctic snapshot rows from our comments table.
 
@@ -462,6 +463,14 @@ def update_arctic_comment_averages(
     finished (the caller uses +6 days, matching the old Reddit-path maturity
     window). Only touches data_source='arctic_shift' rows — real Reddit
     observations are never overwritten. Returns rows updated.
+
+    `subreddits`, when given, restricts the fill to those communities. The
+    caller passes the comment-collection scope: a community whose comments are
+    never collected (the exclude_from_keywords set) has no comment data, and
+    writing its mean of zero collected comments would publish a fabricated
+    0.0 — which is what happened for the 12 excluded communities from June
+    2026 until this guard. Their rows stay NULL, which the site renders as
+    "no data" rather than as a collapse to zero.
     """
     from datetime import datetime, time as dtime, timedelta, timezone
 
@@ -481,8 +490,11 @@ def update_arctic_comment_averages(
             (win_start, win_end),
         ).fetchall()
 
+        allowed = set(subreddits) if subreddits is not None else None
         updated = 0
         for r in rows:
+            if allowed is not None and r["subreddit"] not in allowed:
+                continue
             result = _conn.execute(
                 """
                 UPDATE subreddit_snapshots
@@ -690,6 +702,12 @@ def export_keyword_trends_json(
           ],
           ...
         }
+
+    Both `*_7d_avg` fields are trailing means over the last 7 dates of the
+    CORPUS CALENDAR (`_total_posts`) up to and including the entry's date —
+    the same window the rate's denominator uses — with a corpus day that has
+    no hits for this category counting as 0. Zero-hit days are not emitted as
+    entries; see the comment on the window definition below.
     """
     from src.config import load_keyword_communities
     active_subreddits = [c["subreddit"] for c in load_keyword_communities()]
@@ -767,19 +785,59 @@ def export_keyword_trends_json(
     for category, post_date, count in post_only_rows:
         post_only_lookup[category][post_date] = count
 
+    # ─── The 7-day window, defined once ────────────────────────────────
+    # W(d) = the last 7 entries of the CORPUS CALENDAR (the `_total_posts`
+    # dates, sorted) up to and including d. That is exactly the slice the
+    # rate's denominator uses, so numerator and denominator share a window,
+    # as docs/METHODOLOGY.md §6.2 says they do.
+    #
+    # Before 2026-09 these averages were means over the last 7 entries of the
+    # CATEGORY's own series. Zero-hit days are absent from that series, so the
+    # "7-day" window silently spanned up to hundreds of calendar days and the
+    # divisor was the number of hit-days, not 7 — inflating sparse stretches.
+    #
+    # A corpus day on which the category has no hits contributes a real 0.
+    # Such days are deliberately NOT emitted as entries (that would roughly
+    # double the file); consumers (web/app/themeData.ts,
+    # scripts/export_public_dataset.py) recompute the same window over the
+    # corpus calendar from `count_post_only`, treating an absent day as 0.
+    from datetime import date as _cal_date, timedelta as _cal_delta
+
+    calendar_dates = [d for d, _ in total_posts_rows]
+    calendar_index = {d: i for i, d in enumerate(calendar_dates)}
+
+    def _window_dates(day: str, floor: str) -> list:
+        i = calendar_index.get(day)
+        if i is not None:
+            return calendar_dates[max(0, i - 6): i + 1]
+        # Defensive only: every tag's post_date comes from a post that is
+        # itself counted in _total_posts, so a hit-day is always a corpus day
+        # for pipeline data. If that ever stops holding, fall back to plain
+        # date arithmetic over the trailing 7 calendar days, floored at the
+        # category's first hit-day so the ramp-up mirrors the short window the
+        # calendar path produces at the start of the corpus.
+        end = _cal_date.fromisoformat(day)
+        start = end - _cal_delta(days=6)
+        floor_date = _cal_date.fromisoformat(floor)
+        if start < floor_date:
+            start = floor_date
+        span = (end - start).days + 1
+        return [(start + _cal_delta(days=k)).isoformat() for k in range(span)]
+
     result = {}
     for category, entries in sorted(by_category.items()):
         with_avg = []
         post_only_series = post_only_lookup.get(category, {})
-        for i, entry in enumerate(entries):
-            window = [e["count"] for e in entries[max(0, i - 6): i + 1]]
-            avg = round(sum(window) / len(window), 2)
+        counts = {e["date"]: e["count"] for e in entries}
+        first_date = entries[0]["date"] if entries else ""
+        for entry in entries:
+            window = _window_dates(entry["date"], first_date)
+            avg = round(sum(counts.get(d, 0) for d in window) / len(window), 2)
             # Post-only count: 0 if this category had no post-source hits on this date
             post_only_count = post_only_series.get(entry["date"], 0)
-            post_only_window = [
-                post_only_series.get(e["date"], 0) for e in entries[max(0, i - 6): i + 1]
-            ]
-            post_only_avg = round(sum(post_only_window) / len(post_only_window), 2)
+            post_only_avg = round(
+                sum(post_only_series.get(d, 0) for d in window) / len(window), 2
+            )
             with_avg.append({
                 "date": entry["date"],
                 "count": entry["count"],
@@ -799,8 +857,9 @@ def export_keyword_trends_json(
     # ─── Per-theme coverage_start computation ──────────────────────────
     # Rule (uniform across themes):
     # coverage_start is the first month where the theme's monthly post-only
-    # count is ≥ COVERAGE_THRESHOLD AND every subsequent COMPLETE month also
-    # clears the threshold. The current (in-progress) calendar month is
+    # count is ≥ COVERAGE_THRESHOLD AND every subsequent COMPLETE calendar
+    # month — through the last completed one, whether or not it has tags —
+    # also clears the threshold. The current (in-progress) calendar month is
     # excluded from the "all later months" check because it's not yet a
     # full month's data.
     #
@@ -817,8 +876,21 @@ def export_keyword_trends_json(
     # representative of real discourse. See docs/validation_v8_2_expansion_2026-05-12.md
     # and the agent-derived calibration analysis from 2026-05-13.
     COVERAGE_THRESHOLD = 5
-    from datetime import date as _date
-    current_month = _date.today().strftime("%Y-%m")
+    from datetime import datetime as _dt, timezone as _tz
+    # UTC, matching the day boundary used everywhere else in the data path
+    # (date(created_utc,'unixepoch')) and the site's clip of the in-progress
+    # month (web/app/themeData.ts uses new Date().toISOString()).
+    _today = _dt.now(_tz.utc).date()
+    current_month = _today.strftime("%Y-%m")
+    # The last COMPLETED calendar month — the month before the current one.
+    # "Every later completed month" runs to here, not to the last month that
+    # happened to have tags: a completed month with zero tags is a 0, and 0 is
+    # below the threshold, so a theme whose vocabulary dies out loses its
+    # coverage_start instead of keeping it forever.
+    last_complete = (
+        f"{_today.year - 1:04d}-12" if _today.month == 1
+        else f"{_today.year:04d}-{_today.month - 1:02d}"
+    )
     coverage_start: dict[str, Optional[str]] = {}
     for category, entries in result.items():
         if category.startswith("_"):
@@ -846,17 +918,15 @@ def export_keyword_trends_json(
                 if m == 13:
                     m, y = 1, y + 1
 
-        completed = [m for m in months if m != current_month]
+        completed = [m for m in months if m < current_month]
         chosen: Optional[str] = None
-        if completed:
-            last_complete = completed[-1]
-            for month in completed:
-                if monthly_post_only[month] < COVERAGE_THRESHOLD:
-                    continue
-                if all(monthly_post_only.get(m, 0) >= COVERAGE_THRESHOLD
-                       for m in _month_range(month, last_complete)):
-                    chosen = month
-                    break
+        for month in completed:
+            if monthly_post_only[month] < COVERAGE_THRESHOLD:
+                continue
+            if all(monthly_post_only.get(m, 0) >= COVERAGE_THRESHOLD
+                   for m in _month_range(month, last_complete)):
+                chosen = month
+                break
         # Convert YYYY-MM to YYYY-MM-01 for ISO consistency
         coverage_start[category] = f"{chosen}-01" if chosen else None
     result["_coverage_start"] = coverage_start
