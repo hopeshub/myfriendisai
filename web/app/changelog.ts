@@ -15,15 +15,7 @@ export const CHANGELOG: ChangelogEntry[] = [
     title: "Collection gaps repaired; copy corrected",
     items: [
       "REPAIR_NOTE_CHANGELOG",
-      "A pass over every number in the site's prose against the current data: a few stale figures were corrected (the r/CharacterAI share of the corpus, r/antiAI's rise, the size of the database), the About page now says plainly that the charted lines count post text only, and the methodology document was brought into line with what the pipeline actually does — including that communities added in May 2026 were backfilled, not added forward-only.",
-    ],
-    recent: true,
-  },
-  {
-    date: "June 2026",
-    title: "Collection moved from Reddit to the archive",
-    items: [
-      "Reddit ended unauthenticated data access without notice on May 30, 2026. Daily collection paused from May 29 to June 9; the missing days were recovered from the Arctic Shift archive, and collection has run from the archive ever since. The charted lines count post text only and are unaffected, but two secondary figures froze: subscriber counts and average post score have no archive equivalent and stay at their late-May values, labeled as such on the community pages.",
+      "A pass over every number in the site’s prose against the current data: a few stale figures were corrected — the r/CharacterAI share of the corpus, r/antiAI’s rise, the size of the database. The methodology document was also brought into line with what the pipeline actually does, including that the communities added in May 2026 had their history backfilled rather than tracked only from that date.",
     ],
     recent: true,
   },
@@ -36,10 +28,18 @@ export const CHANGELOG: ChangelogEntry[] = [
     recent: true,
   },
   {
+    date: "June 2026",
+    title: "Collection moved from Reddit to the archive",
+    items: [
+      "Reddit ended unauthenticated data access without notice on May 30, 2026. Daily collection paused from May 29 to June 9; the missing days were recovered from the Arctic Shift archive, and collection has run from the archive ever since. The charted lines count post text only and are unaffected, but two secondary figures froze: subscriber counts and average post score have no archive equivalent and stay at their late-May values, labeled as such on the community pages.",
+    ],
+    recent: true,
+  },
+  {
     date: "May 2026",
     title: "How to read the therapy and addiction lines",
     items: [
-      "A hand-check of 90 posts the keywords had filed as addiction tested how cleanly the two lines separate help from harm. About a quarter of them also carried a help framing the keywords had missed — help language hides in ordinary words (“it got me through”), while problem language announces itself (“relapse,” “days clean”). So the therapy and addiction lines can't be read against each other as a balance: the instrument hears the problem framing far more clearly than the help one. The homepage and About page were corrected to say this plainly.",
+      "A hand-check of 90 posts the keywords had filed as addiction tested how cleanly the two lines separate help from harm. About a quarter of them also carried a help framing the keywords had missed — help language hides in ordinary words (“it got me through”), while problem language announces itself (“relapse,” “days clean”). So the therapy and addiction lines can’t be read against each other as a balance: the instrument hears the problem framing far more clearly than the help one. The homepage and About page were corrected to say this plainly.",
     ],
     recent: true,
   },
@@ -55,7 +55,7 @@ export const CHANGELOG: ChangelogEntry[] = [
     date: "May 2026",
     title: "Three communities removed from the theme charts",
     items: [
-      "r/AIGirlfriend, r/ChatGPTNSFW and r/SpicyChatAI were dropped from the keyword theme lines. Two are mostly noise — affiliate-spam image posts (r/AIGirlfriend) and bot-card listings (r/SpicyChatAI). r/ChatGPTNSFW is a real erotica-writing and jailbreak community, but not a companionship one, so it sits outside what the themes measure. All three remain in the community explorer as context. The sex/ERP line steps down from this point — most visibly across 2024–2025 — because r/ChatGPTNSFW had been a large share of it.",
+      "r/AIGirlfriend, r/ChatGPTNSFW and r/SpicyChatAI were dropped from the keyword theme lines. Two are mostly noise — affiliate-spam image posts (r/AIGirlfriend) and bot-card listings (r/SpicyChatAI). r/ChatGPTNSFW is a real erotica-writing and jailbreak community, but not a companionship one, so it sits outside what the themes measure. All three remain in the community explorer as context. The whole sex/ERP line was re-counted without them, so it runs lower across its full length — most visibly across 2024–2025, when r/ChatGPTNSFW had been a large share of it.",
     ],
     recent: true,
   },
@@ -103,7 +103,7 @@ export const CHANGELOG: ChangelogEntry[] = [
     date: "March 2026",
     title: "Per-theme start dates",
     items: [
-      "Each theme's line now begins only once its vocabulary was common enough to measure reliably. The consciousness line starts in 2025 rather than 2023 for this reason — a flat earlier line would imply absence where I simply couldn't measure it yet.",
+      "Each theme’s line now begins only once its vocabulary was common enough to measure reliably. The consciousness line starts in 2025 rather than 2023 for this reason — a flat earlier line would imply absence where I simply couldn’t measure it yet.",
     ],
     recent: false,
   },

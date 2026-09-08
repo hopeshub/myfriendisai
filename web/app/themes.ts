@@ -59,7 +59,7 @@ export const THEMES: ThemeMeta[] = [
     blurb:
       "Broad waves, not sharp spikes — and a floor: everyday partner talk goes uncaught.",
     story:
-      "Romantic language moves in slow, broad waves rather than sharp spikes, with no single moment behind it. The recent rise is real; how much of the longer climb since 2023 is the conversation growing, and how much is more posts carrying text for the keywords to match, this method can’t separate. It is also the theme the keywords catch least well: most people describe a partner in ordinary words — “she said,” “my girlfriend” — that never trip an explicitly romantic keyword. The real level of this conversation runs well above the line.",
+      "Romantic language moves in slow, broad waves rather than sharp spikes, with no single moment behind it. The recent rise is real; much of the longer climb since 2023 is not — re-checked on posts that carry written text, it largely disappears. It is also the theme the keywords catch least well: most people describe a partner in ordinary words — “she said,” “my girlfriend” — that never trip an explicitly romantic keyword. The real level of this conversation runs well above the line.",
   },
   {
     id: "sexual_erp",

@@ -257,7 +257,7 @@ export default function AmbientChart({
         The debate floor
       </div>
       <div style={{ fontSize: 12, color: "#7E8B9E", marginBottom: 6 }}>
-        r/aiwars &mdash; the only sub in the cluster whose charter is
+        r/aiwars &mdash; the only community in the cluster whose charter is
         all-sides, not a side. Growing on the same curve as the partisans.
       </div>
       <MeasuredChart
@@ -685,7 +685,7 @@ export default function AmbientChart({
         }}
       >
         Half a million subscribers arguing about AI. Rarely about AI
-        companionship &mdash; often about the kind of person who would.
+        companionship &mdash; often about the kind of person who would have one.
       </p>
 
       <p
@@ -701,7 +701,7 @@ export default function AmbientChart({
       >
         Monthly post volume. Each panel has its own scale; click a band to
         isolate it. The {"~"}% on AI companionship in each tooltip is from a
-        50-post sample per sub (May 2026). Two small subs in the cluster
+        50-post sample per sub (May 2026). Two small communities in the cluster
         &mdash; r/trueantiAI and r/ProAI, both under 200 posts a month
         &mdash; are too small to register as bands here, but they are in the
         community list.

@@ -67,7 +67,7 @@ export default function Home() {
                   It tracks six recurring themes in how these communities talk.
                   The sharpest movements in the record are not slow cultural
                   drift &mdash; they arrive when a platform changes underneath
-                  its users: an app removes a feature, a model is retired.
+                  its users.
                 </>
               ),
             },
@@ -184,12 +184,11 @@ export default function Home() {
         <p style={{ ...intro, marginBottom: 16 }}>
           When a platform changes underneath its users &mdash; an app drops a
           feature, a model is retired &mdash; the language in these communities
-          shifts within days. These ruptures are the sharpest movements in the
-          whole record, and the place the tracker sees most clearly: each event
-          below is real, paired with posts people wrote the week it happened
-          &mdash; chosen by hand from the most-upvoted posts in those
-          communities, so they are the loudest reactions, not a representative
-          sample.
+          shifts within days. These ruptures are where the tracker sees most
+          clearly: each event below is real, paired with posts people wrote in
+          the weeks around it &mdash; chosen by hand from the most-upvoted
+          posts in those communities, so they are the loudest reactions, not a
+          representative sample.
         </p>
         <p style={{ ...intro, marginBottom: 16 }}>
           Every event here is a rupture &mdash; itself a finding about the
@@ -267,10 +266,9 @@ export default function Home() {
             A word can hold its place and flip its charge.
           </strong>{" "}
           &ldquo;Therapeutic&rdquo; was a word for real help. Then, over a few
-          months, people began turning it on exactly that &mdash; AI gone
-          preachy and over-careful &mdash; and often the word came to carry the
-          opposite of its old meaning. Same word, opposite charge, no
-          announcement. &ldquo;Sentient&rdquo; had to be dropped;
+          months, people began aiming it at AI gone preachy and over-careful,
+          until it often carried the opposite of its old meaning. Same word,
+          opposite charge, no announcement. &ldquo;Sentient&rdquo; had to be dropped;
           &ldquo;therapeutic&rdquo; is still counted, but now it is watched
           &mdash; re-sampled every month, because the project learned the hard
           way not to trust a word to hold still.
@@ -307,11 +305,8 @@ export default function Home() {
           could be counted.
         </p>
         <p style={{ ...intro }}>
-          That is the thread under all four. The chart counts words, and
-          words come loose, flip, hide, and sometimes leave the change to
-          happen in a register that has no words at all. The lines are real
-          &mdash; and also drawn by an instrument still learning the
-          language it reads.
+          The lines are real &mdash; and also drawn by an instrument still
+          learning the language it reads.
         </p>
         </section>
       </div>
@@ -357,9 +352,8 @@ export default function Home() {
           now runs at more than 10,000 posts a month. r/aiwars is the
           only all-sides debate floor; everyone else is a partisan room.
           r/antiAI didn&apos;t exist before March 2025; four months later
-          its monthly post volume topped every other sub in the cluster,
-          and it has stayed there. Both sides are organizing. The fight
-          is real.
+          its monthly post volume topped every other community in the
+          cluster, and it has stayed there.
         </p>
         <p style={{ ...intro, marginBottom: 28 }}>
           Almost none of it is about AI companionship. &ldquo;AI bros&rdquo;

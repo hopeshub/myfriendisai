@@ -141,8 +141,7 @@ export default function About() {
           <div className="space-y-4" style={bodyStyle}>
             <p>
               This is an independent project, built and maintained by one
-              person. It is not academic, institutional, or peer-reviewed work
-              &mdash; there is no lab or organization behind it.
+              person. It is not academic or peer-reviewed work.
             </p>
             <p>
               It started from a plain wish: a record of how these communities
@@ -206,8 +205,7 @@ export default function About() {
               posts divided by the month&apos;s posts, times a thousand. Posts
               that were removed or deleted before they were archived are left
               out of both halves of that fraction &mdash; only a title survives
-              them, so there is no text to match. The rate matters more than a
-              raw count would here. These
+              them, so there is no text to match. These
               communities have grown enormously since 2017, so a raw count would
               mostly retrace that growth; a rate sets the growth aside and shows
               how the conversation itself is shifting.
@@ -265,9 +263,8 @@ export default function About() {
               also why the large general-AI subreddits are tracked for size and
               activity but kept out of the theme lines. The same goes for the
               nine anti-AI and pro-AI communities in the last section of the
-              homepage, and for three explicitly sexual product subreddits:
-              tracked for size and activity, never counted in a theme. About
-              two dozen of the tracked communities feed the theme lines.
+              homepage, and for three explicitly sexual product subreddits.
+              About two dozen of the tracked communities feed the theme lines.
             </p>
             <p>
               This is a real choice, and it shapes what the site can see.
@@ -346,7 +343,7 @@ export default function About() {
             <p>
               A line is a useful signal, but a narrow one. Four limits are
               worth holding in mind before you read too much into any single
-              one.
+              line.
             </p>
             <p>
               <strong style={leadStyle}>
@@ -434,9 +431,9 @@ export default function About() {
               language &mdash; &ldquo;it got me through,&rdquo; &ldquo;a safe
               space&rdquo; &mdash; and in a scattered vocabulary no keyword list
               captures whole. So a post that holds both frames usually tags only
-              as addiction. We checked: hand-reading 90 posts the keywords had
-              filed as addiction-only, about a quarter visibly carried a help
-              frame the keywords missed. The overlap between these two themes is
+              as addiction. I hand-read 90 posts the keywords had filed as
+              addiction-only: about a quarter visibly carried a help frame the
+              keywords missed. The overlap between these two themes is
               real and large; this method cannot measure it. Read each line on
               its own direction and timing, and do not read the gap between them
               as a help-versus-problem balance &mdash; that balance exists, but
@@ -456,9 +453,8 @@ export default function About() {
               history backfilled, so there is no seam &mdash; but they are
               romance-heavy and now supply about one post in eleven: the romance
               line for July 2026 reads 4.2 per thousand with them and 2.8
-              without. Part of the 2026 romance rise is the tracker widening,
-              not the conversation shifting. Trust the broad direction of a line
-              more than its exact path.
+              without. Trust the broad direction of a line more than its exact
+              path.
             </p>
           </div>
         </section>
@@ -472,10 +468,14 @@ export default function About() {
               Reddit archives (PullPush and Arctic Shift). From March 2026 they
               have been collected daily &mdash; first from Reddit directly, and
               since June 2026 from the Arctic Shift archive, after Reddit closed
-              its public endpoints. One caveat runs through the whole record:
-              the keywords can only match the text a post carries, and that
-              share has risen steadily &mdash; about one post in six carried
-              body text in 2022, and about three in five do in 2026. Part of
+              its public endpoints.
+            </p>
+            <p>
+              One caveat runs through the whole record: the keywords can only
+              match the text a post carries, and that share has risen steadily
+              &mdash; about one post in six carried a written body in 2022
+              (the rest were screenshots, links, or posts removed before the
+              archive saw them), and about three in five do in 2026. Part of
               that is capture: the further back a post goes, the more likely it
               was deleted before the archive saw it. Part is real: fewer
               screenshots, more writing. Either way, every line runs lower at
@@ -495,17 +495,24 @@ export default function About() {
               a second recovery pass, so post volume, theme trends, and
               comment-sourced tags are all complete across the window. Per-day
               subscriber and active-user figures could not be reconstructed and
-              remain blank there. Since this episode, daily collection runs on
-              the archive rather than on Reddit directly. The archive captures
-              comment threads more completely than the old once-per-post
-              snapshot did, but the charted lines count only the text of posts
-              themselves, so they are unaffected. One thing the archive does
-              differently: it records a post within hours, sometimes while it
-              is still waiting in a moderator queue with its body blank, and
-              the collector at first kept that empty snapshot. From June to
-              August 2026 that left roughly one post in three with no text to
-              match, against about one in five in earlier years, and pulled
-              every line down by roughly a tenth. REPAIR_NOTE_ABOUT
+              remain blank there. The archive captures comment threads more
+              completely than the old once-per-post snapshot did, but the
+              charted lines count only the text of posts themselves, so they
+              are unaffected.
+            </p>
+            <p>
+              One thing the archive does differently: it records a post within
+              hours, sometimes while the post is still waiting in a moderator
+              queue with its body blank, and until September 2026 the
+              collector kept that first empty snapshot for good. From June to
+              August 2026 that left roughly one post in three looking removed,
+              against about one in five in earlier years &mdash; and under the
+              old definition those posts sat in the denominator, pulling every
+              line down by roughly a tenth. Two things changed on
+              September 8, 2026. Posts with no surviving text now count in
+              neither half of the rate, as described above. And the collector
+              goes back to the archive for each post a few weeks after it
+              appears; REPAIR_NOTE_ABOUT
             </p>
             <p>
               The code, the keyword lists, and every validation record are
@@ -541,8 +548,8 @@ export default function About() {
                 /dataset/v1/
               </a>{" "}
               &mdash; monthly counts per theme and monthly post volume per
-              community, with a schema and a standalone methodology document
-              alongside them. It is derived numbers only: no post text, no
+              community, with a schema alongside them. It is derived numbers
+              only: no post text, no
               usernames. Each row carries the raw count and the denominator, if
               you want your own error bars. It updates with the site, and it is
               meant to stay readable on its own if this site ever stops.

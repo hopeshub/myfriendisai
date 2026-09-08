@@ -41,12 +41,10 @@ export default function AmbientSection() {
         sentiment. The pro-AI side looks thinner because most pro-AI energy
         on Reddit lives in product communities (r/ChatGPT, r/ClaudeAI,
         r/singularity) &mdash; people using the thing, not arguing for it.
-        The judgment these subs make explicit &mdash; that AI is not the
-        kind of thing one has a relationship with &mdash; also turns up
-        inside the recovery communities above, in people&apos;s own words
-        about their own use. Same posture, different target. Reddit shows
-        both versions; whether one produced the other is not something this
-        site can measure.
+        The same judgment turns up inside the recovery communities above,
+        in people&apos;s own words about their own use. Same posture,
+        different target. Reddit shows both versions; whether one produced
+        the other is not something this site can measure.
       </p>
     </div>
   );

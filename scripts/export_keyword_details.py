@@ -5,6 +5,7 @@ hit counts, subreddit distributions, and sample post titles.
 """
 
 import json
+import os
 import re
 import sqlite3
 import sys
@@ -410,8 +411,16 @@ def main():
     print(f"  {len(included_subs)} keyword-eligible subreddits "
           f"(exclude_from_keywords honored)")
 
-    print("Querying database at", DB_PATH)
-    db = sqlite3.connect(str(DB_PATH), timeout=60.0)
+    # MYFRIENDISAI_DB lets a checkout that has no database of its own (a git
+    # worktree used for a review build) export from the real one read-only.
+    # Never open the production DB from a second checkout read-write.
+    db_override = os.environ.get("MYFRIENDISAI_DB")
+    if db_override:
+        print("Querying database at", db_override, "(read-only, MYFRIENDISAI_DB)")
+        db = sqlite3.connect(f"file:{db_override}?mode=ro", uri=True, timeout=60.0)
+    else:
+        print("Querying database at", DB_PATH)
+        db = sqlite3.connect(str(DB_PATH), timeout=60.0)
 
     result = build_keyword_details(db, categories, included_subs)
 
