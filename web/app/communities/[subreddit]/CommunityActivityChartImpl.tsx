@@ -43,18 +43,27 @@ export default function CommunityActivityChart({
   // No time-range toggle on this chart — it animates once on mount only.
   const reducedMotion = usePrefersReducedMotion();
 
-  const { rows, yearTicks } = useMemo(() => {
-    const rows = months.map((m, i) => ({ month: m, value: values[i] ?? 0 }));
+  // The month axis is shared across all communities, but most were created
+  // well after it starts. Crop to the first month that actually has posts —
+  // a leading run of zeros would assert "0 posts" for months in which the
+  // community did not exist.
+  const { rows, yearTicks, firstTracked } = useMemo(() => {
+    const start = months.findIndex((_, i) => (values[i] ?? 0) > 0);
+    const kept = start > 0 ? months.slice(start) : months;
+    const rows = kept.map((m, i) => ({
+      month: m,
+      value: values[(start > 0 ? start : 0) + i] ?? 0,
+    }));
     const seen = new Set<string>();
     const yearTicks: string[] = [];
-    for (const m of months) {
+    for (const m of kept) {
       const y = m.slice(0, 4);
       if (!seen.has(y)) {
         seen.add(y);
         yearTicks.push(m);
       }
     }
-    return { rows, yearTicks };
+    return { rows, yearTicks, firstTracked: start > 0 ? kept[0] : null };
   }, [months, values]);
 
   if (rows.length === 0 || values.every((v) => !v)) {
@@ -69,88 +78,95 @@ export default function CommunityActivityChart({
   }
 
   return (
-    <MeasuredChart
-      style={{ height: 220 }}
-      role="img"
-      ariaLabel="Chart: this community's monthly post volume from 2023 to the latest complete month."
-    >
-      {({ width, height }) => (
-        <AreaChart
-          width={width}
-          height={height}
-          data={rows}
-          margin={{ top: 8, right: 8, bottom: 2, left: 0 }}
-          accessibilityLayer={false}
-        >
-          <defs>
-            <linearGradient id="community-activity" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="#7C9CD0" stopOpacity={0.5} />
-              <stop offset="100%" stopColor="#7C9CD0" stopOpacity={0.04} />
-            </linearGradient>
-          </defs>
-          <CartesianGrid strokeDasharray="3 3" stroke="#2A2D3A" vertical={false} />
-          <XAxis
-            dataKey="month"
-            ticks={yearTicks}
-            interval={0}
-            tickFormatter={(m: string) => m.slice(0, 4)}
-            stroke="#2A2D3A"
-            tick={{ fill: "#7E8B9E", fontSize: 11 }}
-            tickLine={false}
-            axisLine={{ stroke: "#2A2D3A" }}
-          />
-          <YAxis
-            width={44}
-            stroke="transparent"
-            tick={{ fill: "#7E8B9E", fontSize: 11 }}
-            tickLine={false}
-            axisLine={false}
-            tickFormatter={fmtCount}
-          />
-          <Tooltip
-            cursor={{ stroke: "#475569", strokeWidth: 1 }}
-            animationDuration={140}
-            animationEasing="ease-out"
-            content={({ active, payload, label }) => {
-              if (!active || !payload?.length || payload[0].value == null) {
-                return null;
-              }
-              return (
-                <div
-                  style={{
-                    backgroundColor: "#0F1117",
-                    border: "1px solid #2A2D3A",
-                    borderRadius: 6,
-                    padding: "4px 8px",
-                    fontSize: 11,
-                    whiteSpace: "nowrap",
-                  }}
-                >
-                  <span style={{ color: "#9AA7B8" }}>
-                    {fmtMonth(label as string)}
-                  </span>
-                  <span style={{ color: "#9AA7B8" }}>{"  ·  "}</span>
-                  <span style={{ color: "#F1F4F8", fontWeight: 600 }}>
-                    {(payload[0].value as number).toLocaleString()}
-                  </span>
-                  <span style={{ color: "#9AA7B8" }}> posts</span>
-                </div>
-              );
-            }}
-          />
-          <Area
-            type="monotone"
-            dataKey="value"
-            stroke="#7C9CD0"
-            strokeWidth={2}
-            fill="url(#community-activity)"
-            activeDot={{ r: 4, fill: "#7C9CD0", stroke: "#7C9CD0" }}
-            isAnimationActive={!reducedMotion}
-            animationDuration={700}
-            animationEasing="ease-out"
-          />
-        </AreaChart>
+    <>
+      <MeasuredChart
+        style={{ height: 220 }}
+        role="img"
+        ariaLabel="Chart: this community's monthly post volume across its tracked history, to the latest complete month."
+      >
+        {({ width, height }) => (
+          <AreaChart
+            width={width}
+            height={height}
+            data={rows}
+            margin={{ top: 8, right: 8, bottom: 2, left: 0 }}
+            accessibilityLayer={false}
+          >
+            <defs>
+              <linearGradient id="community-activity" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor="#7C9CD0" stopOpacity={0.5} />
+                <stop offset="100%" stopColor="#7C9CD0" stopOpacity={0.04} />
+              </linearGradient>
+            </defs>
+            <CartesianGrid strokeDasharray="3 3" stroke="#2A2D3A" vertical={false} />
+            <XAxis
+              dataKey="month"
+              ticks={yearTicks}
+              interval={0}
+              tickFormatter={(m: string) => m.slice(0, 4)}
+              stroke="#2A2D3A"
+              tick={{ fill: "#7E8B9E", fontSize: 11 }}
+              tickLine={false}
+              axisLine={{ stroke: "#2A2D3A" }}
+            />
+            <YAxis
+              width={44}
+              stroke="transparent"
+              tick={{ fill: "#7E8B9E", fontSize: 11 }}
+              tickLine={false}
+              axisLine={false}
+              tickFormatter={fmtCount}
+            />
+            <Tooltip
+              cursor={{ stroke: "#475569", strokeWidth: 1 }}
+              animationDuration={140}
+              animationEasing="ease-out"
+              content={({ active, payload, label }) => {
+                if (!active || !payload?.length || payload[0].value == null) {
+                  return null;
+                }
+                return (
+                  <div
+                    style={{
+                      backgroundColor: "#0F1117",
+                      border: "1px solid #2A2D3A",
+                      borderRadius: 6,
+                      padding: "4px 8px",
+                      fontSize: 11,
+                      whiteSpace: "nowrap",
+                    }}
+                  >
+                    <span style={{ color: "#9AA7B8" }}>
+                      {fmtMonth(label as string)}
+                    </span>
+                    <span style={{ color: "#9AA7B8" }}>{"  ·  "}</span>
+                    <span style={{ color: "#F1F4F8", fontWeight: 600 }}>
+                      {(payload[0].value as number).toLocaleString()}
+                    </span>
+                    <span style={{ color: "#9AA7B8" }}> posts</span>
+                  </div>
+                );
+              }}
+            />
+            <Area
+              type="monotone"
+              dataKey="value"
+              stroke="#7C9CD0"
+              strokeWidth={2}
+              fill="url(#community-activity)"
+              activeDot={{ r: 4, fill: "#7C9CD0", stroke: "#7C9CD0" }}
+              isAnimationActive={!reducedMotion}
+              animationDuration={700}
+              animationEasing="ease-out"
+            />
+          </AreaChart>
+        )}
+      </MeasuredChart>
+      {firstTracked && (
+        <p className="text-xs text-[#7E8B9E] mt-2">
+          First tracked {fmtMonth(firstTracked)}.
+        </p>
       )}
-    </MeasuredChart>
+    </>
   );
 }

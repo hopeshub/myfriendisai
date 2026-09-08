@@ -22,6 +22,20 @@ function fmt(n: number | null, decimals = 0): string {
   return n.toLocaleString("en-US", { maximumFractionDigits: decimals });
 }
 
+// Same tick formatter as the post-volume and community-activity charts. The
+// old one rounded to whole thousands, so a tick at 1,500 was labelled "2K".
+function fmtCount(n: number): string {
+  if (n >= 1000) return `${(n / 1000).toFixed(n >= 10000 ? 0 : 1)}k`;
+  return String(n);
+}
+
+// A snapshot taken from the archive carries no comment sample: the exporter
+// writes 0 rather than null for both fields. Treat that pair as "not
+// collected", so the line crops instead of falling to a fabricated zero.
+function hasCommentData(s: Snapshot): boolean {
+  return !(s.avg_comments_per_post === 0 && s.unique_comment_authors_7d === 0);
+}
+
 function fmtTick(d: string): string {
   const dt = new Date(d + "T00:00:00Z");
   return `${MONTH_NAMES[dt.getUTCMonth()]} '${String(dt.getUTCFullYear()).slice(2)}`;
@@ -57,6 +71,7 @@ function MetricChart({
   for (const s of data) {
     const v = s[dataKey] as number | null;
     if (v == null) continue;
+    if (dataKey === "avg_comments_per_post" && !hasCommentData(s)) continue;
     const m = s.snapshot_date.slice(0, 7);
     if (!buckets[m]) buckets[m] = { sum: 0, n: 0 };
     buckets[m].sum += v;
@@ -68,9 +83,9 @@ function MetricChart({
 
   return (
     <div>
-      <p className="text-xs text-[#7E8B9E] uppercase tracking-widest mb-3">
+      <h2 className="text-xs text-[#7E8B9E] uppercase tracking-widest mb-3">
         {label}
-      </p>
+      </h2>
       {monthly.length === 0 ? (
         <div className="h-[140px] flex items-center text-sm text-[#7E8B9E]">
           No data yet.
@@ -104,13 +119,8 @@ function MetricChart({
               tickLine={false}
               axisLine={false}
               width={50}
-              tickFormatter={(v) =>
-                v >= 1_000_000
-                  ? `${(v / 1_000_000).toFixed(1)}M`
-                  : v >= 1_000
-                  ? `${(v / 1_000).toFixed(0)}K`
-                  : String(v)
-              }
+              tickCount={5}
+              tickFormatter={fmtCount}
             />
             <Tooltip
               animationDuration={140}
@@ -161,18 +171,35 @@ export default function Charts({ snapshots }: { snapshots: Snapshot[] }) {
   // than blanking whenever the newest row has a hole.
   const lastKnown = (key: keyof Snapshot): number | null => {
     for (let i = snapshots.length - 1; i >= 0; i--) {
+      if (key === "avg_comments_per_post" && !hasCommentData(snapshots[i])) continue;
       const v = snapshots[i][key];
       if (typeof v === "number") return v;
     }
     return null;
   };
 
+  // Subscriber collection stopped on a different day for different
+  // communities, so the card names this one's own last snapshot rather than a
+  // hardcoded month.
+  const lastSubscriberDate = (): string | null => {
+    for (let i = snapshots.length - 1; i >= 0; i--) {
+      if (typeof snapshots[i].subscribers === "number") {
+        return snapshots[i].snapshot_date;
+      }
+    }
+    return null;
+  };
+  const subsDate = lastSubscriberDate();
+  const subsLabel = subsDate
+    ? `Subscribers (${MONTH_NAMES[Number(subsDate.slice(5, 7)) - 1]} ${subsDate.slice(0, 4)})`
+    : "Subscribers";
+
   return (
     <>
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-8 p-6 bg-[#1A1D27] rounded-xl">
         <div>
           <div className="text-2xl font-semibold tabular-nums text-[#F8FAFC]">{fmt(lastKnown("subscribers"))}</div>
-          <div className="text-xs text-[#9AA7B8] mt-0.5">Subscribers (Jun 2026)</div>
+          <div className="text-xs text-[#9AA7B8] mt-0.5">{subsLabel}</div>
         </div>
         <div>
           <div className="text-2xl font-semibold tabular-nums text-[#F8FAFC]">{fmt(lastKnown("unique_contributors_7d"))}</div>

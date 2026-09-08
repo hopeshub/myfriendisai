@@ -49,7 +49,7 @@ function getCommunityCount(): number {
     return new Set(list.map((s) => s.subreddit)).size;
   } catch {
     // Fallback only if subreddits.json is unreadable — keep in sync with the live count.
-    return 40;
+    return 39;
   }
 }
 
@@ -187,8 +187,9 @@ export default function About() {
               matched and read them; the keyword stays only if those posts are
               genuinely about the theme. If it is matching on a coincidental
               shared word, it gets dropped. Language also drifts over time, so
-              once a month I re-sample recent matches and re-check any keyword
-              whose meaning may have moved.
+              every month a fresh sample of recent matches is pulled for each
+              keyword, and I re-check any keyword whose meaning may have moved
+              (the reading has sometimes covered two months at once).
             </p>
             <p>
               The chart shows how many posts use each theme&apos;s keywords,
@@ -344,7 +345,7 @@ export default function About() {
               <strong style={leadStyle}>
                 Read direction and timing, not height.
               </strong>{" "}
-              Three things make the <em>height</em> of a line untrustworthy,
+              Two things make the <em>height</em> of a line untrustworthy,
               even where its <em>shape</em> holds:
             </p>
             <ul className="space-y-2" style={{ listStyleType: "none", padding: 0 }}>
@@ -364,9 +365,10 @@ export default function About() {
                   <span style={leadStyle}>
                     The keyword set is deliberately incomplete
                   </span>
-                  {" "}&mdash; in a hand-coded sample of 400 random posts, it
-                  caught between a few percent and about a third of the posts
-                  that genuinely belonged.
+                  {" "}&mdash; in a sample of 400 posts classified by a
+                  language model and spot-checked by hand, it caught between
+                  none and about a third of the posts that genuinely belonged
+                  &mdash; 32% for addiction, 0% for consciousness.
                 </>,
               ].map((item, i) => (
                 <li
@@ -412,7 +414,7 @@ export default function About() {
               language &mdash; &ldquo;it got me through,&rdquo; &ldquo;a safe
               space&rdquo; &mdash; and in a scattered vocabulary no keyword list
               captures whole. So a post that holds both frames usually tags only
-              as addiction. We checked: hand-reading 90 posts the keywords had
+              as addiction. I checked: hand-reading 90 posts the keywords had
               filed as addiction-only, about a quarter visibly carried a help
               frame the keywords missed. The overlap between these two themes is
               real and large; this method cannot measure it. Read each line on
@@ -442,7 +444,8 @@ export default function About() {
             <p>
               Posts from 2017 through early 2026 were backfilled from public
               Reddit archives (PullPush and Arctic Shift). From March 2026
-              onward, they are collected fresh from Reddit every day. One caveat
+              onward they are collected daily &mdash; from Reddit directly until
+              late May 2026, and from the Arctic Shift archive since. One caveat
               comes with the older years: the further back a post goes, the more
               likely its text was removed or deleted before the archive captured
               it &mdash; so there is simply less wording for the keywords to
@@ -464,13 +467,14 @@ export default function About() {
               remain blank there. Since this episode, daily collection runs on
               the archive rather than on Reddit directly, and the archive
               captures comment threads somewhat more completely than the old
-              once-per-post snapshot did &mdash; so the default theme lines run
-              a touch fuller from late May 2026 onward. The post-text-only
-              control series is unaffected.
+              once-per-post snapshot did &mdash; so the combined post-plus-comment
+              series, which the site does not publish, runs a touch fuller from
+              late May 2026 onward. The published theme lines count post text
+              only and are unaffected.
             </p>
             <p>
-              The code, the keyword lists, and every validation record are
-              public on{" "}
+              The code, the keyword lists, and the write-up of every
+              validation run are public on{" "}
               <a
                 href="https://github.com/hopeshub/myfriendisai"
                 target="_blank"
@@ -479,7 +483,10 @@ export default function About() {
               >
                 GitHub
               </a>
-              , along with the processed data files. The full post database
+              , along with the processed data files. The raw classification
+              samples are not published &mdash; they are full post text, and
+              republishing them is not worth what it would cost the people who
+              wrote them. The full post database
               (~25&nbsp;GB) is too large to host there, but I&apos;ll share it
               on request &mdash; reach me on X at{" "}
               <a
@@ -503,6 +510,20 @@ export default function About() {
               alongside them. It is derived numbers only: no post text, no
               usernames. It updates with the site, and it is meant to stay
               readable on its own if this site ever stops.
+            </p>
+            <p>
+              If a post of yours is quoted on this site and you would rather it
+              were not, ask and I will remove it &mdash; no reason needed. Reach
+              me on X at{" "}
+              <a
+                href="https://x.com/hopes_revenge"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={linkClass}
+              >
+                @hopes_revenge
+              </a>
+              .
             </p>
             <p>
               The site uses Vercel&apos;s privacy-friendly analytics for

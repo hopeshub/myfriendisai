@@ -14,6 +14,7 @@ import {
 import MeasuredChart from "@/app/MeasuredChart";
 import type { CaiPoint, CompositionPoint } from "./themeData";
 import { measure } from "./styles";
+import { useBreakpoint } from "./useBreakpoint";
 import { usePrefersReducedMotion } from "@/lib/usePrefersReducedMotion";
 
 // ── §1 post-volume chart ─────────────────────────────────────────────────────
@@ -91,6 +92,12 @@ export default function PostVolumeChart({
   characterai: CaiPoint[];
   composition: CompositionPoint[];
 }) {
+  // Direct in-band labels collide and clip in a 375px plot area; the legend
+  // below already names every band, so they are suppressed there. Null (SSR /
+  // pre-measure) is treated as desktop, matching TrendsExplorer.
+  const { isMobileStrip } = useBreakpoint();
+  const showBandLabels = isMobileStrip !== true;
+
   // Static chart — animates once on mount only.
   const reducedMotion = usePrefersReducedMotion();
   const animate = !reducedMotion;
@@ -141,14 +148,13 @@ export default function PostVolumeChart({
 
   // Direct in-band label: rendered once, at the band's widest month, by
   // Recharts' per-point label callback.
-  const bandLabel =
-    (b: Band, dimmed: boolean) =>
-    (props: {
+  const bandLabel = (b: Band, dimmed: boolean) => {
+    function BandLabel(props: {
       x?: number | string;
       y?: number | string;
       index?: number;
       value?: number | string;
-    }) => {
+    }) {
       if (props.index !== widest[b.key] || Number(props.value ?? 0) <= 0) {
         return <g />;
       }
@@ -169,7 +175,9 @@ export default function PostVolumeChart({
           {b.label}
         </text>
       );
-    };
+    }
+    return BandLabel;
+  };
 
   return (
     <div>
@@ -178,12 +186,12 @@ export default function PostVolumeChart({
         r/CharacterAI
       </div>
       <div style={{ fontSize: 12, color: "#7E8B9E", marginBottom: 6 }}>
-        The mass-market giant — boomed past 40k posts a month, then receded.
+        The mass-market giant — boomed to nearly 40k posts a month, then receded.
       </div>
       <MeasuredChart
         style={{ height: 138 }}
         role="img"
-        ariaLabel="Chart: r/CharacterAI monthly post volume from 2023 to 2026, rising past 40,000 posts a month then declining."
+        ariaLabel="Chart: r/CharacterAI monthly post volume from 2023 to 2026, rising to nearly 40,000 posts a month then declining."
       >
         {({ width, height }) => (
           <AreaChart
@@ -441,7 +449,7 @@ export default function PostVolumeChart({
                   animationDuration={700}
                   animationEasing="ease-out"
                 >
-                  {b.key !== "other" && (
+                  {b.key !== "other" && showBandLabels && (
                     <LabelList
                       dataKey={b.key}
                       content={
@@ -477,6 +485,7 @@ export default function PostVolumeChart({
               type="button"
               onClick={() => toggle(b.key)}
               aria-pressed={selected === b.key}
+              className="min-h-11 sm:min-h-0"
               style={{
                 display: "inline-flex",
                 alignItems: "center",
@@ -536,7 +545,7 @@ export default function PostVolumeChart({
 
       <p
         style={{
-          fontSize: 11,
+          fontSize: isMobileStrip ? 13 : 11,
           color: "#7E8B9E",
           marginTop: 8,
           textAlign: "center",

@@ -62,6 +62,12 @@ export default async function SubredditPage({
   // baked into this statically-generated page, so there's no client-side
   // fetch (and no 6.5 MB API parse) on every visit.
   const snapshots = getSnapshotsForSubreddit(subreddit);
+  // Subscriber collection stopped on a different day for different communities
+  // (2026-05-28 for most, 2026-06-07 for the ambient tier), so the footnote
+  // names this community's own last snapshot rather than a hardcoded date.
+  const lastSubscriberDate =
+    [...snapshots].reverse().find((s) => typeof s.subscribers === "number")
+      ?.snapshot_date ?? null;
 
   return (
     <div className="max-w-[1080px] mx-auto px-4 sm:px-8 py-8">
@@ -96,23 +102,24 @@ export default async function SubredditPage({
       </p>
 
       <section id="activity" className="mt-8 scroll-mt-8">
-        <p className="text-xs text-[#7E8B9E] uppercase tracking-widest mb-3">
+        <h2 className="text-xs text-[#7E8B9E] uppercase tracking-widest mb-3">
           Monthly post volume
-        </p>
+        </h2>
         <CommunityActivityChart months={activity.months} values={activitySeries} />
         <p className="text-xs text-[#7E8B9E] mt-2 max-w-2xl">
-          Posts per month since January 2023, to the last complete month &mdash;
-          the longest-range view of this community&apos;s activity.
+          Posts per month, to the last complete month &mdash; the
+          longest-range view of this community&apos;s activity.
         </p>
       </section>
 
       <Charts snapshots={snapshots} />
 
       <p className="mt-10 text-xs text-[#7E8B9E] border-t border-[#2A2D3A] pt-4">
-        <strong>Subscribers</strong> — Direct (Reddit API), last collected
-        2026-06-07; Reddit closed unauthenticated API access in May 2026, so
-        subscriber counts are frozen at that date. Other metrics come from
-        post/comment archives and stay current.{" "}
+        <strong>Subscribers</strong> — Direct (Reddit API)
+        {lastSubscriberDate ? `, last collected ${lastSubscriberDate}` : ""};
+        Reddit closed unauthenticated API access in May 2026, so subscriber
+        counts are frozen at that date. Other metrics come from post/comment
+        archives and stay current.{" "}
         <strong>Contributors / week</strong> — Derived: distinct authors of posts +
         comments in the 7 days ending on the snapshot date. Historical series uses
         post authors only; comment authors are counted from 2026-03-10 forward.{" "}

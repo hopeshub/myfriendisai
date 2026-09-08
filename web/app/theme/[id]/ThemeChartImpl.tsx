@@ -12,6 +12,7 @@ import {
 } from "recharts";
 import MeasuredChart from "@/app/MeasuredChart";
 import { EVENTS } from "../../themes";
+import type { ThemeId } from "../../themes";
 
 // A single line chart for one theme's page. Same honest series as the homepage
 // atlas panel (validated-keyword mentions per 1,000 posts, monthly mean), with
@@ -55,9 +56,11 @@ const RANGES: TimeRange[] = ["6M", "1Y", "2Y", "ALL"];
 export default function ThemeChart({
   series,
   color,
+  themeId,
 }: {
   series: { date: string; hitsPerK: number }[];
   color: string;
+  themeId: ThemeId;
 }) {
   // Defaults to 1Y to match the homepage atlas, so clicking a theme open
   // doesn't silently change the time window the reader was looking at.
@@ -74,7 +77,10 @@ export default function ThemeChart({
     return monthly.filter((m) => m.date >= cutoff);
   }, [monthly, range]);
 
-  // Events that fall inside the visible window, numbered in order.
+  // Events that fall inside the visible window and apply to this theme,
+  // numbered in order. A keyword change scoped to another theme is not part
+  // of this chart's instrument, so it is filtered out before numbering —
+  // the markers and the legend below stay contiguous either way.
   const events = useMemo(() => {
     if (!data.length) return [];
     const first = data[0].date;
@@ -83,10 +89,11 @@ export default function ThemeChart({
     // full-date compare drops events after the 1st of the latest month.
     return EVENTS.filter(
       (e) =>
+        (!e.themes || e.themes.includes(themeId)) &&
         e.date.slice(0, 7) >= first.slice(0, 7) &&
         e.date.slice(0, 7) <= last.slice(0, 7),
     ).map((e, i) => ({ ...e, num: i + 1 }));
-  }, [data]);
+  }, [data, themeId]);
 
   if (!monthly.length) {
     return (
@@ -218,7 +225,7 @@ export default function ThemeChart({
         )}
       </MeasuredChart>
 
-      <div style={{ fontSize: 11, color: "#7E8B9E", marginTop: 8 }}>
+      <div className="text-[13px] sm:text-[11px]" style={{ color: "#7E8B9E", marginTop: 8 }}>
         Validated-keyword mentions per 1,000 posts · monthly average · post text
         only
       </div>

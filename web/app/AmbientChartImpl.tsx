@@ -15,15 +15,16 @@ import {
 import MeasuredChart from "@/app/MeasuredChart";
 import type { AmbientTopPoint, AmbientStackPoint } from "./themeData";
 import { measure } from "./styles";
+import { useBreakpoint } from "./useBreakpoint";
 import { usePrefersReducedMotion } from "@/lib/usePrefersReducedMotion";
 
 // ── §5 ambient-cluster chart ────────────────────────────────────────────────
 // Two stacked panels, modeled on §1. Top: r/antiAI + r/aiwars — the two
 // giants, within a couple percent of each other, both compounding fast since
-// mid-2024. Bottom: a 5-band stacked composition of mid-tier subs that fills
-// in around them — the cluster's organizing infrastructure forming room by
-// room. r/trueantiAI (~50/mo) and r/ProAI (~40/mo) are too small to register
-// as bands and are noted in the caption.
+// mid-2024. Bottom: a 6-band stacked composition of mid-tier subs that fills
+// in around them — the cluster's partisan rooms forming one by one.
+// r/trueantiAI and r/ProAI are too small to register as bands and are noted
+// in the caption.
 //
 // Coloring is by sub identity (the §1 palette family), NOT by valence — the
 // site doesn't score the culture war. The closer line under the chart lands
@@ -113,6 +114,7 @@ export default function AmbientChart({
 }) {
   const reducedMotion = usePrefersReducedMotion();
   const animate = !reducedMotion;
+  const { isMobileStrip } = useBreakpoint();
 
   const [selected, setSelected] = useState<StackKey | null>(null);
   const toggle = (k: StackKey) => setSelected((s) => (s === k ? null : k));
@@ -336,7 +338,7 @@ export default function AmbientChart({
         The partisan rooms
       </div>
       <div style={{ fontSize: 12, color: "#7E8B9E", marginBottom: 6 }}>
-        Six anti-AI subs and two pro-AI subs, stacked. r/antiAI (founded
+        Five anti-AI subs and one pro-AI sub, stacked. r/antiAI (founded
         2025) is now the largest; the others fill in around it.
       </div>
       <MeasuredChart
@@ -530,6 +532,7 @@ export default function AmbientChart({
               type="button"
               onClick={() => toggle(b.key)}
               aria-pressed={selected === b.key}
+              className="min-h-11 sm:min-h-0"
               style={{
                 display: "inline-flex",
                 alignItems: "center",
@@ -607,7 +610,7 @@ export default function AmbientChart({
 
       <p
         style={{
-          fontSize: 11,
+          fontSize: isMobileStrip ? 13 : 11,
           color: "#7E8B9E",
           marginTop: 8,
           textAlign: "center",
@@ -619,9 +622,8 @@ export default function AmbientChart({
         Monthly post volume. Each panel has its own scale; click a band to
         isolate it. The {"~"}% on AI companionship in each tooltip is from a
         50-post sample per sub (May 2026). Two small subs in the cluster
-        &mdash; r/trueantiAI ({"~"}50 posts/mo) and r/ProAI ({"~"}40)
-        &mdash; are too small to register as bands here but are in the
-        community list.
+        &mdash; r/trueantiAI and r/ProAI &mdash; are too small to register as
+        bands here but are in the community list.
       </p>
     </div>
   );

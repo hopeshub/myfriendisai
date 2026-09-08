@@ -15,6 +15,13 @@ function fmt(n: number | null, decimals = 0): string {
   return n.toLocaleString("en-US", { maximumFractionDigits: decimals });
 }
 
+// Archive-sourced rows carry no comment sample; the exporter writes 0 for both
+// fields rather than null. Read that pair as "not collected".
+function avgComments(s: SubredditSummary): number | null {
+  if (s.avg_comments_per_post === 0 && s.unique_comment_authors_7d === 0) return null;
+  return s.avg_comments_per_post;
+}
+
 const TIER_LABELS: Record<number, string> = {
   0: "General AI",
   1: "Companion",
@@ -130,7 +137,7 @@ export default function CommunitiesTable({
               <th className="pb-3 pr-4 font-medium text-[#7E8B9E] hidden sm:table-cell">Activity</th>
               <th className="pb-3 pr-4 font-medium text-[#7E8B9E] hidden sm:table-cell">Tier</th>
               <th className="pb-3 pr-4 font-medium text-right">
-                <SortButton label="Subscribers (Jun 2026)" sortKey="subscribers" current={sort} onSort={handleSort} />
+                <SortButton label="Subscribers (May–Jun 2026)" sortKey="subscribers" current={sort} onSort={handleSort} />
               </th>
               <th className="pb-3 pr-4 font-medium text-right">
                 <SortButton label="Contributors/wk" sortKey="unique_contributors_7d" current={sort} onSort={handleSort} />
@@ -175,7 +182,7 @@ export default function CommunitiesTable({
                 <td className="py-3 pr-4 text-sm tabular-nums text-right text-[#C8D0DC]">{fmt(s.subscribers)}</td>
                 <td className="py-3 pr-4 text-sm tabular-nums text-right text-[#C8D0DC]">{fmt(s.unique_contributors_7d)}</td>
                 <td className="py-3 pr-4 text-sm tabular-nums text-right text-[#C8D0DC] hidden sm:table-cell">{fmt(s.posts_today)}</td>
-                <td className="py-3 pr-4 text-sm tabular-nums text-right text-[#C8D0DC] hidden md:table-cell">{fmt(s.avg_comments_per_post, 1)}</td>
+                <td className="py-3 pr-4 text-sm tabular-nums text-right text-[#C8D0DC] hidden md:table-cell">{fmt(avgComments(s), 1)}</td>
                 <td className="py-3 text-sm tabular-nums text-right text-[#C8D0DC] hidden md:table-cell">{fmt(s.avg_score_per_post, 0)}</td>
               </tr>
             ))}
@@ -187,14 +194,15 @@ export default function CommunitiesTable({
         <p className="text-sm text-[#9AA7B8] py-8 text-center">No communities in this category.</p>
       )}
 
-      <p className="mt-8 text-xs text-[#7E8B9E] hidden md:block">
+      <p className="mt-8 text-xs text-[#7E8B9E]">
         <strong>Activity</strong> — monthly post volume, Jan 2023 to the last
         complete month; each sparkline is on its own scale (read the shape, not
         the height).{" "}
-        <strong>Subscribers</strong> — Direct (Reddit API), last collected
-        2026-06-07; Reddit closed unauthenticated API access in May 2026, so
-        subscriber counts are frozen at that date. All other columns come from
-        post/comment archives and stay current.{" "}
+        <strong>Subscribers</strong> — Direct (Reddit API). Reddit closed
+        unauthenticated API access in May 2026, so these are frozen at the last
+        snapshot collected: 2026-05-28 for most communities, 2026-06-07 for the
+        ambient tier. All other columns come from post/comment archives and stay
+        current.{" "}
         <strong>Contributors/wk</strong> — Derived (distinct post + comment authors over the
         past 7 days; comment authors counted from 2026-03-10 onward).{" "}
         <strong>Posts/day</strong> — Inferred (posts in past 24h).{" "}

@@ -111,6 +111,21 @@ export default function RecoverySection({
 
       <p
         style={{
+          fontSize: 11,
+          color: "#7E8B9E",
+          lineHeight: 1.5,
+          marginBottom: 24,
+          maxWidth: measure,
+        }}
+      >
+        Excerpts are verbatim from public Reddit posts, lightly trimmed. No
+        usernames are reproduced here; each link opens the original thread,
+        where the author&apos;s username is visible. Quoted posts are removed on
+        request.
+      </p>
+
+      <p
+        style={{
           fontSize: 13,
           lineHeight: 1.7,
           color: "#9AA7B8",

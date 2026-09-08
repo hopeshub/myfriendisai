@@ -35,9 +35,6 @@ export const metadata: Metadata = {
   authors: [{ name: "My Friend Is AI" }],
   creator: "My Friend Is AI",
   publisher: "My Friend Is AI",
-  alternates: {
-    canonical: "/",
-  },
   openGraph: {
     title: "My Friend Is AI",
     // Kept under ~200 chars so the "discourse tracker, not a population
@@ -54,10 +51,6 @@ export const metadata: Metadata = {
     title: "My Friend Is AI",
     description:
       "How AI-companion Reddit communities talk: six themes charted month by month. A discourse tracker, not a population estimate.",
-  },
-  robots: {
-    index: true,
-    follow: true,
   },
 };
 
@@ -122,7 +115,7 @@ export default function RootLayout({
           }}
         />
         <a href="#main" className="skip-link">Skip to content</a>
-        <StaleDataBanner />
+        <StaleDataBanner dataThrough={meta.date_end} />
         <header className="border-b border-border">
           <div className="max-w-[1080px] mx-auto px-4 sm:px-8 py-4 flex flex-col sm:flex-row items-start sm:items-center sm:justify-between gap-3 sm:gap-0">
             <Link
@@ -136,19 +129,19 @@ export default function RootLayout({
             <nav aria-label="Primary" className="flex gap-6 text-sm text-muted">
               <Link
                 href="/#themes"
-                className="hover:text-foreground transition-colors"
+                className="min-h-11 sm:min-h-0 inline-flex items-center hover:text-foreground transition-colors"
               >
                 Themes
               </Link>
               <Link
                 href="/communities"
-                className="hover:text-foreground transition-colors"
+                className="min-h-11 sm:min-h-0 inline-flex items-center hover:text-foreground transition-colors"
               >
                 Communities
               </Link>
               <Link
                 href="/about"
-                className="hover:text-foreground transition-colors"
+                className="min-h-11 sm:min-h-0 inline-flex items-center hover:text-foreground transition-colors"
               >
                 About
               </Link>
@@ -156,7 +149,7 @@ export default function RootLayout({
                 href="https://github.com/hopeshub/myfriendisai"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="whitespace-nowrap hover:text-foreground transition-colors"
+                className="min-h-11 sm:min-h-0 inline-flex items-center whitespace-nowrap hover:text-foreground transition-colors"
               >
                 GitHub ↗
               </a>
@@ -171,18 +164,18 @@ export default function RootLayout({
             <div className="flex flex-col gap-1">
               <span>An independent, one-person research project.</span>
               <span>
-                Data from Reddit&apos;s public endpoints ·{" "}
+                Reddit data via public archives ·{" "}
                 {formatPostCount(meta.total_posts)} posts · {startYear}–present ·
                 updated daily
               </span>
             </div>
             <nav aria-label="Footer" className="flex gap-5">
-              <Link href="/about" className="hover:text-foreground transition-colors">
+              <Link href="/about" className="min-h-11 sm:min-h-0 inline-flex items-center hover:text-foreground transition-colors">
                 About
               </Link>
               <Link
                 href="/communities"
-                className="hover:text-foreground transition-colors"
+                className="min-h-11 sm:min-h-0 inline-flex items-center hover:text-foreground transition-colors"
               >
                 Communities
               </Link>
@@ -190,7 +183,7 @@ export default function RootLayout({
                 href="https://github.com/hopeshub/myfriendisai"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hover:text-foreground transition-colors"
+                className="min-h-11 sm:min-h-0 inline-flex items-center hover:text-foreground transition-colors"
               >
                 GitHub
               </a>

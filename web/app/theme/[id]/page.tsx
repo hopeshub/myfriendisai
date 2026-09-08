@@ -176,7 +176,7 @@ export default async function ThemePage({
           padding: "18px 20px 16px",
         }}
       >
-        <ThemeChart series={series} color={theme.color} />
+        <ThemeChart series={series} color={theme.color} themeId={theme.id} />
       </div>
 
       {/* The story */}
@@ -225,10 +225,13 @@ export default async function ThemePage({
               lineHeight: 1.6,
             }}
           >
-            This theme is defined by these {details.keywords.length} validated
-            keywords &mdash; a post counts when its text matches one of them,
-            with no AI classifier. The percentage is the share of a
-            keyword&apos;s matches that were on-theme when hand-checked.
+            This theme is defined by these {details.keywords.length}{" "}
+            validated keywords &mdash; a post counts when its text matches one
+            of them, with no AI classifier. The percentage is the share of a
+            keyword&apos;s matches that were on-theme when the keyword was
+            validated (April&ndash;May 2026); a monthly drift check re-measures
+            these, and some have since moved &mdash; the history is in the
+            repository.
           </p>
           <div
             style={{
@@ -307,10 +310,11 @@ export default async function ThemePage({
             }}
           >
             These keywords are precision-first: when one matches, the post is
-            usually on-theme &mdash; but they also miss a lot. A hand-coded
-            audit found keyword matching catches only a minority of genuinely
-            on-theme posts &mdash; a few percent to about a third, depending on
-            the theme. Read the line as a floor, not a full count.{" "}
+            usually on-theme &mdash; but they also miss a lot. An audit of
+            400 posts (classified by a language model, spot-checked by hand)
+            found keyword matching catches only a minority of genuinely
+            on-theme posts &mdash; from none to about a third, depending on the
+            theme. Read the line as a floor, not a full count.{" "}
             <a
               href="/about#verification"
               style={{ color: "#9AA7B8", textDecoration: "underline" }}

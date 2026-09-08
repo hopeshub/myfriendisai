@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import TrendsExplorer from "./TrendsExplorer";
 import PostVolumeChart from "./PostVolumeChart";
@@ -21,6 +22,12 @@ import { CHANGELOG } from "./changelog";
 // Section eyebrow + intro paragraph come from the shared styles module.
 const sectionLabel = sectionEyebrow;
 const intro = introParagraph;
+
+// Every other route sets its own canonical; the homepage's lives here rather
+// than on the root layout, where it would also stamp 404 pages.
+export const metadata: Metadata = {
+  alternates: { canonical: "/" },
+};
 
 export default function Home() {
   const themeData = loadThemeData();
@@ -345,13 +352,15 @@ export default function Home() {
         <p style={{ ...intro, marginBottom: 16 }}>
           Next door, a new infrastructure is forming. Subreddits built to
           argue about AI as a cultural project barely existed in 2023;
-          the cluster&apos;s post volume rose 347% in 2025 alone, and
-          now runs at more than 10,000 posts a month &mdash; up 824%
-          from 2023. r/aiwars is the only all-sides debate floor;
-          everyone else is a partisan room. r/antiAI didn&apos;t exist
-          before March 2025; 8 months later its monthly post volume
-          topped every other sub in the cluster. Both sides are
-          organizing. The fight is real.
+          the cluster&apos;s post volume rose 347% in 2025 alone
+          &mdash; an 824% increase over its 2023 total &mdash; and now
+          runs at more than 10,000 posts a month. r/aiwars is the only
+          all-sides debate floor; everyone else is a partisan room.
+          r/antiAI didn&apos;t exist before March 2025; four months
+          later its monthly post volume topped every other sub in the
+          cluster. Both sides now have rooms of their own &mdash; spaces
+          for argument, not campaign infrastructure; organized advocacy
+          subs were deliberately left out.
         </p>
         <p style={{ ...intro, marginBottom: 28 }}>
           Almost none of it is about AI companionship. &ldquo;AI bros&rdquo;

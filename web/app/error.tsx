@@ -14,7 +14,7 @@ export default function Error({
   }, [error]);
 
   return (
-    <main style={{
+    <div style={{
       minHeight: "60vh",
       display: "flex",
       flexDirection: "column",
@@ -42,6 +42,6 @@ export default function Error({
       >
         Try again
       </button>
-    </main>
+    </div>
   );
 }

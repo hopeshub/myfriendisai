@@ -119,13 +119,22 @@ function EventLegend({
             </span>
             <span style={{ color: "#C8D0DC" }}>{e.label}</span>
             <span style={{ color: "#7E8B9E" }}>{fmtMonthShort(e.date)}</span>
+            {e.themes && (
+              <span style={{ color: "#7E8B9E" }}>
+                ({e.themes
+                  .map((id) => THEMES.find((t) => t.id === id)?.label ?? id)
+                  .join(", ")}{" "}
+                only)
+              </span>
+            )}
           </span>
         ))}
       </div>
       {hasMethodology && (
         <div style={{ fontSize: bp === "mobile" ? 14 : 11, color: "#7E8B9E", marginTop: 6 }}>
           A hollow marker is a change to our keyword set — a measurement
-          change, not a real-world event.
+          change, not a real-world event. Where a marker names a theme, it is
+          drawn on that panel only.
         </div>
       )}
     </div>
@@ -269,22 +278,24 @@ export default function TrendAtlas({
                       tickCount={4}
                       allowDecimals={false}
                     />
-                    {numberedEvents.map((e) => (
-                      <ReferenceLine
-                        key={e.date}
-                        x={`${e.date.slice(0, 7)}-01`}
-                        stroke="#C2974D"
-                        strokeOpacity={0.7}
-                        strokeDasharray={e.methodology ? "2 3" : "5 3"}
-                        strokeWidth={1}
-                        label={{
-                          value: String(e.num),
-                          position: "top",
-                          fill: "#D4A862",
-                          fontSize: 11,
-                        }}
-                      />
-                    ))}
+                    {numberedEvents
+                      .filter((e) => !e.themes || e.themes.includes(t.id))
+                      .map((e) => (
+                        <ReferenceLine
+                          key={e.date}
+                          x={`${e.date.slice(0, 7)}-01`}
+                          stroke="#C2974D"
+                          strokeOpacity={0.7}
+                          strokeDasharray={e.methodology ? "2 3" : "5 3"}
+                          strokeWidth={1}
+                          label={{
+                            value: String(e.num),
+                            position: "top",
+                            fill: "#D4A862",
+                            fontSize: 11,
+                          }}
+                        />
+                      ))}
                     <Tooltip
                       cursor={{ stroke: "#475569", strokeWidth: 1 }}
                       content={({ active, payload, label }) => {

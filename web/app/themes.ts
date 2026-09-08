@@ -37,6 +37,7 @@ const PALETTE_VIVID: Record<ThemeId, string> = {
   addiction: "#fd7112",
   rupture: "#22C55E",
 };
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const PALETTE_MUTED: Record<ThemeId, string> = {
   romance: "#D08CA6",
   sexual_erp: "#D38E8B",
@@ -120,11 +121,16 @@ export const THEMES: ThemeMeta[] = [
 // `methodology: true` marks a change to the measuring instrument (a keyword-set
 // change), as opposed to a real-world platform event. The chart styles the two
 // differently so an instrument change is never read as a social spike.
+// `themes` scopes an event to particular panels — a keyword change touches
+// one theme's instrument only, and drawing it on the other five invites a
+// reader to discount a real move there as an artifact. Omit it for events
+// (platform changes) that apply to every theme.
 export type ThemeEvent = {
   date: string;
   label: string;
   shortLabel: string;
   methodology?: boolean;
+  themes?: ThemeId[];
 };
 
 export const EVENTS: ThemeEvent[] = [
@@ -133,5 +139,5 @@ export const EVENTS: ThemeEvent[] = [
   { date: "2025-04-01", label: "Sycophancy update", shortLabel: "Sycophancy" },
   { date: "2025-08-01", label: "GPT-5 replaces 4o", shortLabel: "GPT-5" },
   { date: "2026-02-01", label: "4o retired", shortLabel: "4o ret." },
-  { date: "2026-05-12", label: "Rupture keywords expanded", shortLabel: "Rupture keywords", methodology: true },
+  { date: "2026-05-12", label: "Rupture keywords expanded", shortLabel: "Rupture keywords", methodology: true, themes: ["rupture"] },
 ];

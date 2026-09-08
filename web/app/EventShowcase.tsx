@@ -231,6 +231,19 @@ export default function EventShowcase() {
         const spark = windowedSeries(series, event.date.slice(0, 7));
         return <EventCard key={event.slug} event={event} spark={spark} />;
       })}
+      <p
+        style={{
+          fontSize: 11,
+          color: "#7E8B9E",
+          lineHeight: 1.5,
+          maxWidth: measure,
+        }}
+      >
+        Excerpts are verbatim from public Reddit posts, lightly trimmed. No
+        usernames are reproduced here; each link opens the original thread,
+        where the author&apos;s username is visible. Quoted posts are removed on
+        request.
+      </p>
     </div>
   );
 }
