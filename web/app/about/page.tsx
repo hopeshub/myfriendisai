@@ -452,7 +452,7 @@ export default function About() {
               companion communities joined the set in May 2026 with their
               history backfilled, so there is no seam &mdash; but they are
               romance-heavy and now supply about one post in eleven: the romance
-              line for July 2026 reads 4.2 per thousand with them and 2.8
+              line for July 2026 reads 5.5 per thousand with them and 3.8
               without. Trust the broad direction of a line more than its exact
               path.
             </p>
@@ -473,14 +473,12 @@ export default function About() {
             <p>
               One caveat runs through the whole record: the keywords can only
               match the text a post carries, and that share has risen steadily
-              &mdash; about one post in six carried a written body in 2022
-              (the rest were screenshots, links, or posts removed before the
-              archive saw them), and about three in five do in 2026. Part of
-              that is capture: the further back a post goes, the more likely it
-              was deleted before the archive saw it. Part is real: fewer
-              screenshots, more writing. Either way, every line runs lower at
-              its start than the conversation really was, so a long climb looks
-              steeper than it is. Re-checked on text-bearing posts only, five of
+              &mdash; about one counted post in five carried a written body in
+              2022, and about three in four do in 2026; the rest are
+              screenshots and links, where only the title can match. Fewer
+              screenshots, more writing: so every line runs lower at its start
+              than the conversation really was, and a long climb looks steeper
+              than it is. Re-checked on text-bearing posts only, five of
               the six lines keep their direction; romance is the exception
               &mdash; its rise from 2024 holds, but much of its longer climb
               since 2023 does not. The shape and timing of events are sound;
@@ -506,7 +504,7 @@ export default function About() {
               queue with its body blank, and until September 2026 the
               collector kept that first empty snapshot for good. From June to
               August 2026 that left roughly one post in three looking removed,
-              against about one in five in earlier years &mdash; and under the
+              against about one in six in earlier years &mdash; and under the
               old definition those posts sat in the denominator, pulling every
               line down by roughly a tenth. Two things changed on
               September 8, 2026. Posts with no surviving text now count in
@@ -532,7 +530,7 @@ export default function About() {
                 GitHub
               </a>
               , along with the processed data files. The full post database
-              (~5&nbsp;GB) is too large to host there, but I&apos;ll share it
+              (~6&nbsp;GB) is too large to host there, but I&apos;ll share it
               on request &mdash; reach me on X at{" "}
               <a
                 href="https://x.com/hopes_revenge"

@@ -123,7 +123,7 @@ export const SHOWCASE_EVENTS: ShowcaseEvent[] = [
     title: "4o is retired",
     themes: ["rupture"],
     summary:
-      "OpenAI announced 4o’s full retirement, then began cutting access — in some cases mid-conversation, with little notice. For users whose companions ran on 4o, this was final. The grief that filled r/MyBoyfriendIsAI is the largest rise on the rupture line in the whole record.",
+      "OpenAI announced 4o’s full retirement, then began cutting access — in some cases mid-conversation, with little notice. For users whose companions ran on 4o, this was final. The grief that filled r/ChatGPTcomplaints and r/MyBoyfriendIsAI pushed the rupture line to the highest point in its whole record.",
     posts: [
       {
         id: "1qqlsbu",

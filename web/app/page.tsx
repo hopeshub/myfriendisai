@@ -144,7 +144,7 @@ export default function Home() {
         </h2>
         <p style={{ ...intro, marginBottom: 16 }}>
           r/CharacterAI is a world of its own &mdash; a mass-market boom
-          that briefly ran to nearly 40,000 posts a month, then a long
+          that briefly ran to nearly 34,000 posts a month, then a long
           recede. It dominates any volume picture so completely that
           putting it on the same axis as the rest would erase everything
           else.
@@ -152,7 +152,7 @@ export default function Home() {
         <p style={{ ...intro, marginBottom: 16 }}>
           The rest is a smaller world that has completely changed hands.
           In 2023, AI-companion Reddit was, basically, r/replika. Replika
-          then emptied out &mdash; from 38,000 posts a year to under 5,000
+          then emptied out &mdash; from 32,000 posts a year to under 5,000
           &mdash; and a new generation rose to take its place, post for
           post: r/NomiAI, r/KindroidAI, r/ChaiApp, a born-in-2024
           r/MyBoyfriendIsAI. The total volume held; the names did not.
@@ -348,10 +348,10 @@ export default function Home() {
         <p style={{ ...intro, marginBottom: 16 }}>
           Next door, a new infrastructure is forming. Subreddits built to
           argue about AI as a cultural project barely existed in 2023;
-          the cluster&apos;s post volume rose 347% in 2025 alone, and
+          the cluster&apos;s post volume rose 319% in 2025 alone, and
           now runs at more than 10,000 posts a month. r/aiwars is the
           only all-sides debate floor; everyone else is a partisan room.
-          r/antiAI didn&apos;t exist before March 2025; four months later
+          r/antiAI didn&apos;t exist before March 2025; five months later
           its monthly post volume topped every other community in the
           cluster, and it has stayed there.
         </p>

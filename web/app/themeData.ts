@@ -181,7 +181,7 @@ export function loadKeywordDetails(): KeywordDetailsData {
 
 // ── Community composition over time ──────────────────────────────────────────
 // Per-community monthly post volume, from community_activity.json. §1 shows
-// r/CharacterAI on its own (60-90% of all volume — it would crush a shared
+// r/CharacterAI on its own (55-85% of all volume by year — it would crush a shared
 // scale) and every other companionship community as a stacked area, so the
 // field's turnover is visible: r/replika's 2023 dominance collapsing while a
 // new generation rises to fill a roughly flat total.

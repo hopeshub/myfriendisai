@@ -534,7 +534,7 @@ and rupture 2023-09 (−35%).
 Those extreme months are not spread evenly: they land on stretches where
 r/CharacterAI — most of the denominator — was missing days in the corpus
 (2023-08-23 to 08-31, 2024-02-20 to 02-29, 2024-05-16 to 05-31, 2025-12-01 to
-12-10). Those holes were refilled from the archive on 2026-09-08 (13,690
+12-10). Those holes were refilled from the archive on 2026-09-08 (21,828
 posts), which removes the largest distortions; the estimator change below
 removes the mechanism.
 

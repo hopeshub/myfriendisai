@@ -17,7 +17,7 @@ import { measure } from "./styles";
 import { usePrefersReducedMotion } from "@/lib/usePrefersReducedMotion";
 
 // ── §1 post-volume chart ─────────────────────────────────────────────────────
-// Two stacked charts. Top: r/CharacterAI alone — it is 60-90% of all volume and
+// Two stacked charts. Top: r/CharacterAI alone — it is 55-85% of all volume by year and
 // would crush everything else on a shared scale. Bottom: every other
 // companionship community as a stacked area, so the field's turnover is
 // legible — r/replika's 2023 dominance collapsing while a new generation
@@ -179,12 +179,12 @@ export default function PostVolumeChart({
         r/CharacterAI
       </div>
       <div style={{ fontSize: 12, color: "#7E8B9E", marginBottom: 6 }}>
-        The mass-market giant — boomed to nearly 40k posts a month, then receded.
+        The mass-market giant — boomed to nearly 34k posts a month, then receded.
       </div>
       <MeasuredChart
         style={{ height: 138 }}
         role="img"
-        ariaLabel="Chart: r/CharacterAI monthly post volume from 2023 to 2026, peaking near 40,000 posts a month in mid-2024 then declining."
+        ariaLabel="Chart: r/CharacterAI monthly post volume from 2023 to 2026, peaking near 34,000 posts a month in mid-2024 then declining."
       >
         {({ width, height }) => (
           <AreaChart
@@ -549,8 +549,9 @@ export default function PostVolumeChart({
         Monthly post volume, from 2023 onward (where monthly counts become
         reliable). Each chart has its own scale &mdash; click a community,
         below or on the chart, to isolate its band. &ldquo;Other&rdquo; groups
-        the smaller subreddits, the largest being r/Paradot, r/SoulmateAI,
-        r/Character_AI_Recovery, r/CharacterAIrunaways, and r/BeyondThePromptAI.
+        the smaller subreddits, the largest being r/Paradot,
+        r/Character_AI_Recovery, r/SoulmateAI, r/CharacterAIrunaways, and
+        r/BeyondThePromptAI.
       </p>
     </div>
   );
