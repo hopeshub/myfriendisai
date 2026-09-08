@@ -501,23 +501,16 @@ export default function About() {
             <p>
               One thing the archive does differently: it records a post within
               hours, sometimes while the post is still waiting in a moderator
-              queue with its body blank, and until September 2026 the
-              collector kept that first empty snapshot for good. From June to
-              August 2026 that left roughly one post in three looking removed
-              as the record then stood, against about one in six in earlier
-              years &mdash; and under the
-              old definition those posts sat in the denominator, pulling every
-              line down by roughly a tenth. Two things changed on
-              September 8, 2026. Posts with no surviving text now count in
-              neither half of the rate, as described above. And the collector
-              goes back to the archive for each post a few weeks after it
-              appears, and a one-time pass on September 8 re-checked 74,000
-              such posts back to March 2026 and recovered the text of about
-              10,400. The same pass filled four spans where r/CharacterAI had
-              no posts at all &mdash; a backfill gap, not a quiet week &mdash;
-              and re-fetched the removed posts Reddit&apos;s own listing had
-              omitted during the three months collection ran on Reddit
-              directly.
+              queue with its body blank. Until September 2026 the collector
+              kept that first empty snapshot for good, which left roughly one
+              post in three looking removed over the summer of 2026, against
+              about one in six in earlier years, and under the old definition
+              those posts sat in the denominator and pulled every line down by
+              roughly a tenth. Two things fixed it. Posts with no surviving
+              text now count in neither half of the rate, as described above,
+              and the collector goes back to the archive for each post a few
+              weeks after it appears. The changelog below has the details of
+              the September 2026 repair.
             </p>
             <p>
               The code, the keyword lists, and every validation record are
