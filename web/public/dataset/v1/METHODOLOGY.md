@@ -472,8 +472,9 @@ the full and the "Excluding r/CharacterAI" series.
 **Clearing the gate does not make a month precise.** A threshold of five posts
 admits months that are still very small. Of the months actually drawn on the
 chart, the share whose post-only numerator is under 20 posts: consciousness 41%
-(76% are under 30), addiction 34% — mostly 2023 — and therapy 32%. In the
-"Excluding r/CharacterAI" series it is therapy 38% and rupture 47%. On a
+(76% are under 30), therapy 36% (52% under 30) and addiction 32% — mostly
+2023. In the "Excluding r/CharacterAI" series it is therapy 38% and rupture
+47%. On a
 two-proportion test, only about 19% of consciousness's and therapy's
 month-to-month moves are distinguishable from chance at p < 0.05.
 
@@ -534,7 +535,7 @@ and rupture 2023-09 (−35%).
 Those extreme months are not spread evenly: they land on stretches where
 r/CharacterAI — most of the denominator — was missing days in the corpus
 (2023-08-23 to 08-31, 2024-02-20 to 02-29, 2024-05-16 to 05-31, 2025-12-01 to
-12-10). Those holes were refilled from the archive on 2026-09-08 (13,690
+12-10). Those holes were refilled from the archive on 2026-09-08 (21,828
 posts), which removes the largest distortions; the estimator change below
 removes the mechanism.
 
@@ -591,8 +592,8 @@ step at one date but a change in what every earlier month is made of.
 
 That effect is measurable, and on one theme it is large. The five companion
 communities added in May 2026 are romance-dense, and they now supply about 9% of
-the per-1,000 denominator. Romance for July 2026 reads **4.24 per 1,000 with
-them and 2.80 without** — the added communities are roughly a third of that
+the per-1,000 denominator. Romance for July 2026 reads **5.54 per 1,000 with
+them and 3.75 without** — the added communities are roughly a third of that
 month's level. The other five themes move by 10% or less.
 
 So part of a long climb reflects the tracked world widening rather than the
@@ -787,7 +788,12 @@ subscriber counts are. **`avg_comments_per_post` changed definition in June
 2026**: it was Reddit's own `num_comments` field, and it is now the mean number
 of comments this project actually collected for a post. Those are different
 quantities. Read that metric for direction within an era, not as a level across
-the whole record.
+the whole record. **`unique_contributors_7d` (contributors/week) steps at the
+same seam**: comment authors have been counted since 2026-03-12, and from June
+2026 comments are collected continuously by creation window rather than once
+per post, so more comment authors are seen — r/replika's weekly figure goes
+from ~34 in May 2026 to ~120 in June, r/CharacterAI from ~2,550 to ~4,530. Same
+rule: within an era only.
 
 ### 9.3 How much matchable text exists is not constant
 

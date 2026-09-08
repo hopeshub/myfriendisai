@@ -503,8 +503,9 @@ export default function About() {
               hours, sometimes while the post is still waiting in a moderator
               queue with its body blank, and until September 2026 the
               collector kept that first empty snapshot for good. From June to
-              August 2026 that left roughly one post in three looking removed,
-              against about one in six in earlier years &mdash; and under the
+              August 2026 that left roughly one post in three looking removed
+              as the record then stood, against about one in six in earlier
+              years &mdash; and under the
               old definition those posts sat in the denominator, pulling every
               line down by roughly a tenth. Two things changed on
               September 8, 2026. Posts with no surviving text now count in

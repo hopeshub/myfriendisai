@@ -138,7 +138,9 @@ export default async function SubredditPage({
         <strong>Contributors/wk</strong> — counted from post and comment
         authors in the archive over the 7 days ending on the snapshot date; the
         historical series uses post authors only, with comment authors counted
-        from 2026-03-12 onward.{" "}
+        from 2026-03-12 onward, and more of them seen from June 2026, when
+        comment collection became continuous &mdash; read it within an era, not
+        across June 2026.{" "}
         <strong>Posts/day</strong> — mean of the last 7 complete days; the
         current day is still filling up, so it is left out.{" "}
         <strong>Avg comments</strong> — Derived from the comment threads this
