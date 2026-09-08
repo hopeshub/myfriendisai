@@ -241,7 +241,7 @@ export default function Home() {
         </h2>
         <p style={{ ...intro, marginBottom: 16 }}>
           No keyword can tell &ldquo;my boyfriend uses ChatGPT&rdquo; from
-          &ldquo;my boyfriend <em>is</em> an AI.&rdquo; Nothing in the words
+          &ldquo;my boyfriend <em>is</em>{" "}an AI.&rdquo; Nothing in the words
           decides that &mdash; the room does, which is why the lines above are
           drawn only inside communities where AI companionship is the subject.
           Even there, the words will not hold still. They come loose from their

@@ -45,6 +45,8 @@ function clean(text: string): string {
     .replace(/\\{1,2}([^A-Za-z0-9\s])/g, "$1")
     .replace(/\*\*|__/g, "")
     .replace(/(^|[\s("'])\*(\S(?:[^*]*\S)?)\*(?=[\s.,!?;:)"']|$)/g, "$1$2")
+    // Reddit blockquote markers ("> quoted line", sometimes HTML-escaped).
+    .replace(/(^|\s)(?:&gt;|>)\s?/g, "$1")
     .replace(/\s{2,}/g, " ")
     .trim();
 }

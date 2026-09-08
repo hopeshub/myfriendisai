@@ -442,7 +442,7 @@ export default function PostVolumeChart({
                   animationDuration={700}
                   animationEasing="ease-out"
                 >
-                  {b.key !== "other" && (
+                  {b.key !== "other" && width >= 500 && (
                     <LabelList
                       dataKey={b.key}
                       content={

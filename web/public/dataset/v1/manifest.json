@@ -1,7 +1,7 @@
 {
   "dataset": "myfriendisai-aggregates",
   "version": "v1",
-  "generated_at": "2026-09-08T16:26:57Z",
+  "generated_at": "2026-09-08T16:55:02Z",
   "data_through": "2026-08",
   "license": "CC BY 4.0",
   "license_url": "https://creativecommons.org/licenses/by/4.0/",
@@ -21,8 +21,8 @@
     },
     {
       "name": "index.html",
-      "bytes": 3773,
-      "sha256": "fbb314807cc8935905a3e890a9165f496dbc0ab0f63d41dd93ddc4ba300301f3"
+      "bytes": 3830,
+      "sha256": "ca4f643cad876fe8e335efb5ed0eae4d4087199c0ee454b7e22acd13b830d8fc"
     },
     {
       "name": "monthly_community_volumes.csv",

@@ -135,7 +135,7 @@ export default async function SubredditPage({
         <strong>Subscribers and Avg score</strong> — Direct (Reddit API),
         frozen at the date shown since Reddit closed unauthenticated access in
         May 2026.{" "}
-        <strong>Contributors/wk</strong> — counted from post and comment
+        <strong>Contributors/wk</strong>{" "}— counted from post and comment
         authors in the archive over the 7 days ending on the snapshot date; the
         historical series uses post authors only, with comment authors counted
         from 2026-03-12 onward, and more of them seen from June 2026, when

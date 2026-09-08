@@ -239,8 +239,8 @@ export default function CommunitiesTable({
         <p className="text-sm text-[#9AA7B8] py-8 text-center">No communities in this category.</p>
       )}
 
-      <p className="mt-8 text-xs text-[#7E8B9E] hidden md:block">
-        <strong>Activity</strong> — monthly post volume, from each
+      <p className="mt-8 text-xs text-[#7E8B9E]">
+        <strong>Activity</strong>{" "}— monthly post volume, from each
         community&apos;s first month to the last complete one; each sparkline
         is on its own scale (read the shape, not the height).{" "}
         <strong>Subscribers and Avg score</strong> — Direct (Reddit API),

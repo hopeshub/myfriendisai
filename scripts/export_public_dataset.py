@@ -449,7 +449,8 @@ INDEX_TEMPLATE = """\
              text-transform:uppercase; margin-bottom:10px; }}
   p {{ margin:0 0 16px; }}
   a {{ color:#F1F4F8; }}
-  table {{ border-collapse:collapse; width:100%; margin:0 0 24px; font-size:15px; }}
+  table {{ border-collapse:collapse; width:100%; margin:0 0 24px; font-size:15px; table-layout:fixed; }}
+  td, th {{ overflow-wrap:anywhere; }}
   th, td {{ text-align:left; padding:9px 10px; border-bottom:1px solid #1E293B;
            vertical-align:top; }}
   th {{ color:#9AA7B8; font-weight:500; font-size:13px; }}
