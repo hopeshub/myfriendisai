@@ -512,7 +512,13 @@ export default function About() {
               September 8, 2026. Posts with no surviving text now count in
               neither half of the rate, as described above. And the collector
               goes back to the archive for each post a few weeks after it
-              appears; REPAIR_NOTE_ABOUT
+              appears, and a one-time pass on September 8 re-checked 74,000
+              such posts back to March 2026 and recovered the text of about
+              10,400. The same pass filled four spans where r/CharacterAI had
+              no posts at all &mdash; a backfill gap, not a quiet week &mdash;
+              and re-fetched the removed posts Reddit&apos;s own listing had
+              omitted during the three months collection ran on Reddit
+              directly.
             </p>
             <p>
               The code, the keyword lists, and every validation record are

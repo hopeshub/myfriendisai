@@ -534,8 +534,9 @@ and rupture 2023-09 (−35%).
 Those extreme months are not spread evenly: they land on stretches where
 r/CharacterAI — most of the denominator — was missing days in the corpus
 (2023-08-23 to 08-31, 2024-02-20 to 02-29, 2024-05-16 to 05-31, 2025-12-01 to
-12-10). Those holes were repaired on 2026-09-08, which removes the largest
-distortions. `[REPAIR-NOTE]`
+12-10). Those holes were refilled from the archive on 2026-09-08 (13,690
+posts), which removes the largest distortions; the estimator change below
+removes the mechanism.
 
 The public dataset keeps its `rate_per_1k_charted` column so that nothing
 reading the file breaks, but the two columns now carry the same number.
@@ -754,13 +755,19 @@ to 2024 and early 2026. On therapy it inverted a direction: the published line
 fell 2.7% from March–May to June–August, and rose 16% on a denominator counting
 only text-bearing posts.
 
-**This was repaired on 2026-09-08.** `[REPAIR-NOTE]` A shell-refresh step now
-re-fetches posts that were captured as shells once they are 10–35 days old, and
-a one-time pass covered everything back to 2026-03-11. `[REPAIR-NOTE]` The
-live-Reddit window of 2026-03-11 → 05-26 was re-fetched from the archive for the
-23 keyword-scope communities other than r/CharacterAI, which had already been
-repaired in May. `[REPAIR-NOTE]` The shell shares and the 12–16% depression
-given above describe the record as it stood before that repair. `[REPAIR-NOTE]`
+**This was repaired on 2026-09-08.** A shell-refresh step now re-fetches posts
+that were captured as shells once they are 10–35 days old, and a one-time pass
+re-checked 74,306 shells back to 2026-03-11: 10,393 had gained a body in the
+archive and were updated and re-tagged (r/KindroidAI 696 of 1,366, r/replika 57
+of 205, r/CharacterAI 273 of 8,090, r/ChaiApp 95 of 9,916; the rest are genuine
+removals). The live-Reddit window of 2026-03-11 → 05-26 was re-fetched from the
+archive for the 23 keyword-scope communities other than r/CharacterAI, which
+had already been repaired in May — 8,566 posts Reddit's listing had omitted,
+most of them removed posts. After the repair the shell share of the
+keyword-scope corpus is a flat 20–24% in every month of 2026, where it had
+been 14% in the live-Reddit window and 32% in June. The shell shares and the
+12–16% depression given above describe the record as it stood before that
+repair, under the old population definition.
 
 **And the decision that repair made unavoidable:** shells are no longer counted
 at all. Since 2026-09-08 the published population is measurable posts (§2.8) —

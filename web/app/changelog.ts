@@ -14,7 +14,9 @@ export const CHANGELOG: ChangelogEntry[] = [
     date: "September 2026",
     title: "Collection gaps repaired; copy corrected",
     items: [
-      "REPAIR_NOTE_CHANGELOG",
+      "Four spans where r/CharacterAI had no posts at all — a backfill gap, not a quiet week (late August 2023, late February 2024, the second half of May 2024, early December 2025) — were refilled from the archive, about 13,700 posts. The March–May 2026 window, collected from Reddit directly, was re-fetched for the roughly 8,600 removed posts Reddit’s own listing had omitted. And about 10,400 posts the archive had captured while they sat in a moderator queue, body blank, got their text back; the collector now re-checks new posts a few weeks after they appear.",
+      "Two definitions changed with it. The charted rate now counts only posts whose text survived to capture, in both halves of the fraction, so a removed post no longer dilutes the denominator — the one definition that reads the same across every way the data has been collected. And each month’s point is now the plain rate for that month rather than an average of daily rates. Both push most lines up by a tenth or so across the whole record; the About page explains each. The keyword set is unchanged.",
+      "One account is newly excluded: r/NomiAI’s community-manager account, whose weekly collab-thread template happened to contain the phrase “NSFW content is not…” and so counted as sex/ERP — 85 posts, all one template. Its removal lowers the sex/ERP line from late 2025 on. That is the correction, not a change in the discourse.",
       "A pass over every number in the site’s prose against the current data: a few stale figures were corrected — the r/CharacterAI share of the corpus, r/antiAI’s rise, the size of the database. The methodology document was also brought into line with what the pipeline actually does, including that the communities added in May 2026 had their history backfilled rather than tracked only from that date.",
     ],
     recent: true,

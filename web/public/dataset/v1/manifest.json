@@ -1,7 +1,7 @@
 {
   "dataset": "myfriendisai-aggregates",
   "version": "v1",
-  "generated_at": "2026-09-08T16:03:59Z",
+  "generated_at": "2026-09-08T16:06:38Z",
   "data_through": "2026-08",
   "license": "CC BY 4.0",
   "license_url": "https://creativecommons.org/licenses/by/4.0/",
@@ -11,8 +11,8 @@
   "files": [
     {
       "name": "METHODOLOGY.md",
-      "bytes": 51243,
-      "sha256": "5a7bdc9e5eb2f1afc328eb8b07572f4605c70b3e597ffa2767abad695993d17f"
+      "bytes": 51733,
+      "sha256": "6beb002b0a48358d1f5a7c407f422d610ad21384d055dfd0a3818ee0d0d97715"
     },
     {
       "name": "README.md",
