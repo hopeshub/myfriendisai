@@ -132,10 +132,10 @@ def precision_paragraph():
             parts.append(f"{theme} ~{census}%")
     if latest:
         head = (
-            "**Measured per-theme precision** (share of sampled matches judged on-theme,\n"
-            "pooled with equal weight per keyword rather than by hit volume), as the\n"
-            f"2026-05-16 census / the latest drift cycle ({stamp}), both LLM-graded (the\n"
-            "census against a 72-post human anchor): "
+            "**Measured per-theme precision** (share of matched posts judged on-theme),\n"
+            "as the 2026-05-16 census (post-weighted) / the latest drift cycle\n"
+            f"({stamp}; sampled matches pooled with equal weight per keyword rather than\n"
+            "by hit volume), both LLM-graded (the census against a 72-post human anchor): "
         )
     else:
         head = (

@@ -119,7 +119,7 @@ companionship discourse.
 
 **Excluded from keyword tracking, 2026-05-18** (three T2 communities):
 
-| Community | Why the matches were noise | Why excluded |
+| Community | What the keyword matches were | Why excluded |
 |---|---|---|
 | r/AIGirlfriend | 1.4% keyword-tag rate; a re-examination of recent posts found them dominated by affiliate and marketing image posts rather than discourse (sample size not recorded) | Matches were marketing copy, not discourse |
 | r/SpicyChatAI | Bot-card marketplace and product support | Matches were listing text — the JanitorAI failure mode |
@@ -316,9 +316,11 @@ from the most recent per-keyword drift cycle:
 
 Both columns are LLM-graded — the census anchored on 72 human-coded posts, the
 drift cycle drawn from a larger and more recent sample and re-measured monthly.
-Each is the share of *sampled* matches judged on-theme, pooled with equal
-weight per keyword — not weighted by how many posts each keyword actually tags,
-which would move some themes by several points in either direction.
+The two columns weight differently. The census column is post-weighted: random
+draws from each theme's tagged posts, or a full census of them. The drift column
+is the share of *sampled* matches judged on-theme, pooled with equal weight per
+keyword rather than by how many posts each keyword tags — which can differ from
+a post-weighted figure by several points in either direction.
 
 The therapy figure is sometimes quoted as ~80% or ~87% — this document itself
 carried ~80% until September 2026. Both numbers are projections for a rebuilt
@@ -360,9 +362,9 @@ the posts the keywords had missed spot-checked by hand. Recall =
 
 Recall runs 0–32% across the six themes: consciousness caught none of its eight
 classified-YES posts. The confidence intervals are wide because the YES counts
-are small; treat the point estimates with that uncertainty. They also assume
-simple random sampling, while the design oversamples theme-rich communities, so
-read them as a lower bound on the uncertainty.
+are small; treat the point estimates with that uncertainty. The intervals also
+assume simple random sampling, while the design oversamples theme-rich
+communities, so read their width as a lower bound on the uncertainty.
 
 **Where the missed posts live.** The gap concentrates in four structural
 categories:
@@ -529,7 +531,8 @@ classifier bias — the check answers "has this keyword's meaning moved?", not
 "what is its absolute precision today?". The same pass also yields a per-theme
 precision estimate for the cycle, which §4.4 and the site's theme-health export
 publish as such; a keyword whose latest re-measurement falls below the 60% cut
-line is marked *contested* on its theme page.
+line — or that failed an earlier independent audit — is marked *contested* on
+its theme page.
 
 The sampling half is automated and scheduled monthly; the classification and
 reporting half is run by hand, and has sometimes covered two months' samples in

@@ -73,9 +73,9 @@ Three previously-tracked T2 subreddits were set `exclude_from_keywords: true`
 (removed from the keyword theme lines and the normalization denominator; kept
 in the community explorer as engagement context):
 
-| Sub | What it actually is | Why excluded |
+| Sub | What the keyword matches were | Why excluded |
 |---|---|---|
-| r/AIGirlfriend | ~91% affiliate-spam image posts (from a re-examination whose sample size and frame were not recorded); 1.4% keyword-tag rate | Tags were marketing copy matching romance/sexual vocabulary — false-positive noise, not discourse. |
+| r/AIGirlfriend | A re-examination found recent posts dominated by affiliate and marketing image posts (sample size and frame not recorded); 1.4% keyword-tag rate | Tags were marketing copy matching romance/sexual vocabulary — false-positive noise, not discourse. |
 | r/SpicyChatAI | Bot-card marketplace + product/filter support; 2.4% tag rate | Tags were bot-card listing text — the same failure mode that kept JanitorAI/SillyTavern out. |
 | r/ChatGPTNSFW | Erotica-writing / jailbreak-craft community; 10.7% tag rate | **Not noise — real signal, but off-construct.** No persistent companion or relationship; the room's context is "make the model write porn," not "my AI partner." Fails the canonical test of a community where companionship is central. |
 

@@ -232,8 +232,9 @@ export default async function ThemePage({
             sampled matches judged on-theme when the keyword was validated
             (April&ndash;May 2026). A monthly drift check re-measures these:
             any keyword whose latest re-measurement fell below the
-            project&apos;s 60% cut line is marked <em>contested</em> below,
-            and the full history is in the repository.
+            project&apos;s 60% cut line &mdash; or that failed an earlier
+            independent audit &mdash; is marked <em>contested</em> below, and
+            the full history is in the repository.
           </p>
           <div
             style={{

@@ -101,10 +101,10 @@ vocabulary (addiction: "relapse", "cold turkey") reads higher than one
 written in ordinary language (romance: "I love him") whatever the truth
 beneath. Read each theme against itself — direction, timing, spikes.
 
-**Measured per-theme precision** (share of sampled matches judged on-theme,
-pooled with equal weight per keyword rather than by hit volume), as the
-2026-05-16 census / the latest drift cycle (2026-08-27), both LLM-graded (the
-census against a 72-post human anchor): romance ~86% / 89% (n=931), sexual_erp ~96% / 83% (n=524), consciousness ~87% / 86% (n=369), therapy ~68% / 66% (n=360), addiction ~97% / 85% (n=741), rupture ~77% / 85% (n=926). The therapy line is published below the
+**Measured per-theme precision** (share of matched posts judged on-theme),
+as the 2026-05-16 census (post-weighted) / the latest drift cycle
+(2026-08-27; sampled matches pooled with equal weight per keyword rather than
+by hit volume), both LLM-graded (the census against a 72-post human anchor): romance ~86% / 89% (n=931), sexual_erp ~96% / 83% (n=524), consciousness ~87% / 86% (n=369), therapy ~68% / 66% (n=360), addiction ~97% / 85% (n=741), rupture ~77% / 85% (n=926). The therapy line is published below the
 project's 80% keep gate, with that caveat stated rather than hidden.
 
 **It counts language, not people.** A rising line means the theme's

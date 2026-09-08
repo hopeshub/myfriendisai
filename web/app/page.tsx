@@ -353,7 +353,7 @@ export default function Home() {
           The argument is upstream
         </h2>
         <p style={{ ...intro, marginBottom: 16 }}>
-          Next door, a whole argument has moved into subreddits of its own. Subreddits built to
+          Next door, a whole argument has moved into subreddits of its own. Communities built to
           argue about AI as a cultural project barely existed in 2023;
           the cluster&apos;s post volume rose 347% in 2025 alone
           &mdash; an 824% increase over its 2023 total &mdash; and now
@@ -367,9 +367,9 @@ export default function Home() {
         </p>
         <p style={{ ...intro, marginBottom: 28 }}>
           Almost none of it is about AI companionship. A 50-post read of each
-          sub in May 2026 put companionship discourse &mdash; first-person
-          attachment or mockery of it &mdash; at 0&ndash;6% of posts across
-          the cluster. But the posture is the same one
+          of the six largest subs here, in May 2026, put companionship
+          discourse &mdash; first-person attachment or mockery of it &mdash;
+          at 0&ndash;6% of their posts. But the posture is the same one
           &mdash; that taking a chatbot seriously is a category mistake
           worth mocking &mdash; and it is already the air the communities
           on this site breathe.
