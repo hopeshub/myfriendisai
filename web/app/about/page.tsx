@@ -190,8 +190,11 @@ export default function About() {
               keyword stays only if those posts are genuinely about the theme. If it is matching on a coincidental
               shared word, it gets dropped. Language also drifts over time, so
               every month a fresh sample of recent matches is pulled for each
-              keyword, and I re-check any keyword whose meaning may have moved
-              (the reading has sometimes covered two months at once).
+              keyword and read the same way, and any keyword whose meaning has
+              moved is flagged for my review (the reading has sometimes
+              covered two months at once). That monthly check is the one place
+              a language model is used in the ongoing pipeline, and it feeds
+              no number on the chart.
             </p>
             <p>
               The chart shows how many posts use each theme&apos;s keywords,
@@ -220,9 +223,36 @@ export default function About() {
               each keyword match raised precision — the share of matched posts
               that genuinely belong to the theme — from roughly 80% to 88%,
               while doing nothing for the posts the keywords never matched in
-              the first place. So the method stays plain on purpose. The careful
-              work happens earlier, in validating each keyword before it is
-              ever allowed to count.
+              the first place. That layer was removed after the test; no
+              charted number passes through a language model. So the method
+              stays plain on purpose. The careful work happens earlier, in
+              validating each keyword before it is ever allowed to count.
+            </p>
+            <p style={subheadStyle}>Why not a local embedding model?</p>
+            <p>
+              A related suggestion is to skip the language model and score
+              each post by how close it sits to a handful of example
+              sentences, using a small open embedding model that runs locally.
+              That is cheap, and unlike an API model it is reproducible: the
+              weights never change underneath you. It is the right tool for
+              one job here &mdash; finding posts the keywords miss, so that
+              new keywords can be proposed and put through the same validation
+              as the rest. It is the wrong tool for the chart itself.
+              Similarity scores carry the topic of a post but not its stance.
+              A post that denies the theme, a journalist looking for
+              interviewees, a bot&apos;s character card, or AI-written text
+              pasted into a comment all sit close to the real thing, and any
+              cutoff loose enough to catch ordinary romance language lets all
+              of them through. The{" "}
+              <a
+                href="https://github.com/hopeshub/myfriendisai/blob/main/docs/embedding_classifier_assessment_2026-09-08.md"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={linkClass}
+              >
+                full assessment
+              </a>
+              , with a small test anyone can rerun, is in the repository.
             </p>
           </div>
         </section>
