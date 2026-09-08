@@ -65,7 +65,7 @@ export default async function Image() {
             marginBottom: 48,
           }}
         >
-          How are people talking about AI companionship?
+          When the AI is the relationship, not the tool
         </div>
 
         {/* Theme pills */}

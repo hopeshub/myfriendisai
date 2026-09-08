@@ -121,7 +121,8 @@ export default function RecoverySection({
           A note on scale.
         </span>{" "}
         These are small communities &mdash; together a few thousand posts a
-        year, a rounding error against CharacterAI&apos;s millions. This is a
+        year, against the two hundred thousand r/CharacterAI posts in the same
+        year. This is a
         qualitative finding, not a measured prevalence: not how many people,
         but the plain fact that a recovery infrastructure now exists where
         three years ago there was none.

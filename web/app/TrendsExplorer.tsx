@@ -83,8 +83,8 @@ export default function TrendsExplorer({ themeData, themeDataExclCai }: Props) {
       </div>
       <p className="mb-3" style={{ fontSize: 12, color: "#7E8B9E", maxWidth: measure }}>
         {scope === "all"
-          ? "r/CharacterAI dominates this set — for years, 75–90% of every post counted here — and it rises and falls on its own platform lifecycle. Switch it off to see each rate within the dedicated companionship communities."
-          : "r/CharacterAI removed from both the keyword counts and the denominator. These are the rates within the dedicated companionship and recovery communities — the rises hold, and several are steeper here."}
+          ? "r/CharacterAI is the largest community in this set — 75–90% of every post counted here through 2025, and around half today — and it rises and falls on its own platform lifecycle. Switch it off to see each rate within the dedicated companionship communities."
+          : "r/CharacterAI removed from both the keyword counts and the denominator. These are the rates within the dedicated companionship and recovery communities — the rises hold, and several are steeper here. With fewer posts to count, the therapy and addiction lines start later in this view: the earlier months exist but are too thin to chart."}
       </p>
 
       {/* Time range selector */}
@@ -151,10 +151,18 @@ export default function TrendsExplorer({ themeData, themeDataExclCai }: Props) {
             per 1,000 posts, by month &mdash; counted by keyword, no AI
             classification.
           </li>
-          <li>The panels have independent scales.</li>
           <li>
-            Read each line&apos;s shape and timing, not its height against
-            another.
+            The panels have independent scales; read shape and timing, not
+            height.
+          </li>
+          <li>
+            Every line is a floor. The keywords are precision-first &mdash;
+            they miss far more theme-relevant posts than they catch.
+          </li>
+          <li>
+            The consciousness and therapy panels count only a few dozen posts a
+            month, so a single month&apos;s rise or fall there is usually
+            noise &mdash; read those two over half a year or more.
           </li>
           <li>
             Platform events are marked on every panel as a shared time

@@ -89,6 +89,15 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   const meta = getSiteMeta();
   const startYear = meta.date_start.slice(0, 4);
+  // "2017–Sep 2026" rather than "2017–present": the end date is the last
+  // collected day, which is the honest thing to print on every page.
+  const endLabel = meta.date_end
+    ? new Date(meta.date_end + "T00:00:00Z").toLocaleDateString("en-US", {
+        month: "short",
+        year: "numeric",
+        timeZone: "UTC",
+      })
+    : "present";
 
   return (
     <html lang="en">
@@ -171,8 +180,8 @@ export default function RootLayout({
             <div className="flex flex-col gap-1">
               <span>An independent, one-person research project.</span>
               <span>
-                Data from Reddit&apos;s public endpoints ·{" "}
-                {formatPostCount(meta.total_posts)} posts · {startYear}–present ·
+                Data from public Reddit archives ·{" "}
+                {formatPostCount(meta.total_posts)} posts · {startYear}–{endLabel} ·
                 updated daily
               </span>
             </div>
@@ -186,6 +195,9 @@ export default function RootLayout({
               >
                 Communities
               </Link>
+              <a href="/dataset/v1/" className="hover:text-foreground transition-colors">
+                Data
+              </a>
               <a
                 href="https://github.com/hopeshub/myfriendisai"
                 target="_blank"

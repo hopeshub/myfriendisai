@@ -64,8 +64,10 @@ export default function Home() {
               fontWeight: 400,
               body: (
                 <>
-                  It tracks six recurring themes in how these communities talk,
-                  and the platform events that move them.
+                  It tracks six recurring themes in how these communities talk.
+                  The sharpest movements in the record are not slow cultural
+                  drift &mdash; they arrive when a platform changes underneath
+                  its users: an app removes a feature, a model is retired.
                 </>
               ),
             },
@@ -141,10 +143,6 @@ export default function Home() {
           The names keep changing
         </h2>
         <p style={{ ...intro, marginBottom: 16 }}>
-          Two charts here, because they&apos;re two stories at different
-          scales.
-        </p>
-        <p style={{ ...intro, marginBottom: 16 }}>
           r/CharacterAI is a world of its own &mdash; a mass-market boom
           that briefly ran to nearly 40,000 posts a month, then a long
           recede. It dominates any volume picture so completely that
@@ -186,16 +184,21 @@ export default function Home() {
         <p style={{ ...intro, marginBottom: 16 }}>
           When a platform changes underneath its users &mdash; an app drops a
           feature, a model is retired &mdash; the language in these communities
-          shifts within days. This is where the tracker sees most clearly: each
-          event below is real, paired with the posts people wrote the week it
-          happened.
+          shifts within days. These ruptures are the sharpest movements in the
+          whole record, and the place the tracker sees most clearly: each event
+          below is real, paired with posts people wrote the week it happened
+          &mdash; chosen by hand from the most-upvoted posts in those
+          communities, so they are the loudest reactions, not a representative
+          sample.
         </p>
         <p style={{ ...intro, marginBottom: 16 }}>
           Every event here is a rupture &mdash; itself a finding about the
-          method. Of the six themes, rupture is the only one shaped like an
-          event: romance, consciousness, and therapy drift, with no press
-          release behind them. A section built around moments can only be
-          about the theme that arrives in them.
+          method. Only the rupture line is event-shaped throughout; sex/ERP
+          has one enormous event and little else, and romance, consciousness,
+          and therapy drift, with no press release behind them &mdash; though
+          their vocabularies hold no event words, so a spike in them would be
+          hard for this instrument to see. A section built around moments can
+          only be about the theme that arrives in them.
         </p>
         <EventShowcase />
         </section>
@@ -214,8 +217,11 @@ export default function Home() {
         <p style={{ ...intro, marginBottom: 16 }}>
           Six recurring themes, and how often each one&apos;s language surfaces
           in posts across these communities, month by month. Each panel is
-          scaled to mentions per 1,000 posts &mdash; a value of 8 means roughly
-          8 of every 1,000 posts that month carried that theme&apos;s keywords.
+          scaled to mentions per 1,000 posts &mdash; a value of 8 means that on
+          a typical day that month, roughly 8 of every 1,000 posts carried that
+          theme&apos;s keywords. Read each panel against itself: a line sits
+          high when its theme is written in blunt, easily counted words, not
+          because the experience behind it is more common.
         </p>
         <TrendsExplorer
           themeData={themeData}
@@ -235,12 +241,14 @@ export default function Home() {
           A word is not a fixed thing
         </h2>
         <p style={{ ...intro, marginBottom: 16 }}>
-          Every line on the chart above is built from words &mdash; and words
-          are the least fixed thing the project measures. They come loose
-          from their meaning, they flip while you watch, sometimes two of
-          them name one behavior, and sometimes the change happens in a
-          register the words can&apos;t reach. Here is what that looked
-          like, four times.
+          No keyword can tell &ldquo;my boyfriend uses ChatGPT&rdquo; from
+          &ldquo;my boyfriend <em>is</em> an AI.&rdquo; Nothing in the words
+          decides that &mdash; the room does, which is why the lines above are
+          drawn only inside communities where AI companionship is the subject.
+          Even there, the words will not hold still. They come loose from their
+          meaning, they flip while you watch, sometimes two of them name one
+          behavior, and sometimes the change happens in a register the words
+          can&apos;t reach. Here is what that looked like, four times.
         </p>
         <p style={{ ...intro, marginBottom: 16 }}>
           <strong style={{ color: "#F1F4F8", fontWeight: 600 }}>
@@ -346,20 +354,20 @@ export default function Home() {
           Next door, a new infrastructure is forming. Subreddits built to
           argue about AI as a cultural project barely existed in 2023;
           the cluster&apos;s post volume rose 347% in 2025 alone, and
-          now runs at more than 10,000 posts a month &mdash; up 824%
-          from 2023. r/aiwars is the only all-sides debate floor;
-          everyone else is a partisan room. r/antiAI didn&apos;t exist
-          before March 2025; 8 months later its monthly post volume
-          topped every other sub in the cluster. Both sides are
-          organizing. The fight is real.
+          now runs at more than 10,000 posts a month. r/aiwars is the
+          only all-sides debate floor; everyone else is a partisan room.
+          r/antiAI didn&apos;t exist before March 2025; four months later
+          its monthly post volume topped every other sub in the cluster,
+          and it has stayed there. Both sides are organizing. The fight
+          is real.
         </p>
         <p style={{ ...intro, marginBottom: 28 }}>
           Almost none of it is about AI companionship. &ldquo;AI bros&rdquo;
-          appears in titles here roughly ten times more often than
+          appears in titles here well over ten times more often than
           &ldquo;AI girlfriend.&rdquo; But the posture is the same one
           &mdash; that taking a chatbot seriously is a category mistake
-          worth mocking &mdash; and it is already the air the communities
-          on this site breathe.
+          worth mocking &mdash; and it is the environment the communities
+          on this site post into.
         </p>
         <AmbientSection />
         </section>

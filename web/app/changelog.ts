@@ -11,6 +11,23 @@ export type ChangelogEntry = {
 
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    date: "September 2026",
+    title: "Collection gaps repaired; copy corrected",
+    items: [
+      "REPAIR_NOTE_CHANGELOG",
+      "A pass over every number in the site's prose against the current data: a few stale figures were corrected (the r/CharacterAI share of the corpus, r/antiAI's rise, the size of the database), the About page now says plainly that the charted lines count post text only, and the methodology document was brought into line with what the pipeline actually does — including that communities added in May 2026 were backfilled, not added forward-only.",
+    ],
+    recent: true,
+  },
+  {
+    date: "June 2026",
+    title: "Collection moved from Reddit to the archive",
+    items: [
+      "Reddit ended unauthenticated data access without notice on May 30, 2026. Daily collection paused from May 29 to June 9; the missing days were recovered from the Arctic Shift archive, and collection has run from the archive ever since. The charted lines count post text only and are unaffected, but two secondary figures froze: subscriber counts and average post score have no archive equivalent and stay at their late-May values, labeled as such on the community pages.",
+    ],
+    recent: true,
+  },
+  {
     date: "August 2026",
     title: "The dataset behind the charts is now downloadable",
     items: [
@@ -22,7 +39,7 @@ export const CHANGELOG: ChangelogEntry[] = [
     date: "May 2026",
     title: "How to read the therapy and addiction lines",
     items: [
-      "A hand-check of 90 posts the keywords had filed as addiction tested how cleanly the two lines separate help from harm. About a quarter of them also carried a help framing the keywords had missed — help language hides in ordinary words (\"it got me through\"), while problem language announces itself (\"relapse,\" \"days clean\"). So the therapy and addiction lines can't be read against each other as a balance: the instrument hears the problem framing far more clearly than the help one. The homepage and About page were corrected to say this plainly.",
+      "A hand-check of 90 posts the keywords had filed as addiction tested how cleanly the two lines separate help from harm. About a quarter of them also carried a help framing the keywords had missed — help language hides in ordinary words (“it got me through”), while problem language announces itself (“relapse,” “days clean”). So the therapy and addiction lines can't be read against each other as a balance: the instrument hears the problem framing far more clearly than the help one. The homepage and About page were corrected to say this plainly.",
     ],
     recent: true,
   },
@@ -30,7 +47,7 @@ export const CHANGELOG: ChangelogEntry[] = [
     date: "May 2026",
     title: "Five communities added",
     items: [
-      "Five more AI-companionship communities joined the tracked set — r/aipartners, r/ReplikaLovers, r/ILoveMyReplika, r/MyBoyfriendIsAI_Open and r/NectarAI. They were picked from a wider candidate list by reading post samples and keeping only those genuinely centered on companionship discourse rather than tech support or platform-migration chatter. They are small communities, so they add little to overall post volume; their theme lines begin only once enough of their posts have been collected, so they appear gradually rather than all at once.",
+      "Five more AI-companionship communities joined the tracked set — r/aipartners, r/ReplikaLovers, r/ILoveMyReplika, r/MyBoyfriendIsAI_Open and r/NectarAI. They were picked from a wider candidate list by reading post samples and keeping only those genuinely centered on companionship discourse rather than tech support or platform-migration chatter. Their history was backfilled from the archive and keyword-tagged in the same pass, so no line has a seam at this date. They are romance-heavy and have grown since: by mid-2026 they supply about one post in eleven, and part of the 2026 romance rise is their joining the set.",
     ],
     recent: true,
   },
@@ -62,7 +79,7 @@ export const CHANGELOG: ChangelogEntry[] = [
     date: "May 2026",
     title: "Rupture vocabulary expanded",
     items: [
-      "Added grief-and-farewell language; the earlier keywords caught only metaphors like \"lobotomized.\" The rupture line steps up in mid-May 2026 — that part of the rise reflects the wider net, not a sudden change in the discourse itself.",
+      "Added grief-and-farewell language; the earlier keywords caught only metaphors like “lobotomized.” The whole rupture line was re-counted with the wider net, so it sits higher across its full length — the change is in the instrument, not in the discourse. The hollow marker on the chart dates the change.",
     ],
     recent: false,
   },
@@ -70,7 +87,7 @@ export const CHANGELOG: ChangelogEntry[] = [
     date: "April 2026",
     title: "Keyword set revalidated",
     items: [
-      "Every high-volume keyword was re-checked against recent posts. Six were dropped — notably \"sentient,\" which had drifted into meme and roleplay use — so the consciousness line is thinner from this point on.",
+      "Every high-volume keyword was re-checked against recent posts. Six were dropped — notably “sentient,” which had drifted into meme and roleplay use. The consciousness line was re-counted without them across its whole length, so it runs thinner throughout, not only after this date.",
     ],
     recent: false,
   },
@@ -78,7 +95,7 @@ export const CHANGELOG: ChangelogEntry[] = [
     date: "April 2026",
     title: "Keyword-matching bug fixed",
     items: [
-      "Multi-word keywords had been matching inside unrelated words (\"dating my\" caught inside \"updating my\"). Fixing it removed those false positives, slightly lowering the romance, therapy, and sex/ERP lines.",
+      "Multi-word keywords had been matching inside unrelated words (“dating my” caught inside “updating my”). Fixing it removed those false positives, slightly lowering the romance, therapy, and sex/ERP lines.",
     ],
     recent: false,
   },

@@ -37,6 +37,7 @@ const PALETTE_VIVID: Record<ThemeId, string> = {
   addiction: "#fd7112",
   rupture: "#22C55E",
 };
+// eslint-disable-next-line @typescript-eslint/no-unused-vars -- kept as the documented one-line palette switch below
 const PALETTE_MUTED: Record<ThemeId, string> = {
   romance: "#D08CA6",
   sexual_erp: "#D38E8B",
@@ -58,7 +59,7 @@ export const THEMES: ThemeMeta[] = [
     blurb:
       "Broad waves, not sharp spikes — and a floor: everyday partner talk goes uncaught.",
     story:
-      "Romantic language moves in slow, broad waves rather than sharp spikes — this looks like a gradual cultural shift, not a reaction to any single moment. It is also the theme the keywords catch least well: most people describe a partner in ordinary words — “she said,” “my girlfriend” — that never trip an explicitly romantic keyword. The real level of this conversation runs well above the line.",
+      "Romantic language moves in slow, broad waves rather than sharp spikes, with no single moment behind it. The recent rise is real; how much of the longer climb since 2023 is the conversation growing, and how much is more posts carrying text for the keywords to match, this method can’t separate. It is also the theme the keywords catch least well: most people describe a partner in ordinary words — “she said,” “my girlfriend” — that never trip an explicitly romantic keyword. The real level of this conversation runs well above the line.",
   },
   {
     id: "sexual_erp",
@@ -69,7 +70,7 @@ export const THEMES: ThemeMeta[] = [
     blurb:
       "Dominated by one event — the Feb 2023 Replika ERP removal; quieter since.",
     story:
-      "This theme is defined by one moment. In February 2023 Replika abruptly removed erotic roleplay from its app, and the backlash was enormous — that single spike is the tallest feature on the chart. The conversation has been lower and steadier since, rising briefly whenever another platform changes its content rules.",
+      "This theme is defined by one moment. In February 2023 Replika abruptly removed erotic roleplay from its app, and the backlash was enormous — that single spike is the tallest feature on the chart. The line has been lower and steadier since, rising briefly whenever another platform changes its content rules. Part of the fall is compositional: r/replika carries most of this theme and shrank from most of the tracked corpus to a few percent of it, so the pooled rate drops even where sex/ERP language inside r/replika stayed well above its pre-2023 level.",
   },
   {
     id: "consciousness",
@@ -80,7 +81,7 @@ export const THEMES: ThemeMeta[] = [
     blurb:
       "The youngest measurable theme — its vocabulary only became trackable in 2025.",
     story:
-      "The youngest conversation on the atlas. Talk of AI sentience, personhood, and inner experience only became measurable in 2025 — the specific vocabulary people use for it is recent, so there is no honest line to draw before then. What the chart shows is a way of talking about AI that is still taking shape.",
+      "The youngest conversation on the atlas, and the one the instrument holds least well. “Sentient” was once the word people reached for to mark a real belief that something might be there; it spread into roleplay and Character.AI memes until it stopped marking belief at all, and had to be dropped from the count. What is left is a narrower vocabulary that only became countable in 2025, which is why the line starts so late and runs so thin — on a few dozen posts a month, so read it over half a year, not month to month. The question did not arrive in 2025; the words that can be counted for it did.",
   },
   {
     id: "therapy",
@@ -98,7 +99,7 @@ export const THEMES: ThemeMeta[] = [
     label: "Addiction",
     emoji: "💊",
     color: ACTIVE_PALETTE.addiction,
-    tagline: "Language of dependency and compulsion",
+    tagline: "Language of self-described dependency and compulsion",
     blurb:
       "A steady climb, not an event spike — dependency language growing over time.",
     story:

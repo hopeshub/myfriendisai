@@ -124,8 +124,8 @@ function EventLegend({
       </div>
       {hasMethodology && (
         <div style={{ fontSize: bp === "mobile" ? 14 : 11, color: "#7E8B9E", marginTop: 6 }}>
-          A hollow marker is a change to our keyword set — a measurement
-          change, not a real-world event.
+          A hollow marker is a change to our keyword set, applied back across
+          the whole record — a measurement change, not a real-world event.
         </div>
       )}
     </div>

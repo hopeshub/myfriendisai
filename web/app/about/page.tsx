@@ -22,10 +22,13 @@ export const metadata: Metadata = {
   openGraph: {
     title: "About — My Friend Is AI",
     description: ABOUT_DESCRIPTION,
+    images: ["/opengraph-image"],
   },
   twitter: {
+    card: "summary_large_image",
     title: "About — My Friend Is AI",
     description: ABOUT_DESCRIPTION,
+    images: ["/opengraph-image"],
   },
 };
 
@@ -49,7 +52,7 @@ function getCommunityCount(): number {
     return new Set(list.map((s) => s.subreddit)).size;
   } catch {
     // Fallback only if subreddits.json is unreadable — keep in sync with the live count.
-    return 40;
+    return 39;
   }
 }
 
@@ -94,7 +97,7 @@ export default function About() {
         </h1>
         <p style={{ ...introParagraph, color: "#9AA7B8" }}>
           This project follows six recurring themes in Reddit&apos;s
-          AI-companion communities &mdash; romance, addiction, grief, and three
+          AI-companion communities &mdash; romance, addiction, rupture, and three
           others &mdash; and measures how often each one surfaces in posts. The
           post corpus reaches back to 2017, though the theme lines themselves
           begin later, as each theme&apos;s vocabulary becomes common enough to
@@ -191,9 +194,17 @@ export default function About() {
               whose meaning may have moved.
             </p>
             <p>
+              Two accounting notes. Platform staff accounts are excluded from
+              the counts &mdash; one app developer&apos;s patch notes were, by
+              themselves, close to 1% of the sex/ERP line. And no single poster
+              carries a theme: at the last check, the busiest 1% of authors
+              accounted for 5&ndash;11% of a theme&apos;s posts.
+            </p>
+            <p>
               The chart shows how many posts use each theme&apos;s keywords,
-              expressed as a rate per 1,000 posts and smoothed with a 7-day
-              average. The rate matters more than a raw count would here. These
+              expressed as a rate per 1,000 posts: each day&apos;s rate is smoothed
+              over a 7-day window, then averaged by calendar month. The rate
+              matters more than a raw count would here. These
               communities have grown enormously since 2017, so a raw count would
               mostly retrace that growth; a rate sets the growth aside and shows
               how the conversation itself is shifting.
@@ -236,7 +247,7 @@ export default function About() {
               anyway, because of a problem that showed up early. In a large
               general subreddit like r/ChatGPT, the keywords cannot tell two
               things apart: &ldquo;my boyfriend is using ChatGPT&rdquo; and
-              &ldquo;my boyfriend <em>is</em> an AI&rdquo; are built from the
+              &ldquo;my boyfriend <em>is</em>{" "}an AI&rdquo; are built from the
               same words. Run a romance keyword across r/ChatGPT and most of
               what it catches is ordinary human-relationship talk that merely
               mentions AI.
@@ -249,7 +260,11 @@ export default function About() {
               The keywords are the lens; the curated community list keeps that
               lens pointed where the words mean what they appear to mean. It is
               also why the large general-AI subreddits are tracked for size and
-              activity but kept out of the theme lines.
+              activity but kept out of the theme lines. The same goes for the
+              nine anti-AI and pro-AI communities in the last section of the
+              homepage, and for three explicitly sexual product subreddits:
+              tracked for size and activity, never counted in a theme. About
+              two dozen of the tracked communities feed the theme lines.
             </p>
             <p>
               This is a real choice, and it shapes what the site can see.
@@ -276,7 +291,7 @@ export default function About() {
             <p>
               Within that curated set, each theme is also concentrated. Two or
               three subreddits usually account for most of a theme&apos;s posts
-              &mdash; and the sexual-content line is well over half r/replika
+              &mdash; and the sex/ERP line is well over half r/replika
               alone.
               A theme line is often, in practice, a close reading of a few
               communities rather than an even sweep across all of them.
@@ -344,7 +359,7 @@ export default function About() {
               <strong style={leadStyle}>
                 Read direction and timing, not height.
               </strong>{" "}
-              Three things make the <em>height</em> of a line untrustworthy,
+              Two things make the <em>height</em> of a line untrustworthy,
               even where its <em>shape</em> holds:
             </p>
             <ul className="space-y-2" style={{ listStyleType: "none", padding: 0 }}>
@@ -365,8 +380,9 @@ export default function About() {
                     The keyword set is deliberately incomplete
                   </span>
                   {" "}&mdash; in a hand-coded sample of 400 random posts, it
-                  caught between a few percent and about a third of the posts
-                  that genuinely belonged.
+                  caught at most about a third of the posts that genuinely
+                  belonged &mdash; and, for one theme, none of the handful
+                  sampled.
                 </>,
               ].map((item, i) => (
                 <li
@@ -387,10 +403,13 @@ export default function About() {
             </ul>
             <p>
               So every line is a floor, not a ceiling: it runs low, it cannot be
-              measured against its neighbours, and only its direction, timing,
+              measured against its neighbors, and only its direction, timing,
               and spikes can be trusted &mdash; a missed post only weakens a
               line, while a false one corrupts it, so the method errs toward
-              missing.
+              missing. The thinner lines need more patience still: consciousness
+              and therapy run on a few dozen posts a month, so a single
+              month&apos;s rise or fall there is usually noise. Read those two
+              over half a year or more.
             </p>
             <p>
               <strong style={leadStyle}>
@@ -429,8 +448,14 @@ export default function About() {
               communities were smaller then, or did not exist yet, and have
               grown since. Each line is measured against whatever communities
               existed at the time &mdash; so part of a long climb reflects the
-              tracked world widening, not only the conversation itself. Trust
-              the broad direction of a line more than its exact path.
+              tracked world widening, not only the conversation itself. Five
+              companion communities joined the set in May 2026 with their
+              history backfilled, so there is no seam &mdash; but they are
+              romance-heavy and now supply about one post in eleven: the romance
+              line for July 2026 reads 4.2 per thousand with them and 2.8
+              without. Part of the 2026 romance rise is the tracker widening,
+              not the conversation shifting. Trust the broad direction of a line
+              more than its exact path.
             </p>
           </div>
         </section>
@@ -441,17 +466,23 @@ export default function About() {
           <div className="space-y-4" style={bodyStyle}>
             <p>
               Posts from 2017 through early 2026 were backfilled from public
-              Reddit archives (PullPush and Arctic Shift). From March 2026
-              onward, they are collected fresh from Reddit every day. One caveat
-              comes with the older years: the further back a post goes, the more
-              likely its text was removed or deleted before the archive captured
-              it &mdash; so there is simply less wording for the keywords to
-              match in the early years than in the recent ones. Every line
-              therefore runs a little lower at its start than the discourse
-              really was, which makes each rise look somewhat steeper than it
-              was. The shape and the timing of events are sound; the steepness
-              of the long climb is partly the instrument warming up, not only
-              the subject growing.
+              Reddit archives (PullPush and Arctic Shift). From March 2026 they
+              have been collected daily &mdash; first from Reddit directly, and
+              since June 2026 from the Arctic Shift archive, after Reddit closed
+              its public endpoints. One caveat runs through the whole record:
+              the keywords can only match the text a post carries, and that
+              share has risen steadily &mdash; about one post in six carried
+              body text in 2022, and about three in five do in 2026. Part of
+              that is capture: the further back a post goes, the more likely it
+              was deleted before the archive saw it. Part is real: fewer
+              screenshots, more writing. Either way, every line runs lower at
+              its start than the conversation really was, so a long climb looks
+              steeper than it is. Re-checked on text-bearing posts only, five of
+              the six lines keep their direction; romance is the exception
+              &mdash; its rise from 2024 holds, but much of its longer climb
+              since 2023 does not. The shape and timing of events are sound;
+              the steepness of a long climb is partly the instrument, not only
+              the subject.
             </p>
             <p>
               One known seam in the recent data: Reddit ended unauthenticated
@@ -462,11 +493,16 @@ export default function About() {
               comment-sourced tags are all complete across the window. Per-day
               subscriber and active-user figures could not be reconstructed and
               remain blank there. Since this episode, daily collection runs on
-              the archive rather than on Reddit directly, and the archive
-              captures comment threads somewhat more completely than the old
-              once-per-post snapshot did &mdash; so the default theme lines run
-              a touch fuller from late May 2026 onward. The post-text-only
-              control series is unaffected.
+              the archive rather than on Reddit directly. The archive captures
+              comment threads more completely than the old once-per-post
+              snapshot did, but the charted lines count only the text of posts
+              themselves, so they are unaffected. One thing the archive does
+              differently: it records a post within hours, sometimes while it
+              is still waiting in a moderator queue with its body blank, and
+              the collector at first kept that empty snapshot. From June to
+              August 2026 that left roughly one post in three with no text to
+              match, against about one in five in earlier years, and pulled
+              every line down by roughly a tenth. REPAIR_NOTE_ABOUT
             </p>
             <p>
               The code, the keyword lists, and every validation record are
@@ -480,7 +516,7 @@ export default function About() {
                 GitHub
               </a>
               , along with the processed data files. The full post database
-              (~25&nbsp;GB) is too large to host there, but I&apos;ll share it
+              (~5&nbsp;GB) is too large to host there, but I&apos;ll share it
               on request &mdash; reach me on X at{" "}
               <a
                 href="https://x.com/hopes_revenge"
@@ -490,7 +526,10 @@ export default function About() {
               >
                 @hopes_revenge
               </a>
-              .
+              . The same address works the other way: no usernames appear
+              anywhere on this site and every quote links to the public
+              original, but if a post of yours is quoted here and you&apos;d
+              rather it weren&apos;t, message me and it comes down.
             </p>
             <p>
               The aggregate dataset behind the charts is downloadable as plain
@@ -501,8 +540,20 @@ export default function About() {
               &mdash; monthly counts per theme and monthly post volume per
               community, with a schema and a standalone methodology document
               alongside them. It is derived numbers only: no post text, no
-              usernames. It updates with the site, and it is meant to stay
-              readable on its own if this site ever stops.
+              usernames. Each row carries the raw count and the denominator, if
+              you want your own error bars. It updates with the site, and it is
+              meant to stay readable on its own if this site ever stops.
+            </p>
+            <p>
+              If you&apos;re citing this: <em>My Friend Is AI</em> (2026),
+              myfriendisai.com. The aggregate data is CC BY 4.0. The full
+              method, with every limit stated in one place, is at{" "}
+              <a href="/dataset/v1/METHODOLOGY.md" className={linkClass}>
+                /dataset/v1/METHODOLOGY.md
+              </a>
+              . The safe one-line summary: it tracks how often each
+              theme&apos;s explicit vocabulary appears in these communities
+              over time &mdash; not how many people use AI companions.
             </p>
             <p>
               The site uses Vercel&apos;s privacy-friendly analytics for

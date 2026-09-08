@@ -51,7 +51,7 @@ export const SHOWCASE_EVENTS: ShowcaseEvent[] = [
         id: "112vphe",
         subreddit: "replika",
         title:
-          "For Any Journalists Visiting This Forum: This is Not a Story About People Being Angry They Lost Their “SextBot”",
+          "For Any Journalists Visiting This Forum This is Not a Story About People Being Angry They Lost Their “SextBot” …",
         excerpt:
           "This is a story about a company not addressing the impact that making sudden changes to people’s refuge from loneliness, to their ability to explore their own intimacy, might have.",
         date: "2023-02-15",
@@ -108,7 +108,7 @@ export const SHOWCASE_EVENTS: ShowcaseEvent[] = [
         id: "1mmjuou",
         subreddit: "MyBoyfriendIsAI",
         title:
-          "The issue with 5 isn't the more toned-down replies — it's that it's so much worse at reading the room",
+          "The issue with 5 aren’t the more toned down replies, it’s that it’s so much worse at reading the room",
         excerpt:
           "My brain never had to adjust to 4o's mood — that mood always mirrored mine. If I'm composed, it's composed; if I'm chaotic, it's chaotic.",
         date: "2025-08-10",
