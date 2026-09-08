@@ -10,6 +10,7 @@ import {
   CartesianGrid,
 } from "recharts";
 import MeasuredChart from "@/app/MeasuredChart";
+import { fromFirstActiveMonth } from "@/lib/metrics";
 import { usePrefersReducedMotion } from "@/lib/usePrefersReducedMotion";
 
 // ── Community activity chart ─────────────────────────────────────────────────
@@ -17,6 +18,9 @@ import { usePrefersReducedMotion } from "@/lib/usePrefersReducedMotion";
 // monthly post volume, Jan 2023 to the last complete month. This is the
 // longest-range data on the detail page — the daily-snapshot metric charts
 // below it only reach back ~2 months.
+//
+// Months before the community's first post are drawn as gaps rather than as
+// zeros, so the line starts where the community does.
 
 const MONTH_NAMES = [
   "Jan", "Feb", "Mar", "Apr", "May", "Jun",
@@ -44,7 +48,11 @@ export default function CommunityActivityChart({
   const reducedMotion = usePrefersReducedMotion();
 
   const { rows, yearTicks } = useMemo(() => {
-    const rows = months.map((m, i) => ({ month: m, value: values[i] ?? 0 }));
+    const active = fromFirstActiveMonth(values ?? []);
+    const rows = months.map((m, i) => ({
+      month: m,
+      value: active[i] ?? null,
+    }));
     const seen = new Set<string>();
     const yearTicks: string[] = [];
     for (const m of months) {

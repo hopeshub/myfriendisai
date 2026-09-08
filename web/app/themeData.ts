@@ -299,7 +299,7 @@ export function loadRecoveryVolume(): RecoveryVolumePoint[] {
 // the top line panel; every partisan room — r/antiAI plus the five mid-tier
 // subs — is stacked underneath, with r/antiAI as the dominant band. The
 // arena/partisan split makes a structural distinction visible: aiwars is
-// not a side, the others are. r/trueantiAI (~50/mo) and r/ProAI (~40/mo)
+// not a side, the others are. r/trueantiAI and r/ProAI (both under 200/mo)
 // are too small to register as bands and are mentioned in the caption
 // instead. Read engagement, not opinion — these subs are excluded from
 // every keyword measurement (see CLAUDE.md §2.1 LOCKED).

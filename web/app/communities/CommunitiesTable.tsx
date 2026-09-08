@@ -1,14 +1,32 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import Link from "next/link";
 import type { SubredditSummary, CommunityActivity } from "@/lib/types";
+import type { CommunityMetrics } from "@/lib/data";
+import { hasCommentAverage } from "@/lib/metrics";
 import Sparkline from "./Sparkline";
 
-type SortKey = keyof Pick<
-  SubredditSummary,
-  "subscribers" | "posts_today" | "avg_comments_per_post" | "avg_score_per_post" | "unique_authors" | "unique_contributors_7d"
->;
+// Sort keys are the displayed values, not the raw export fields: posts/day is
+// a 7-day mean derived at build time, and avg comments is blank for the
+// communities whose comment threads this project doesn't collect.
+type SortKey =
+  | "subscribers"
+  | "contributors"
+  | "postsPerDay"
+  | "avgComments"
+  | "avgScore";
+
+type Row = {
+  sub: SubredditSummary;
+  subscribers: number | null;
+  contributors: number | null;
+  postsPerDay: number | null;
+  avgComments: number | null;
+  avgScore: number | null;
+  subscribersAsOf: string | null;
+  avgScoreAsOf: string | null;
+};
 
 function fmt(n: number | null, decimals = 0): string {
   if (n == null) return "—";
@@ -73,9 +91,11 @@ function SortButton({
 export default function CommunitiesTable({
   subreddits,
   activity,
+  metrics,
 }: {
   subreddits: SubredditSummary[];
   activity: CommunityActivity;
+  metrics: CommunityMetrics;
 }) {
   const [sort, setSort] = useState<{ key: SortKey; asc: boolean }>({
     key: "subscribers",
@@ -89,8 +109,23 @@ export default function CommunitiesTable({
 
   const categories = ["All", ...Array.from(new Set(subreddits.map((s) => s.category).filter(Boolean) as string[]))];
 
-  const filtered = subreddits.filter(
-    (s) => categoryFilter === "All" || s.category === categoryFilter
+  const rows: Row[] = useMemo(
+    () =>
+      subreddits.map((sub) => ({
+        sub,
+        subscribers: sub.subscribers,
+        contributors: sub.unique_contributors_7d,
+        postsPerDay: metrics.postsPerDay7d[sub.subreddit] ?? null,
+        avgComments: hasCommentAverage(sub) ? sub.avg_comments_per_post : null,
+        avgScore: sub.avg_score_per_post,
+        subscribersAsOf: metrics.subscribersAsOf[sub.subreddit] ?? null,
+        avgScoreAsOf: metrics.avgScoreAsOf[sub.subreddit] ?? null,
+      })),
+    [subreddits, metrics],
+  );
+
+  const filtered = rows.filter(
+    (r) => categoryFilter === "All" || r.sub.category === categoryFilter
   );
 
   const sorted = [...filtered].sort((a, b) => {
@@ -102,6 +137,13 @@ export default function CommunitiesTable({
     if (bv == null) return -1;
     return sort.asc ? av - bv : bv - av;
   });
+
+  const subscribersLabel = metrics.subscribersRange
+    ? `Subscribers (${metrics.subscribersRange})`
+    : "Subscribers";
+  const avgScoreLabel = metrics.avgScoreRange
+    ? `Avg score (${metrics.avgScoreRange})`
+    : "Avg score";
 
   return (
     <div>
@@ -130,53 +172,63 @@ export default function CommunitiesTable({
               <th className="pb-3 pr-4 font-medium text-[#7E8B9E] hidden sm:table-cell">Activity</th>
               <th className="pb-3 pr-4 font-medium text-[#7E8B9E] hidden sm:table-cell">Tier</th>
               <th className="pb-3 pr-4 font-medium text-right">
-                <SortButton label="Subscribers (Jun 2026)" sortKey="subscribers" current={sort} onSort={handleSort} />
+                <SortButton label={subscribersLabel} sortKey="subscribers" current={sort} onSort={handleSort} />
               </th>
               <th className="pb-3 pr-4 font-medium text-right">
-                <SortButton label="Contributors/wk" sortKey="unique_contributors_7d" current={sort} onSort={handleSort} />
+                <SortButton label="Contributors/wk" sortKey="contributors" current={sort} onSort={handleSort} />
               </th>
               <th className="pb-3 pr-4 font-medium text-right hidden sm:table-cell">
-                <SortButton label="Posts/day" sortKey="posts_today" current={sort} onSort={handleSort} />
+                <SortButton label="Posts/day (7-day avg)" sortKey="postsPerDay" current={sort} onSort={handleSort} />
               </th>
               <th className="pb-3 pr-4 font-medium text-right hidden md:table-cell">
-                <SortButton label="Avg comments" sortKey="avg_comments_per_post" current={sort} onSort={handleSort} />
+                <SortButton label="Avg comments" sortKey="avgComments" current={sort} onSort={handleSort} />
               </th>
               <th className="pb-3 font-medium text-right hidden md:table-cell">
-                <SortButton label="Avg score" sortKey="avg_score_per_post" current={sort} onSort={handleSort} />
+                <SortButton label={avgScoreLabel} sortKey="avgScore" current={sort} onSort={handleSort} />
               </th>
             </tr>
           </thead>
           <tbody>
-            {sorted.map((s) => (
-              <tr key={s.subreddit} className="border-t border-[#2A2D3A] hover:bg-[#1A1D27] transition-colors">
+            {sorted.map((r) => (
+              <tr key={r.sub.subreddit} className="border-t border-[#2A2D3A] hover:bg-[#1A1D27] transition-colors">
                 <td className="py-3 pr-4">
                   <Link
-                    href={`/communities/${s.subreddit}`}
+                    href={`/communities/${r.sub.subreddit}`}
                     className="font-medium text-sm text-[#F8FAFC] hover:underline"
                   >
-                    r/{s.subreddit}
+                    r/{r.sub.subreddit}
                   </Link>
-                  {s.category && (
-                    <div className="text-xs text-[#7E8B9E] mt-0.5">{s.category}</div>
+                  {r.sub.category && (
+                    <div className="text-xs text-[#7E8B9E] mt-0.5">{r.sub.category}</div>
                   )}
                 </td>
                 <td className="py-3 pr-4 hidden sm:table-cell">
                   <Link
-                    href={`/communities/${s.subreddit}#activity`}
-                    aria-label={`Full activity chart for r/${s.subreddit}`}
+                    href={`/communities/${r.sub.subreddit}#activity`}
+                    aria-label={`Full activity chart for r/${r.sub.subreddit}`}
                     className="flex items-center min-h-11 -my-3 py-3 opacity-80 hover:opacity-100 transition-opacity"
                   >
-                    <Sparkline values={activity.activity[s.subreddit] ?? []} />
+                    <Sparkline values={activity.activity[r.sub.subreddit] ?? []} />
                   </Link>
                 </td>
                 <td className="py-3 pr-4 hidden sm:table-cell">
-                  <TierBadge tier={s.tier} />
+                  <TierBadge tier={r.sub.tier} />
                 </td>
-                <td className="py-3 pr-4 text-sm tabular-nums text-right text-[#C8D0DC]">{fmt(s.subscribers)}</td>
-                <td className="py-3 pr-4 text-sm tabular-nums text-right text-[#C8D0DC]">{fmt(s.unique_contributors_7d)}</td>
-                <td className="py-3 pr-4 text-sm tabular-nums text-right text-[#C8D0DC] hidden sm:table-cell">{fmt(s.posts_today)}</td>
-                <td className="py-3 pr-4 text-sm tabular-nums text-right text-[#C8D0DC] hidden md:table-cell">{fmt(s.avg_comments_per_post, 1)}</td>
-                <td className="py-3 text-sm tabular-nums text-right text-[#C8D0DC] hidden md:table-cell">{fmt(s.avg_score_per_post, 0)}</td>
+                <td
+                  className="py-3 pr-4 text-sm tabular-nums text-right text-[#C8D0DC]"
+                  title={r.subscribersAsOf ? `Last collected ${r.subscribersAsOf}` : undefined}
+                >
+                  {fmt(r.subscribers)}
+                </td>
+                <td className="py-3 pr-4 text-sm tabular-nums text-right text-[#C8D0DC]">{fmt(r.contributors)}</td>
+                <td className="py-3 pr-4 text-sm tabular-nums text-right text-[#C8D0DC] hidden sm:table-cell">{fmt(r.postsPerDay, 1)}</td>
+                <td className="py-3 pr-4 text-sm tabular-nums text-right text-[#C8D0DC] hidden md:table-cell">{fmt(r.avgComments, 1)}</td>
+                <td
+                  className="py-3 text-sm tabular-nums text-right text-[#C8D0DC] hidden md:table-cell"
+                  title={r.avgScoreAsOf ? `Last collected ${r.avgScoreAsOf}` : undefined}
+                >
+                  {fmt(r.avgScore, 0)}
+                </td>
               </tr>
             ))}
           </tbody>
@@ -188,17 +240,21 @@ export default function CommunitiesTable({
       )}
 
       <p className="mt-8 text-xs text-[#7E8B9E] hidden md:block">
-        <strong>Activity</strong> — monthly post volume, Jan 2023 to the last
-        complete month; each sparkline is on its own scale (read the shape, not
-        the height).{" "}
-        <strong>Subscribers</strong> — Direct (Reddit API), last collected
-        2026-06-07; Reddit closed unauthenticated API access in May 2026, so
-        subscriber counts are frozen at that date. All other columns come from
-        post/comment archives and stay current.{" "}
-        <strong>Contributors/wk</strong> — Derived (distinct post + comment authors over the
-        past 7 days; comment authors counted from 2026-03-10 onward).{" "}
-        <strong>Posts/day</strong> — Inferred (posts in past 24h).{" "}
-        <strong>Avg comments / Avg score</strong> — Inferred (sample of 100 posts).
+        <strong>Activity</strong> — monthly post volume, from each
+        community&apos;s first month to the last complete one; each sparkline
+        is on its own scale (read the shape, not the height).{" "}
+        <strong>Subscribers and Avg score</strong> — Direct (Reddit API),
+        frozen at the date shown since Reddit closed unauthenticated access in
+        May 2026.{" "}
+        <strong>Contributors/wk</strong> — counted from post and comment
+        authors in the archive over the past 7 days (comment authors from
+        2026-03-12 onward).{" "}
+        <strong>Posts/day</strong> — mean of the last 7 complete days; the
+        current day is still filling up, so it is left out.{" "}
+        <strong>Avg comments</strong> — Derived from the comment threads this
+        project collects (companionship communities only; since June 2026
+        those are gathered more completely than before, so read it within an
+        era, not across June 2026).
       </p>
     </div>
   );

@@ -33,6 +33,22 @@ function truncate(str: string, max: number): string {
   return str.length > max ? str.slice(0, max).trimEnd() + "…" : str;
 }
 
+/**
+ * Strip the Reddit markdown that rides along in a raw title or selftext
+ * excerpt: backslash-escaped punctuation (sometimes escaped twice), bold and
+ * underline markers, and a lone `*` wrapped around a word for emphasis. Pure
+ * and deliberately conservative — it removes markup, never rewrites words, and
+ * leaves anything ambiguous (list bullets, unpaired stars) alone.
+ */
+function clean(text: string): string {
+  return text
+    .replace(/\\{1,2}([^A-Za-z0-9\s])/g, "$1")
+    .replace(/\*\*|__/g, "")
+    .replace(/(^|[\s("'])\*(\S(?:[^*]*\S)?)\*(?=[\s.,!?;:)"']|$)/g, "$1$2")
+    .replace(/\s{2,}/g, " ")
+    .trim();
+}
+
 type SampleWithTerm = SamplePost & { matchedTerm: string };
 
 /**
@@ -111,13 +127,18 @@ export async function generateMetadata({
     title: theme.label,
     description,
     alternates: { canonical: `/theme/${theme.id}` },
+    // Repeat the site card image: an openGraph/twitter block here replaces
+    // the inherited one wholesale, so without this the route ships no image.
     openGraph: {
       title: `${theme.label} — My Friend Is AI`,
       description,
+      images: ["/opengraph-image"],
     },
     twitter: {
+      card: "summary_large_image",
       title: `${theme.label} — My Friend Is AI`,
       description,
+      images: ["/opengraph-image"],
     },
   };
 }
@@ -225,9 +246,9 @@ export default async function ThemePage({
               lineHeight: 1.6,
             }}
           >
-            This theme is defined by these {details.keywords.length} validated
-            keywords &mdash; a post counts when its text matches one of them,
-            with no AI classifier. The percentage is the share of a
+            This theme is defined by these {details.keywords.length}{" "}
+            validated keywords &mdash; a post counts when its text matches one
+            of them, with no AI classifier. The percentage is the share of a
             keyword&apos;s matches that were on-theme when hand-checked.
           </p>
           <div
@@ -288,16 +309,30 @@ export default async function ThemePage({
               }}
             >
               A few keywords carry a note.{" "}
-              <em style={{ color: "#9AA7B8" }}>contested</em> &mdash; an
-              independent re-read didn&apos;t consistently agree its matches
-              were on-theme, so its precision is less settled than the figure
-              suggests. <em style={{ color: "#9AA7B8" }}>judgment call</em>{" "}
+              <em style={{ color: "#9AA7B8" }}>contested</em>{" "}
+              &mdash; an independent re-read didn&apos;t consistently agree its
+              matches were on-theme, so its precision is less settled than the
+              figure suggests.{" "}
+              <em style={{ color: "#9AA7B8" }}>judgment call</em>{" "}
               &mdash; kept despite a score below the usual bar because its
               false matches are few and predictable.{" "}
-              <em style={{ color: "#9AA7B8" }}>low volume</em> &mdash; too few
-              matches to score precisely.
+              <em style={{ color: "#9AA7B8" }}>low volume</em>{" "}
+              &mdash; too few matches to score precisely.
             </p>
           )}
+          <p
+            style={{
+              fontSize: fontSize.xs,
+              color: "#7E8B9E",
+              marginTop: 10,
+              lineHeight: 1.6,
+            }}
+          >
+            Precision figures come from each keyword&apos;s last full
+            validation (May 2026). A monthly re-check watches for words whose
+            meaning moves; where it has found one, the figure here is known to
+            run high.
+          </p>
           <p
             style={{
               fontSize: fontSize.xs,
@@ -344,7 +379,8 @@ export default async function ThemePage({
             }}
           >
             {samples.map((sp, i) => {
-              const displayTitle = truncate(sp.title, 120);
+              const displayTitle = truncate(clean(sp.title), 120);
+              const displayExcerpt = sp.excerpt ? clean(sp.excerpt) : null;
               // Test the *truncated* title — if truncation dropped the matched
               // term, fall through to the excerpt so the post still shows its
               // highlighted keyword rather than rendering with none.
@@ -370,7 +406,7 @@ export default async function ThemePage({
                       ? highlight(displayTitle, sp.matchedTerm, theme.color)
                       : displayTitle}
                   </a>
-                  {!inTitle && sp.excerpt && (
+                  {!inTitle && displayExcerpt && (
                     <div
                       style={{
                         fontSize: fontSize.sm,
@@ -381,7 +417,7 @@ export default async function ThemePage({
                         paddingLeft: 10,
                       }}
                     >
-                      {highlight(sp.excerpt, sp.matchedTerm, theme.color)}
+                      {highlight(displayExcerpt, sp.matchedTerm, theme.color)}
                     </div>
                   )}
                   <div
@@ -407,7 +443,17 @@ export default async function ThemePage({
           }}
         >
           Snippets are shortened and usernames aren&apos;t shown; each link
-          opens the original public Reddit post.{" "}
+          opens the original public Reddit post. If one of these posts is
+          yours and you&apos;d rather it weren&apos;t here,{" "}
+          <a
+            href="https://x.com/hopes_revenge"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ color: "#9AA7B8", textDecoration: "underline" }}
+          >
+            message me
+          </a>{" "}
+          and it comes down.{" "}
           <a
             href="/about#verification"
             style={{ color: "#9AA7B8", textDecoration: "underline" }}

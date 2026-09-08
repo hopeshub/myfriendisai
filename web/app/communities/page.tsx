@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { getSubreddits, getCommunityActivity } from "@/lib/data";
+import {
+  getSubreddits,
+  getCommunityActivity,
+  getCommunityMetrics,
+} from "@/lib/data";
 import CommunitiesTable from "./CommunitiesTable";
 
 // Derived at build time so the count never drifts from the data.
@@ -12,19 +16,25 @@ export const metadata: Metadata = {
   title: "Communities",
   description: `Browse ${communityCount} Reddit communities tracked for AI companionship trends — sortable by subscribers, posts per day, and engagement metrics.`,
   alternates: { canonical: "/communities" },
+  // Repeat the site card image: an openGraph/twitter block here replaces the
+  // inherited one wholesale, so without this the route ships no image.
   openGraph: {
     title: "Communities — My Friend Is AI",
     description: COMMUNITIES_OG_DESCRIPTION,
+    images: ["/opengraph-image"],
   },
   twitter: {
+    card: "summary_large_image",
     title: "Communities — My Friend Is AI",
     description: COMMUNITIES_OG_DESCRIPTION,
+    images: ["/opengraph-image"],
   },
 };
 
 export default function Communities() {
   const subreddits = getSubreddits();
   const activity = getCommunityActivity();
+  const metrics = getCommunityMetrics();
   const asOf = subreddits[0]?.snapshot_date ?? "—";
 
   return (
@@ -47,7 +57,11 @@ export default function Communities() {
         the debate arena between them. They are tracked as context only and do
         not feed the theme atlas.
       </p>
-      <CommunitiesTable subreddits={subreddits} activity={activity} />
+      <CommunitiesTable
+        subreddits={subreddits}
+        activity={activity}
+        metrics={metrics}
+      />
     </div>
   );
 }

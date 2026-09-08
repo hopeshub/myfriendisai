@@ -9,8 +9,11 @@ import dynamic from "next/dynamic";
 const PostVolumeChart = dynamic(() => import("./PostVolumeChartImpl"), {
   ssr: false,
   // Two stacked panels (r/CharacterAI, then the composition area) at every
-  // width — size the placeholder so the page doesn't jump on chart load.
-  loading: () => <div className="min-h-[560px]" />,
+  // width. Heights measured in the production build at 390 / 640 / 768 / 1280
+  // so the placeholder matches what loads.
+  loading: () => (
+    <div className="min-h-[790px] sm:min-h-[675px] md:min-h-[660px] lg:min-h-[635px]" />
+  ),
 });
 
 export default PostVolumeChart;

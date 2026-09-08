@@ -3,6 +3,11 @@
 // post volume, normalized to its own min/max so the shape stays readable
 // whatever the community's size. Direction-only: read the shape, not the
 // height. Plain SVG, not Recharts — 31 of these in one table must stay light.
+//
+// The series starts at the community's first active month: the zeros before a
+// community was founded would otherwise draw a long flat line and a cliff.
+
+import { fromFirstActiveMonth } from "@/lib/metrics";
 
 // Below this monthly peak a community has too little volume for its shape to
 // mean anything — normalizing would turn an eight-posts-ever community into a
@@ -19,7 +24,9 @@ export default function Sparkline({
   width?: number;
   height?: number;
 }) {
-  const clean = values?.filter((v) => Number.isFinite(v)) ?? [];
+  const clean = fromFirstActiveMonth(values ?? []).filter(
+    (v): v is number => v != null && Number.isFinite(v),
+  );
   const peak = clean.length ? Math.max(...clean) : 0;
   if (clean.length < 2 || peak === 0) {
     return (

@@ -8,7 +8,9 @@ import dynamic from "next/dynamic";
 
 const ThemeChart = dynamic(() => import("./ThemeChartImpl"), {
   ssr: false,
-  loading: () => <div style={{ minHeight: 370 }} />,
+  // Range selector, chart and event row. Height measured in the production
+  // build; a little taller on narrow screens where the event row wraps.
+  loading: () => <div className="min-h-[445px] sm:min-h-[435px]" />,
 });
 
 export default ThemeChart;

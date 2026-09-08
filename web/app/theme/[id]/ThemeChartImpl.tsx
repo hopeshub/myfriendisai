@@ -155,7 +155,6 @@ export default function ThemeChart({
               axisLine={false}
               domain={[0, "auto"]}
               tickCount={5}
-              allowDecimals={false}
             />
             {events.map((e) => (
               <ReferenceLine

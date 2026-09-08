@@ -7,18 +7,21 @@ import { useEffect, useState } from "react";
 // JS-driven draw-on animation, which the global CSS prefers-reduced-motion
 // block cannot reach.
 //
-// Starts `true` (motion-reduced) so the first client render is the calm,
-// no-animation path. After mount we read the real media query: if the user
-// does NOT prefer reduced motion, `false` is committed before the chart's
-// first paint of its data, so the draw-on animation still plays once on mount.
-// This conservative default means an unresolved query never animates.
+// The media query is read once in a lazy initializer, so the very first render
+// already has the right answer and the effect only has to subscribe to later
+// changes. Every caller is a lazily-imported client chart, so `window` exists
+// by then; on the server (and in any other unresolved case) the initializer
+// falls back to `true` — the calm, no-animation path.
 
 export function usePrefersReducedMotion(): boolean {
-  const [reduced, setReduced] = useState(true);
+  const [reduced, setReduced] = useState(
+    () =>
+      typeof window === "undefined" ||
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches,
+  );
 
   useEffect(() => {
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
-    setReduced(mq.matches);
     const onChange = (e: MediaQueryListEvent) => setReduced(e.matches);
     mq.addEventListener("change", onChange);
     return () => mq.removeEventListener("change", onChange);

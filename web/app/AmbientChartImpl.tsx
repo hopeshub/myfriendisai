@@ -22,8 +22,8 @@ import { usePrefersReducedMotion } from "@/lib/usePrefersReducedMotion";
 // giants, within a couple percent of each other, both compounding fast since
 // mid-2024. Bottom: a 5-band stacked composition of mid-tier subs that fills
 // in around them — the cluster's organizing infrastructure forming room by
-// room. r/trueantiAI (~50/mo) and r/ProAI (~40/mo) are too small to register
-// as bands and are noted in the caption.
+// room. r/trueantiAI and r/ProAI (both under 200/mo) are too small to
+// register as bands and are noted in the caption.
 //
 // Coloring is by sub identity (the §1 palette family), NOT by valence — the
 // site doesn't score the culture war. The closer line under the chart lands
@@ -83,6 +83,44 @@ const STACK_LABEL: Record<string, string> = Object.fromEntries(
   STACK_BANDS.map((b) => [b.key, b.label]),
 );
 
+// ── In-band label geometry ───────────────────────────────────────────────────
+// The stacked panel's fixed box, and the plot area inside it once the chart
+// margins and the x-axis strip are taken out. Used to turn a pixel gap between
+// two labels into the data-space distance a ReferenceDot needs.
+const STACK_PANEL_HEIGHT = 240;
+const STACK_PLOT_HEIGHT = 210;
+const LABEL_LINE_PX = 13;
+// Chart margins that bound the plot horizontally: the y-axis reserve on the
+// left and the AreaChart's right margin.
+const Y_AXIS_WIDTH = 40;
+const PLOT_RIGHT_MARGIN = 12;
+// Rough advance width of the 10px bold label face, per character.
+const LABEL_CHAR_PX = 5.4;
+
+/**
+ * Where to hang one in-band label so it stays inside the plot. Recharts places
+ * a ReferenceDot label from `position`: "center" centers it on the point,
+ * "left"/"right" hang it off the point with the matching text anchor. A label
+ * whose centered box would cross either edge of the plot gets hung inward
+ * instead. `chartWidth` is the measured pixel width of the whole panel.
+ */
+function labelPosition(
+  idx: number,
+  lastIdx: number,
+  label: string,
+  chartWidth: number,
+): "center" | "left" | "right" {
+  const plotLeft = Y_AXIS_WIDTH;
+  const plotRight = chartWidth - PLOT_RIGHT_MARGIN;
+  const plotWidth = plotRight - plotLeft;
+  if (plotWidth <= 0 || lastIdx <= 0) return "center";
+  const x = plotLeft + (idx / lastIdx) * plotWidth;
+  const halfLabel = (label.length * LABEL_CHAR_PX) / 2;
+  if (x + halfLabel > plotRight) return "left";
+  if (x - halfLabel < plotLeft) return "right";
+  return "center";
+}
+
 function yearTicks(months: string[]): string[] {
   const seen = new Set<string>();
   const ticks: string[] = [];
@@ -128,8 +166,20 @@ export default function AmbientChart({
   // lands in the body of the colored band, not at the boundary above it).
   // Rendered via <ReferenceDot r={0} label={...} /> so Recharts handles
   // the data-to-pixel mapping.
+  //
+  // Three of the six bands are widest in the newest month, which put their
+  // labels half off the right edge and stacked two of them on top of each
+  // other. Two corrections below: `idx` travels with each anchor so the
+  // renderer can right-anchor a label that would overflow, and labels that
+  // land at nearly the same x are pushed apart vertically.
   const anchors = useMemo(() => {
-    type Anchor = { x: string; y: number; label: string; color: string };
+    type Anchor = {
+      x: string;
+      idx: number;
+      y: number;
+      label: string;
+      color: string;
+    };
     const out: Anchor[] = [];
     for (const b of STACK_BANDS) {
       let bestIdx = 0;
@@ -151,10 +201,33 @@ export default function AmbientChart({
       }
       out.push({
         x: point.month,
+        idx: bestIdx,
         y: cumulative + bestVal / 2,
         label: b.label,
         color: b.color,
       });
+    }
+
+    // De-collide vertically. Labels far apart horizontally can never collide,
+    // so only anchors within NEAR_X months of each other are compared. The
+    // minimum gap is a pixel distance converted to data units through the
+    // panel's plot height and the tallest stacked total — approximate (the
+    // real axis rounds its max up to a tick), which errs toward more room.
+    const NEAR_X = Math.max(2, Math.round(stack.length * 0.12));
+    const tallest = Math.max(
+      1,
+      ...stack.map((p) => STACK_BANDS.reduce((s, b) => s + p[b.key], 0)),
+    );
+    const minGap = (LABEL_LINE_PX / STACK_PLOT_HEIGHT) * tallest;
+    out.sort((a, b) => a.y - b.y);
+    for (let i = 1; i < out.length; i++) {
+      const prev = out[i - 1];
+      if (
+        Math.abs(out[i].idx - prev.idx) <= NEAR_X &&
+        out[i].y - prev.y < minGap
+      ) {
+        out[i].y = prev.y + minGap;
+      }
     }
     return out;
   }, [stack]);
@@ -336,11 +409,12 @@ export default function AmbientChart({
         The partisan rooms
       </div>
       <div style={{ fontSize: 12, color: "#7E8B9E", marginBottom: 6 }}>
-        Six anti-AI subs and two pro-AI subs, stacked. r/antiAI (founded
-        2025) is now the largest; the others fill in around it.
+        The cluster&apos;s six anti-AI and two pro-AI subs; the six largest
+        are stacked here. r/antiAI (founded 2025) is now the largest; the
+        others fill in around it.
       </div>
       <MeasuredChart
-        style={{ height: 240 }}
+        style={{ height: STACK_PANEL_HEIGHT }}
         role="img"
         ariaLabel="Stacked area chart: monthly post volume of the partisan ambient subs — r/antiAI, r/ArtistHate, r/DefendingAIArt, r/BetterOffline, r/FuckAI, r/AIDangers — with r/antiAI as the dominant band growing from zero in early 2025."
       >
@@ -479,13 +553,21 @@ export default function AmbientChart({
             })}
             {/* In-band labels: positioned at the data-space midpoint of each
                 band at its widest month, so the label lands in the body of
-                the colored band rather than at the boundary above it. */}
+                the colored band rather than at the boundary above it. A
+                label whose box would cross the plot edge hangs inward from
+                its point instead of straddling it. */}
             {anchors.map((a) => {
               const isSelected = selected != null;
               const matchKey = STACK_BANDS.find(
                 (b) => b.label === a.label,
               )?.key;
               const dimmed = isSelected && matchKey !== selected;
+              const position = labelPosition(
+                a.idx,
+                stack.length - 1,
+                a.label,
+                width,
+              );
               return (
                 <ReferenceDot
                   key={a.label}
@@ -502,7 +584,8 @@ export default function AmbientChart({
                     strokeWidth: 3,
                     paintOrder: "stroke",
                     opacity: dimmed ? 0.15 : 0.95,
-                    position: "center",
+                    position,
+                    offset: position === "center" ? 0 : 4,
                   }}
                 />
               );
@@ -619,8 +702,8 @@ export default function AmbientChart({
         Monthly post volume. Each panel has its own scale; click a band to
         isolate it. The {"~"}% on AI companionship in each tooltip is from a
         50-post sample per sub (May 2026). Two small subs in the cluster
-        &mdash; r/trueantiAI ({"~"}50 posts/mo) and r/ProAI ({"~"}40)
-        &mdash; are too small to register as bands here but are in the
+        &mdash; r/trueantiAI and r/ProAI, both under 200 posts a month
+        &mdash; are too small to register as bands here, but they are in the
         community list.
       </p>
     </div>

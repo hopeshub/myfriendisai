@@ -143,6 +143,7 @@ export default function PostVolumeChart({
   // Recharts' per-point label callback.
   const bandLabel =
     (b: Band, dimmed: boolean) =>
+    // eslint-disable-next-line react/display-name -- a Recharts <LabelList content> render callback, not a component
     (props: {
       x?: number | string;
       y?: number | string;
@@ -178,12 +179,12 @@ export default function PostVolumeChart({
         r/CharacterAI
       </div>
       <div style={{ fontSize: 12, color: "#7E8B9E", marginBottom: 6 }}>
-        The mass-market giant — boomed past 40k posts a month, then receded.
+        The mass-market giant — boomed to nearly 40k posts a month, then receded.
       </div>
       <MeasuredChart
         style={{ height: 138 }}
         role="img"
-        ariaLabel="Chart: r/CharacterAI monthly post volume from 2023 to 2026, rising past 40,000 posts a month then declining."
+        ariaLabel="Chart: r/CharacterAI monthly post volume from 2023 to 2026, peaking near 40,000 posts a month in mid-2024 then declining."
       >
         {({ width, height }) => (
           <AreaChart
