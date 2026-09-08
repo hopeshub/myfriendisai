@@ -40,6 +40,30 @@ fail() {
     exit 1
 }
 
+# Run a command with a wall-clock limit. macOS ships no `timeout`, and an
+# unbounded restic upload can hang for days on a stalled B2 connection: on
+# 2026-09-05 one hung ~44 h, which (a) blocked the next day's launchd run
+# entirely (launchd will not start a second instance) and (b) left a stale
+# repo lock when it was finally killed, so the following run's prune failed
+# too. A kill here is always safe: restic snapshots are atomic (a killed
+# backup leaves no partial snapshot) and the next run clears the lock.
+run_with_timeout() {
+    local secs=$1; shift
+    "$@" &
+    local pid=$!
+    ( sleep "$secs" && kill -TERM "$pid" 2>/dev/null ) &
+    local watchdog=$!
+    local rc=0
+    wait "$pid" || rc=$?
+    kill "$watchdog" 2>/dev/null; wait "$watchdog" 2>/dev/null || true
+    if [ "$rc" -ne 0 ] && ! kill -0 "$pid" 2>/dev/null && [ "$rc" -ge 128 ]; then
+        echo "[$(date)] command killed after ${secs}s: $*"
+    fi
+    return "$rc"
+}
+BACKUP_TIMEOUT_SECS=$(( 3 * 3600 ))   # normal run is seconds; full re-upload of 5 GB is well under an hour
+PRUNE_TIMEOUT_SECS=$(( 1 * 3600 ))
+
 echo "[$(date)] ===== B2 backup start ====="
 
 [ -f "$CRED" ] || fail "credentials file missing: $CRED"
@@ -100,17 +124,24 @@ qc=$(sqlite3 "$STAGING" "PRAGMA quick_check;" 2>&1)
 #    gitignored (public repo, internal notes), so this backup is their only
 #    off-site copy. The runbook especially: it is the recover-from-a-dead-Mac
 #    document, so it must live off-machine.
+# 2b. Clear any stale repo lock left by a killed/crashed earlier run. restic
+#     only removes locks whose owning process is gone (or that are >30 min
+#     old), so this never disturbs a live backup.
+restic unlock >/dev/null 2>&1 || true
+
 echo "[$(date)] restic backup -> $RESTIC_REPOSITORY"
-restic backup "$STAGING" CLAUDE.md docs/archive docs/collection_host_rebuild_runbook.md \
+run_with_timeout "$BACKUP_TIMEOUT_SECS" \
+    restic backup "$STAGING" CLAUDE.md docs/archive docs/collection_host_rebuild_runbook.md \
     --tag tracker-db --host myfriendisai-collector \
-    || fail "restic backup failed"
+    || fail "restic backup failed (or exceeded ${BACKUP_TIMEOUT_SECS}s)"
 
 # 4. Retention. group-by host,tags (NOT the default host,paths) so every
 #    daily snapshot counts as one series for the keep-policy.
 echo "[$(date)] Pruning B2 snapshots (keep 7 daily / 5 weekly / 12 monthly) ..."
-restic forget --tag tracker-db --group-by host,tags \
+run_with_timeout "$PRUNE_TIMEOUT_SECS" \
+    restic forget --tag tracker-db --group-by host,tags \
     --keep-daily 7 --keep-weekly 5 --keep-monthly 12 \
-    --prune || fail "restic forget/prune failed"
+    --prune || fail "restic forget/prune failed (or exceeded ${PRUNE_TIMEOUT_SECS}s)"
 
 # 5. Record success so the daily pipeline can publish backup freshness in
 #    status.json, which the GitHub Actions alert reads. Without this the only
