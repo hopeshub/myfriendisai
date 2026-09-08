@@ -79,42 +79,39 @@ conn.close()
 " 2>/dev/null || echo 0)
 fi
 
-# ── Step 2: Push & deploy ──
-push_succeeded=false
-if [ $collect_exit -ne 0 ]; then
-    echo "Collection failed — skipping push & deploy." >> "$LOG_FILE"
-else
-    echo "" >> "$LOG_FILE"
-    if "$PROJECT_DIR/scripts/push_and_deploy.sh" >> "$LOG_FILE" 2>&1; then
-        echo "=== Push & deploy succeeded ===" >> "$LOG_FILE"
-        push_succeeded=true
-    else
-        echo "=== Push & deploy FAILED (exit code: $?) — data is safe, will retry next run ===" >> "$LOG_FILE"
+# ── Health status writer ──
+# Written TWICE per run. First, before the push, so the status.json that
+# push_and_deploy.sh commits alongside today's data describes today's
+# collection (the banner keys on last_collection; a file written only after
+# the push is always one run stale — it nearly false-fired the stale banner
+# on 2026-09-08). Then again after the push with the push result, which is
+# committed by the NEXT run. push_state: "pending" | "true" | "false".
+write_status() {
+    local push_state="$1"
+    # Status carries a consecutive-failure counter and the last error line so the
+    # frontend stale-data banner can show *why* the site is stale, not just that
+    # it is. last_push_error is extracted from the PUSH_ERR sentinel emitted by
+    # push_and_deploy.sh.
+    local now; now=$(date -u '+%Y-%m-%dT%H:%M:%SZ')
+    local collection_succeeded_bool; collection_succeeded_bool=$([ $collect_exit -eq 0 ] && echo true || echo false)
+    local last_push_error=""
+    if [ "$push_state" = false ] && [ $collect_exit -eq 0 ]; then
+        last_push_error=$(grep "^PUSH_ERR:" "$LOG_FILE" | tail -1 | sed 's/^PUSH_ERR: //' || echo "")
     fi
-fi
 
-# ── Step 3: Write health status ──
-# Status carries a consecutive-failure counter and the last error line so the
-# frontend stale-data banner can show *why* the site is stale, not just that
-# it is. last_push_error is extracted from the PUSH_ERR sentinel emitted by
-# push_and_deploy.sh.
-now=$(date -u '+%Y-%m-%dT%H:%M:%SZ')
-collection_succeeded_bool=$([ $collect_exit -eq 0 ] && echo true || echo false)
-last_push_error=""
-if [ "$push_succeeded" = false ] && [ $collect_exit -eq 0 ]; then
-    last_push_error=$(grep "^PUSH_ERR:" "$LOG_FILE" | tail -1 | sed 's/^PUSH_ERR: //' || echo "")
-fi
-
-"$PROJECT_DIR/.venv/bin/python" - "$STATUS_FILE" "$now" "$posts_collected" "$subreddits_ok" "$subreddits_total" "$collection_succeeded_bool" "$push_succeeded" "$last_push_error" <<'EOPY'
+    "$PROJECT_DIR/.venv/bin/python" - "$STATUS_FILE" "$now" "$posts_collected" "$subreddits_ok" "$subreddits_total" "$collection_succeeded_bool" "$push_state" "$last_push_error" <<'EOPY'
 import glob
 import json
 import os
 import sys
 import time
 
-status_path, now, posts, ok, total, collection_ok, push_ok, last_err = sys.argv[1:9]
+status_path, now, posts, ok, total, collection_ok, push_state, last_err = sys.argv[1:9]
 collection_ok = collection_ok == "true"
-push_ok = push_ok == "true"
+# "pending": the pre-push write — carry the previous run's push fields
+# forward untouched and publish push_succeeded as null.
+push_pending = push_state == "pending"
+push_ok = push_state == "true"
 
 try:
     prev = json.load(open(status_path))
@@ -162,7 +159,11 @@ except Exception:
 prev_consec = int(prev.get("consecutive_push_failures") or 0)
 prev_last_push = prev.get("last_successful_push")
 
-if push_ok:
+if push_pending:
+    consec = prev_consec
+    last_push = prev_last_push
+    last_err = prev.get("last_push_error") or ""
+elif push_ok:
     consec = 0
     last_push = now
     last_err = ""
@@ -180,7 +181,7 @@ out = {
     "subreddits_ok": int(ok),
     "subreddits_total": int(total),
     "collection_succeeded": collection_ok,
-    "push_succeeded": push_ok,
+    "push_succeeded": None if push_pending else push_ok,
     "last_successful_push": last_push,
     "consecutive_push_failures": consec,
     "last_push_error": last_err or None,
@@ -204,7 +205,27 @@ with open(status_path, "w") as f:
     f.write("\n")
 EOPY
 
-echo "Wrote status to $STATUS_FILE" >> "$LOG_FILE"
+    echo "Wrote status to $STATUS_FILE" >> "$LOG_FILE"
+}
+
+# ── Step 2: Push & deploy ──
+push_succeeded=false
+# Provisional status for THIS run's commit (see write_status).
+write_status pending
+if [ $collect_exit -ne 0 ]; then
+    echo "Collection failed — skipping push & deploy." >> "$LOG_FILE"
+else
+    echo "" >> "$LOG_FILE"
+    if "$PROJECT_DIR/scripts/push_and_deploy.sh" >> "$LOG_FILE" 2>&1; then
+        echo "=== Push & deploy succeeded ===" >> "$LOG_FILE"
+        push_succeeded=true
+    else
+        echo "=== Push & deploy FAILED (exit code: $?) — data is safe, will retry next run ===" >> "$LOG_FILE"
+    fi
+fi
+
+# ── Step 3: Final health status (push result; committed by the next run) ──
+write_status "$push_succeeded"
 
 # ── Step 4: Notify on failure ──
 if [ $collect_exit -ne 0 ] || [ "$push_succeeded" = false ]; then
