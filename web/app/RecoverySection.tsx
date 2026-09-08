@@ -122,10 +122,9 @@ export default function RecoverySection({
         </span>{" "}
         These are small communities &mdash; together a few thousand posts a
         year, against r/CharacterAI&apos;s hundred and fifty thousand in 2025.
-        This is a
-        qualitative finding, not a measured prevalence: not how many people,
-        but the plain fact that a recovery infrastructure now exists where
-        three years ago there was none.
+        This is a qualitative finding, not a measured prevalence. It says
+        nothing about how many people. It says that a recovery infrastructure
+        now exists where three years ago there was none.
       </p>
     </div>
   );

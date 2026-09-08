@@ -65,9 +65,8 @@ export default function Home() {
               body: (
                 <>
                   It tracks six recurring themes in how these communities talk.
-                  The sharpest movements in the record are not slow cultural
-                  drift &mdash; they arrive when a platform changes underneath
-                  its users.
+                  The sharpest movements in the record arrive when a platform
+                  changes underneath its users, not from slow cultural drift.
                 </>
               ),
             },
@@ -145,7 +144,7 @@ export default function Home() {
         <p style={{ ...intro, marginBottom: 16 }}>
           r/CharacterAI is a world of its own &mdash; a mass-market boom
           that briefly ran to nearly 34,000 posts a month, then a long
-          recede. It dominates any volume picture so completely that
+          decline. It dominates any volume picture so completely that
           putting it on the same axis as the rest would erase everything
           else.
         </p>
@@ -185,18 +184,18 @@ export default function Home() {
           When a platform changes underneath its users &mdash; an app drops a
           feature, a model is retired &mdash; the language in these communities
           shifts within days. These ruptures are where the tracker sees most
-          clearly: each event below is real, paired with posts people wrote in
-          the weeks around it &mdash; chosen by hand from the most-upvoted
-          posts in those communities, so they are the loudest reactions, not a
+          clearly. Each event below is real, paired with posts people wrote in
+          the weeks around it. The posts are chosen by hand from the
+          most-upvoted in those communities: the loudest reactions, not a
           representative sample.
         </p>
         <p style={{ ...intro, marginBottom: 16 }}>
           Every event here is a rupture &mdash; itself a finding about the
-          method. Only the rupture line is event-shaped throughout; sex/ERP
-          has one enormous event and little else, and romance, consciousness,
-          and therapy drift, with no press release behind them &mdash; though
-          their vocabularies hold no event words, so a spike in them would be
-          hard for this instrument to see. A section built around moments can
+          method. Only the rupture line is event-shaped throughout. Sex/ERP has
+          one enormous event and little else; romance, consciousness, and
+          therapy drift, with no press release behind them. (Their vocabularies
+          hold no event words either, so this instrument would struggle to show
+          a spike in them if one came.) A section built around moments can
           only be about the theme that arrives in them.
         </p>
         <EventShowcase />
@@ -244,10 +243,8 @@ export default function Home() {
           &ldquo;my boyfriend <em>is</em>{" "}an AI.&rdquo; Nothing in the words
           decides that &mdash; the room does, which is why the lines above are
           drawn only inside communities where AI companionship is the subject.
-          Even there, the words will not hold still. They come loose from their
-          meaning, they flip while you watch, sometimes two of them name one
-          behavior, and sometimes the change happens in a register the words
-          can&apos;t reach. Here is what that looked like, four times.
+          Even there, the words will not hold still. Here is what that looked
+          like, four times.
         </p>
         <p style={{ ...intro, marginBottom: 16 }}>
           <strong style={{ color: "#F1F4F8", fontWeight: 600 }}>
@@ -346,8 +343,8 @@ export default function Home() {
           The argument is upstream
         </h2>
         <p style={{ ...intro, marginBottom: 16 }}>
-          Next door, a new infrastructure is forming. Subreddits built to
-          argue about AI as a cultural project barely existed in 2023;
+          Next door, a new cluster of communities has formed. Subreddits built
+          to argue about AI as a cultural project barely existed in 2023;
           the cluster&apos;s post volume rose 319% in 2025 alone, and
           now runs at more than 10,000 posts a month. r/aiwars is the
           only all-sides debate floor; everyone else is a partisan room.
