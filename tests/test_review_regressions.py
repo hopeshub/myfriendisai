@@ -210,6 +210,17 @@ def _seed_tagged_month(conn, month, n=5):
         )
 
 
+def _seed_untagged_month(conn, month, n=3):
+    """Seed `n` untagged posts into "YYYY-MM": the corpus continues, the theme is silent."""
+    for i in range(n):
+        day = f"{month}-{i % 5 + 2:02d}"
+        conn.execute(
+            "INSERT INTO posts (id, subreddit, created_utc, collected_date) "
+            "VALUES (?, 'replika', strftime('%s', ?), ?)",
+            (f"u{month}{i}", day, day),
+        )
+
+
 def _month_offset(months_back):
     """The calendar month `months_back` months before the current UTC month."""
     from datetime import datetime, timezone
@@ -241,6 +252,9 @@ def test_coverage_start_rejects_candidate_before_gap_month(tmp_path, monkeypatch
     # reliably-measurable start.
     _seed_tagged_month(mem_conn, "2025-01")
     _seed_tagged_month(mem_conn, "2025-03")
+    # The corpus keeps collecting through the last completed month (untagged
+    # posts) — so the silence after 2025-03 is the theme's, not an outage's.
+    _seed_untagged_month(mem_conn, _month_offset(1))
     mem_conn.commit()
 
     cs = _coverage_start(tmp_path, mem_conn)
@@ -269,3 +283,21 @@ def test_coverage_start_accepts_series_running_to_last_completed_month(
     assert cs["romance"] == f"{_month_offset(2)}-01", \
         (f"expected {_month_offset(2)}-01 (gap at {_month_offset(3)} "
          f"disqualifies {_month_offset(4)}); got {cs['romance']}")
+
+
+def test_coverage_start_survives_collection_outage(tmp_path, monkeypatch, mem_conn):
+    """A completed month with NO corpus days is missing data, not a silent
+    theme: 'every later completed month' is evaluated only up to the last
+    month the corpus has, so an outage does not blank every coverage_start."""
+    import src.config as config_mod
+    monkeypatch.setattr(config_mod, "load_keyword_communities",
+                        lambda: [{"subreddit": "replika"}])
+
+    # Tagged and above threshold in M-4..M-2; nothing at all (no posts) in M-1.
+    for back in (4, 3, 2):
+        _seed_tagged_month(mem_conn, _month_offset(back))
+    mem_conn.commit()
+
+    cs = _coverage_start(tmp_path, mem_conn)
+    assert cs["romance"] == f"{_month_offset(4)}-01", \
+        f"outage month {_month_offset(1)} must not disqualify the series (got {cs['romance']})"

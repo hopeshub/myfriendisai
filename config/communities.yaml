@@ -131,8 +131,9 @@ communities:
 
   # Added 2026-05-18 — community coverage refresh. An open-coding pass scored 15
   # candidate subs for companionship-discourse density; these 5 cleared the gate
-  # (10 were skipped as operational/noise). Forward-only: no historical backfill,
-  # so their theme lines start from collection onward. See docs/HANDOFF_2026-05-18.md.
+  # (10 were skipped as operational/noise). Their history was backfilled from the
+  # archive (in-scope pre-May-2026 posts: 0.16% of the denominator). See
+  # docs/HANDOFF_2026-05-18.md.
   - subreddit: aipartners
     display_name: "r/aipartners"
     tier: 1
@@ -312,7 +313,8 @@ communities:
   # categories (Anti-AI, Pro-AI, Debate Arena) but excluded from the theme
   # atlas, the per-1k denominator, composition_trends.json, and every keyword
   # export. All carry exclude_from_keywords: true; load_keyword_communities()
-  # gates them out by tier (in (1,2,3)) as a second fence. Forward-only.
+  # gates them out by tier (in (1,2,3)) as a second fence. History backfilled
+  # from the archive (the ambient charts rest on it).
   #
   # ── REJECTED ENTRIES (with rationale, so they don't get re-proposed) ──────
   # Failed stage 1 (technical/non-advocacy):

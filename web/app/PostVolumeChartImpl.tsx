@@ -18,7 +18,7 @@ import { useBreakpoint } from "./useBreakpoint";
 import { usePrefersReducedMotion } from "@/lib/usePrefersReducedMotion";
 
 // ── §1 post-volume chart ─────────────────────────────────────────────────────
-// Two stacked charts. Top: r/CharacterAI alone — it is 60-90% of all volume and
+// Two stacked charts. Top: r/CharacterAI alone — it has run 35–91% of theme-measurement post volume by month and
 // would crush everything else on a shared scale. Bottom: every other
 // companionship community as a stacked area, so the field's turnover is
 // legible — r/replika's 2023 dominance collapsing while a new generation

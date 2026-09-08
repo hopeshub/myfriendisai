@@ -55,7 +55,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.7,
     },
     {
-      url: "https://myfriendisai.com/dataset/v1/",
+      url: "https://myfriendisai.com/dataset/v1",
       lastModified: dataDate,
       changeFrequency: "daily",
       priority: 0.6,

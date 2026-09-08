@@ -21,6 +21,13 @@ from src.config import load_keyword_communities
 DB_PATH = PROJECT_ROOT / "data" / "tracker.db"
 KEYWORDS_PATH = PROJECT_ROOT / "config" / "keywords_v8.yaml"
 OUTPUT_PATH = PROJECT_ROOT / "web" / "data" / "keyword_details.json"
+DRIFT_PATH = PROJECT_ROOT / "analysis" / "keyword_pipeline" / "drift_history.json"
+
+# A keyword whose latest post-level drift re-measurement falls below this is
+# marked "contested" on its theme page (status "audit-gate-fail"). 0.60 is the
+# project's own CUT gate (docs/METHODOLOGY.md §4.2) and the bucket the drift
+# reports use for the v9 review pile — not a new policy.
+DRIFT_CONTESTED_BELOW = 0.60
 
 # Posts to exclude from samples
 EXCLUDED_TITLES = {"[deleted]", "[removed]", "", None}
@@ -107,6 +114,45 @@ def detect_status(annotation_block: str) -> "str | None":
     return None
 
 
+def load_latest_drift_precision(path: Path = DRIFT_PATH) -> dict:
+    """{term: latest post-level drift precision (0-1)} from drift_history.json.
+
+    Takes, per keyword, the most recent ``level == "post"`` history entry
+    (ordered by date, then cycle). Returns {} if the file is missing or
+    unreadable so the export degrades to the YAML-only statuses.
+    """
+    try:
+        data = json.loads(Path(path).read_text())
+    except (OSError, ValueError):
+        return {}
+    latest = {}
+    for term, entry in (data.get("keywords") or {}).items():
+        posts = [
+            h for h in entry.get("history", [])
+            if h.get("level") == "post" and h.get("precision") is not None
+        ]
+        if not posts:
+            continue
+        posts.sort(key=lambda h: (h.get("date") or "", h.get("quarter") or ""))
+        latest[term] = float(posts[-1]["precision"])
+    return latest
+
+
+def apply_drift_status(categories: dict, drift: dict) -> dict:
+    """Override a keyword's display status to "audit-gate-fail" (rendered as
+    "contested") when its latest drift re-measurement is below
+    DRIFT_CONTESTED_BELOW. Applied LAST, so it also wins over "low-volume"
+    and "researcher-accepted": the validation-time badge stays as the number,
+    and the mark says its meaning has since moved. Returns the term list.
+    """
+    for terms in categories.values():
+        for ti in terms:
+            latest = drift.get(ti["term"])
+            if latest is not None and latest < DRIFT_CONTESTED_BELOW:
+                ti["status"] = "audit-gate-fail"
+    return categories
+
+
 def parse_keyword_annotation(raw_lines: list, clean_term: str) -> tuple:
     """Locate a keyword's YAML definition line and return (precision, status).
 
@@ -161,7 +207,7 @@ def parse_keywords_yaml(yaml_path: Path) -> dict:
             )
         categories[name] = terms
 
-    return categories
+    return apply_drift_status(categories, load_latest_drift_precision())
 
 
 def build_keyword_details(
@@ -184,6 +230,15 @@ def build_keyword_details(
     # Case-insensitive subreddit allowlist for the WHERE ... IN clauses.
     sub_params = tuple(s.lower() for s in included_subs)
     sub_ph = ",".join("?" for _ in sub_params)
+
+    # Post ids already used as a sample for an earlier keyword, across ALL
+    # themes. Samples are most-recent-first, so without this the same recent
+    # post from a small community can be the first "matched post" on several
+    # theme pages at once — a re-identification surface, and often a false
+    # positive for the later keywords. Prefer unused posts; fall back to used
+    # ones only when the keyword has too few candidates.
+    used_ids = set()
+    pool_limit = SAMPLE_LIMIT * 4
 
     for cat_name, terms_info in categories.items():
         # --- Per-keyword stats and samples ---
@@ -228,11 +283,11 @@ def build_keyword_details(
                      AND pkt.post_date >= ?
                    ORDER BY pkt.post_date DESC
                    LIMIT ?""",
-                (cat_name, term, *sub_params, recent_date, SAMPLE_LIMIT),
+                (cat_name, term, *sub_params, recent_date, pool_limit),
             ).fetchall()
 
             # Fall back to older posts if not enough recent ones
-            if len(sample_posts) < SAMPLE_LIMIT:
+            if len(sample_posts) < pool_limit:
                 older = db.execute(
                     f"""SELECT DISTINCT p.title, pkt.subreddit, pkt.post_date, p.id,
                               p.selftext
@@ -245,14 +300,21 @@ def build_keyword_details(
                          AND LOWER(pkt.subreddit) IN ({sub_ph})
                        ORDER BY pkt.post_date DESC
                        LIMIT ?""",
-                    (cat_name, term, *sub_params, SAMPLE_LIMIT - len(sample_posts)),
+                    (cat_name, term, *sub_params, pool_limit - len(sample_posts)),
                 ).fetchall()
                 existing_titles = {sp[0] for sp in sample_posts}
                 for o in older:
                     if o[0] not in existing_titles:
                         sample_posts.append(o)
-                    if len(sample_posts) >= SAMPLE_LIMIT:
+                    if len(sample_posts) >= pool_limit:
                         break
+
+            # Choose SAMPLE_LIMIT from the pool: unused posts first (in date
+            # order), then already-used ones only to fill a shortfall.
+            fresh = [sp for sp in sample_posts if sp[3] not in used_ids]
+            reused = [sp for sp in sample_posts if sp[3] in used_ids]
+            sample_posts = (fresh + reused)[:SAMPLE_LIMIT]
+            used_ids.update(sp[3] for sp in sample_posts)
 
             keywords.append(
                 {

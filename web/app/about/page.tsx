@@ -184,8 +184,10 @@ export default function About() {
             <p>
               Each theme is then defined by a set of keywords, and every keyword
               has to earn its place. For a candidate, I pull 100 real posts it
-              matched and read them; the keyword stays only if those posts are
-              genuinely about the theme. If it is matching on a coincidental
+              matched and have them classified against the theme&apos;s
+              definition &mdash; by language-model agents working from a
+              written rubric, with my own spot-checks of the results; the
+              keyword stays only if those posts are genuinely about the theme. If it is matching on a coincidental
               shared word, it gets dropped. Language also drifts over time, so
               every month a fresh sample of recent matches is pulled for each
               keyword, and I re-check any keyword whose meaning may have moved
@@ -219,8 +221,8 @@ export default function About() {
               that genuinely belong to the theme — from roughly 80% to 88%,
               while doing nothing for the posts the keywords never matched in
               the first place. So the method stays plain on purpose. The careful
-              work happens earlier, in validating each keyword by hand before it
-              is ever allowed to count.
+              work happens earlier, in validating each keyword before it is
+              ever allowed to count.
             </p>
           </div>
         </section>

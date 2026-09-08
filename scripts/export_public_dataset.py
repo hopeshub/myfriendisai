@@ -95,8 +95,9 @@ def _current_month():
 
 
 # The 2026-05-16 census values, LLM-graded against a 72-post human anchor.
-# The therapy figure is the as-is v8 set (~68%); the ~87% sometimes quoted is
-# a rebuilt v9 set that has not shipped. See docs/METHODOLOGY.md §4.4.
+# The therapy figure is the as-is v8 set (~68%); the ~80%/~87% sometimes quoted
+# were projections for a rebuilt v9 set that has not shipped. See
+# docs/METHODOLOGY.md §4.4.
 CENSUS_PRECISION_2026_05 = {
     "addiction": 97, "sexual_erp": 96, "consciousness": 87,
     "romance": 86, "therapy": 68, "rupture": 77,
@@ -119,7 +120,7 @@ def precision_paragraph():
             pp = t.get("post_precision") or {}
             if pp.get("precision") is not None and pp.get("n"):
                 latest[theme] = (round(pp["precision"] * 100), pp["n"])
-                stamp = pp.get("date") or stamp
+                stamp = max(stamp or "", pp.get("date") or "") or None
     except (OSError, ValueError):
         latest = {}
     parts = []
@@ -131,9 +132,10 @@ def precision_paragraph():
             parts.append(f"{theme} ~{census}%")
     if latest:
         head = (
-            "**Measured per-theme precision** (share of matched posts genuinely about the\n"
-            f"theme), as the 2026-05-16 census / the latest drift cycle ({stamp}), both\n"
-            "LLM-graded (the census against a 72-post human anchor): "
+            "**Measured per-theme precision** (share of sampled matches judged on-theme,\n"
+            "pooled with equal weight per keyword rather than by hit volume), as the\n"
+            f"2026-05-16 census / the latest drift cycle ({stamp}), both LLM-graded (the\n"
+            "census against a 72-post human anchor): "
         )
     else:
         head = (
@@ -458,7 +460,7 @@ becomes reliable) through the last complete month.
 | `tier` | Direct | 0–4. See `METHODOLOGY.md` for what each tier is and why it exists. |
 | `tier_label` | Direct | Human-readable tier name. |
 | `category` | Direct | The community's category label as shown on the site. |
-| `in_theme_measurement` | Derived | `true` when the community counts toward `monthly_theme_counts` — i.e. tier 1–3 and not excluded from keyword tracking. T0 general-AI and T4 ambient communities are tracked for context only and are always `false`, as are the three explicitness-scope exclusions. |
+| `in_theme_measurement` | Derived | A boolean — `true`/`false` in the JSON, the same words in the CSV (before September 2026 the JSON carried the strings `"true"`/`"false"`). `true` when the community counts toward `monthly_theme_counts` — i.e. tier 1–3 and not excluded from keyword tracking. T0 general-AI and T4 ambient communities are tracked for context only and are always `false`, as are the three explicitness-scope exclusions. |
 
 This table covers the communities currently being collected. Two communities
 that were tracked and later deactivated — r/HeavenGF (removed from Reddit —
@@ -557,9 +559,10 @@ INDEX_TEMPLATE = """\
   <!-- File links are root-absolute (/dataset/{version}/…), not relative:
        Next redirects /dataset/{version}/ to /dataset/{version} (308) before the
        rewrite serves this file, so a relative href would resolve one directory
-       up and 404. In a downloaded copy of the bundle the files sit next to this
-       page under those same names. The two site links are full URLs so a
-       downloaded copy still reaches the site. -->
+       up and 404. In a downloaded copy of the bundle these links will not
+       resolve, but the files sit next to this page under the same names and
+       README.md lists them. The two site links are full URLs so a downloaded
+       copy still reaches the site. -->
   <div style="overflow-x:auto">
   <table>
     <thead><tr><th>File</th><th>Rows</th><th>What it is</th></tr></thead>

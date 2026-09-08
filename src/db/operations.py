@@ -891,6 +891,13 @@ def export_keyword_trends_json(
         f"{_today.year - 1:04d}-12" if _today.month == 1
         else f"{_today.year:04d}-{_today.month - 1:02d}"
     )
+    # Floor it at the last completed month the CORPUS has any days in: a
+    # whole month of collection outage is missing data, not a month in which
+    # every theme's vocabulary went silent, and must not blank every
+    # coverage_start at once.
+    corpus_months = [d[:7] for d, _ in total_posts_rows if d[:7] < current_month]
+    if corpus_months and max(corpus_months) < last_complete:
+        last_complete = max(corpus_months)
     coverage_start: dict[str, Optional[str]] = {}
     for category, entries in result.items():
         if category.startswith("_"):

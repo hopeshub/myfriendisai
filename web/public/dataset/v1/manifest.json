@@ -1,7 +1,7 @@
 {
   "dataset": "myfriendisai-aggregates",
   "version": "v1",
-  "generated_at": "2026-09-08T12:58:47Z",
+  "generated_at": "2026-09-08T13:32:01Z",
   "data_through": "2026-08",
   "license": "CC BY 4.0",
   "license_url": "https://creativecommons.org/licenses/by/4.0/",
@@ -11,18 +11,18 @@
   "files": [
     {
       "name": "METHODOLOGY.md",
-      "bytes": 33476,
-      "sha256": "b3c5b71921c2b3c8b8f98ed68145e5e99cfc85655e3a46b773fc0ad7b6d57da5"
+      "bytes": 35197,
+      "sha256": "92605b67d6b9662aefacc749dfd59b5de46210b482917238bb77975e2f96debf"
     },
     {
       "name": "README.md",
-      "bytes": 8415,
-      "sha256": "614850ef8c6124c47490777bcf1dc8231852a73bdcca3bd280ded2f5b8dc6a90"
+      "bytes": 8612,
+      "sha256": "44ea1e0498c429ffd15b4824e2dfe11dc1e37549822d64a695f41a7b74b2e39c"
     },
     {
       "name": "index.html",
-      "bytes": 4440,
-      "sha256": "3521553d9e11a098af14d7b08dbae27b33185f7a41a9b6e63ee965084dd98035"
+      "bytes": 4504,
+      "sha256": "08d175f7b98e1f65234df284f77334e6f0377d4bd6445f89dc68991ce057e5f1"
     },
     {
       "name": "monthly_community_volumes.csv",

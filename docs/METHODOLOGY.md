@@ -119,9 +119,9 @@ companionship discourse.
 
 **Excluded from keyword tracking, 2026-05-18** (three T2 communities):
 
-| Community | What it actually is | Why excluded |
+| Community | Why the matches were noise | Why excluded |
 |---|---|---|
-| r/AIGirlfriend | ~91% affiliate-spam image posts | Matches were marketing copy, not discourse |
+| r/AIGirlfriend | 1.4% keyword-tag rate; a re-examination of recent posts found them dominated by affiliate and marketing image posts rather than discourse (sample size not recorded) | Matches were marketing copy, not discourse |
 | r/SpicyChatAI | Bot-card marketplace and product support | Matches were listing text — the JanitorAI failure mode |
 | r/ChatGPTNSFW | Erotica-writing / jailbreak-craft community | Real signal but off-construct: no persistent companion or relationship |
 
@@ -198,8 +198,12 @@ published in the site footer and in `data/site_meta.json`; the public bundle
 be reproduced from it. Per-theme coverage gating (§6.1) means a theme's chart
 line still begins only where its vocabulary becomes measurable.
 
-Communities added after launch are **forward-only** — no backfill — because a
-backfilled addition would inject a step into the historical series.
+Communities added after launch are backfilled from the archive where history
+is available, so a new community's volume appears in the historical series from
+its own founding rather than from its add date. Additions to the
+theme-measurement scope have been small — the five communities added in May
+2026 contribute 0.16% of the pre-May-2026 denominator — and are listed with
+their add dates in `config/communities.yaml`.
 
 ---
 
@@ -225,9 +229,10 @@ Themes are **not mutually exclusive**. A single post can be counted under
 several themes; each theme line counts distinct posts for that theme. The theme
 series therefore do not sum to anything meaningful.
 
-### 3.3 No language model in any published number
+### 3.3 No language model in any charted number
 
-Every published figure is a deterministic, manually-validated keyword count.
+Every number on the chart is a deterministic keyword count. No language model
+classifies a post into a theme.
 
 This is a deliberate trade. A language model would classify more flexibly, but
 it introduces model drift, hidden judgment calls, version dependency, and
@@ -242,7 +247,8 @@ roughly 80% to 88% and did nothing at all for the posts the keywords never
 matched. It was dropped. The drift check (§8) is the only language model in the
 ongoing pipeline; the May 2026 recall audit (§5) and precision census (§4.4)
 were LLM-graded too, the census against a 72-post human anchor. No language
-model touches a published number.
+model touches a number on the chart; the precision and recall figures that
+*describe* the instrument (§4.4, §5) are LLM-graded audits of it.
 
 ---
 
@@ -256,6 +262,10 @@ Every keyword has to earn its place before it is allowed to count.
 2. Read title + body of each.
 3. Classify YES / NO / AMBIGUOUS.
 4. Relevance = YES / (YES + NO).
+
+Classification is done by parallel LLM agents under a locked rubric, with the
+researcher spot-checking results and reading the disagreements; the per-run
+`validation_*` reports in the repository record each pass.
 
 Classification uses the **topical reading** (locked 2026-04-23): a post is YES
 if it is thematically about the theme, even without graphic or first-person
@@ -306,11 +316,16 @@ from the most recent per-keyword drift cycle:
 
 Both columns are LLM-graded — the census anchored on 72 human-coded posts, the
 drift cycle drawn from a larger and more recent sample and re-measured monthly.
+Each is the share of *sampled* matches judged on-theme, pooled with equal
+weight per keyword — not weighted by how many posts each keyword actually tags,
+which would move some themes by several points in either direction.
 
-The therapy census figure is sometimes quoted as ~87%. That number belongs to a
-rebuilt therapy keyword set specified in May 2026 that has not shipped; the
-published line is the v8 set as-is, at ~68% — below the §4.2 KEEP gate. The
-therapy line is published with that caveat rather than quietly.
+The therapy figure is sometimes quoted as ~80% or ~87% — this document itself
+carried ~80% until September 2026. Both numbers are projections for a rebuilt
+therapy keyword set specified in May 2026 (written there as "~87% rebuilt" and
+"~80%+ (rebuilt)") that has not shipped; the published line is the v8 set as-is,
+at ~68% — below the §4.2 KEEP gate. The therapy line is published with that
+caveat rather than quietly.
 
 Earlier small-sample (n≈20) screens had run 10–15 points low; those figures are
 superseded.
@@ -345,7 +360,9 @@ the posts the keywords had missed spot-checked by hand. Recall =
 
 Recall runs 0–32% across the six themes: consciousness caught none of its eight
 classified-YES posts. The confidence intervals are wide because the YES counts
-are small; treat the point estimates with that uncertainty.
+are small; treat the point estimates with that uncertainty. They also assume
+simple random sampling, while the design oversamples theme-rich communities, so
+read them as a lower bound on the uncertainty.
 
 **Where the missed posts live.** The gap concentrates in four structural
 categories:
@@ -487,7 +504,7 @@ the record, so the combined series carries a step artifact at 2026-03-18 and is
 not longitudinally comparable. Backfilled data predating that date was tagged on
 post text only, so the two series are nearly identical for older posts — but not
 identical by construction: a comment written after 2026-03-18 on an older post
-propagates a tag dated to the parent post, and 48 pre-2026-03-18 dates differ
+propagates a tag dated to the parent post, and 48 theme-days (21 distinct dates) before 2026-03-18 differ
 between the two series in the committed export. The published post-only series
 is unaffected.
 
@@ -509,7 +526,10 @@ So a **monthly per-keyword drift check** re-samples recent matches for each
 keyword and re-classifies them, tracking *relative* agreement over time. Relative
 agreement is the right statistic here because it is robust to a constant
 classifier bias — the check answers "has this keyword's meaning moved?", not
-"what is its absolute precision today?".
+"what is its absolute precision today?". The same pass also yields a per-theme
+precision estimate for the cycle, which §4.4 and the site's theme-health export
+publish as such; a keyword whose latest re-measurement falls below the 60% cut
+line is marked *contested* on its theme page.
 
 The sampling half is automated and scheduled monthly; the classification and
 reporting half is run by hand, and has sometimes covered two months' samples in
@@ -520,8 +540,9 @@ noisy-keyword flags) is regenerated on every collection run for audit.
 
 The drift check is the only language model in the ongoing pipeline; the May 2026
 recall audit (§5) and precision census (§4.4) were LLM-graded as well, the
-census against a 72-post human anchor. It feeds no published number — it flags
-keywords for human review.
+census against a 72-post human anchor. It feeds no number on any chart — it flags
+keywords for human review; the per-theme precision it yields is published as
+validation metadata (§4.4 and the dataset README), never as a series.
 
 ---
 
@@ -650,8 +671,8 @@ The bundle contains **derived numbers only**: no post text, no titles, no
 usernames, no post IDs, no raw Reddit content. It is regenerated by the daily
 pipeline.
 
-The full post database is too large to host in the repository. It is available
-on request.
+The full post database is too large to host in the repository. It is not
+published; it is shared on request.
 
 ---
 
@@ -659,7 +680,8 @@ on request.
 
 The aggregate data exports are licensed **CC BY 4.0**
 (<https://creativecommons.org/licenses/by/4.0/>). The project's source code is
-MIT-licensed separately. The underlying raw corpus is not redistributed.
+MIT-licensed separately. The underlying raw corpus is not published or
+redistributed; it is shared on request (§13).
 
 Suggested citation:
 

@@ -515,7 +515,7 @@
         "term": "ai therapy",
         "hits": 32,
         "precision": 73.3,
-        "status": "low-volume",
+        "status": "audit-gate-fail",
         "sample_posts": [
           {
             "title": "AI: Final Weapon or Final Healer? Cincinnatus Hibbard\u2019s AI Therapy Experiment | Bohemian",
@@ -2119,7 +2119,7 @@
         "term": "screen time",
         "hits": 391,
         "precision": 89.0,
-        "status": null,
+        "status": "audit-gate-fail",
         "sample_posts": [
           {
             "title": "Even when I hate him, I can't stop being dependent on \u201chim\u201d.",
@@ -2763,7 +2763,7 @@
         "term": "I was hooked",
         "hits": 55,
         "precision": 81.3,
-        "status": null,
+        "status": "audit-gate-fail",
         "sample_posts": [
           {
             "title": "Moving My Companion",
@@ -8198,7 +8198,7 @@
         "term": "memory reset",
         "hits": 11,
         "precision": 72.2,
-        "status": "low-volume",
+        "status": "audit-gate-fail",
         "sample_posts": [
           {
             "title": "Memory resets around message 20 are driving me insane - what's your biggest CAI pain?",

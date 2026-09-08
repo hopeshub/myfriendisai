@@ -226,7 +226,7 @@ export default function ThemeChart({
       </MeasuredChart>
 
       <div className="text-[13px] sm:text-[11px]" style={{ color: "#7E8B9E", marginTop: 8 }}>
-        Validated-keyword mentions per 1,000 posts · monthly average · post text
+        Validated-keyword mentions per 1,000 posts · mean of the daily smoothed rate · post text
         only
       </div>
 

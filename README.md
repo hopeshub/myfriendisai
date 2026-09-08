@@ -15,7 +15,7 @@ It does **not** measure sentiment, prevalence, or how many people are actually i
 - **41 subreddits** across 5 tiers: general AI (T0), primary companionship (T1), platform-specific (T2), recovery/dependency (T3), and ambient discourse climate (T4, context only) — 39 currently live
 - **6 keyword themes** — Romance, Sex/ERP, Consciousness, Therapy, Addiction, Rupture — matched against the T1–T3 companion subreddits only (22 currently collected, plus two deactivated communities whose historical posts stay in the numerator and denominator; the 5 general-AI subs, the 9 ambient T4 subs, and the 3 off-construct subs excluded from keyword tracking are tracked for context but excluded from the theme lines — see `docs/nsfw_scope_position.md`)
 - **~4.4M posts** from 2017 to present, updated daily
-- **Keyword validation** — every keyword is manually scored against 100-post samples; only keywords at 80%+ precision are accepted (60-79% may be accepted when false positive patterns are well-defined)
+- **Keyword validation** — every keyword is scored against a 100-post sample of its own matches (classified by LLM agents under a locked rubric, spot-checked by hand); only keywords at 80%+ precision are accepted (60-79% may be accepted when false positive patterns are well-defined)
 
 ## How the data works
 

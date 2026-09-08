@@ -227,11 +227,13 @@ export default async function ThemePage({
           >
             This theme is defined by these {details.keywords.length}{" "}
             validated keywords &mdash; a post counts when its text matches one
-            of them, with no AI classifier. The percentage is the share of a
-            keyword&apos;s matches that were on-theme when the keyword was
-            validated (April&ndash;May 2026); a monthly drift check re-measures
-            these, and some have since moved &mdash; the history is in the
-            repository.
+            of them, with no AI classifier in the count. The percentage is a
+            measured precision figure &mdash; the share of a keyword&apos;s
+            sampled matches judged on-theme when the keyword was validated
+            (April&ndash;May 2026). A monthly drift check re-measures these:
+            any keyword whose latest re-measurement fell below the
+            project&apos;s 60% cut line is marked <em>contested</em> below,
+            and the full history is in the repository.
           </p>
           <div
             style={{

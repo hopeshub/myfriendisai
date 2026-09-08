@@ -221,8 +221,11 @@ export default function Home() {
         <p style={{ ...intro, marginBottom: 16 }}>
           Six recurring themes, and how often each one&apos;s language surfaces
           in posts across these communities, month by month. Each panel is
-          scaled to mentions per 1,000 posts &mdash; a value of 8 means roughly
-          8 of every 1,000 posts that month carried that theme&apos;s keywords.
+          scaled to mentions per 1,000 posts &mdash; a value of 8 means the
+          theme&apos;s keywords appeared at a rate of roughly 8 per 1,000 posts
+          a day, averaged over that month. The plain monthly ratio is in the
+          downloadable dataset; the two differ in months whose daily volume is
+          uneven.
         </p>
         <TrendsExplorer
           themeData={themeData}
@@ -336,7 +339,7 @@ export default function Home() {
       </div>
 
       {/* §5 — The room next door: the AI culture-war communities. The
-          chart shows the infrastructure forming; the editorial point is
+          chart shows the cluster forming; the editorial point is
           that what these subs police is upstream of AI companionship,
           not aimed at it. §4 records that posture being absorbed inward;
           the closing disclosure fences what Reddit can and can't show. */}
@@ -350,7 +353,7 @@ export default function Home() {
           The argument is upstream
         </h2>
         <p style={{ ...intro, marginBottom: 16 }}>
-          Next door, a new infrastructure is forming. Subreddits built to
+          Next door, a whole argument has moved into subreddits of its own. Subreddits built to
           argue about AI as a cultural project barely existed in 2023;
           the cluster&apos;s post volume rose 347% in 2025 alone
           &mdash; an 824% increase over its 2023 total &mdash; and now
@@ -363,9 +366,10 @@ export default function Home() {
           subs were deliberately left out.
         </p>
         <p style={{ ...intro, marginBottom: 28 }}>
-          Almost none of it is about AI companionship. &ldquo;AI bros&rdquo;
-          appears in titles here roughly ten times more often than
-          &ldquo;AI girlfriend.&rdquo; But the posture is the same one
+          Almost none of it is about AI companionship. A 50-post read of each
+          sub in May 2026 put companionship discourse &mdash; first-person
+          attachment or mockery of it &mdash; at 0&ndash;6% of posts across
+          the cluster. But the posture is the same one
           &mdash; that taking a chatbot seriously is a category mistake
           worth mocking &mdash; and it is already the air the communities
           on this site breathe.
