@@ -45,6 +45,19 @@ logger = logging.getLogger(__name__)
 # window that still needs no per-sub chunking.
 ARCTIC_WINDOW_HOURS = 7 * 24
 
+# Shell refresh (arctic mode only). Arctic archives a post within hours of
+# creation, often while it is still queued for moderation, so its record — and
+# therefore ours — reads selftext='[removed]'. Re-check those rows once they
+# are old enough to have been approved and re-archived. 10 days: younger posts
+# usually have nothing to recover yet. 35 days: past that, approvals have
+# stopped and the requests are wasted. The request cap keeps the step to a few
+# minutes; with --use-cursor a capped run resumes where it stopped, so an
+# initial backlog drains over a few days instead of the oldest shells being
+# re-checked forever. See scripts/refresh_shell_posts.py.
+SHELL_REFRESH_MIN_AGE_DAYS = 10
+SHELL_REFRESH_MAX_AGE_DAYS = 35
+SHELL_REFRESH_MAX_REQUESTS = 60  # ~6,000 ids per run
+
 # Per-run telemetry handed to run_collect.sh's status writer (which publishes it
 # in web/public/status.json). In logs/ because logs/ is gitignored — data/*.json
 # is committed by push_and_deploy.sh and this file is machine-local state.
@@ -276,6 +289,30 @@ def _step_heal_snapshots(communities, conn):
             avgs_updated += update_arctic_comment_averages(d, conn=conn)
 
     return {"rows_created": rows_created, "comment_avgs_updated": avgs_updated}
+
+
+def _step_refresh_shells(communities, conn):
+    """Step 1d (arctic mode): fill in bodies for posts archived while queued.
+
+    Must run before tagging: a post whose body is recovered here is re-tagged
+    inside the refresh, and any post the refresh could not repair is left for
+    the normal tagging step. Bounded by SHELL_REFRESH_MAX_REQUESTS.
+    """
+    from datetime import date as date_cls, timedelta
+    from scripts.refresh_shell_posts import _epoch, refresh_shells
+
+    today = date_cls.today()
+    stats = refresh_shells(
+        conn,
+        since_epoch=_epoch(today - timedelta(days=SHELL_REFRESH_MAX_AGE_DAYS)),
+        until_epoch=_epoch(today - timedelta(days=SHELL_REFRESH_MIN_AGE_DAYS)),
+        subreddits=[c["subreddit"] for c in communities],
+        max_requests=SHELL_REFRESH_MAX_REQUESTS,
+        rollback_log=Path(__file__).parent.parent / "logs" / (
+            "shell_refresh_%s.jsonl" % today.isoformat()),
+        use_cursor=True,
+    )
+    return stats
 
 
 def _step_tag_posts(conn):
@@ -619,6 +656,30 @@ def _main_inner():
         failed_steps.append("snapshot_heal")
     step_times["snapshot_heal"] = time.time() - t0
 
+    # ── Step 1d: Refresh shell posts ────────────────────────────────────
+    # Arctic-mode only: the Reddit path reads a post's body at collection time,
+    # after moderation, so it never stores queue shells in the first place.
+    # Non-fatal by design — an Arctic hiccup here must not block the day's push
+    # (same policy as the public-dataset export in Step 5); the window is
+    # re-walked tomorrow.
+    shell_stats = {"selected": 0, "fetched": 0, "recovered": 0, "requests": 0}
+    if arctic_mode:
+        logger.info("=" * 60)
+        logger.info("STEP 1d: Refreshing shell posts (%d-%d days old)",
+                    SHELL_REFRESH_MIN_AGE_DAYS, SHELL_REFRESH_MAX_AGE_DAYS)
+        t0 = time.time()
+        try:
+            shell_stats = _step_refresh_shells(communities, conn)
+            logger.info("  %d shells selected, %d re-fetched, %d bodies "
+                        "recovered, %d requests%s",
+                        shell_stats["selected"], shell_stats["fetched"],
+                        shell_stats["recovered"], shell_stats["requests"],
+                        " (request cap hit — backlog resumes tomorrow)"
+                        if shell_stats.get("capped") else "")
+        except Exception:
+            logger.exception("Step 1d (shell refresh) failed — continuing")
+        step_times["shell_refresh"] = time.time() - t0
+
     # ── Step 2: Tag posts ───────────────────────────────────────────────
     logger.info("=" * 60)
     logger.info("STEP 2: Tagging posts with keywords")
@@ -699,6 +760,13 @@ def _main_inner():
             "Arctic Shift served today's posts and comments — Reddit access is unavailable; "
             "subscriber/active-user snapshots did not run (no archive equivalent)."
         )
+    if "shell_refresh" in step_times:
+        logger.info(
+            "  1d. Shell refresh:       %.1f min (%d re-fetched, %d bodies recovered)",
+            step_times["shell_refresh"] / 60,
+            shell_stats.get("fetched", 0),
+            shell_stats.get("recovered", 0),
+        )
     logger.info(
         "  2. Post keyword tagging: %.1f min (%d tags added)",
         step_times["post_tagging"] / 60,
@@ -751,6 +819,9 @@ def _main_inner():
             "arctic_throttle_events": throttle_events,
             "posts_inserted": post_stats.get("posts_collected", 0),
             "comments_collected": comment_stats.get("comments_collected", 0),
+            "shells_checked": shell_stats.get("fetched", 0),
+            "shells_recovered": shell_stats.get("recovered", 0),
+            "shell_refresh_requests": shell_stats.get("requests", 0),
         })
     except Exception:
         logger.exception("Failed to write run stats (%s) — continuing", RUN_STATS_PATH)

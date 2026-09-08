@@ -107,6 +107,8 @@ class _FakeResp:
     def __init__(self, status_code, payload=None):
         self.status_code = status_code
         self._payload = payload or {}
+        # backfill_arctic reads .text when logging a non-200 (since 2026-08-07)
+        self.text = ""
 
     def json(self):
         return self._payload

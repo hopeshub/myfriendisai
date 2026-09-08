@@ -191,6 +191,11 @@ out = {
     "arctic_throttle_events": run_stats.get("arctic_throttle_events"),
     "posts_inserted": run_stats.get("posts_inserted"),
     "comments_collected": run_stats.get("comments_collected"),
+    # Added 2026-09-08 with the shell-refresh step (scripts/refresh_shell_posts.py):
+    # how many archive shells were re-checked and how many gained a real body.
+    "shells_checked": run_stats.get("shells_checked"),
+    "shells_recovered": run_stats.get("shells_recovered"),
+    "shell_refresh_requests": run_stats.get("shell_refresh_requests"),
     "drift_backlog_files": drift_backlog_files,
     "drift_backlog_days": drift_backlog_days,
 }

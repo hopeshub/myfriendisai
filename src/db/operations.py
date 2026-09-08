@@ -123,8 +123,59 @@ def insert_snapshot(
             _conn.close()
 
 
-def insert_posts(posts: list[dict], conn: Optional[sqlite3.Connection] = None) -> int:
-    """Insert posts, skipping duplicates. Returns count of new rows inserted.
+# Bodies Reddit serves in place of a post's text. A row carrying one of these
+# is a "shell": we have the title and nothing else. Arctic Shift archives a
+# post within hours of creation — often while it is still in a moderator queue,
+# so its record reads '[removed]' — and the archive record is updated when the
+# post is approved. Under the old INSERT OR IGNORE the first snapshot won
+# forever, so ~30% of arctic-era rows are shells vs a stable 16-20% earlier.
+# See scripts/refresh_shell_posts.py.
+SHELL_BODIES = ("[removed]", "[deleted]")
+
+# Upgrade a stored shell in place when the archive has since gained a real
+# body. The guard lives in the SQL (not the caller) so there is exactly one
+# rule: only a shell is ever overwritten, and only by real text — a stored body
+# can never be downgraded back to a shell, and an empty selftext (a legitimate
+# link/image post) is not treated as text.
+_INSERT_POST_SQL = """
+INSERT INTO posts
+    (id, subreddit, title, author, created_utc, score, num_comments,
+     upvote_ratio, is_self, selftext, url, collected_date, data_source)
+VALUES
+    (:id, :subreddit, :title, :author, :created_utc, :score, :num_comments,
+     :upvote_ratio, :is_self, :selftext, :url, :collected_date, :data_source)
+ON CONFLICT(id) DO UPDATE SET
+    selftext = excluded.selftext,
+    author = CASE WHEN posts.author = '[deleted]'
+                   AND excluded.author IS NOT NULL
+                   AND excluded.author NOT IN ('', '[deleted]')
+                  THEN excluded.author ELSE posts.author END,
+    score = excluded.score,
+    num_comments = excluded.num_comments,
+    upvote_ratio = excluded.upvote_ratio
+WHERE posts.selftext IN ('[removed]', '[deleted]')
+  AND excluded.selftext IS NOT NULL
+  AND excluded.selftext NOT IN ('', '[removed]', '[deleted]')
+"""
+
+
+def insert_posts(
+    posts: list[dict],
+    conn: Optional[sqlite3.Connection] = None,
+    updated_ids: Optional[list] = None,
+) -> int:
+    """Insert posts. Returns the count of NEW rows; repairs shells in place.
+
+    A row that already exists is left alone unless it is a shell (selftext
+    '[removed]'/'[deleted]') and the incoming row carries real text — then its
+    body, author (only if ours is '[deleted]'), score, num_comments and
+    upvote_ratio are refreshed. collected_date and data_source are never
+    touched: the daily snapshot aggregates group on collected_date.
+
+    updated_ids: optional list; ids of rows repaired this call are appended to
+    it. An out-param rather than a new return type so every existing call site
+    (all of which just add up the insert count) keeps working unchanged.
+    Callers that repair posts must re-tag them — see retag_posts().
 
     A "raw_json" key in the post dicts is tolerated but NOT persisted — the
     column was dropped in the 2026-08-08 DB-slimming migration (historical
@@ -134,24 +185,119 @@ def insert_posts(posts: list[dict], conn: Optional[sqlite3.Connection] = None) -
     _conn = conn or get_connection()
     inserted = 0
     try:
-        for p in posts:
-            result = _conn.execute(
-                """
-                INSERT OR IGNORE INTO posts
-                    (id, subreddit, title, author, created_utc, score, num_comments,
-                     upvote_ratio, is_self, selftext, url, collected_date, data_source)
-                VALUES
-                    (:id, :subreddit, :title, :author, :created_utc, :score, :num_comments,
-                     :upvote_ratio, :is_self, :selftext, :url, :collected_date, :data_source)
-                """,
-                p,
+        # rowcount is 1 for both a fresh insert and a shell repair, so which
+        # ids already existed has to be known up front.
+        ids = [p["id"] for p in posts if p.get("id")]
+        existing = set()
+        CHUNK = 500
+        for i in range(0, len(ids), CHUNK):
+            chunk = ids[i:i + CHUNK]
+            placeholders = ",".join("?" * len(chunk))
+            existing.update(
+                r[0] for r in _conn.execute(
+                    f"SELECT id FROM posts WHERE id IN ({placeholders})", chunk
+                ).fetchall()
             )
-            inserted += result.rowcount
+
+        for p in posts:
+            result = _conn.execute(_INSERT_POST_SQL, p)
+            if not result.rowcount:
+                continue  # duplicate we chose not to touch
+            if p.get("id") not in existing:
+                inserted += 1
+            elif updated_ids is not None:
+                updated_ids.append(p["id"])
         _conn.commit()
     finally:
         if conn is None:
             _conn.close()
     return inserted
+
+
+def retag_posts(
+    post_ids: list,
+    conn: Optional[sqlite3.Connection] = None,
+    patterns: Optional[list] = None,
+) -> dict:
+    """Rebuild post-source keyword tags for specific posts. Returns a stats dict.
+
+    Needed whenever a stored post's text changes (see insert_posts /
+    scripts/refresh_shell_posts.py). The taggers treat "has any source='post'
+    tag row" as "already scanned", so a repaired post would otherwise keep the
+    tags its title-only version produced and never be re-scanned against its
+    recovered body. Deleting the post-source rows first both replaces stale
+    tags (the UNIQUE constraint makes re-inserting them a no-op otherwise) and
+    clears the already-scanned marker.
+
+    Comment-source tags are deliberately left alone: they describe comment
+    text, which this repair never touches.
+
+    Scope matches the taggers: only keyword-eligible (T1-T3, not
+    exclude_from_keywords) subreddits are tagged at all.
+    """
+    from src.config import load_keyword_communities, load_keywords
+    from src.keyword_matching import build_patterns, match_text
+
+    ids = list(dict.fromkeys(pid for pid in post_ids if pid))
+    stats = {"posts_retagged": 0, "tags_deleted": 0, "tags_added": 0}
+    if not ids:
+        return stats
+
+    _conn = conn or get_connection()
+    try:
+        eligible = {c["subreddit"] for c in load_keyword_communities()}
+        if patterns is None:
+            patterns = build_patterns(load_keywords())
+
+        CHUNK = 500
+        for i in range(0, len(ids), CHUNK):
+            chunk = ids[i:i + CHUNK]
+            placeholders = ",".join("?" * len(chunk))
+            rows = _conn.execute(
+                f"SELECT id, subreddit, title, selftext, "
+                f"       date(created_utc, 'unixepoch') AS post_date "
+                f"FROM posts WHERE id IN ({placeholders})",
+                chunk,
+            ).fetchall()
+            targets = [r for r in rows
+                       if r["subreddit"] in eligible and r["post_date"]]
+            if not targets:
+                continue
+
+            target_ids = [r["id"] for r in targets]
+            ph = ",".join("?" * len(target_ids))
+            stats["tags_deleted"] += _conn.execute(
+                f"DELETE FROM post_keyword_tags "
+                f"WHERE source = 'post' AND post_id IN ({ph})",
+                target_ids,
+            ).rowcount
+            # scanned_posts is currently vestigial (nothing writes it), but it
+            # is the schema's declared already-scanned marker — clear it too so
+            # a future reader of that table can't skip a repaired post.
+            _conn.execute(
+                f"DELETE FROM scanned_posts WHERE post_id IN ({ph})", target_ids
+            )
+
+            batch = []
+            for r in targets:
+                text = " ".join(filter(None, [r["title"], r["selftext"]]))
+                for category, matched_term in match_text(text, patterns):
+                    batch.append((r["id"], r["subreddit"], category,
+                                  matched_term, r["post_date"]))
+            if batch:
+                _conn.executemany(
+                    "INSERT OR IGNORE INTO post_keyword_tags "
+                    "(post_id, subreddit, category, matched_term, post_date) "
+                    "VALUES (?, ?, ?, ?, ?)",
+                    batch,
+                )
+                stats["tags_added"] += len(batch)
+            stats["posts_retagged"] += len(targets)
+        _conn.commit()
+    finally:
+        if conn is None:
+            _conn.close()
+    return stats
 
 
 def insert_comments(comments: list[dict], conn: Optional[sqlite3.Connection] = None) -> int:
