@@ -26,6 +26,45 @@ from src.db.operations import measurable_post_where
 MEASURABLE = measurable_post_where("p")
 
 DB_PATH = PROJECT_ROOT / "data" / "tracker.db"
+DRIFT_HISTORY_PATH = PROJECT_ROOT / "analysis" / "keyword_pipeline" / "drift_history.json"
+# A keyword whose latest post-level re-check lands below this is shown as
+# "drifting" on its theme page. Same line as the validation CUT threshold.
+DRIFT_FLAG_BELOW = 0.60
+
+
+def load_drift_checks(path: Path = DRIFT_HISTORY_PATH) -> dict:
+    """Latest POST-level drift re-check per keyword, from drift_history.json.
+
+    The precision badge on a theme page is the keyword's last full validation
+    (May 2026). The monthly drift check (scripts/drift_check.py) re-samples
+    recent matches; when it finds a keyword's meaning has moved, the badge is
+    known to run high. Publishing the latest post-level re-check next to the
+    badge is what makes the site's stated policy ("where the re-check has found
+    one, it is marked") true. Comment-level entries are ignored: the badge is a
+    post-level figure and the published line is post-only.
+
+    Returns {term: {"precision": float, "date": "YYYY-MM-DD", "n": int}} for
+    keywords that have at least one post-level entry; missing file → {}.
+    """
+    try:
+        data = json.loads(path.read_text())
+    except (OSError, ValueError):
+        return {}
+    out = {}
+    for term, rec in (data.get("keywords") or {}).items():
+        post_entries = [
+            h for h in rec.get("history", [])
+            if h.get("level") == "post" and h.get("precision") is not None
+        ]
+        if not post_entries:
+            continue
+        latest = max(post_entries, key=lambda h: h.get("date", ""))
+        out[term.lower()] = {
+            "precision": round(float(latest["precision"]) * 100, 1),
+            "date": latest.get("date"),
+            "n": latest.get("n"),
+        }
+    return out
 KEYWORDS_PATH = PROJECT_ROOT / "config" / "keywords_v8.yaml"
 OUTPUT_PATH = PROJECT_ROOT / "web" / "data" / "keyword_details.json"
 
@@ -193,6 +232,7 @@ def build_keyword_details(
     # Case-insensitive subreddit allowlist for the WHERE ... IN clauses.
     sub_params = tuple(s.lower() for s in included_subs)
     sub_ph = ",".join("?" for _ in sub_params)
+    drift = load_drift_checks()
 
     for cat_name, terms_info in categories.items():
         # --- Per-keyword stats and samples ---
@@ -275,6 +315,15 @@ def build_keyword_details(
                     "hits": hits,
                     "precision": ti["precision"],
                     "status": ti["status"],
+                    # Latest post-level drift re-check (see load_drift_checks);
+                    # null when the keyword has never been re-checked at post level.
+                    "drift_precision": drift.get(term.lower(), {}).get("precision"),
+                    "drift_date": drift.get(term.lower(), {}).get("date"),
+                    "drift_n": drift.get(term.lower(), {}).get("n"),
+                    "drifting": (
+                        drift.get(term.lower(), {}).get("precision") is not None
+                        and drift[term.lower()]["precision"] < DRIFT_FLAG_BELOW * 100
+                    ),
                     "sample_posts": [
                         {
                             "title": sp[0],

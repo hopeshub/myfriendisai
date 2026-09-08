@@ -296,6 +296,18 @@ export default async function ThemePage({
                         : "· low volume"}
                     </span>
                   )}
+                  {kw.drifting && kw.drift_precision != null && (
+                    <span
+                      title={`Monthly re-check${kw.drift_date ? ` (${kw.drift_date})` : ""}: ${Math.round(kw.drift_precision)}% of ${kw.drift_n ?? "sampled"} recent matches on-theme`}
+                      style={{
+                        color: "#D4A862",
+                        fontStyle: "italic",
+                        fontSize: fontSize.xs,
+                      }}
+                    >
+                      · drifting, {Math.round(kw.drift_precision)}% on re-check
+                    </span>
+                  )}
                 </span>
               ))}
           </div>
@@ -329,9 +341,13 @@ export default async function ThemePage({
             }}
           >
             Precision figures come from each keyword&apos;s last full
-            validation (May 2026). A monthly re-check watches for words whose
-            meaning moves; where it has found one, the figure here is known to
-            run high.
+            validation (May 2026). A monthly re-check re-reads a sample of
+            each keyword&apos;s recent matches; where the latest re-check fell
+            below 60% the keyword is marked{" "}
+            <em style={{ color: "#D4A862" }}>drifting</em> with that figure,
+            and its validation number is known to run high. A drifted keyword
+            stays in the count until the next keyword-set revision, so the
+            line is never re-cut quietly mid-version.
           </p>
           <p
             style={{

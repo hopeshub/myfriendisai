@@ -23,6 +23,14 @@ export type KeywordEntry = {
   // Display status from the keyword's YAML annotation: "audit-gate-fail",
   // "researcher-accepted", "low-volume", or null for a clean keyword.
   status: string | null;
+  // Latest post-level drift re-check (scripts/drift_check.py, monthly), or
+  // null when never re-checked. `drifting` is true when that re-check landed
+  // below the 60% cut line — the validation figure above is then known to
+  // run high.
+  drift_precision?: number | null;
+  drift_date?: string | null;
+  drift_n?: number | null;
+  drifting?: boolean;
   sample_posts: SamplePost[];
 };
 export type SubredditEntry = { name: string; hits: number; pct: number };

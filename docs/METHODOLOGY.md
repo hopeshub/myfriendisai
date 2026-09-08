@@ -676,10 +676,10 @@ theme reads where it does in §4.4.
 
 **A keyword that falls below the cut keeps counting until the next version
 bump.** It is not quietly dropped — it is named: in the table above, and on the
-site's theme page, where every keyword in a theme is listed with its precision
-and a note if it is contested or low-volume. Two of the six above — `screen
-time` and `I was hooked` — passed validation cleanly and so carry no note there
-yet, which makes the table above their disclosure until the bump.
+site's theme page, where every keyword in a theme is listed with its validation
+precision and, since 2026-09-08, marked *drifting* with the figure from its
+latest post-level re-check whenever that re-check landed below 60%. All six
+above carry that mark.
 
 This is deliberate. Re-cutting a keyword mid-version would silently restate
 every historical month on that line — the same posts would produce a different
