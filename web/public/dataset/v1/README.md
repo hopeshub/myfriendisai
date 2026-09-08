@@ -29,6 +29,17 @@ no titles, no usernames, no post IDs — no raw Reddit content of any kind.
 The `.csv` and `.json` forms of each table carry identical data; the JSON
 wraps the same rows in an object with a `columns` list and a `row_count`.
 
+**About `manifest.json`.** Its `generated_at` is when these numbers were first
+produced, not when the bundle was last rebuilt. The pipeline regenerates the
+bundle daily and carries the previous timestamp forward whenever every file
+hash matches, so a day on which nothing moved leaves no diff at all. Read it as
+"these numbers date from", not "last checked".
+
+**What is not here.** The site also publishes an *Excluding r/CharacterAI*
+version of every theme line — r/CharacterAI is 60–90% of all post volume, so
+that second view shows the rest of the corpus on its own. It is not part of v1;
+this bundle carries the full-scope series only.
+
 ---
 
 ## `monthly_theme_counts`
@@ -44,9 +55,24 @@ meaningful.
 | `post_only_count` | Derived | Distinct posts in that month whose **own title or body** matched at least one validated keyword for the theme. This is the published series. Keyword hits found only in a post's *comments* are deliberately excluded — comment tagging began 2026-03-18, so including them puts a step artifact in the series at that date. |
 | `eligible_posts` | Derived | All posts collected that month across the communities in the theme-measurement scope (T1–T3, minus the communities excluded from keyword tracking). This is the per-1k denominator. |
 | `rate_per_1k` | Derived | `post_only_count / eligible_posts * 1000`. The plain monthly rate. |
-| `rate_per_1k_charted` | Derived | The value the site's chart plots: the mean over the month's days of the daily rate, where both numerator and denominator are 7-day trailing means. Smoothing keeps low-volume days from spiking the line. It is close to `rate_per_1k` but not identical; use `rate_per_1k` for analysis and `rate_per_1k_charted` to reproduce the chart. |
+| `rate_per_1k_charted` | Derived | What the site's chart plots: the mean, over the month's days, of the daily smoothed rate. It is a different estimator from `rate_per_1k`, not a rounding of it — see below. |
 | `days_observed` | Derived | Days in that month present in the corpus calendar. Below ~28 means the collector missed days. |
 | `coverage_start` | Derived | The theme's first reliably-measurable month (see below). Constant per theme; repeated on each row for convenience. |
+
+**Two rates, and which to use.** `rate_per_1k` is the pooled monthly rate: one
+count divided by one denominator. `rate_per_1k_charted` is a mean of daily
+ratios, which is not the same quantity and runs slightly higher on average,
+because it weights quiet days as heavily as busy ones. The two smoothing
+windows behind it are also not aligned: the denominator's 7-day trailing mean
+runs over the calendar, while the numerator's runs over the last seven days
+that had at least one keyword hit — zero-hit days are dropped upstream. For a
+theme with hits most days the two coincide; for a sparse one they do not
+(consciousness records a hit on 48% of its charted days, therapy 55%). Measured
+across the whole record, the gap between the two columns has a median of
+3.6–7.9% by theme and a 90th percentile of 14–29%, with worst months at +79%
+(romance 2024-05), +59% (consciousness 2025-12) and −35% (rupture 2023-09).
+**Use `rate_per_1k` for any analysis.** Use `rate_per_1k_charted` only to
+reproduce what the site draws.
 
 **Coverage gating.** Each theme's rows begin at its `coverage_start` — the
 first calendar month where the post-only count is at least 5 and every later
@@ -54,6 +80,12 @@ completed month is also at least 5. Before that point a theme's vocabulary is
 too sparse in the corpus to chart honestly, so those months are omitted here
 exactly as they are omitted from the site. The corpus itself reaches back to
 2017; the theme lines do not.
+
+**Small months.** Clearing that gate does not make a month precise: 41% of the
+consciousness rows and about a third of the therapy and addiction rows have a
+`post_only_count` under 20. `post_only_count` and `eligible_posts` are both on
+every row so that you can put an interval on any month rather than take the
+rate at face value.
 
 **Partial months.** The in-progress calendar month is excluded entirely, so
 the last row for each theme is always a complete month.
@@ -73,7 +105,7 @@ becomes reliable) through the last complete month.
 | `tier` | Direct | 0–4. See `METHODOLOGY.md` for what each tier is and why it exists. |
 | `tier_label` | Direct | Human-readable tier name. |
 | `category` | Direct | The community's category label as shown on the site. |
-| `in_theme_measurement` | Derived | `true` when the community counts toward `monthly_theme_counts` — i.e. tier 1–3 and not excluded from keyword tracking. T0 general-AI and T4 ambient communities are tracked for context only and are always `false`, as are the three explicitness-scope exclusions. |
+| `in_theme_measurement` | Derived | `true` when the community counts toward `monthly_theme_counts` — i.e. tier 1–3 and not excluded from keyword tracking. T0 general-AI and T4 ambient communities are tracked for context only and are always `false`, as are the three explicitness-scope exclusions. In the JSON this is a real boolean; in the CSV it is the lowercase string `true` or `false`. |
 
 This table covers the communities currently being collected. Two communities
 that were tracked and later deactivated — r/HeavenGF (banned by Reddit, ~May
@@ -86,9 +118,11 @@ corpus and in the theme denominator, but do not appear here.
 
 **The counts are a floor, not a ceiling.** The keyword instrument is
 precision-first: it would rather miss a real post than admit a false one. A
-hand-coded audit of 400 posts put per-theme recall between about 3% and 32%.
-Shape and timing are approximately honest; absolute magnitude is a clear
-undercount, and the undercount is uneven across themes.
+hand-coded audit of 400 posts put per-theme recall between 0% and 32% —
+consciousness caught none of the eight posts a human classified as on-theme
+(a small sample, whose Wilson interval reaches about 32%). Shape and timing are
+approximately honest; absolute magnitude is a clear undercount, and the
+undercount is uneven across themes.
 
 **Do not compare theme heights.** A theme written in blunt, distinctive
 vocabulary (addiction: "relapse", "cold turkey") reads higher than one
@@ -96,8 +130,13 @@ written in ordinary language (romance: "I love him") whatever the truth
 beneath. Read each theme against itself — direction, timing, spikes.
 
 **Measured per-theme precision** (share of matched posts genuinely about the
-theme, re-measured 2026-05-16): addiction ~97%, sexual_erp ~96%,
-consciousness ~87%, romance ~86%, therapy ~80%, rupture ~77%.
+theme, census re-measurement 2026-05-16): addiction ~97%, sexual_erp ~96%,
+consciousness ~87%, romance ~86%, rupture ~77%, therapy ~66–68%. Earlier
+versions of this file put therapy at ~80%; that figure was a projection for a
+rebuilt keyword set that has not shipped, and the table now carries the measured
+value for the set that is actually counting. `METHODOLOGY.md` §4.4 has the
+correction in full, along with the separate drift-check figures and why they
+differ.
 
 **It counts language, not people.** A rising line means the theme's
 vocabulary appeared more often in these communities. It does not establish

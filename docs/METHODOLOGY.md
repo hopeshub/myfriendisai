@@ -6,7 +6,7 @@ assumes no access to the live site, the repository, or any other document.*
 
 **Project:** My Friend Is AI — <https://myfriendisai.com>
 **Code and validation records:** <https://github.com/hopeshub/myfriendisai>
-**Document version:** 1.0 · 2026-08-27
+**Document version:** 1.1 · 2026-09-08
 **Instrument version:** keyword set v8 (92 keywords, locked)
 
 ---
@@ -194,8 +194,14 @@ years, COVID-era growth, and the ChatGPT precondition era. As of 2026-08 it
 holds roughly 4.4 million posts. Per-theme coverage gating (§5) means a theme's
 chart line still begins only where its vocabulary becomes measurable.
 
-Communities added after launch are **forward-only** — no backfill — because a
-backfilled addition would inject a step into the historical series.
+**Communities added after launch were backfilled, not forward-only.** Each
+addition was pulled back to the community's own start at the time it was added
+and its whole history keyword-tagged in the same pass — r/ILoveMyReplika to
+2022-10, r/NectarAI to 2023-05, r/aipartners to 2025-12, r/MyBoyfriendIsAI_Open
+to 2025-08, r/ReplikaLovers from its creation on 2026-04-19, and all nine
+ambient-tier communities across 2022–2025. So there is no step artifact at the
+date each community joined. What backfilling does instead is change the
+composition of every earlier month; §6.5 gives the size of that effect.
 
 ---
 
@@ -295,11 +301,57 @@ re-measurement plus a 72-post human gold anchor:
 | sexual_erp | ~96% |
 | consciousness | ~87% |
 | romance | ~86% |
-| therapy | ~80% |
+| therapy | **~66–68%** |
 | rupture | ~77% |
 
 Earlier small-sample (n≈20) screens had run 10–15 points low; those figures are
 superseded.
+
+**The therapy figure was previously published as ~80%, and that was wrong.**
+The 2026-05-16 census reported therapy twice: ~68% for the keyword set as it
+ships, and ~87% for a rebuilt set that cuts the two noisiest keywords and admits
+15 census-recovered replacements. The ~87% was a projection of work that has not
+shipped — the rebuild is a v9 change, still awaiting sign-off — and the ~80% in
+earlier versions of this document was drawn from it. The table above now carries
+the measured value for the set that is actually counting: **~66–68%**, confirmed
+by three drift cycles (June–August 2026). Four of the eight therapy keywords —
+`emotional support`, `therapeutic`, `as a therapist`, `for therapy` — scored
+75%, 65%, 60% and 60% at the 2026-05-12 audit and are flagged AUDIT-GATE FAIL in
+the keyword config. They still count, under the change-control rule in §8.2. When
+the rebuild ships, the theme's precision and its volume will both move, and that
+will be a versioned change with a changelog entry.
+
+**How firm any one of these numbers is.** Each keyword-level validation figure
+underneath the table comes from a 100-post read by a single coder — the
+researcher. Treat any individual figure as roughly ±8 points. Posts the coder
+could not decide were dropped from the denominator rather than counted against
+the keyword.
+
+**The drift check measures something else, and its numbers differ.** The monthly
+drift check (§8) re-samples recent matches and re-classifies them with a
+language-model classifier. It exists to answer "has this keyword's meaning
+moved?", so it is read as change across cycles; it is robust to a constant
+classifier bias but is not calibrated against the human coding above. Its
+current per-theme post-level values ship in `theme_health.json` with the rest of
+the aggregate exports (audit dated 2026-08-27):
+
+| Theme | Drift post precision | n |
+|---|---|---|
+| romance | 88.7% | 931 |
+| consciousness | 85.9% | 369 |
+| rupture | 84.7% | 926 |
+| addiction | 84.6% | 741 |
+| sexual_erp | 83.2% | 524 |
+| therapy | 66.4% | 360 |
+
+Only therapy agrees with the census table. The other five differ in both
+directions and by as much as 13 points: addiction and sex/ERP read about 12–13
+points *lower* on the drift instrument, rupture about 8 points *higher*, romance
+and consciousness within 3. The two instruments have not been reconciled against
+each other. Which to use: for "what share of the posts on this line belong to
+the theme?", use the census table — it rests on human coding. For "is this
+keyword still measuring what it used to?", use the drift series, and read the
+movement rather than the level.
 
 Comment-level precision was measured separately across the June and July 2026
 drift cycles (n≈4,000 comment classifications): addiction 78–79%, rupture
@@ -353,10 +405,12 @@ That gap *is* the precision-first trade-off, quantified.
 
 - Every line is a **floor estimate**, not a count. Actual theme-relevant
   discourse is plausibly several times what the chart shows.
-- **Shape and timing are honest.** A spike in tagged posts reflects a real
-  spike in clearly-worded posts.
+- **Shape and timing are honest** — with one qualification, in §9.3: a spike in
+  tagged posts reflects a real spike in clearly-worded posts, but the amount of
+  matchable text in the corpus has itself risen over the years, which bears on
+  long climbs rather than on spikes.
 - **Within-theme comparison across time works** — same keyword set, same
-  precision standard, applied across years.
+  precision standard, applied across years — again subject to §9.3.
 - **Cross-theme height comparison does not work.** Themes with distinctive
   vocabulary read higher than themes written in ordinary language, whatever the
   truth beneath. This bias runs in one direction and cannot be corrected for.
@@ -379,6 +433,20 @@ Consciousness begins 2025-04; the other five begin across 2022–2023. The
 corpus reaches back to 2017, but a theme line does not start where the corpus
 does.
 
+**Clearing the gate does not make a month precise.** A threshold of five posts
+admits months that are still very small. Of the months actually drawn on the
+chart, the share whose post-only numerator is under 20 posts: consciousness 41%
+(76% are under 30), addiction 34% — mostly 2023 — and therapy 32%. In the
+"Excluding r/CharacterAI" series it is therapy 38% and rupture 47%. On a
+two-proportion test, only about 19% of consciousness's and therapy's
+month-to-month moves are distinguishable from chance at p < 0.05.
+
+**So read consciousness and therapy over half a year or more, not month to
+month.** A single month's wiggle on either line is usually noise. The public
+dataset carries `post_only_count` and `eligible_posts` on every row precisely so
+that a reader can compute an interval for any month rather than take the plotted
+point at face value.
+
 ### 6.2 Normalization
 
 The published figure is a **rate per 1,000 posts**, not a raw count. These
@@ -388,10 +456,50 @@ shifting.
 
 The denominator is all posts collected from the theme-measurement scope (T1–T3
 minus the flagged exclusions) on the same day. Numerator and denominator are
-both smoothed with a **7-day trailing mean** so they share a window and the
-displayed rate does not spike on low-volume days. The chart plots the mean of
-the daily smoothed rate over each calendar month; the in-progress month is
-clipped.
+both smoothed with a **7-day trailing mean** so the displayed rate does not
+spike on low-volume days. The chart plots the mean of the daily smoothed rate
+over each calendar month; the in-progress month is clipped.
+
+**There are two rates, and they are not the same number.** The published dataset
+carries both, per theme per month:
+
+- `rate_per_1k` — the pooled monthly rate: the month's post-only count divided
+  by the month's eligible posts, times 1,000. One ratio, computed once.
+- `rate_per_1k_charted` — the estimator the site's chart plots: the mean, over
+  the month's days, of the daily smoothed rate.
+
+A mean of daily ratios is not the same thing as the ratio of the monthly totals,
+and here it runs slightly higher on average — a mean of ratios weights the
+low-volume days as heavily as the busy ones.
+
+**The two smoothing windows are also not aligned, and earlier versions of this
+document claimed they were.** The denominator's 7-day trailing mean runs over
+the corpus calendar. The numerator's runs over the last seven days *that had at
+least one keyword hit* — the export omits zero-hit days entirely, so the window
+is index-based over hit-days, not calendar days. For a theme with a hit almost
+every day the two windows coincide. For a sparse theme they do not: consciousness
+records a hit on 48% of the days in its charted range, therapy on 55%, so on
+those two lines the numerator's window can reach back a fortnight or more while
+the denominator's covers a week.
+
+The size of the resulting difference, measured across the whole charted record:
+the median gap between the two rates runs 3.6–7.9% depending on the theme, the
+90th percentile 14–29%, and the worst single months are romance 2024-05 (+79%),
+consciousness 2025-12 (+59%) and rupture 2023-09 (−35%). The mean signed bias is
++1.6% to +6.1% per theme, largest in the early years and roughly half that since
+2025 (2023 +4.7%, 2024 +7.8%, 2025 +3.2%, 2026 +2.2%).
+
+The extreme months are not spread evenly: they land on stretches where
+r/CharacterAI — most of the denominator — was missing days in the corpus
+(2023-08-23 to 08-31, 2024-02-20 to 02-29, 2024-05-16 to 05-31, 2025-12-01 to
+12-10). Those holes were repaired on 2026-09-08, which removes the largest
+distortions but not the underlying estimator difference. `[REPAIR-NOTE]`
+
+**Which one to use.** For any analysis, use `rate_per_1k`: it is the plain,
+reproducible ratio, and it does not depend on how the smoothing window happened
+to be built. Use `rate_per_1k_charted` only to reproduce what the site's chart
+draws. Whether the chart should switch to the pooled rate is an open question
+for the next instrument version; it is not being changed silently.
 
 ### 6.3 Volume weighting is deliberate
 
@@ -404,6 +512,13 @@ line that swings on the arrival of a new sub.
 Because volume weighting *is* a choice, the site publishes a second series with
 r/CharacterAI removed, so the dedicated-community signal can be read separately
 from the largest community's platform lifecycle.
+
+That second series starts later, and for a mechanical reason worth knowing:
+`coverage_start` (§6.1) tests a raw count, not a rate, so removing the largest
+community pushes several themes below the five-post gate for months they clear
+in the full series. Therapy begins 2024-07 and addiction 2024-08 without
+r/CharacterAI, against 2023-01 for both with it. The earlier years did not
+become unmeasurable — the gate simply counts posts.
 
 A leave-one-community-out check (2026-08) records the largest single-community
 dependencies: sexual_erp on r/replika (level −50% when removed), addiction on
@@ -427,9 +542,21 @@ subreddit. Platform-specific and recovery communities were smaller or did not
 exist. Tier share of corpus posts (T1/T2/T3): 2024 = 85.9/13.6/0.5,
 2025 = 82.1/16.3/1.6, 2026-to-date = 77.6/18.7/3.7.
 
-Each line is measured against whatever communities existed at the time, so part
-of a long climb reflects the tracked world widening rather than the conversation
-itself. Trust the broad direction of a line more than its exact path.
+Because post-launch additions were backfilled rather than added forward-only
+(§2.7), a new community does not appear at the date it joined the project — it
+appears retroactively, wherever its own history starts. So the effect is not a
+step at one date but a change in what every earlier month is made of.
+
+That effect is measurable, and on one theme it is large. The five companion
+communities added in May 2026 are romance-dense, and they now supply about 9% of
+the per-1,000 denominator. Romance for July 2026 reads **4.24 per 1,000 with
+them and 2.80 without** — the added communities are roughly a third of that
+month's level. The other five themes move by 10% or less.
+
+So part of a long climb reflects the tracked world widening rather than the
+conversation itself. Trust the broad direction of a line more than its exact
+path, and expect romance in particular to sit higher than it would have on the
+2025 community set.
 
 ---
 
@@ -477,28 +604,72 @@ noisy-keyword flags) is regenerated on every collection run for audit.
 The drift check is the only component of the project that uses a language model,
 and it feeds no published number — it flags keywords for human review.
 
+### 8.1 What the August 2026 cycle found
+
+Six keywords now measure below the 60% cut that would reject a new keyword. The
+drift figure comes first, the original validation figure in brackets:
+
+| Keyword | Theme | Drift, post-level | At validation |
+|---|---|---|---|
+| `I was hooked` | addiction | 46% | 81% |
+| `ai therapy` | therapy | 48% | 73% |
+| `screen time` | addiction | 52% | 89% |
+| `emotional support` | therapy | 52% | 100% |
+| `therapeutic` | therapy | 52% | 69% |
+| `memory reset` | rupture | 55% | 72% |
+
+Each has a nameable cause rather than random noise. `screen time` was absorbed
+by r/CharacterAI's "post your screen time" comparison threads, which are
+usage-bragging with no distress in them. `I was hooked` is product-review idiom
+("tried it and I was hooked"). `ai therapy` drifted into a comedy genre —
+therapy sessions written *for* the AIs. `memory reset` became the name of a
+button users press on purpose, which is outside the rupture definition.
+
+`screen time` is the clearest meaning-shift the programme has caught, and it is
+also nearly immaterial: it is the only tag on 3.6% of the addiction theme's
+posts over the last six months, so at 52% precision it contributes roughly 1.7%
+spurious volume to that line. Three of the six sit in therapy, which is why that
+theme reads where it does in §4.4.
+
+### 8.2 What happens to a keyword that drifts
+
+**A keyword that falls below the cut keeps counting until the next version
+bump.** It is not quietly dropped — it is named: in the table above, and on the
+site's theme page, where every keyword in a theme is listed with its precision
+and a note if it is contested or low-volume. Two of the six above — `screen
+time` and `I was hooked` — passed validation cleanly and so carry no note there
+yet, which makes the table above their disclosure until the bump.
+
+This is deliberate. Re-cutting a keyword mid-version would silently restate
+every historical month on that line — the same posts would produce a different
+number than they did last week, which is the exact property the no-model design
+(§3.3) exists to protect. Corrections that move a published line belong to a
+version bump with a changelog entry (§12), so that a reader can see what changed
+and when. The cost is that a drifted keyword keeps adding noise in the meantime;
+the numbers above are how much.
+
 ---
 
 ## 9. Data sources and collection timeline
 
 | Period | Source | Notes |
 |---|---|---|
-| 2017 – early 2026 | Public Reddit archives (PullPush, then Arctic Shift) | Historical backfill. The further back a post goes, the more likely its text was removed or deleted before the archive captured it. |
-| from 2026-03 | Reddit public `.json` endpoints, daily | Unauthenticated, rate-limited |
-| 2026-05-29 → 2026-06-09 | **collection gap** | Reddit disabled unauthenticated `.json` access globally on 2026-05-30 with no announcement; every endpoint began returning 403 |
-| 2026-06-09 → 2026-06-11 | Reddit OAuth (app-only token) | Same endpoints, bearer-authenticated |
-| from 2026-06-11 | **Arctic Shift archive, daily** ("arctic-first") | Permanent mode as of 2026-08-08 |
+| 2017 → 2026-03-10 | Public Reddit archives (PullPush, then Arctic Shift) | Historical backfill, inserted March 2026; the pre-2023 years and several repairs followed in May 2026. |
+| 2026-03-11 → 03-14 | Reddit public `.json`, daily | Unauthenticated, rate-limited. |
+| 2026-03-15 → 05-11 | Reddit public `.json`, daily | r/CharacterAI's live collection was capped at exactly 100 posts a day by Reddit's single-listing limit. The lost volume was repaired from the archive on 2026-05-11/12 — for that community only. |
+| 2026-05-12 → 05-26 | Reddit public `.json`, daily | |
+| 2026-05-27 → 06-07 | Reddit `.json`, then nothing | Reddit disabled unauthenticated `.json` access globally on 2026-05-30, with no announcement; every endpoint began returning 403. The window was recovered from the archive on 2026-06-09/10. |
+| 2026-06-08 → 08-26 | **Arctic Shift archive, daily** ("arctic-first") | 72-hour window per run. |
+| from 2026-08-27 | **Arctic Shift archive, daily** | 7-day window per run, so an archive outage shorter than a week heals itself on the next good run. |
 
-**The gap was repaired.** Posts for 2026-05-29 → 06-09 were recovered from the
-Arctic Shift archive, and comments followed in a second recovery pass, so post
-volume, theme trends, and comment-sourced tags are complete across the window.
-Per-day subscriber and active-user figures could not be reconstructed and remain
-blank there.
+**Reddit API access was never granted.** Reddit retired self-serve app creation
+in early 2026; an application was filed in June 2026 through the required
+support-ticket route and was never acknowledged. The project's judgment as of
+2026-08-08 is that the route is closed, and arctic-first is the permanent
+collection mode. Earlier versions of this document listed a short Reddit-OAuth
+era in the table above; there was none.
 
-**Arctic-first is permanent.** An application for ongoing Reddit API access was
-filed in June 2026 and never acknowledged; the project's judgment as of
-2026-08-08 is that this route is closed. Two consequences the reader should
-know:
+Two consequences the reader should know:
 
 1. **Subscriber counts are frozen at 2026-06-07** and active-user counts are
    permanently null. The site labels subscriber figures with that date.
@@ -507,12 +678,97 @@ know:
    more complete, so the *post+comment* series runs a touch fuller from late May
    2026 onward. **The published post-only series is unaffected.**
 
-An implication for the early years that affects every line: because archived
-older posts are more likely to have had their text removed, there is simply less
-wording available for the keywords to match. Every line therefore runs a little
-low at its start, which makes each rise look somewhat steeper than it was. Shape
-and event timing are sound; the steepness of the long climb is partly the
-instrument warming up.
+One note for anyone reading the database rather than the exports:
+`posts.collected_date` holds the post's *creation* date for archive-sourced
+rows, not the date it was fetched. The fetch time is `created_at`.
+
+### 9.1 The two sources disagree about removed posts
+
+Reddit's `new.json` listing omits posts that have been removed. The archive
+keeps them, as a title-only record with `[removed]` where the body was. The eras
+were therefore not alike: the posts collected live from Reddit — 2026-03-11 to
+05-26, plus the mixed days to 06-07 — were missing removed posts altogether and
+ran roughly 15–20% short on volume, while every archive-sourced era includes
+them as empty shells. That window has since been re-fetched from the archive;
+see the end of this section.
+
+Removed shells as a share of posts, by the post's own year: 2020 28%, 2021 25%,
+2022 17%, 2023 20%, 2024 16%, 2025 17%, 2026 January–May about 22%, 2026
+June–August about 30%.
+
+The June–August 2026 excess was not a change in how these communities moderate.
+It was a capture-timing artefact of arctic-first collection: the archive records
+a post within hours of creation, often while it is still in a moderator queue
+with its body blank, and the collector never returned to update that first
+snapshot. Re-fetching a sample showed how much of it was temporary — in
+r/KindroidAI 20 of 25 sampled shells now have bodies, in r/replika 13 of 25, in
+r/CharacterAI 3 of 25. r/ChaiApp was 0 of 25: those are genuine removals, and
+that community has run 70–85% removed posts in every archive month since 2025.
+
+This reaches every theme line, because a shell sits in the per-1,000 denominator
+while having almost nothing for a keyword to match. Shells tag at 0.1–2.3 per
+1,000 against 2.0–18.8 for text-bearing posts. From June 2026 that pushed every
+line down by roughly 12–16% relative to March–May 2026, and about 12% relative
+to 2024 and early 2026. On therapy it inverted a direction: the published line
+fell 2.7% from March–May to June–August, and rose 16% on a denominator counting
+only text-bearing posts.
+
+**This was repaired on 2026-09-08.** `[REPAIR-NOTE]` A shell-refresh step now
+re-fetches posts that were captured as shells once they are 10–35 days old, and
+a one-time pass covered everything back to 2026-03-11. `[REPAIR-NOTE]` The
+live-Reddit window of 2026-03-11 → 05-26 was re-fetched from the archive for the
+23 keyword-scope communities other than r/CharacterAI, which had already been
+repaired in May. `[REPAIR-NOTE]` The shell shares and the 12–16% depression
+given above describe the record as it stood before that repair. `[REPAIR-NOTE]`
+
+### 9.2 The engagement metrics have their own breaks
+
+These are secondary-context figures, not theme measurement, but they carry two
+discontinuities worth naming. **`avg_score_per_post` has no archive equivalent
+and is frozen at 2026-05-28** — 2026-06-07 for the ambient tier — exactly as
+subscriber counts are. **`avg_comments_per_post` changed definition in June
+2026**: it was Reddit's own `num_comments` field, and it is now the mean number
+of comments this project actually collected for a post. Those are different
+quantities. Read that metric for direction within an era, not as a level across
+the whole record.
+
+### 9.3 How much matchable text exists is not constant
+
+This is the most important caveat in the document after recall, because it is
+the one that bears on "shape and timing are honest."
+
+The keywords match title and body text. The share of eligible posts that carry
+any body text at all has risen steadily:
+
+| Year | Posts with body text |
+|---|---|
+| 2022 | 17% |
+| 2023 | 32% |
+| 2024 | 40% |
+| 2025 | 53% |
+| 2026 | 61% |
+
+Within r/CharacterAI alone the climb is steeper — 27% in 2023 to 66% in 2026 —
+and outside it, gentler: 48% to 55%. Part of this is capture recency: an older
+post had more years in which to be deleted before the archive ever saw it. Part
+of it is a real change in how these communities post — more text, fewer
+screenshots.
+
+Either way, the instrument had more to read in 2026 than in 2022. **And whether
+recall is constant over time has never been tested.** The 2026-05-13 recall
+audit (§5) drew an all-time random sample with no period stratification, and the
+drift check (§8) measures precision drift only, not recall.
+
+What has been tested is how much the published shapes depend on it. Restricting
+the corpus to body-bearing posts, five of the six themes keep the direction they
+are charted with. Romance is the exception: on the published denominator it goes
+from 2.10 to 4.08 per 1,000 between 2023 and 2026 (+94%); on body-bearing posts
+only, from 4.55 to 5.72 (+26%). Its rise out of the 2024 trough survives; much
+of the longer climb since 2023 does not.
+
+So, stated at the strength the evidence supports: **direction is robust for five
+of six themes and for event-shaped spikes; multi-year magnitude is weaker
+everywhere; and romance's long climb is the weakest claim on the site.**
 
 ---
 
@@ -537,8 +793,10 @@ composite looks authoritative and is fragile.
 1. **It counts language, not people or feelings.** A rising addiction line means
    addiction-related language appears more often. It does not establish that
    more people are addicted, nor how they feel about it.
-2. **Every line is a floor.** Measured recall is 3–32% per theme (§5). Magnitude
-   is a clear undercount.
+2. **Every line is a floor.** Measured recall is 0–32% per theme (§5):
+   consciousness caught none of the eight posts a human classified as on-theme.
+   That is a small sample — its Wilson interval reaches about 32% — but the
+   point estimate is zero, not 3%. Magnitude is a clear undercount.
 3. **Theme heights are not comparable to each other.** Vocabularies catch
    unevenly, in one direction: blunt, deliberate vocabulary reads higher than
    ordinary language.
@@ -554,8 +812,11 @@ composite looks authoritative and is fragile.
    ended — to a newer app, a Discord, a general-AI subreddit outside this set —
    and the instrument cannot tell those apart.
 6. **Private and invite-only communities are unreachable** (§2.5).
-7. **Older archived posts are more likely to be text-removed** (§9), biasing
-   early years low.
+7. **The amount of matchable text is not constant over time** (§9.3). Posts
+   carrying body text went from 17% of the corpus in 2022 to 61% in 2026, and
+   nothing in the validation programme has tested whether recall is flat across
+   that change. Restricted to body-bearing posts, five themes keep their charted
+   direction; romance's climb since 2023 largely does not.
 8. **The six themes are a lens, not a census.** There is no "fun",
    "creativity", or "everyday utility" theme — and everyday practical talk (bug
    reports, tips, which app to use) is in fact most of what these communities
@@ -563,6 +824,24 @@ composite looks authoritative and is fragile.
    carry weight: intimacy, belief, dependence, and loss.
 9. **Post-level NSFW filtering** may cause slight undercounting within
    otherwise-accessible communities.
+10. **A few accounts carry more of a theme than you might expect, and one
+    template is currently distorting sex/ERP.** The most prolific 1% of authors
+    account for 5–11% of a theme's posts (May 2026 audit) — concentrated, but
+    not enough to make a theme one person's diary. One platform-operator account
+    was found posting product announcements into the sex/ERP theme
+    (`SoulmateAI_Dev`, 2023 Soulmate patch notes, about 0.8% of the theme); it
+    is excluded from the counts. A second cluster is known and **not yet
+    fixed**: one r/NomiAI moderator's weekly "collab" thread template contains
+    the phrase *"NSFW content is not blanket excluded…"*, which matches the
+    keyword `nsfw content`. Eighty-four of those posts exist, all from one
+    account on a fixed weekly cadence, and they are 14–25% of the sex/ERP
+    theme-months since late 2025. They are false positives. The fix — drop the
+    keyword, guard it against the template, or exclude the account as
+    `SoulmateAI_Dev` was — is queued for the next instrument version, under the
+    change-control rule in §8.2.
+11. **Exact duplicates and crossposts are about 8% of the eligible corpus**
+    (varying 3–9% by year) and about 2% of tagged posts. They are not
+    de-duplicated. This wobbles the denominator slightly; it is not corrected.
 
 ---
 
@@ -601,6 +880,9 @@ The bundle contains **derived numbers only**: no post text, no titles, no
 usernames, no post IDs, no raw Reddit content. It is regenerated by the daily
 pipeline.
 
+One series the site publishes is **not** in v1: the "Excluding r/CharacterAI"
+view (§6.3). The bundle carries the full-scope series only.
+
 The full post database is too large to host in the repository. It is available
 on request.
 
@@ -617,6 +899,21 @@ Suggested citation:
 > Bockley, W. (2026). *My Friend Is AI: Reddit discourse tracker for AI
 > companionship communities.* myfriendisai.com.
 > <https://github.com/hopeshub/myfriendisai>
+
+### 14.1 The people in the data
+
+These are public posts, but they were written by people talking about their own
+relationships, and the site is built accordingly.
+
+- **No usernames appear anywhere on the site**, in any chart, table, quote, or
+  export.
+- **Every quoted post links to the public original**, so a reader can see the
+  context rather than a fragment chosen to make a point.
+- **If a quoted post is yours and you want it off the page, it comes down.**
+  Message the project's author on X at
+  [@hopes_revenge](https://x.com/hopes_revenge). No explanation needed.
+- **Posts that were later deleted stay in the counts but are never quoted.** The
+  archive captured them; a count is not a republication, and a quote is.
 
 ---
 

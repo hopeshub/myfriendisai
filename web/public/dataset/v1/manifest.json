@@ -1,7 +1,7 @@
 {
   "dataset": "myfriendisai-aggregates",
   "version": "v1",
-  "generated_at": "2026-09-03T13:57:07Z",
+  "generated_at": "2026-09-08T13:08:36Z",
   "data_through": "2026-08",
   "license": "CC BY 4.0",
   "license_url": "https://creativecommons.org/licenses/by/4.0/",
@@ -11,18 +11,18 @@
   "files": [
     {
       "name": "METHODOLOGY.md",
-      "bytes": 29792,
-      "sha256": "4c49fa5e3b3ef07e7b34995a4b5e31645d1e82cde9df559f6579af86b5db0346"
+      "bytes": 47504,
+      "sha256": "f6b07f377a89f4e9ab0075aaeeaeb17cb418c0b4ff94518ccfb8e76de9327b13"
     },
     {
       "name": "README.md",
-      "bytes": 7040,
-      "sha256": "e7ec2870bcfc2218fb9335182ddc1c0a2fecfaa70cf1b95bec24ef1baa6c0828"
+      "bytes": 9457,
+      "sha256": "a59c4dd161bf2be52d8fccc48931666b135d5bd4e3c5be230221f1f2402f3d18"
     },
     {
       "name": "index.html",
-      "bytes": 3779,
-      "sha256": "02d6378bb04014153041784157f2516435ba2110274633e60fdf756c6bc4084d"
+      "bytes": 3773,
+      "sha256": "fbb314807cc8935905a3e890a9165f496dbc0ab0f63d41dd93ddc4ba300301f3"
     },
     {
       "name": "monthly_community_volumes.csv",
@@ -32,8 +32,8 @@
     },
     {
       "name": "monthly_community_volumes.json",
-      "bytes": 422311,
-      "sha256": "c02929cb9de593f8aa9893dc03e5d5fb3c69056961c2694ca656645d36148755",
+      "bytes": 418879,
+      "sha256": "477d594efa91eec9ab769b77473c225493fcddd72938500d2fd6ef62b08e06d7",
       "rows": 1716
     },
     {

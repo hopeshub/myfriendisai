@@ -1,11 +1,17 @@
 Data License — Creative Commons Attribution 4.0 International (CC BY 4.0)
 ===========================================================================
 
-The aggregate data exports in this repository (the JSON files in
-/web/data/ and /data/, including keyword_trends.json, theme_health.json,
-subreddits.json, site_meta.json, snapshots.json, keywords.json,
-keyword_details.json, and verification_examples.json) are licensed under
-the Creative Commons Attribution 4.0 International License.
+The aggregate data exports in this repository are licensed under the
+Creative Commons Attribution 4.0 International License. These are:
+
+  - the JSON files in /web/data/ and /data/, including
+    keyword_trends.json, theme_health.json, subreddits.json,
+    site_meta.json, snapshots.json, keywords.json,
+    keyword_details.json, and verification_examples.json; and
+
+  - the published dataset bundles under /web/public/dataset/, all
+    versions (the CSV and JSON tables, the manifest, and the
+    accompanying README and METHODOLOGY documents).
 
 To view a copy of this license, visit:
   https://creativecommons.org/licenses/by/4.0/

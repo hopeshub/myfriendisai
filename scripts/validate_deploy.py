@@ -7,6 +7,7 @@ Usage:
     python scripts/validate_deploy.py
 """
 
+import hashlib
 import json
 import sys
 from pathlib import Path
@@ -179,8 +180,39 @@ def main():
             match = src.read_bytes() == dst.read_bytes()
             check(f"{Path(f).name}", match, "mismatch!" if not match else "")
 
-    # ── 7. Frontend builds ──
-    print("\n7. Frontend build")
+    # ── 7. Public dataset bundle matches its manifest ──
+    # The bundle is a citeable artifact with published SHA-256 hashes, so a
+    # file that drifts from the manifest is a broken promise, not a warning.
+    print("\n7. Public dataset bundle")
+    manifest_path = ROOT / "web/public/dataset/v1/manifest.json"
+    if not manifest_path.exists():
+        check("dataset/v1/manifest.json", False, "missing")
+    else:
+        try:
+            manifest = json.loads(manifest_path.read_text())
+        except json.JSONDecodeError as e:
+            manifest = None
+            check("dataset/v1/manifest.json", False, f"invalid JSON: {e}")
+
+        if manifest is not None:
+            entries = manifest.get("files") or []
+            check("manifest lists files", bool(entries), f"{len(entries)} listed")
+
+            problems = []
+            for entry in entries:
+                name = entry.get("name", "?")
+                f = manifest_path.parent / name
+                if not f.exists():
+                    problems.append(f"{name}: listed but missing")
+                elif hashlib.sha256(f.read_bytes()).hexdigest() != entry.get("sha256"):
+                    problems.append(f"{name}: sha256 mismatch")
+
+            check("bundle files match manifest hashes", not problems,
+                  "; ".join(problems) if problems
+                  else f"{len(entries)} files verified")
+
+    # ── 8. Frontend builds ──
+    print("\n8. Frontend build")
     import subprocess
     result = subprocess.run(
         ["npm", "run", "build"],
