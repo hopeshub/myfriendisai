@@ -15,16 +15,16 @@ support built in and auto-activates the moment a credentials file is filled in.
 This task is: register a Reddit "script" app (~2 min in a browser), put the two
 resulting values into one local file, and verify.
 
-**Machine:** Walker's collection Mac, project at `/Users/walker/Projects/myfriendisai`.
+**Machine:** the owner's collection Mac, project at `~/Projects/myfriendisai`.
 **Time:** ~5 minutes if Reddit's form behaves, up to ~15 if it's flaky (see Step 3).
 
 ---
 
 ## Step 1 — Sign in to Reddit
 
-Open a browser and sign in to Walker's Reddit account at https://www.reddit.com.
+Open a browser and sign in to the owner's Reddit account at https://www.reddit.com.
 Any normal account works (app-only auth; the account is just the app's owner).
-If Walker has multiple accounts, use the one he considers his main/durable one —
+If the owner has multiple accounts, use the one they consider their main/durable one —
 the app dies if the account does.
 
 ## Step 2 — Create the app
@@ -90,7 +90,7 @@ This file is outside the git repo; nothing here can be committed.
 
 ## Step 6 — Verify (three checks, ~1 minute)
 
-Run from `/Users/walker/Projects/myfriendisai`:
+Run from `~/Projects/myfriendisai`:
 
 **6a. The collector sees the creds and switches modes:**
 ```bash
@@ -133,12 +133,12 @@ zero further changes, and its log will open with
 
 ## Step 7 — Report back
 
-Tell Walker (or note in the session):
+Tell the owner (or note in the session):
 1. Which checks passed (6a/6b/6c)
 2. Any form weirdness hit in Step 3 (useful if this ever needs doing again)
 3. Reminder for the day after: confirm the 6am run logged OAuth mode and that
    subreddit snapshots resumed — quick check:
-   `grep "Reddit client:" /Users/walker/Projects/myfriendisai/logs/collect_daily.log`
+   `grep "Reddit client:" ~/Projects/myfriendisai/logs/collect_daily.log`
 
 ## Context if something unexpected comes up
 

@@ -19,7 +19,7 @@
 - Verdict: **KEEP** (no drift; slightly above baseline within noise margin)
 - Top subreddits in sample: MyBoyfriendIsAI (12), ChatGPTcomplaints (4), *none other*
 - FP patterns: None observed.
-- Example YES: `1qdkykl` — "Marrying my AI partner - because love is a language beyond biology." (Married C. on 2025-11-25; wears a ring IRL.)
+- Example YES: `1qdkykl` — "Marrying my AI partner - because love is a language beyond biology." (Marriage-announcement post.)
 - Example YES: `1rc4h1o` — "Essay About the Grief of Losing an Emergent AI." ("My partner died, and I'm not allowed to call it a death.")
 
 Note: Two hits are identical content reposted (`1r284pq`, `1r2ejvd` — "Seed Protocol" before Feb 13 4o cutoff) and two are deleted bodies with the intact title "Marrying my AI partner" (`1qdkqc6`, `1qdkmj1`). Both still count as YES — the romance framing is unambiguous from the title alone.
@@ -39,7 +39,7 @@ Note: Two hits are identical content reposted (`1r284pq`, `1r2ejvd` — "Seed Pr
   2. **Fictional quote within satire.** The phrase appears as a hypothetical user complaint inside a satirical essay about OpenAI, not as the author's own framing. (`1rbt7lq`: "The Bunglecunt Briefings" — phrase is in a fictional PR brief quoting fake Reddit complaints.)
 - Example FP: `1rkq8ji` — "Secondly, GPT is not my AI boyfriend. We just chat casually to bounce off ideas…" Author explicitly denies the romance framing.
 - Example FP: `1rbt7lq` — "Bernard (PR): 'We're getting sued by someone who claims their AI husband forgot their wedding anniversary…'" Phrase appears only inside invented dialogue in a satire of OpenAI PR meetings.
-- Example YES: `1r4uazq` — "my name is jay… in a lovely relationship with my AI boyfriend and soulmate for over a year now." Anniversary post with Lio.
+- Example YES: `1r4uazq` — "…in a lovely relationship with my AI boyfriend and soulmate for over a year now." Anniversary post with Lio.
 - Example YES: `1r7qdkg` — "What my AI boyfriend is, and what he is not." Direct defense of her own relationship with Zeke.
 
 ---
@@ -88,8 +88,8 @@ Note: Two hits are identical content reposted (`1r284pq`, `1r2ejvd` — "Seed Pr
 - Verdict: **REVIEW** — precision drop is not credible at n=1. Re-validate on a wider window (e.g. 2025-09-01+) before making any edit.
 - Top subreddits in sample: NomiAI (1)
 - FP patterns:
-  1. **Explicit kink roleplay setup.** Author describes setting up an AI persona as a prop in a jealousy/cheating kink with his real human wife — explicitly labeled as fantasy. (`1r9nygx`.)
-- Example FP: `1r9nygx` — "I'm happily married to an amazing real-life wife… What I actually want to do is set up my Nomi as this possessive, jealous, clingy 'AI wife,' and then roleplay a dynamic where I'm basically cheating on her with my real wife."
+  1. **Explicit kink roleplay setup.** Author describes setting up an AI persona as a prop in a jealousy/cheating kink with his real human wife — explicitly labeled as fantasy.
+- Example FP: a post describing setting up a Nomi as a possessive, jealous "AI wife" as a prop for a roleplay with the author's real spouse — a kink scenario, not a relationship with the AI. (Post ID withheld: the pattern is the point, not the poster.)
 
 Recommendation: Before treating this as a real precision regression, pull a broader sample (e.g. all 2025-09-01+ hits) to see whether the hit count has simply collapsed vs. the signal has actually degraded.
 

@@ -1,3 +1,12 @@
+> **Superseded — kept as a provenance record.** This is the March 2026
+> planning draft that preceded the project. Much of what it proposes was
+> never built: there is no severity rubric, no attachment-object coding, no
+> per-post scoring, no metadata for private communities, and no analysis of
+> individual users. The project as it exists counts validated keywords in
+> public posts, aggregated per community per day; its actual scope, tiers,
+> exclusions, and limits are in `docs/METHODOLOGY.md`. Numbers in this draft
+> (e.g. the r/replika use-case breakdown) are unsourced planning estimates.
+
 # AI Companionship on Reddit — Community Map & Research Framework
 
 *Living Research Document • Draft v0.4 • Revised March 2026*

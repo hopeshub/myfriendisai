@@ -1,19 +1,19 @@
 # Guide: Request Reddit API access and finish OAuth setup (full hand-off)
 
 **Status:** ticket FILED 2026-06-11 (via Claude + Chrome). Ticket number pending —
-watch walkerbockley@gmail.com (and spam) for the Zendesk confirmation email and
+watch <owner email> (and spam) for the Zendesk confirmation email and
 record the number here. Part 1 is DONE; we are now in Part 2 (waiting).
 Filing details: form submitted signed-out of the help center under account
-u/GuardEither6527, email walkerbockley@gmail.com. The live form turned out to be
+u/<owner account>, email <owner email>. The live form turned out to be
 the structured Devvit-era "Data Access Request" form (role: "I'm a developer";
 inquiry: "build a Reddit App that does not work in the Devvit ecosystem"), so the
 ticket text below was adapted across its fields: benefit/purpose, detailed
 description (read-only scope, ~360-470 req/day, policy-compliance affirmations,
 .json-endpoint history), what's-missing-from-Devvit (external read-only pipeline,
 no on-Reddit surface), source link (github.com/hopeshub/myfriendisai +
-myfriendisai.com), all 40 subreddits, operating username u/GuardEither6527.
+myfriendisai.com), all 40 subreddits, operating username u/<owner account>.
 No-reply nudge date (4 weeks): 2026-07-09.
-**Who can do this:** anyone with (a) access to Walker's Reddit account in a browser
+**Who can do this:** anyone with (a) access to the owner's Reddit account in a browser
 and (b) access to this Mac. No coding required; every command is copy-paste.
 **Goal:** get Reddit's explicit approval to create an API app, then create the app,
 install the credentials, and verify — so daily collection runs on Reddit's API
@@ -29,13 +29,13 @@ in `docs/oauth_setup_guide.md` Step 2 is dead until Reddit approves a request.
 **There is no urgency.** The site is healthy on the Arctic Shift fallback — theme
 trends stay current; only subscriber snapshots and comment collection are paused.
 Never use workarounds (no extra accounts, no borrowed API keys, no third-party
-keys). If anything below fails repeatedly, stop and tell Walker.
+keys). If anything below fails repeatedly, stop and tell the owner.
 
 ---
 
 ## Part 1 — File the access request ticket (~10 minutes)
 
-1. In a browser, sign in to **Walker's Reddit account** at https://www.reddit.com
+1. In a browser, sign in to **the owner's Reddit account** at https://www.reddit.com
    (his main/durable account — ask him which if unsure; note the username, you
    need it in step 4).
 2. Open the developer request form:
@@ -45,7 +45,7 @@ keys). If anything below fails repeatedly, stop and tell Walker.
    https://support.reddithelp.com → submit a request → choose the **Developer /
    API** form and the **developer** request type in the role dropdown.)
 3. Fill the form's standard fields:
-   - **Email:** `walkerbockley@gmail.com`
+   - **Email:** `<owner email>`
    - **Role / request type** (if shown): **developer** (NOT "researcher" — that
      dropdown routes to the academic Reddit-for-Researchers program, which
      requires university affiliation we don't have; this is a non-commercial
@@ -130,11 +130,11 @@ Happy to answer questions or adjust scope. Thank you for considering.
 ## Part 2 — While waiting
 
 - **Nothing needs babysitting.** The daily pipeline keeps running on the Arctic
-  Shift fallback, and a GitHub Action already emails Walker if the site goes stale.
-- **Watch `walkerbockley@gmail.com`** (and Reddit DMs/modmail on the account) for a
+  Shift fallback, and a GitHub Action already emails the owner if the site goes stale.
+- **Watch `<owner email>`** (and Reddit DMs/modmail on the account) for a
   reply. Zendesk replies sometimes land in spam — check there too.
 - If Reddit asks follow-up questions, answer honestly from the ticket text above;
-  if a question isn't covered there, ask Walker before answering.
+  if a question isn't covered there, ask the owner before answering.
 - If Reddit asks the app to **register a developer profile / app profile** at
   https://developers.reddit.com/app-registration, do it — same account, same app
   name (`ai-companion-tracker`), same description as the ticket.
@@ -154,17 +154,17 @@ specific instructions. Unless their instructions say otherwise:
    to restart, nothing to deploy.
 3. The day after, confirm OAuth mode is live:
    ```bash
-   grep "Reddit client:" /Users/walker/Projects/myfriendisai/logs/collect_daily.log
+   grep "Reddit client:" ~/Projects/myfriendisai/logs/collect_daily.log
    ```
-   Expect a line saying `OAuth mode`. Tell Walker it's done.
+   Expect a line saying `OAuth mode`. Tell the owner it's done.
 
 ## Part 4 — If rejected (or conditions we can't meet)
 
 Do **not** improvise workarounds. The site is fine on the fallback indefinitely.
 
-1. Save Reddit's full reply (forward the email to Walker).
+1. Save Reddit's full reply (forward the email to the owner).
 2. Update the **Status** line at the top of this file with the outcome + date.
-3. Tell Walker — deciding any next move (appeal, scope change, staying on the
+3. Tell the owner — deciding any next move (appeal, scope change, staying on the
    fallback permanently) is his call.
 
 ## Context links

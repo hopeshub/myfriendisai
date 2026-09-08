@@ -1,11 +1,20 @@
 Data License — Creative Commons Attribution 4.0 International (CC BY 4.0)
 ===========================================================================
 
-The aggregate data exports in this repository (the JSON files in
-/web/data/ and /data/, including keyword_trends.json, theme_health.json,
-subreddits.json, site_meta.json, snapshots.json, keywords.json,
-keyword_details.json, and verification_examples.json) are licensed under
-the Creative Commons Attribution 4.0 International License.
+The aggregate data exports in this repository are licensed under the
+Creative Commons Attribution 4.0 International License. This covers:
+
+  - the public dataset bundle at /web/public/dataset/v1/ (also published
+    at https://myfriendisai.com/dataset/v1/), and
+  - the aggregate JSON files in /data/ and /web/data/ that drive the site:
+    keyword_trends.json, composition_trends.json, community_activity.json,
+    snapshots.json, subreddits.json, theme_health.json, site_meta.json.
+
+It does NOT cover keyword_details.json. That file contains short excerpts
+and titles of public Reddit posts, reproduced for transparency (so a
+reader can see why a keyword matched); those excerpts remain the property
+of their authors and are not licensed by this project. The same applies to
+the post excerpts quoted on the site itself.
 
 To view a copy of this license, visit:
   https://creativecommons.org/licenses/by/4.0/
