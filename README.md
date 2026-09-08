@@ -13,8 +13,8 @@ It does **not** measure sentiment, prevalence, or how many people are actually i
 ## What it tracks
 
 - **41 subreddits** across 5 tiers: general AI (T0), primary companionship (T1), platform-specific (T2), recovery/dependency (T3), and ambient discourse climate (T4, context only) — 39 currently live
-- **6 keyword themes** — Romance, Sex/ERP, Consciousness, Therapy, Addiction, Rupture — matched against the 22 T1–T3 companion subreddits only (the 5 general-AI subs, the 9 ambient T4 subs, and the 3 NSFW subs that fell outside the companionship-construct gate are tracked for context but excluded from the theme lines — see `docs/nsfw_scope_position.md`)
-- **~4.0M posts** from 2017 to present, updated daily
+- **6 keyword themes** — Romance, Sex/ERP, Consciousness, Therapy, Addiction, Rupture — matched against the T1–T3 companion subreddits only (22 currently collected, plus two deactivated communities whose historical posts stay in the numerator and denominator; the 5 general-AI subs, the 9 ambient T4 subs, and the 3 off-construct subs excluded from keyword tracking are tracked for context but excluded from the theme lines — see `docs/nsfw_scope_position.md`)
+- **~4.4M posts** from 2017 to present, updated daily
 - **Keyword validation** — every keyword is manually scored against 100-post samples; only keywords at 80%+ precision are accepted (60-79% may be accepted when false positive patterns are well-defined)
 
 ## How the data works
@@ -35,7 +35,7 @@ Full methodology: [myfriendisai.com/about](https://myfriendisai.com/about)
 | Layer | Technology |
 |-------|-----------|
 | Data collection | Python with `requests` |
-| Database | SQLite (~4.0M posts) |
+| Database | SQLite (~4.4M posts) |
 | Keyword matching | Regex with word-boundary matching |
 | Keyword drift check | Monthly LLM-assisted sample review — monitoring only, not in the chart |
 | Frontend | Next.js 16 + TypeScript + Tailwind CSS |
@@ -75,5 +75,9 @@ npm run dev
 ```
 
 ## License
+- **Code** — MIT (`LICENSE`).
+- **Aggregate data exports** — CC BY 4.0 (`LICENSE-DATA`); the public bundle is at https://myfriendisai.com/dataset/v1/.
+- **Quoted Reddit post excerpts** (on the site and in `keyword_details.json`) remain the property of their authors and are not licensed by this project.
 
-MIT
+## Data sources
+Historical backfill and daily collection use the [Arctic Shift](https://arctic-shift.photon-reddit.com/) Reddit archive, with earlier backfill from [PullPush](https://pullpush.io/). Neither project is affiliated with this one.
