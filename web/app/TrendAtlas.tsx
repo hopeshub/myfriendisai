@@ -48,7 +48,9 @@ function fmtMonthShort(d: string): string {
   return `${MONTH_NAMES[dt.getUTCMonth()]} '${String(dt.getUTCFullYear()).slice(2)}`;
 }
 
-/** Monthly mean of the daily per-1k rate. */
+/** Bucket the series by month. loadThemeData already emits one pooled point
+ *  per month, so this is a pass-through; it stays so the component still
+ *  behaves if it is ever handed a daily series. */
 function monthlySeries(
   points: { date: string; hitsPerK: number }[],
 ): { date: string; value: number }[] {

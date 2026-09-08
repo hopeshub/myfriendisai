@@ -44,9 +44,10 @@ const THEME_CATEGORIES: Record<string, string[]> = {
   rupture:       ["rupture"],
 };
 
-// One point per MONTH (date is "YYYY-MM-01"). The charts only ever render the
-// monthly mean of the per-1k rate, so loadThemeData aggregates daily → monthly
-// server-side rather than shipping ~5,600 daily points per theme to the client.
+// One point per MONTH (date is "YYYY-MM-01"). `hitsPerK` is the POOLED monthly
+// rate: the month's post-only count over the month's measurable posts, times
+// 1,000. The charts render monthly points, so loadThemeData aggregates daily →
+// monthly server-side rather than shipping ~5,600 daily points per theme.
 export type ThemeDataPoint = { date: string; value: number; hitsPerK: number };
 export type ThemeData = Record<string, ThemeDataPoint[]>;
 
@@ -66,22 +67,17 @@ export function loadThemeData(filename: string = "keyword_trends.json"): ThemeDa
     return {};
   }
 
-  // Total posts per day, plus a trailing 7-entry rolling mean used as the
-  // rate denominator. The numerator (count_post_only_7d_avg) is already a
-  // 7-entry trailing mean; smoothing the denominator the same way keeps the
-  // displayed rate from spiking on low-volume days — numerator and denominator
-  // now share a window.
+  // Measurable posts per day: the per-1,000 denominator. Posts stored as
+  // '[removed]'/'[deleted]' are already out of this series (src/db/operations.py,
+  // measurable_post_where) — a post whose text did not survive to capture is
+  // not something this instrument can measure.
   const totalEntries = (
     (raw["_total_posts"] as Array<{ date: string; count: number }> | undefined) ?? []
   )
     .slice()
     .sort((a, b) => a.date.localeCompare(b.date));
-  const totalPosts7dAvg: Record<string, number> = {};
-  for (let i = 0; i < totalEntries.length; i++) {
-    const window = totalEntries.slice(Math.max(0, i - 6), i + 1);
-    totalPosts7dAvg[totalEntries[i].date] =
-      window.reduce((s, e) => s + e.count, 0) / window.length;
-  }
+  const totalByDate: Record<string, number> = {};
+  for (const e of totalEntries) totalByDate[e.date] = e.count;
 
   // Per-theme coverage_start: dates before this are unreliable keyword coverage
   // and are filtered out of the rendered series. Rule computed in
@@ -103,19 +99,11 @@ export function loadThemeData(filename: string = "keyword_trends.json"): ThemeDa
     // longitudinally comparable series: comment tagging only began March 2026,
     // so the post+comment series has a step artifact there. There is no
     // LLM-classified series in the published chart.
-    const rawByDate: Record<string, { count: number; avg: number }> = {};
+    const rawByDate: Record<string, number> = {};
     for (const cat of categories) {
-      type Entry = {
-        date: string;
-        count: number;
-        count_post_only?: number;
-        count_post_only_7d_avg?: number;
-      };
+      type Entry = { date: string; count: number; count_post_only?: number };
       for (const e of (raw[cat] as Entry[] | undefined) ?? []) {
-        if (!rawByDate[e.date]) rawByDate[e.date] = { count: 0, avg: 0 };
-        const postOnly = e.count_post_only ?? e.count;
-        rawByDate[e.date].count += postOnly;
-        rawByDate[e.date].avg += e.count_post_only_7d_avg ?? postOnly;
+        rawByDate[e.date] = (rawByDate[e.date] ?? 0) + (e.count_post_only ?? e.count);
       }
     }
 
@@ -123,10 +111,11 @@ export function loadThemeData(filename: string = "keyword_trends.json"): ThemeDa
     const currentMonth = new Date().toISOString().slice(0, 7); // "YYYY-MM"
 
     // Walk the CORPUS calendar (_total_posts dates), not just hit-days: the
-    // export omits days with zero hits, and averaging only over hit-days
-    // biased sparse months upward (worst in early-coverage months). A day the
-    // corpus has posts but the theme has no hits is a real 0, and must pull
-    // the monthly mean down. Days with no collection at all stay absent.
+    // export omits days with zero hits, so a hit-day walk would drop those
+    // days' posts out of the denominator and read every sparse month high. A
+    // day the corpus has posts but the theme has none belongs in the month's
+    // denominator with a numerator of 0. Days with no collection at all stay
+    // absent — a hole in the record is not a quiet day.
     // coverage_start bounds the walk; without one (no reliable coverage yet)
     // fall back to hit-days only rather than emitting years of zeros.
     let dates: string[];
@@ -138,30 +127,34 @@ export function loadThemeData(filename: string = "keyword_trends.json"): ThemeDa
       dates = Object.keys(rawByDate).sort().filter((d) => d.slice(0, 7) < currentMonth);
     }
 
-    // Aggregate daily → monthly. The atlas and the per-theme chart both render
-    // the monthly mean of the daily per-1k rate (their monthlySeries() helper),
-    // so doing it here ships ~36 points per theme instead of ~5,600 — the chart
-    // is pixel-identical (monthlySeries on already-monthly data is a no-op).
-    const monthly: Record<
-      string,
-      { rateSum: number; n: number; count: number }
-    > = {};
+    // Aggregate daily → monthly as a POOLED rate: one month's hits over one
+    // month's measurable posts. Decided 2026-09-08, replacing a mean of daily
+    // 7-day-smoothed rates. Three reasons. The old estimator ran 2-8% high
+    // against the pooled rate, by an amount that drifted by era, because a mean
+    // of ratios weights a quiet day as heavily as a busy one. Its numerator
+    // window ran over hit-days while its denominator ran over the calendar, so
+    // on a sparse theme the two covered different spans of time. And it turned
+    // a gap in collection into a spike — romance May 2024 drew 5.79 against
+    // neighbours near 1.7. The pooled rate needs no smoothing: the monthly
+    // bucket already is the smoothing. It is also what the public dataset
+    // publishes as `rate_per_1k` and what the homepage sentence describes, so
+    // chart, dataset and prose are now one number.
+    const monthly: Record<string, { count: number; eligible: number }> = {};
     for (const date of dates) {
-      const day = rawByDate[date] ?? { count: 0, avg: 0 };
-      const total7d = totalPosts7dAvg[date] ?? 0;
-      const hitsPerK = total7d > 0 ? (day.avg / total7d) * 1000 : 0;
       const m = date.slice(0, 7) + "-01";
-      if (!monthly[m]) monthly[m] = { rateSum: 0, n: 0, count: 0 };
-      monthly[m].rateSum += hitsPerK;
-      monthly[m].n += 1;
-      monthly[m].count += day.count;
+      if (!monthly[m]) monthly[m] = { count: 0, eligible: 0 };
+      monthly[m].count += rawByDate[date] ?? 0;
+      monthly[m].eligible += totalByDate[date] ?? 0;
     }
     result[themeId] = Object.keys(monthly)
       .sort()
       .map((m) => ({
         date: m,
         value: monthly[m].count,
-        hitsPerK: monthly[m].rateSum / monthly[m].n,
+        hitsPerK:
+          monthly[m].eligible > 0
+            ? (monthly[m].count / monthly[m].eligible) * 1000
+            : 0,
       }));
   }
   return result;

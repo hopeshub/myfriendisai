@@ -202,9 +202,12 @@ export default function About() {
             </p>
             <p>
               The chart shows how many posts use each theme&apos;s keywords,
-              expressed as a rate per 1,000 posts: each day&apos;s rate is smoothed
-              over a 7-day window, then averaged by calendar month. The rate
-              matters more than a raw count would here. These
+              expressed as a rate per 1,000 posts: the month&apos;s matched
+              posts divided by the month&apos;s posts, times a thousand. Posts
+              that were removed or deleted before they were archived are left
+              out of both halves of that fraction &mdash; only a title survives
+              them, so there is no text to match. The rate matters more than a
+              raw count would here. These
               communities have grown enormously since 2017, so a raw count would
               mostly retrace that growth; a rate sets the growth aside and shows
               how the conversation itself is shifting.

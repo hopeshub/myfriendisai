@@ -89,29 +89,20 @@ def build_theme_rows(trends):
     For each theme the walk runs over the CORPUS calendar (the dates present
     in ``_total_posts``) from that theme's ``_coverage_start`` up to the last
     complete month. Walking the corpus calendar rather than the theme's
-    hit-days matters: the trends export omits zero-hit days, and averaging
-    over hit-days only would bias sparse months upward.
+    hit-days matters: the trends export omits zero-hit days, so a hit-day walk
+    would leave those days' posts out of the denominator.
+
+    Both columns are now the same pooled monthly rate. Until 2026-09-08 the
+    site charted a mean of daily smoothed rates, and ``rate_per_1k_charted``
+    reproduced that estimator; it ran 2-8% above the pooled rate by an amount
+    that drifted by era, its numerator and denominator smoothing windows
+    covered different spans of time, and it turned a gap in collection into a
+    spike. The chart now plots the pooled rate, so the two columns coincide.
+    The column is kept so the dataset schema does not break for anyone who
+    already reads it.
     """
     total_entries = sorted(trends.get("_total_posts", []), key=lambda e: e["date"])
     totals = {e["date"]: e["count"] for e in total_entries}
-
-    # Trailing 7-entry mean of the denominator, index-based over the corpus
-    # calendar — matching themeData.ts, so `rate_per_1k_charted` reproduces
-    # what the site draws.
-    #
-    # NOTE (2026-09-08): the two windows are NOT aligned, and the comment here
-    # previously claimed they were. The numerator's count_post_only_7d_avg is
-    # also index-based, but over the theme's HIT-days: operations.py builds it
-    # from a GROUP BY that emits no row for a zero-hit day. So for a sparse
-    # theme the numerator's window reaches back further in calendar time than
-    # the denominator's (consciousness has hits on 48% of its charted days,
-    # therapy 55%). This is documented in METHODOLOGY §6.2 and the bundle
-    # README; changing it is a v9-class decision, not a quiet fix. `rate_per_1k`
-    # (pooled, unsmoothed) is unaffected and is the column to analyse.
-    total_7d = {}
-    for i, entry in enumerate(total_entries):
-        window = total_entries[max(0, i - 6): i + 1]
-        total_7d[entry["date"]] = sum(e["count"] for e in window) / len(window)
 
     coverage_start = trends.get("_coverage_start", {}) or {}
     current_month = _current_month()
@@ -123,13 +114,7 @@ def build_theme_rows(trends):
         # `count` carries a step artifact at 2026-03-18 (when comment tagging
         # began) and is not longitudinally comparable. Fall back to `count`
         # for older export vintages that predate the post-only split.
-        by_date = {}
-        for e in series:
-            post_only = e.get("count_post_only", e["count"])
-            by_date[e["date"]] = {
-                "count": post_only,
-                "avg": e.get("count_post_only_7d_avg", post_only),
-            }
+        by_date = {e["date"]: e.get("count_post_only", e["count"]) for e in series}
 
         cs = coverage_start.get(theme)
         if cs:
@@ -144,28 +129,23 @@ def build_theme_rows(trends):
 
         monthly = {}
         for d in dates:
-            day = by_date.get(d, {"count": 0, "avg": 0})
-            denom = total_7d.get(d, 0)
-            rate = (day["avg"] / denom) * 1000 if denom > 0 else 0.0
             m = d[:7]
-            bucket = monthly.setdefault(
-                m, {"count": 0, "eligible": 0, "rate_sum": 0.0, "days": 0}
-            )
-            bucket["count"] += day["count"]
+            bucket = monthly.setdefault(m, {"count": 0, "eligible": 0, "days": 0})
+            bucket["count"] += by_date.get(d, 0)
             bucket["eligible"] += totals.get(d, 0)
-            bucket["rate_sum"] += rate
             bucket["days"] += 1
 
         for m in sorted(monthly):
             b = monthly[m]
-            simple = (b["count"] / b["eligible"] * 1000) if b["eligible"] else 0.0
+            pooled = (b["count"] / b["eligible"] * 1000) if b["eligible"] else 0.0
             rows.append({
                 "theme": theme,
                 "month": m,
                 "post_only_count": b["count"],
                 "eligible_posts": b["eligible"],
-                "rate_per_1k": _round(simple),
-                "rate_per_1k_charted": _round(b["rate_sum"] / b["days"]) if b["days"] else 0.0,
+                "rate_per_1k": _round(pooled),
+                # Identical to rate_per_1k since 2026-09-08 — see the docstring.
+                "rate_per_1k_charted": _round(pooled),
                 "days_observed": b["days"],
                 "coverage_start": cs or "",
             })
@@ -310,27 +290,34 @@ meaningful.
 |---|---|---|
 | `theme` | Direct | One of `romance`, `sexual_erp`, `consciousness`, `therapy`, `addiction`, `rupture`. |
 | `month` | Direct | Calendar month, `YYYY-MM`. |
-| `post_only_count` | Derived | Distinct posts in that month whose **own title or body** matched at least one validated keyword for the theme. This is the published series. Keyword hits found only in a post's *comments* are deliberately excluded — comment tagging began 2026-03-18, so including them puts a step artifact in the series at that date. |
-| `eligible_posts` | Derived | All posts collected that month across the communities in the theme-measurement scope (T1–T3, minus the communities excluded from keyword tracking). This is the per-1k denominator. |
-| `rate_per_1k` | Derived | `post_only_count / eligible_posts * 1000`. The plain monthly rate. |
-| `rate_per_1k_charted` | Derived | What the site's chart plots: the mean, over the month's days, of the daily smoothed rate. It is a different estimator from `rate_per_1k`, not a rounding of it — see below. |
-| `days_observed` | Derived | Days in that month present in the corpus calendar. Below ~28 means the collector missed days. |
+| `post_only_count` | Derived | Distinct posts in that month whose **own title or body** matched at least one validated keyword for the theme. This is the published series. Keyword hits found only in a post's *comments* are deliberately excluded — comment tagging began 2026-03-18, so including them puts a step artifact in the series at that date. Counted over the same population as `eligible_posts`: posts whose text survived. |
+| `eligible_posts` | Derived | Posts with surviving text that month across the theme-measurement scope (T1–T3, minus the communities excluded from keyword tracking). Posts recorded as removed or deleted are excluded — the archive kept a title and nothing else, so there is no text to match. Image and link posts, which have a title and an empty body, are included. This is the per-1k denominator. |
+| `rate_per_1k` | Derived | `post_only_count / eligible_posts * 1000`. The pooled monthly rate, and the number the site's chart plots. |
+| `rate_per_1k_charted` | Derived | Identical to `rate_per_1k` since 2026-09-08. Kept so the schema does not break — see below. |
+| `days_observed` | Derived | Days in that month present in the corpus calendar. Below ~28 means the collector missed days entirely. It will not catch a month that was collected thinly rather than not at all — for that, compare `eligible_posts` against the neighbouring months. |
 | `coverage_start` | Derived | The theme's first reliably-measurable month (see below). Constant per theme; repeated on each row for convenience. |
 
-**Two rates, and which to use.** `rate_per_1k` is the pooled monthly rate: one
-count divided by one denominator. `rate_per_1k_charted` is a mean of daily
-ratios, which is not the same quantity and runs slightly higher on average,
-because it weights quiet days as heavily as busy ones. The two smoothing
-windows behind it are also not aligned: the denominator's 7-day trailing mean
-runs over the calendar, while the numerator's runs over the last seven days
-that had at least one keyword hit — zero-hit days are dropped upstream. For a
-theme with hits most days the two coincide; for a sparse one they do not
-(consciousness records a hit on 48% of its charted days, therapy 55%). Measured
-across the whole record, the gap between the two columns has a median of
-3.6–7.9% by theme and a 90th percentile of 14–29%, with worst months at +79%
-(romance 2024-05), +59% (consciousness 2025-12) and −35% (rupture 2023-09).
-**Use `rate_per_1k` for any analysis.** Use `rate_per_1k_charted` only to
-reproduce what the site draws.
+**The two rate columns now carry the same number.** Until 2026-09-08 the
+site's chart plotted a different estimator — a mean, over the month's days, of
+a daily rate smoothed with a 7-day trailing window — and `rate_per_1k_charted`
+reproduced it. That estimator ran 2–8% above the pooled rate by an amount that
+drifted era to era, its numerator and denominator smoothing windows covered
+different spans of time, and it turned a gap in collection into a spike. The
+chart now plots the pooled rate: one month's count over one month's eligible
+posts. The column stays in the schema so existing readers do not break, but
+there is no longer a choice to make between the two. **Downloads taken before
+2026-09-08 have different values in the two columns**; in those files,
+`rate_per_1k` is the one to analyse.
+
+**What counts as a post.** As of 2026-09-08 the published population is posts
+whose text survived to capture. A post the archive recorded as `[removed]` or
+`[deleted]` kept only its title, so it is out of both the count and the
+denominator. Keeping such posts in made every rate depend on how hard a
+community moderates and on which collection regime was running — one tracked
+community runs 70–85% removed posts, and the live-Reddit window of March–May
+2026 contained none at all, because Reddit's own listing omitted them.
+Downloads taken before 2026-09-08 used the wider population and sit roughly
+12–16% lower in the affected months.
 
 **Coverage gating.** Each theme's rows begin at its `coverage_start` — the
 first calendar month where the post-only count is at least 5 and every later
@@ -359,7 +346,7 @@ becomes reliable) through the last complete month.
 |---|---|---|
 | `subreddit` | Direct | Subreddit name, without the `r/` prefix. |
 | `month` | Direct | Calendar month, `YYYY-MM`. |
-| `posts` | Derived | Posts collected from that community with a creation timestamp in that month. |
+| `posts` | Derived | Posts collected from that community with a creation timestamp in that month, counting measurable posts only — the same population as `eligible_posts` above, so a community's volume here is what it contributes to the theme denominator. Posts recorded as removed or deleted are excluded; image and link posts are included. |
 | `tier` | Direct | 0–4. See `METHODOLOGY.md` for what each tier is and why it exists. |
 | `tier_label` | Direct | Human-readable tier name. |
 | `category` | Direct | The community's category label as shown on the site. |
@@ -369,6 +356,19 @@ This table covers the communities currently being collected. Two communities
 that were tracked and later deactivated — r/HeavenGF (banned by Reddit, ~May
 2026) and r/MySentientAI (moribund) — keep their historical posts in the
 corpus and in the theme denominator, but do not appear here.
+
+---
+
+## Revision history
+
+| Version | Date | What changed |
+|---|---|---|
+| v1 | 2026-08-27 | First publication. |
+| v1.1 | 2026-09-08 | Population narrowed to **measurable posts**: posts recorded as removed or deleted leave every count and the per-1k denominator. The site's chart switched to the **pooled monthly rate**, so `rate_per_1k_charted` now equals `rate_per_1k`. `in_theme_measurement` is a real boolean in the JSON form. Numbers moved; the schema did not. |
+
+The bundle URL and file names stay `v1` — these are corrections to how the same
+quantities are computed, not a new set of quantities. `manifest.json` records
+when the current numbers were produced.
 
 ---
 

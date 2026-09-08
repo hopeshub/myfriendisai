@@ -132,6 +132,40 @@ def insert_snapshot(
 # See scripts/refresh_shell_posts.py.
 SHELL_BODIES = ("[removed]", "[deleted]")
 
+_SHELL_BODIES_SQL = ", ".join("'{}'".format(b.replace("'", "''")) for b in SHELL_BODIES)
+
+
+def measurable_post_where(alias: str = "p") -> str:
+    """SQL predicate selecting *measurable* posts. Pass "" for an unaliased query.
+
+    The published post population, decided 2026-09-08: a post counts if its
+    text survived to capture. A shell carries a title and nothing else, so the
+    instrument cannot read it, and counting shells makes every published rate
+    depend on two things that have nothing to do with discourse:
+
+    * how hard a community moderates — r/ChaiApp is 70-85% removed posts in
+      every archive month, so its posts sat in the per-1,000 denominator while
+      contributing almost no matchable text; and
+    * which collection regime was running — Reddit's own listing omitted
+      removed posts entirely, so the live window (2026-03-11 to 05-26) holds
+      0% shells while archive-sourced months hold 16-20% (2022-2025) and about
+      30% in June-August 2026, a capture-timing artefact.
+
+    Defining the population as "posts whose text survived" is the only
+    definition consistent across all three regimes, and it is the population
+    the keyword instrument can actually measure.
+
+    An EMPTY body is not a shell. An image or link post (selftext '' or NULL)
+    is visible, its title is matchable, and it stays in the population.
+    """
+    col = f"{alias}.selftext" if alias else "selftext"
+    return f"({col} IS NULL OR {col} NOT IN ({_SHELL_BODIES_SQL}))"
+
+
+# The common case: a query that joins `posts p`.
+MEASURABLE_POST_WHERE = measurable_post_where("p")
+
+
 # Upgrade a stored shell in place when the archive has since gained a real
 # body. The guard lives in the SQL (not the caller) so there is exactly one
 # rule: only a shell is ever overwritten, and only by real text — a stored body
@@ -360,6 +394,13 @@ def get_all_snapshots_for_chart(conn: Optional[sqlite3.Connection] = None) -> li
     2026) — that put a fake cliff in the per-subreddit posts/day charts at the
     backfill→live seam. The posts table is the single source of truth and is
     consistent across that seam, so the chart is now drawn from it directly.
+
+    That recount is over MEASURABLE posts only (2026-09-08) — published post
+    volume is the same population the theme rates are normalized by, so the two
+    never describe different corpora. The other snapshot columns are left
+    exactly as stored: author/contributor counts and the comment/score averages
+    describe people and engagement, not matchable text, and a removed post
+    still had an author and still drew comments.
     """
     _conn = conn or get_connection()
     try:
@@ -379,10 +420,11 @@ def get_all_snapshots_for_chart(conn: Optional[sqlite3.Connection] = None) -> li
 
         # True posts-per-day, per subreddit, from the posts table.
         post_counts = _conn.execute(
-            """
+            f"""
             SELECT subreddit, date(created_utc, 'unixepoch') AS d, COUNT(*) AS n
             FROM posts
             WHERE created_utc IS NOT NULL
+              AND {measurable_post_where("")}
             GROUP BY subreddit, d
             """
         ).fetchall()
@@ -512,11 +554,17 @@ def aggregate_posts_to_snapshots(conn: Optional[sqlite3.Connection] = None) -> i
 
     Uses INSERT OR IGNORE so real json_endpoint snapshots are never overwritten.
     Returns the number of new rows inserted.
+
+    posts_today counts MEASURABLE posts only (2026-09-08) — see
+    measurable_post_where(). The other three aggregates deliberately keep the
+    full population: unique_authors counts people, and the comment/score means
+    describe engagement. A removed post still had an author and still drew
+    comments; only its *text* is missing.
     """
     _conn = conn or get_connection()
     try:
         result = _conn.execute(
-            """
+            f"""
             INSERT OR IGNORE INTO subreddit_snapshots
                 (subreddit, snapshot_date, data_source,
                  posts_today, avg_comments_per_post, avg_score_per_post, unique_authors)
@@ -524,7 +572,7 @@ def aggregate_posts_to_snapshots(conn: Optional[sqlite3.Connection] = None) -> i
                 subreddit,
                 collected_date                                                  AS snapshot_date,
                 'arctic_shift'                                                  AS data_source,
-                COUNT(*)                                                        AS posts_today,
+                SUM(CASE WHEN {measurable_post_where("")} THEN 1 ELSE 0 END)     AS posts_today,
                 ROUND(AVG(CASE WHEN num_comments >= 0 THEN num_comments END), 2) AS avg_comments_per_post,
                 ROUND(AVG(score), 2)                                            AS avg_score_per_post,
                 COUNT(DISTINCT CASE WHEN author != '[deleted]' THEN author END) AS unique_authors
@@ -548,7 +596,10 @@ def create_arctic_snapshot_rows(
     """Create snapshot rows from our own posts table for a day Reddit gave us nothing.
 
     posts_today and unique_authors are computed from the posts table over the
-    UTC calendar day (created_utc). subscribers/active_users stay NULL — they
+    UTC calendar day (created_utc). posts_today counts MEASURABLE posts only
+    (2026-09-08, see measurable_post_where()); unique_authors keeps the full
+    population, because a removed post still had an author.
+    subscribers/active_users stay NULL — they
     are unobservable without Reddit and must not be fabricated.
     avg_comments_per_post is left NULL here and filled at +6d maturity by
     update_arctic_comment_averages; avg_score_per_post stays NULL permanently
@@ -565,9 +616,9 @@ def create_arctic_snapshot_rows(
         win_start = int(datetime.combine(snapshot_date, dtime.min, tzinfo=timezone.utc).timestamp())
         win_end = int(datetime.combine(snapshot_date + timedelta(days=1), dtime.min, tzinfo=timezone.utc).timestamp())
         rows = _conn.execute(
-            """
+            f"""
             SELECT subreddit,
-                   COUNT(*) AS n,
+                   SUM(CASE WHEN {measurable_post_where("")} THEN 1 ELSE 0 END) AS n,
                    COUNT(DISTINCT CASE WHEN author IS NOT NULL AND author != ''
                                        AND author != '[deleted]' THEN author END) AS ua
             FROM posts
@@ -757,6 +808,12 @@ def export_community_activity_json(
     CHART_START) up to the last *complete* month, so no sparkline ends on a
     misleading partial-month dip. Each sparkline is read direction-only, on
     its own scale.
+
+    Counts MEASURABLE posts only (2026-09-08, see measurable_post_where()), so
+    a community's published volume is the same population its posts contribute
+    to the theme denominator. Without that, a heavily-moderated community
+    (r/ChaiApp runs 70-85% removed) reads as far busier here than it is
+    anywhere else on the site.
     """
     path = output_path or DATA_DIR / "community_activity.json"
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -773,12 +830,13 @@ def export_community_activity_json(
         # Monthly post counts, case-insensitive on the subreddit name (the
         # posts table can carry case drift vs. config — see the collector).
         rows = _conn.execute(
-            """
+            f"""
             SELECT LOWER(subreddit) AS sub,
                    strftime('%Y-%m', created_utc, 'unixepoch') AS month,
                    COUNT(*) AS n
             FROM posts
             WHERE created_utc IS NOT NULL
+              AND {measurable_post_where("")}
             GROUP BY sub, month
             """
         ).fetchall()
@@ -817,6 +875,12 @@ def export_keyword_trends_json(
     bot-listing-heavy subs like JanitorAI/SillyTavern). The subreddit context
     provides the AI companionship filter; keywords capture thematic dimensions.
 
+    **Population: measurable posts** (2026-09-08). Numerator and denominator
+    both drop shells — posts stored as '[removed]'/'[deleted]', whose text did
+    not survive to capture. See measurable_post_where() for why. A shell can
+    still carry a title-only tag, so the filter has to be applied to the
+    numerator as well, or the two would describe different corpora.
+
     Emits both the post+comment metric (the default, all sources) and a
     post-only control series so downstream analysis can decompose whether
     trend shifts reflect new comment coverage or discourse changes. The two
@@ -836,6 +900,14 @@ def export_keyword_trends_json(
           ],
           ...
         }
+
+    **The site no longer plots either 7d average.** Since 2026-09-08 the chart
+    and the public dataset both show the pooled monthly rate — the month's
+    post-only count over the month's measurable posts — which the monthly
+    bucket already smooths. The two averages are kept so the schema stays
+    stable for anyone reading older exports, and they are now computed over
+    the corpus calendar with zero-fill (see below) rather than over hit-days,
+    which is what made them unusable in the first place.
     """
     from src.config import load_keyword_communities
     active_subreddits = [c["subreddit"] for c in load_keyword_communities()]
@@ -863,6 +935,7 @@ def export_keyword_trends_json(
             FROM post_keyword_tags t
             JOIN posts p ON p.id = t.post_id
             WHERE t.subreddit IN ({placeholders})
+              AND {MEASURABLE_POST_WHERE}
               AND (p.author IS NULL OR p.author NOT IN ({excluded_authors_placeholders}))
             GROUP BY t.category, t.post_date
             ORDER BY t.category, t.post_date
@@ -878,6 +951,7 @@ def export_keyword_trends_json(
             JOIN posts p ON p.id = t.post_id
             WHERE t.subreddit IN ({placeholders})
               AND t.source = 'post'
+              AND {MEASURABLE_POST_WHERE}
               AND (p.author IS NULL OR p.author NOT IN ({excluded_authors_placeholders}))
             GROUP BY t.category, t.post_date
             ORDER BY t.category, t.post_date
@@ -895,6 +969,7 @@ def export_keyword_trends_json(
             FROM posts
             WHERE subreddit IN ({placeholders})
               AND created_utc IS NOT NULL
+              AND {measurable_post_where("")}
             GROUP BY post_date
             ORDER BY post_date
             """,
@@ -913,19 +988,37 @@ def export_keyword_trends_json(
     for category, post_date, count in post_only_rows:
         post_only_lookup[category][post_date] = count
 
+    # The corpus calendar: every day the denominator has posts on. The 7-day
+    # averages below walk THIS list, not the theme's hit-days.
+    #
+    # Why it matters (fixed 2026-09-08): a GROUP BY emits no row for a day with
+    # zero hits, so the old window was index-based over hit-days and reached
+    # back a fortnight or more on a sparse theme while the denominator's window
+    # covered a week. Numerator and denominator were measuring different spans
+    # of time. Nothing plots these averages any more — the chart is the pooled
+    # monthly rate — but a wrong number in a published file is still wrong.
+    corpus_dates = [row[0] for row in total_posts_rows]
+
     result = {}
     for category, entries in sorted(by_category.items()):
         with_avg = []
         post_only_series = post_only_lookup.get(category, {})
-        for i, entry in enumerate(entries):
-            window = [e["count"] for e in entries[max(0, i - 6): i + 1]]
-            avg = round(sum(window) / len(window), 2)
+        by_date = {e["date"]: e["count"] for e in entries}
+        # Union so a hit-day the denominator does not know about (possible only
+        # in synthetic data) still gets a window; on real data the hit-days are
+        # a subset of the corpus calendar and this is exactly corpus_dates.
+        calendar = sorted(set(corpus_dates) | set(by_date) | set(post_only_series))
+        index = {d: i for i, d in enumerate(calendar)}
+        for entry in entries:
+            i = index[entry["date"]]
+            window = calendar[max(0, i - 6): i + 1]
+            # Zero-fill: a corpus day with no hits is a real 0, not a gap.
+            avg = round(sum(by_date.get(d, 0) for d in window) / len(window), 2)
             # Post-only count: 0 if this category had no post-source hits on this date
             post_only_count = post_only_series.get(entry["date"], 0)
-            post_only_window = [
-                post_only_series.get(e["date"], 0) for e in entries[max(0, i - 6): i + 1]
-            ]
-            post_only_avg = round(sum(post_only_window) / len(post_only_window), 2)
+            post_only_avg = round(
+                sum(post_only_series.get(d, 0) for d in window) / len(window), 2
+            )
             with_avg.append({
                 "date": entry["date"],
                 "count": entry["count"],
@@ -949,6 +1042,9 @@ def export_keyword_trends_json(
     # clears the threshold. The current (in-progress) calendar month is
     # excluded from the "all later months" check because it's not yet a
     # full month's data.
+    #
+    # Recomputed from the measurable-post numerator since 2026-09-08, so the
+    # values moved slightly when shells left the counts.
     #
     # Why post-only and not post+comment: post-only is comparable across the
     # full 2023-2026 timeline (comments only began tagging March 2026). Using

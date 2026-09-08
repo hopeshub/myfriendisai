@@ -110,12 +110,23 @@ def test_out_of_scope_subs_excluded(conn_and_patches):
 
 
 def test_rolling_average_over_7_day_window(conn_and_patches):
-    """One hit per day for 8 consecutive days → rolling avg stays 1.0."""
+    """One hit per day for 8 consecutive days → rolling avg stays 1.0.
+
+    created_utc has to match each tag's post_date here: since 2026-09-08 the
+    trailing mean walks the corpus calendar (the days _total_posts covers) with
+    zero-fill, rather than the theme's hit-days. In real data the two dates are
+    the same day by construction — the tagger derives post_date from
+    created_utc — so this only makes the fixture honest.
+    """
+    from datetime import datetime, timezone
+
     conn, tmp_path = conn_and_patches
     dates = [f"2026-03-{i:02d}" for i in range(1, 9)]
     for i, d in enumerate(dates):
         pid = f"p{i}"
-        _seed_post(conn, pid, created_utc=1_760_000_000 + i)
+        utc = int(datetime.strptime(d + " 12:00", "%Y-%m-%d %H:%M")
+                  .replace(tzinfo=timezone.utc).timestamp())
+        _seed_post(conn, pid, created_utc=utc)
         _seed_tag(conn, pid, "romance", "my ai boyfriend", d, "post")
     conn.commit()
 

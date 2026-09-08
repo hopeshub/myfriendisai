@@ -17,6 +17,13 @@ PROJECT_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(PROJECT_ROOT))
 
 from src.config import load_keyword_communities
+from src.db.operations import measurable_post_where
+
+# The published population is measurable posts — posts whose text survived to
+# capture (2026-09-08). A shell ('[removed]'/'[deleted]' body) is out of every
+# count on the site, so it is out of these per-keyword totals too, and a
+# title-only removed post is a poor example to show a reader besides.
+MEASURABLE = measurable_post_where("p")
 
 DB_PATH = PROJECT_ROOT / "data" / "tracker.db"
 KEYWORDS_PATH = PROJECT_ROOT / "config" / "keywords_v8.yaml"
@@ -175,7 +182,9 @@ def build_keyword_details(
     otherwise excluded subs (e.g. r/ChatGPTNSFW) leak into the per-theme totals.
     Counts are also restricted to post-text matches (`source = 'post'`), so the
     panel describes the same post-only metric the published chart shows rather
-    than mixing in comment-sourced tags.
+    than mixing in comment-sourced tags, and to measurable posts (2026-09-08),
+    so a per-keyword total here equals what that keyword contributes to the
+    theme line.
     """
     result = {}
     recent_date = (datetime.now() - timedelta(days=RECENT_CUTOFF_DAYS)).strftime(
@@ -193,11 +202,13 @@ def build_keyword_details(
 
             # Total hits for this term in this category (keyword-eligible subs only)
             row = db.execute(
-                f"""SELECT COUNT(DISTINCT post_id)
-                   FROM post_keyword_tags
-                   WHERE category = ? AND matched_term = ?
-                     AND source = 'post'
-                     AND LOWER(subreddit) IN ({sub_ph})""",
+                f"""SELECT COUNT(DISTINCT pkt.post_id)
+                   FROM post_keyword_tags pkt
+                   JOIN posts p ON p.id = pkt.post_id
+                   WHERE pkt.category = ? AND pkt.matched_term = ?
+                     AND pkt.source = 'post'
+                     AND {MEASURABLE}
+                     AND LOWER(pkt.subreddit) IN ({sub_ph})""",
                 (cat_name, term, *sub_params),
             ).fetchone()
             hits = row[0] if row else 0
@@ -205,11 +216,13 @@ def build_keyword_details(
             if hits == 0:
                 # Try case-insensitive match
                 row = db.execute(
-                    f"""SELECT COUNT(DISTINCT post_id)
-                       FROM post_keyword_tags
-                       WHERE category = ? AND LOWER(matched_term) = LOWER(?)
-                         AND source = 'post'
-                         AND LOWER(subreddit) IN ({sub_ph})""",
+                    f"""SELECT COUNT(DISTINCT pkt.post_id)
+                       FROM post_keyword_tags pkt
+                       JOIN posts p ON p.id = pkt.post_id
+                       WHERE pkt.category = ? AND LOWER(pkt.matched_term) = LOWER(?)
+                         AND pkt.source = 'post'
+                         AND {MEASURABLE}
+                         AND LOWER(pkt.subreddit) IN ({sub_ph})""",
                     (cat_name, term, *sub_params),
                 ).fetchone()
                 hits = row[0] if row else 0
@@ -224,6 +237,7 @@ def build_keyword_details(
                      AND pkt.source = 'post'
                      AND p.title IS NOT NULL
                      AND p.title NOT IN ('[deleted]', '[removed]', '')
+                     AND {MEASURABLE}
                      AND LOWER(pkt.subreddit) IN ({sub_ph})
                      AND pkt.post_date >= ?
                    ORDER BY pkt.post_date DESC
@@ -242,6 +256,7 @@ def build_keyword_details(
                          AND pkt.source = 'post'
                          AND p.title IS NOT NULL
                          AND p.title NOT IN ('[deleted]', '[removed]', '')
+                         AND {MEASURABLE}
                          AND LOWER(pkt.subreddit) IN ({sub_ph})
                        ORDER BY pkt.post_date DESC
                        LIMIT ?""",
@@ -278,12 +293,14 @@ def build_keyword_details(
 
         # --- Subreddit distribution (keyword-eligible subs only) ---
         sub_rows = db.execute(
-            f"""SELECT subreddit, COUNT(DISTINCT post_id) as hits
-               FROM post_keyword_tags
-               WHERE category = ?
-                 AND source = 'post'
-                 AND LOWER(subreddit) IN ({sub_ph})
-               GROUP BY subreddit
+            f"""SELECT pkt.subreddit, COUNT(DISTINCT pkt.post_id) as hits
+               FROM post_keyword_tags pkt
+               JOIN posts p ON p.id = pkt.post_id
+               WHERE pkt.category = ?
+                 AND pkt.source = 'post'
+                 AND {MEASURABLE}
+                 AND LOWER(pkt.subreddit) IN ({sub_ph})
+               GROUP BY pkt.subreddit
                ORDER BY hits DESC""",
             (cat_name, *sub_params),
         ).fetchall()
@@ -304,17 +321,21 @@ def build_keyword_details(
 
         # --- Category totals (keyword-eligible subs only) ---
         total_row = db.execute(
-            f"SELECT COUNT(*) FROM post_keyword_tags "
-            f"WHERE category = ? AND source = 'post' "
-            f"AND LOWER(subreddit) IN ({sub_ph})",
+            f"SELECT COUNT(*) FROM post_keyword_tags pkt "
+            f"JOIN posts p ON p.id = pkt.post_id "
+            f"WHERE pkt.category = ? AND pkt.source = 'post' "
+            f"AND {MEASURABLE} "
+            f"AND LOWER(pkt.subreddit) IN ({sub_ph})",
             (cat_name, *sub_params),
         ).fetchone()
         total_hits = total_row[0] if total_row else 0
 
         unique_row = db.execute(
-            f"SELECT COUNT(DISTINCT post_id) FROM post_keyword_tags "
-            f"WHERE category = ? AND source = 'post' "
-            f"AND LOWER(subreddit) IN ({sub_ph})",
+            f"SELECT COUNT(DISTINCT pkt.post_id) FROM post_keyword_tags pkt "
+            f"JOIN posts p ON p.id = pkt.post_id "
+            f"WHERE pkt.category = ? AND pkt.source = 'post' "
+            f"AND {MEASURABLE} "
+            f"AND LOWER(pkt.subreddit) IN ({sub_ph})",
             (cat_name, *sub_params),
         ).fetchone()
         unique_posts = unique_row[0] if unique_row else 0

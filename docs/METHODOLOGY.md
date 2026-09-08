@@ -6,7 +6,7 @@ assumes no access to the live site, the repository, or any other document.*
 
 **Project:** My Friend Is AI — <https://myfriendisai.com>
 **Code and validation records:** <https://github.com/hopeshub/myfriendisai>
-**Document version:** 1.1 · 2026-09-08
+**Document version:** 1.2 · 2026-09-08
 **Instrument version:** keyword set v8 (92 keywords, locked)
 
 ---
@@ -202,6 +202,38 @@ to 2025-08, r/ReplikaLovers from its creation on 2026-04-19, and all nine
 ambient-tier communities across 2022–2025. So there is no step artifact at the
 date each community joined. What backfilling does instead is change the
 composition of every earlier month; §6.5 gives the size of that effect.
+
+### 2.8 Which posts count
+
+**A post counts if its text survived to capture.** Reddit and the archives both
+keep a post that has been removed or deleted, but they keep it as a title with
+`[removed]` or `[deleted]` where the body was. Call that a shell. A shell is not
+something this instrument can read: the keywords match title and body, and a
+shell has only the first.
+
+Since 2026-09-08 the published population is **measurable posts** — every
+collected post that is not a shell. That is the per-1,000 denominator, the
+population the theme counts are drawn from, and the volume figure on each
+community's page. About 18% of the posts in the measurement scope are shells.
+
+Two facts forced the decision. Shells are not spread evenly across communities:
+r/ChaiApp runs 70–85% removed posts in every archive month, so counting them
+made that community look like a large, quiet room rather than a heavily
+moderated one, and put 10,000 unreadable posts a year into the denominator
+every other community's rate is divided by. And their share depends on how the
+data was collected: Reddit's own listing omitted removed posts entirely, so the
+live-collection window of March–May 2026 contains none at all, while
+archive-sourced months contain 16–20% (2022–2025) and about 30% in June–August
+2026 (§9.1). A denominator that moves with moderation policy and with
+collection regime is not measuring discourse.
+
+**An empty body is not a shell.** An image or link post has a title, no body,
+and is perfectly visible. Its title is matchable and it stays in the
+population — half of all measurable posts are of that kind, which is part of
+why §9.3 is the caveat it is.
+
+Shells are still collected and still stored. Nothing is deleted from the
+corpus; shells are excluded from published counts.
 
 ---
 
@@ -433,6 +465,10 @@ Consciousness begins 2025-04; the other five begin across 2022–2023. The
 corpus reaches back to 2017, but a theme line does not start where the corpus
 does.
 
+The count the gate tests is a count of measurable posts (§2.8). Narrowing the
+population on 2026-09-08 left every theme's start month where it was, in both
+the full and the "Excluding r/CharacterAI" series.
+
 **Clearing the gate does not make a month precise.** A threshold of five posts
 admits months that are still very small. Of the months actually drawn on the
 chart, the share whose post-only numerator is under 20 posts: consciousness 41%
@@ -454,52 +490,57 @@ communities have grown enormously since 2017; a raw count would mostly retrace
 that growth. The rate sets growth aside and shows how the conversation itself is
 shifting.
 
-The denominator is all posts collected from the theme-measurement scope (T1–T3
-minus the flagged exclusions) on the same day. Numerator and denominator are
-both smoothed with a **7-day trailing mean** so the displayed rate does not
-spike on low-volume days. The chart plots the mean of the daily smoothed rate
-over each calendar month; the in-progress month is clipped.
+The denominator is the month's measurable posts (§2.8) across the
+theme-measurement scope: T1–T3, minus the flagged exclusions, minus the posts
+whose text did not survive to capture. The numerator is counted over that same
+population — distinct posts in the month whose own title or body matched a
+validated keyword.
 
-**There are two rates, and they are not the same number.** The published dataset
-carries both, per theme per month:
+**The chart plots the pooled monthly rate:**
 
-- `rate_per_1k` — the pooled monthly rate: the month's post-only count divided
-  by the month's eligible posts, times 1,000. One ratio, computed once.
-- `rate_per_1k_charted` — the estimator the site's chart plots: the mean, over
-  the month's days, of the daily smoothed rate.
+> the month's post-only count ÷ the month's measurable posts × 1,000
 
-A mean of daily ratios is not the same thing as the ratio of the monthly totals,
-and here it runs slightly higher on average — a mean of ratios weights the
-low-volume days as heavily as the busy ones.
+One count over one denominator. There is no smoothing step, because the monthly
+bucket is the smoothing. It is the same number the public dataset publishes as
+`rate_per_1k` and the same number the site's own sentences describe, so the
+chart, the dataset and the prose are one figure. The in-progress month is
+clipped, so the last point on every line is a complete month.
 
-**The two smoothing windows are also not aligned, and earlier versions of this
-document claimed they were.** The denominator's 7-day trailing mean runs over
-the corpus calendar. The numerator's runs over the last seven days *that had at
-least one keyword hit* — the export omits zero-hit days entirely, so the window
-is index-based over hit-days, not calendar days. For a theme with a hit almost
-every day the two windows coincide. For a sparse theme they do not: consciousness
+**Before 2026-09-08 the chart plotted something else.** The old estimator took
+the mean, over the month's days, of a daily rate whose numerator and denominator
+were each smoothed with a 7-day trailing window. Three things were wrong with
+it, and they were measured before it was replaced.
+
+A mean of daily ratios is not the ratio of the monthly totals; it weights the
+quiet days as heavily as the busy ones, and here it ran high. Median gap by
+theme 3.6–7.9%, 90th percentile 14–29%, mean signed bias +1.6% to +6.1% — and
+the bias drifted by era rather than holding steady (2023 +4.7%, 2024 +7.8%,
+2025 +3.2%, 2026 +2.2%), which is the part that matters for a chart read for
+direction.
+
+The two smoothing windows were also not aligned, and earlier versions of this
+document claimed they were. The denominator's ran over the corpus calendar; the
+numerator's ran over the last seven days *that had at least one keyword hit*,
+because the export omits zero-hit days entirely. For a theme with a hit almost
+every day the two coincided. For a sparse one they did not: consciousness
 records a hit on 48% of the days in its charted range, therapy on 55%, so on
-those two lines the numerator's window can reach back a fortnight or more while
-the denominator's covers a week.
+those lines the numerator's window could reach back a fortnight while the
+denominator's covered a week.
 
-The size of the resulting difference, measured across the whole charted record:
-the median gap between the two rates runs 3.6–7.9% depending on the theme, the
-90th percentile 14–29%, and the worst single months are romance 2024-05 (+79%),
-consciousness 2025-12 (+59%) and rupture 2023-09 (−35%). The mean signed bias is
-+1.6% to +6.1% per theme, largest in the early years and roughly half that since
-2025 (2023 +4.7%, 2024 +7.8%, 2025 +3.2%, 2026 +2.2%).
+And it turned a hole in collection into a spike. The worst single months were
+romance 2024-05 (+79% against the pooled rate), consciousness 2025-12 (+59%)
+and rupture 2023-09 (−35%).
 
-The extreme months are not spread evenly: they land on stretches where
+Those extreme months are not spread evenly: they land on stretches where
 r/CharacterAI — most of the denominator — was missing days in the corpus
 (2023-08-23 to 08-31, 2024-02-20 to 02-29, 2024-05-16 to 05-31, 2025-12-01 to
 12-10). Those holes were repaired on 2026-09-08, which removes the largest
-distortions but not the underlying estimator difference. `[REPAIR-NOTE]`
+distortions. `[REPAIR-NOTE]`
 
-**Which one to use.** For any analysis, use `rate_per_1k`: it is the plain,
-reproducible ratio, and it does not depend on how the smoothing window happened
-to be built. Use `rate_per_1k_charted` only to reproduce what the site's chart
-draws. Whether the chart should switch to the pooled rate is an open question
-for the next instrument version; it is not being changed silently.
+The public dataset keeps its `rate_per_1k_charted` column so that nothing
+reading the file breaks, but the two columns now carry the same number.
+Downloads taken before 2026-09-08 do not; in those, `rate_per_1k` is the column
+to analyse.
 
 ### 6.3 Volume weighting is deliberate
 
@@ -721,6 +762,15 @@ live-Reddit window of 2026-03-11 → 05-26 was re-fetched from the archive for t
 repaired in May. `[REPAIR-NOTE]` The shell shares and the 12–16% depression
 given above describe the record as it stood before that repair. `[REPAIR-NOTE]`
 
+**And the decision that repair made unavoidable:** shells are no longer counted
+at all. Since 2026-09-08 the published population is measurable posts (§2.8) —
+a post whose stored body is `[removed]` or `[deleted]` is out of every published
+figure, numerator and denominator alike. Repairing the capture-timing artefact
+recovers the posts that were only temporarily blank; excluding shells settles
+what to do about the ones that are genuinely gone, which no re-fetch can bring
+back. The 12–16% depression described just above is the arithmetic of the old
+definition, which counted them.
+
 ### 9.2 The engagement metrics have their own breaks
 
 These are secondary-context figures, not theme measurement, but they carry two
@@ -737,16 +787,18 @@ the whole record.
 This is the most important caveat in the document after recall, because it is
 the one that bears on "shape and timing are honest."
 
-The keywords match title and body text. The share of eligible posts that carry
-any body text at all has risen steadily:
+The keywords match title and body text. The share of posts carrying any body
+text at all has risen steadily. Both populations are shown, because the
+published one narrowed on 2026-09-08 (§2.8) and the other figures in this
+section were computed on the wider one:
 
-| Year | Posts with body text |
-|---|---|
-| 2022 | 17% |
-| 2023 | 32% |
-| 2024 | 40% |
-| 2025 | 53% |
-| 2026 | 61% |
+| Year | Of all collected posts | Of measurable posts |
+|---|---|---|
+| 2022 | 17% | 20% |
+| 2023 | 32% | 39% |
+| 2024 | 40% | 48% |
+| 2025 | 53% | 63% |
+| 2026 | 61% | 76% |
 
 Within r/CharacterAI alone the climb is steeper — 27% in 2023 to 66% in 2026 —
 and outside it, gentler: 48% to 55%. Part of this is capture recency: an older
@@ -760,8 +812,8 @@ audit (§5) drew an all-time random sample with no period stratification, and th
 drift check (§8) measures precision drift only, not recall.
 
 What has been tested is how much the published shapes depend on it. Restricting
-the corpus to body-bearing posts, five of the six themes keep the direction they
-are charted with. Romance is the exception: on the published denominator it goes
+the corpus to body-bearing posts — a test run against the wider pre-2026-09-08
+denominator — five of the six themes keep the direction they are charted with. Romance is the exception: on the published denominator it goes
 from 2.10 to 4.08 per 1,000 between 2023 and 2026 (+94%); on body-bearing posts
 only, from 4.55 to 5.72 (+26%). Its rise out of the 2024 trough survives; much
 of the longer climb since 2023 does not.
@@ -813,18 +865,24 @@ composite looks authoritative and is fragile.
    and the instrument cannot tell those apart.
 6. **Private and invite-only communities are unreachable** (§2.5).
 7. **The amount of matchable text is not constant over time** (§9.3). Posts
-   carrying body text went from 17% of the corpus in 2022 to 61% in 2026, and
-   nothing in the validation programme has tested whether recall is flat across
-   that change. Restricted to body-bearing posts, five themes keep their charted
+   carrying body text went from 20% of the measurable corpus in 2022 to 76% in
+   2026, and nothing in the validation programme has tested whether recall is
+   flat across that change. Restricted to body-bearing posts, five themes keep their charted
    direction; romance's climb since 2023 largely does not.
-8. **The six themes are a lens, not a census.** There is no "fun",
+8. **Posts whose text did not survive are not counted** (§2.8). A post the
+   archive holds only as a title, because it was removed or deleted, is out of
+   every published figure. That is the population the instrument can read, but
+   it means a heavily moderated community contributes less to the denominator
+   than its raw posting suggests, and the counts here are smaller than the
+   volume these communities actually posted.
+9. **The six themes are a lens, not a census.** There is no "fun",
    "creativity", or "everyday utility" theme — and everyday practical talk (bug
    reports, tips, which app to use) is in fact most of what these communities
    post. The themes were chosen for the parts of life with an AI companion that
    carry weight: intimacy, belief, dependence, and loss.
-9. **Post-level NSFW filtering** may cause slight undercounting within
-   otherwise-accessible communities.
-10. **A few accounts carry more of a theme than you might expect, and one
+10. **Post-level NSFW filtering** may cause slight undercounting within
+    otherwise-accessible communities.
+11. **A few accounts carry more of a theme than you might expect, and one
     template is currently distorting sex/ERP.** The most prolific 1% of authors
     account for 5–11% of a theme's posts (May 2026 audit) — concentrated, but
     not enough to make a theme one person's diary. One platform-operator account
@@ -839,7 +897,7 @@ composite looks authoritative and is fragile.
     keyword, guard it against the template, or exclude the account as
     `SoulmateAI_Dev` was — is queued for the next instrument version, under the
     change-control rule in §8.2.
-11. **Exact duplicates and crossposts are about 8% of the eligible corpus**
+12. **Exact duplicates and crossposts are about 8% of the eligible corpus**
     (varying 3–9% by year) and about 2% of tagged posts. They are not
     de-duplicated. This wobbles the denominator slightly; it is not corrected.
 
@@ -853,6 +911,13 @@ requires a version bump (v8 → v9) and a public changelog entry. Corrections th
 move a published line — such as the 2026-05-18 exclusion of three
 off-construct communities, which stepped the sex/ERP line down across 2024–2025
 — are disclosed in the site's changelog rather than made quietly.
+
+Two such corrections landed on 2026-09-08 and moved every line: the population
+became measurable posts (§2.8) and the charted rate became the pooled monthly
+rate (§6.2). The keyword set did not change, so the instrument is still v8; what
+changed is which posts are counted and how the month's number is formed. Both
+are recorded here, in the public dataset's revision history, and in the site's
+changelog.
 
 The instrument has been through several full revisions. Keeping the measurement
 honest means keeping it in motion; the monthly drift check exists because a

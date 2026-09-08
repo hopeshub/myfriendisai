@@ -217,9 +217,9 @@ export default function Home() {
         <p style={{ ...intro, marginBottom: 16 }}>
           Six recurring themes, and how often each one&apos;s language surfaces
           in posts across these communities, month by month. Each panel is
-          scaled to mentions per 1,000 posts &mdash; a value of 8 means that on
-          a typical day that month, roughly 8 of every 1,000 posts carried that
-          theme&apos;s keywords. Read each panel against itself: a line sits
+          scaled to mentions per 1,000 posts &mdash; a value of 8 means that
+          roughly 8 of every 1,000 posts that month carried that theme&apos;s
+          keywords. Read each panel against itself: a line sits
           high when its theme is written in blunt, easily counted words, not
           because the experience behind it is more common.
         </p>
