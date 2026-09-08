@@ -882,21 +882,22 @@ composite looks authoritative and is fragile.
    carry weight: intimacy, belief, dependence, and loss.
 10. **Post-level NSFW filtering** may cause slight undercounting within
     otherwise-accessible communities.
-11. **A few accounts carry more of a theme than you might expect, and one
-    template is currently distorting sex/ERP.** The most prolific 1% of authors
-    account for 5–11% of a theme's posts (May 2026 audit) — concentrated, but
-    not enough to make a theme one person's diary. One platform-operator account
-    was found posting product announcements into the sex/ERP theme
-    (`SoulmateAI_Dev`, 2023 Soulmate patch notes, about 0.8% of the theme); it
-    is excluded from the counts. A second cluster is known and **not yet
-    fixed**: one r/NomiAI moderator's weekly "collab" thread template contains
-    the phrase *"NSFW content is not blanket excluded…"*, which matches the
-    keyword `nsfw content`. Eighty-four of those posts exist, all from one
-    account on a fixed weekly cadence, and they are 14–25% of the sex/ERP
-    theme-months since late 2025. They are false positives. The fix — drop the
-    keyword, guard it against the template, or exclude the account as
-    `SoulmateAI_Dev` was — is queued for the next instrument version, under the
-    change-control rule in §8.2.
+11. **A few accounts carry more of a theme than you might expect, and two
+    platform accounts are excluded.** The most prolific 1% of authors account
+    for 5–11% of a theme's posts (May 2026 audit) — concentrated, but not
+    enough to make a theme one person's diary. Two accounts are excluded from
+    every count — numerator and denominator alike — under one rule: platform
+    or moderator announcement content is not community discourse. The first is
+    a platform-operator account posting product announcements into the sex/ERP
+    theme (`SoulmateAI_Dev`, 2023 Soulmate patch notes, about 0.8% of the
+    theme; excluded May 2026). The second, found in the 2026-09-08 audit, is
+    r/NomiAI's community-manager account, whose weekly "collab" thread template
+    contains the phrase *"NSFW content is not blanket excluded…"* and so
+    matched the keyword `nsfw content`: 85 posts, one template, a fixed weekly
+    cadence, 14–25% of the sex/ERP theme-months since late 2025, every one a
+    false positive and every one of that account's theme tags. Excluded
+    2026-09-08; the sex/ERP line runs lower from late 2025 as a result, which
+    is the correction, not a change in the discourse.
 12. **Exact duplicates and crossposts are about 8% of the eligible corpus**
     (varying 3–9% by year) and about 2% of tagged posts. They are not
     de-duplicated. This wobbles the denominator slightly; it is not corrected.

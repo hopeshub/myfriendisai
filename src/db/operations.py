@@ -17,6 +17,15 @@ DATA_DIR = Path(__file__).parent.parent.parent / "data"
 # Add accounts here as we discover them — leave the SQL hooks in place.
 EXCLUDED_AUTHORS = (
     "SoulmateAI_Dev",  # Soulmate platform creator — 89 posts, 57 tagged sex/ERP
+    # r/NomiAI community-manager/moderator account (official Q&A-stream
+    # summaries, weekly "SELFIE/ART collab" threads). Its collab template
+    # carries the phrase "NSFW content is not blanket excluded…", which the
+    # keyword `nsfw content` matches: 85 posts, all one template, on a fixed
+    # weekly cadence — 14-25% of recent sex/ERP theme-months, all false
+    # positives, and 100% of the account's theme tags. Same rule as above:
+    # platform/moderator announcement content is not community discourse.
+    # Added 2026-09-08 (docs/METHODOLOGY.md §11).
+    "heatherado",
 )
 
 
@@ -970,10 +979,11 @@ def export_keyword_trends_json(
             WHERE subreddit IN ({placeholders})
               AND created_utc IS NOT NULL
               AND {measurable_post_where("")}
+              AND (author IS NULL OR author NOT IN ({excluded_authors_placeholders}))
             GROUP BY post_date
             ORDER BY post_date
             """,
-            active_subreddits,
+            (*active_subreddits, *EXCLUDED_AUTHORS),
         ).fetchall()
     finally:
         if conn is None:
