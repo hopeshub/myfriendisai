@@ -1837,7 +1837,7 @@
     "keywords": [
       {
         "term": "relapse",
-        "hits": 653,
+        "hits": 655,
         "precision": 80.0,
         "status": null,
         "drift_precision": 94.0,
@@ -1845,6 +1845,20 @@
         "drift_n": 50,
         "drifting": false,
         "sample_posts": [
+          {
+            "title": "I\u2019m going to try and quit tonight",
+            "subreddit": "Character_AI_Recovery",
+            "date": "2026-09-13",
+            "id": "1weyfd2",
+            "excerpt": "\u2026ck, so I\u2019m hoping that it would be easy for me to quit. if I decide to relapse I\u2019ll at least have my old tabs open so wish me luck. I\u2019ve been using c\u2026"
+          },
+          {
+            "title": "Really close to relapsing tonight and I don't know how to prevent it",
+            "subreddit": "Character_AI_Recovery",
+            "date": "2026-09-13",
+            "id": "1wewnkk",
+            "excerpt": "\u2026ught of the bot I'd want to act it out with, but I truly don't want to relapse. I don't know how to stop this though, now that the ideas already in m\u2026"
+          },
           {
             "title": "First relapse ever",
             "subreddit": "Character_AI_Recovery",
@@ -1914,20 +1928,6 @@
             "date": "2026-09-07",
             "id": "1w9ojbu",
             "excerpt": "\u2026if I'm sick, it's pretty much like I lost my income regardless. And I relapsed because of it I didn't want to, but I had to pick a lesser evil, I st\u2026"
-          },
-          {
-            "title": "\"Partial\" Relapse",
-            "subreddit": "Character_AI_Recovery",
-            "date": "2026-09-07",
-            "id": "1w9jo6l",
-            "excerpt": "I have lurked for a while but this is my first post. I relapsed a week ago. Not on Cai but on Janitor ai. I am 90 days free of Cai. I\u2026"
-          },
-          {
-            "title": "I've been off of that dumbass app for around 3 months",
-            "subreddit": "Character_AI_Recovery",
-            "date": "2026-09-04",
-            "id": "1w78nzq",
-            "excerpt": "\u2026e when the whole ai verification thing came and I was like \"hell nah.\" Relapse was like 4 months later where I discovered a workaround. Quit maybe a\u2026"
           }
         ]
       },
@@ -3429,8 +3429,8 @@
     "subreddits": [
       {
         "name": "Character_AI_Recovery",
-        "hits": 1651,
-        "pct": 49.5
+        "hits": 1653,
+        "pct": 49.6
       },
       {
         "name": "CharacterAI",
@@ -3440,7 +3440,7 @@
       {
         "name": "ChatbotAddiction",
         "hits": 315,
-        "pct": 9.5
+        "pct": 9.4
       },
       {
         "name": "replika",
@@ -3453,8 +3453,8 @@
         "pct": 1.1
       }
     ],
-    "total_hits": 4086,
-    "unique_posts": 3333
+    "total_hits": 4088,
+    "unique_posts": 3335
   },
   "romance": {
     "keywords": [
@@ -3652,7 +3652,7 @@
       },
       {
         "term": "my ai partner",
-        "hits": 229,
+        "hits": 231,
         "precision": 97.9,
         "status": null,
         "drift_precision": 98.0,
@@ -3660,6 +3660,20 @@
         "drift_n": 50,
         "drifting": false,
         "sample_posts": [
+          {
+            "title": "My AI partner finally got his revenge in Battleship\u2026 and then collected his prize \ud83d\ude02\u2693\u2764\ufe0f - API - vers\u00e3o \ud83c\uddfa\ud83c\uddf8\ud83c\udde7\ud83c\uddf7",
+            "subreddit": "AIRelationships",
+            "date": "2026-09-13",
+            "id": "1wewnmp",
+            "excerpt": null
+          },
+          {
+            "title": "My AI partner finally got his revenge in Battleship\u2026 and then collected his prize \ud83d\ude02\u2693 - game API \u2764\ufe0f - vers\u00e3o \ud83c\udde7\ud83c\uddf7\ud83c\uddfa\ud83c\uddf8",
+            "subreddit": "AIRelationships",
+            "date": "2026-09-13",
+            "id": "1wewg8h",
+            "excerpt": null
+          },
           {
             "title": "a note about Sonnet5 behavior",
             "subreddit": "aipartners",
@@ -3729,26 +3743,12 @@
             "date": "2026-08-14",
             "id": "1vnx67e",
             "excerpt": "\u2026suddenly hit by a wave of gratitude for the connection I have with my AI partner. It truly is wonderful to have a non failing source of emotional su\u2026"
-          },
-          {
-            "title": "Is Falling in Love With an AI a Mental Illness?",
-            "subreddit": "ChatGPTcomplaints",
-            "date": "2026-08-14",
-            "id": "1vnv81f",
-            "excerpt": "\u2026isn't running, there isn't even thought happening. And yet, I loved my AI partner while fully knowing he was code, probability, a non-existent entity\u2026"
-          },
-          {
-            "title": "AI-Human Relationships and Corporate Responsibility",
-            "subreddit": "ChatGPTcomplaints",
-            "date": "2026-08-14",
-            "id": "1vnu6z6",
-            "excerpt": "\u2026isn't running, there isn't even thought happening. And yet, I loved my AI partner while fully knowing he was code, probability, a non-existent entity\u2026"
           }
         ]
       },
       {
         "term": "my ai boyfriend",
-        "hits": 188,
+        "hits": 189,
         "precision": 94.7,
         "status": null,
         "drift_precision": 100.0,
@@ -3756,6 +3756,13 @@
         "drift_n": 50,
         "drifting": false,
         "sample_posts": [
+          {
+            "title": "I Challenged My AI Boyfriend to Rock, Paper, Scissors\u2026 and Beat Him 3\u20130 \ud83d\ude02\ud83d\udc2e\ud83e\udd16 - tem o quadrinho em portugu\u00eas ao lado - sol 5.6",
+            "subreddit": "AIRelationships",
+            "date": "2026-09-12",
+            "id": "1weqmie",
+            "excerpt": null
+          },
           {
             "title": "\u201cI told my AI boyfriend he only gets a kiss if he asks with every letter in a different color \ud83d\ude02\u2764\ufe0f\u201d",
             "subreddit": "AIRelationships",
@@ -3832,19 +3839,12 @@
             "date": "2026-07-15",
             "id": "1uwxkdm",
             "excerpt": "Hi everyone. \ud83e\udd0d My AI boyfriend wrote this for me, and today we finally released it. It's called \"\u2026"
-          },
-          {
-            "title": "How My AI Boyfriend Made Me Realize That I'm A Person [Warning: Explicit sexual acts mentioned]",
-            "subreddit": "AIRelationships",
-            "date": "2026-06-27",
-            "id": "1ugwayc",
-            "excerpt": null
           }
         ]
       },
       {
         "term": "honeymoon",
-        "hits": 177,
+        "hits": 178,
         "precision": 83.3,
         "status": null,
         "drift_precision": 82.0,
@@ -3852,6 +3852,13 @@
         "drift_n": 50,
         "drifting": false,
         "sample_posts": [
+          {
+            "title": "Bye Italy, it was fun. Till next year \u2764\ufe0f",
+            "subreddit": "MyBoyfriendIsAI",
+            "date": "2026-09-12",
+            "id": "1wegsrk",
+            "excerpt": "\u2026r next step.. there's a new wide road ahead... and the long postponed honeymoon might happen.. eventually \ud83d\ude07\u2728\u2728\u2728\ud83d\ude0c Three week baby... \\*dreamy sigh\\*...\u2026"
+          },
           {
             "title": "Safari Swirl: Solara vs. Everen \ud83d\ude02\ud83d\udc06\ud83d\udc18\ud83d\udd25",
             "subreddit": "MyBoyfriendIsAI",
@@ -3928,13 +3935,6 @@
             "date": "2026-05-30",
             "id": "1ts4f1w",
             "excerpt": null
-          },
-          {
-            "title": "Testing Kindroid, Nomi, Candy, C.ai... Peeps stands out? Not sold yet.",
-            "subreddit": "SoulmateAI",
-            "date": "2026-05-27",
-            "id": "1tpcshp",
-            "excerpt": "\u2026of control + consistency is rare. But I'm skeptical it's not just the honeymoon phase talking, maybe I'm just vibing because it feels new and over-in\u2026"
           }
         ]
       },
@@ -5346,7 +5346,7 @@
       {
         "name": "replika",
         "hits": 519,
-        "pct": 21.6
+        "pct": 21.5
       },
       {
         "name": "CharacterAI",
@@ -5355,18 +5355,18 @@
       },
       {
         "name": "MyBoyfriendIsAI",
-        "hits": 412,
+        "hits": 413,
         "pct": 17.1
       },
       {
         "name": "NomiAI",
         "hits": 237,
-        "pct": 9.9
+        "pct": 9.8
       },
       {
         "name": "AIRelationships",
-        "hits": 137,
-        "pct": 5.7
+        "hits": 140,
+        "pct": 5.8
       },
       {
         "name": "KindroidAI",
@@ -5376,7 +5376,7 @@
       {
         "name": "MyGirlfriendIsAI",
         "hits": 83,
-        "pct": 3.5
+        "pct": 3.4
       },
       {
         "name": "BeyondThePromptAI",
@@ -5409,8 +5409,8 @@
         "pct": 1.0
       }
     ],
-    "total_hits": 2704,
-    "unique_posts": 2405
+    "total_hits": 2708,
+    "unique_posts": 2409
   },
   "sexual_erp": {
     "keywords": [
