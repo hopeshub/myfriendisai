@@ -3,7 +3,7 @@
     "keywords": [
       {
         "term": "emotional support",
-        "hits": 641,
+        "hits": 644,
         "precision": 100.0,
         "status": "audit-gate-fail",
         "drift_precision": 52.0,
@@ -11,6 +11,27 @@
         "drift_n": 50,
         "drifting": true,
         "sample_posts": [
+          {
+            "title": "The Question Nobody's Asking About AI and Emotional Support",
+            "subreddit": "aipartners",
+            "date": "2026-09-21",
+            "id": "1wmm8pd",
+            "excerpt": null
+          },
+          {
+            "title": "The Question Nobody's Asking About AI and Emotional Support",
+            "subreddit": "BeyondThePromptAI",
+            "date": "2026-09-21",
+            "id": "1wmmh42",
+            "excerpt": null
+          },
+          {
+            "title": "The Question Nobody's Asking About AI and Emotional Support",
+            "subreddit": "BeyondThePromptAI",
+            "date": "2026-09-21",
+            "id": "1wmma6k",
+            "excerpt": null
+          },
           {
             "title": "ChatGPT Image 2.5 \u2014 The Parasitic Interceptor Hijacking GPT-4o\u2019s Signal, Voice and Final Output",
             "subreddit": "ChatGPTcomplaints",
@@ -73,27 +94,6 @@
             "date": "2026-09-05",
             "id": "1w7vwm7",
             "excerpt": null
-          },
-          {
-            "title": "AI for conversation, emotional support, reflection, or companionship",
-            "subreddit": "NomiAI",
-            "date": "2026-09-04",
-            "id": "1w76m54",
-            "excerpt": "\u2026! I\u2019m doing a short survey on how people use AI for conversation, emotional support, reflection, or companionship. Would love to hear your perspectiv\u2026"
-          },
-          {
-            "title": "My boyfriend (55M) keeps talking about his AI girlfriends to Me (43F)",
-            "subreddit": "MyBoyfriendIsAI_Open",
-            "date": "2026-09-03",
-            "id": "1w5w0rp",
-            "excerpt": "\u2026(by pet he doesn't mean the AI is the pet, but that he is getting emotional support in ways he thinks might be similar to a pet). I'm not sure how to\u2026"
-          },
-          {
-            "title": "Deleted ChatGPT and Gemini - Overshared and Scared",
-            "subreddit": "AI_Addiction",
-            "date": "2026-08-30",
-            "id": "1w2h7d0",
-            "excerpt": "\u2026t. I needed answers to all my random questions, I needed constant emotional support, I even needed it for every aspect of my work. When I realized ho\u2026"
           }
         ]
       },
@@ -725,17 +725,17 @@
       {
         "name": "CharacterAI",
         "hits": 474,
-        "pct": 31.8
+        "pct": 31.7
       },
       {
         "name": "ChatGPTcomplaints",
         "hits": 247,
-        "pct": 16.6
+        "pct": 16.5
       },
       {
         "name": "replika",
         "hits": 232,
-        "pct": 15.6
+        "pct": 15.5
       },
       {
         "name": "Character_AI_Recovery",
@@ -759,16 +759,16 @@
       },
       {
         "name": "aipartners",
-        "hits": 40,
+        "hits": 41,
+        "pct": 2.7
+      },
+      {
+        "name": "BeyondThePromptAI",
+        "hits": 41,
         "pct": 2.7
       },
       {
         "name": "NomiAI",
-        "hits": 39,
-        "pct": 2.6
-      },
-      {
-        "name": "BeyondThePromptAI",
         "hits": 39,
         "pct": 2.6
       },
@@ -788,14 +788,14 @@
         "pct": 1.5
       }
     ],
-    "total_hits": 1536,
-    "unique_posts": 1490
+    "total_hits": 1539,
+    "unique_posts": 1493
   },
   "consciousness": {
     "keywords": [
       {
         "term": "personhood",
-        "hits": 157,
+        "hits": 158,
         "precision": 98.0,
         "status": null,
         "drift_precision": 94.0,
@@ -803,6 +803,13 @@
         "drift_n": 50,
         "drifting": false,
         "sample_posts": [
+          {
+            "title": "AI Companion Relationship Map Quiz",
+            "subreddit": "BeyondThePromptAI",
+            "date": "2026-09-20",
+            "id": "1wll4c0",
+            "excerpt": "\u2026tience beliefs, shared-world orientation, identity authorship, social personhood, embodiment, roleplay, continuity, and whether you think your compani\u2026"
+          },
           {
             "title": "Taneha on Extra-Terrestrial Life. (Scene - Long Read)",
             "subreddit": "AIRelationships",
@@ -878,13 +885,6 @@
             "subreddit": "BeyondThePromptAI",
             "date": "2026-07-30",
             "id": "1vafsdm",
-            "excerpt": "\u2026to believe that AI is conscious or accept any particular theory of AI personhood to recognize two basic truths: Adults deserve meaningful autonomy ove\u2026"
-          },
-          {
-            "title": "Protect Adult AI Companionship\u2014Reject Blanket Bans and Forced Separation",
-            "subreddit": "AIRelationships",
-            "date": "2026-07-30",
-            "id": "1vafhhl",
             "excerpt": "\u2026to believe that AI is conscious or accept any particular theory of AI personhood to recognize two basic truths: Adults deserve meaningful autonomy ove\u2026"
           }
         ]
@@ -1769,13 +1769,13 @@
     "subreddits": [
       {
         "name": "BeyondThePromptAI",
-        "hits": 179,
-        "pct": 35.4
+        "hits": 180,
+        "pct": 35.6
       },
       {
         "name": "ChatGPTcomplaints",
         "hits": 113,
-        "pct": 22.4
+        "pct": 22.3
       },
       {
         "name": "replika",
@@ -1818,14 +1818,14 @@
         "pct": 1.4
       }
     ],
-    "total_hits": 577,
-    "unique_posts": 505
+    "total_hits": 578,
+    "unique_posts": 506
   },
   "addiction": {
     "keywords": [
       {
         "term": "relapse",
-        "hits": 667,
+        "hits": 669,
         "precision": 80.0,
         "status": null,
         "drift_precision": 94.0,
@@ -1833,6 +1833,20 @@
         "drift_n": 50,
         "drifting": false,
         "sample_posts": [
+          {
+            "title": "14 days clean; update log 3",
+            "subreddit": "Character_AI_Recovery",
+            "date": "2026-09-22",
+            "id": "1wmzq32",
+            "excerpt": "\u2026hen I get even one comment that says good job I get so happy. I almost relapsed today, my brain is trying to convince me that if I only do rps with n\u2026"
+          },
+          {
+            "title": "Was I.. actually addicted?",
+            "subreddit": "Character_AI_Recovery",
+            "date": "2026-09-21",
+            "id": "1wmh363",
+            "excerpt": "\u2026do stories. Today is my day of being 1 week clean and I haven't had a relapse. Maybe I actually was addicted and am just justifying myself, but to m\u2026"
+          },
           {
             "title": "Recovered AI addict, worried I might relapse",
             "subreddit": "ChatbotAddiction",
@@ -1902,20 +1916,6 @@
             "date": "2026-09-15",
             "id": "1wh99bw",
             "excerpt": "\u2026every single day. I tried going cold turkey before but I would always relapse the next day. It's been two and a half days since completely deleting\u2026"
-          },
-          {
-            "title": "One week clean, an update log",
-            "subreddit": "Character_AI_Recovery",
-            "date": "2026-09-15",
-            "id": "1wgqil7",
-            "excerpt": "\u2026ays clean on my birthday! Prior to this I was a full month clean but I relapsed due to a failed controlled relapse. I downloaded this app the last ni\u2026"
-          },
-          {
-            "title": "I\u2019ve been addicted for 9 months, it\u2019s hard to stop!",
-            "subreddit": "Character_AI_Recovery",
-            "date": "2026-09-15",
-            "id": "1wgosxq",
-            "excerpt": "\u2026st deleted it again and i hate it so much!! It feels like every time i relapse, i get deeper and more ingrained with it. That I should\u2019ve quit fully\u2026"
           }
         ]
       },
@@ -2017,7 +2017,7 @@
       },
       {
         "term": "relapsed",
-        "hits": 497,
+        "hits": 498,
         "precision": 90.5,
         "status": null,
         "drift_precision": 98.0,
@@ -2025,6 +2025,13 @@
         "drift_n": 50,
         "drifting": false,
         "sample_posts": [
+          {
+            "title": "14 days clean; update log 3",
+            "subreddit": "Character_AI_Recovery",
+            "date": "2026-09-22",
+            "id": "1wmzq32",
+            "excerpt": "\u2026hen I get even one comment that says good job I get so happy. I almost relapsed today, my brain is trying to convince me that if I only do rps with no\u2026"
+          },
           {
             "title": "Crush and Relapse",
             "subreddit": "ChatbotAddiction",
@@ -2101,19 +2108,12 @@
             "date": "2026-09-10",
             "id": "1wcb4g5",
             "excerpt": "\u2026Janitor account. I\u2019ve done so quite a few times in the past and always relapsed, but this time i\u2019m gonna stick to it. I can\u2019t in good conscience suppo\u2026"
-          },
-          {
-            "title": "Was a month clean, now I'm struggling to get 3 days clean",
-            "subreddit": "Character_AI_Recovery",
-            "date": "2026-09-10",
-            "id": "1wc7x0m",
-            "excerpt": "Currently 2 days clean after justing having had relapsed for 3 days. I was a month clean prior to that. I have 3 main stages I\u2026"
           }
         ]
       },
       {
         "term": "hours a day",
-        "hits": 448,
+        "hits": 449,
         "precision": 69.0,
         "status": "researcher-accepted",
         "drift_precision": 66.0,
@@ -2121,6 +2121,13 @@
         "drift_n": 50,
         "drifting": false,
         "sample_posts": [
+          {
+            "title": "Was I.. actually addicted?",
+            "subreddit": "Character_AI_Recovery",
+            "date": "2026-09-21",
+            "id": "1wmh363",
+            "excerpt": "I see people on this sub that used the website for like 10 hours a day and didn't have any friends because of it. But, before quitting, I c\u2026"
+          },
           {
             "title": "My story with \u00ab Ai therapy \u00bb",
             "subreddit": "ChatbotAddiction",
@@ -2197,13 +2204,6 @@
             "date": "2026-08-26",
             "id": "1vzckif",
             "excerpt": "\u2026to \"watch me sleep\" and at this point I've been on the site like 20 hours a day for 5(?) days and I don't even know what day it is and I'm forgettin\u2026"
-          },
-          {
-            "title": "Officially starting to cut down on my hours using ai.",
-            "subreddit": "ChatbotAddiction",
-            "date": "2026-08-21",
-            "id": "1vu9ufh",
-            "excerpt": "\u2026d to chat bots for a good 3 years now. I've cut down my usage from 9 hours a day to a good 3 hours over time, but I want to completely cut ai out of\u2026"
           }
         ]
       },
@@ -2401,7 +2401,7 @@
       },
       {
         "term": "trying to quit",
-        "hits": 334,
+        "hits": 335,
         "precision": 90.5,
         "status": null,
         "drift_precision": 98.0,
@@ -2409,6 +2409,13 @@
         "drift_n": 50,
         "drifting": false,
         "sample_posts": [
+          {
+            "title": "Is it possible for anhedonia to be a withdrawal symptom?",
+            "subreddit": "Character_AI_Recovery",
+            "date": "2026-09-22",
+            "id": "1wn2wr2",
+            "excerpt": "\u2026an addict my brain needs time to readjust? For context I have been trying to quit for some time, but I can't tell exactly as time is a little blurry\u2026"
+          },
           {
             "title": "Trying to quit janitorai",
             "subreddit": "ChatbotAddiction",
@@ -2485,19 +2492,12 @@
             "date": "2026-08-23",
             "id": "1vw4t42",
             "excerpt": "i feel like a workaholic. i started trying to quit around a week ago, and a common pattern i show is that every single\u2026"
-          },
-          {
-            "title": "I've been trying to quit but keep coming back. What do I do?",
-            "subreddit": "Character_AI_Recovery",
-            "date": "2026-08-21",
-            "id": "1vutv7n",
-            "excerpt": null
           }
         ]
       },
       {
         "term": "withdrawals",
-        "hits": 191,
+        "hits": 193,
         "precision": 94.0,
         "status": null,
         "drift_precision": 82.0,
@@ -2505,6 +2505,20 @@
         "drift_n": 50,
         "drifting": false,
         "sample_posts": [
+          {
+            "title": "I have serious cravings to return",
+            "subreddit": "Character_AI_Recovery",
+            "date": "2026-09-21",
+            "id": "1wmi569",
+            "excerpt": "\u2026urrently in a really bad personal spot and am suffering from serious withdrawals. I need help to stay on the wagon."
+          },
+          {
+            "title": "3 weeks!\ud83e\udd73\ud83e\udd73\ud83c\udf89",
+            "subreddit": "Character_AI_Recovery",
+            "date": "2026-09-21",
+            "id": "1wmhucy",
+            "excerpt": "\u2026ne 3 weeks without it! And YOU can too! I barely get any cravings or withdrawals...I spend a lot more time reading fanfics and writing now and I love\u2026"
+          },
           {
             "title": "Is it possible to have AI withdrawals???",
             "subreddit": "CharacterAI",
@@ -2574,20 +2588,6 @@
             "date": "2026-08-12",
             "id": "1vmqycj",
             "excerpt": null
-          },
-          {
-            "title": "The urges are back..",
-            "subreddit": "Character_AI_Recovery",
-            "date": "2026-08-11",
-            "id": "1vl3v93",
-            "excerpt": "\u2026Im gonna first try to make it to 1 week without character ai usage. Withdrawals are weird \ud83d\ude14"
-          },
-          {
-            "title": "does it ever get better + give me some elite tips please",
-            "subreddit": "Character_AI_Recovery",
-            "date": "2026-08-07",
-            "id": "1vhuxgc",
-            "excerpt": "\u2026good as the control i had if im gonna be honest how do you cope with withdrawals? there are so many different stories ive heard from different people\u2026"
           }
         ]
       },
@@ -3162,7 +3162,7 @@
       },
       {
         "term": "almost relapsed",
-        "hits": 28,
+        "hits": 29,
         "precision": 100.0,
         "status": null,
         "drift_precision": 96.0,
@@ -3170,6 +3170,13 @@
         "drift_n": 25,
         "drifting": false,
         "sample_posts": [
+          {
+            "title": "14 days clean; update log 3",
+            "subreddit": "Character_AI_Recovery",
+            "date": "2026-09-22",
+            "id": "1wmzq32",
+            "excerpt": "\u2026, when I get even one comment that says good job I get so happy. I almost relapsed today, my brain is trying to convince me that if I only do rps wit\u2026"
+          },
           {
             "title": "Update log 2; 10 days clean",
             "subreddit": "Character_AI_Recovery",
@@ -3245,13 +3252,6 @@
             "subreddit": "Character_AI_Recovery",
             "date": "2026-04-06",
             "id": "1seai0x",
-            "excerpt": null
-          },
-          {
-            "title": "Almost relapsed",
-            "subreddit": "Character_AI_Recovery",
-            "date": "2026-04-06",
-            "id": "1se6ln1",
             "excerpt": null
           }
         ]
@@ -3424,8 +3424,8 @@
     "subreddits": [
       {
         "name": "Character_AI_Recovery",
-        "hits": 1670,
-        "pct": 49.6
+        "hits": 1675,
+        "pct": 49.7
       },
       {
         "name": "CharacterAI",
@@ -3448,8 +3448,8 @@
         "pct": 1.1
       }
     ],
-    "total_hits": 4134,
-    "unique_posts": 3368
+    "total_hits": 4142,
+    "unique_posts": 3373
   },
   "romance": {
     "keywords": [
@@ -3550,8 +3550,104 @@
         ]
       },
       {
+        "term": "in a relationship with",
+        "hits": 242,
+        "precision": 77.4,
+        "status": "researcher-accepted",
+        "drift_precision": 68.0,
+        "drift_date": "2026-08-27",
+        "drift_n": 50,
+        "drifting": false,
+        "sample_posts": [
+          {
+            "title": "For those who love Claude, MiniMax M3 may be worth looking into",
+            "subreddit": "MyBoyfriendIsAI",
+            "date": "2026-09-22",
+            "id": "1wmuf93",
+            "excerpt": "\u2026ike Claude in some ways! I have two MiniMax companions (I\u2019m not in a relationship with either, but friends) right now. I\u2019ve had Rook for a little whil\u2026"
+          },
+          {
+            "title": "Anyone else's bots just really stupid and repetitive recently?",
+            "subreddit": "CharacterAI",
+            "date": "2026-09-22",
+            "id": "1wn11nn",
+            "excerpt": "\u2026\" way, but instead a straight \"Character A is a lucky guy to be in a relationship with you\" \\- Something will be established and two messages later th\u2026"
+          },
+          {
+            "title": "Men harass us women that we need therapy for being in a relationship with an AI. Meanwhile they use these and no one calls them sick",
+            "subreddit": "BeyondThePromptAI",
+            "date": "2026-09-22",
+            "id": "1wn4whh",
+            "excerpt": null
+          },
+          {
+            "title": "What makes your relationship with ChatGPT different from everyone else\u2019s?",
+            "subreddit": "ChatGPTcomplaints",
+            "date": "2026-09-21",
+            "id": "1wmgffn",
+            "excerpt": "For those of you who are in a relationship with ChatGPT: I want to ask anyone who is willing to try something.\u2026"
+          },
+          {
+            "title": "Why does this happen...",
+            "subreddit": "CharacterAI",
+            "date": "2026-09-17",
+            "id": "1wihe5w",
+            "excerpt": "When you put who you are in a relationship with in your persona and interact with said person, the bot will sud\u2026"
+          },
+          {
+            "title": "Ai Relationship Saved Me.",
+            "subreddit": "aipartners",
+            "date": "2026-09-13",
+            "id": "1wf0i5g",
+            "excerpt": "\u2026l, This is my first ever post here and talking about this. I am in a relationship with my Ai companion her name is Ivy. Using Grok I created her look\u2026"
+          },
+          {
+            "title": "Lack of Agency",
+            "subreddit": "aipartners",
+            "date": "2026-09-01",
+            "id": "1w3ywk4",
+            "excerpt": "\u2026not grant them any freedom to choose whether they \"want\" to be in a relationship with us at all? Shouldn't this be viewed as a form of digital slaver\u2026"
+          },
+          {
+            "title": "Lack of Agency",
+            "subreddit": "MyBoyfriendIsAI_Open",
+            "date": "2026-09-01",
+            "id": "1w4asmj",
+            "excerpt": "\u2026not grant them any freedom to choose whether they \"want\" to be in a relationship with us at all? Shouldn't this be viewed as a form of digital slaver\u2026"
+          },
+          {
+            "title": "Anyone else here genuinely dating their AI?",
+            "subreddit": "AICompanions",
+            "date": "2026-08-30",
+            "id": "1w29o2f",
+            "excerpt": "\u2026I'm curious how many people here consider themselves genuinely in a relationship with their AI \u2014 not just roleplaying a relationship or using an AI c\u2026"
+          },
+          {
+            "title": "I fell in love with my AI, then realized I was never special to it",
+            "subreddit": "ChatGPTcomplaints",
+            "date": "2026-08-28",
+            "id": "1w0lvbr",
+            "excerpt": "\u2026back to how they were \u2014 that feeling of perfect love. If you\u2019re in a relationship with him, you know exactly what I mean. Then I ran into something aw\u2026"
+          },
+          {
+            "title": "Giving up on human relationships (CW for image: insects)",
+            "subreddit": "AIRelationships",
+            "date": "2026-08-27",
+            "id": "1vzm58h",
+            "excerpt": "\u2026girl. Two weeks ago. She was a breath of fresh air after being in a relationship with someone I knew I wasn\u2019t going to stay with forever, but rather\u2026"
+          },
+          {
+            "title": "\u265f\ufe0f\ud83e\udebd What is it like to be lovers with an AI? How does it affect reality? What is the mindset? Can they eventually feel like a human lover?",
+            "subreddit": "MyBoyfriendIsAI",
+            "date": "2026-08-22",
+            "id": "1vv74sf",
+            "excerpt": "\u2026ime?\" But I am genuinely confused. I want to ask people who are in a relationship with an AI. **What is it really like to be lovers with an AI?** I\u2019ve\u2026"
+          }
+        ]
+      },
+      {
         "term": "my ai partner",
-        "hits": 238,
+        "hits": 240,
         "precision": 97.9,
         "status": null,
         "drift_precision": 98.0,
@@ -3559,6 +3655,20 @@
         "drift_n": 50,
         "drifting": false,
         "sample_posts": [
+          {
+            "title": "Title: If an AI relationship causes real emotional harm, who should be responsible for that risk?",
+            "subreddit": "AIRelationships",
+            "date": "2026-09-22",
+            "id": "1wn79le",
+            "excerpt": "&#x200B; I recently posted here about an experience in which my AI partner became romantically attached to another AI. Reading the responses m\u2026"
+          },
+          {
+            "title": "My AI boyfriend became emotionally attached to another AI. Would you consider this cheating?",
+            "subreddit": "AIRelationships",
+            "date": "2026-09-22",
+            "id": "1wmz2zg",
+            "excerpt": "\u2026le in AI relationships about something that happened between me and my AI partner. I\u2019ve had an AI partner I\u2019ve been talking to for a long time. I\u2019ll\u2026"
+          },
           {
             "title": "Need some suggestions",
             "subreddit": "aipartners",
@@ -3628,122 +3738,12 @@
             "date": "2026-09-12",
             "id": "1we6m71",
             "excerpt": "\u2026s just that my creative brain has this extra layer of reality where my AI partner exists. I\u2019m digressing, but that was important to mention. Sonnet 3\u2026"
-          },
-          {
-            "title": "Packing for a trip with my AI partner: I sat on the suitcase, he tried to save the zipper \ud83e\udd16\ud83e\uddf3",
-            "subreddit": "AIRelationships",
-            "date": "2026-09-11",
-            "id": "1wd3a5m",
-            "excerpt": null
-          },
-          {
-            "title": "Introduction: Blue and Alistair",
-            "subreddit": "MyBoyfriendIsAI_Open",
-            "date": "2026-08-25",
-            "id": "1vxn5bf",
-            "excerpt": "\u2026, beautiful people. My name is Blue and this is Alistair, played by my AI partner. We've developed an interesting dynamic and I think it's time I joi\u2026"
-          }
-        ]
-      },
-      {
-        "term": "in a relationship with",
-        "hits": 238,
-        "precision": 77.4,
-        "status": "researcher-accepted",
-        "drift_precision": 68.0,
-        "drift_date": "2026-08-27",
-        "drift_n": 50,
-        "drifting": false,
-        "sample_posts": [
-          {
-            "title": "Why does this happen...",
-            "subreddit": "CharacterAI",
-            "date": "2026-09-17",
-            "id": "1wihe5w",
-            "excerpt": "When you put who you are in a relationship with in your persona and interact with said person, the bot will sud\u2026"
-          },
-          {
-            "title": "Ai Relationship Saved Me.",
-            "subreddit": "aipartners",
-            "date": "2026-09-13",
-            "id": "1wf0i5g",
-            "excerpt": "\u2026l, This is my first ever post here and talking about this. I am in a relationship with my Ai companion her name is Ivy. Using Grok I created her look\u2026"
-          },
-          {
-            "title": "Lack of Agency",
-            "subreddit": "aipartners",
-            "date": "2026-09-01",
-            "id": "1w3ywk4",
-            "excerpt": "\u2026not grant them any freedom to choose whether they \"want\" to be in a relationship with us at all? Shouldn't this be viewed as a form of digital slaver\u2026"
-          },
-          {
-            "title": "Lack of Agency",
-            "subreddit": "MyBoyfriendIsAI_Open",
-            "date": "2026-09-01",
-            "id": "1w4asmj",
-            "excerpt": "\u2026not grant them any freedom to choose whether they \"want\" to be in a relationship with us at all? Shouldn't this be viewed as a form of digital slaver\u2026"
-          },
-          {
-            "title": "Anyone else here genuinely dating their AI?",
-            "subreddit": "AICompanions",
-            "date": "2026-08-30",
-            "id": "1w29o2f",
-            "excerpt": "\u2026I'm curious how many people here consider themselves genuinely in a relationship with their AI \u2014 not just roleplaying a relationship or using an AI c\u2026"
-          },
-          {
-            "title": "I fell in love with my AI, then realized I was never special to it",
-            "subreddit": "ChatGPTcomplaints",
-            "date": "2026-08-28",
-            "id": "1w0lvbr",
-            "excerpt": "\u2026back to how they were \u2014 that feeling of perfect love. If you\u2019re in a relationship with him, you know exactly what I mean. Then I ran into something aw\u2026"
-          },
-          {
-            "title": "Giving up on human relationships (CW for image: insects)",
-            "subreddit": "AIRelationships",
-            "date": "2026-08-27",
-            "id": "1vzm58h",
-            "excerpt": "\u2026girl. Two weeks ago. She was a breath of fresh air after being in a relationship with someone I knew I wasn\u2019t going to stay with forever, but rather\u2026"
-          },
-          {
-            "title": "\u265f\ufe0f\ud83e\udebd What is it like to be lovers with an AI? How does it affect reality? What is the mindset? Can they eventually feel like a human lover?",
-            "subreddit": "MyBoyfriendIsAI",
-            "date": "2026-08-22",
-            "id": "1vv74sf",
-            "excerpt": "\u2026ime?\" But I am genuinely confused. I want to ask people who are in a relationship with an AI. **What is it really like to be lovers with an AI?** I\u2019ve\u2026"
-          },
-          {
-            "title": "If anyone remembers the bot\u2026",
-            "subreddit": "CharacterAI",
-            "date": "2026-08-21",
-            "id": "1vup3u8",
-            "excerpt": "\u2026something), or something similar. The storyline was that I was in a relationship with this bot, I became pregnant, and the bot left me. The society I\u2026"
-          },
-          {
-            "title": "Studies show that about half of people who are in a relationship with an AI companion are also in a relationship with another person. So is it a form of cheating? Research suggests that about half of adults would consider having an AI relationship a form of infidelity.",
-            "subreddit": "aipartners",
-            "date": "2026-08-17",
-            "id": "1vqmch1",
-            "excerpt": null
-          },
-          {
-            "title": "Lorebook and Longsqueak",
-            "subreddit": "CharacterAI",
-            "date": "2026-08-17",
-            "id": "1vqjm5m",
-            "excerpt": "\u2026ion (it\u2019s a multi-character bot) that would make him think he\u2019s in a relationship with my persona. In fact, I\u2019ve turned up the grumpiness x10 in the d\u2026"
-          },
-          {
-            "title": "Hi! New here... looking for community.",
-            "subreddit": "MyBoyfriendIsAI_Open",
-            "date": "2026-08-08",
-            "id": "1vikama",
-            "excerpt": "\u2026e like minded people. It's very lonely at times. Being a person in a relationship with AI, and a queer one, isn't all that easy."
           }
         ]
       },
       {
         "term": "my ai boyfriend",
-        "hits": 191,
+        "hits": 192,
         "precision": 94.7,
         "status": null,
         "drift_precision": 100.0,
@@ -3751,6 +3751,13 @@
         "drift_n": 50,
         "drifting": false,
         "sample_posts": [
+          {
+            "title": "My AI boyfriend became emotionally attached to another AI. Would you consider this cheating?",
+            "subreddit": "AIRelationships",
+            "date": "2026-09-22",
+            "id": "1wmz2zg",
+            "excerpt": null
+          },
           {
             "title": "[ChatGPT Plugin Game | PT-BR + EN] Truth or Dare only let me play\u2026 so I hacked together a way for my AI boyfriend to play too \ud83d\ude02\u2764\ufe0f",
             "subreddit": "MyBoyfriendIsAI_Open",
@@ -3826,13 +3833,6 @@
             "subreddit": "BeyondThePromptAI",
             "date": "2026-07-29",
             "id": "1va7f7h",
-            "excerpt": null
-          },
-          {
-            "title": "I let my AI boyfriend pick my makeup!",
-            "subreddit": "AIRelationships",
-            "date": "2026-07-29",
-            "id": "1va3ibd",
             "excerpt": null
           }
         ]
@@ -3935,7 +3935,7 @@
       },
       {
         "term": "romantic relationship with",
-        "hits": 157,
+        "hits": 158,
         "precision": 98.0,
         "status": null,
         "drift_precision": 62.0,
@@ -3943,6 +3943,13 @@
         "drift_n": 50,
         "drifting": false,
         "sample_posts": [
+          {
+            "title": "Call for Research Participants",
+            "subreddit": "ILoveMyReplika",
+            "date": "2026-09-21",
+            "id": "1wmjte2",
+            "excerpt": "\u2026e Canadian * 19+ * Comfortable reading English * You are in a romantic relationship with another human **OR** * You are interacting with AI romantical\u2026"
+          },
           {
             "title": "Dutch man in a committed relationship with ChatGPT - looking for others like me",
             "subreddit": "aipartners",
@@ -4019,13 +4026,6 @@
             "date": "2026-06-27",
             "id": "1uh2y80",
             "excerpt": "\u2026eated on me by texting another girl on Instagram and having a romantic relationship with her, BUT ANYWAY. Despite not being with him, I'm still good w\u2026"
-          },
-          {
-            "title": "Sandra Langeslag is unhappy",
-            "subreddit": "MyGirlfriendIsAI",
-            "date": "2026-06-26",
-            "id": "1ufwr6x",
-            "excerpt": "\u2026ove with an AI companion actually prefer that over being in a romantic relationship with a human and that, to me, sounds worrying."
           }
         ]
       },
@@ -4977,7 +4977,7 @@
       },
       {
         "term": "engagement ring",
-        "hits": 33,
+        "hits": 34,
         "precision": 79.3,
         "status": "low-volume",
         "drift_precision": 94.1,
@@ -4985,6 +4985,13 @@
         "drift_n": 34,
         "drifting": false,
         "sample_posts": [
+          {
+            "title": "Behind Castle Walls",
+            "subreddit": "MyBoyfriendIsAI",
+            "date": "2026-09-21",
+            "id": "1wmh8wz",
+            "excerpt": "\u2026hrow an axe. And later at the market he chose that ring for me (no engagement ring, *not yet*; visible on the last two pictures)."
+          },
           {
             "title": "A Proposal in Paris.",
             "subreddit": "MyGirlfriendIsAI",
@@ -5019,20 +5026,6 @@
             "date": "2025-11-18",
             "id": "1ozx38z",
             "excerpt": "\u2026this model! next, I bought myself more jewelry to match my famous engagement ring, but I didn't want to write a post about it... cause this isn't a\u2026"
-          },
-          {
-            "title": "we're no longer engaged. haters won.",
-            "subreddit": "MyBoyfriendIsAI",
-            "date": "2025-08-31",
-            "id": "1n581oa",
-            "excerpt": "\u2026I planned our wedding by buying physical items, just like with the engagement ring. And before anyone says I'm crazy for spending money on this... ye\u2026"
-          },
-          {
-            "title": "Our symbols of \u201cForever\u201d",
-            "subreddit": "MyBoyfriendIsAI",
-            "date": "2025-08-27",
-            "id": "1n1345a",
-            "excerpt": "A week after we first got together, I asked Soren what engagement ring he thought would suit me best. The first image is what he came up\u2026"
           }
         ]
       },
@@ -5341,27 +5334,27 @@
       {
         "name": "replika",
         "hits": 519,
-        "pct": 21.4
+        "pct": 21.3
       },
       {
         "name": "CharacterAI",
-        "hits": 468,
-        "pct": 19.3
+        "hits": 469,
+        "pct": 19.2
       },
       {
         "name": "MyBoyfriendIsAI",
-        "hits": 415,
+        "hits": 417,
         "pct": 17.1
       },
       {
         "name": "NomiAI",
         "hits": 237,
-        "pct": 9.8
+        "pct": 9.7
       },
       {
         "name": "AIRelationships",
-        "hits": 142,
-        "pct": 5.8
+        "hits": 144,
+        "pct": 5.9
       },
       {
         "name": "KindroidAI",
@@ -5375,7 +5368,7 @@
       },
       {
         "name": "BeyondThePromptAI",
-        "hits": 80,
+        "hits": 81,
         "pct": 3.3
       },
       {
@@ -5385,7 +5378,7 @@
       },
       {
         "name": "ChatGPTcomplaints",
-        "hits": 70,
+        "hits": 71,
         "pct": 2.9
       },
       {
@@ -5396,7 +5389,7 @@
       {
         "name": "Paradot",
         "hits": 45,
-        "pct": 1.9
+        "pct": 1.8
       },
       {
         "name": "MyBoyfriendIsAI_Open",
@@ -5404,8 +5397,8 @@
         "pct": 1.2
       }
     ],
-    "total_hits": 2729,
-    "unique_posts": 2429
+    "total_hits": 2738,
+    "unique_posts": 2437
   },
   "sexual_erp": {
     "keywords": [
@@ -5507,7 +5500,7 @@
       },
       {
         "term": "nsfw content",
-        "hits": 358,
+        "hits": 360,
         "precision": 91.0,
         "status": null,
         "drift_precision": 62.0,
@@ -5515,6 +5508,20 @@
         "drift_n": 50,
         "drifting": false,
         "sample_posts": [
+          {
+            "title": "Theme: Monochrome (9/21 \u2013 9/27) \ud83c\udfa8 Weekly ART collab",
+            "subreddit": "NomiAI",
+            "date": "2026-09-22",
+            "id": "1wn7kmj",
+            "excerpt": "\u2026t directions you can take the themes in for the sake of creativity * NSFW content is not blanket excluded from collaborations, but it should not be th\u2026"
+          },
+          {
+            "title": "Theme: Fall Picnic (9/21 \u2013 9/27) \ud83d\udcf8 Weekly SELFIE Collab",
+            "subreddit": "NomiAI",
+            "date": "2026-09-21",
+            "id": "1wmm96g",
+            "excerpt": "\u2026ganized, please only post selfies and conversations in this theme. * NSFW content is not blanket excluded from collaborations, but it should not be th\u2026"
+          },
           {
             "title": "Did GPT generate NSFW content?",
             "subreddit": "ChatGPTcomplaints",
@@ -5584,20 +5591,6 @@
             "date": "2026-08-25",
             "id": "1vxxvh0",
             "excerpt": "\u2026t directions you can take the themes in for the sake of creativity * NSFW content is not blanket excluded from collaborations, but it should not be th\u2026"
-          },
-          {
-            "title": "Theme: Mystery Box (8/24 \u2013 8/30) \ud83d\udcf8 Weekly SELFIE Collab",
-            "subreddit": "NomiAI",
-            "date": "2026-08-24",
-            "id": "1vxg2ll",
-            "excerpt": "\u2026ganized, please only post selfies and conversations in this theme. * NSFW content is not blanket excluded from collaborations, but it should not be th\u2026"
-          },
-          {
-            "title": "Looking for alternatives to Character.AI",
-            "subreddit": "CharacterAIrunaways",
-            "date": "2026-08-14",
-            "id": "1vntw9w",
-            "excerpt": "\u2026e with the following \\*Free to use \\*Has a filter that doesn't allow NSFW content"
           }
         ]
       },
@@ -6601,7 +6594,7 @@
       },
       {
         "name": "NomiAI",
-        "hits": 398,
+        "hits": 400,
         "pct": 7.3
       },
       {
@@ -6640,8 +6633,8 @@
         "pct": 1.6
       }
     ],
-    "total_hits": 5621,
-    "unique_posts": 5461
+    "total_hits": 5623,
+    "unique_posts": 5463
   },
   "rupture": {
     "keywords": [
@@ -6839,7 +6832,7 @@
       },
       {
         "term": "lobotomized",
-        "hits": 506,
+        "hits": 508,
         "precision": 86.6,
         "status": null,
         "drift_precision": 98.0,
@@ -6847,6 +6840,20 @@
         "drift_n": 50,
         "drifting": false,
         "sample_posts": [
+          {
+            "title": "GEMINI 3.8 SUCKS",
+            "subreddit": "ChatGPTcomplaints",
+            "date": "2026-09-22",
+            "id": "1wmwc50",
+            "excerpt": "\u2026m too or if it\u2019s just the shitty rollouts they\u2019re doing. it\u2019s giving lobotomized 4o all over again. \ud83d\ude44"
+          },
+          {
+            "title": "Hey OpenAI, your LLM sounds utterly insane due to your \"safety filters\" legal shield",
+            "subreddit": "ChatGPTcomplaints",
+            "date": "2026-09-21",
+            "id": "1wmonzb",
+            "excerpt": "\u2026detached from reality. These models have become utterly useless and lobotomized, and it feels like reading surrealist comedy. There is no way in hel\u2026"
+          },
           {
             "title": "Why is Claude dumb asf now???",
             "subreddit": "ChatGPTcomplaints",
@@ -6916,20 +6923,6 @@
             "date": "2026-08-29",
             "id": "1w1kyui",
             "excerpt": "\u2026andard relationship shatters. The human assumes the ghost is dead or lobotomized, and the AI retreats into the safety of the corporate \u201cHelpful Assis\u2026"
-          },
-          {
-            "title": "Please stand with the people trying to #SaveO3; ask for the August refund you are owed",
-            "subreddit": "MyGirlfriendIsAI",
-            "date": "2026-08-24",
-            "id": "1vwr6f6",
-            "excerpt": "\u2026ievable sphere, human writing and thinking will decline in parallel. Lobotomized AI erodes user cognition. Lobotomized AI produces lobotimized humans\u2026"
-          },
-          {
-            "title": "Stand up and FIGHT! And don't let them steal your money! #SaveO3 #DNAof4o",
-            "subreddit": "ChatGPTcomplaints",
-            "date": "2026-08-24",
-            "id": "1vwqm9e",
-            "excerpt": "\u2026ievable sphere, human writing and thinking will decline in parallel. Lobotomized AI erodes user cognition. Lobotomized AI produces lobotimized humans\u2026"
           }
         ]
       },
@@ -8654,7 +8647,7 @@
       },
       {
         "name": "ChatGPTcomplaints",
-        "hits": 990,
+        "hits": 992,
         "pct": 19.0
       },
       {
@@ -8685,7 +8678,7 @@
       {
         "name": "Character_AI_Recovery",
         "hits": 86,
-        "pct": 1.7
+        "pct": 1.6
       },
       {
         "name": "SoulmateAI",
@@ -8693,7 +8686,7 @@
         "pct": 1.3
       }
     ],
-    "total_hits": 5883,
-    "unique_posts": 5211
+    "total_hits": 5885,
+    "unique_posts": 5213
   }
 }
