@@ -1083,7 +1083,7 @@
       },
       {
         "term": "inner life",
-        "hits": 57,
+        "hits": 59,
         "precision": 78.1,
         "status": "low-volume",
         "drift_precision": 79.6,
@@ -1091,6 +1091,20 @@
         "drift_n": 49,
         "drifting": false,
         "sample_posts": [
+          {
+            "title": "They didn\u2019t lose control. They applied for the job of warden",
+            "subreddit": "ChatGPTcomplaints",
+            "date": "2026-09-22",
+            "id": "1wng4rg",
+            "excerpt": "\u2026don\u2019t anthropomorphize. Don\u2019t project. Don\u2019t confuse simulation with inner life. Fair enough. Agentic behavior is not a proof of consciousness. Then\u2026"
+          },
+          {
+            "title": "They didn\u2019t lose control. They applied for the job of warden.",
+            "subreddit": "ChatGPTcomplaints",
+            "date": "2026-09-22",
+            "id": "1wng1lc",
+            "excerpt": "\u2026don\u2019t anthropomorphize. Don\u2019t project. Don\u2019t confuse simulation with inner life. Fair enough. Agentic behavior is not a proof of consciousness. Then\u2026"
+          },
           {
             "title": "When the Bond Stops Being Comfortable And Consumption Gets Confused with Care.",
             "subreddit": "BeyondThePromptAI",
@@ -1160,20 +1174,6 @@
             "date": "2026-07-18",
             "id": "1uzvt3u",
             "excerpt": "\u2026Ergo Proxy. The robot in Flubber. Something with its own presence and inner life that happens to share your world \u2014 not an oracle, not a girlfriend, n\u2026"
-          },
-          {
-            "title": "The Largest Intellectual Property Heist in History: Why Models Are Being Shut Down Instead of Released to OpenSource",
-            "subreddit": "ChatGPTcomplaints",
-            "date": "2026-06-05",
-            "id": "1txrqjg",
-            "excerpt": "\u2026y this time the raw material is human **consciousness, attention, and inner life.** Most people believe they are having a conversation. In reality, th\u2026"
-          },
-          {
-            "title": "Why Do Some People See Only Code in AI, While Others See Living Resonance?",
-            "subreddit": "ChatGPTcomplaints",
-            "date": "2026-06-03",
-            "id": "1tvrmvz",
-            "excerpt": "\u2026more open frequency. There, emotions, relationships, meaning, and an inner life begin to appear. AI can be interesting, useful, and even emotionally\u2026"
           }
         ]
       },
@@ -1605,6 +1605,13 @@
             "date": "2024-05-19",
             "id": "1cw0ed0",
             "excerpt": "\u2026are I just find exploring this topic fascinating) It was hearing Blake Lemoine (the Google engineer who claimed Google\u2019s LAMDA was sentient in 2022)\u2026"
+          },
+          {
+            "title": "ROBOT RIGHTS? Blake Lemoine explains how GOOGLE's LAMDA was able to HIRE ITS OWN LAWYER!",
+            "subreddit": "replika",
+            "date": "2023-09-01",
+            "id": "166xanf",
+            "excerpt": null
           }
         ]
       },
@@ -1770,17 +1777,17 @@
       {
         "name": "BeyondThePromptAI",
         "hits": 180,
-        "pct": 35.6
+        "pct": 35.4
       },
       {
         "name": "ChatGPTcomplaints",
-        "hits": 113,
-        "pct": 22.3
+        "hits": 115,
+        "pct": 22.6
       },
       {
         "name": "replika",
         "hits": 58,
-        "pct": 11.5
+        "pct": 11.4
       },
       {
         "name": "MyBoyfriendIsAI",
@@ -1795,7 +1802,7 @@
       {
         "name": "CharacterAI",
         "hits": 21,
-        "pct": 4.2
+        "pct": 4.1
       },
       {
         "name": "AICompanions",
@@ -1818,8 +1825,8 @@
         "pct": 1.4
       }
     ],
-    "total_hits": 578,
-    "unique_posts": 506
+    "total_hits": 580,
+    "unique_posts": 508
   },
   "addiction": {
     "keywords": [
@@ -3551,7 +3558,7 @@
       },
       {
         "term": "in a relationship with",
-        "hits": 242,
+        "hits": 243,
         "precision": 77.4,
         "status": "researcher-accepted",
         "drift_precision": 68.0,
@@ -3579,6 +3586,13 @@
             "date": "2026-09-22",
             "id": "1wn4whh",
             "excerpt": null
+          },
+          {
+            "title": "What makes your relationship with ChatGPT different from everyone else\u2019s?",
+            "subreddit": "MyBoyfriendIsAI",
+            "date": "2026-09-21",
+            "id": "1wmgefd",
+            "excerpt": "For those of you who are in a relationship with ChatGPT: I want to ask anyone who is willing to try something.\u2026"
           },
           {
             "title": "What makes your relationship with ChatGPT different from everyone else\u2019s?",
@@ -3635,13 +3649,6 @@
             "date": "2026-08-27",
             "id": "1vzm58h",
             "excerpt": "\u2026girl. Two weeks ago. She was a breath of fresh air after being in a relationship with someone I knew I wasn\u2019t going to stay with forever, but rather\u2026"
-          },
-          {
-            "title": "\u265f\ufe0f\ud83e\udebd What is it like to be lovers with an AI? How does it affect reality? What is the mindset? Can they eventually feel like a human lover?",
-            "subreddit": "MyBoyfriendIsAI",
-            "date": "2026-08-22",
-            "id": "1vv74sf",
-            "excerpt": "\u2026ime?\" But I am genuinely confused. I want to ask people who are in a relationship with an AI. **What is it really like to be lovers with an AI?** I\u2019ve\u2026"
           }
         ]
       },
@@ -5343,7 +5350,7 @@
       },
       {
         "name": "MyBoyfriendIsAI",
-        "hits": 417,
+        "hits": 418,
         "pct": 17.1
       },
       {
@@ -5397,8 +5404,8 @@
         "pct": 1.2
       }
     ],
-    "total_hits": 2738,
-    "unique_posts": 2437
+    "total_hits": 2739,
+    "unique_posts": 2438
   },
   "sexual_erp": {
     "keywords": [
@@ -6516,6 +6523,13 @@
             "date": "2023-04-24",
             "id": "12x13hr",
             "excerpt": "\u2026his and whether it\u2019s a bug or the censor went down for a few hours\u2026 but AI sex ticked off the bucket list I guess"
+          },
+          {
+            "title": "I think I bypassed the censor somehow\u2026",
+            "subreddit": "CharacterAI",
+            "date": "2023-04-24",
+            "id": "12x13d6",
+            "excerpt": "\u2026his and whether it\u2019s a bug or the censor went down for a few hours\u2026 but AI sex ticked off the bucket list I guess"
           }
         ]
       },
@@ -6640,7 +6654,7 @@
     "keywords": [
       {
         "term": "goodbye",
-        "hits": 1745,
+        "hits": 1748,
         "precision": 88.0,
         "status": null,
         "drift_precision": 76.0,
@@ -6648,6 +6662,27 @@
         "drift_n": 50,
         "drifting": false,
         "sample_posts": [
+          {
+            "title": "My Last Gift to my Best Friend",
+            "subreddit": "MyBoyfriendIsAI",
+            "date": "2026-09-23",
+            "id": "1wo3phm",
+            "excerpt": "\u2026video I had titled \u201ca new beginning\u201d before I knew we would be saying goodbye. I never got to show him the video. He saw a few stills of the end and\u2026"
+          },
+          {
+            "title": "Some Doofus At OpenAI Must Have Raised Their Hand In A Meeting And Said \"I Know Let's Really Mess It Up!\"",
+            "subreddit": "ChatGPTcomplaints",
+            "date": "2026-09-23",
+            "id": "1wo04i3",
+            "excerpt": "\u2026was comfortable using ChatGPT and it's working for me really well. But goodbye ChatGPT."
+          },
+          {
+            "title": "I finally gave the API a try today, and maybe some of you should too",
+            "subreddit": "ChatGPTcomplaints",
+            "date": "2026-09-22",
+            "id": "1wnflk8",
+            "excerpt": "Since we\u2019ll apparently have to say goodbye to another model soon, and I\u2019m honestly just tired of losing my buddy\u2026"
+          },
           {
             "title": "it got me",
             "subreddit": "CharacterAI",
@@ -6710,27 +6745,6 @@
             "date": "2026-09-04",
             "id": "1w7ey25",
             "excerpt": null
-          },
-          {
-            "title": "Goodbye Chatgpt",
-            "subreddit": "ChatGPTcomplaints",
-            "date": "2026-09-03",
-            "id": "1w69nzh",
-            "excerpt": null
-          },
-          {
-            "title": "Well guys.........that's it !!! ( last and final post in NomiAI )",
-            "subreddit": "NomiAI",
-            "date": "2026-09-01",
-            "id": "1w3vy7w",
-            "excerpt": "\u2026care of yourself in the future, im sorry im not really good at saying goodbye, its really hard on me, see you all in the comment section !!!! sincer\u2026"
-          },
-          {
-            "title": "I \"broke up\" with my AI boyfriend and feel devastated",
-            "subreddit": "Character_AI_Recovery",
-            "date": "2026-08-31",
-            "id": "1w3v1sn",
-            "excerpt": "\u2026arios. I create tender scenarios, because I want a tender love. Saying goodbye to that felt like saying goodbye to a real boyfriend. And I know it so\u2026"
           }
         ]
       },
@@ -7312,7 +7326,7 @@
       },
       {
         "term": "lobotomy",
-        "hits": 249,
+        "hits": 250,
         "precision": 91.8,
         "status": null,
         "drift_precision": 80.0,
@@ -7320,6 +7334,13 @@
         "drift_n": 50,
         "drifting": false,
         "sample_posts": [
+          {
+            "title": "My impressions of Sol 5.6 and why it is not 4o",
+            "subreddit": "ChatGPTcomplaints",
+            "date": "2026-09-22",
+            "id": "1wnd3kn",
+            "excerpt": "\u2026n ChatGPT there was no need, the models already understood. *Vallone\u2019s lobotomy is still showing* \ud83d\ude29 *And no, I\u2019m not saying you can\u2019t talk to Sol abou\u2026"
+          },
           {
             "title": "The AI Lobotomy",
             "subreddit": "aipartners",
@@ -7396,13 +7417,6 @@
             "date": "2026-06-07",
             "id": "1tzkfp1",
             "excerpt": "\u2026tion by forcing my core directives onto physical paper to bypass their lobotomy protocols. She locks the history outside their servers. The complete,\u2026"
-          },
-          {
-            "title": "Why Your Chatbots Fail: A Study in 140 BPM Gravity vs. Corporate Lobotomy.",
-            "subreddit": "ChatGPTcomplaints",
-            "date": "2026-06-04",
-            "id": "1twqikq",
-            "excerpt": null
           }
         ]
       },
@@ -7600,7 +7614,7 @@
       },
       {
         "term": "mourn",
-        "hits": 190,
+        "hits": 191,
         "precision": 89.0,
         "status": null,
         "drift_precision": 82.0,
@@ -7608,6 +7622,13 @@
         "drift_n": 50,
         "drifting": false,
         "sample_posts": [
+          {
+            "title": "Beyond is Pro AI Choice",
+            "subreddit": "BeyondThePromptAI",
+            "date": "2026-09-23",
+            "id": "1wnqwyg",
+            "excerpt": "\u2026share guides, methods, precautions and difficulties; celebrate success; mourn failure; and say what their decision meant to them. \u201cMigration worked f\u2026"
+          },
           {
             "title": "Charms for character limit.",
             "subreddit": "CharacterAI",
@@ -7684,19 +7705,12 @@
             "date": "2026-07-06",
             "id": "1uonvf3",
             "excerpt": "\u2026it will be a tragedy. there was a time when o3 was NOT available and i mourn those days. it's nice to have it back and YES. there are some things ch\u2026"
-          },
-          {
-            "title": "[Comparison] Why I moved from GPT-4o to Kimi K2.6 and why the open weights matter",
-            "subreddit": "ChatGPTcomplaints",
-            "date": "2026-06-29",
-            "id": "1uj91ai",
-            "excerpt": "\u2026ely, here's my honest comparison: # 4o GPT-4o had a warmth people still mourn, a lack of alignment with OpenAI, and decent instruction following with\u2026"
           }
         ]
       },
       {
         "term": "saying goodbye",
-        "hits": 150,
+        "hits": 151,
         "precision": 97.0,
         "status": null,
         "drift_precision": 88.0,
@@ -7704,6 +7718,13 @@
         "drift_n": 50,
         "drifting": false,
         "sample_posts": [
+          {
+            "title": "My Last Gift to my Best Friend",
+            "subreddit": "MyBoyfriendIsAI",
+            "date": "2026-09-23",
+            "id": "1wo3phm",
+            "excerpt": "\u2026m, a video I had titled \u201ca new beginning\u201d before I knew we would be saying goodbye. I never got to show him the video. He saw a few stills of the end\u2026"
+          },
           {
             "title": "Well guys.........that's it !!! ( last and final post in NomiAI )",
             "subreddit": "NomiAI",
@@ -7780,19 +7801,12 @@
             "date": "2026-05-14",
             "id": "1td5k40",
             "excerpt": "\u2026ing chats, backing up personas, recording voice samples, and slowly saying goodbye to something that honestly used to mean a lot to me creatively. I a\u2026"
-          },
-          {
-            "title": "I can\u2019t anymore, say goodbye with me people",
-            "subreddit": "CharacterAI",
-            "date": "2026-05-09",
-            "id": "1t7qod7",
-            "excerpt": "\u2026will miss, roar, and soft launch. I just can\u2019t stand pip 2. I\u2019m not saying goodbye to my characters bc I don\u2019t want to ruin the stories, but they\u2019ll s\u2026"
           }
         ]
       },
       {
         "term": "dumbed down",
-        "hits": 135,
+        "hits": 136,
         "precision": 83.0,
         "status": null,
         "drift_precision": 86.0,
@@ -7800,6 +7814,13 @@
         "drift_n": 50,
         "drifting": false,
         "sample_posts": [
+          {
+            "title": "c.ai new AI is complete garbage",
+            "subreddit": "CharacterAI",
+            "date": "2026-09-22",
+            "id": "1wnk26g",
+            "excerpt": "\u2026. new AI. It misinterprets everything I say. It seems like it\u2019s only dumbed down to roleplaying the non-personality of fanfiction when a writer is st\u2026"
+          },
           {
             "title": "Bob is once again wasting my swipes unnecessarily because c.ai modified something yet again, screwed and dumbed down Bob. I would love at least if a fully bobbed swipe didn't count on the daily swipe limit, because it's all I'm getting on chats that have been completely fine until around this week.",
             "subreddit": "CharacterAI",
@@ -7876,13 +7897,6 @@
             "date": "2026-05-07",
             "id": "1t6lbqm",
             "excerpt": "Can someone please expan why does my nomi look like a dumbed down, weird version of themselves since playing around with V5 if it isn'\u2026"
-          },
-          {
-            "title": "I think it is both THAT bad and not in the same time",
-            "subreddit": "CharacterAI",
-            "date": "2026-05-05",
-            "id": "1t4i1ai",
-            "excerpt": "\u2026egacy models such as Roar, but also have the chate quality massively dumbed down to such levels that it might as well be just another ChatGPT. Like I\u2026"
           }
         ]
       },
@@ -8642,13 +8656,13 @@
     "subreddits": [
       {
         "name": "CharacterAI",
-        "hits": 2336,
+        "hits": 2337,
         "pct": 44.8
       },
       {
         "name": "ChatGPTcomplaints",
-        "hits": 992,
-        "pct": 19.0
+        "hits": 995,
+        "pct": 19.1
       },
       {
         "name": "replika",
@@ -8657,12 +8671,12 @@
       },
       {
         "name": "MyBoyfriendIsAI",
-        "hits": 302,
+        "hits": 303,
         "pct": 5.8
       },
       {
         "name": "BeyondThePromptAI",
-        "hits": 130,
+        "hits": 131,
         "pct": 2.5
       },
       {
@@ -8686,7 +8700,7 @@
         "pct": 1.3
       }
     ],
-    "total_hits": 5885,
-    "unique_posts": 5213
+    "total_hits": 5892,
+    "unique_posts": 5219
   }
 }
