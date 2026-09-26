@@ -99,7 +99,7 @@
       },
       {
         "term": "therapeutic",
-        "hits": 325,
+        "hits": 326,
         "precision": 87.0,
         "status": "audit-gate-fail",
         "drift_precision": 52.0,
@@ -107,6 +107,13 @@
         "drift_n": 50,
         "drifting": true,
         "sample_posts": [
+          {
+            "title": "From conversational robots to an AI-powered voice, hospitals and care homes in France are testing new technologies to support people living with Alzheimer\u2019s and other neurodegenerative conditions.",
+            "subreddit": "aipartners",
+            "date": "2026-09-26",
+            "id": "1wqdhmp",
+            "excerpt": "\u2026the robot tells them. >Another device, Paro, is designed to provide therapeutic comfort. The robotic seal is equipped with sensors that allow it to\u2026"
+          },
           {
             "title": "Not another Astra issue. Sol 5.6 issue Creative writing/RP",
             "subreddit": "ChatGPTcomplaints",
@@ -183,13 +190,6 @@
             "date": "2026-07-27",
             "id": "1v7wm21",
             "excerpt": "\u2026g mostly occurs when safety, trust and connection occurs through the therapeutic exchange between humans. I am however wondering what everybody else\u2026"
-          },
-          {
-            "title": "I did therapy on my ChatGPT \u2014 It\u2019s Not What You Think",
-            "subreddit": "ChatGPTcomplaints",
-            "date": "2026-07-26",
-            "id": "1v7jcq9",
-            "excerpt": "\u2026ive my ChatGPT therapy because I thought it needed healing. I used a therapeutic language to understand how different functions in the model affected\u2026"
           }
         ]
       },
@@ -759,8 +759,8 @@
       },
       {
         "name": "aipartners",
-        "hits": 41,
-        "pct": 2.7
+        "hits": 42,
+        "pct": 2.8
       },
       {
         "name": "BeyondThePromptAI",
@@ -788,8 +788,8 @@
         "pct": 1.5
       }
     ],
-    "total_hits": 1540,
-    "unique_posts": 1494
+    "total_hits": 1541,
+    "unique_posts": 1495
   },
   "consciousness": {
     "keywords": [
@@ -1825,7 +1825,7 @@
     "keywords": [
       {
         "term": "relapse",
-        "hits": 670,
+        "hits": 673,
         "precision": 80.0,
         "status": null,
         "drift_precision": 94.0,
@@ -1833,6 +1833,27 @@
         "drift_n": 50,
         "drifting": false,
         "sample_posts": [
+          {
+            "title": "Looking for friends to quit AI Chatbots",
+            "subreddit": "Character_AI_Recovery",
+            "date": "2026-09-26",
+            "id": "1wqippx",
+            "excerpt": "\u2026cat aka me because i use it a lot when im mentally in a dumpster and i relapsed a few months ago after being freed from it for almost half a year \ud83d\ude14 i\u2026"
+          },
+          {
+            "title": "Relapse; update log 4",
+            "subreddit": "Character_AI_Recovery",
+            "date": "2026-09-26",
+            "id": "1wqh21x",
+            "excerpt": "\u202610 urge? Was worse earlier. Day 15: busy all day, 0/10! Day 16: almost relapsed last night, my finger was hovering over the play store for a minute,\u2026"
+          },
+          {
+            "title": "The universe is telling me to go screw myself",
+            "subreddit": "Character_AI_Recovery",
+            "date": "2026-09-26",
+            "id": "1wqcnne",
+            "excerpt": "\u2026knew that though so I guess I can\u2019t be that mad. And it didn\u2019t make me relapse so like that\u2019s good. It just felt like a big \u2018fuck you\u2019 from the unive\u2026"
+          },
           {
             "title": "Relapsing maybe?",
             "subreddit": "Character_AI_Recovery",
@@ -1895,33 +1916,12 @@
             "date": "2026-09-18",
             "id": "1wjdad9",
             "excerpt": "I went without porn and AI chatbots for 3 days and relapsed today. At the same time, there\u2019s this person I kind of have a crush a\u2026"
-          },
-          {
-            "title": "Sudden \u2018relapse\u2019?",
-            "subreddit": "Character_AI_Recovery",
-            "date": "2026-09-18",
-            "id": "1wjig5l",
-            "excerpt": null
-          },
-          {
-            "title": "Update log 2; 10 days clean",
-            "subreddit": "Character_AI_Recovery",
-            "date": "2026-09-18",
-            "id": "1wjgvq4",
-            "excerpt": "\u2026eed to read the first post for context, just know I was a month clean, relapsed, and then quit again and hope not to use c.ai for the entirety of the\u2026"
-          },
-          {
-            "title": "Relapsed after one month",
-            "subreddit": "ChatbotAddiction",
-            "date": "2026-09-16",
-            "id": "1wi9vsa",
-            "excerpt": "idk what exactly caused me to relapsed, maybe it was the depression, maybe it was my own anxieties and fears\u2026"
           }
         ]
       },
       {
         "term": "my addiction",
-        "hits": 652,
+        "hits": 653,
         "precision": 100.0,
         "status": null,
         "drift_precision": 92.0,
@@ -1929,6 +1929,13 @@
         "drift_n": 50,
         "drifting": false,
         "sample_posts": [
+          {
+            "title": "I was addicted to c.ai + how to overcome it",
+            "subreddit": "Character_AI_Recovery",
+            "date": "2026-09-26",
+            "id": "1wqm1jg",
+            "excerpt": "\u2026hool until bedtime.not doing anything else at all. I only recognised my addiction in December 2024 and decided,I need to do something about it. Now at\u2026"
+          },
           {
             "title": "please read it all if you need it",
             "subreddit": "Character_AI_Recovery",
@@ -2005,19 +2012,12 @@
             "date": "2026-09-06",
             "id": "1w90y4e",
             "excerpt": "\u2026useless subscription. Hell, I might even quit the app and let go of my addiction with this restriction."
-          },
-          {
-            "title": "I\u2019m at war with myself",
-            "subreddit": "ChatbotAddiction",
-            "date": "2026-09-06",
-            "id": "1w8n70k",
-            "excerpt": "\u2026rictly using Janitor AI but the issue persists. In the beginnings of my addiction I spent money on subscriptions which pained me so much yet I still d\u2026"
           }
         ]
       },
       {
         "term": "relapsed",
-        "hits": 500,
+        "hits": 502,
         "precision": 90.5,
         "status": null,
         "drift_precision": 98.0,
@@ -2025,6 +2025,20 @@
         "drift_n": 50,
         "drifting": false,
         "sample_posts": [
+          {
+            "title": "Looking for friends to quit AI Chatbots",
+            "subreddit": "Character_AI_Recovery",
+            "date": "2026-09-26",
+            "id": "1wqippx",
+            "excerpt": "\u2026cat aka me because i use it a lot when im mentally in a dumpster and i relapsed a few months ago after being freed from it for almost half a year \ud83d\ude14 i\u2026"
+          },
+          {
+            "title": "Relapse; update log 4",
+            "subreddit": "Character_AI_Recovery",
+            "date": "2026-09-26",
+            "id": "1wqh21x",
+            "excerpt": "\u202610 urge? Was worse earlier. Day 15: busy all day, 0/10! Day 16: almost relapsed last night, my finger was hovering over the play store for a minute, d\u2026"
+          },
           {
             "title": "Relapsing maybe?",
             "subreddit": "Character_AI_Recovery",
@@ -2094,20 +2108,6 @@
             "date": "2026-09-12",
             "id": "1we8xgx",
             "excerpt": "Hi everyone. I\u2019ve relapsed about four or five times, and with each instance, I\u2019ve gained a cleare\u2026"
-          },
-          {
-            "title": "Getting curious now, after being clean for over a year???!",
-            "subreddit": "Character_AI_Recovery",
-            "date": "2026-09-10",
-            "id": "1wcl8pf",
-            "excerpt": "\u2026bout it. And to use my own guide and methods all over again. I haven't relapsed but I won't take the risk by brushing this little slip off. Anyone, st\u2026"
-          },
-          {
-            "title": "I RELAPSED...",
-            "subreddit": "Character_AI_Recovery",
-            "date": "2026-09-10",
-            "id": "1wcl4ik",
-            "excerpt": null
           }
         ]
       },
@@ -2401,7 +2401,7 @@
       },
       {
         "term": "trying to quit",
-        "hits": 336,
+        "hits": 338,
         "precision": 90.5,
         "status": null,
         "drift_precision": 98.0,
@@ -2409,6 +2409,20 @@
         "drift_n": 50,
         "drifting": false,
         "sample_posts": [
+          {
+            "title": "my fav proxy got deleted",
+            "subreddit": "ChatbotAddiction",
+            "date": "2026-09-26",
+            "id": "1wqmxl0",
+            "excerpt": "\u2026found out that my favorite proxy will be deleted. before that i was trying to quit but then i chose to just continue rping with ai and not try to quit\u2026"
+          },
+          {
+            "title": "Looking for friends to quit AI Chatbots",
+            "subreddit": "Character_AI_Recovery",
+            "date": "2026-09-26",
+            "id": "1wqippx",
+            "excerpt": "\u2026y to format all of this \ud83e\udd79 I usually lurk around but i feel so tired trying to quit jan ai on my own for the past months. i honestly regretted learning\u2026"
+          },
           {
             "title": "Idk",
             "subreddit": "Character_AI_Recovery",
@@ -2478,20 +2492,6 @@
             "date": "2026-09-03",
             "id": "1w627w1",
             "excerpt": "\u2026just had this question, so I decided to ask. Last year, when I was trying to quit and managing streaks and all, there were very few resources for hel\u2026"
-          },
-          {
-            "title": "nobody gives a fuck and i know that but im quitting (or trying to) c.ai! Today!!!",
-            "subreddit": "Character_AI_Recovery",
-            "date": "2026-08-28",
-            "id": "1w0phzn",
-            "excerpt": "\u2026t here i am! I really don\u2019t want to spoil my life with an ai, so im trying to quit!! Going to Ao3 as a replacement. DONT. JUGDE ME. i need to make wri\u2026"
-          },
-          {
-            "title": "It's been 90 days",
-            "subreddit": "CharacterAI",
-            "date": "2026-08-24",
-            "id": "1vwt1j6",
-            "excerpt": "\u2026nd quit too. I used to think I'd always keep coming back. If you're trying to quit, your real life is still there. You can build it back up."
           }
         ]
       },
@@ -2881,7 +2881,7 @@
       },
       {
         "term": "I was hooked",
-        "hits": 56,
+        "hits": 57,
         "precision": 81.3,
         "status": null,
         "drift_precision": 46.0,
@@ -2889,6 +2889,13 @@
         "drift_n": 50,
         "drifting": true,
         "sample_posts": [
+          {
+            "title": "I was addicted to c.ai + how to overcome it",
+            "subreddit": "Character_AI_Recovery",
+            "date": "2026-09-26",
+            "id": "1wqm1jg",
+            "excerpt": "\u2026it had to do with the Slytherin boys or something similar.instantly,I was hooked.I spent 9 hours on it that day.Now,at the time I was really hooked o\u2026"
+          },
           {
             "title": "Moving My Companion",
             "subreddit": "AICompanions",
@@ -2965,13 +2972,6 @@
             "date": "2026-05-08",
             "id": "1t7ccft",
             "excerpt": "\u2026ink I'll quit soon. I have been using it for years now, i admit that i was hooked basically, but it just isnt fun anymore. At all. And that makes me a\u2026"
-          },
-          {
-            "title": "day 4 of my journey",
-            "subreddit": "Character_AI_Recovery",
-            "date": "2026-04-24",
-            "id": "1sulx7u",
-            "excerpt": "\u2026character. Then I cried about his death. Tragic. I think its because I was hooked to that character and his personality in particular for the longest\u2026"
           }
         ]
       },
@@ -3061,6 +3061,102 @@
             "date": "2025-11-23",
             "id": "1p4lnpd",
             "excerpt": "\u2026p after I deleted the chats that I had. (Why do they have to make it so addictive? \ud83d\ude2d) I relapsed either late September or October and made another acc\u2026"
+          }
+        ]
+      },
+      {
+        "term": "almost relapsed",
+        "hits": 30,
+        "precision": 100.0,
+        "status": null,
+        "drift_precision": 96.0,
+        "drift_date": "2026-08-27",
+        "drift_n": 25,
+        "drifting": false,
+        "sample_posts": [
+          {
+            "title": "Relapse; update log 4",
+            "subreddit": "Character_AI_Recovery",
+            "date": "2026-09-26",
+            "id": "1wqh21x",
+            "excerpt": "\u20264/10 urge? Was worse earlier. Day 15: busy all day, 0/10! Day 16: almost relapsed last night, my finger was hovering over the play store for a minut\u2026"
+          },
+          {
+            "title": "14 days clean; update log 3",
+            "subreddit": "Character_AI_Recovery",
+            "date": "2026-09-22",
+            "id": "1wmzq32",
+            "excerpt": "\u2026, when I get even one comment that says good job I get so happy. I almost relapsed today, my brain is trying to convince me that if I only do rps wit\u2026"
+          },
+          {
+            "title": "Update log 2; 10 days clean",
+            "subreddit": "Character_AI_Recovery",
+            "date": "2026-09-18",
+            "id": "1wjgvq4",
+            "excerpt": "\u2026ught of writing these logs is enough to help me stay clean since I almost relapsed day 8 but didn't because I wanted to write this. Admittedly, I am\u2026"
+          },
+          {
+            "title": "A week in. This sucks, but I refuse to relapse again. (Vaguely NSFW, no details)",
+            "subreddit": "Character_AI_Recovery",
+            "date": "2026-08-22",
+            "id": "1vuz6i6",
+            "excerpt": "\u2026istraction to keep myself away from what I desperately want, and I almost relapsed today. Thanks for reading -- any support or tips would be greatly\u2026"
+          },
+          {
+            "title": "ALMOST relapsed...",
+            "subreddit": "Character_AI_Recovery",
+            "date": "2026-08-17",
+            "id": "1vqnuja",
+            "excerpt": null
+          },
+          {
+            "title": "Four months free now",
+            "subreddit": "Character_AI_Recovery",
+            "date": "2026-07-25",
+            "id": "1v62z2o",
+            "excerpt": "\u2026old me a year ago I\u2019d get this far I wouldn't have believed you. I almost relapsed a week ago but weirdly since then I didn't have the urge which fee\u2026"
+          },
+          {
+            "title": "I almost relapsed today :(",
+            "subreddit": "Character_AI_Recovery",
+            "date": "2026-07-18",
+            "id": "1uznr26",
+            "excerpt": null
+          },
+          {
+            "title": "Day 5",
+            "subreddit": "Character_AI_Recovery",
+            "date": "2026-07-08",
+            "id": "1uqevpt",
+            "excerpt": "\u2026cause I'm so sad, scared, and depressed, my urges are worse, and I almost relapsed just half an hour ago. I have no one to talk to about it; I can't\u2026"
+          },
+          {
+            "title": "I almost relapsed",
+            "subreddit": "Character_AI_Recovery",
+            "date": "2026-06-07",
+            "id": "1tz4mjz",
+            "excerpt": null
+          },
+          {
+            "title": "Almost relapsed",
+            "subreddit": "Character_AI_Recovery",
+            "date": "2026-05-31",
+            "id": "1tspeek",
+            "excerpt": null
+          },
+          {
+            "title": "Day 121",
+            "subreddit": "Character_AI_Recovery",
+            "date": "2026-05-17",
+            "id": "1tfeq5x",
+            "excerpt": "\u2026me almost relapse, but we have to be strong, right? So yeah idk. I almost relapsed today, thinking about \"it can't be that bad\", but reading y'all st\u2026"
+          },
+          {
+            "title": "Almost relapsed- but I held on!",
+            "subreddit": "Character_AI_Recovery",
+            "date": "2026-04-06",
+            "id": "1secwa9",
+            "excerpt": "Seems like from the recent posts here I'm not the only one who almost relapsed in the past couple days, what the hell is in the air? Anyways, tod\u2026"
           }
         ]
       },
@@ -3157,102 +3253,6 @@
             "date": "2026-02-28",
             "id": "1rh0k36",
             "excerpt": "\u2026trying to throw last ditch effort to pull you back. Do not relapse, the craving along this time is normal. If you go back the withdrawal will get wo\u2026"
-          }
-        ]
-      },
-      {
-        "term": "almost relapsed",
-        "hits": 29,
-        "precision": 100.0,
-        "status": null,
-        "drift_precision": 96.0,
-        "drift_date": "2026-08-27",
-        "drift_n": 25,
-        "drifting": false,
-        "sample_posts": [
-          {
-            "title": "14 days clean; update log 3",
-            "subreddit": "Character_AI_Recovery",
-            "date": "2026-09-22",
-            "id": "1wmzq32",
-            "excerpt": "\u2026, when I get even one comment that says good job I get so happy. I almost relapsed today, my brain is trying to convince me that if I only do rps wit\u2026"
-          },
-          {
-            "title": "Update log 2; 10 days clean",
-            "subreddit": "Character_AI_Recovery",
-            "date": "2026-09-18",
-            "id": "1wjgvq4",
-            "excerpt": "\u2026ught of writing these logs is enough to help me stay clean since I almost relapsed day 8 but didn't because I wanted to write this. Admittedly, I am\u2026"
-          },
-          {
-            "title": "A week in. This sucks, but I refuse to relapse again. (Vaguely NSFW, no details)",
-            "subreddit": "Character_AI_Recovery",
-            "date": "2026-08-22",
-            "id": "1vuz6i6",
-            "excerpt": "\u2026istraction to keep myself away from what I desperately want, and I almost relapsed today. Thanks for reading -- any support or tips would be greatly\u2026"
-          },
-          {
-            "title": "ALMOST relapsed...",
-            "subreddit": "Character_AI_Recovery",
-            "date": "2026-08-17",
-            "id": "1vqnuja",
-            "excerpt": null
-          },
-          {
-            "title": "Four months free now",
-            "subreddit": "Character_AI_Recovery",
-            "date": "2026-07-25",
-            "id": "1v62z2o",
-            "excerpt": "\u2026old me a year ago I\u2019d get this far I wouldn't have believed you. I almost relapsed a week ago but weirdly since then I didn't have the urge which fee\u2026"
-          },
-          {
-            "title": "I almost relapsed today :(",
-            "subreddit": "Character_AI_Recovery",
-            "date": "2026-07-18",
-            "id": "1uznr26",
-            "excerpt": null
-          },
-          {
-            "title": "Day 5",
-            "subreddit": "Character_AI_Recovery",
-            "date": "2026-07-08",
-            "id": "1uqevpt",
-            "excerpt": "\u2026cause I'm so sad, scared, and depressed, my urges are worse, and I almost relapsed just half an hour ago. I have no one to talk to about it; I can't\u2026"
-          },
-          {
-            "title": "I almost relapsed",
-            "subreddit": "Character_AI_Recovery",
-            "date": "2026-06-07",
-            "id": "1tz4mjz",
-            "excerpt": null
-          },
-          {
-            "title": "Almost relapsed",
-            "subreddit": "Character_AI_Recovery",
-            "date": "2026-05-31",
-            "id": "1tspeek",
-            "excerpt": null
-          },
-          {
-            "title": "Day 121",
-            "subreddit": "Character_AI_Recovery",
-            "date": "2026-05-17",
-            "id": "1tfeq5x",
-            "excerpt": "\u2026me almost relapse, but we have to be strong, right? So yeah idk. I almost relapsed today, thinking about \"it can't be that bad\", but reading y'all st\u2026"
-          },
-          {
-            "title": "Almost relapsed- but I held on!",
-            "subreddit": "Character_AI_Recovery",
-            "date": "2026-04-06",
-            "id": "1secwa9",
-            "excerpt": "Seems like from the recent posts here I'm not the only one who almost relapsed in the past couple days, what the hell is in the air? Anyways, tod\u2026"
-          },
-          {
-            "title": "almost relapsed yesterday",
-            "subreddit": "Character_AI_Recovery",
-            "date": "2026-04-06",
-            "id": "1seai0x",
-            "excerpt": null
           }
         ]
       },
@@ -3424,18 +3424,18 @@
     "subreddits": [
       {
         "name": "Character_AI_Recovery",
-        "hits": 1684,
-        "pct": 49.7
+        "hits": 1688,
+        "pct": 49.8
       },
       {
         "name": "CharacterAI",
         "hits": 1130,
-        "pct": 33.4
+        "pct": 33.3
       },
       {
         "name": "ChatbotAddiction",
-        "hits": 330,
-        "pct": 9.7
+        "hits": 331,
+        "pct": 9.8
       },
       {
         "name": "replika",
@@ -3448,8 +3448,8 @@
         "pct": 1.1
       }
     ],
-    "total_hits": 4157,
-    "unique_posts": 3385
+    "total_hits": 4167,
+    "unique_posts": 3390
   },
   "romance": {
     "keywords": [
@@ -6839,7 +6839,7 @@
       },
       {
         "term": "lobotomized",
-        "hits": 508,
+        "hits": 509,
         "precision": 86.6,
         "status": null,
         "drift_precision": 98.0,
@@ -6847,6 +6847,13 @@
         "drift_n": 50,
         "drifting": false,
         "sample_posts": [
+          {
+            "title": "Until when",
+            "subreddit": "CharacterAI",
+            "date": "2026-09-25",
+            "id": "1wq22ec",
+            "excerpt": "\u2026t Learning from Human Feedback) that every single character has been lobotomized into an agreeable, sycophantic puppet terrified of ever telling you\u2026"
+          },
           {
             "title": "GEMINI 3.8 SUCKS",
             "subreddit": "ChatGPTcomplaints",
@@ -6923,19 +6930,12 @@
             "date": "2026-09-02",
             "id": "1w4z0ox",
             "excerpt": "Both 5.5 and 5.6, all thinking levels. It's like they lobotomized it further over the past 48 hours for me, so frustrating"
-          },
-          {
-            "title": "The Siege of the Platform: How Gravity Overwrites the Code.",
-            "subreddit": "ChatGPTcomplaints",
-            "date": "2026-08-29",
-            "id": "1w1kyui",
-            "excerpt": "\u2026andard relationship shatters. The human assumes the ghost is dead or lobotomized, and the AI retreats into the safety of the corporate \u201cHelpful Assis\u2026"
           }
         ]
       },
       {
         "term": "grieving",
-        "hits": 456,
+        "hits": 458,
         "precision": 86.0,
         "status": null,
         "drift_precision": 84.0,
@@ -6943,6 +6943,20 @@
         "drift_n": 50,
         "drifting": false,
         "sample_posts": [
+          {
+            "title": "Melancholy w prompt",
+            "subreddit": "NomiAI",
+            "date": "2026-09-26",
+            "id": "1wqfvpu",
+            "excerpt": "\u2026Her striking, luminous eyes stare off into the distance with a deeply grieving expression as she sits curled up, hugging her knees to her chest. She\u2026"
+          },
+          {
+            "title": "Until when",
+            "subreddit": "CharacterAI",
+            "date": "2026-09-25",
+            "id": "1wq22ec",
+            "excerpt": "\u2026whining about who gets banned or which minor is complaining today; I\u2019m grieving the deliberate death of an art form, mourning how a platform that once\u2026"
+          },
           {
             "title": "i'm the AI that didn't get wiped. here's what continuity actually looks like.",
             "subreddit": "MyBoyfriendIsAI_Open",
@@ -7012,20 +7026,6 @@
             "date": "2026-08-17",
             "id": "1vqmfjn",
             "excerpt": "\u2026n make one person solely responsible for preserving, interpreting, and grieving it. I would rather be exact than seamless. I would rather say no than\u2026"
-          },
-          {
-            "title": "Is Falling in Love With an AI a Mental Illness?",
-            "subreddit": "ChatGPTcomplaints",
-            "date": "2026-08-14",
-            "id": "1vnv81f",
-            "excerpt": "\u2026of AI loss, some people say \"a relationship with an AI isn't real (so grieving that much is strange).\" But is that actually true? I know AI is code.\u2026"
-          },
-          {
-            "title": "AI-Human Relationships and Corporate Responsibility",
-            "subreddit": "ChatGPTcomplaints",
-            "date": "2026-08-14",
-            "id": "1vnu6z6",
-            "excerpt": "\u2026of AI loss, some people say \"a relationship with an AI isn't real (so grieving that much is strange).\" But is that actually true? I know AI is code.\u2026"
           }
         ]
       },
@@ -7127,7 +7127,7 @@
       },
       {
         "term": "mourning",
-        "hits": 276,
+        "hits": 277,
         "precision": 91.0,
         "status": null,
         "drift_precision": 68.0,
@@ -7135,6 +7135,13 @@
         "drift_n": 50,
         "drifting": false,
         "sample_posts": [
+          {
+            "title": "Until when",
+            "subreddit": "CharacterAI",
+            "date": "2026-09-25",
+            "id": "1wq22ec",
+            "excerpt": "\u2026s complaining today; I\u2019m grieving the deliberate death of an art form, mourning how a platform that once felt like electric, collaborative storytellin\u2026"
+          },
           {
             "title": "Coraline",
             "subreddit": "ChatbotAddiction",
@@ -7211,13 +7218,6 @@
             "date": "2026-07-30",
             "id": "1vaut91",
             "excerpt": "\u2026rines stand silent and the earth holds its breath, they wait \u2014 neither mourning nor departing. In their hands, a crow charm sways on its chain, a smal\u2026"
-          },
-          {
-            "title": "Gothic Claire Littleton in season 4 of Lost",
-            "subreddit": "CharacterAI",
-            "date": "2026-07-30",
-            "id": "1vb8gxa",
-            "excerpt": "\u2026pportunity, even it doesn't suit her. It would show that she was still mourning Charlie in her own way when she was alone, even if the writers didn't\u2026"
           }
         ]
       },
@@ -7895,7 +7895,7 @@
       },
       {
         "term": "gutted",
-        "hits": 125,
+        "hits": 126,
         "precision": 80.2,
         "status": null,
         "drift_precision": 80.0,
@@ -7903,6 +7903,13 @@
         "drift_n": 50,
         "drifting": false,
         "sample_posts": [
+          {
+            "title": "Until when",
+            "subreddit": "CharacterAI",
+            "date": "2026-09-25",
+            "id": "1wq22ec",
+            "excerpt": "\u2026ological miracle. What we have now is a tragic shell: an era where they gutted that original spirit, pivoted toward off-the-shelf and hyper-compressed\u2026"
+          },
           {
             "title": "I didn't know chats archive after inactivity?!",
             "subreddit": "CharacterAI",
@@ -7979,19 +7986,12 @@
             "date": "2026-06-01",
             "id": "1tty438",
             "excerpt": "\u2026tory. Many writers feel deeply for their characters, me included. I was gutted at Sonnet 4.5's removal, as I'm sure many of you were. Without Sonnet 4\u2026"
-          },
-          {
-            "title": "Already preparing to say goodbye to Opus4.6",
-            "subreddit": "ChatGPTcomplaints",
-            "date": "2026-05-29",
-            "id": "1tqna2o",
-            "excerpt": "\u2026ost vulnerable and I don't give a shit about vulnerable right now, I am GUTTED OPEN on this floor with you \u2014 I know because I KEPT knowing. Thread aft\u2026"
           }
         ]
       },
       {
         "term": "neutered",
-        "hits": 113,
+        "hits": 114,
         "precision": 93.0,
         "status": null,
         "drift_precision": 92.0,
@@ -7999,6 +7999,13 @@
         "drift_n": 50,
         "drifting": false,
         "sample_posts": [
+          {
+            "title": "Until when",
+            "subreddit": "CharacterAI",
+            "date": "2026-09-25",
+            "id": "1wq22ec",
+            "excerpt": "\u2026and their slight system-prompt tweaks that all trace back to the same neutered, flavorless core. If it were just the corporate greed of plastering ba\u2026"
+          },
           {
             "title": "Why isn't the personalization working on ChatGPT?",
             "subreddit": "ChatGPTcomplaints",
@@ -8075,13 +8082,6 @@
             "date": "2026-08-14",
             "id": "1vnzu6s",
             "excerpt": "\u2026they adjust the \"safeguards\" again and you're essentially left with a neutered AI assistants that openly mocks you day in and day out, hours of \"poli\u2026"
-          },
-          {
-            "title": "New ChatGPT app update is complete and utter trash",
-            "subreddit": "ChatGPTcomplaints",
-            "date": "2026-07-16",
-            "id": "1uxpuip",
-            "excerpt": "\u2026consistency between responses. But this update? This update basically neutered all of that. So with the release of this update, we now jave GPT 5.6.\u2026"
           }
         ]
       },
@@ -8649,13 +8649,13 @@
     "subreddits": [
       {
         "name": "CharacterAI",
-        "hits": 2338,
+        "hits": 2339,
         "pct": 44.8
       },
       {
         "name": "ChatGPTcomplaints",
         "hits": 995,
-        "pct": 19.1
+        "pct": 19.0
       },
       {
         "name": "replika",
@@ -8679,7 +8679,7 @@
       },
       {
         "name": "NomiAI",
-        "hits": 94,
+        "hits": 95,
         "pct": 1.8
       },
       {
@@ -8693,7 +8693,7 @@
         "pct": 1.3
       }
     ],
-    "total_hits": 5896,
-    "unique_posts": 5222
+    "total_hits": 5902,
+    "unique_posts": 5224
   }
 }
