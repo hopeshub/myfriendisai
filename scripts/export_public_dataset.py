@@ -223,6 +223,30 @@ def _json_bytes(rows, columns, description):
     return (json.dumps(payload, indent=2, sort_keys=False) + "\n").encode("utf-8")
 
 
+def _small_month_phrase(theme_rows, threshold=20, floor_pct=20):
+    """Share of each theme's rows under `threshold` posts, for the README.
+
+    Computed rather than hardcoded: the shares move as the corpus grows (the
+    hand-written "41% of consciousness rows" had drifted to 35% by 2026-09).
+    Themes where fewer than `floor_pct`% of rows are small are omitted.
+    """
+    parts = []
+    for theme in THEMES:
+        rows = [r for r in theme_rows if r["theme"] == theme]
+        if not rows:
+            continue
+        pct = round(100 * sum(r["post_only_count"] < threshold for r in rows) / len(rows))
+        if pct >= floor_pct:
+            parts.append((pct, theme))
+    parts.sort(key=lambda x: (-x[0], THEMES.index(x[1])))
+    if not parts:
+        return "few rows"
+    phrases = [f"{pct}% of the {theme} rows" for pct, theme in parts]
+    if len(phrases) == 1:
+        return phrases[0]
+    return ", ".join(phrases[:-1]) + " and " + phrases[-1]
+
+
 def _write_if_changed(path, content):
     """Write only when the bytes differ, so mtimes stay stable across runs."""
     if path.exists() and path.read_bytes() == content:
@@ -274,8 +298,9 @@ hash matches, so a day on which nothing moved leaves no diff at all. Read it as
 "these numbers date from", not "last checked".
 
 **What is not here.** The site also publishes an *Excluding r/CharacterAI*
-version of every theme line — r/CharacterAI is 60–90% of all post volume, so
-that second view shows the rest of the corpus on its own. It is not part of v1;
+version of every theme line — r/CharacterAI supplied 70–90% of the posts in
+the theme measurement through most of 2023–2025 and roughly 40–65% during
+2026, so that second view shows the rest of the corpus on its own. It is not part of v1;
 this bundle carries the full-scope series only.
 
 ---
@@ -326,9 +351,8 @@ too sparse in the corpus to chart honestly, so those months are omitted here
 exactly as they are omitted from the site. The corpus itself reaches back to
 2017; the theme lines do not.
 
-**Small months.** Clearing that gate does not make a month precise: 41% of the
-consciousness rows and about a third of the therapy and addiction rows have a
-`post_only_count` under 20. `post_only_count` and `eligible_posts` are both on
+**Small months.** Clearing that gate does not make a month precise: {small_months}
+have a `post_only_count` under 20. `post_only_count` and `eligible_posts` are both on
 every row so that you can put an interval on any month rather than take the
 rate at face value.
 
@@ -471,19 +495,19 @@ INDEX_TEMPLATE = """\
   <table>
     <thead><tr><th>File</th><th>Rows</th><th>What it is</th></tr></thead>
     <tbody>
-      <tr><td><a href="monthly_theme_counts.csv">monthly_theme_counts.csv</a> ·
-              <a href="monthly_theme_counts.json">.json</a></td>
+      <tr><td><a href="/dataset/{version}/monthly_theme_counts.csv">monthly_theme_counts.csv</a> ·
+              <a href="/dataset/{version}/monthly_theme_counts.json">.json</a></td>
           <td class="n">{theme_rows}</td>
           <td>Per theme per month: published keyword count, denominator, rate per 1,000.</td></tr>
-      <tr><td><a href="monthly_community_volumes.csv">monthly_community_volumes.csv</a> ·
-              <a href="monthly_community_volumes.json">.json</a></td>
+      <tr><td><a href="/dataset/{version}/monthly_community_volumes.csv">monthly_community_volumes.csv</a> ·
+              <a href="/dataset/{version}/monthly_community_volumes.json">.json</a></td>
           <td class="n">{community_rows}</td>
           <td>Per tracked community per month: post volume, with tier.</td></tr>
-      <tr><td><a href="README.md">README.md</a></td><td class="n">—</td>
+      <tr><td><a href="/dataset/{version}/README.md">README.md</a></td><td class="n">—</td>
           <td>Column-by-column schema, provenance, and how to read the numbers.</td></tr>
-      <tr><td><a href="METHODOLOGY.md">METHODOLOGY.md</a></td><td class="n">—</td>
+      <tr><td><a href="/dataset/{version}/METHODOLOGY.md">METHODOLOGY.md</a></td><td class="n">—</td>
           <td>Standalone statement of scope, method, validation, and limits.</td></tr>
-      <tr><td><a href="manifest.json">manifest.json</a></td><td class="n">—</td>
+      <tr><td><a href="/dataset/{version}/manifest.json">manifest.json</a></td><td class="n">—</td>
           <td>Version, generation timestamp, row counts, SHA-256 hashes.</td></tr>
     </tbody>
   </table>
@@ -493,7 +517,7 @@ INDEX_TEMPLATE = """\
   keyword instrument is precision-first: a hand-coded audit put per-theme recall
   between 0% and 32%. Shape and timing are approximately honest; magnitude
   is an undercount, and it is uneven across themes, so theme heights are not
-  comparable to each other. <a href="METHODOLOGY.md">METHODOLOGY.md</a> and the
+  comparable to each other. <a href="/dataset/{version}/METHODOLOGY.md">METHODOLOGY.md</a> and the
   site's <a href="/about">About page</a> state the limits in full.</p>
   <p class="note">Licensed <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.
   Cite as: Bockley, W. (2026). <em>My Friend Is AI: Reddit discourse tracker for
@@ -556,6 +580,7 @@ def main():
         data_through=data_through,
         theme_rows=f"{len(theme_rows):,}",
         community_rows=f"{len(community_rows):,}",
+        small_months=_small_month_phrase(theme_rows),
     ).encode("utf-8")
 
     contents["index.html"] = INDEX_TEMPLATE.format(

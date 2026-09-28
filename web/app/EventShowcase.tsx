@@ -2,6 +2,10 @@
 // Server component. Renders the curated platform-event spine: each event with
 // its real posts. No client interactivity — the post cards are plain links to
 // Reddit, so this stays out of the JS bundle.
+//
+// Sub-14px text carries a `text-[14px] md:text-[Npx]` class instead of an
+// inline fontSize: the 14px mobile font floor needs a media query (Tailwind md),
+// and this server component can't use useBreakpoint.
 
 import { THEMES, type ThemeId } from "./themes";
 import {
@@ -85,8 +89,8 @@ function EventCard({
       {/* Header: date + title */}
       <div className="flex items-baseline gap-3 flex-wrap">
         <span
+          className="text-[14px] md:text-[12px]"
           style={{
-            fontSize: 12,
             color: "#C2974D",
             textTransform: "uppercase",
             letterSpacing: "0.05em",
@@ -107,10 +111,10 @@ function EventCard({
           return (
             <span
               key={id}
-              className="inline-flex items-center gap-1.5"
-              style={{ fontSize: 12, color: "#9AA7B8" }}
+              className="inline-flex items-center gap-1.5 text-[14px] md:text-[12px]"
+              style={{ color: "#9AA7B8" }}
             >
-              <span aria-hidden style={{ fontSize: 13 }}>
+              <span aria-hidden className="text-[14px] md:text-[13px]">
                 {t?.emoji ?? "•"}
               </span>
               {t?.label ?? id}
@@ -140,7 +144,10 @@ function EventCard({
             eventIndex={spark.eventIndex}
             color={themeMeta(event.themes[0])?.color ?? "#9AA7B8"}
           />
-          <p style={{ fontSize: 11, color: "#7E8B9E", marginTop: 4, lineHeight: 1.5 }}>
+          <p
+            className="text-[14px] md:text-[11px]"
+            style={{ color: "#7E8B9E", marginTop: 4, lineHeight: 1.5 }}
+          >
             <span
               style={{
                 color: themeMeta(event.themes[0])?.color ?? "#9AA7B8",
@@ -171,9 +178,8 @@ function EventCard({
             }}
           >
             <div
-              className="line-clamp-2"
+              className="line-clamp-2 text-[14px] md:text-[13px]"
               style={{
-                fontSize: 13,
                 fontWeight: 600,
                 color: "#F1F4F8",
                 lineHeight: 1.4,
@@ -182,9 +188,8 @@ function EventCard({
               {p.title}
             </div>
             <p
-              className="font-display line-clamp-4"
+              className="font-display line-clamp-4 text-[14px] md:text-[13px]"
               style={{
-                fontSize: 13,
                 lineHeight: 1.6,
                 color: "#9AA7B8",
                 marginTop: 8,
@@ -194,8 +199,8 @@ function EventCard({
               &ldquo;{p.excerpt}&rdquo;
             </p>
             <div
+              className="text-[14px] md:text-[11px]"
               style={{
-                fontSize: 11,
                 color: "#7E8B9E",
                 marginTop: 10,
                 display: "flex",

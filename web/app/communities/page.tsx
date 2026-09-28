@@ -16,11 +16,15 @@ export const metadata: Metadata = {
   title: "Communities",
   description: `Browse ${communityCount} Reddit communities tracked for AI companionship trends — sortable by subscribers, posts per day, and engagement metrics.`,
   alternates: { canonical: "/communities" },
-  // Repeat the site card image: an openGraph/twitter block here replaces the
-  // inherited one wholesale, so without this the route ships no image.
+  // Repeat the card image + url/siteName/type: an openGraph/twitter block here replaces the
+  // inherited one wholesale, so without this the route ships none of them.
   openGraph: {
     title: "Communities — My Friend Is AI",
     description: COMMUNITIES_OG_DESCRIPTION,
+    url: "/communities",
+    siteName: "My Friend Is AI",
+    type: "website",
+    locale: "en_US",
     images: ["/opengraph-image"],
   },
   twitter: {

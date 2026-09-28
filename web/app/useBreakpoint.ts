@@ -20,10 +20,16 @@ export function useBreakpoint(): {
   useEffect(() => {
     function update() {
       const w = window.innerWidth;
-      setState({
-        bp: w < 640 ? "mobile" : w < 1024 ? "tablet" : "desktop",
-        isMobileStrip: w <= 768,
-      });
+      const bp: Breakpoint = w < 640 ? "mobile" : w < 1024 ? "tablet" : "desktop";
+      const isMobileStrip = w <= 768;
+      // Return the previous object when nothing changed: resize fires on every
+      // pixel of a drag and (on mobile Safari) whenever the URL bar collapses
+      // during scroll — a fresh object each time would re-render every chart.
+      setState((prev) =>
+        prev.bp === bp && prev.isMobileStrip === isMobileStrip
+          ? prev
+          : { bp, isMobileStrip },
+      );
     }
     update();
     window.addEventListener("resize", update);

@@ -2,7 +2,8 @@
 // A tiny inline trend line for the Communities table — one community's monthly
 // post volume, normalized to its own min/max so the shape stays readable
 // whatever the community's size. Direction-only: read the shape, not the
-// height. Plain SVG, not Recharts — 31 of these in one table must stay light.
+// height. Plain SVG, not Recharts — the table renders one per live community,
+// so it must stay light.
 //
 // The series starts at the community's first active month: the zeros before a
 // community was founded would otherwise draw a long flat line and a cliff.

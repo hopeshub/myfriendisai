@@ -51,9 +51,11 @@ export const textColor = {
 /** The reading measure — max line length (px) for all running text. */
 export const measure = 680;
 
-/** Small uppercase "eyebrow" label that sits above a section heading. */
+/** Small uppercase "eyebrow" label that sits above a section heading.
+ *  Size comes from the `--eyebrow-size` CSS variable (globals.css): fontSize.xs
+ *  (12px) on desktop, 14px at ≤768px to hold the mobile font floor. */
 export const sectionEyebrow: CSSProperties = {
-  fontSize: fontSize.xs,
+  fontSize: `var(--eyebrow-size, ${fontSize.xs}px)`,
   fontWeight: 500,
   textTransform: "uppercase",
   letterSpacing: "0.05em",

@@ -95,13 +95,19 @@ if [ "$free_bytes" -lt "$need_bytes" ]; then
     # restic temp packs still use the internal disk, so require SCRATCH_GIB
     # free there and DB-size + margin free on T9.
     t9_free_bytes=$(( $(df -k "$T9_STAGING_DIR" 2>/dev/null | awk 'NR==2 {print $4}' || echo 0) * 1024 ))
-    if [ -d "$T9_STAGING_DIR" ] \
+    # Probe with a real write: macOS privacy controls (TCC) can mount T9 yet
+    # deny this process access ("Operation not permitted"), which -d/-w miss.
+    t9_writable=0
+    if touch "$T9_STAGING_DIR/.write-probe" 2>/dev/null; then
+        rm -f "$T9_STAGING_DIR/.write-probe"; t9_writable=1
+    fi
+    if [ -d "$T9_STAGING_DIR" ] && [ "$t9_writable" -eq 1 ] \
         && [ "$t9_free_bytes" -gt $(( db_bytes + 2 * 1024 * 1024 * 1024 )) ] \
         && [ "$free_bytes" -gt $(( SCRATCH_GIB * 1024 * 1024 * 1024 )) ]; then
         STAGING="$T9_STAGING_DIR/tracker-staging.db"
         echo "[$(date)] Internal disk short (need $(( need_bytes / 1024**3 )) GiB, have $(( free_bytes / 1024**3 )) GiB) — staging on T9 instead"
     else
-        fail "insufficient disk: need $(( need_bytes / 1024**3 )) GiB (DB $(( db_bytes / 1024**3 )) GiB + ${SCRATCH_GIB} GiB restic scratch), have $(( free_bytes / 1024**3 )) GiB free, and T9 fallback unavailable"
+        fail "insufficient disk: need $(( need_bytes / 1024**3 )) GiB (DB $(( db_bytes / 1024**3 )) GiB + ${SCRATCH_GIB} GiB restic scratch), have $(( free_bytes / 1024**3 )) GiB free, and T9 fallback unavailable (absent, full, or not writable — check System Settings > Privacy & Security for removable-volume access)"
     fi
 else
     echo "[$(date)] Disk precheck OK — need $(( need_bytes / 1024**3 )) GiB, have $(( free_bytes / 1024**3 )) GiB free"

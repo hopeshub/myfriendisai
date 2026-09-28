@@ -50,6 +50,7 @@ PROJECT_ROOT = Path(__file__).parent.parent
 sys.path.insert(0, str(PROJECT_ROOT))
 
 from src.config import load_keyword_communities, load_keywords  # noqa: E402
+from src.db.operations import EXCLUDED_AUTHORS, measurable_post_where  # noqa: E402
 
 DB_PATH = PROJECT_ROOT / "data" / "tracker.db"
 RESULTS_DIR = PROJECT_ROOT / "analysis" / "keyword_pipeline" / "results"
@@ -86,6 +87,7 @@ def cmd_build(args):
 
     T1_T3 = [c["subreddit"] for c in load_keyword_communities()]
     sub_ph = ",".join("?" * len(T1_T3))
+    ea_ph = ",".join("?" * len(EXCLUDED_AUTHORS))
 
     # Iterate all keywords from current config
     keyword_categories = load_keywords()
@@ -104,9 +106,15 @@ def cmd_build(args):
                            JOIN posts p ON p.id = t.post_id
                            WHERE t.matched_term = ? AND t.category = ?
                              AND t.source='post' AND p.subreddit IN ({sub_ph})
+                             -- Sample the published population: measurable
+                             -- posts, no EXCLUDED_AUTHORS (the 2026-09 cycle
+                             -- drew 10/50 `nsfw content` hits from an
+                             -- excluded account's template).
+                             AND {measurable_post_where('p')}
+                             AND COALESCE(p.author, '') NOT IN ({ea_ph})
                            ORDER BY RANDOM()
                            LIMIT ?""",
-                        (term, theme, *T1_T3, n_per_keyword),
+                        (term, theme, *T1_T3, *EXCLUDED_AUTHORS, n_per_keyword),
                     ).fetchall()
                 else:
                     rows = conn.execute(

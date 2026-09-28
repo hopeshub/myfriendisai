@@ -18,11 +18,9 @@ import { measure } from "./styles";
 import { usePrefersReducedMotion } from "@/lib/usePrefersReducedMotion";
 
 // ── §5 ambient-cluster chart ────────────────────────────────────────────────
-// Two stacked panels, modeled on §1. Top: r/antiAI + r/aiwars — the two
-// giants, within a couple percent of each other, both compounding fast since
-// mid-2024. Bottom: a 5-band stacked composition of mid-tier subs that fills
-// in around them — the cluster's organizing infrastructure forming room by
-// room. r/trueantiAI and r/ProAI (both under 200/mo) are too small to
+// Two stacked panels, modeled on §1. Top: r/aiwars alone — the all-sides
+// debate floor. Bottom: a 6-band stacked composition of the partisan rooms,
+// r/antiAI (the largest band since Aug 2025) at the base. r/trueantiAI and r/ProAI (both under 200/mo) are too small to
 // register as bands and are noted in the caption.
 //
 // Coloring is by sub identity (the §1 palette family), NOT by valence — the

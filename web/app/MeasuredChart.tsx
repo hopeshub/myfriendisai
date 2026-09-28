@@ -39,8 +39,18 @@ export default function MeasuredChart({
   useLayoutEffect(() => {
     const el = ref.current;
     if (!el) return;
-    const measure = () =>
-      setDims({ width: el.clientWidth, height: el.clientHeight });
+    // Keep the previous object when the size is unchanged — ResizeObserver
+    // fires once on observe() (right after the synchronous measure below), and
+    // a fresh object would force a redundant full re-render of the chart.
+    const measure = () => {
+      const width = el.clientWidth;
+      const height = el.clientHeight;
+      setDims((prev) =>
+        prev.width === width && prev.height === height
+          ? prev
+          : { width, height },
+      );
+    };
     measure();
     const observer = new ResizeObserver(measure);
     observer.observe(el);

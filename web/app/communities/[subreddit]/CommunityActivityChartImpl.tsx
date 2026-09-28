@@ -15,9 +15,9 @@ import { usePrefersReducedMotion } from "@/lib/usePrefersReducedMotion";
 
 // ── Community activity chart ─────────────────────────────────────────────────
 // The full-size version of the Communities-table sparkline: one community's
-// monthly post volume, Jan 2023 to the last complete month. This is the
-// longest-range data on the detail page — the daily-snapshot metric charts
-// below it only reach back ~2 months.
+// monthly post volume, Jan 2023 to the last complete month. It is counted
+// from the posts themselves; the metric charts below it are monthly means of
+// the daily snapshots, a separate series with its own start date.
 //
 // Months before the community's first post are drawn as gaps rather than as
 // zeros, so the line starts where the community does.

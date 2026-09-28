@@ -3,8 +3,13 @@ import Link from "next/link";
 
 // A bare segment — the root layout's title template adds the site suffix, the
 // same way every other page composes its title.
+// The root layout sets `robots: index, follow` and `canonical: "/"`; without
+// these overrides every 404 inherited both, emitting a second robots tag that
+// contradicts Next's own `noindex` and a canonical pointing at the homepage.
 export const metadata: Metadata = {
   title: "Page not found",
+  robots: { index: false, follow: true },
+  alternates: { canonical: null },
 };
 
 export default function NotFound() {

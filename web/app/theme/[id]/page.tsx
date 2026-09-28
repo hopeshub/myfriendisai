@@ -90,13 +90,25 @@ function pickSamplePosts(
   return out;
 }
 
-/** Wrap the first occurrence of `term` in `text` in the theme colour. */
+/**
+ * Index of the first whole-word, case-insensitive occurrence of `term` in
+ * `text`, or -1. Mirrors the tagger (src/keyword_matching.py wraps each term
+ * in \b…\b), so "relapse" is not found inside "relapsed" — a plain substring
+ * search would highlight a title word that is not what the tagger matched.
+ */
+function findTerm(text: string, term: string): number {
+  const escaped = term.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const m = new RegExp(`\\b${escaped}\\b`, "i").exec(text);
+  return m ? m.index : -1;
+}
+
+/** Wrap the first whole-word occurrence of `term` in `text` in the theme colour. */
 function highlight(
   text: string,
   term: string,
   color: string,
 ): React.ReactNode {
-  const i = text.toLowerCase().indexOf(term.toLowerCase());
+  const i = findTerm(text, term);
   if (i < 0) return text;
   return (
     <>
@@ -129,11 +141,15 @@ export async function generateMetadata({
     title: theme.label,
     description,
     alternates: { canonical: `/theme/${theme.id}` },
-    // Repeat the site card image: an openGraph/twitter block here replaces
-    // the inherited one wholesale, so without this the route ships no image.
+    // Repeat the card image + url/siteName/type: an openGraph/twitter block here replaces
+    // the inherited one wholesale, so without this the route ships none of them.
     openGraph: {
       title: `${theme.label} — My Friend Is AI`,
       description,
+      url: `/theme/${theme.id}`,
+      siteName: "My Friend Is AI",
+      type: "website",
+      locale: "en_US",
       images: ["/opengraph-image"],
     },
     twitter: {
@@ -279,8 +295,14 @@ export default async function ThemePage({
                 >
                   <span style={{ color: "#C8D0DC" }}>{kw.term}</span>
                   {kw.precision != null && (
-                    <span style={{ color: "#7E8B9E" }}>
+                    <span
+                      title="Share of matches on-theme at the keyword's last full validation"
+                      style={{ color: "#7E8B9E" }}
+                    >
                       {Math.round(kw.precision)}%
+                      {/* Name the source when a second, lower figure follows,
+                          so the two percentages don't read as a contradiction. */}
+                      {kw.drifting && kw.drift_precision != null && " at validation"}
                     </span>
                   )}
                   {kw.status && (
@@ -307,7 +329,7 @@ export default async function ThemePage({
                         fontSize: fontSize.xs,
                       }}
                     >
-                      · drifting, {Math.round(kw.drift_precision)}% on re-check
+                      · drifting &mdash; {Math.round(kw.drift_precision)}% on re-check
                     </span>
                   )}
                 </span>
@@ -343,7 +365,7 @@ export default async function ThemePage({
             }}
           >
             Precision figures come from each keyword&apos;s last full
-            validation (May 2026). A monthly re-check re-reads a sample of
+            validation (all completed by May 2026). A monthly re-check re-reads a sample of
             each keyword&apos;s recent matches; where the latest re-check fell
             below 60% the keyword is marked{" "}
             <em style={{ color: "#D4A862" }}>drifting</em> with that figure,
@@ -402,9 +424,7 @@ export default async function ThemePage({
               // Test the *truncated* title — if truncation dropped the matched
               // term, fall through to the excerpt so the post still shows its
               // highlighted keyword rather than rendering with none.
-              const inTitle = displayTitle
-                .toLowerCase()
-                .includes(sp.matchedTerm.toLowerCase());
+              const inTitle = findTerm(displayTitle, sp.matchedTerm) >= 0;
               return (
                 <li
                   key={sp.id}

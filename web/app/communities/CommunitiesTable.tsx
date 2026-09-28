@@ -52,7 +52,7 @@ const TIER_COLORS: Record<number, string> = {
 function TierBadge({ tier }: { tier: number | null }) {
   if (tier == null) return null;
   return (
-    <span className={`inline-flex text-xs font-medium px-2 py-0.5 rounded-full ${TIER_COLORS[tier] ?? "bg-slate-400/10 text-slate-300"}`}>
+    <span className={`inline-flex text-sm md:text-xs font-medium px-2 py-0.5 rounded-full ${TIER_COLORS[tier] ?? "bg-slate-400/10 text-slate-300"}`}>
       {TIER_LABELS[tier] ?? `Tier ${tier}`}
     </span>
   );
@@ -78,10 +78,10 @@ function SortButton({
           ? `Sort by ${label} — currently ${current.asc ? "ascending" : "descending"}`
           : `Sort by ${label}`
       }
-      className={`flex items-center gap-1 ml-auto py-2 min-h-11 sm:min-h-0 text-sm sm:text-xs hover:text-[#C8D0DC] transition-colors ${active ? "text-[#F8FAFC]" : "text-[#7E8B9E]"}`}
+      className={`flex items-center gap-1 ml-auto py-2 min-h-11 md:min-h-0 text-sm md:text-xs hover:text-[#C8D0DC] transition-colors ${active ? "text-[#F8FAFC]" : "text-[#7E8B9E]"}`}
     >
       {label}
-      <span aria-hidden className="text-[11px]">
+      <span aria-hidden className="text-sm md:text-[11px]">
         {active ? (current.asc ? "↑" : "↓") : "↕"}
       </span>
     </button>
@@ -153,7 +153,7 @@ export default function CommunitiesTable({
           <button
             key={cat}
             onClick={() => setCategoryFilter(cat)}
-            className={`text-sm sm:text-xs px-3 py-2 sm:py-1 min-h-11 sm:min-h-0 rounded-full border transition-colors ${
+            className={`text-sm md:text-xs px-3 py-2 md:py-1 min-h-11 md:min-h-0 rounded-full border transition-colors ${
               categoryFilter === cat
                 ? "bg-[#1A1D27] text-[#F8FAFC] border-[#2A2D3A]"
                 : "border-[#2A2D3A] text-[#9AA7B8] hover:border-[#475569]"
@@ -167,7 +167,7 @@ export default function CommunitiesTable({
       <div className="overflow-x-auto">
         <table className="w-full text-left">
           <thead>
-            <tr className="text-xs uppercase tracking-wide border-b border-[#2A2D3A]">
+            <tr className="text-sm md:text-xs uppercase tracking-wide border-b border-[#2A2D3A]">
               <th className="pb-3 pr-4 font-medium text-[#7E8B9E]">Community</th>
               <th className="pb-3 pr-4 font-medium text-[#7E8B9E] hidden sm:table-cell">Activity</th>
               <th className="pb-3 pr-4 font-medium text-[#7E8B9E] hidden sm:table-cell">Tier</th>
@@ -199,7 +199,7 @@ export default function CommunitiesTable({
                     r/{r.sub.subreddit}
                   </Link>
                   {r.sub.category && (
-                    <div className="text-xs text-[#7E8B9E] mt-0.5">{r.sub.category}</div>
+                    <div className="text-sm md:text-xs text-[#7E8B9E] mt-0.5">{r.sub.category}</div>
                   )}
                 </td>
                 <td className="py-3 pr-4 hidden sm:table-cell">
@@ -239,7 +239,7 @@ export default function CommunitiesTable({
         <p className="text-sm text-[#9AA7B8] py-8 text-center">No communities in this category.</p>
       )}
 
-      <p className="mt-8 text-xs text-[#7E8B9E]">
+      <p className="mt-8 text-sm md:text-xs text-[#7E8B9E]">
         <strong>Activity</strong>{" "}— monthly post volume, from each
         community&apos;s first month to the last complete one; each sparkline
         is on its own scale (read the shape, not the height).{" "}

@@ -7,6 +7,7 @@ import {
   getCommunityMetrics,
   getSnapshotsForSubreddit,
 } from "@/lib/data";
+import { buildCommunityChartData } from "@/lib/communityCharts";
 import Charts from "./Charts";
 import CommunityActivityChart from "./CommunityActivityChart";
 
@@ -35,11 +36,15 @@ export async function generateMetadata({
     title: `r/${subreddit}`,
     description: `Engagement trends for r/${subreddit}${tierLabel ? ` (${tierLabel})` : ""} — subscribers, posts per day, and comment activity over time.`,
     alternates: { canonical: `/communities/${subreddit}` },
-    // Repeat the site card image: an openGraph/twitter block here replaces
-    // the inherited one wholesale, so without this the route ships no image.
+    // Repeat the card image + url/siteName/type: an openGraph/twitter block here replaces
+    // the inherited one wholesale, so without this the route ships none of them.
     openGraph: {
       title: `r/${subreddit} — My Friend Is AI`,
       description: ogDescription,
+      url: `/communities/${subreddit}`,
+      siteName: "My Friend Is AI",
+      type: "website",
+      locale: "en_US",
       images: ["/opengraph-image"],
     },
     twitter: {
@@ -68,9 +73,17 @@ export default async function SubredditPage({
 
   // The tier label usually ends with the category name ("Tier 1 — Primary
   // Companionship" vs "Primary Companionship"), so only add the category when
-  // it actually says something the tier label doesn't.
+  // it actually says something the tier label doesn't. T4 categories carry
+  // their own "Ambient — " prefix ("Ambient — Anti-AI"), which the tier label
+  // already says, so drop that prefix rather than print "Ambient" twice.
   const tierLabel = meta.tier != null ? TIER_LABELS[meta.tier] : "";
-  const category = meta.category ?? "";
+  const rawCategory = meta.category ?? "";
+  const [categoryHead, ...categoryRest] = rawCategory.split(" — ");
+  const category =
+    categoryRest.length > 0 &&
+    tierLabel.toLowerCase().includes(categoryHead.toLowerCase())
+      ? categoryRest.join(" — ")
+      : rawCategory;
   const subtitle =
     category && !tierLabel.toLowerCase().includes(category.toLowerCase())
       ? [tierLabel, category].filter(Boolean).join(" · ")
@@ -78,10 +91,11 @@ export default async function SubredditPage({
 
   const activity = getCommunityActivity();
   const activitySeries = activity.activity[subreddit] ?? [];
-  // Loaded server-side and passed to Charts as a prop — the snapshot data is
-  // baked into this statically-generated page, so there's no client-side
-  // fetch (and no 6.5 MB API parse) on every visit.
-  const snapshots = getSnapshotsForSubreddit(subreddit);
+  // Loaded and aggregated server-side, then passed to Charts as a prop. Only
+  // the monthly means and latest-known card values the client renders are
+  // baked into this statically-generated page — not the ~1,300 daily rows
+  // (which made each page ~400 KB) — and there's no client-side fetch.
+  const chartData = buildCommunityChartData(getSnapshotsForSubreddit(subreddit));
   const metrics = getCommunityMetrics();
 
   return (
@@ -126,7 +140,7 @@ export default async function SubredditPage({
       </section>
 
       <Charts
-        snapshots={snapshots}
+        data={chartData}
         postsPerDay={metrics.postsPerDay7d[subreddit] ?? null}
         subscribersAsOf={metrics.subscribersAsOf[subreddit] ?? null}
       />

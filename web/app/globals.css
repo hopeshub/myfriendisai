@@ -6,6 +6,16 @@
   --muted: #9AA7B8;
   --border: #2A2D3A;
   --card: #1A1D27;
+  /* Section eyebrow size (styles.ts `sectionEyebrow`): 12px on desktop,
+     raised to the 14px mobile floor below. A variable, so the inline style
+     object works unchanged in every server component that spreads it. */
+  --eyebrow-size: 12px;
+}
+
+@media (max-width: 768px) {
+  :root {
+    --eyebrow-size: 14px;
+  }
 }
 
 @theme inline {
@@ -61,12 +71,12 @@ a:focus-visible {
   border-radius: 4px;
 }
 
-/* Mobile: prevent horizontal page scroll, enforce font floor */
+/* Mobile: prevent horizontal page scroll. (The 14px mobile font floor is
+   applied per component, not here.) */
 @media (max-width: 768px) {
   html, body {
     overflow-x: hidden;
   }
-
 }
 
 /* Mobile card scroll strip */

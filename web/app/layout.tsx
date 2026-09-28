@@ -145,19 +145,19 @@ export default function RootLayout({
             <nav aria-label="Primary" className="flex gap-6 text-sm text-muted">
               <Link
                 href="/#themes"
-                className="hover:text-foreground transition-colors"
+                className="inline-flex items-center min-h-11 md:min-h-0 hover:text-foreground transition-colors"
               >
                 Themes
               </Link>
               <Link
                 href="/communities"
-                className="hover:text-foreground transition-colors"
+                className="inline-flex items-center min-h-11 md:min-h-0 hover:text-foreground transition-colors"
               >
                 Communities
               </Link>
               <Link
                 href="/about"
-                className="hover:text-foreground transition-colors"
+                className="inline-flex items-center min-h-11 md:min-h-0 hover:text-foreground transition-colors"
               >
                 About
               </Link>
@@ -165,7 +165,7 @@ export default function RootLayout({
                 href="https://github.com/hopeshub/myfriendisai"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="whitespace-nowrap hover:text-foreground transition-colors"
+                className="inline-flex items-center min-h-11 md:min-h-0 whitespace-nowrap hover:text-foreground transition-colors"
               >
                 GitHub ↗
               </a>
@@ -186,23 +186,23 @@ export default function RootLayout({
               </span>
             </div>
             <nav aria-label="Footer" className="flex gap-5">
-              <Link href="/about" className="hover:text-foreground transition-colors">
+              <Link href="/about" className="inline-flex items-center min-h-11 md:min-h-0 hover:text-foreground transition-colors">
                 About
               </Link>
               <Link
                 href="/communities"
-                className="hover:text-foreground transition-colors"
+                className="inline-flex items-center min-h-11 md:min-h-0 hover:text-foreground transition-colors"
               >
                 Communities
               </Link>
-              <a href="/dataset/v1/" className="hover:text-foreground transition-colors">
+              <a href="/dataset/v1/" className="inline-flex items-center min-h-11 md:min-h-0 hover:text-foreground transition-colors">
                 Data
               </a>
               <a
                 href="https://github.com/hopeshub/myfriendisai"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hover:text-foreground transition-colors"
+                className="inline-flex items-center min-h-11 md:min-h-0 hover:text-foreground transition-colors"
               >
                 GitHub
               </a>

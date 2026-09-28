@@ -48,7 +48,9 @@ export default function TrendsExplorer({ themeData, themeDataExclCai }: Props) {
           toggling r/CharacterAI is a core methodological choice, not a
           cosmetic option. */}
       <div className="flex items-center gap-2.5 mb-2 flex-wrap">
-        <span style={{ fontSize: 12, color: "#7E8B9E" }}>Communities:</span>
+        <span style={{ fontSize: isMobileStrip ? 14 : 12, color: "#7E8B9E" }}>
+          Communities:
+        </span>
         <div
           role="group"
           aria-label="Community scope"
@@ -70,7 +72,7 @@ export default function TrendsExplorer({ themeData, themeDataExclCai }: Props) {
               key={s}
               onClick={() => setScope(s)}
               aria-pressed={scope === s}
-              className="min-h-11 sm:min-h-0 px-3 py-1.5 text-sm sm:text-xs font-medium rounded-md transition-colors"
+              className="min-h-11 md:min-h-0 px-3 py-1.5 text-sm md:text-xs font-medium rounded-md transition-colors"
               style={{
                 backgroundColor: scope === s ? "#252834" : "transparent",
                 color: scope === s ? "#F1F4F8" : "#9AA7B8",
@@ -81,7 +83,10 @@ export default function TrendsExplorer({ themeData, themeDataExclCai }: Props) {
           ))}
         </div>
       </div>
-      <p className="mb-3" style={{ fontSize: 12, color: "#7E8B9E", maxWidth: measure }}>
+      <p
+        className="mb-3"
+        style={{ fontSize: isMobileStrip ? 14 : 12, color: "#7E8B9E", maxWidth: measure }}
+      >
         {scope === "all"
           ? "r/CharacterAI is the largest community in this set — 75–90% of every post counted here through 2025, and around half today — and it rises and falls on its own platform lifecycle. Switch it off to see each rate within the dedicated companionship communities."
           : "r/CharacterAI removed from both the keyword counts and the denominator. These are the rates within the dedicated companionship and recovery communities — the rises hold, and several are steeper here. With fewer posts to count, the therapy and addiction lines start later in this view: the earlier months exist but are too thin to chart."}
@@ -95,7 +100,7 @@ export default function TrendsExplorer({ themeData, themeDataExclCai }: Props) {
             onClick={() => setTimeRange(range)}
             aria-pressed={timeRange === range}
             aria-label={`Show ${range === "ALL" ? "all time" : `last ${range}`}`}
-            className="flex-1 sm:flex-none h-11 sm:h-auto px-3 py-1 text-sm sm:text-xs font-medium rounded-md transition-colors"
+            className="flex-1 sm:flex-none h-11 md:h-auto px-3 py-1 text-sm md:text-xs font-medium rounded-md transition-colors"
             style={{
               backgroundColor: timeRange === range ? "#1A1D27" : "transparent",
               color: timeRange === range ? "#F1F4F8" : "#9AA7B8",
@@ -121,7 +126,12 @@ export default function TrendsExplorer({ themeData, themeDataExclCai }: Props) {
           keyword detection sensitivity differs by theme. Each panel begins at
           its own coverage-start date, and is a link to that theme&apos;s page.
         </p>
-        <TrendAtlas themeData={activeData} timeRange={timeRange} bp={bp} />
+        <TrendAtlas
+          themeData={activeData}
+          timeRange={timeRange}
+          bp={bp}
+          isMobileStrip={isMobileStrip}
+        />
       </section>
 
       {/* Methodology + how-to-read — a quiet caption: short prose lead-in

@@ -13,7 +13,8 @@ import {
 } from "recharts";
 import MeasuredChart from "@/app/MeasuredChart";
 import type { CaiPoint, CompositionPoint } from "./themeData";
-import { measure } from "./styles";
+import { fontSize, measure } from "./styles";
+import { useBreakpoint } from "./useBreakpoint";
 import { usePrefersReducedMotion } from "@/lib/usePrefersReducedMotion";
 
 // ── §1 post-volume chart ─────────────────────────────────────────────────────
@@ -95,6 +96,11 @@ export default function PostVolumeChart({
   const reducedMotion = usePrefersReducedMotion();
   const animate = !reducedMotion;
 
+  // ≤768px: lift every non-axis label to the 14px mobile font floor and give
+  // the legend buttons 44px touch targets. Desktop sizes are unchanged.
+  const mobile = useBreakpoint().isMobileStrip === true;
+  const fs = (desktop: number) => (mobile ? fontSize.base : desktop);
+
   // Click a band (or its legend entry) to isolate it; click again to clear.
   const [selected, setSelected] = useState<BandKey | null>(null);
   const toggle = (k: BandKey) => setSelected((s) => (s === k ? null : k));
@@ -158,7 +164,7 @@ export default function PostVolumeChart({
           x={props.x ?? 0}
           y={Number(props.y ?? 0) + 12}
           textAnchor="middle"
-          fontSize={10}
+          fontSize={fs(10)}
           fontWeight={700}
           fill="#F8FAFC"
           stroke="#0F1117"
@@ -178,7 +184,7 @@ export default function PostVolumeChart({
       <div style={{ fontSize: 14, fontWeight: 600, color: "#F1F4F8" }}>
         r/CharacterAI
       </div>
-      <div style={{ fontSize: 12, color: "#7E8B9E", marginBottom: 6 }}>
+      <div style={{ fontSize: fs(12), color: "#7E8B9E", marginBottom: 6 }}>
         The mass-market giant — boomed to nearly 34k posts a month, then receded.
       </div>
       <MeasuredChart
@@ -225,7 +231,7 @@ export default function PostVolumeChart({
                   return null;
                 }
                 return (
-                  <div style={{ ...tooltipBox, whiteSpace: "nowrap" }}>
+                  <div style={{ ...tooltipBox, fontSize: fs(11), whiteSpace: "nowrap" }}>
                     <span style={{ color: "#9AA7B8" }}>
                       {fmtMonth(label as string)}
                     </span>
@@ -261,7 +267,7 @@ export default function PostVolumeChart({
                   value: String(e.n),
                   position: "top",
                   fill: "#D4A862",
-                  fontSize: 11,
+                  fontSize: fs(11),
                   fontWeight: 700,
                 }}
               />
@@ -271,7 +277,7 @@ export default function PostVolumeChart({
       </MeasuredChart>
       <div
         style={{
-          fontSize: 11,
+          fontSize: fs(11),
           color: "#7E8B9E",
           marginTop: 6,
           display: "flex",
@@ -295,10 +301,10 @@ export default function PostVolumeChart({
                 display: "inline-flex",
                 alignItems: "center",
                 justifyContent: "center",
-                width: 15,
-                height: 15,
+                width: mobile ? 20 : 15,
+                height: mobile ? 20 : 15,
                 borderRadius: 999,
-                fontSize: 10,
+                fontSize: fs(10),
                 fontWeight: 700,
                 color: "#0F1117",
                 backgroundColor: "#C2974D",
@@ -323,7 +329,7 @@ export default function PostVolumeChart({
       >
         Every other community
       </div>
-      <div style={{ fontSize: 12, color: "#7E8B9E", marginBottom: 6 }}>
+      <div style={{ fontSize: fs(12), color: "#7E8B9E", marginBottom: 6 }}>
         A steady floor &mdash; but watch r/replika give way to a new generation.
       </div>
       <MeasuredChart
@@ -366,7 +372,7 @@ export default function PostVolumeChart({
                   0,
                 );
                 return (
-                  <div style={tooltipBox}>
+                  <div style={{ ...tooltipBox, fontSize: fs(11) }}>
                     <div style={{ color: "#9AA7B8", marginBottom: 4 }}>
                       {fmtMonth(label as string)}
                     </div>
@@ -482,7 +488,8 @@ export default function PostVolumeChart({
                 display: "inline-flex",
                 alignItems: "center",
                 gap: 5,
-                fontSize: 11,
+                fontSize: fs(11),
+                minHeight: mobile ? 44 : undefined,
                 color: "#9AA7B8",
                 background: "none",
                 border: "none",
@@ -512,7 +519,7 @@ export default function PostVolumeChart({
           style={{
             marginTop: 2,
             textAlign: "center",
-            fontSize: 11,
+            fontSize: fs(11),
             color: "#7E8B9E",
           }}
         >
@@ -526,8 +533,13 @@ export default function PostVolumeChart({
               color: "#9AA7B8",
               textDecoration: "underline",
               cursor: "pointer",
-              fontSize: 11,
+              fontSize: fs(11),
               padding: 0,
+              ...(mobile && {
+                display: "inline-flex",
+                alignItems: "center",
+                minHeight: 44,
+              }),
             }}
           >
             show all
@@ -537,7 +549,7 @@ export default function PostVolumeChart({
 
       <p
         style={{
-          fontSize: 11,
+          fontSize: fs(11),
           color: "#7E8B9E",
           marginTop: 8,
           textAlign: "center",

@@ -98,9 +98,14 @@ def make_excerpt(term: str, selftext, width: int = 150) -> "str | None":
     body = " ".join(body.split())
     if not body:
         return None
-    idx = body.lower().find(term.lower())
-    if idx == -1:
+    # Whole-word, case-insensitive — the same \b…\b rule the tagger uses
+    # (src/keyword_matching.py), so the excerpt centres on the real match
+    # rather than on the term embedded in a longer word ("relapse" in
+    # "relapsed").
+    m = re.search(r"\b" + re.escape(term) + r"\b", body, re.IGNORECASE)
+    if m is None:
         return None
+    idx = m.start()
     pad = max(0, (width - len(term)) // 2)
     start = max(0, idx - pad)
     end = min(len(body), idx + len(term) + pad)

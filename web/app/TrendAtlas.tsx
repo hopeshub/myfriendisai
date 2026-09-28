@@ -73,13 +73,15 @@ function monthlySeries(
 // and every panel update together, so within any view they stay consistent.
 function EventLegend({
   events,
-  bp,
+  isMobileStrip,
 }: {
   events: NumberedEvent[];
-  bp: Breakpoint;
+  isMobileStrip: boolean;
 }) {
   const hasMethodology = events.some((e) => e.methodology);
-  const fs = bp === "mobile" ? 14 : 12;
+  // ≤768px: 14px mobile font floor.
+  const fs = isMobileStrip ? 14 : 12;
+  const smallFs = isMobileStrip ? 14 : 11;
   return (
     <div style={{ marginBottom: 16 }}>
       <div
@@ -87,7 +89,7 @@ function EventLegend({
       >
         <span
           style={{
-            fontSize: 11,
+            fontSize: smallFs,
             color: "#7E8B9E",
             textTransform: "uppercase",
             letterSpacing: "0.05em",
@@ -106,10 +108,10 @@ function EventLegend({
                 display: "inline-flex",
                 alignItems: "center",
                 justifyContent: "center",
-                width: 16,
-                height: 16,
+                width: isMobileStrip ? 20 : 16,
+                height: isMobileStrip ? 20 : 16,
                 borderRadius: 999,
-                fontSize: 11,
+                fontSize: smallFs,
                 fontWeight: 700,
                 flexShrink: 0,
                 color: e.methodology ? "#D4A862" : "#0F1117",
@@ -125,7 +127,7 @@ function EventLegend({
         ))}
       </div>
       {hasMethodology && (
-        <div style={{ fontSize: bp === "mobile" ? 14 : 11, color: "#7E8B9E", marginTop: 6 }}>
+        <div style={{ fontSize: smallFs, color: "#7E8B9E", marginTop: 6 }}>
           A hollow marker is a change to the keyword set, applied back across
           the whole record — a measurement change, not a real-world event.
         </div>
@@ -138,10 +140,13 @@ export default function TrendAtlas({
   themeData,
   timeRange,
   bp,
+  isMobileStrip,
 }: {
   themeData: ThemeData;
   timeRange: TimeRange;
   bp: Breakpoint;
+  /** ≤768px — the mobile font-floor breakpoint (bp "mobile" is only <640). */
+  isMobileStrip: boolean;
 }) {
   // Build each theme's monthly series and the shared month domain.
   const { perTheme, months } = useMemo(() => {
@@ -167,7 +172,7 @@ export default function TrendAtlas({
   // tablet, 1 on mobile.
   const cols = bp === "mobile" ? 1 : bp === "tablet" ? 2 : 3;
   const panelHeight = bp === "mobile" ? 210 : 240;
-  const labelFs = bp === "mobile" ? 14 : 11;
+  const labelFs = isMobileStrip ? 14 : 11;
 
   // Events that fall inside the visible window, numbered 1..n in order — so
   // the legend never shows a gap like "3, 4, 5". Compare at month granularity:
@@ -183,7 +188,7 @@ export default function TrendAtlas({
   return (
     <div>
       {numberedEvents.length > 0 && (
-        <EventLegend events={numberedEvents} bp={bp} />
+        <EventLegend events={numberedEvents} isMobileStrip={isMobileStrip} />
       )}
 
       <div
@@ -203,7 +208,10 @@ export default function TrendAtlas({
           // shorter axis instead.
           const data = months
             .filter((m) => !themeStart || m >= themeStart)
-            .map((m) => ({ date: m, value: byDate[m] ?? 0 }));
+            // A month with no point for this theme is a hole in the record,
+            // not a quiet month — leave it null so the line breaks there
+            // (connectNulls={false}) instead of drawing a false zero.
+            .map((m) => ({ date: m, value: byDate[m] ?? null }));
           const startsLate =
             themeStart && months.length > 0 && themeStart > months[0];
 
@@ -228,7 +236,7 @@ export default function TrendAtlas({
               {/* One-line reading of the theme's trend */}
               <p
                 style={{
-                  fontSize: bp === "mobile" ? 14 : 13,
+                  fontSize: isMobileStrip ? 14 : 13,
                   lineHeight: 1.45,
                   color: "#9AA7B8",
                   marginTop: 3,
@@ -238,7 +246,15 @@ export default function TrendAtlas({
                 {t.blurb}
               </p>
 
-              <MeasuredChart style={{ height: panelHeight }}>
+              <MeasuredChart
+                style={{ height: panelHeight }}
+                role="img"
+                ariaLabel={`Line chart: ${t.label} validated-keyword mentions per 1,000 posts, by month${
+                  data.length
+                    ? `, ${fmtMonth(data[0].date)} to ${fmtMonth(data[data.length - 1].date)}`
+                    : ""
+                }, on its own scale.`}
+              >
                 {({ width, height }) => (
                   <LineChart
                     width={width}

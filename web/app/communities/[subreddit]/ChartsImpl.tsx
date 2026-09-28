@@ -9,8 +9,8 @@ import {
   CartesianGrid,
 } from "recharts";
 import MeasuredChart from "@/app/MeasuredChart";
-import type { Snapshot } from "@/lib/types";
-import { hasCommentAverage, monthLabel, monthRange } from "@/lib/metrics";
+import type { CommunityChartData, MonthPoint } from "@/lib/communityCharts";
+import { monthLabel, monthRange } from "@/lib/metrics";
 import { usePrefersReducedMotion } from "@/lib/usePrefersReducedMotion";
 
 const MONTH_NAMES = [
@@ -36,31 +36,6 @@ function fmtTooltipLabel(d: unknown): string {
   if (typeof d !== "string") return "";
   const dt = new Date(d + "T00:00:00Z");
   return `${MONTH_NAMES[dt.getUTCMonth()]} ${dt.getUTCFullYear()}`;
-}
-
-type MonthPoint = { date: string; value: number };
-
-// One metric, aggregated to a monthly mean. The snapshot history runs daily
-// across 3+ years — plotting ~1,200 raw daily points in a small panel is an
-// unreadable scribble, so each month collapses to the mean of its days.
-// Months with no reading produce no point at all, so a metric that stopped
-// being collected ends its line where it stopped instead of running on.
-function monthlyMean(
-  data: Snapshot[],
-  value: (s: Snapshot) => number | null,
-): MonthPoint[] {
-  const buckets: Record<string, { sum: number; n: number }> = {};
-  for (const s of data) {
-    const v = value(s);
-    if (v == null) continue;
-    const m = s.snapshot_date.slice(0, 7);
-    if (!buckets[m]) buckets[m] = { sum: 0, n: 0 };
-    buckets[m].sum += v;
-    buckets[m].n += 1;
-  }
-  return Object.keys(buckets)
-    .sort()
-    .map((m) => ({ date: m + "-01", value: buckets[m].sum / buckets[m].n }));
 }
 
 function MetricChart({
@@ -180,56 +155,27 @@ function MetricChart({
 }
 
 export default function Charts({
-  snapshots,
+  data,
   postsPerDay,
   subscribersAsOf,
 }: {
-  snapshots: Snapshot[];
+  /** Monthly series + latest-known card values, aggregated at build time. */
+  data: CommunityChartData | null;
   /** Mean posts per day over the last 7 complete days, derived at build time. */
   postsPerDay: number | null;
   subscribersAsOf: string | null;
 }) {
-  if (snapshots.length === 0) {
+  if (!data) {
     return <p className="text-sm text-[#9AA7B8]">No snapshot data yet.</p>;
   }
 
-  // Per-field latest non-null: archive-sourced snapshot rows legitimately
-  // lack Reddit-only observables (subscribers; comment averages mature with
-  // a 6-day lag), so each card shows its most recent known value rather
-  // than blanking whenever the newest row has a hole.
-  const lastKnown = (key: keyof Snapshot): number | null => {
-    for (let i = snapshots.length - 1; i >= 0; i--) {
-      const v = snapshots[i][key];
-      if (typeof v === "number") return v;
-    }
-    return null;
-  };
-
-  // Avg comments: same walk-back for the collection lag, but it stops at the
-  // newest row that reported anything at all. The collector writes a 0 for
-  // communities whose comment threads it never gathers, and that 0 means "no
-  // reading" — publishing it, or reaching past it for a months-old figure
-  // from a different collection regime, would both be wrong.
-  const lastCommentAverage = (): number | null => {
-    for (let i = snapshots.length - 1; i >= 0; i--) {
-      if (snapshots[i].avg_comments_per_post == null) continue;
-      return hasCommentAverage(snapshots[i])
-        ? snapshots[i].avg_comments_per_post
-        : null;
-    }
-    return null;
-  };
-
-  const dataEndMonth = snapshots.reduce(
-    (max, s) => (s.snapshot_date > max ? s.snapshot_date : max),
-    "",
-  ).slice(0, 7);
+  const { dataEndMonth } = data;
 
   return (
     <>
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-8 p-6 bg-[#1A1D27] rounded-xl">
         <div>
-          <div className="text-2xl font-semibold tabular-nums text-[#F8FAFC]">{fmt(lastKnown("subscribers"))}</div>
+          <div className="text-2xl font-semibold tabular-nums text-[#F8FAFC]">{fmt(data.subscribers)}</div>
           <div className="text-xs text-[#9AA7B8] mt-0.5">Subscribers</div>
           {subscribersAsOf && (
             <div className="text-xs text-[#7E8B9E] mt-0.5 whitespace-nowrap">
@@ -238,7 +184,7 @@ export default function Charts({
           )}
         </div>
         <div>
-          <div className="text-2xl font-semibold tabular-nums text-[#F8FAFC]">{fmt(lastKnown("unique_contributors_7d"))}</div>
+          <div className="text-2xl font-semibold tabular-nums text-[#F8FAFC]">{fmt(data.contributors)}</div>
           <div className="text-xs text-[#9AA7B8] mt-0.5">Contributors / week</div>
         </div>
         <div>
@@ -246,7 +192,7 @@ export default function Charts({
           <div className="text-xs text-[#9AA7B8] mt-0.5">Posts / day (7-day avg)</div>
         </div>
         <div>
-          <div className="text-2xl font-semibold tabular-nums text-[#F8FAFC]">{fmt(lastCommentAverage(), 1)}</div>
+          <div className="text-2xl font-semibold tabular-nums text-[#F8FAFC]">{fmt(data.avgComments, 1)}</div>
           <div className="text-xs text-[#9AA7B8] mt-0.5">Avg comments / post</div>
         </div>
       </div>
@@ -258,22 +204,20 @@ export default function Charts({
         </p>
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           <MetricChart
-            monthly={monthlyMean(snapshots, (s) => s.unique_contributors_7d)}
+            monthly={data.contributorsMonthly}
             label="Contributors / week"
             dataEndMonth={dataEndMonth}
             color="#e8692a"
           />
           <MetricChart
-            monthly={monthlyMean(snapshots, (s) =>
-              hasCommentAverage(s) ? s.avg_comments_per_post : null,
-            )}
+            monthly={data.commentsMonthly}
             label="Avg comments per post"
             dataEndMonth={dataEndMonth}
             color="#8b5cf6"
             decimals={1}
           />
           <MetricChart
-            monthly={monthlyMean(snapshots, (s) => s.avg_score_per_post)}
+            monthly={data.scoreMonthly}
             label="Avg score per post"
             dataEndMonth={dataEndMonth}
             color="#10b981"

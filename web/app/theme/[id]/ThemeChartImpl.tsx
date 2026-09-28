@@ -12,6 +12,8 @@ import {
 } from "recharts";
 import MeasuredChart from "@/app/MeasuredChart";
 import { EVENTS } from "../../themes";
+import { fontSize } from "../../styles";
+import { useBreakpoint } from "../../useBreakpoint";
 
 // A single line chart for one theme's page. Same honest series as the homepage
 // atlas panel (validated-keyword mentions per 1,000 posts, pooled by month), with
@@ -65,6 +67,9 @@ export default function ThemeChart({
   // doesn't silently change the time window the reader was looking at.
   const [range, setRange] = useState<TimeRange>("1Y");
   const monthly = useMemo(() => monthlySeries(series), [series]);
+  // ≤768px: lift non-axis text to the 14px mobile font floor. Desktop unchanged.
+  const mobile = useBreakpoint().isMobileStrip === true;
+  const fs = (desktop: number) => (mobile ? fontSize.base : desktop);
 
   // Apply the selected time window.
   const data = useMemo(() => {
@@ -110,7 +115,7 @@ export default function ThemeChart({
             onClick={() => setRange(r)}
             aria-pressed={range === r}
             aria-label={`Show ${r === "ALL" ? "all time" : `last ${r}`}`}
-            className="px-3 h-11 sm:h-8 text-xs font-medium rounded-md transition-colors"
+            className="px-3 h-11 md:h-8 text-sm md:text-xs font-medium rounded-md transition-colors"
             style={{
               backgroundColor: range === r ? "#0F1117" : "transparent",
               color: range === r ? "#F8FAFC" : "#9AA7B8",
@@ -170,7 +175,7 @@ export default function ThemeChart({
                   value: String(e.num),
                   position: "top",
                   fill: "#D4A862",
-                  fontSize: 12,
+                  fontSize: fs(12),
                 }}
               />
             ))}
@@ -189,7 +194,7 @@ export default function ThemeChart({
                       border: "1px solid #2A2D3A",
                       borderRadius: 6,
                       padding: "4px 8px",
-                      fontSize: 12,
+                      fontSize: fs(12),
                       whiteSpace: "nowrap",
                     }}
                   >
@@ -219,7 +224,7 @@ export default function ThemeChart({
         )}
       </MeasuredChart>
 
-      <div style={{ fontSize: 11, color: "#7E8B9E", marginTop: 8 }}>
+      <div style={{ fontSize: fs(11), color: "#7E8B9E", marginTop: 8 }}>
         Validated-keyword mentions per 1,000 posts · by month · post text
         only
       </div>
@@ -243,7 +248,7 @@ export default function ThemeChart({
           >
             <span
               style={{
-                fontSize: 11,
+                fontSize: fs(11),
                 color: "#7E8B9E",
                 textTransform: "uppercase",
                 letterSpacing: "0.05em",
@@ -258,7 +263,7 @@ export default function ThemeChart({
                   display: "inline-flex",
                   alignItems: "center",
                   gap: 6,
-                  fontSize: 13,
+                  fontSize: fs(13),
                   whiteSpace: "nowrap",
                 }}
               >
@@ -268,10 +273,10 @@ export default function ThemeChart({
                     display: "inline-flex",
                     alignItems: "center",
                     justifyContent: "center",
-                    width: 16,
-                    height: 16,
+                    width: mobile ? 20 : 16,
+                    height: mobile ? 20 : 16,
                     borderRadius: 999,
-                    fontSize: 11,
+                    fontSize: fs(11),
                     fontWeight: 700,
                     flexShrink: 0,
                     color: e.methodology ? "#D4A862" : "#0F1117",
@@ -286,7 +291,7 @@ export default function ThemeChart({
             ))}
           </div>
           {hasMethodology && (
-            <div style={{ fontSize: 11, color: "#7E8B9E", marginTop: 7 }}>
+            <div style={{ fontSize: fs(11), color: "#7E8B9E", marginTop: 7 }}>
               A hollow marker is a change to our keyword set — a measurement
               change, not a real-world event.
             </div>

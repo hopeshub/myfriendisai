@@ -31,8 +31,8 @@ export default function RecoverySection({
     <div>
       <RecoveryChart data={data} />
       <p
+        className="text-[14px] md:text-[12px]"
         style={{
-          fontSize: 12,
           color: "#7E8B9E",
           marginTop: 8,
           marginBottom: 28,
@@ -61,9 +61,8 @@ export default function RecoverySection({
             }}
           >
             <div
-              className="line-clamp-2"
+              className="line-clamp-2 text-[14px] md:text-[13px]"
               style={{
-                fontSize: 13,
                 fontWeight: 600,
                 color: "#F1F4F8",
                 lineHeight: 1.4,
@@ -72,9 +71,8 @@ export default function RecoverySection({
               {p.title}
             </div>
             <p
-              className="font-display line-clamp-4"
+              className="font-display line-clamp-4 text-[14px] md:text-[13px]"
               style={{
-                fontSize: 13,
                 lineHeight: 1.6,
                 color: "#9AA7B8",
                 marginTop: 8,
@@ -84,8 +82,8 @@ export default function RecoverySection({
               &ldquo;{p.excerpt}&rdquo;
             </p>
             <div
+              className="text-[14px] md:text-[11px]"
               style={{
-                fontSize: 11,
                 color: "#7E8B9E",
                 marginTop: 10,
                 display: "flex",
@@ -110,8 +108,8 @@ export default function RecoverySection({
       </div>
 
       <p
+        className="text-[14px] md:text-[13px]"
         style={{
-          fontSize: 13,
           lineHeight: 1.7,
           color: "#9AA7B8",
           maxWidth: measure,

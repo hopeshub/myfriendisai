@@ -752,13 +752,20 @@ def export_subreddits_json(
     active_users, and score/comment averages (Reddit-only observables), so each
     of those columns falls back to its most recent observed value instead of
     going blank the day Reddit access breaks.
+
+    posts_today is recounted from the posts table over MEASURABLE posts
+    (2026-09-08, see measurable_post_where()) for the snapshot's UTC day, the
+    same way get_all_snapshots_for_chart() does, rather than read from the
+    stored snapshot column: the stored value is frozen by INSERT OR IGNORE at
+    whatever partial count existed when the row was first created, and older
+    rows used the all-posts population. The latest day is still a partial day.
     """
     path = output_path or DATA_DIR / "subreddits.json"
     path.parent.mkdir(parents=True, exist_ok=True)
     _conn = conn or get_connection()
     try:
         rows = _conn.execute(
-            """
+            f"""
             SELECT s.subreddit, s.snapshot_date,
                    (SELECT subscribers FROM subreddit_snapshots
                     WHERE subreddit = s.subreddit AND subscribers IS NOT NULL
@@ -766,7 +773,11 @@ def export_subreddits_json(
                    (SELECT active_users FROM subreddit_snapshots
                     WHERE subreddit = s.subreddit AND active_users IS NOT NULL
                     ORDER BY snapshot_date DESC LIMIT 1) AS active_users,
-                   s.posts_today,
+                   (SELECT COUNT(*) FROM posts p
+                    WHERE p.subreddit = s.subreddit
+                      AND p.created_utc >= CAST(strftime('%s', s.snapshot_date) AS INTEGER)
+                      AND p.created_utc <  CAST(strftime('%s', s.snapshot_date) AS INTEGER) + 86400
+                      AND {MEASURABLE_POST_WHERE}) AS posts_today,
                    (SELECT avg_comments_per_post FROM subreddit_snapshots
                     WHERE subreddit = s.subreddit AND avg_comments_per_post IS NOT NULL
                     ORDER BY snapshot_date DESC LIMIT 1) AS avg_comments_per_post,
@@ -1154,14 +1165,27 @@ def export_theme_health_json(
     T1_T3 = [c["subreddit"] for c in load_keyword_communities()]
     sub_ph = ",".join("?" * len(T1_T3))
 
+    # Post-level figures use the published population (2026-09-08): measurable
+    # posts only (see measurable_post_where()) and no EXCLUDED_AUTHORS, so this
+    # audit file describes the same corpus the chart and dataset count.
+    # Comment-level figures are unchanged — comment text is independent of
+    # whether the parent post's body survived.
+    ea_ph = ",".join("?" * len(EXCLUDED_AUTHORS))
+    POST_FROM = (
+        f"FROM post_keyword_tags t JOIN posts p ON p.id = t.post_id "
+        f"WHERE t.category=? AND t.source='post' AND t.subreddit IN ({sub_ph}) "
+        f"AND {MEASURABLE_POST_WHERE} "
+        f"AND (p.author IS NULL OR p.author NOT IN ({ea_ph}))"
+    )
+
     try:
         out_themes = {}
         for theme in THEMES:
+            post_params = (theme, *T1_T3, *EXCLUDED_AUTHORS)
             # Post tags + comment tags
             post_total = _conn.execute(
-                f"SELECT COUNT(DISTINCT post_id) FROM post_keyword_tags "
-                f"WHERE category=? AND source='post' AND subreddit IN ({sub_ph})",
-                (theme, *T1_T3),
+                f"SELECT COUNT(DISTINCT t.post_id) {POST_FROM}",
+                post_params,
             ).fetchone()[0]
             comment_total = _conn.execute(
                 f"SELECT COUNT(DISTINCT comment_id) FROM comment_keyword_hits "
@@ -1171,11 +1195,10 @@ def export_theme_health_json(
 
             # Top sub (posts)
             top_sub_post_row = _conn.execute(
-                f"""SELECT subreddit, COUNT(DISTINCT post_id) AS n
-                   FROM post_keyword_tags
-                   WHERE category=? AND source='post' AND subreddit IN ({sub_ph})
-                   GROUP BY subreddit ORDER BY n DESC LIMIT 1""",
-                (theme, *T1_T3),
+                f"""SELECT t.subreddit, COUNT(DISTINCT t.post_id) AS n
+                   {POST_FROM}
+                   GROUP BY t.subreddit ORDER BY n DESC LIMIT 1""",
+                post_params,
             ).fetchone()
             top_sub_post = (
                 {"subreddit": top_sub_post_row[0], "n": top_sub_post_row[1],
@@ -1201,10 +1224,9 @@ def export_theme_health_json(
             top_day_row = _conn.execute(
                 f"""SELECT date(p.created_utc,'unixepoch') AS d,
                           COUNT(DISTINCT t.post_id) AS n
-                   FROM post_keyword_tags t JOIN posts p ON p.id = t.post_id
-                   WHERE t.category=? AND t.source='post' AND p.subreddit IN ({sub_ph})
+                   {POST_FROM}
                    GROUP BY d ORDER BY n DESC LIMIT 1""",
-                (theme, *T1_T3),
+                post_params,
             ).fetchone()
             top_day = (
                 {"date": top_day_row[0], "n": top_day_row[1],
@@ -1216,12 +1238,11 @@ def export_theme_health_json(
             top5_row = _conn.execute(
                 f"""SELECT SUM(n) FROM (
                        SELECT COUNT(DISTINCT t.post_id) AS n
-                       FROM post_keyword_tags t JOIN posts p ON p.id = t.post_id
-                       WHERE t.category=? AND t.source='post' AND p.subreddit IN ({sub_ph})
+                       {POST_FROM}
                          AND p.author NOT IN ('[deleted]','AutoModerator') AND p.author IS NOT NULL
                        GROUP BY p.author ORDER BY n DESC LIMIT 5
                    )""",
-                (theme, *T1_T3),
+                post_params,
             ).fetchone()
             top5_n = top5_row[0] if top5_row and top5_row[0] is not None else 0
             top5_authors_pct = round(100 * top5_n / post_total, 1) if post_total else 0.0
@@ -1231,10 +1252,9 @@ def export_theme_health_json(
             top_month_row = _conn.execute(
                 f"""SELECT strftime('%Y-%m', p.created_utc, 'unixepoch') AS m,
                           COUNT(DISTINCT t.post_id) AS n
-                   FROM post_keyword_tags t JOIN posts p ON p.id = t.post_id
-                   WHERE t.category=? AND t.source='post' AND p.subreddit IN ({sub_ph})
+                   {POST_FROM}
                    GROUP BY m ORDER BY n DESC LIMIT 1""",
-                (theme, *T1_T3),
+                post_params,
             ).fetchone()
             top_month = (
                 {"month": top_month_row[0], "n": top_month_row[1],

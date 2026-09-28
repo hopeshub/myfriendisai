@@ -19,9 +19,15 @@ export const metadata: Metadata = {
   description:
     "How this project tracks AI-companionship discourse on Reddit: the keyword method, its honest limits, the data sources, and a changelog of method changes.",
   alternates: { canonical: "/about" },
+  // A page-level openGraph replaces the layout's wholesale, so url / siteName /
+  // type are restated here.
   openGraph: {
     title: "About — My Friend Is AI",
     description: ABOUT_DESCRIPTION,
+    url: "/about",
+    siteName: "My Friend Is AI",
+    type: "website",
+    locale: "en_US",
     images: ["/opengraph-image"],
   },
   twitter: {
@@ -127,7 +133,8 @@ export default function About() {
             >
               {stat.value}
             </div>
-            <div style={{ fontSize: fontSize.xs, color: "#9AA7B8", marginTop: 2 }}>
+            {/* text-[14px] md:text-[12px]: 14px mobile font floor (server component — no useBreakpoint). */}
+            <div className="text-[14px] md:text-[12px]" style={{ color: "#9AA7B8", marginTop: 2 }}>
               {stat.label}
             </div>
           </div>
@@ -506,7 +513,7 @@ export default function About() {
               post in three looking removed over the summer of 2026, against
               about one in six in earlier years, and under the old definition
               those posts sat in the denominator and pulled every line down by
-              roughly a tenth. Two things fixed it. Posts with no surviving
+              roughly an eighth. Two things fixed it. Posts with no surviving
               text now count in neither half of the rate, as described above,
               and the collector goes back to the archive for each post a few
               weeks after it appears. The changelog below has the details of
@@ -593,7 +600,7 @@ export default function About() {
                       border: "2px solid #0F1117",
                     }}
                   />
-                  <div style={{ fontSize: fontSize.xs, color: "#F59E0B", marginBottom: 2 }}>
+                  <div className="text-[14px] md:text-[12px]" style={{ color: "#F59E0B", marginBottom: 2 }}>
                     {entry.date}
                   </div>
                   <div
@@ -610,8 +617,8 @@ export default function About() {
                     {entry.items.map((item, j) => (
                       <li
                         key={j}
+                        className="text-[14px] md:text-[13px]"
                         style={{
-                          fontSize: fontSize.sm,
                           lineHeight: 1.6,
                           color: "#9AA7B8",
                           paddingLeft: 12,
@@ -630,8 +637,8 @@ export default function About() {
             </div>
           </div>
           <p
+            className="text-[14px] md:text-[12px]"
             style={{
-              fontSize: fontSize.xs,
               color: "#7E8B9E",
               marginTop: 20,
               paddingLeft: 24,
