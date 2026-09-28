@@ -190,8 +190,8 @@ collection; it never retroactively removes data.
 ### 2.7 Corpus extent
 
 The post corpus reaches back to **2017** via archive backfill: the early Replika
-years, COVID-era growth, and the ChatGPT precondition era. As of 2026-08 it
-holds roughly 4.4 million posts. Per-theme coverage gating (§5) means a theme's
+years, COVID-era growth, and the ChatGPT precondition era. As of late
+2026-09 it holds roughly 4.5 million posts. Per-theme coverage gating (§5) means a theme's
 chart line still begins only where its vocabulary becomes measurable.
 
 **Communities added after launch were backfilled, not forward-only.** Each
@@ -349,7 +349,9 @@ the measured value for the set that is actually counting: **~66–68%**, confirm
 by three drift cycles (June–August 2026). Four of the eight therapy keywords —
 `emotional support`, `therapeutic`, `as a therapist`, `for therapy` — scored
 75%, 65%, 60% and 60% at the 2026-05-12 audit and are flagged AUDIT-GATE FAIL in
-the keyword config. They still count, under the change-control rule in §8.2. When
+the keyword config. (That audit was a later, separate re-read; it is not the
+original 100-post validation sample, whose figures §8.1 lists and which ran
+higher for most of these keywords.) They still count, under the change-control rule in §8.2. When
 the rebuild ships, the theme's precision and its volume will both move, and that
 will be a versioned change with a changelog entry.
 
@@ -471,8 +473,8 @@ the full and the "Excluding r/CharacterAI" series.
 
 **Clearing the gate does not make a month precise.** A threshold of five posts
 admits months that are still very small. Of the months actually drawn on the
-chart, the share whose post-only numerator is under 20 posts: consciousness 41%
-(76% are under 30), therapy 36% (52% under 30) and addiction 32% — mostly
+chart, the share whose post-only numerator is under 20 posts (as of 2026-09):
+consciousness 35% (76% are under 30), therapy 36% (52% under 30) and addiction 32% — mostly
 2023. In the "Excluding r/CharacterAI" series it is therapy 38% and rupture
 47%. On a
 two-proportion test, only about 19% of consciousness's and therapy's
@@ -547,7 +549,8 @@ to analyse.
 ### 6.3 Volume weighting is deliberate
 
 The denominator is post-volume-weighted, not community-equal. One community —
-r/CharacterAI — is 60–90% of total post volume, so it dominates the aggregate.
+r/CharacterAI — was 70–90% of total post volume through most of 2023–2025 and
+roughly 40–65% in 2026, so it dominates the aggregate.
 This is a documented posture, not a bug: the alternative (weighting each
 community equally) gives every small community outsized influence and produces a
 line that swings on the arrival of a new sub.
@@ -650,7 +653,10 @@ and it feeds no published number — it flags keywords for human review.
 ### 8.1 What the August 2026 cycle found
 
 Six keywords now measure below the 60% cut that would reject a new keyword. The
-drift figure comes first, the original validation figure in brackets:
+drift figure comes first, the original validation figure in the last column. "At
+validation" is the keyword's first 100-post validation read; it differs from
+the 2026-05-12 audit figures in §4.4 (e.g. `emotional support` 75%,
+`therapeutic` 65%), which came from a separate, later re-read:
 
 | Keyword | Theme | Drift, post-level | At validation |
 |---|---|---|---|
@@ -714,8 +720,10 @@ era in the table above; there was none.
 
 Two consequences the reader should know:
 
-1. **Subscriber counts are frozen at 2026-06-07** and active-user counts are
-   permanently null. The site labels subscriber figures with that date.
+1. **Subscriber counts are frozen at their last Reddit snapshot** — 2026-05-28
+   for the companion and general-AI tiers, 2026-06-07 for the ambient tier —
+   and active-user counts are permanently null. The site labels subscriber
+   figures with the date they were taken.
 2. The archive path collects comments *continuously by creation window* rather
    than by the one-shot per-post snapshot the Reddit path used. This is strictly
    more complete, so the *post+comment* series runs a touch fuller from late May
@@ -826,7 +834,7 @@ drift check (§8) measures precision drift only, not recall.
 
 What has been tested is how much the published shapes depend on it. Restricting
 the corpus to body-bearing posts — a test run against the wider pre-2026-09-08
-denominator — five of the six themes keep the direction they are charted with. Romance is the exception: on the published denominator it goes
+denominator — five of the six themes keep the direction they are charted with. Romance is the exception: on that test's all-posts denominator it goes
 from 2.10 to 4.08 per 1,000 between 2023 and 2026 (+94%); on body-bearing posts
 only, from 4.55 to 5.72 (+26%). Its rise out of the 2024 trough survives; much
 of the longer climb since 2023 does not.

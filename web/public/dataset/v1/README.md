@@ -36,8 +36,9 @@ hash matches, so a day on which nothing moved leaves no diff at all. Read it as
 "these numbers date from", not "last checked".
 
 **What is not here.** The site also publishes an *Excluding r/CharacterAI*
-version of every theme line — r/CharacterAI is 60–90% of all post volume, so
-that second view shows the rest of the corpus on its own. It is not part of v1;
+version of every theme line — r/CharacterAI supplied 70–90% of the posts in
+the theme measurement through most of 2023–2025 and roughly 40–65% during
+2026, so that second view shows the rest of the corpus on its own. It is not part of v1;
 this bundle carries the full-scope series only.
 
 ---
@@ -88,9 +89,8 @@ too sparse in the corpus to chart honestly, so those months are omitted here
 exactly as they are omitted from the site. The corpus itself reaches back to
 2017; the theme lines do not.
 
-**Small months.** Clearing that gate does not make a month precise: 41% of the
-consciousness rows and about a third of the therapy and addiction rows have a
-`post_only_count` under 20. `post_only_count` and `eligible_posts` are both on
+**Small months.** Clearing that gate does not make a month precise: 36% of the therapy rows, 35% of the consciousness rows and 32% of the addiction rows
+have a `post_only_count` under 20. `post_only_count` and `eligible_posts` are both on
 every row so that you can put an interval on any month rather than take the
 rate at face value.
 
