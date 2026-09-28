@@ -439,7 +439,7 @@ the repository). The project's source code is MIT-licensed separately.
 
 Suggested citation:
 
-> Bockley, W. (2026). *My Friend Is AI: Reddit discourse tracker for AI
+> *My Friend Is AI* (2026). *Reddit discourse tracker for AI
 > companionship communities* — public aggregate dataset {version}.
 > myfriendisai.com. <{url}>
 
@@ -520,7 +520,7 @@ INDEX_TEMPLATE = """\
   comparable to each other. <a href="/dataset/{version}/METHODOLOGY.md">METHODOLOGY.md</a> and the
   site's <a href="/about">About page</a> state the limits in full.</p>
   <p class="note">Licensed <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.
-  Cite as: Bockley, W. (2026). <em>My Friend Is AI: Reddit discourse tracker for
+  Cite as: <em>My Friend Is AI</em> (2026). <em>Reddit discourse tracker for
   AI companionship communities</em> — public aggregate dataset {version}.
   myfriendisai.com. Code and validation records:
   <a href="https://github.com/hopeshub/myfriendisai">github.com/hopeshub/myfriendisai</a>.</p>

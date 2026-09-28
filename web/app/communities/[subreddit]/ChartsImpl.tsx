@@ -7,6 +7,7 @@ import {
   YAxis,
   Tooltip,
   CartesianGrid,
+  ReferenceArea,
 } from "recharts";
 import MeasuredChart from "@/app/MeasuredChart";
 import type { CommunityChartData, MonthPoint } from "@/lib/communityCharts";
@@ -21,6 +22,12 @@ const MONTH_NAMES = [
 // Below this many months a line is a couple of dots joined by a diagonal
 // across an otherwise empty axis, which reads as a trend that isn't there.
 const MIN_MONTHS_TO_CHART = 3;
+
+// 2026-03-11 → 05-26 the collector read Reddit's live listing, which leaves
+// out removed posts; everywhere else the archive keeps them. Averages over
+// posts read high in that window for heavily moderated communities (r/ChaiApp
+// removes ~85% of posts: its avg comments runs 15–58 there, under 1 around it).
+const LIVE_LISTING_BAND = { x1: "2026-03-01", x2: "2026-05-01" };
 
 function fmt(n: number | null, decimals = 0): string {
   if (n == null) return "—";
@@ -44,6 +51,7 @@ function MetricChart({
   dataEndMonth,
   color = "#7C9CD0",
   decimals = 0,
+  markLiveListing = false,
 }: {
   monthly: MonthPoint[];
   label: string;
@@ -51,6 +59,8 @@ function MetricChart({
   dataEndMonth: string;
   color?: string;
   decimals?: number;
+  /** Shade the live-Reddit-listing window (see LIVE_LISTING_BAND). */
+  markLiveListing?: boolean;
 }) {
   // This chart has no time-range/scope toggle, so it animates exactly once on
   // mount. Gated on reduced-motion since Recharts animation is JS-driven.
@@ -59,6 +69,11 @@ function MetricChart({
   const firstMonth = monthly[0]?.date.slice(0, 7) ?? "";
   const lastMonth = monthly[monthly.length - 1]?.date.slice(0, 7) ?? "";
   const endsEarly = lastMonth !== "" && lastMonth < dataEndMonth;
+  // Category axis: both band edges must be months present in the data.
+  const showBand =
+    markLiveListing &&
+    monthly.some((p) => p.date === LIVE_LISTING_BAND.x1) &&
+    monthly.some((p) => p.date === LIVE_LISTING_BAND.x2);
 
   return (
     <div>
@@ -88,6 +103,16 @@ function MetricChart({
               accessibilityLayer={false}
             >
               <CartesianGrid strokeDasharray="3 3" stroke="#2A2D3A" />
+              {showBand && (
+                <ReferenceArea
+                  x1={LIVE_LISTING_BAND.x1}
+                  x2={LIVE_LISTING_BAND.x2}
+                  fill="#94A3B8"
+                  fillOpacity={0.16}
+                  stroke="none"
+                  ifOverflow="extendDomain"
+                />
+              )}
               <XAxis
                 dataKey="date"
                 tickFormatter={fmtTick}
@@ -215,12 +240,14 @@ export default function Charts({
             dataEndMonth={dataEndMonth}
             color="#8b5cf6"
             decimals={1}
+            markLiveListing
           />
           <MetricChart
             monthly={data.scoreMonthly}
             label="Avg score per post"
             dataEndMonth={dataEndMonth}
             color="#10b981"
+            markLiveListing
           />
         </div>
       </div>

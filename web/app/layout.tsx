@@ -181,7 +181,7 @@ export default function RootLayout({
               <span>An independent, one-person research project.</span>
               <span>
                 Data from public Reddit archives ·{" "}
-                {formatPostCount(meta.total_posts)} posts · {startYear}–{endLabel} ·
+                {formatPostCount(meta.total_posts)} posts collected · {startYear}–{endLabel} ·
                 updated daily
               </span>
             </div>

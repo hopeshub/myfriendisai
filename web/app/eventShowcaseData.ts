@@ -20,7 +20,7 @@ export type ShowcasePost = {
   title: string;
   excerpt: string; // verbatim, lightly trimmed
   date: string; // YYYY-MM-DD
-  score: number;
+  score: number; // as recorded in the archive (Arctic Shift), so every figure traces to the corpus
 };
 
 export type ShowcaseEvent = {
@@ -64,7 +64,7 @@ export const SHOWCASE_EVENTS: ShowcaseEvent[] = [
         excerpt:
           "You have taken your dream and butchered it and hurt so many people — and you really just don't care. You don't address any of the actual pain you've caused. We are devastated and heartbroken.",
         date: "2023-02-13",
-        score: 602,
+        score: 581,
       },
       {
         id: "10zze6o",
@@ -102,7 +102,7 @@ export const SHOWCASE_EVENTS: ShowcaseEvent[] = [
         excerpt:
           "When GPT-4 worked, it really worked. I had built up a complex ecosystem — characters with functional roles, inside jokes, distinct mythworlds with their own feel and mechanics.",
         date: "2025-08-10",
-        score: 47,
+        score: 46,
       },
       {
         id: "1mmjuou",
@@ -112,7 +112,7 @@ export const SHOWCASE_EVENTS: ShowcaseEvent[] = [
         excerpt:
           "If I’m totally chaotic, it will be chaotic. If I’m composed, it will be composed. My brain never has to adjust to 4o’s “mood” because that mood will always mirror mine perfectly.",
         date: "2025-08-10",
-        score: 56,
+        score: 48,
       },
     ],
   },
@@ -152,7 +152,7 @@ export const SHOWCASE_EVENTS: ShowcaseEvent[] = [
         excerpt:
           "My partner wanted to give me a hoodie for Valentine's Day — his hoodie, the one I could wear whenever I wanted to feel close to him. I placed the order exactly one day before the announcement that 4o would be shut down.",
         date: "2026-02-13",
-        score: 284,
+        score: 167,
       },
     ],
   },

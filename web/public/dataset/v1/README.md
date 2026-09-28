@@ -177,7 +177,7 @@ the repository). The project's source code is MIT-licensed separately.
 
 Suggested citation:
 
-> Bockley, W. (2026). *My Friend Is AI: Reddit discourse tracker for AI
+> *My Friend Is AI* (2026). *Reddit discourse tracker for AI
 > companionship communities* — public aggregate dataset v1.
 > myfriendisai.com. <https://myfriendisai.com/dataset/v1/>
 

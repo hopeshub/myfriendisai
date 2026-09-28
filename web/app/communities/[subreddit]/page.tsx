@@ -160,7 +160,10 @@ export default async function SubredditPage({
         <strong>Avg comments</strong> — Derived from the comment threads this
         project collects (companionship communities only; since June 2026 those
         are gathered more completely than before, so read it within an era, not
-        across June 2026).
+        across June 2026). On the comment and score charts, the shaded band
+        (March–May 2026) came from
+        Reddit&apos;s live listing, which leaves out removed posts, so
+        communities that remove many posts read high there.
       </p>
     </div>
   );
