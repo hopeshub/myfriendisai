@@ -7,7 +7,7 @@ of how the numbers were made, so the dataset stays interpretable even if the
 site goes away.
 
 - **Version:** v1
-- **Data through:** 2026-08 (the in-progress calendar month is excluded)
+- **Data through:** 2026-09 (the in-progress calendar month is excluded)
 - **Generated at:** see `manifest.json`
 - **Canonical location:** <https://myfriendisai.com/dataset/v1/>
 
@@ -20,8 +20,8 @@ no titles, no usernames, no post IDs — no raw Reddit content of any kind.
 
 | File | Rows | What it is |
 |---|---|---|
-| `monthly_theme_counts.csv` / `.json` | 244 | Per theme per month: the published keyword-hit count, the corpus denominator, and the rate per 1,000 posts. |
-| `monthly_community_volumes.csv` / `.json` | 1,716 | Per tracked community per month: post volume, with its tier. |
+| `monthly_theme_counts.csv` / `.json` | 250 | Per theme per month: the published keyword-hit count, the corpus denominator, and the rate per 1,000 posts. |
+| `monthly_community_volumes.csv` / `.json` | 1,755 | Per tracked community per month: post volume, with its tier. |
 | `METHODOLOGY.md` | — | Standalone statement of scope, method, validation, and limits. |
 | `manifest.json` | — | Version, generation timestamp, per-file row counts and SHA-256 hashes. |
 | `index.html` | — | Directory listing, so the bundle URL opens in a browser. |
@@ -89,7 +89,7 @@ too sparse in the corpus to chart honestly, so those months are omitted here
 exactly as they are omitted from the site. The corpus itself reaches back to
 2017; the theme lines do not.
 
-**Small months.** Clearing that gate does not make a month precise: 36% of the therapy rows, 35% of the consciousness rows and 32% of the addiction rows
+**Small months.** Clearing that gate does not make a month precise: 36% of the therapy rows, 33% of the consciousness rows and 31% of the addiction rows
 have a `post_only_count` under 20. `post_only_count` and `eligible_posts` are both on
 every row so that you can put an interval on any month rather than take the
 rate at face value.
