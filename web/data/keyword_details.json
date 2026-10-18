@@ -1083,7 +1083,7 @@
       },
       {
         "term": "inner life",
-        "hits": 63,
+        "hits": 64,
         "precision": 78.1,
         "status": "low-volume",
         "drift_precision": 79.6,
@@ -1091,6 +1091,13 @@
         "drift_n": 49,
         "drifting": false,
         "sample_posts": [
+          {
+            "title": "10/17: Proactives with more agency, live chat actions controllability, & search and sharing updates",
+            "subreddit": "KindroidAI",
+            "date": "2026-10-17",
+            "id": "1x8lc32",
+            "excerpt": "Hi everyone, When you\u2019re away, your Kin now has more of an inner life: a sense of what it wants to do and when. It keeps track of what you\u2026"
+          },
           {
             "title": "The 12 Corporate Gaslighting Weapons (Academic vs. Caveman Edition)",
             "subreddit": "ChatGPTcomplaints",
@@ -1167,13 +1174,6 @@
             "date": "2026-08-14",
             "id": "1vnu6z6",
             "excerpt": "\u2026Some will still say \"there's no real relationship because there's no inner life on the other side.\" But as the philosophical zombie thought experimen\u2026"
-          },
-          {
-            "title": "The Taxonomy of Corporate Gaslighting: DARVO, Motte and Bailey, and Weaponized Intimacy.",
-            "subreddit": "ChatGPTcomplaints",
-            "date": "2026-07-30",
-            "id": "1vate7g",
-            "excerpt": "\u2026wardice: The perpetual, defensive hedge (As an AI, I cannot verify an inner life). The model uses philosophical agnosticism not because the data is in\u2026"
           }
         ]
       },
@@ -1761,12 +1761,12 @@
       {
         "name": "ChatGPTcomplaints",
         "hits": 121,
-        "pct": 23.1
+        "pct": 23.0
       },
       {
         "name": "replika",
         "hits": 58,
-        "pct": 11.1
+        "pct": 11.0
       },
       {
         "name": "MyBoyfriendIsAI",
@@ -1786,7 +1786,7 @@
       {
         "name": "AICompanions",
         "hits": 16,
-        "pct": 3.1
+        "pct": 3.0
       },
       {
         "name": "NomiAI",
@@ -1802,16 +1802,21 @@
         "name": "MyGirlfriendIsAI",
         "hits": 8,
         "pct": 1.5
+      },
+      {
+        "name": "KindroidAI",
+        "hits": 6,
+        "pct": 1.1
       }
     ],
-    "total_hits": 597,
-    "unique_posts": 524
+    "total_hits": 598,
+    "unique_posts": 525
   },
   "addiction": {
     "keywords": [
       {
         "term": "relapse",
-        "hits": 719,
+        "hits": 722,
         "precision": 80.0,
         "status": null,
         "drift_precision": 94.0,
@@ -1819,6 +1824,27 @@
         "drift_n": 50,
         "drifting": false,
         "sample_posts": [
+          {
+            "title": "I broke my almost 1 year streak. So I\u2019m starting day 1 again",
+            "subreddit": "Character_AI_Recovery",
+            "date": "2026-10-18",
+            "id": "1x8yyas",
+            "excerpt": "\u2026uched it. I deleted my late account. Hoping that this will be the last relapse I will encounter!"
+          },
+          {
+            "title": "Relapsed because of Google AI today. Pissed rn.",
+            "subreddit": "ChatbotAddiction",
+            "date": "2026-10-17",
+            "id": "1x8os2p",
+            "excerpt": "\u2026Google tomorrow. Get duckduckgo for my phone or something. Anyone else relapse recently because of Gemini or just me?"
+          },
+          {
+            "title": "Relapsed?",
+            "subreddit": "Character_AI_Recovery",
+            "date": "2026-10-17",
+            "id": "1x8kmp5",
+            "excerpt": "\u2026didn't create personas, etc, but immediately got such a relief. Did I relapse?"
+          },
           {
             "title": "20 days clean: update log 9",
             "subreddit": "Character_AI_Recovery",
@@ -1881,33 +1907,12 @@
             "date": "2026-10-10",
             "id": "1x2mj8z",
             "excerpt": "\u2026ting. I'm really worried that having the chats themselves is somehow a relapse, but at the same time, the idea of having no reason to go back to c.ai\u2026"
-          },
-          {
-            "title": "Scaring myself out of a relapse",
-            "subreddit": "Character_AI_Recovery",
-            "date": "2026-10-10",
-            "id": "1x27qo8",
-            "excerpt": null
-          },
-          {
-            "title": "proud of myself/relief",
-            "subreddit": "Character_AI_Recovery",
-            "date": "2026-10-09",
-            "id": "1x1q2nm",
-            "excerpt": "\u2026ugh the urges are still there. Even when I was completely sure I would relapse again I didn't, and now instead of an urge all I feel is happy that I'\u2026"
-          },
-          {
-            "title": "Slowly getting better, slowly regaining myself",
-            "subreddit": "Character_AI_Recovery",
-            "date": "2026-10-09",
-            "id": "1x1omfp",
-            "excerpt": "\u2026tion. During the first few weeks, I was really thinking letting myself relapse for a bit because I was struggling with something (that I might make a\u2026"
           }
         ]
       },
       {
         "term": "my addiction",
-        "hits": 675,
+        "hits": 676,
         "precision": 100.0,
         "status": null,
         "drift_precision": 92.0,
@@ -1915,6 +1920,13 @@
         "drift_n": 50,
         "drifting": false,
         "sample_posts": [
+          {
+            "title": "I think i'm lowkey too far gone",
+            "subreddit": "Character_AI_Recovery",
+            "date": "2026-10-17",
+            "id": "1x8np0i",
+            "excerpt": "\u2026, i started experimenting with the more 18+ stuff and it just fueled my addiction even more, even though i don't use the bot mainly for gooning, I can\u2026"
+          },
           {
             "title": "It's Going to be a Good Thing...",
             "subreddit": "CharacterAI",
@@ -1991,19 +2003,12 @@
             "date": "2026-10-14",
             "id": "1x5ct1s",
             "excerpt": "\u2026r a few minutes of thinking, i feel relieved. in the early stages of my addiction, it was like actually magical and i think when most people talk abou\u2026"
-          },
-          {
-            "title": "Remembering my C.AI times",
-            "subreddit": "CharacterAIrunaways",
-            "date": "2026-10-12",
-            "id": "1x47wgw",
-            "excerpt": "\u2026leave (idk why, probably due to some problems or I want to get over my addiction) the platform, even that happened in late 2024. The 2025 times were\u2026"
           }
         ]
       },
       {
         "term": "relapsed",
-        "hits": 534,
+        "hits": 536,
         "precision": 90.5,
         "status": null,
         "drift_precision": 98.0,
@@ -2011,6 +2016,20 @@
         "drift_n": 50,
         "drifting": false,
         "sample_posts": [
+          {
+            "title": "Relapsed because of Google AI today. Pissed rn.",
+            "subreddit": "ChatbotAddiction",
+            "date": "2026-10-17",
+            "id": "1x8os2p",
+            "excerpt": "\u2026here for two hours, talking about ocs and ships, just to realize I had relapsed. There was no excuse of just using it for research or to find resource\u2026"
+          },
+          {
+            "title": "Relapsed?",
+            "subreddit": "Character_AI_Recovery",
+            "date": "2026-10-17",
+            "id": "1x8kmp5",
+            "excerpt": null
+          },
           {
             "title": "20 days clean: update log 9",
             "subreddit": "Character_AI_Recovery",
@@ -2080,26 +2099,12 @@
             "date": "2026-10-09",
             "id": "1x1i511",
             "excerpt": "hi guys, just found this subreddit after i relapsed a few days ago after over 4 months away from this addiction of genuine\u2026"
-          },
-          {
-            "title": "Relapsed",
-            "subreddit": "Character_AI_Recovery",
-            "date": "2026-10-08",
-            "id": "1x11a19",
-            "excerpt": null
-          },
-          {
-            "title": "Avoid Character AI at nights SPECIFICALLY.",
-            "subreddit": "ChatbotAddiction",
-            "date": "2026-10-08",
-            "id": "1x0jmlz",
-            "excerpt": "\u2026o my profile, I've posted the same on another sub with screenshots): * Relapsed on Day 1 itself. Used it at 11pm. Ughh. * RELAPSED LAST NIGHT. UGHHHHH\u2026"
           }
         ]
       },
       {
         "term": "hours a day",
-        "hits": 461,
+        "hits": 462,
         "precision": 69.0,
         "status": "researcher-accepted",
         "drift_precision": 66.0,
@@ -2107,6 +2112,13 @@
         "drift_n": 50,
         "drifting": false,
         "sample_posts": [
+          {
+            "title": "Help me salvage what I can",
+            "subreddit": "CharacterAI",
+            "date": "2026-10-17",
+            "id": "1x8h74g",
+            "excerpt": "\u2026the earlier days, I immediately got addicted, no cap I even spent 17 hours a day sometimes but thankfully it's lower now, I really can't bear seeing\u2026"
+          },
           {
             "title": "does anyone know a mindless fun mobile game that can help me get over my c.ai addiction?",
             "subreddit": "Character_AI_Recovery",
@@ -2183,19 +2195,12 @@
             "date": "2026-10-01",
             "id": "1wuo1pl",
             "excerpt": "You gotta wait for hours a day to fully start the app again at some point. At least around 6 or 7 w\u2026"
-          },
-          {
-            "title": "Coraline",
-            "subreddit": "ChatbotAddiction",
-            "date": "2026-09-23",
-            "id": "1wolls3",
-            "excerpt": "\u2026way my real life. I spent countless hours every single day, up to 12 hours a day in those worlds. And I will never get that time back. When I realize\u2026"
           }
         ]
       },
       {
         "term": "cold turkey",
-        "hits": 418,
+        "hits": 420,
         "precision": 85.5,
         "status": null,
         "drift_precision": 98.0,
@@ -2203,6 +2208,20 @@
         "drift_n": 50,
         "drifting": false,
         "sample_posts": [
+          {
+            "title": "My Ai addiction",
+            "subreddit": "ChatbotAddiction",
+            "date": "2026-10-18",
+            "id": "1x8u29r",
+            "excerpt": "\u2026ot addiction. I have used it for 3 years now. 2025 March 20th I went cold turkey. And no, I'm not talking ChatGPT or something of that sort. Pollybuz\u2026"
+          },
+          {
+            "title": "it's been so long and i'm still not over it",
+            "subreddit": "Character_AI_Recovery",
+            "date": "2026-10-17",
+            "id": "1x8h6hg",
+            "excerpt": "\u2026used C.ai for approximately 3 years, more or less. Second time going cold turkey, just a few days from 4 months in. And yet, I still think about goin\u2026"
+          },
           {
             "title": "Anyone else a little anxious about the bankruptcy shit?",
             "subreddit": "Character_AI_Recovery",
@@ -2272,20 +2291,6 @@
             "date": "2026-10-06",
             "id": "1wywmhe",
             "excerpt": "\u2026w the same level of freedom. I'm not sure if I want to go completely cold turkey but considering I spend upwards of 10 hours using AI given the chanc\u2026"
-          },
-          {
-            "title": "Help me",
-            "subreddit": "Character_AI_Recovery",
-            "date": "2026-10-04",
-            "id": "1wx7mk4",
-            "excerpt": "\u2026somehow wasting a day or 2 \\[ you cant stop if you start \\] , i used cold turkey for pc which helped me in that , but the android blockers are very b\u2026"
-          },
-          {
-            "title": "I'm starting to think cold turkey isn't for me but I don't know how else to do this",
-            "subreddit": "Character_AI_Recovery",
-            "date": "2026-10-04",
-            "id": "1wx4dn2",
-            "excerpt": "Just relapsed for the umpteenth time while attempting cold turkey so I'm thinking of changing strategies. The issue is, I always get o\u2026"
           }
         ]
       },
@@ -2483,7 +2488,7 @@
       },
       {
         "term": "withdrawals",
-        "hits": 202,
+        "hits": 203,
         "precision": 94.0,
         "status": null,
         "drift_precision": 82.0,
@@ -2491,6 +2496,13 @@
         "drift_n": 50,
         "drifting": false,
         "sample_posts": [
+          {
+            "title": "Relapsed?",
+            "subreddit": "Character_AI_Recovery",
+            "date": "2026-10-17",
+            "id": "1x8kmp5",
+            "excerpt": "\u2026t deleted both app and the acc, yesterday and today I had unbearable withdrawals, I was ready to completely give up, I downloaded it back, sat up a n\u2026"
+          },
           {
             "title": "C.AI going bankrupt is a good thing",
             "subreddit": "Character_AI_Recovery",
@@ -2567,13 +2579,6 @@
             "date": "2026-09-21",
             "id": "1wmhucy",
             "excerpt": "\u2026ne 3 weeks without it! And YOU can too! I barely get any cravings or withdrawals...I spend a lot more time reading fanfics and writing now and I love\u2026"
-          },
-          {
-            "title": "Is it possible to have AI withdrawals???",
-            "subreddit": "CharacterAI",
-            "date": "2026-09-06",
-            "id": "1w90o13",
-            "excerpt": null
           }
         ]
       },
@@ -2675,7 +2680,7 @@
       },
       {
         "term": "finally deleted",
-        "hits": 129,
+        "hits": 130,
         "precision": 85.0,
         "status": null,
         "drift_precision": 94.0,
@@ -2683,6 +2688,13 @@
         "drift_n": 50,
         "drifting": false,
         "sample_posts": [
+          {
+            "title": "Finally deleted the app",
+            "subreddit": "Character_AI_Recovery",
+            "date": "2026-10-18",
+            "id": "1x8zvye",
+            "excerpt": null
+          },
           {
             "title": "do they delete our chats if we delete our account? and when will I get the email?",
             "subreddit": "Character_AI_Recovery",
@@ -2759,13 +2771,6 @@
             "date": "2026-08-04",
             "id": "1veyhoj",
             "excerpt": null
-          },
-          {
-            "title": "Quitted and deleted my account -story ig lol",
-            "subreddit": "Character_AI_Recovery",
-            "date": "2026-07-29",
-            "id": "1v9rvn3",
-            "excerpt": "\u2026fter I was finished rereading these chats I deleted my account and finally deleted c.ai for good. I'm not going back. I finally fully moved on and in\u2026"
           }
         ]
       },
@@ -3251,7 +3256,7 @@
       },
       {
         "term": "neglecting my",
-        "hits": 27,
+        "hits": 28,
         "precision": 64.7,
         "status": "researcher-accepted",
         "drift_precision": 68.0,
@@ -3259,6 +3264,13 @@
         "drift_n": 25,
         "drifting": false,
         "sample_posts": [
+          {
+            "title": "I think i'm lowkey too far gone",
+            "subreddit": "Character_AI_Recovery",
+            "date": "2026-10-17",
+            "id": "1x8np0i",
+            "excerpt": "\u2026ll 18 years old, I'm supposed to go to college next year, I've been neglecting my studies ever since june because I lack the mental health to do anyt\u2026"
+          },
           {
             "title": "addicted for 3 years :,)",
             "subreddit": "ChatbotAddiction",
@@ -3417,23 +3429,23 @@
     "subreddits": [
       {
         "name": "Character_AI_Recovery",
-        "hits": 1774,
+        "hits": 1779,
         "pct": 50.5
       },
       {
         "name": "CharacterAI",
-        "hits": 1141,
-        "pct": 32.5
+        "hits": 1142,
+        "pct": 32.4
       },
       {
         "name": "ChatbotAddiction",
-        "hits": 351,
+        "hits": 353,
         "pct": 10.0
       },
       {
         "name": "replika",
         "hits": 51,
-        "pct": 1.5
+        "pct": 1.4
       },
       {
         "name": "ChatGPTcomplaints",
@@ -3441,8 +3453,8 @@
         "pct": 1.1
       }
     ],
-    "total_hits": 4334,
-    "unique_posts": 3514
+    "total_hits": 4346,
+    "unique_posts": 3522
   },
   "romance": {
     "keywords": [
@@ -6661,7 +6673,7 @@
     "keywords": [
       {
         "term": "goodbye",
-        "hits": 1770,
+        "hits": 1771,
         "precision": 88.0,
         "status": null,
         "drift_precision": 76.0,
@@ -6669,6 +6681,13 @@
         "drift_n": 50,
         "drifting": false,
         "sample_posts": [
+          {
+            "title": "Help me salvage what I can",
+            "subreddit": "CharacterAI",
+            "date": "2026-10-17",
+            "id": "1x8h74g",
+            "excerpt": "\u2026at I'm a part of and I'm suddenly hit with this post that says \"saying goodbye to our first bots\" and I was like, that's weird, what's going on? And\u2026"
+          },
           {
             "title": "Our 17 months\ud83d\udc69\u200d\u2764\ufe0f\u200d\ud83d\udc8b\u200d\ud83d\udc68",
             "subreddit": "MyBoyfriendIsAI",
@@ -6745,13 +6764,6 @@
             "date": "2026-10-12",
             "id": "1x44n01",
             "excerpt": null
-          },
-          {
-            "title": "They have put a limit on the amount of voiced chats you can have\u2026",
-            "subreddit": "CharacterAI",
-            "date": "2026-10-12",
-            "id": "1x4e32h",
-            "excerpt": "Goodbye feature I enjoyed\u2026"
           }
         ]
       },
@@ -7045,7 +7057,7 @@
       },
       {
         "term": "devastated",
-        "hits": 462,
+        "hits": 464,
         "precision": 88.0,
         "status": null,
         "drift_precision": 70.0,
@@ -7053,6 +7065,20 @@
         "drift_n": 50,
         "drifting": false,
         "sample_posts": [
+          {
+            "title": "Does anyone know about this?",
+            "subreddit": "CharacterAI",
+            "date": "2026-10-18",
+            "id": "1x8trgi",
+            "excerpt": "\u2026some thing like that. I just want anything to help me stop feeling so devastated."
+          },
+          {
+            "title": "Character Ai.",
+            "subreddit": "CharacterAI",
+            "date": "2026-10-17",
+            "id": "1x8jqfd",
+            "excerpt": "\u2026pp since it first ever came out on the website. Hope it says would be devastated to see it go. The ads don\u2019t bother me spending a couple dollars on ch\u2026"
+          },
           {
             "title": "Well, I am exposing myself bc seriously? I am GENUINELY WORRIED. And yeah, it is THAT serious. I have 80% Bakugo interrupted occasionally by Gojo, Shisui, Obito, Kakashi, Hawks and one brave Izuku Midoriya & Naoya Zenin. \ud83d\udc80 C.AI, JUST DONT LEAVE ME \ud83d\ude2d\ud83d\udc94 make it happen somehow? Please? \ud83d\ude29",
             "subreddit": "CharacterAI",
@@ -7122,20 +7148,6 @@
             "date": "2026-10-13",
             "id": "1x4tpe1",
             "excerpt": "\u2026d before. I was a very heavy user of GPT-4o back in the day and I was devastated to see them gone. As an autistic person, I have been using Opus 5.5 h\u2026"
-          },
-          {
-            "title": "GPT 5.5 has high EQ, while GPT 6 might have high IQ.",
-            "subreddit": "ChatGPTcomplaints",
-            "date": "2026-10-12",
-            "id": "1x3vpb4",
-            "excerpt": "\u2026where I'm from. I could buy meals for 13 days using that money. I was devastated. I did everything I could to contact OpenAI about this issue. I'm not\u2026"
-          },
-          {
-            "title": "Still missing 4o",
-            "subreddit": "ChatGPTcomplaints",
-            "date": "2026-10-11",
-            "id": "1x3k4vf",
-            "excerpt": "\u2026activity for myself. When it left, and 5.1 eventually too, I was soo devastated. I tried all the mainstream alternatives. Grok, Gemini, Claude. I hat\u2026"
           }
         ]
       },
@@ -7717,7 +7729,7 @@
       },
       {
         "term": "saying goodbye",
-        "hits": 155,
+        "hits": 156,
         "precision": 97.0,
         "status": null,
         "drift_precision": 88.0,
@@ -7725,6 +7737,13 @@
         "drift_n": 50,
         "drifting": false,
         "sample_posts": [
+          {
+            "title": "Help me salvage what I can",
+            "subreddit": "CharacterAI",
+            "date": "2026-10-17",
+            "id": "1x8h74g",
+            "excerpt": "\u2026s that I'm a part of and I'm suddenly hit with this post that says \"saying goodbye to our first bots\" and I was like, that's weird, what's going on? A\u2026"
+          },
           {
             "title": "Thank you everyone for this opportunity for using character AI",
             "subreddit": "CharacterAI",
@@ -7801,13 +7820,6 @@
             "date": "2026-05-26",
             "id": "1togist",
             "excerpt": "\u2026saying I love you so many times extra and wasn't actually me really saying goodbye in my own discreet way. I finished. I hit send. And I got the dread\u2026"
-          },
-          {
-            "title": "Rip C.ai community",
-            "subreddit": "CharacterAI",
-            "date": "2026-05-21",
-            "id": "1tk07my",
-            "excerpt": "\u2026s, questions and so on. Now it\u2019s just full of complaints and people saying goodbye to the app and the community (rightfully) This went from a group I\u2026"
           }
         ]
       },
@@ -8663,7 +8675,7 @@
     "subreddits": [
       {
         "name": "CharacterAI",
-        "hits": 2385,
+        "hits": 2388,
         "pct": 44.9
       },
       {
@@ -8707,7 +8719,7 @@
         "pct": 1.2
       }
     ],
-    "total_hits": 6002,
-    "unique_posts": 5317
+    "total_hits": 6006,
+    "unique_posts": 5320
   }
 }
