@@ -356,7 +356,7 @@ antiAI,2026-03,3868,4,T4 — Ambient / Discourse Climate (context),Ambient — A
 antiAI,2026-04,3912,4,T4 — Ambient / Discourse Climate (context),Ambient — Anti-AI,false
 antiAI,2026-05,4177,4,T4 — Ambient / Discourse Climate (context),Ambient — Anti-AI,false
 antiAI,2026-06,4638,4,T4 — Ambient / Discourse Climate (context),Ambient — Anti-AI,false
-antiAI,2026-07,4946,4,T4 — Ambient / Discourse Climate (context),Ambient — Anti-AI,false
+antiAI,2026-07,5117,4,T4 — Ambient / Discourse Climate (context),Ambient — Anti-AI,false
 antiAI,2026-08,6659,4,T4 — Ambient / Discourse Climate (context),Ambient — Anti-AI,false
 antiAI,2026-09,6823,4,T4 — Ambient / Discourse Climate (context),Ambient — Anti-AI,false
 ArtistHate,2023-01,67,4,T4 — Ambient / Discourse Climate (context),Ambient — Anti-AI,false
@@ -626,7 +626,7 @@ CharacterAI,2026-03,8743,1,T1 — Primary Companionship,Primary Companionship,tr
 CharacterAI,2026-04,7164,1,T1 — Primary Companionship,Primary Companionship,true
 CharacterAI,2026-05,10420,1,T1 — Primary Companionship,Primary Companionship,true
 CharacterAI,2026-06,6655,1,T1 — Primary Companionship,Primary Companionship,true
-CharacterAI,2026-07,3833,1,T1 — Primary Companionship,Primary Companionship,true
+CharacterAI,2026-07,4322,1,T1 — Primary Companionship,Primary Companionship,true
 CharacterAI,2026-08,4750,1,T1 — Primary Companionship,Primary Companionship,true
 CharacterAI,2026-09,3610,1,T1 — Primary Companionship,Primary Companionship,true
 CharacterAIrunaways,2023-01,0,3,T3 — Recovery & Dependency,Recovery & Dependency,true
@@ -761,7 +761,7 @@ ChatGPT,2026-03,5778,0,T0 — General AI (context),General AI,false
 ChatGPT,2026-04,6458,0,T0 — General AI (context),General AI,false
 ChatGPT,2026-05,6121,0,T0 — General AI (context),General AI,false
 ChatGPT,2026-06,5613,0,T0 — General AI (context),General AI,false
-ChatGPT,2026-07,5657,0,T0 — General AI (context),General AI,false
+ChatGPT,2026-07,5827,0,T0 — General AI (context),General AI,false
 ChatGPT,2026-08,5436,0,T0 — General AI (context),General AI,false
 ChatGPT,2026-09,6727,0,T0 — General AI (context),General AI,false
 ChatGPTcomplaints,2023-01,0,1,T1 — Primary Companionship,Primary Companionship,true
@@ -895,8 +895,8 @@ ClaudeAI,2026-02,4990,0,T0 — General AI (context),General AI,false
 ClaudeAI,2026-03,7135,0,T0 — General AI (context),General AI,false
 ClaudeAI,2026-04,6907,0,T0 — General AI (context),General AI,false
 ClaudeAI,2026-05,4589,0,T0 — General AI (context),General AI,false
-ClaudeAI,2026-06,5253,0,T0 — General AI (context),General AI,false
-ClaudeAI,2026-07,5553,0,T0 — General AI (context),General AI,false
+ClaudeAI,2026-06,5400,0,T0 — General AI (context),General AI,false
+ClaudeAI,2026-07,5831,0,T0 — General AI (context),General AI,false
 ClaudeAI,2026-08,3872,0,T0 — General AI (context),General AI,false
 ClaudeAI,2026-09,4157,0,T0 — General AI (context),General AI,false
 claudexplorers,2023-01,0,0,T0 — General AI (context),General AI,false
@@ -941,7 +941,7 @@ claudexplorers,2026-03,962,0,T0 — General AI (context),General AI,false
 claudexplorers,2026-04,663,0,T0 — General AI (context),General AI,false
 claudexplorers,2026-05,641,0,T0 — General AI (context),General AI,false
 claudexplorers,2026-06,542,0,T0 — General AI (context),General AI,false
-claudexplorers,2026-07,545,0,T0 — General AI (context),General AI,false
+claudexplorers,2026-07,557,0,T0 — General AI (context),General AI,false
 claudexplorers,2026-08,332,0,T0 — General AI (context),General AI,false
 claudexplorers,2026-09,336,0,T0 — General AI (context),General AI,false
 DefendingAIArt,2023-01,351,4,T4 — Ambient / Discourse Climate (context),Ambient — Pro-AI,false
@@ -986,7 +986,7 @@ DefendingAIArt,2026-03,1641,4,T4 — Ambient / Discourse Climate (context),Ambie
 DefendingAIArt,2026-04,1426,4,T4 — Ambient / Discourse Climate (context),Ambient — Pro-AI,false
 DefendingAIArt,2026-05,1650,4,T4 — Ambient / Discourse Climate (context),Ambient — Pro-AI,false
 DefendingAIArt,2026-06,1722,4,T4 — Ambient / Discourse Climate (context),Ambient — Pro-AI,false
-DefendingAIArt,2026-07,1637,4,T4 — Ambient / Discourse Climate (context),Ambient — Pro-AI,false
+DefendingAIArt,2026-07,1706,4,T4 — Ambient / Discourse Climate (context),Ambient — Pro-AI,false
 DefendingAIArt,2026-08,2165,4,T4 — Ambient / Discourse Climate (context),Ambient — Pro-AI,false
 DefendingAIArt,2026-09,1946,4,T4 — Ambient / Discourse Climate (context),Ambient — Pro-AI,false
 FuckAI,2023-01,0,4,T4 — Ambient / Discourse Climate (context),Ambient — Anti-AI,false
@@ -1391,7 +1391,7 @@ OpenAI,2026-03,1727,0,T0 — General AI (context),General AI,false
 OpenAI,2026-04,1369,0,T0 — General AI (context),General AI,false
 OpenAI,2026-05,1271,0,T0 — General AI (context),General AI,false
 OpenAI,2026-06,1220,0,T0 — General AI (context),General AI,false
-OpenAI,2026-07,1737,0,T0 — General AI (context),General AI,false
+OpenAI,2026-07,1767,0,T0 — General AI (context),General AI,false
 OpenAI,2026-08,1329,0,T0 — General AI (context),General AI,false
 OpenAI,2026-09,2498,0,T0 — General AI (context),General AI,false
 Paradot,2023-01,0,2,T2 — Platform-Specific,Platform-Specific,true

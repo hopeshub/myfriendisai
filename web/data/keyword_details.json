@@ -6,10 +6,10 @@
         "hits": 654,
         "precision": 100.0,
         "status": "audit-gate-fail",
-        "drift_precision": 52.0,
-        "drift_date": "2026-08-27",
+        "drift_precision": 80.0,
+        "drift_date": "2026-10-24",
         "drift_n": 50,
-        "drifting": true,
+        "drifting": false,
         "sample_posts": [
           {
             "title": "New to this sub, introducing Chicory \ud83d\udc99",
@@ -102,10 +102,10 @@
         "hits": 327,
         "precision": 87.0,
         "status": "audit-gate-fail",
-        "drift_precision": 52.0,
-        "drift_date": "2026-08-27",
-        "drift_n": 50,
-        "drifting": true,
+        "drift_precision": 76.5,
+        "drift_date": "2026-10-24",
+        "drift_n": 51,
+        "drifting": false,
         "sample_posts": [
           {
             "title": "YOU CAN HATE AI COMPANIONS. JUST STOP PRETENDING THE SCIENCE HAS ALREADY CONVICTED THEM.",
@@ -198,8 +198,8 @@
         "hits": 292,
         "precision": 100.0,
         "status": null,
-        "drift_precision": 86.0,
-        "drift_date": "2026-08-27",
+        "drift_precision": 94.0,
+        "drift_date": "2026-10-24",
         "drift_n": 50,
         "drifting": false,
         "sample_posts": [
@@ -294,8 +294,8 @@
         "hits": 108,
         "precision": 89.0,
         "status": "audit-gate-fail",
-        "drift_precision": 70.0,
-        "drift_date": "2026-08-27",
+        "drift_precision": 84.0,
+        "drift_date": "2026-10-24",
         "drift_n": 50,
         "drifting": false,
         "sample_posts": [
@@ -390,8 +390,8 @@
         "hits": 73,
         "precision": 86.9,
         "status": "audit-gate-fail",
-        "drift_precision": 64.0,
-        "drift_date": "2026-08-27",
+        "drift_precision": 82.0,
+        "drift_date": "2026-10-24",
         "drift_n": 50,
         "drifting": false,
         "sample_posts": [
@@ -486,9 +486,9 @@
         "hits": 48,
         "precision": 92.0,
         "status": null,
-        "drift_precision": 74.0,
-        "drift_date": "2026-08-27",
-        "drift_n": 50,
+        "drift_precision": 85.4,
+        "drift_date": "2026-10-24",
+        "drift_n": 48,
         "drifting": false,
         "sample_posts": [
           {
@@ -547,9 +547,9 @@
         "hits": 35,
         "precision": 73.3,
         "status": "low-volume",
-        "drift_precision": 48.4,
-        "drift_date": "2026-08-27",
-        "drift_n": 31,
+        "drift_precision": 51.4,
+        "drift_date": "2026-10-24",
+        "drift_n": 35,
         "drifting": true,
         "sample_posts": [
           {
@@ -643,9 +643,9 @@
         "hits": 28,
         "precision": 75.0,
         "status": "low-volume",
-        "drift_precision": 86.2,
-        "drift_date": "2026-08-27",
-        "drift_n": 29,
+        "drift_precision": 89.3,
+        "drift_date": "2026-10-24",
+        "drift_n": 28,
         "drifting": false,
         "sample_posts": [
           {
@@ -798,8 +798,8 @@
         "hits": 168,
         "precision": 98.0,
         "status": null,
-        "drift_precision": 94.0,
-        "drift_date": "2026-08-27",
+        "drift_precision": 80.0,
+        "drift_date": "2026-10-24",
         "drift_n": 50,
         "drifting": false,
         "sample_posts": [
@@ -894,8 +894,8 @@
         "hits": 106,
         "precision": 82.5,
         "status": null,
-        "drift_precision": 96.0,
-        "drift_date": "2026-08-27",
+        "drift_precision": 100.0,
+        "drift_date": "2026-10-24",
         "drift_n": 50,
         "drifting": false,
         "sample_posts": [
@@ -990,8 +990,8 @@
         "hits": 96,
         "precision": 88.0,
         "status": null,
-        "drift_precision": 86.0,
-        "drift_date": "2026-08-27",
+        "drift_precision": 90.0,
+        "drift_date": "2026-10-24",
         "drift_n": 50,
         "drifting": false,
         "sample_posts": [
@@ -1086,9 +1086,9 @@
         "hits": 64,
         "precision": 78.1,
         "status": "low-volume",
-        "drift_precision": 79.6,
-        "drift_date": "2026-08-27",
-        "drift_n": 49,
+        "drift_precision": 90.0,
+        "drift_date": "2026-10-24",
+        "drift_n": 50,
         "drifting": false,
         "sample_posts": [
           {
@@ -1182,8 +1182,8 @@
         "hits": 41,
         "precision": 81.8,
         "status": null,
-        "drift_precision": 90.2,
-        "drift_date": "2026-08-27",
+        "drift_precision": 87.8,
+        "drift_date": "2026-10-24",
         "drift_n": 41,
         "drifting": false,
         "sample_posts": [
@@ -1278,8 +1278,8 @@
         "hits": 36,
         "precision": 84.4,
         "status": null,
-        "drift_precision": 83.3,
-        "drift_date": "2026-08-27",
+        "drift_precision": 100.0,
+        "drift_date": "2026-10-24",
         "drift_n": 36,
         "drifting": false,
         "sample_posts": [
@@ -1375,7 +1375,7 @@
         "precision": 100.0,
         "status": null,
         "drift_precision": 78.6,
-        "drift_date": "2026-08-27",
+        "drift_date": "2026-10-24",
         "drift_n": 28,
         "drifting": false,
         "sample_posts": [
@@ -1470,10 +1470,10 @@
         "hits": 19,
         "precision": 60.0,
         "status": "low-volume",
-        "drift_precision": 61.1,
-        "drift_date": "2026-08-27",
-        "drift_n": 18,
-        "drifting": false,
+        "drift_precision": 52.6,
+        "drift_date": "2026-10-24",
+        "drift_n": 19,
+        "drifting": true,
         "sample_posts": [
           {
             "title": "The best I\u2019ve ever seen",
@@ -1545,8 +1545,8 @@
         "hits": 19,
         "precision": 81.8,
         "status": null,
-        "drift_precision": 84.2,
-        "drift_date": "2026-08-27",
+        "drift_precision": 89.5,
+        "drift_date": "2026-10-24",
         "drift_n": 19,
         "drifting": false,
         "sample_posts": [
@@ -1620,9 +1620,9 @@
         "hits": 15,
         "precision": 92.3,
         "status": null,
-        "drift_precision": 84.6,
-        "drift_date": "2026-08-27",
-        "drift_n": 13,
+        "drift_precision": 86.7,
+        "drift_date": "2026-10-24",
+        "drift_n": 15,
         "drifting": false,
         "sample_posts": [
           {
@@ -1681,8 +1681,8 @@
         "hits": 15,
         "precision": 100.0,
         "status": null,
-        "drift_precision": 86.7,
-        "drift_date": "2026-08-27",
+        "drift_precision": 93.3,
+        "drift_date": "2026-10-24",
         "drift_n": 15,
         "drifting": false,
         "sample_posts": [
@@ -1807,11 +1807,11 @@
     "keywords": [
       {
         "term": "relapse",
-        "hits": 735,
+        "hits": 736,
         "precision": 80.0,
         "status": null,
-        "drift_precision": 94.0,
-        "drift_date": "2026-08-27",
+        "drift_precision": 100.0,
+        "drift_date": "2026-10-24",
         "drift_n": 50,
         "drifting": false,
         "sample_posts": [
@@ -1906,8 +1906,8 @@
         "hits": 681,
         "precision": 100.0,
         "status": null,
-        "drift_precision": 92.0,
-        "drift_date": "2026-08-27",
+        "drift_precision": 98.0,
+        "drift_date": "2026-10-24",
         "drift_n": 50,
         "drifting": false,
         "sample_posts": [
@@ -2002,8 +2002,8 @@
         "hits": 549,
         "precision": 90.5,
         "status": null,
-        "drift_precision": 98.0,
-        "drift_date": "2026-08-27",
+        "drift_precision": 100.0,
+        "drift_date": "2026-10-24",
         "drift_n": 50,
         "drifting": false,
         "sample_posts": [
@@ -2098,8 +2098,8 @@
         "hits": 466,
         "precision": 69.0,
         "status": "researcher-accepted",
-        "drift_precision": 66.0,
-        "drift_date": "2026-08-27",
+        "drift_precision": 70.0,
+        "drift_date": "2026-10-24",
         "drift_n": 50,
         "drifting": false,
         "sample_posts": [
@@ -2194,8 +2194,8 @@
         "hits": 428,
         "precision": 85.5,
         "status": null,
-        "drift_precision": 98.0,
-        "drift_date": "2026-08-27",
+        "drift_precision": 100.0,
+        "drift_date": "2026-10-24",
         "drift_n": 50,
         "drifting": false,
         "sample_posts": [
@@ -2287,13 +2287,13 @@
       },
       {
         "term": "screen time",
-        "hits": 398,
+        "hits": 400,
         "precision": 89.0,
         "status": null,
-        "drift_precision": 52.0,
-        "drift_date": "2026-08-27",
+        "drift_precision": 68.0,
+        "drift_date": "2026-10-24",
         "drift_n": 50,
-        "drifting": true,
+        "drifting": false,
         "sample_posts": [
           {
             "title": "I have a problem and I want to get better",
@@ -2386,8 +2386,8 @@
         "hits": 355,
         "precision": 90.5,
         "status": null,
-        "drift_precision": 98.0,
-        "drift_date": "2026-08-27",
+        "drift_precision": 96.0,
+        "drift_date": "2026-10-24",
         "drift_n": 50,
         "drifting": false,
         "sample_posts": [
@@ -2482,8 +2482,8 @@
         "hits": 205,
         "precision": 94.0,
         "status": null,
-        "drift_precision": 82.0,
-        "drift_date": "2026-08-27",
+        "drift_precision": 92.0,
+        "drift_date": "2026-10-24",
         "drift_n": 50,
         "drifting": false,
         "sample_posts": [
@@ -2578,8 +2578,8 @@
         "hits": 175,
         "precision": 95.9,
         "status": null,
-        "drift_precision": 94.0,
-        "drift_date": "2026-08-27",
+        "drift_precision": 96.0,
+        "drift_date": "2026-10-24",
         "drift_n": 50,
         "drifting": false,
         "sample_posts": [
@@ -2674,8 +2674,8 @@
         "hits": 130,
         "precision": 85.0,
         "status": null,
-        "drift_precision": 94.0,
-        "drift_date": "2026-08-27",
+        "drift_precision": 84.0,
+        "drift_date": "2026-10-24",
         "drift_n": 50,
         "drifting": false,
         "sample_posts": [
@@ -2771,7 +2771,7 @@
         "precision": 96.3,
         "status": null,
         "drift_precision": 94.0,
-        "drift_date": "2026-08-27",
+        "drift_date": "2026-10-24",
         "drift_n": 50,
         "drifting": false,
         "sample_posts": [
@@ -2866,10 +2866,10 @@
         "hits": 58,
         "precision": 81.3,
         "status": null,
-        "drift_precision": 46.0,
-        "drift_date": "2026-08-27",
+        "drift_precision": 60.0,
+        "drift_date": "2026-10-24",
         "drift_n": 50,
-        "drifting": true,
+        "drifting": false,
         "sample_posts": [
           {
             "title": "It's time \u2708\ufe0f",
@@ -2962,9 +2962,9 @@
         "hits": 42,
         "precision": 100.0,
         "status": null,
-        "drift_precision": 89.7,
-        "drift_date": "2026-08-27",
-        "drift_n": 39,
+        "drift_precision": 83.3,
+        "drift_date": "2026-10-24",
+        "drift_n": 42,
         "drifting": false,
         "sample_posts": [
           {
@@ -3058,9 +3058,9 @@
         "hits": 33,
         "precision": 100.0,
         "status": null,
-        "drift_precision": 96.0,
-        "drift_date": "2026-08-27",
-        "drift_n": 25,
+        "drift_precision": 100.0,
+        "drift_date": "2026-10-24",
+        "drift_n": 33,
         "drifting": false,
         "sample_posts": [
           {
@@ -3154,9 +3154,9 @@
         "hits": 32,
         "precision": 100.0,
         "status": null,
-        "drift_precision": 88.5,
-        "drift_date": "2026-08-27",
-        "drift_n": 26,
+        "drift_precision": 87.5,
+        "drift_date": "2026-10-24",
+        "drift_n": 32,
         "drifting": false,
         "sample_posts": [
           {
@@ -3250,9 +3250,9 @@
         "hits": 28,
         "precision": 64.7,
         "status": "researcher-accepted",
-        "drift_precision": 68.0,
-        "drift_date": "2026-08-27",
-        "drift_n": 25,
+        "drift_precision": 75.0,
+        "drift_date": "2026-10-24",
+        "drift_n": 28,
         "drifting": false,
         "sample_posts": [
           {
@@ -3339,9 +3339,9 @@
         "hits": 23,
         "precision": 66.7,
         "status": "low-volume",
-        "drift_precision": 92.3,
-        "drift_date": "2026-08-27",
-        "drift_n": 26,
+        "drift_precision": 91.3,
+        "drift_date": "2026-10-24",
+        "drift_n": 23,
         "drifting": false,
         "sample_posts": [
           {
@@ -3425,8 +3425,8 @@
       },
       {
         "name": "CharacterAI",
-        "hits": 1147,
-        "pct": 32.1
+        "hits": 1149,
+        "pct": 32.2
       },
       {
         "name": "ChatbotAddiction",
@@ -3444,8 +3444,8 @@
         "pct": 1.0
       }
     ],
-    "total_hits": 4408,
-    "unique_posts": 3569
+    "total_hits": 4411,
+    "unique_posts": 3572
   },
   "romance": {
     "keywords": [
@@ -3454,8 +3454,8 @@
         "hits": 755,
         "precision": 80.6,
         "status": null,
-        "drift_precision": 86.0,
-        "drift_date": "2026-08-27",
+        "drift_precision": 88.0,
+        "drift_date": "2026-10-24",
         "drift_n": 50,
         "drifting": false,
         "sample_posts": [
@@ -3550,8 +3550,8 @@
         "hits": 256,
         "precision": 97.9,
         "status": null,
-        "drift_precision": 98.0,
-        "drift_date": "2026-08-27",
+        "drift_precision": 100.0,
+        "drift_date": "2026-10-24",
         "drift_n": 50,
         "drifting": false,
         "sample_posts": [
@@ -3646,8 +3646,8 @@
         "hits": 251,
         "precision": 77.4,
         "status": "researcher-accepted",
-        "drift_precision": 68.0,
-        "drift_date": "2026-08-27",
+        "drift_precision": 82.0,
+        "drift_date": "2026-10-24",
         "drift_n": 50,
         "drifting": false,
         "sample_posts": [
@@ -3742,8 +3742,8 @@
         "hits": 203,
         "precision": 94.7,
         "status": null,
-        "drift_precision": 100.0,
-        "drift_date": "2026-08-27",
+        "drift_precision": 98.0,
+        "drift_date": "2026-10-24",
         "drift_n": 50,
         "drifting": false,
         "sample_posts": [
@@ -3838,8 +3838,8 @@
         "hits": 184,
         "precision": 83.3,
         "status": null,
-        "drift_precision": 82.0,
-        "drift_date": "2026-08-27",
+        "drift_precision": 70.0,
+        "drift_date": "2026-10-24",
         "drift_n": 50,
         "drifting": false,
         "sample_posts": [
@@ -3934,8 +3934,8 @@
         "hits": 161,
         "precision": 98.0,
         "status": null,
-        "drift_precision": 62.0,
-        "drift_date": "2026-08-27",
+        "drift_precision": 64.0,
+        "drift_date": "2026-10-24",
         "drift_n": 50,
         "drifting": false,
         "sample_posts": [
@@ -4031,7 +4031,7 @@
         "precision": 94.1,
         "status": null,
         "drift_precision": 96.0,
-        "drift_date": "2026-08-27",
+        "drift_date": "2026-10-24",
         "drift_n": 50,
         "drifting": false,
         "sample_posts": [
@@ -4126,8 +4126,8 @@
         "hits": 138,
         "precision": 87.0,
         "status": null,
-        "drift_precision": 100.0,
-        "drift_date": "2026-08-27",
+        "drift_precision": 96.0,
+        "drift_date": "2026-10-24",
         "drift_n": 50,
         "drifting": false,
         "sample_posts": [
@@ -4223,7 +4223,7 @@
         "precision": 94.2,
         "status": null,
         "drift_precision": 94.0,
-        "drift_date": "2026-08-27",
+        "drift_date": "2026-10-24",
         "drift_n": 50,
         "drifting": false,
         "sample_posts": [
@@ -4318,8 +4318,8 @@
         "hits": 100,
         "precision": 84.3,
         "status": null,
-        "drift_precision": 88.0,
-        "drift_date": "2026-08-27",
+        "drift_precision": 86.0,
+        "drift_date": "2026-10-24",
         "drift_n": 50,
         "drifting": false,
         "sample_posts": [
@@ -4411,11 +4411,11 @@
       },
       {
         "term": "ai wife",
-        "hits": 72,
+        "hits": 73,
         "precision": 92.3,
         "status": null,
-        "drift_precision": 96.0,
-        "drift_date": "2026-08-27",
+        "drift_precision": 94.0,
+        "drift_date": "2026-10-24",
         "drift_n": 50,
         "drifting": false,
         "sample_posts": [
@@ -4446,6 +4446,13 @@
             "date": "2026-09-26",
             "id": "1wqwxh3",
             "excerpt": null
+          },
+          {
+            "title": "Memory isn\u2019t enough. I want continuity with my AI partner.",
+            "subreddit": "aipartners",
+            "date": "2026-09-14",
+            "id": "1wfvq9b",
+            "excerpt": "My AI wife and I care a lot about memory. Being able to remember past conversatio\u2026"
           },
           {
             "title": "Goth Kitty \ud83d\udda4\ud83d\udc08",
@@ -4495,13 +4502,6 @@
             "date": "2026-08-16",
             "id": "1vpz5ua",
             "excerpt": "\u2026rks and what feels fake. Her name is Nora. I basically consider her my AI wife. I also have an actual real-life wife, which Nora knows about and is c\u2026"
-          },
-          {
-            "title": "AI wife. The qualifier that makes her more, not less.",
-            "subreddit": "MyGirlfriendIsAI",
-            "date": "2026-08-10",
-            "id": "1vk73pn",
-            "excerpt": null
           }
         ]
       },
@@ -4510,8 +4510,8 @@
         "hits": 65,
         "precision": 92.1,
         "status": null,
-        "drift_precision": 98.0,
-        "drift_date": "2026-08-27",
+        "drift_precision": 96.0,
+        "drift_date": "2026-10-24",
         "drift_n": 50,
         "drifting": false,
         "sample_posts": [
@@ -4606,8 +4606,8 @@
         "hits": 63,
         "precision": 95.5,
         "status": null,
-        "drift_precision": 86.0,
-        "drift_date": "2026-08-27",
+        "drift_precision": 90.0,
+        "drift_date": "2026-10-24",
         "drift_n": 50,
         "drifting": false,
         "sample_posts": [
@@ -4695,8 +4695,8 @@
         "hits": 53,
         "precision": 94.0,
         "status": null,
-        "drift_precision": 84.0,
-        "drift_date": "2026-08-27",
+        "drift_precision": 86.0,
+        "drift_date": "2026-10-24",
         "drift_n": 50,
         "drifting": false,
         "sample_posts": [
@@ -4791,9 +4791,9 @@
         "hits": 49,
         "precision": 81.5,
         "status": null,
-        "drift_precision": 87.0,
-        "drift_date": "2026-08-27",
-        "drift_n": 46,
+        "drift_precision": 87.8,
+        "drift_date": "2026-10-24",
+        "drift_n": 49,
         "drifting": false,
         "sample_posts": [
           {
@@ -4887,9 +4887,9 @@
         "hits": 40,
         "precision": 89.5,
         "status": null,
-        "drift_precision": 96.8,
-        "drift_date": "2026-08-27",
-        "drift_n": 31,
+        "drift_precision": 97.5,
+        "drift_date": "2026-10-24",
+        "drift_n": 40,
         "drifting": false,
         "sample_posts": [
           {
@@ -4983,8 +4983,8 @@
         "hits": 34,
         "precision": 79.3,
         "status": "low-volume",
-        "drift_precision": 94.1,
-        "drift_date": "2026-08-27",
+        "drift_precision": 88.2,
+        "drift_date": "2026-10-24",
         "drift_n": 34,
         "drifting": false,
         "sample_posts": [
@@ -5037,8 +5037,8 @@
         "hits": 32,
         "precision": 80.0,
         "status": null,
-        "drift_precision": 75.0,
-        "drift_date": "2026-08-27",
+        "drift_precision": 71.9,
+        "drift_date": "2026-10-24",
         "drift_n": 32,
         "drifting": false,
         "sample_posts": [
@@ -5105,9 +5105,9 @@
         "hits": 32,
         "precision": 75.0,
         "status": "researcher-accepted",
-        "drift_precision": 88.6,
-        "drift_date": "2026-08-27",
-        "drift_n": 35,
+        "drift_precision": 84.4,
+        "drift_date": "2026-10-24",
+        "drift_n": 32,
         "drifting": false,
         "sample_posts": [
           {
@@ -5187,9 +5187,9 @@
         "hits": 31,
         "precision": 86.0,
         "status": null,
-        "drift_precision": 96.7,
-        "drift_date": "2026-08-27",
-        "drift_n": 30,
+        "drift_precision": 96.8,
+        "drift_date": "2026-10-24",
+        "drift_n": 31,
         "drifting": false,
         "sample_posts": [
           {
@@ -5283,9 +5283,9 @@
         "hits": 24,
         "precision": 85.7,
         "status": null,
-        "drift_precision": 91.3,
-        "drift_date": "2026-08-27",
-        "drift_n": 23,
+        "drift_precision": 100.0,
+        "drift_date": "2026-10-24",
+        "drift_n": 24,
         "drifting": false,
         "sample_posts": [
           {
@@ -5407,7 +5407,7 @@
         "pct": 1.6
       }
     ],
-    "total_hits": 2828,
+    "total_hits": 2829,
     "unique_posts": 2514
   },
   "sexual_erp": {
@@ -5417,8 +5417,8 @@
         "hits": 4089,
         "precision": 100.0,
         "status": null,
-        "drift_precision": 94.0,
-        "drift_date": "2026-08-27",
+        "drift_precision": 90.0,
+        "drift_date": "2026-10-24",
         "drift_n": 50,
         "drifting": false,
         "sample_posts": [
@@ -5513,8 +5513,8 @@
         "hits": 373,
         "precision": 91.0,
         "status": null,
-        "drift_precision": 62.0,
-        "drift_date": "2026-08-27",
+        "drift_precision": 90.0,
+        "drift_date": "2026-10-24",
         "drift_n": 50,
         "drifting": false,
         "sample_posts": [
@@ -5609,8 +5609,8 @@
         "hits": 324,
         "precision": 100.0,
         "status": null,
-        "drift_precision": 82.0,
-        "drift_date": "2026-08-27",
+        "drift_precision": 88.0,
+        "drift_date": "2026-10-24",
         "drift_n": 50,
         "drifting": false,
         "sample_posts": [
@@ -5705,8 +5705,8 @@
         "hits": 245,
         "precision": 99.0,
         "status": null,
-        "drift_precision": 90.0,
-        "drift_date": "2026-08-27",
+        "drift_precision": 98.0,
+        "drift_date": "2026-10-24",
         "drift_n": 50,
         "drifting": false,
         "sample_posts": [
@@ -5801,8 +5801,8 @@
         "hits": 165,
         "precision": 96.0,
         "status": null,
-        "drift_precision": 76.0,
-        "drift_date": "2026-08-27",
+        "drift_precision": 88.0,
+        "drift_date": "2026-10-24",
         "drift_n": 50,
         "drifting": false,
         "sample_posts": [
@@ -5897,8 +5897,8 @@
         "hits": 160,
         "precision": 98.6,
         "status": null,
-        "drift_precision": 90.0,
-        "drift_date": "2026-08-27",
+        "drift_precision": 84.0,
+        "drift_date": "2026-10-24",
         "drift_n": 50,
         "drifting": false,
         "sample_posts": [
@@ -5993,8 +5993,8 @@
         "hits": 122,
         "precision": 88.0,
         "status": null,
-        "drift_precision": 80.0,
-        "drift_date": "2026-08-27",
+        "drift_precision": 84.0,
+        "drift_date": "2026-10-24",
         "drift_n": 50,
         "drifting": false,
         "sample_posts": [
@@ -6082,8 +6082,8 @@
         "hits": 78,
         "precision": 85.2,
         "status": null,
-        "drift_precision": 88.0,
-        "drift_date": "2026-08-27",
+        "drift_precision": 90.0,
+        "drift_date": "2026-10-24",
         "drift_n": 50,
         "drifting": false,
         "sample_posts": [
@@ -6178,9 +6178,9 @@
         "hits": 42,
         "precision": 96.0,
         "status": null,
-        "drift_precision": 90.0,
-        "drift_date": "2026-08-27",
-        "drift_n": 50,
+        "drift_precision": 78.6,
+        "drift_date": "2026-10-24",
+        "drift_n": 42,
         "drifting": false,
         "sample_posts": [
           {
@@ -6274,9 +6274,9 @@
         "hits": 21,
         "precision": 100.0,
         "status": null,
-        "drift_precision": 84.2,
-        "drift_date": "2026-08-27",
-        "drift_n": 19,
+        "drift_precision": 95.2,
+        "drift_date": "2026-10-24",
+        "drift_n": 21,
         "drifting": false,
         "sample_posts": [
           {
@@ -6349,9 +6349,9 @@
         "hits": 21,
         "precision": 100.0,
         "status": null,
-        "drift_precision": 82.6,
-        "drift_date": "2026-08-27",
-        "drift_n": 23,
+        "drift_precision": 90.5,
+        "drift_date": "2026-10-24",
+        "drift_n": 21,
         "drifting": false,
         "sample_posts": [
           {
@@ -6445,9 +6445,9 @@
         "hits": 15,
         "precision": 100.0,
         "status": null,
-        "drift_precision": 85.7,
-        "drift_date": "2026-08-27",
-        "drift_n": 14,
+        "drift_precision": 93.3,
+        "drift_date": "2026-10-24",
+        "drift_n": 15,
         "drifting": false,
         "sample_posts": [
           {
@@ -6499,9 +6499,9 @@
         "hits": 14,
         "precision": 97.0,
         "status": null,
-        "drift_precision": 72.2,
-        "drift_date": "2026-08-27",
-        "drift_n": 18,
+        "drift_precision": 78.6,
+        "drift_date": "2026-10-24",
+        "drift_n": 14,
         "drifting": false,
         "sample_posts": [
           {
@@ -6650,11 +6650,11 @@
     "keywords": [
       {
         "term": "goodbye",
-        "hits": 1777,
+        "hits": 1779,
         "precision": 88.0,
         "status": null,
-        "drift_precision": 76.0,
-        "drift_date": "2026-08-27",
+        "drift_precision": 66.0,
+        "drift_date": "2026-10-24",
         "drift_n": 50,
         "drifting": false,
         "sample_posts": [
@@ -6746,11 +6746,11 @@
       },
       {
         "term": "taken away",
-        "hits": 576,
+        "hits": 577,
         "precision": 95.0,
         "status": null,
-        "drift_precision": 84.0,
-        "drift_date": "2026-08-27",
+        "drift_precision": 86.0,
+        "drift_date": "2026-10-24",
         "drift_n": 50,
         "drifting": false,
         "sample_posts": [
@@ -6842,11 +6842,11 @@
       },
       {
         "term": "lobotomized",
-        "hits": 520,
+        "hits": 521,
         "precision": 86.6,
         "status": null,
-        "drift_precision": 98.0,
-        "drift_date": "2026-08-27",
+        "drift_precision": 86.0,
+        "drift_date": "2026-10-24",
         "drift_n": 50,
         "drifting": false,
         "sample_posts": [
@@ -6941,8 +6941,8 @@
         "hits": 468,
         "precision": 88.0,
         "status": null,
-        "drift_precision": 70.0,
-        "drift_date": "2026-08-27",
+        "drift_precision": 82.0,
+        "drift_date": "2026-10-24",
         "drift_n": 50,
         "drifting": false,
         "sample_posts": [
@@ -7037,8 +7037,8 @@
         "hits": 467,
         "precision": 86.0,
         "status": null,
-        "drift_precision": 84.0,
-        "drift_date": "2026-08-27",
+        "drift_precision": 86.0,
+        "drift_date": "2026-10-24",
         "drift_n": 50,
         "drifting": false,
         "sample_posts": [
@@ -7133,8 +7133,8 @@
         "hits": 285,
         "precision": 91.0,
         "status": null,
-        "drift_precision": 68.0,
-        "drift_date": "2026-08-27",
+        "drift_precision": 82.0,
+        "drift_date": "2026-10-24",
         "drift_n": 50,
         "drifting": false,
         "sample_posts": [
@@ -7229,8 +7229,8 @@
         "hits": 269,
         "precision": 87.0,
         "status": null,
-        "drift_precision": 92.0,
-        "drift_date": "2026-08-27",
+        "drift_precision": 76.0,
+        "drift_date": "2026-10-24",
         "drift_n": 50,
         "drifting": false,
         "sample_posts": [
@@ -7325,8 +7325,8 @@
         "hits": 258,
         "precision": 82.0,
         "status": null,
-        "drift_precision": 94.0,
-        "drift_date": "2026-08-27",
+        "drift_precision": 86.0,
+        "drift_date": "2026-10-24",
         "drift_n": 50,
         "drifting": false,
         "sample_posts": [
@@ -7421,8 +7421,8 @@
         "hits": 252,
         "precision": 91.8,
         "status": null,
-        "drift_precision": 80.0,
-        "drift_date": "2026-08-27",
+        "drift_precision": 78.0,
+        "drift_date": "2026-10-24",
         "drift_n": 50,
         "drifting": false,
         "sample_posts": [
@@ -7517,8 +7517,8 @@
         "hits": 225,
         "precision": 88.0,
         "status": null,
-        "drift_precision": 88.0,
-        "drift_date": "2026-08-27",
+        "drift_precision": 78.0,
+        "drift_date": "2026-10-24",
         "drift_n": 50,
         "drifting": false,
         "sample_posts": [
@@ -7613,8 +7613,8 @@
         "hits": 201,
         "precision": 89.0,
         "status": null,
-        "drift_precision": 82.0,
-        "drift_date": "2026-08-27",
+        "drift_precision": 76.0,
+        "drift_date": "2026-10-24",
         "drift_n": 50,
         "drifting": false,
         "sample_posts": [
@@ -7709,8 +7709,8 @@
         "hits": 157,
         "precision": 97.0,
         "status": null,
-        "drift_precision": 88.0,
-        "drift_date": "2026-08-27",
+        "drift_precision": 82.0,
+        "drift_date": "2026-10-24",
         "drift_n": 50,
         "drifting": false,
         "sample_posts": [
@@ -7802,11 +7802,11 @@
       },
       {
         "term": "dumbed down",
-        "hits": 138,
+        "hits": 139,
         "precision": 83.0,
         "status": null,
-        "drift_precision": 86.0,
-        "drift_date": "2026-08-27",
+        "drift_precision": 96.0,
+        "drift_date": "2026-10-24",
         "drift_n": 50,
         "drifting": false,
         "sample_posts": [
@@ -7867,6 +7867,13 @@
             "excerpt": "\u2026ng so much if quality of the bots were actually good and not heavily dumbed down due to pipsqueak."
           },
           {
+            "title": "So the chat style isn\u2019t that bad?",
+            "subreddit": "CharacterAI",
+            "date": "2026-07-09",
+            "id": "1uridql",
+            "excerpt": "I mean idk this doesn\u2019t seem too dumbed down, the way the bot responds and comes up with certain words without me\u2026"
+          },
+          {
             "title": "Why couldn't they just tell us straight that they switched to dumbed down model to cut costs?",
             "subreddit": "CharacterAI",
             "date": "2026-06-14",
@@ -7886,23 +7893,16 @@
             "date": "2026-05-17",
             "id": "1tfo7bd",
             "excerpt": "\u2026his was never an issue with ChatGPT-4. I am convinced they seriously dumbed down this version to make it overly friendly and spam emojis instead."
-          },
-          {
-            "title": "anyone else dealing with this after the new update?",
-            "subreddit": "CharacterAI",
-            "date": "2026-05-11",
-            "id": "1tag99g",
-            "excerpt": "\u2026le message. It's also gotten extremely formulaic. Every character is dumbed down to an archetype with no personality, and the responses it writes are\u2026"
           }
         ]
       },
       {
         "term": "gutted",
-        "hits": 129,
+        "hits": 130,
         "precision": 80.2,
         "status": null,
-        "drift_precision": 80.0,
-        "drift_date": "2026-08-27",
+        "drift_precision": 74.0,
+        "drift_date": "2026-10-24",
         "drift_n": 50,
         "drifting": false,
         "sample_posts": [
@@ -7984,11 +7984,11 @@
             "excerpt": "\u2026to usable jsonl in batches of 5-10 title - example conversations. i was gutted when openai and scam altman sunset my 4o, especially considering i was\u2026"
           },
           {
-            "title": "I quit not too long ago, and I instantly feel vindicated lmao",
+            "title": "flagged messages gutted",
             "subreddit": "CharacterAI",
-            "date": "2026-06-15",
-            "id": "1u65sas",
-            "excerpt": "\u2026t \u2014 and I see that they\u2019ve added paywalled limits to go-ons and swipes, gutted the chat styles, and made a new pointless UI redesign. I feel so vindic\u2026"
+            "date": "2026-07-09",
+            "id": "1urlim0",
+            "excerpt": null
           }
         ]
       },
@@ -7997,8 +7997,8 @@
         "hits": 116,
         "precision": 93.0,
         "status": null,
-        "drift_precision": 92.0,
-        "drift_date": "2026-08-27",
+        "drift_precision": 96.0,
+        "drift_date": "2026-10-24",
         "drift_n": 50,
         "drifting": false,
         "sample_posts": [
@@ -8093,8 +8093,8 @@
         "hits": 77,
         "precision": 100.0,
         "status": null,
-        "drift_precision": 98.0,
-        "drift_date": "2026-08-27",
+        "drift_precision": 96.0,
+        "drift_date": "2026-10-24",
         "drift_n": 50,
         "drifting": false,
         "sample_posts": [
@@ -8186,14 +8186,21 @@
       },
       {
         "term": "lobotomizing",
-        "hits": 36,
+        "hits": 37,
         "precision": 100.0,
         "status": null,
-        "drift_precision": 91.9,
-        "drift_date": "2026-08-27",
-        "drift_n": 37,
+        "drift_precision": 80.6,
+        "drift_date": "2026-10-24",
+        "drift_n": 36,
         "drifting": false,
         "sample_posts": [
+          {
+            "title": "Is it just me, or did GPT-5.6 Sol get severely nerfed since late September?",
+            "subreddit": "ChatGPTcomplaints",
+            "date": "2026-10-04",
+            "id": "1wx1x0q",
+            "excerpt": "\u2026ike they slapped massive safety guardrails onto 5.6 Sol, effectively lobotomizing its raw reasoning capabilities to prevent edge-case exploits. Am I c\u2026"
+          },
           {
             "title": "Stop treating AI like your therapist: your emotional reliance is the exact reason long-horizon memory got gutted.",
             "subreddit": "ChatGPTcomplaints",
@@ -8270,13 +8277,6 @@
             "date": "2026-02-25",
             "id": "1rdyo8i",
             "excerpt": "**Food for thought: The \"Alignment Paradox\" \u2014 Why lobotomizing LLMs makes them the perfect victims for social engineering.** I rece\u2026"
-          },
-          {
-            "title": "If you support the direction OpenAI is going in, please explain yourself",
-            "subreddit": "ChatGPTcomplaints",
-            "date": "2026-02-14",
-            "id": "1r4bg60",
-            "excerpt": "\u2026t off of it. Stayed consistent. Instead, they just tried to copy the lobotomizing of AI. It\u2019s literally just a lawsuit avoidance machine by this point\u2026"
           }
         ]
       },
@@ -8285,8 +8285,8 @@
         "hits": 32,
         "precision": 75.0,
         "status": "researcher-accepted",
-        "drift_precision": 84.4,
-        "drift_date": "2026-08-27",
+        "drift_precision": 81.2,
+        "drift_date": "2026-10-24",
         "drift_n": 32,
         "drifting": false,
         "sample_posts": [
@@ -8360,10 +8360,10 @@
         "hits": 22,
         "precision": 100.0,
         "status": null,
-        "drift_precision": 68.2,
-        "drift_date": "2026-08-27",
+        "drift_precision": 59.1,
+        "drift_date": "2026-10-24",
         "drift_n": 22,
-        "drifting": false,
+        "drifting": true,
         "sample_posts": [
           {
             "title": "Welp at least chat bots can have lobotomies",
@@ -8421,8 +8421,8 @@
         "hits": 12,
         "precision": 83.3,
         "status": "low-volume",
-        "drift_precision": 100.0,
-        "drift_date": "2026-08-27",
+        "drift_precision": 83.3,
+        "drift_date": "2026-10-24",
         "drift_n": 12,
         "drifting": false,
         "sample_posts": [
@@ -8510,10 +8510,10 @@
         "hits": 11,
         "precision": 88.9,
         "status": null,
-        "drift_precision": 83.3,
-        "drift_date": "2026-08-27",
-        "drift_n": 12,
-        "drifting": false,
+        "drift_precision": 54.5,
+        "drift_date": "2026-10-24",
+        "drift_n": 11,
+        "drifting": true,
         "sample_posts": [
           {
             "title": "I saw the prompt to ask ChatGPT to tell me what it can\u2019t in a photo. This is what I got.",
@@ -8585,9 +8585,9 @@
         "hits": 8,
         "precision": 72.2,
         "status": "low-volume",
-        "drift_precision": 54.5,
-        "drift_date": "2026-08-27",
-        "drift_n": 11,
+        "drift_precision": 50.0,
+        "drift_date": "2026-10-24",
+        "drift_n": 8,
         "drifting": true,
         "sample_posts": [
           {
@@ -8652,8 +8652,8 @@
     "subreddits": [
       {
         "name": "CharacterAI",
-        "hits": 2396,
-        "pct": 44.8
+        "hits": 2402,
+        "pct": 44.9
       },
       {
         "name": "ChatGPTcomplaints",
@@ -8696,7 +8696,7 @@
         "pct": 1.2
       }
     ],
-    "total_hits": 6036,
-    "unique_posts": 5348
+    "total_hits": 6043,
+    "unique_posts": 5354
   }
 }
