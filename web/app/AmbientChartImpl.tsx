@@ -408,7 +408,7 @@ export default function AmbientChart({
       </div>
       <div style={{ fontSize: 12, color: "#7E8B9E", marginBottom: 6 }}>
         The cluster&apos;s six anti-AI and two pro-AI subs; the six largest
-        are stacked here. r/antiAI (founded 2025) is now the largest; the
+        over the cluster&apos;s history are stacked here. r/antiAI (founded 2025) is now the largest; the
         others fill in around it.
       </div>
       <MeasuredChart
@@ -701,8 +701,8 @@ export default function AmbientChart({
         isolate it. The {"~"}% on AI companionship in each tooltip is from a
         50-post sample per sub (May 2026). Two small communities in the cluster
         &mdash; r/trueantiAI and r/ProAI, both under 200 posts a month
-        &mdash; are too small to register as bands here, but they are in the
-        community list.
+        &mdash; are not drawn as bands here, but they are in the community
+        list.
       </p>
     </div>
   );

@@ -319,9 +319,9 @@ export default function Home() {
           Calling it an addiction
         </h2>
         <p style={{ ...intro, marginBottom: 28 }}>
-          As AI companionship grew, so did unease about it. A growing number of
-          people describe their own AI use as an addiction, and have built
-          communities to quit it &mdash; borrowing the language of substance
+          As these communities grew, so did unease inside them. More and more
+          posts describe the writer&apos;s own AI use as an addiction, and people
+          have built communities to quit it &mdash; borrowing the language of substance
           recovery: relapse, cold turkey, &ldquo;X days clean.&rdquo;
         </p>
         <RecoverySection data={recoveryVolume} />

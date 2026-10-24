@@ -195,7 +195,7 @@ export default function RootLayout({
               >
                 Communities
               </Link>
-              <a href="/dataset/v1/" className="inline-flex items-center min-h-11 md:min-h-0 hover:text-foreground transition-colors">
+              <a href="/dataset/v1" className="inline-flex items-center min-h-11 md:min-h-0 hover:text-foreground transition-colors">
                 Data
               </a>
               <a

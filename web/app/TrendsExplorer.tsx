@@ -88,8 +88,8 @@ export default function TrendsExplorer({ themeData, themeDataExclCai }: Props) {
         style={{ fontSize: isMobileStrip ? 14 : 12, color: "#7E8B9E", maxWidth: measure }}
       >
         {scope === "all"
-          ? "r/CharacterAI is the largest community in this set — 75–90% of every post counted here through 2025, and around half today — and it rises and falls on its own platform lifecycle. Switch it off to see each rate within the dedicated companionship communities."
-          : "r/CharacterAI removed from both the keyword counts and the denominator. These are the rates within the dedicated companionship and recovery communities — the rises hold, and several are steeper here. With fewer posts to count, the therapy and addiction lines start later in this view: the earlier months exist but are too thin to chart."}
+          ? "r/CharacterAI is the largest community in this set — 75–90% of every post counted here through most of 2025, and under half today — and it rises and falls on its own platform lifecycle. Switch it off to see each rate within the dedicated companionship communities."
+          : "r/CharacterAI removed from both the keyword counts and the denominator. These are the rates within the dedicated companionship and recovery communities — most of the rises hold. With fewer posts to count, the therapy and addiction lines start later in this view: the earlier months exist but are too thin to chart."}
       </p>
 
       {/* Time range selector */}

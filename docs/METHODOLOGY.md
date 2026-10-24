@@ -191,7 +191,7 @@ collection; it never retroactively removes data.
 
 The post corpus reaches back to **2017** via archive backfill: the early Replika
 years, COVID-era growth, and the ChatGPT precondition era. As of late
-2026-09 it holds roughly 4.5 million posts. Per-theme coverage gating (§5) means a theme's
+2026-10 it holds roughly 4.6 million posts. Per-theme coverage gating (§5) means a theme's
 chart line still begins only where its vocabulary becomes measurable.
 
 **Communities added after launch were backfilled, not forward-only.** Each
@@ -350,8 +350,8 @@ by three drift cycles (June–August 2026). Four of the eight therapy keywords �
 `emotional support`, `therapeutic`, `as a therapist`, `for therapy` — scored
 75%, 65%, 60% and 60% at the 2026-05-12 audit and are flagged AUDIT-GATE FAIL in
 the keyword config. (That audit was a later, separate re-read; it is not the
-original 100-post validation sample, whose figures §8.1 lists and which ran
-higher for most of these keywords.) They still count, under the change-control rule in §8.2. When
+original 100-post validation sample, which ran higher for most of these
+keywords.) They still count, under the change-control rule in §8.2. When
 the rebuild ships, the theme's precision and its volume will both move, and that
 will be a versioned change with a changelog entry.
 
@@ -473,12 +473,13 @@ the full and the "Excluding r/CharacterAI" series.
 
 **Clearing the gate does not make a month precise.** A threshold of five posts
 admits months that are still very small. Of the months actually drawn on the
-chart, the share whose post-only numerator is under 20 posts (as of 2026-09):
-consciousness 35% (76% are under 30), therapy 36% (52% under 30) and addiction 32% — mostly
-2023. In the "Excluding r/CharacterAI" series it is therapy 38% and rupture
-47%. On a
-two-proportion test, only about 19% of consciousness's and therapy's
-month-to-month moves are distinguishable from chance at p < 0.05.
+chart, the share whose post-only numerator is under 20 posts (as of 2026-10):
+consciousness 33% (78% are under 30), therapy 36% (51% under 30) and addiction 31% — mostly
+2023. In the "Excluding r/CharacterAI" series it is therapy 37% and rupture
+46%. On a
+two-proportion test, only about a quarter of therapy's, and two in five of
+consciousness's, month-to-month moves are distinguishable from chance at
+p < 0.05.
 
 **So read consciousness and therapy over half a year or more, not month to
 month.** A single month's wiggle on either line is usually noise. The public
@@ -585,8 +586,8 @@ communities rather than an even sweep.
 
 In the early years almost every tracked community was a primary companionship
 subreddit. Platform-specific and recovery communities were smaller or did not
-exist. Tier share of corpus posts (T1/T2/T3): 2024 = 85.9/13.6/0.5,
-2025 = 82.1/16.3/1.6, 2026-to-date = 77.6/18.7/3.7.
+exist. Tier share of measurable keyword-scope posts (T1/T2/T3): 2024 = 87.6/11.9/0.5,
+2025 = 85.2/13.0/1.8, 2026 (to 2026-10) = 79.4/16.0/4.7.
 
 Because post-launch additions were backfilled rather than added forward-only
 (§2.7), a new community does not appear at the date it joined the project — it
@@ -595,8 +596,8 @@ step at one date but a change in what every earlier month is made of.
 
 That effect is measurable, and on one theme it is large. The five companion
 communities added in May 2026 are romance-dense, and they now supply about 9% of
-the per-1,000 denominator. Romance for July 2026 reads **5.54 per 1,000 with
-them and 3.75 without** — the added communities are roughly a third of that
+the per-1,000 denominator. Romance for July 2026 reads **5.27 per 1,000 with
+them and 3.55 without** — the added communities are roughly a third of that
 month's level. The other five themes move by 10% or less.
 
 So part of a long climb reflects the tracked world widening rather than the
@@ -650,35 +651,51 @@ noisy-keyword flags) is regenerated on every collection run for audit.
 The drift check is the only component of the project that uses a language model,
 and it feeds no published number — it flags keywords for human review.
 
-### 8.1 What the August 2026 cycle found
+### 8.1 What the latest recorded cycle found (October 2026)
 
-Six keywords now measure below the 60% cut that would reject a new keyword. The
-drift figure comes first, the original validation figure in the last column. "At
-validation" is the keyword's first 100-post validation read; it differs from
-the 2026-05-12 audit figures in §4.4 (e.g. `emotional support` 75%,
-`therapeutic` 65%), which came from a separate, later re-read:
+**How the cycles relate.** The September 2026 cycle was classified but not
+recorded. Its raters applied several edge-case rules more strictly than
+August's had, and single keywords fell 30–40 points on near-identical samples.
+That was a change in the rater, not in the corpus. A blind re-rating of August
+and September samples under written conventions reproduced August within a few
+points and removed September's drops. Those conventions are now printed in the
+header of every sample file, along with the theme's definition. October was
+classified under them and recorded.
 
-| Keyword | Theme | Drift, post-level | At validation |
+Five keywords measure below the 60% cut at post level in October. The
+last column is the keyword's first validation read:
+
+| Keyword | Theme | Drift, post-level (n) | At validation |
 |---|---|---|---|
-| `I was hooked` | addiction | 46% | 81% |
-| `ai therapy` | therapy | 48% | 73% |
-| `screen time` | addiction | 52% | 89% |
-| `emotional support` | therapy | 52% | 100% |
-| `therapeutic` | therapy | 52% | 69% |
-| `memory reset` | rupture | 55% | 72% |
+| `memory reset` | rupture | 50% (8) | 72% |
+| `ai therapy` | therapy | 51% (35) | 73% |
+| `not just an ai` | consciousness | 53% (19) | 60% |
+| `memory wiped` | rupture | 55% (11) | 89% |
+| `lobotomies` | rupture | 59% (22) | 100% |
 
-Each has a nameable cause rather than random noise. `screen time` was absorbed
-by r/CharacterAI's "post your screen time" comparison threads, which are
-usage-bragging with no distress in them. `I was hooked` is product-review idiom
-("tried it and I was hooked"). `ai therapy` drifted into a comedy genre —
-therapy sessions written *for* the AIs. `memory reset` became the name of a
-button users press on purpose, which is outside the rupture definition.
+All five are low-volume keywords. Each one's sample is close to its entire
+match history, so successive cycles mostly re-rate the same posts, and a
+handful of judgment calls moves the figure by ten points or more. `memory
+reset` names a button users press on purpose, which is outside the rupture
+definition. `ai therapy` is dominated by news links, research recruitment and a
+comedy genre (therapy sessions written *for* the AIs). `not just an ai` and
+`lobotomies` have sat between 44% and 68% in every cycle. `memory wiped` lost
+entries to transient bugs and users wiping their own companions.
 
-`screen time` is the clearest meaning-shift the programme has caught, and it is
-also nearly immaterial: it is the only tag on 3.6% of the addiction theme's
-posts over the last six months, so at 52% precision it contributes roughly 1.7%
-spurious volume to that line. Three of the six sit in therapy, which is why that
-theme reads where it does in §4.4.
+Four keywords flagged in August measure above the cut in October:
+`screen time` (68%), `I was hooked` (60%), `emotional support` (80%) and
+`therapeutic` (76%). The therapy theme is the least rater-stable. A blind
+re-rating of August's therapy samples under the conventions landed between the
+two cycles. It put `emotional support` at 70% and `therapeutic` at 64%, both
+still above the cut, and `ai therapy` at 58%, still below it. So read October's
+therapy figures as about five to ten points generous. Two edge cases drove the
+spread: the matched keyword falling outside the excerpt a rater saw, and
+complaints about a model's "therapy voice". Since 2026-10-24 the excerpt is
+centred on the keyword, and the second case has a written convention.
+
+Pooled post-level precision in October: addiction 88%, romance 89%,
+consciousness 88%, sexual_erp 88%, rupture 82%, therapy 81% (see the caveat
+above). Full findings: `docs/drift_2026-10_findings.md`.
 
 ### 8.2 What happens to a keyword that drifts
 
@@ -686,7 +703,7 @@ theme reads where it does in §4.4.
 bump.** It is not quietly dropped — it is named: in the table above, and on the
 site's theme page, where every keyword in a theme is listed with its validation
 precision and, since 2026-09-08, marked *drifting* with the figure from its
-latest post-level re-check whenever that re-check landed below 60%. All six
+latest post-level re-check whenever that re-check landed below 60%. All five
 above carry that mark.
 
 This is deliberate. Re-cutting a keyword mid-version would silently restate
@@ -999,8 +1016,9 @@ relationships, and the site is built accordingly.
 - **If a quoted post is yours and you want it off the page, it comes down.**
   Message the project's author on X at
   [@hopes_revenge](https://x.com/hopes_revenge). No explanation needed.
-- **Posts that were later deleted stay in the counts but are never quoted.** The
-  archive captured them; a count is not a republication, and a quote is.
+- **Posts deleted after the archive captured their text stay in the counts but
+  are never quoted.** A count is not a republication, and a quote is. Posts the
+  archive captured only as a title are not counted at all (§2.8).
 
 ---
 

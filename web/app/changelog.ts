@@ -11,6 +11,15 @@ export type ChangelogEntry = {
 
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    date: "October 2026",
+    title: "A July gap refilled; the drift check made consistent",
+    items: [
+      "Twelve short collection holes between June 30 and July 13, 2026 were refilled from the archive: 1,991 posts, 614 of them in r/CharacterAI. Each hole crossed midnight, so no single day looked empty, and earlier gap scans missed them. July 2026 rates come down 1–5% (romance 5.54 → 5.27 per 1,000). The keyword set is unchanged.",
+      "The monthly drift check now gives every rater the same written rules for edge cases, such as companion-written text, users quitting by choice, and spam. A blind re-rating showed that September’s apparent drops came from the raters, not the language, so September was not recorded and October was. The keywords marked “drifting” on the theme pages changed with it. Five low-volume keywords are marked now, and four marked in August no longer are.",
+    ],
+    recent: true,
+  },
+  {
     date: "September 2026",
     title: "Collection gaps repaired; copy corrected",
     items: [

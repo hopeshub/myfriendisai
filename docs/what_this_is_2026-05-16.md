@@ -10,7 +10,7 @@ document; where they disagree, this document is the source of truth.*
 
 **My Friend Is AI is a daily-updating public record of how AI-companion communities on Reddit talk over time.**
 
-It tracks six recurring themes — romance, sex/ERP, consciousness, therapy, addiction, and rupture — across a curated set of AI-companion subreddits. The post corpus reaches back to 2017, though the theme lines themselves begin in 2022–2023, where monthly volume becomes reliable enough to chart. The method is intentionally simple and transparent: validated keyword patterns are matched against posts, counted over time, and normalized per 1,000 posts.
+It tracks six recurring themes — romance, sex/ERP, consciousness, therapy, addiction, and rupture — across a curated set of AI-companion subreddits. The post corpus reaches back to 2017, though the theme lines themselves begin in 2022–2023 (consciousness in 2025), where monthly volume becomes reliable enough to chart. The method is intentionally simple and transparent: validated keyword patterns are matched against posts, counted over time, and normalized per 1,000 posts.
 
 This project does not measure the whole phenomenon of AI companionship. It measures the parts of the conversation that become explicit enough to track in language.
 
@@ -99,7 +99,7 @@ Do not read it as:
 
 > “How common was this experience among people?”
 
-Therapy and addiction are the one intentional exception to reading each line on its own. The two themes track the same behavior — emotional reliance on an AI — separated only by the writer's framing. Neutral or positive language (“it's my coping mechanism,” “it helps”) reads as therapy; negative language (“I'm addicted,” “I can't stop”) reads as addiction. The two lines share posts by design and are best read as a linked pair — watch which way the balance tips.
+Therapy and addiction are the one intentional exception to reading each line on its own. The two themes track the same behavior — emotional reliance on an AI — separated only by the writer's framing. Neutral or positive language (“it's my coping mechanism,” “it helps”) reads as therapy; negative language (“I'm addicted,” “I can't stop”) reads as addiction. But the instrument hears the problem framing far better than the help framing: the two lines barely share posts (about 1 in 50), because the keywords miss help-framing's ordinary language. So the gap between the lines is not a balance to read (finding: `docs/therapy_addiction_overlap_finding_2026-05-18.md`).
 
 Broad movement matters more than individual wiggles. A sustained rise, a clear spike, or a long decline is meaningful. A single noisy month may not be.
 

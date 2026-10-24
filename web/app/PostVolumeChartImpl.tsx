@@ -563,7 +563,7 @@ export default function PostVolumeChart({
         below or on the chart, to isolate its band. &ldquo;Other&rdquo; groups
         the smaller subreddits, the largest being r/Paradot,
         r/Character_AI_Recovery, r/SoulmateAI, r/CharacterAIrunaways, and
-        r/BeyondThePromptAI.
+        r/ReplikaLovers.
       </p>
     </div>
   );

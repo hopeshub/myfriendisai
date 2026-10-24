@@ -121,6 +121,10 @@ function highlight(
   );
 }
 
+// Unknown slugs get the real 404 page at build time instead of an on-demand
+// render that came back blank without JavaScript (2026-10-24 site audit).
+export const dynamicParams = false;
+
 export function generateStaticParams() {
   return THEMES.map((t) => ({ id: t.id }));
 }

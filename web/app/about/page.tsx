@@ -430,7 +430,7 @@ export default function About() {
             </p>
             <p>
               You might expect the two lines to share many posts, then. They
-              barely do &mdash; fewer than 1 in 50 posts is tagged on both
+              barely do &mdash; about 1 in 50 posts is tagged on both
               &mdash; and that is a limit of the instrument, not a fact about
               the behavior. Addiction announces itself: &ldquo;relapse,&rdquo;
               &ldquo;days clean,&rdquo; &ldquo;withdrawals&rdquo; are deliberate
@@ -549,7 +549,7 @@ export default function About() {
             <p>
               The aggregate dataset behind the charts is downloadable as plain
               CSV and JSON at{" "}
-              <a href="/dataset/v1/" className={linkClass}>
+              <a href="/dataset/v1" className={linkClass}>
                 /dataset/v1/
               </a>{" "}
               &mdash; monthly counts per theme and monthly post volume per
