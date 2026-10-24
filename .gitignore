@@ -48,6 +48,7 @@ data/.collect_daily.lock
 !/analysis/**/*.yml
 !/analysis/README.md
 !/analysis/keyword_pipeline/drift_history.json
+!/analysis/keyword_pipeline/drift_rater_conventions.md
 
 # Build-process notes — kept local, not published. The public methodology
 # record is the validation/audit reports in docs/ and the About page.

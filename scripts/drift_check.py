@@ -55,6 +55,8 @@ from src.db.operations import EXCLUDED_AUTHORS, measurable_post_where  # noqa: E
 DB_PATH = PROJECT_ROOT / "data" / "tracker.db"
 RESULTS_DIR = PROJECT_ROOT / "analysis" / "keyword_pipeline" / "results"
 DRIFT_HISTORY = PROJECT_ROOT / "analysis" / "keyword_pipeline" / "drift_history.json"
+THEME_DEFINITIONS = PROJECT_ROOT / "analysis" / "keyword_pipeline" / "theme_definitions.yaml"
+RATER_CONVENTIONS = PROJECT_ROOT / "analysis" / "keyword_pipeline" / "drift_rater_conventions.md"
 ALARM_PRECISION = 0.70
 
 
@@ -62,6 +64,27 @@ ALARM_PRECISION = 0.70
 def truncate(s: Optional[str], n: int) -> str:
     s = (s or "").strip()
     return s if len(s) <= n else s[:n] + "..."
+
+
+def excerpt(s: Optional[str], term: str, n: int) -> str:
+    """Like truncate(), but keeps the keyword visible.
+
+    Plain head-truncation hid the matched keyword in a large share of long
+    entries — raters in the 2026-10 cycle named it the most common reason they
+    had to guess. When the first match falls past the head, show the opening
+    plus a window around the match. Matching mirrors src/keyword_matching.py.
+    """
+    s = (s or "").strip()
+    if len(s) <= n:
+        return s
+    m = re.search(r"\b" + re.escape(term) + r"\b", s, re.IGNORECASE)
+    if not m or m.end() <= n - 20:
+        return s[:n] + "..."
+    head = n * 2 // 5
+    half = (n - head) // 2
+    start = max(head, m.start() - half)
+    end = min(len(s), m.end() + half)
+    return s[:head] + " [...] " + s[start:end] + ("..." if end < len(s) else "")
 
 
 def current_period() -> str:
@@ -144,27 +167,52 @@ def cmd_build(args):
     print(f"  Then run: scripts/drift_check.py record --files {RESULTS_DIR}/drift_{quarter}_*_results.txt")
 
 
+def load_rater_context(theme: str) -> tuple:
+    """The theme's definition + exclusions and the fixed rater conventions.
+
+    Before 2026-10-24 the header carried only the generic FP rules, so each
+    cycle's raters re-decided the edge cases and the Sept 2026 cycle scored
+    10–40 points below August with no change in the corpus. Embedding the
+    locked definitions and the written conventions in every file keeps the
+    rater constant across cycles.
+    """
+    import yaml
+
+    defs = yaml.safe_load(THEME_DEFINITIONS.read_text())
+    entry = defs.get(theme) or {}
+    return (
+        (entry.get("definition") or "").strip(),
+        (entry.get("excludes") or "").strip(),
+        RATER_CONVENTIONS.read_text().strip(),
+    )
+
+
 def write_sample_file(path: Path, rows, term: str, theme: str, level: str, quarter: str):
     is_comment = level == "comment"
+    unit = "comment" if is_comment else "post"
+    definition, excludes, conventions = load_rater_context(theme)
     with open(path, "w") as f:
         f.write(f"# Drift check — {quarter} — `{term}` ({theme}) [{level}-level]\n\n")
         f.write(f"{len(rows)} random {level} hits for keyword `{term}` in theme `{theme}`.\n\n")
-        f.write(f"**Task:** classify each {'comment' if is_comment else 'post'} as TP or FP under the topical reading.\n\n")
-        f.write(f"A TP requires the {'comment' if is_comment else 'post'} to genuinely be about the {theme} theme.\n")
-        f.write("FP rules (strict):\n")
+        f.write(f"**Task:** classify each {unit} as TP or FP under the topical reading.\n\n")
+        f.write(f"A TP requires the {unit} to genuinely be about the {theme} theme.\n\n")
+        f.write(f"**Theme definition ({theme}):**\n\n{definition}\n\n")
+        f.write(f"**Does not count:**\n\n{excludes}\n\n")
+        f.write("FP rules:\n")
         f.write("- Polysemy (keyword used in unrelated sense)\n")
         f.write("- Negation (\"I am NOT in a relationship with it\")\n")
-        f.write("- Sarcasm / irony\n")
-        f.write("- Quoted speech (quoting another user, or AI roleplay output)\n")
+        f.write("- Sarcasm / irony (see convention 4 for ironic cures)\n")
+        f.write("- Quoted speech (see convention 1 for what this covers)\n")
         f.write("- Off-topic content even in on-topic thread\n")
         f.write("- Keyword used metaphorically without theme content\n\n")
+        f.write(conventions + "\n\n")
         f.write("**Output format** — one line per entry:\n\n")
         f.write("```\n1. TP\n2. FP\n3. TP\n...\n```\n\n")
         f.write("Write your output to a sibling file with name `" + path.stem + "_results.txt`.\n\n")
         f.write("---\n\n")
         for i, r in enumerate(rows, 1):
             if is_comment:
-                comment_body = truncate(r["comment_body"], 500) or "(empty)"
+                comment_body = excerpt(r["comment_body"], term, 500) or "(empty)"
                 f.write(f"### {i}\n")
                 f.write(f"**r/{r['subreddit']}**  **Date:** {r['post_date']}\n\n")
                 f.write(f"**Parent title:** {r['title'] or '(no title)'}\n\n")
@@ -173,7 +221,7 @@ def write_sample_file(path: Path, rows, term: str, theme: str, level: str, quart
                 f.write(f"### {i}\n")
                 f.write(f"**r/{r['subreddit']}**  **Date:** {r['post_date']}\n\n")
                 f.write(f"**Title:** {r['title'] or '(no title)'}\n\n")
-                f.write(f"**Body:** {truncate(r['selftext'], 500) or '(empty)'}\n\n---\n\n")
+                f.write(f"**Body:** {excerpt(r['selftext'], term, 500) or '(empty)'}\n\n---\n\n")
 
 
 # ── RECORD ────────────────────────────────────────────────────────────────

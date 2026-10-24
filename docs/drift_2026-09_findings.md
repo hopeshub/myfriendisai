@@ -4,7 +4,12 @@ Classified 2026-09-28 (staged by launchd 2026-09-13; 183 sample files, ~5,000
 classifications across 9 parallel agents, one theme or half-theme each). Result
 files are in `analysis/keyword_pipeline/results/drift_2026-09_*_results.txt`.
 
-**Status: classified, NOT recorded.** `drift_check.py record` was run and then
+**Status: classified, NOT recorded — superseded 2026-10-24.** The conventions
+below were written down (`analysis/keyword_pipeline/drift_rater_conventions.md`),
+a blind re-rating confirmed the swing was the rater, and the October cycle was
+recorded under them instead (`docs/drift_2026-10_findings.md`).
+
+**Original status: classified, NOT recorded.** `drift_check.py record` was run and then
 rolled back (the pre-record `drift_history.json` was restored). The reason is
 below; the decision to record is the researcher's.
 
