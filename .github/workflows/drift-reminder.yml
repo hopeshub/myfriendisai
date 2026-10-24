@@ -1,0 +1,43 @@
+name: Drift-check reminder
+
+# A drift backlog is a chore, not an outage. Until 2026-10-24 this check ran
+# as the last step of "Data staleness alert", so an unclassified drift cycle
+# arrived as a "Run failed: Data staleness alert" email that read like a
+# collection failure. Its own workflow gives the email its own subject.
+
+on:
+  schedule:
+    - cron: "0 17 * * *" # daily, same time as the staleness alert
+  workflow_dispatch:
+
+jobs:
+  check-drift-backlog:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check drift-check backlog
+        run: |
+          set -euo pipefail
+          status=$(curl -fsS --max-time 30 --retry 3 --retry-all-errors --retry-delay 30 https://myfriendisai.com/status.json)
+
+          # The monthly launchd build (13th, noon) stages drift sample files; a
+          # Claude Code session classifies them and writes _results.txt
+          # siblings. status.json publishes how many are still unclassified and
+          # how old the oldest one is. Twice the classification sat for weeks
+          # because the only reminder was a macOS notification on the
+          # collection Mac. A cycle builds on the 13th, so >7 days means the
+          # month's samples were staged and then ignored.
+          #
+          # Absent field = a status.json published before 2026-08-27; skip
+          # rather than fail, since the collector will add it on its next run.
+          days=$(echo "$status" | jq -r '.drift_backlog_days // empty')
+          if [ -z "$days" ]; then
+            echo "::notice::status.json has no drift_backlog_days yet (pre-2026-08-27 status file) — skipping."
+            exit 0
+          fi
+
+          files=$(echo "$status" | jq -r '.drift_backlog_files // 0')
+          echo "Drift backlog: ${files} unclassified sample file(s), oldest ${days} day(s) old"
+          if [ "$days" -gt 7 ]; then
+            echo "::error::Drift-check backlog — ${files} staged sample file(s) unclassified, oldest ${days} days old. Open Claude Code on the collection Mac and ask it to run the drift check (classify → record → report)."
+            exit 1
+          fi

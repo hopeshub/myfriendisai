@@ -50,6 +50,20 @@ echo "=== Collection started at $(date -u '+%Y-%m-%d %H:%M:%S UTC') ===" > "$LOG
 "$PROJECT_DIR/.venv/bin/python" scripts/collect_daily.py >> "$LOG_FILE" 2>&1
 collect_exit=$?
 
+# One retry after a failure. Every observed failed run (2026-10-10, and the
+# May–June ones) was an upstream outage — Arctic Shift returning 5xx/530 for
+# most subs — not a bug, and the archive was back within hours. Collection is
+# idempotent (INSERT OR IGNORE over a 7-day window), so a second pass is safe.
+# The failed attempt's log is kept, since the rotation below would otherwise
+# lose it on the next run and leave no record of why it failed.
+if [ $collect_exit -ne 0 ]; then
+    cp "$LOG_FILE" "$LOG_DIR/collect_daily.failed-$(date -u '+%Y-%m-%d').log"
+    echo "=== Collection failed (exit $collect_exit) — retrying once in 90 min ===" >> "$LOG_FILE"
+    sleep 5400
+    "$PROJECT_DIR/.venv/bin/python" scripts/collect_daily.py >> "$LOG_FILE" 2>&1
+    collect_exit=$?
+fi
+
 echo "=== Collection finished at $(date -u '+%Y-%m-%d %H:%M:%S UTC') (exit code: $collect_exit) ===" >> "$LOG_FILE"
 
 # Get collection stats from the database
@@ -156,6 +170,18 @@ try:
 except Exception:
     pass
 
+# Runs in a row that collected no comments. A single zero self-heals (the
+# arctic comment window is 7 days), but on 2026-10-23 Arctic answered HTTP 530
+# for every sub and the run still reported success. Advanced only on the
+# pre-push write, so the two writes per run count it once.
+prev_zero_comments = int(prev.get("consecutive_zero_comment_runs") or 0)
+if push_pending:
+    zero_comment_runs = (
+        prev_zero_comments + 1 if not run_stats.get("comments_collected") else 0
+    )
+else:
+    zero_comment_runs = prev_zero_comments
+
 prev_consec = int(prev.get("consecutive_push_failures") or 0)
 prev_last_push = prev.get("last_successful_push")
 
@@ -197,6 +223,7 @@ out = {
     "shells_checked": run_stats.get("shells_checked"),
     "shells_recovered": run_stats.get("shells_recovered"),
     "shell_refresh_requests": run_stats.get("shell_refresh_requests"),
+    "consecutive_zero_comment_runs": zero_comment_runs,
     "drift_backlog_files": drift_backlog_files,
     "drift_backlog_days": drift_backlog_days,
 }

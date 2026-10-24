@@ -353,3 +353,28 @@ def test_fetch_by_ids_gives_up_on_persistent_throttling(monkeypatch):
     posts, made, ok = rsp.fetch_posts_by_ids(["p1"])
     assert ok is False and posts == []
     assert made == rsp.MAX_RETRIES + 1  # bounded, not an infinite loop
+
+
+# ── Daily arctic collection re-tags shells it upgrades ──────────────────────
+
+def test_daily_arctic_collection_retags_upgraded_shell(conn, monkeypatch):
+    """The 7-day re-pull can upgrade a shell; its new body must be scanned.
+
+    Found 2026-10-24: _step_collect_posts_arctic ignored updated_ids, so a
+    shell whose title already carried a tag kept only its title tags.
+    """
+    import scripts.collect_daily as cd
+    import scripts.backfill_arctic as ba
+
+    insert_posts([_post("p1", title="my ai boyfriend")], conn=conn)
+    retag_posts(["p1"], conn=conn)
+    raw = [{"id": "p1"}]
+    upgraded = _post("p1", title="my ai boyfriend", selftext="I relapsed again today")
+    monkeypatch.setattr(ba, "fetch_posts", lambda *a, **k: (raw, False))
+    monkeypatch.setattr(ba, "parse_arctic_post", lambda p: dict(upgraded))
+
+    cd._step_collect_posts_arctic([{"subreddit": SUB}], conn)
+
+    cats = {r["category"] for r in conn.execute(
+        "SELECT category FROM post_keyword_tags WHERE post_id='p1' AND source='post'")}
+    assert {"romance", "addiction"} <= cats

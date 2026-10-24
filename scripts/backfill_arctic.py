@@ -68,7 +68,10 @@ REQUEST_DELAY = 2.0  # seconds between requests
 # probe on 2026-08-07. It is NOT a validation error and NOT a pagination-depth
 # limit: a cold single-sub walk reaches 8900+ items fine, while the daily run
 # (40 subs back to back) trips it partway through the busiest subs.
-RETRYABLE_STATUS = (422, 429, 500, 502, 503, 504)
+# 520–530 are Cloudflare's origin-unreachable codes; added 2026-10-24 after
+# HTTP 530 truncated every remaining sub's comment window instantly on
+# 2026-10-23 (and most likely killed the 2026-10-10 run outright).
+RETRYABLE_STATUS = (422, 429, 500, 502, 503, 504, 520, 521, 522, 523, 524, 530)
 
 # Arctic Shift health telemetry, counted in-process by _fetch_window.
 # collect_daily.py snapshots the total into logs/last_run_stats.json, which

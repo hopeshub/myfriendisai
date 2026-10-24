@@ -116,10 +116,29 @@ class _FakeResp:
 
 def test_fetch_posts_non_200_is_truncated(monkeypatch):
     import scripts.backfill_arctic as ba
-    monkeypatch.setattr(ba.requests, "get", lambda *a, **k: _FakeResp(422))
+    # A non-retryable status. (422 was the original fixture, but it became a
+    # retryable "slow down" signal in 2026-08, which made this test sleep
+    # through every real backoff — 225 s — and stop testing its name.)
+    monkeypatch.setattr(ba.requests, "get", lambda *a, **k: _FakeResp(404))
+    monkeypatch.setattr(ba.time, "sleep", lambda s: None)
     posts, truncated = ba.fetch_posts("replika", 1_000, 2_000)
     assert posts == []
     assert truncated is True
+
+
+def test_fetch_posts_cloudflare_530_is_retried(monkeypatch):
+    """HTTP 530 (Cloudflare: origin unreachable) truncated every comment window
+    on 2026-10-23 without a single retry."""
+    import scripts.backfill_arctic as ba
+    calls = []
+    def fake_get(*a, **k):
+        calls.append(1)
+        return _FakeResp(530)
+    monkeypatch.setattr(ba.requests, "get", fake_get)
+    monkeypatch.setattr(ba.time, "sleep", lambda s: None)
+    posts, truncated = ba.fetch_posts("replika", 1_000, 2_000)
+    assert truncated is True
+    assert len(calls) > 1
 
 
 def test_fetch_posts_persistent_429_is_truncated(monkeypatch):

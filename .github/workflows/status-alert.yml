@@ -38,6 +38,32 @@ jobs:
           fi
 
           now_epoch=$(date -u +%s)
+
+          # One missed day. The push check below needs two: the deployed file's
+          # last_successful_push is the PREVIOUS run's push (healthy age ~27–30h
+          # at check time). last_collection is written before the push, so it
+          # describes the deployed run itself: ~3h old on a normal day, up to
+          # ~27h if today's run is slow and hasn't pushed yet, ≥48h if a day was
+          # skipped. A whole day went missing on 2026-10-16 with no alert.
+          last_coll=$(echo "$status" | jq -r '.last_collection // empty')
+          if [ -n "$last_coll" ]; then
+            coll_hours=$(( (now_epoch - $(date -u -d "$last_coll" +%s)) / 3600 ))
+            echo "Last published collection: $last_coll (${coll_hours}h ago)"
+            if [ "$coll_hours" -gt 36 ]; then
+              echo "::error::No collection has been published for ${coll_hours}h — at least one daily run was missed or failed. Check the collection Mac is on and awake (logs/collect_daily.log, logs/failures.log)."
+              exit 1
+            fi
+          fi
+
+          # Comments come from a 7-day arctic window, so one empty run heals
+          # itself; two in a row means the archive's comment endpoint is down
+          # long enough to start losing data. Absent field = pre-2026-10-24 file.
+          zero_c=$(echo "$status" | jq -r '.consecutive_zero_comment_runs // 0')
+          if [ "$zero_c" -ge 2 ]; then
+            echo "::error::${zero_c} consecutive runs collected zero comments — Arctic Shift's comment endpoint may be down. Comments older than the 7-day window will be lost. Check logs/collect_daily.log."
+            exit 1
+          fi
+
           push_epoch=$(date -u -d "$last_push" +%s)
           age_hours=$(( (now_epoch - push_epoch) / 3600 ))
           echo "Last successful push: $last_push (${age_hours}h ago)"
@@ -77,35 +103,5 @@ jobs:
           echo "Last successful backup: $last_backup (${age_hours}h ago)"
           if [ "$age_hours" -gt 72 ]; then
             echo "::error::Off-site backup is stale — last successful B2 snapshot was ${age_hours}h ago. Check logs/backup_b2.log and free disk space on the collection Mac."
-            exit 1
-          fi
-
-      # Runs last: a drift backlog is a chore, not an outage, and failing here
-      # must not hide the collection/backup checks above.
-      - name: Check drift-check backlog
-        run: |
-          set -euo pipefail
-          status=$(curl -fsS --max-time 30 --retry 3 --retry-all-errors --retry-delay 30 https://myfriendisai.com/status.json)
-
-          # The monthly launchd build (13th, noon) stages drift sample files; a
-          # Claude Code session classifies them and writes _results.txt
-          # siblings. status.json publishes how many are still unclassified and
-          # how old the oldest one is. Twice the classification sat for weeks
-          # because the only reminder was a macOS notification on the
-          # collection Mac. A cycle builds on the 13th, so >7 days means the
-          # month's samples were staged and then ignored.
-          #
-          # Absent field = a status.json published before 2026-08-27; skip
-          # rather than fail, since the collector will add it on its next run.
-          days=$(echo "$status" | jq -r '.drift_backlog_days // empty')
-          if [ -z "$days" ]; then
-            echo "::notice::status.json has no drift_backlog_days yet (pre-2026-08-27 status file) — skipping."
-            exit 0
-          fi
-
-          files=$(echo "$status" | jq -r '.drift_backlog_files // 0')
-          echo "Drift backlog: ${files} unclassified sample file(s), oldest ${days} day(s) old"
-          if [ "$days" -gt 7 ]; then
-            echo "::error::Drift-check backlog — ${files} staged sample file(s) unclassified, oldest ${days} days old. Open Claude Code on the collection Mac and ask it to run the drift check (classify → record → report)."
             exit 1
           fi

@@ -93,10 +93,12 @@ def _step_collect_posts(communities, client, conn):
             logger.info("  r/%s: small sub (%d subs), first-time pagination up to 500 posts...", subreddit, row["subscribers"])
             try:
                 from src.collector import _parse_posts, _normalize_subreddit
-                from src.db.operations import insert_posts
+                from src.db.operations import insert_posts, retag_posts
                 extra_children = client.get_new_paginated(subreddit, target=500)
                 extra_posts = _normalize_subreddit(_parse_posts(extra_children), subreddit)
-                new_count = insert_posts(extra_posts, conn=conn)
+                updated_ids = []
+                new_count = insert_posts(extra_posts, conn=conn, updated_ids=updated_ids)
+                retag_posts(updated_ids, conn=conn)
                 if new_count > 0:
                     logger.info("  r/%s: %d additional posts from pagination", subreddit, new_count)
             except Exception as e:
@@ -130,7 +132,7 @@ def _step_collect_posts_arctic(communities, conn):
     and stay empty for the day.
     """
     from scripts.backfill_arctic import fetch_posts, parse_arctic_post
-    from src.db.operations import insert_posts
+    from src.db.operations import insert_posts, retag_posts
 
     before_epoch = int(time.time())
     # Wide window (not 36h): Arctic Shift is an archive with ingestion lag, so a
@@ -151,7 +153,13 @@ def _step_collect_posts_arctic(communities, conn):
             # case-sensitive IN(...) filters downstream would silently drop.
             for p in parsed:
                 p["subreddit"] = subreddit
-            inserted = insert_posts(parsed, conn=conn)
+            # A post first archived as a body-blank shell is upgraded in place
+            # when a later pull carries its text; re-tag those, or the new body
+            # is never scanned (the tagger treats an already-tagged post as
+            # done). Same rule as scripts/refresh_shell_posts.py.
+            updated_ids = []
+            inserted = insert_posts(parsed, conn=conn, updated_ids=updated_ids)
+            retag_posts(updated_ids, conn=conn)
             conn.commit()
             total_inserted += inserted
             if truncated:
