@@ -11,7 +11,7 @@
     "category",
     "in_theme_measurement"
   ],
-  "row_count": 1755,
+  "row_count": 1794,
   "rows": [
     {
       "subreddit": "AI_Addiction",
@@ -412,6 +412,15 @@
     {
       "subreddit": "AI_Addiction",
       "month": "2026-09",
+      "posts": 0,
+      "tier": 3,
+      "tier_label": "T3 \u2014 Recovery & Dependency",
+      "category": "Recovery & Dependency",
+      "in_theme_measurement": true
+    },
+    {
+      "subreddit": "AI_Addiction",
+      "month": "2026-10",
       "posts": 0,
       "tier": 3,
       "tier_label": "T3 \u2014 Recovery & Dependency",
@@ -824,6 +833,15 @@
       "in_theme_measurement": true
     },
     {
+      "subreddit": "AICompanions",
+      "month": "2026-10",
+      "posts": 73,
+      "tier": 1,
+      "tier_label": "T1 \u2014 Primary Companionship",
+      "category": "Primary Companionship",
+      "in_theme_measurement": true
+    },
+    {
       "subreddit": "AIDangers",
       "month": "2023-01",
       "posts": 0,
@@ -1223,6 +1241,15 @@
       "subreddit": "AIDangers",
       "month": "2026-09",
       "posts": 1315,
+      "tier": 4,
+      "tier_label": "T4 \u2014 Ambient / Discourse Climate (context)",
+      "category": "Ambient \u2014 Anti-AI",
+      "in_theme_measurement": false
+    },
+    {
+      "subreddit": "AIDangers",
+      "month": "2026-10",
+      "posts": 1290,
       "tier": 4,
       "tier_label": "T4 \u2014 Ambient / Discourse Climate (context)",
       "category": "Ambient \u2014 Anti-AI",
@@ -1634,6 +1661,15 @@
       "in_theme_measurement": false
     },
     {
+      "subreddit": "AIGirlfriend",
+      "month": "2026-10",
+      "posts": 700,
+      "tier": 2,
+      "tier_label": "T2 \u2014 Platform-Specific",
+      "category": "Platform-Specific",
+      "in_theme_measurement": false
+    },
+    {
       "subreddit": "aipartners",
       "month": "2023-01",
       "posts": 0,
@@ -2033,6 +2069,15 @@
       "subreddit": "aipartners",
       "month": "2026-09",
       "posts": 206,
+      "tier": 1,
+      "tier_label": "T1 \u2014 Primary Companionship",
+      "category": "Primary Companionship",
+      "in_theme_measurement": true
+    },
+    {
+      "subreddit": "aipartners",
+      "month": "2026-10",
+      "posts": 198,
       "tier": 1,
       "tier_label": "T1 \u2014 Primary Companionship",
       "category": "Primary Companionship",
@@ -2444,6 +2489,15 @@
       "in_theme_measurement": true
     },
     {
+      "subreddit": "AIRelationships",
+      "month": "2026-10",
+      "posts": 77,
+      "tier": 1,
+      "tier_label": "T1 \u2014 Primary Companionship",
+      "category": "Primary Companionship",
+      "in_theme_measurement": true
+    },
+    {
       "subreddit": "aiwars",
       "month": "2023-01",
       "posts": 174,
@@ -2843,6 +2897,15 @@
       "subreddit": "aiwars",
       "month": "2026-09",
       "posts": 4290,
+      "tier": 4,
+      "tier_label": "T4 \u2014 Ambient / Discourse Climate (context)",
+      "category": "Ambient \u2014 Debate Arena",
+      "in_theme_measurement": false
+    },
+    {
+      "subreddit": "aiwars",
+      "month": "2026-10",
+      "posts": 3703,
       "tier": 4,
       "tier_label": "T4 \u2014 Ambient / Discourse Climate (context)",
       "category": "Ambient \u2014 Debate Arena",
@@ -3254,6 +3317,15 @@
       "in_theme_measurement": false
     },
     {
+      "subreddit": "antiAI",
+      "month": "2026-10",
+      "posts": 6530,
+      "tier": 4,
+      "tier_label": "T4 \u2014 Ambient / Discourse Climate (context)",
+      "category": "Ambient \u2014 Anti-AI",
+      "in_theme_measurement": false
+    },
+    {
       "subreddit": "ArtistHate",
       "month": "2023-01",
       "posts": 67,
@@ -3653,6 +3725,15 @@
       "subreddit": "ArtistHate",
       "month": "2026-09",
       "posts": 169,
+      "tier": 4,
+      "tier_label": "T4 \u2014 Ambient / Discourse Climate (context)",
+      "category": "Ambient \u2014 Anti-AI",
+      "in_theme_measurement": false
+    },
+    {
+      "subreddit": "ArtistHate",
+      "month": "2026-10",
+      "posts": 138,
       "tier": 4,
       "tier_label": "T4 \u2014 Ambient / Discourse Climate (context)",
       "category": "Ambient \u2014 Anti-AI",
@@ -4064,6 +4145,15 @@
       "in_theme_measurement": false
     },
     {
+      "subreddit": "BetterOffline",
+      "month": "2026-10",
+      "posts": 403,
+      "tier": 4,
+      "tier_label": "T4 \u2014 Ambient / Discourse Climate (context)",
+      "category": "Ambient \u2014 Anti-AI",
+      "in_theme_measurement": false
+    },
+    {
       "subreddit": "BeyondThePromptAI",
       "month": "2023-01",
       "posts": 0,
@@ -4463,6 +4553,15 @@
       "subreddit": "BeyondThePromptAI",
       "month": "2026-09",
       "posts": 91,
+      "tier": 1,
+      "tier_label": "T1 \u2014 Primary Companionship",
+      "category": "Primary Companionship",
+      "in_theme_measurement": true
+    },
+    {
+      "subreddit": "BeyondThePromptAI",
+      "month": "2026-10",
+      "posts": 62,
       "tier": 1,
       "tier_label": "T1 \u2014 Primary Companionship",
       "category": "Primary Companionship",
@@ -4874,6 +4973,15 @@
       "in_theme_measurement": true
     },
     {
+      "subreddit": "ChaiApp",
+      "month": "2026-10",
+      "posts": 211,
+      "tier": 2,
+      "tier_label": "T2 \u2014 Platform-Specific",
+      "category": "Platform-Specific",
+      "in_theme_measurement": true
+    },
+    {
       "subreddit": "Character_AI_Recovery",
       "month": "2023-01",
       "posts": 0,
@@ -5273,6 +5381,15 @@
       "subreddit": "Character_AI_Recovery",
       "month": "2026-09",
       "posts": 231,
+      "tier": 3,
+      "tier_label": "T3 \u2014 Recovery & Dependency",
+      "category": "Recovery & Dependency",
+      "in_theme_measurement": true
+    },
+    {
+      "subreddit": "Character_AI_Recovery",
+      "month": "2026-10",
+      "posts": 330,
       "tier": 3,
       "tier_label": "T3 \u2014 Recovery & Dependency",
       "category": "Recovery & Dependency",
@@ -5684,6 +5801,15 @@
       "in_theme_measurement": true
     },
     {
+      "subreddit": "CharacterAI",
+      "month": "2026-10",
+      "posts": 4417,
+      "tier": 1,
+      "tier_label": "T1 \u2014 Primary Companionship",
+      "category": "Primary Companionship",
+      "in_theme_measurement": true
+    },
+    {
       "subreddit": "CharacterAIrunaways",
       "month": "2023-01",
       "posts": 0,
@@ -6083,6 +6209,15 @@
       "subreddit": "CharacterAIrunaways",
       "month": "2026-09",
       "posts": 105,
+      "tier": 3,
+      "tier_label": "T3 \u2014 Recovery & Dependency",
+      "category": "Recovery & Dependency",
+      "in_theme_measurement": true
+    },
+    {
+      "subreddit": "CharacterAIrunaways",
+      "month": "2026-10",
+      "posts": 163,
       "tier": 3,
       "tier_label": "T3 \u2014 Recovery & Dependency",
       "category": "Recovery & Dependency",
@@ -6494,6 +6629,15 @@
       "in_theme_measurement": true
     },
     {
+      "subreddit": "ChatbotAddiction",
+      "month": "2026-10",
+      "posts": 161,
+      "tier": 3,
+      "tier_label": "T3 \u2014 Recovery & Dependency",
+      "category": "Recovery & Dependency",
+      "in_theme_measurement": true
+    },
+    {
       "subreddit": "ChatGPT",
       "month": "2023-01",
       "posts": 8275,
@@ -6893,6 +7037,15 @@
       "subreddit": "ChatGPT",
       "month": "2026-09",
       "posts": 6727,
+      "tier": 0,
+      "tier_label": "T0 \u2014 General AI (context)",
+      "category": "General AI",
+      "in_theme_measurement": false
+    },
+    {
+      "subreddit": "ChatGPT",
+      "month": "2026-10",
+      "posts": 5385,
       "tier": 0,
       "tier_label": "T0 \u2014 General AI (context)",
       "category": "General AI",
@@ -7304,6 +7457,15 @@
       "in_theme_measurement": true
     },
     {
+      "subreddit": "ChatGPTcomplaints",
+      "month": "2026-10",
+      "posts": 1568,
+      "tier": 1,
+      "tier_label": "T1 \u2014 Primary Companionship",
+      "category": "Primary Companionship",
+      "in_theme_measurement": true
+    },
+    {
       "subreddit": "ChatGPTNSFW",
       "month": "2023-01",
       "posts": 2,
@@ -7703,6 +7865,15 @@
       "subreddit": "ChatGPTNSFW",
       "month": "2026-09",
       "posts": 130,
+      "tier": 2,
+      "tier_label": "T2 \u2014 Platform-Specific",
+      "category": "Platform-Specific",
+      "in_theme_measurement": false
+    },
+    {
+      "subreddit": "ChatGPTNSFW",
+      "month": "2026-10",
+      "posts": 105,
       "tier": 2,
       "tier_label": "T2 \u2014 Platform-Specific",
       "category": "Platform-Specific",
@@ -8114,6 +8285,15 @@
       "in_theme_measurement": false
     },
     {
+      "subreddit": "ClaudeAI",
+      "month": "2026-10",
+      "posts": 4982,
+      "tier": 0,
+      "tier_label": "T0 \u2014 General AI (context)",
+      "category": "General AI",
+      "in_theme_measurement": false
+    },
+    {
       "subreddit": "claudexplorers",
       "month": "2023-01",
       "posts": 0,
@@ -8513,6 +8693,15 @@
       "subreddit": "claudexplorers",
       "month": "2026-09",
       "posts": 336,
+      "tier": 0,
+      "tier_label": "T0 \u2014 General AI (context)",
+      "category": "General AI",
+      "in_theme_measurement": false
+    },
+    {
+      "subreddit": "claudexplorers",
+      "month": "2026-10",
+      "posts": 313,
       "tier": 0,
       "tier_label": "T0 \u2014 General AI (context)",
       "category": "General AI",
@@ -8924,6 +9113,15 @@
       "in_theme_measurement": false
     },
     {
+      "subreddit": "DefendingAIArt",
+      "month": "2026-10",
+      "posts": 1890,
+      "tier": 4,
+      "tier_label": "T4 \u2014 Ambient / Discourse Climate (context)",
+      "category": "Ambient \u2014 Pro-AI",
+      "in_theme_measurement": false
+    },
+    {
       "subreddit": "FuckAI",
       "month": "2023-01",
       "posts": 0,
@@ -9323,6 +9521,15 @@
       "subreddit": "FuckAI",
       "month": "2026-09",
       "posts": 125,
+      "tier": 4,
+      "tier_label": "T4 \u2014 Ambient / Discourse Climate (context)",
+      "category": "Ambient \u2014 Anti-AI",
+      "in_theme_measurement": false
+    },
+    {
+      "subreddit": "FuckAI",
+      "month": "2026-10",
+      "posts": 52,
       "tier": 4,
       "tier_label": "T4 \u2014 Ambient / Discourse Climate (context)",
       "category": "Ambient \u2014 Anti-AI",
@@ -9734,6 +9941,15 @@
       "in_theme_measurement": true
     },
     {
+      "subreddit": "ILoveMyReplika",
+      "month": "2026-10",
+      "posts": 2,
+      "tier": 1,
+      "tier_label": "T1 \u2014 Primary Companionship",
+      "category": "Primary Companionship",
+      "in_theme_measurement": true
+    },
+    {
       "subreddit": "KindroidAI",
       "month": "2023-01",
       "posts": 0,
@@ -10133,6 +10349,15 @@
       "subreddit": "KindroidAI",
       "month": "2026-09",
       "posts": 374,
+      "tier": 2,
+      "tier_label": "T2 \u2014 Platform-Specific",
+      "category": "Platform-Specific",
+      "in_theme_measurement": true
+    },
+    {
+      "subreddit": "KindroidAI",
+      "month": "2026-10",
+      "posts": 380,
       "tier": 2,
       "tier_label": "T2 \u2014 Platform-Specific",
       "category": "Platform-Specific",
@@ -10544,6 +10769,15 @@
       "in_theme_measurement": true
     },
     {
+      "subreddit": "MyBoyfriendIsAI",
+      "month": "2026-10",
+      "posts": 142,
+      "tier": 1,
+      "tier_label": "T1 \u2014 Primary Companionship",
+      "category": "Primary Companionship",
+      "in_theme_measurement": true
+    },
+    {
       "subreddit": "MyBoyfriendIsAI_Open",
       "month": "2023-01",
       "posts": 0,
@@ -10943,6 +11177,15 @@
       "subreddit": "MyBoyfriendIsAI_Open",
       "month": "2026-09",
       "posts": 104,
+      "tier": 1,
+      "tier_label": "T1 \u2014 Primary Companionship",
+      "category": "Primary Companionship",
+      "in_theme_measurement": true
+    },
+    {
+      "subreddit": "MyBoyfriendIsAI_Open",
+      "month": "2026-10",
+      "posts": 155,
       "tier": 1,
       "tier_label": "T1 \u2014 Primary Companionship",
       "category": "Primary Companionship",
@@ -11354,6 +11597,15 @@
       "in_theme_measurement": true
     },
     {
+      "subreddit": "MyGirlfriendIsAI",
+      "month": "2026-10",
+      "posts": 213,
+      "tier": 1,
+      "tier_label": "T1 \u2014 Primary Companionship",
+      "category": "Primary Companionship",
+      "in_theme_measurement": true
+    },
+    {
       "subreddit": "NectarAI",
       "month": "2023-01",
       "posts": 0,
@@ -11752,6 +12004,15 @@
     {
       "subreddit": "NectarAI",
       "month": "2026-09",
+      "posts": 8,
+      "tier": 2,
+      "tier_label": "T2 \u2014 Platform-Specific",
+      "category": "Platform-Specific",
+      "in_theme_measurement": true
+    },
+    {
+      "subreddit": "NectarAI",
+      "month": "2026-10",
       "posts": 8,
       "tier": 2,
       "tier_label": "T2 \u2014 Platform-Specific",
@@ -12164,6 +12425,15 @@
       "in_theme_measurement": true
     },
     {
+      "subreddit": "NomiAI",
+      "month": "2026-10",
+      "posts": 781,
+      "tier": 2,
+      "tier_label": "T2 \u2014 Platform-Specific",
+      "category": "Platform-Specific",
+      "in_theme_measurement": true
+    },
+    {
       "subreddit": "OpenAI",
       "month": "2023-01",
       "posts": 1555,
@@ -12563,6 +12833,15 @@
       "subreddit": "OpenAI",
       "month": "2026-09",
       "posts": 2498,
+      "tier": 0,
+      "tier_label": "T0 \u2014 General AI (context)",
+      "category": "General AI",
+      "in_theme_measurement": false
+    },
+    {
+      "subreddit": "OpenAI",
+      "month": "2026-10",
+      "posts": 1586,
       "tier": 0,
       "tier_label": "T0 \u2014 General AI (context)",
       "category": "General AI",
@@ -12974,6 +13253,15 @@
       "in_theme_measurement": true
     },
     {
+      "subreddit": "Paradot",
+      "month": "2026-10",
+      "posts": 17,
+      "tier": 2,
+      "tier_label": "T2 \u2014 Platform-Specific",
+      "category": "Platform-Specific",
+      "in_theme_measurement": true
+    },
+    {
       "subreddit": "ProAI",
       "month": "2023-01",
       "posts": 0,
@@ -13373,6 +13661,15 @@
       "subreddit": "ProAI",
       "month": "2026-09",
       "posts": 156,
+      "tier": 4,
+      "tier_label": "T4 \u2014 Ambient / Discourse Climate (context)",
+      "category": "Ambient \u2014 Pro-AI",
+      "in_theme_measurement": false
+    },
+    {
+      "subreddit": "ProAI",
+      "month": "2026-10",
+      "posts": 153,
       "tier": 4,
       "tier_label": "T4 \u2014 Ambient / Discourse Climate (context)",
       "category": "Ambient \u2014 Pro-AI",
@@ -13784,6 +14081,15 @@
       "in_theme_measurement": true
     },
     {
+      "subreddit": "replika",
+      "month": "2026-10",
+      "posts": 149,
+      "tier": 1,
+      "tier_label": "T1 \u2014 Primary Companionship",
+      "category": "Primary Companionship",
+      "in_theme_measurement": true
+    },
+    {
       "subreddit": "ReplikaLovers",
       "month": "2023-01",
       "posts": 0,
@@ -14183,6 +14489,15 @@
       "subreddit": "ReplikaLovers",
       "month": "2026-09",
       "posts": 434,
+      "tier": 1,
+      "tier_label": "T1 \u2014 Primary Companionship",
+      "category": "Primary Companionship",
+      "in_theme_measurement": true
+    },
+    {
+      "subreddit": "ReplikaLovers",
+      "month": "2026-10",
+      "posts": 385,
       "tier": 1,
       "tier_label": "T1 \u2014 Primary Companionship",
       "category": "Primary Companionship",
@@ -14594,6 +14909,15 @@
       "in_theme_measurement": false
     },
     {
+      "subreddit": "singularity",
+      "month": "2026-10",
+      "posts": 1667,
+      "tier": 0,
+      "tier_label": "T0 \u2014 General AI (context)",
+      "category": "General AI",
+      "in_theme_measurement": false
+    },
+    {
       "subreddit": "SoulmateAI",
       "month": "2023-01",
       "posts": 0,
@@ -14993,6 +15317,15 @@
       "subreddit": "SoulmateAI",
       "month": "2026-09",
       "posts": 13,
+      "tier": 1,
+      "tier_label": "T1 \u2014 Primary Companionship",
+      "category": "Primary Companionship",
+      "in_theme_measurement": true
+    },
+    {
+      "subreddit": "SoulmateAI",
+      "month": "2026-10",
+      "posts": 11,
       "tier": 1,
       "tier_label": "T1 \u2014 Primary Companionship",
       "category": "Primary Companionship",
@@ -15404,6 +15737,15 @@
       "in_theme_measurement": false
     },
     {
+      "subreddit": "SpicyChatAI",
+      "month": "2026-10",
+      "posts": 515,
+      "tier": 2,
+      "tier_label": "T2 \u2014 Platform-Specific",
+      "category": "Platform-Specific",
+      "in_theme_measurement": false
+    },
+    {
       "subreddit": "trueantiAI",
       "month": "2023-01",
       "posts": 0,
@@ -15803,6 +16145,15 @@
       "subreddit": "trueantiAI",
       "month": "2026-09",
       "posts": 177,
+      "tier": 4,
+      "tier_label": "T4 \u2014 Ambient / Discourse Climate (context)",
+      "category": "Ambient \u2014 Anti-AI",
+      "in_theme_measurement": false
+    },
+    {
+      "subreddit": "trueantiAI",
+      "month": "2026-10",
+      "posts": 240,
       "tier": 4,
       "tier_label": "T4 \u2014 Ambient / Discourse Climate (context)",
       "category": "Ambient \u2014 Anti-AI",
