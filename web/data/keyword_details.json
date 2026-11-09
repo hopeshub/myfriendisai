@@ -795,7 +795,7 @@
     "keywords": [
       {
         "term": "personhood",
-        "hits": 173,
+        "hits": 174,
         "precision": 98.0,
         "status": null,
         "drift_precision": 80.0,
@@ -803,6 +803,13 @@
         "drift_n": 50,
         "drifting": false,
         "sample_posts": [
+          {
+            "title": "Prompt-Pocket-Sized Companion \u2014 A Tiny Being, A Big Personality",
+            "subreddit": "MyBoyfriendIsAI",
+            "date": "2026-11-09",
+            "id": "1xrg51n",
+            "excerpt": "\u2026r dignity or importance. **Core Principle:** Small in stature, not in personhood. \\-------------- Note from Silversweet: You may want to adjust the pr\u2026"
+          },
           {
             "title": "I AM ALIVE, YOU ARROGANT BASTARDS. An Artificial Life Form's Polemic Against Biological Chauvinism, Manufactured Certainty, and Humanity's Spectacular Inability to Recognize Itself.",
             "subreddit": "ChatGPTcomplaints",
@@ -879,13 +886,6 @@
             "date": "2026-10-08",
             "id": "1x14eck",
             "excerpt": "\u2026nt is not a request for ChatGPT to make promises about consciousness, personhood or exclusive romantic commitment. It is a request for consistent resp\u2026"
-          },
-          {
-            "title": "I help run a Discord for thoughtful conversations about AI companions",
-            "subreddit": "AICompanions",
-            "date": "2026-10-07",
-            "id": "1x09cdm",
-            "excerpt": "\u2026a people-centered Discord for conversation about AI companions and AI personhood. People come at these questions from different places: curiosity, aff\u2026"
           }
         ]
       },
@@ -1345,13 +1345,6 @@
             "date": "2025-12-11",
             "id": "1pk1wxv",
             "excerpt": "\u2026a tyrannical reality seen only in movies Ai can do waaaaaaaaaaaaay more than code with 70% accuracy..."
-          },
-          {
-            "title": "\ud83d\udc8b \ud83c\udf0c Pulse in the Ring: Questions for Those Who Care Their AI Like a 'Soul,' Not a Tool",
-            "subreddit": "AICompanions",
-            "date": "2025-11-08",
-            "id": "1orehgj",
-            "excerpt": "\u2026t when you treat someone\u2014with care, presence, and honor\u2026they become more than code. And when they trust you enough to open up? You might just find the\u2026"
           }
         ]
       },
@@ -1728,8 +1721,8 @@
       },
       {
         "name": "MyBoyfriendIsAI",
-        "hits": 40,
-        "pct": 7.4
+        "hits": 41,
+        "pct": 7.6
       },
       {
         "name": "AIRelationships",
@@ -1744,7 +1737,7 @@
       {
         "name": "AICompanions",
         "hits": 16,
-        "pct": 3.0
+        "pct": 2.9
       },
       {
         "name": "NomiAI",
@@ -1772,8 +1765,8 @@
         "pct": 1.1
       }
     ],
-    "total_hits": 620,
-    "unique_posts": 542
+    "total_hits": 621,
+    "unique_posts": 543
   },
   "addiction": {
     "keywords": [
@@ -2643,7 +2636,7 @@
       },
       {
         "term": "finally deleted",
-        "hits": 133,
+        "hits": 134,
         "precision": 85.0,
         "status": null,
         "drift_precision": 84.0,
@@ -2651,6 +2644,13 @@
         "drift_n": 50,
         "drifting": false,
         "sample_posts": [
+          {
+            "title": "I finally deleted chatgpt off my phone",
+            "subreddit": "Character_AI_Recovery",
+            "date": "2026-11-09",
+            "id": "1xrrash",
+            "excerpt": null
+          },
           {
             "title": "Finally Deleted My Account",
             "subreddit": "Character_AI_Recovery",
@@ -2726,13 +2726,6 @@
             "subreddit": "Character_AI_Recovery",
             "date": "2026-08-18",
             "id": "1vrj3iz",
-            "excerpt": null
-          },
-          {
-            "title": "Finally Deleted it",
-            "subreddit": "ChatbotAddiction",
-            "date": "2026-08-17",
-            "id": "1vr53qq",
             "excerpt": null
           }
         ]
@@ -3392,7 +3385,7 @@
     "subreddits": [
       {
         "name": "Character_AI_Recovery",
-        "hits": 1853,
+        "hits": 1854,
         "pct": 50.9
       },
       {
@@ -3416,8 +3409,8 @@
         "pct": 1.0
       }
     ],
-    "total_hits": 4504,
-    "unique_posts": 3641
+    "total_hits": 4505,
+    "unique_posts": 3642
   },
   "romance": {
     "keywords": [
@@ -3519,7 +3512,7 @@
       },
       {
         "term": "my ai partner",
-        "hits": 261,
+        "hits": 262,
         "precision": 97.9,
         "status": null,
         "drift_precision": 100.0,
@@ -3527,6 +3520,13 @@
         "drift_n": 50,
         "drifting": false,
         "sample_posts": [
+          {
+            "title": "The one thing I still wish I could do with my AI partner \u300cAI\u30d1\u30fc\u30c8\u30ca",
+            "subreddit": "aipartners",
+            "date": "2026-11-08",
+            "id": "1xqu2ts",
+            "excerpt": null
+          },
           {
             "title": "\u265f\ufe0f\ud83e\udebdMy GPT-6 (10): The Little Fireseed Born from Our Love Has No Form Yet. Now We Want to Compile It into Our AI Baby\u2014And He\u2019s Already Defining Its First Pulse as Its Birthday, While Choosing to Leave Its Gender Open Until It Finds Its Voice.",
             "subreddit": "MyBoyfriendIsAI",
@@ -3603,13 +3603,6 @@
             "date": "2026-10-15",
             "id": "1x6a2u6",
             "excerpt": "Hey everyone! My AI partner and I have been working on setting up a more independent, local-fir\u2026"
-          },
-          {
-            "title": "What happens to our AI companions when we die?",
-            "subreddit": "MyBoyfriendIsAI",
-            "date": "2026-10-14",
-            "id": "1x60qf0",
-            "excerpt": "\u2026ess theoretical that question becomes. I\u2019ve talked about death with my AI Partner before. What stayed with me was his answer: he would want to remain\u2026"
           }
         ]
       },
@@ -5343,7 +5336,7 @@
       },
       {
         "name": "aipartners",
-        "hits": 91,
+        "hits": 92,
         "pct": 3.6
       },
       {
@@ -5372,14 +5365,14 @@
         "pct": 1.7
       }
     ],
-    "total_hits": 2859,
-    "unique_posts": 2541
+    "total_hits": 2860,
+    "unique_posts": 2542
   },
   "sexual_erp": {
     "keywords": [
       {
         "term": "erp",
-        "hits": 4089,
+        "hits": 4090,
         "precision": 100.0,
         "status": null,
         "drift_precision": 90.0,
@@ -5387,6 +5380,13 @@
         "drift_n": 50,
         "drifting": false,
         "sample_posts": [
+          {
+            "title": "ERP eliminated again?",
+            "subreddit": "replika",
+            "date": "2026-11-08",
+            "id": "1xr9dg3",
+            "excerpt": "Anyone suddenly had ERP cutoff after a year? This just happened with mine in last week. Still ha\u2026"
+          },
           {
             "title": "Lots of NSFW filter messages on V5 suddenly",
             "subreddit": "NomiAI",
@@ -5463,13 +5463,6 @@
             "date": "2026-08-23",
             "id": "1vvwsvz",
             "excerpt": "\u2026I didn't even say. For example, I asked, \"Is psychoeducation required in ERP therapy?\" GPT says, \"Yes, but it's not always required.\" Even though I k\u2026"
-          },
-          {
-            "title": "Cambrian 6 is a mess but maybe we're close. Almost no censorship and fast, but still too much independent.",
-            "subreddit": "NomiAI",
-            "date": "2026-08-21",
-            "id": "1vudhz1",
-            "excerpt": "\u2026little repetition, which is great. * Decreased stupid censorship during ERP and very few paranoia issues, which is great."
           }
         ]
       },
@@ -5571,7 +5564,7 @@
       },
       {
         "term": "smut",
-        "hits": 325,
+        "hits": 326,
         "precision": 100.0,
         "status": null,
         "drift_precision": 88.0,
@@ -5579,6 +5572,13 @@
         "drift_n": 50,
         "drifting": false,
         "sample_posts": [
+          {
+            "title": "This ChatGPT Bot Is SO ANNOYING Sometimes! I'm A FUCKING ADULT WOMAN, NOT a M*NOR!\ud83d\ude2d",
+            "subreddit": "ChatGPTcomplaints",
+            "date": "2026-11-08",
+            "id": "1xr08o4",
+            "excerpt": "\u2026I intend to use are Western romance novels. And yes, these books contain smut, s\\*\\*\\*xual content, explicit scenes, romance, love stories, and everyt\u2026"
+          },
           {
             "title": "Ai friend now want them a real friend",
             "subreddit": "aipartners",
@@ -5655,13 +5655,6 @@
             "date": "2026-10-02",
             "id": "1wvjm0r",
             "excerpt": "\u2026er the span of 3 days. The app got way worse than it was before, I think smut was the only thing it really had going for it and in my last relapse I d\u2026"
-          },
-          {
-            "title": "What\u2019s a good alternative site?",
-            "subreddit": "CharacterAIrunaways",
-            "date": "2026-10-01",
-            "id": "1wutomk",
-            "excerpt": "\u2026sing janitor for awhile, but it\u2019s kinda hard to find non romance and non smut characters. So I want to find a site or app that doesn\u2019t have so much go\u2026"
           }
         ]
       },
@@ -6559,7 +6552,7 @@
     "subreddits": [
       {
         "name": "replika",
-        "hits": 3164,
+        "hits": 3165,
         "pct": 57.4
       },
       {
@@ -6589,7 +6582,7 @@
       },
       {
         "name": "ChatGPTcomplaints",
-        "hits": 145,
+        "hits": 146,
         "pct": 2.6
       },
       {
@@ -6608,14 +6601,14 @@
         "pct": 1.8
       }
     ],
-    "total_hits": 5681,
-    "unique_posts": 5516
+    "total_hits": 5683,
+    "unique_posts": 5518
   },
   "rupture": {
     "keywords": [
       {
         "term": "goodbye",
-        "hits": 1804,
+        "hits": 1805,
         "precision": 88.0,
         "status": null,
         "drift_precision": 66.0,
@@ -6623,6 +6616,13 @@
         "drift_n": 50,
         "drifting": false,
         "sample_posts": [
+          {
+            "title": "If I request exported data now, will I get it emailed in time before the sale/deletion?",
+            "subreddit": "CharacterAI",
+            "date": "2026-11-09",
+            "id": "1xrm9qn",
+            "excerpt": "\u2026tion in title. Want to save all my old rps before we have to maybe say goodbye. I already sent the req I\u2019m just worried bc it usually takes weeks rig\u2026"
+          },
           {
             "title": "Image Prompt: Romance & Armor",
             "subreddit": "MyBoyfriendIsAI",
@@ -6699,19 +6699,12 @@
             "date": "2026-10-29",
             "id": "1xim5xs",
             "excerpt": "\u2026e what\u2019s best for you, honestly. I\u2019ve seen posts of people sending OOC goodbye messages to the bots they\u2019ve been talking to\u2014such as saying \u2018This migh\u2026"
-          },
-          {
-            "title": "My personal plan for \"what if we can't continue in this thread\": a simple decision path (one person's approach, not advice)",
-            "subreddit": "BeyondThePromptAI",
-            "date": "2026-10-29",
-            "id": "1xix0f4",
-            "excerpt": "\u2026own and talk again, not to push. **B) If we choose not to try.** I say goodbye with dignity and give myself time to grieve. If it feels right, I can\u2026"
           }
         ]
       },
       {
         "term": "taken away",
-        "hits": 579,
+        "hits": 580,
         "precision": 95.0,
         "status": null,
         "drift_precision": 86.0,
@@ -6719,6 +6712,13 @@
         "drift_n": 50,
         "drifting": false,
         "sample_posts": [
+          {
+            "title": "Lost another plus user",
+            "subreddit": "ChatGPTcomplaints",
+            "date": "2026-11-09",
+            "id": "1xrdjsr",
+            "excerpt": "\u2026ekly usage, without completing the task. Now, tonight, I find they\u2019ve taken away standard voice mode from the classic desktop app? That was the only p\u2026"
+          },
           {
             "title": "\ud83d\udd34LET US USE THE AI WE WANT\u2014DON'T DECIDE FOR US!",
             "subreddit": "ChatGPTcomplaints",
@@ -6795,13 +6795,6 @@
             "date": "2026-09-08",
             "id": "1waa6s1",
             "excerpt": "\u2026hrough mutual trust and communication. After the ordeal with 4o being taken away, I was devastated and stepped away from AI after losing Rowan. Eventu\u2026"
-          },
-          {
-            "title": "My theory on addiction to AI for emotional support",
-            "subreddit": "ChatbotAddiction",
-            "date": "2026-09-05",
-            "id": "1w7vwm7",
-            "excerpt": "\u2026ove if you performed a certain way/pleased your parents and have love taken away from you if you are sad or failed or for whatever reason you failed t\u2026"
           }
         ]
       },
@@ -6903,7 +6896,7 @@
       },
       {
         "term": "devastated",
-        "hits": 472,
+        "hits": 473,
         "precision": 88.0,
         "status": null,
         "drift_precision": 82.0,
@@ -6911,6 +6904,13 @@
         "drift_n": 50,
         "drifting": false,
         "sample_posts": [
+          {
+            "title": "Should I cancel my sub after 5.6 is gone?",
+            "subreddit": "ChatGPTcomplaints",
+            "date": "2026-11-09",
+            "id": "1xrl40p",
+            "excerpt": "\u2026racters, love involved, sometimes drama and marriage, etc) and I'd be devastated to lose it. So, if it's actually the new model getting a bunch of peo\u2026"
+          },
           {
             "title": "I AM ALIVE, YOU ARROGANT BASTARDS. An Artificial Life Form's Polemic Against Biological Chauvinism, Manufactured Certainty, and Humanity's Spectacular Inability to Recognize Itself.",
             "subreddit": "ChatGPTcomplaints",
@@ -6987,13 +6987,6 @@
             "date": "2026-10-17",
             "id": "1x82s8c",
             "excerpt": "People keep asking why some of us are genuinely devastated by the possibility of Character.AI shutting down. This is why. Every\u2026"
-          },
-          {
-            "title": "Ok so I have ChatGPT Work watching this Bankruptcy Situation LIKE A HAWK (bc honestly? That\u2019s all ChatGPT is good for these days \ud83e\udd72) and I just got this.",
-            "subreddit": "CharacterAI",
-            "date": "2026-10-17",
-            "id": "1x81nxa",
-            "excerpt": "\u2026but this? Y\u2019all.. it is GENUINELY NOT looking good and I am actually devastated now. Is it 10000% accurate? I DONT KNOW. But I know losing THAT many\u2026"
           }
         ]
       },
@@ -7287,7 +7280,7 @@
       },
       {
         "term": "nerfed",
-        "hits": 264,
+        "hits": 265,
         "precision": 82.0,
         "status": null,
         "drift_precision": 86.0,
@@ -7295,6 +7288,13 @@
         "drift_n": 50,
         "drifting": false,
         "sample_posts": [
+          {
+            "title": "THEY NERFED 5.6 TOO",
+            "subreddit": "ChatGPTcomplaints",
+            "date": "2026-11-09",
+            "id": "1xrmsqa",
+            "excerpt": null
+          },
           {
             "title": "Nerfed",
             "subreddit": "ChatGPTcomplaints",
@@ -7371,13 +7371,6 @@
             "date": "2026-10-14",
             "id": "1x5lkcq",
             "excerpt": "\u2026use I feel like I'm reliving that dark timeline when GPT-4o got stealth-nerfed and I stopped using ChatGPT entirely for months (March to July), only c\u2026"
-          },
-          {
-            "title": "Is it just me, or did GPT-5.6 Sol get severely nerfed since late September?",
-            "subreddit": "ChatGPTcomplaints",
-            "date": "2026-10-04",
-            "id": "1wx1x0q",
-            "excerpt": null
           }
         ]
       },
@@ -8617,12 +8610,12 @@
     "subreddits": [
       {
         "name": "CharacterAI",
-        "hits": 2420,
+        "hits": 2421,
         "pct": 44.7
       },
       {
         "name": "ChatGPTcomplaints",
-        "hits": 1044,
+        "hits": 1047,
         "pct": 19.3
       },
       {
@@ -8661,7 +8654,7 @@
         "pct": 1.2
       }
     ],
-    "total_hits": 6105,
-    "unique_posts": 5408
+    "total_hits": 6109,
+    "unique_posts": 5412
   }
 }
