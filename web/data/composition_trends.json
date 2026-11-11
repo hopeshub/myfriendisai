@@ -5245,10 +5245,17 @@
     },
     {
       "date": "2026-11-10",
-      "count": 2,
+      "count": 7,
+      "count_7d_avg": 5.0,
+      "count_post_only": 5,
+      "count_post_only_7d_avg": 3.71
+    },
+    {
+      "date": "2026-11-11",
+      "count": 3,
       "count_7d_avg": 4.29,
       "count_post_only": 2,
-      "count_post_only_7d_avg": 3.29
+      "count_post_only_7d_avg": 3.0
     }
   ],
   "consciousness": [
@@ -16299,6 +16306,20 @@
       "count_7d_avg": 3.43,
       "count_post_only": 1,
       "count_post_only_7d_avg": 1.71
+    },
+    {
+      "date": "2026-11-10",
+      "count": 2,
+      "count_7d_avg": 3.29,
+      "count_post_only": 1,
+      "count_post_only_7d_avg": 1.71
+    },
+    {
+      "date": "2026-11-11",
+      "count": 1,
+      "count_7d_avg": 2.71,
+      "count_post_only": 1,
+      "count_post_only_7d_avg": 1.71
     }
   ],
   "rupture": [
@@ -23192,24 +23213,31 @@
     },
     {
       "date": "2026-11-08",
-      "count": 5,
-      "count_7d_avg": 5.57,
+      "count": 7,
+      "count_7d_avg": 5.86,
       "count_post_only": 1,
       "count_post_only_7d_avg": 1.86
     },
     {
       "date": "2026-11-09",
       "count": 6,
-      "count_7d_avg": 5.0,
+      "count_7d_avg": 5.29,
       "count_post_only": 3,
       "count_post_only_7d_avg": 2.14
     },
     {
       "date": "2026-11-10",
+      "count": 7,
+      "count_7d_avg": 5.71,
+      "count_post_only": 4,
+      "count_post_only_7d_avg": 2.57
+    },
+    {
+      "date": "2026-11-11",
       "count": 2,
-      "count_7d_avg": 4.71,
-      "count_post_only": 2,
-      "count_post_only_7d_avg": 2.29
+      "count_7d_avg": 5.43,
+      "count_post_only": 0,
+      "count_post_only_7d_avg": 2.14
     }
   ],
   "sexual_erp": [
@@ -49783,11 +49811,15 @@
     },
     {
       "date": "2026-11-09",
-      "count": 119
+      "count": 120
     },
     {
       "date": "2026-11-10",
-      "count": 66
+      "count": 119
+    },
+    {
+      "date": "2026-11-11",
+      "count": 76
     }
   ],
   "_coverage_start": {
