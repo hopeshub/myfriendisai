@@ -7037,10 +7037,17 @@
     },
     {
       "date": "2026-11-11",
-      "count": 3,
-      "count_7d_avg": 5.29,
-      "count_post_only": 2,
-      "count_post_only_7d_avg": 3.29
+      "count": 4,
+      "count_7d_avg": 5.43,
+      "count_post_only": 3,
+      "count_post_only_7d_avg": 3.43
+    },
+    {
+      "date": "2026-11-12",
+      "count": 6,
+      "count_7d_avg": 6.0,
+      "count_post_only": 5,
+      "count_post_only_7d_avg": 4.0
     }
   ],
   "consciousness": [
@@ -10177,6 +10184,20 @@
       "date": "2026-11-09",
       "count": 1,
       "count_7d_avg": 1.71,
+      "count_post_only": 1,
+      "count_post_only_7d_avg": 0.57
+    },
+    {
+      "date": "2026-11-11",
+      "count": 1,
+      "count_7d_avg": 1.14,
+      "count_post_only": 1,
+      "count_post_only_7d_avg": 0.57
+    },
+    {
+      "date": "2026-11-12",
+      "count": 2,
+      "count_7d_avg": 1.14,
       "count_post_only": 1,
       "count_post_only_7d_avg": 0.57
     }
@@ -19109,45 +19130,52 @@
     },
     {
       "date": "2026-11-05",
-      "count": 3,
-      "count_7d_avg": 3.71,
+      "count": 4,
+      "count_7d_avg": 3.86,
       "count_post_only": 3,
       "count_post_only_7d_avg": 1.57
     },
     {
       "date": "2026-11-06",
       "count": 1,
-      "count_7d_avg": 2.57,
+      "count_7d_avg": 2.71,
       "count_post_only": 1,
       "count_post_only_7d_avg": 1.14
     },
     {
       "date": "2026-11-07",
       "count": 10,
-      "count_7d_avg": 3.29,
+      "count_7d_avg": 3.43,
       "count_post_only": 5,
       "count_post_only_7d_avg": 1.57
     },
     {
       "date": "2026-11-08",
       "count": 2,
-      "count_7d_avg": 3.57,
+      "count_7d_avg": 3.71,
       "count_post_only": 1,
       "count_post_only_7d_avg": 1.71
     },
     {
       "date": "2026-11-10",
       "count": 3,
-      "count_7d_avg": 3.57,
+      "count_7d_avg": 3.71,
       "count_post_only": 1,
       "count_post_only_7d_avg": 1.71
     },
     {
       "date": "2026-11-11",
-      "count": 1,
+      "count": 2,
+      "count_7d_avg": 3.14,
+      "count_post_only": 2,
+      "count_post_only_7d_avg": 1.86
+    },
+    {
+      "date": "2026-11-12",
+      "count": 2,
       "count_7d_avg": 2.86,
       "count_post_only": 1,
-      "count_post_only_7d_avg": 1.71
+      "count_post_only_7d_avg": 1.57
     }
   ],
   "rupture": [
@@ -28505,17 +28533,24 @@
     },
     {
       "date": "2026-11-10",
-      "count": 9,
-      "count_7d_avg": 8.14,
+      "count": 10,
+      "count_7d_avg": 8.29,
       "count_post_only": 5,
       "count_post_only_7d_avg": 3.43
     },
     {
       "date": "2026-11-11",
-      "count": 2,
-      "count_7d_avg": 7.43,
+      "count": 6,
+      "count_7d_avg": 8.14,
       "count_post_only": 0,
       "count_post_only_7d_avg": 2.86
+    },
+    {
+      "date": "2026-11-12",
+      "count": 3,
+      "count_7d_avg": 7.43,
+      "count_post_only": 1,
+      "count_post_only_7d_avg": 2.71
     }
   ],
   "sexual_erp": [
@@ -38010,6 +38045,20 @@
       "count_7d_avg": 2.86,
       "count_post_only": 0,
       "count_post_only_7d_avg": 0.71
+    },
+    {
+      "date": "2026-11-11",
+      "count": 4,
+      "count_7d_avg": 3.29,
+      "count_post_only": 0,
+      "count_post_only_7d_avg": 0.71
+    },
+    {
+      "date": "2026-11-12",
+      "count": 3,
+      "count_7d_avg": 3.43,
+      "count_post_only": 0,
+      "count_post_only_7d_avg": 0.71
     }
   ],
   "therapy": [
@@ -44345,6 +44394,13 @@
       "date": "2026-11-11",
       "count": 1,
       "count_7d_avg": 1.71,
+      "count_post_only": 0,
+      "count_post_only_7d_avg": 0.57
+    },
+    {
+      "date": "2026-11-12",
+      "count": 1,
+      "count_7d_avg": 1.86,
       "count_post_only": 0,
       "count_post_only_7d_avg": 0.57
     }
@@ -57188,7 +57244,7 @@
     },
     {
       "date": "2026-10-31",
-      "count": 234
+      "count": 236
     },
     {
       "date": "2026-11-01",
@@ -57228,11 +57284,15 @@
     },
     {
       "date": "2026-11-10",
-      "count": 189
+      "count": 191
     },
     {
       "date": "2026-11-11",
-      "count": 105
+      "count": 220
+    },
+    {
+      "date": "2026-11-12",
+      "count": 107
     }
   ],
   "_coverage_start": {
