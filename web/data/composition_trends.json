@@ -5287,10 +5287,17 @@
     },
     {
       "date": "2026-11-16",
-      "count": 4,
-      "count_7d_avg": 6.29,
+      "count": 7,
+      "count_7d_avg": 6.71,
+      "count_post_only": 4,
+      "count_post_only_7d_avg": 5.29
+    },
+    {
+      "date": "2026-11-17",
+      "count": 3,
+      "count_7d_avg": 6.14,
       "count_post_only": 3,
-      "count_post_only_7d_avg": 5.14
+      "count_post_only_7d_avg": 5.0
     }
   ],
   "consciousness": [
@@ -8380,6 +8387,27 @@
       "count_7d_avg": 1.43,
       "count_post_only": 0,
       "count_post_only_7d_avg": 0.57
+    },
+    {
+      "date": "2026-11-14",
+      "count": 1,
+      "count_7d_avg": 1.14,
+      "count_post_only": 0,
+      "count_post_only_7d_avg": 0.57
+    },
+    {
+      "date": "2026-11-15",
+      "count": 1,
+      "count_7d_avg": 1.29,
+      "count_post_only": 0,
+      "count_post_only_7d_avg": 0.57
+    },
+    {
+      "date": "2026-11-16",
+      "count": 1,
+      "count_7d_avg": 1.29,
+      "count_post_only": 0,
+      "count_post_only_7d_avg": 0.43
     }
   ],
   "romance": [
@@ -16407,10 +16435,10 @@
     },
     {
       "date": "2026-11-16",
-      "count": 2,
-      "count_7d_avg": 3.0,
-      "count_post_only": 2,
-      "count_post_only_7d_avg": 1.86
+      "count": 5,
+      "count_7d_avg": 3.43,
+      "count_post_only": 5,
+      "count_post_only_7d_avg": 2.29
     }
   ],
   "rupture": [
@@ -23353,17 +23381,17 @@
     },
     {
       "date": "2026-11-15",
-      "count": 7,
-      "count_7d_avg": 7.29,
+      "count": 8,
+      "count_7d_avg": 7.43,
       "count_post_only": 3,
       "count_post_only_7d_avg": 2.57
     },
     {
       "date": "2026-11-16",
-      "count": 2,
-      "count_7d_avg": 6.71,
-      "count_post_only": 2,
-      "count_post_only_7d_avg": 2.43
+      "count": 6,
+      "count_7d_avg": 7.43,
+      "count_post_only": 4,
+      "count_post_only_7d_avg": 2.71
     }
   ],
   "sexual_erp": [
@@ -32231,45 +32259,45 @@
     },
     {
       "date": "2026-11-06",
-      "count": 1,
-      "count_7d_avg": 2.29,
-      "count_post_only": 1,
-      "count_post_only_7d_avg": 0.57
+      "count": 2,
+      "count_7d_avg": 2.43,
+      "count_post_only": 2,
+      "count_post_only_7d_avg": 0.71
     },
     {
       "date": "2026-11-07",
       "count": 5,
-      "count_7d_avg": 2.86,
+      "count_7d_avg": 3.0,
       "count_post_only": 1,
-      "count_post_only_7d_avg": 0.71
+      "count_post_only_7d_avg": 0.86
     },
     {
       "date": "2026-11-08",
       "count": 4,
-      "count_7d_avg": 2.57,
+      "count_7d_avg": 2.71,
       "count_post_only": 3,
-      "count_post_only_7d_avg": 0.71
+      "count_post_only_7d_avg": 0.86
     },
     {
       "date": "2026-11-09",
       "count": 3,
-      "count_7d_avg": 2.43,
+      "count_7d_avg": 2.57,
       "count_post_only": 0,
-      "count_post_only_7d_avg": 0.71
+      "count_post_only_7d_avg": 0.86
     },
     {
       "date": "2026-11-11",
       "count": 3,
-      "count_7d_avg": 2.43,
+      "count_7d_avg": 2.57,
       "count_post_only": 0,
-      "count_post_only_7d_avg": 0.71
+      "count_post_only_7d_avg": 0.86
     },
     {
       "date": "2026-11-12",
       "count": 4,
-      "count_7d_avg": 2.86,
+      "count_7d_avg": 3.0,
       "count_post_only": 0,
-      "count_post_only_7d_avg": 0.71
+      "count_post_only_7d_avg": 0.86
     },
     {
       "date": "2026-11-13",
@@ -32290,6 +32318,13 @@
       "count": 2,
       "count_7d_avg": 3.14,
       "count_post_only": 1,
+      "count_post_only_7d_avg": 1.0
+    },
+    {
+      "date": "2026-11-16",
+      "count": 2,
+      "count_7d_avg": 3.0,
+      "count_post_only": 0,
       "count_post_only_7d_avg": 1.0
     }
   ],
@@ -37123,6 +37158,13 @@
       "count_7d_avg": 1.14,
       "count_post_only": 0,
       "count_post_only_7d_avg": 0.29
+    },
+    {
+      "date": "2026-11-17",
+      "count": 1,
+      "count_7d_avg": 1.14,
+      "count_post_only": 0,
+      "count_post_only_7d_avg": 0.14
     }
   ],
   "_total_posts": [
@@ -49988,7 +50030,7 @@
     },
     {
       "date": "2026-11-06",
-      "count": 127
+      "count": 128
     },
     {
       "date": "2026-11-07",
@@ -50024,10 +50066,14 @@
     },
     {
       "date": "2026-11-15",
-      "count": 158
+      "count": 159
     },
     {
       "date": "2026-11-16",
+      "count": 148
+    },
+    {
+      "date": "2026-11-17",
       "count": 71
     }
   ],
