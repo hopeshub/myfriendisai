@@ -26,6 +26,18 @@ EXCLUDED_AUTHORS = (
     # platform/moderator announcement content is not community discourse.
     # Added 2026-09-08 (docs/METHODOLOGY.md §11).
     "heatherado",
+    # r/MyBoyfriendIsAI moderator account that posts the sub's recurring
+    # threads (Weekly Image Thread, Tech Talk Monday, Saturday Suno, Q&A,
+    # megathreads). Since May 2026 the Weekly Image Thread invitation reads
+    # "A portrait, a steamy scene, something funny…", which the keyword
+    # `steamy` matches: 12 template posts, every one a false positive, 3-12%
+    # of the sex/ERP theme-months May-Nov 2026 (Arctic Shift text, keyword
+    # matcher re-run, 2026-11-20). Flagged two drift cycles running (Oct,
+    # Nov). Same rule: moderator announcement content is not community
+    # discourse. Also drops the account's ~200 other posts (mostly recurring
+    # threads) from the denominator, and its 12 rupture tags (event
+    # megathreads; <=1.3% of any rupture month). Added 2026-11.
+    "rawunfilteredchaos",
 )
 
 

@@ -934,10 +934,10 @@ composite looks authoritative and is fragile.
    carry weight: intimacy, belief, dependence, and loss.
 10. **Post-level NSFW filtering** may cause slight undercounting within
     otherwise-accessible communities.
-11. **A few accounts carry more of a theme than you might expect, and two
-    platform accounts are excluded.** The most prolific 1% of authors account
+11. **A few accounts carry more of a theme than you might expect, and three
+    platform or moderator accounts are excluded.** The most prolific 1% of authors account
     for 5–11% of a theme's posts (May 2026 audit) — concentrated, but not
-    enough to make a theme one person's diary. Two accounts are excluded from
+    enough to make a theme one person's diary. Three accounts are excluded from
     every count — numerator and denominator alike — under one rule: platform
     or moderator announcement content is not community discourse. The first is
     a platform-operator account posting product announcements into the sex/ERP
@@ -949,7 +949,15 @@ composite looks authoritative and is fragile.
     cadence, 14–25% of the sex/ERP theme-months since late 2025, every one a
     false positive and every one of that account's theme tags. Excluded
     2026-09-08; the sex/ERP line runs lower from late 2025 as a result, which
-    is the correction, not a change in the discourse.
+    is the correction, not a change in the discourse. The third, found by the
+    November 2026 drift check, is the r/MyBoyfriendIsAI moderator account that
+    posts the sub's recurring threads. Since May 2026 its Weekly Image Thread
+    invitation has read *"A portrait, a steamy scene, something funny…"*, which
+    matched the keyword `steamy`: 12 template posts, 3–12% of the sex/ERP
+    theme-months from May to November 2026, every one a false positive.
+    Excluded November 2026; the account's other posts (mostly recurring threads
+    and event megathreads) leave the denominator with it, which moves no other
+    theme by more than about 1%.
 12. **Exact duplicates and crossposts are about 8% of the eligible corpus**
     (varying 3–9% by year) and about 2% of tagged posts. They are not
     de-duplicated. This wobbles the denominator slightly; it is not corrected.
