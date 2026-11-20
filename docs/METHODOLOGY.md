@@ -662,40 +662,48 @@ points and removed September's drops. Those conventions are now printed in the
 header of every sample file, along with the theme's definition. October was
 classified under them and recorded.
 
-Five keywords measure below the 60% cut at post level in October. The
-last column is the keyword's first validation read:
+The October cycle wrote down the edge cases its raters had settled for
+themselves (conventions 8–12: outsiders, product senses, declining, repeated
+text, usage figures), and from November each sample shows the passage around
+the keyword rather than only the opening of a long post. **November therefore
+reads lower than October in every theme, and that is the instrument, not the
+corpus.** Samples are drawn from each keyword's whole history, so one month of
+new posts barely changes them. A blind re-rating of 28 of October's own sample
+files put the step at about two points from the new raters and about six from
+the added conventions: the same October posts scored 80.7% as recorded, 78.4%
+under October's rules with new raters, and 72.7% under November's rules,
+against 71.6% for the November cycle on the same keywords. The step falls
+mostly on therapy and sex/ERP comments. Read November onward against November.
+
+Ten keywords measure below the 60% cut at post level in November. The last
+column is the keyword's first validation read:
 
 | Keyword | Theme | Drift, post-level (n) | At validation |
 |---|---|---|---|
+| `ai therapy` | therapy | 46% (35) | 73% |
+| `not just an ai` | consciousness | 47% (19) | 60% |
 | `memory reset` | rupture | 50% (8) | 72% |
-| `ai therapy` | therapy | 51% (35) | 73% |
-| `not just an ai` | consciousness | 53% (19) | 60% |
+| `I was hooked` | addiction | 52% (50) | 81% |
+| `goodbye` | rupture | 52% (50) | 88% |
+| `as a therapist` | therapy | 54% (50) | 73% |
 | `memory wiped` | rupture | 55% (11) | 89% |
+| `we broke up` | romance | 56% (32) | 75% |
+| `tulpa` | consciousness | 59% (29) | 100% |
 | `lobotomies` | rupture | 59% (22) | 100% |
 
-All five are low-volume keywords. Each one's sample is close to its entire
-match history, so successive cycles mostly re-rate the same posts, and a
-handful of judgment calls moves the figure by ten points or more. `memory
-reset` names a button users press on purpose, which is outside the rupture
-definition. `ai therapy` is dominated by news links, research recruitment and a
-comedy genre (therapy sessions written *for* the AIs). `not just an ai` and
-`lobotomies` have sat between 44% and 68% in every cycle. `memory wiped` lost
-entries to transient bugs and users wiping their own companions.
+The five newly below the cut differ in kind:
+- `as a therapist` mostly moved with the rubric: on October's own posts it went from 82% to 62% under the new conventions. It catches complaints that a model "acts like a therapist", roleplay roles and human therapists.
+- `we broke up` was generous in October: re-rated under October's own rules it scores 56%, because most of its misses are breakups with human partners.
+- `I was hooked` is mostly first-impression enthusiasm ("I tried it and I was hooked").
+- `goodbye` catches users leaving for their own reasons, fiction and real-world grief.
+- `tulpa` catches the human, in-head sense, and one author writes a third of its posts.
 
-Four keywords flagged in August measure above the cut in October:
-`screen time` (68%), `I was hooked` (60%), `emotional support` (80%) and
-`therapeutic` (76%). The therapy theme is the least rater-stable. A blind
-re-rating of August's therapy samples under the conventions landed between the
-two cycles. It put `emotional support` at 70% and `therapeutic` at 64%, both
-still above the cut, and `ai therapy` at 58%, still below it. So read October's
-therapy figures as about five to ten points generous. Two edge cases drove the
-spread: the matched keyword falling outside the excerpt a rater saw, and
-complaints about a model's "therapy voice". Since 2026-10-24 the excerpt is
-centred on the keyword, and the second case has a written convention.
+The five carried over from October are low-volume, and each sample is close to its entire match history, so a handful of judgment calls moves the figure by ten points or more.
 
-Pooled post-level precision in October: addiction 88%, romance 89%,
-consciousness 88%, sexual_erp 88%, rupture 82%, therapy 81% (see the caveat
-above). Full findings: `docs/drift_2026-10_findings.md`.
+Pooled post-level precision in November: addiction 85%, romance 87%,
+sexual_erp 79%, consciousness 76%, rupture 74%, therapy 68%. Full findings:
+`docs/drift_2026-11_findings.md`; October's are in
+`docs/drift_2026-10_findings.md`.
 
 ### 8.2 What happens to a keyword that drifts
 
@@ -703,8 +711,8 @@ above). Full findings: `docs/drift_2026-10_findings.md`.
 bump.** It is not quietly dropped — it is named: in the table above, and on the
 site's theme page, where every keyword in a theme is listed with its validation
 precision and, since 2026-09-08, marked *drifting* with the figure from its
-latest post-level re-check whenever that re-check landed below 60%. All five
-above carry that mark.
+latest post-level re-check whenever that re-check landed below 60%. Every
+keyword in that table carries the mark.
 
 This is deliberate. Re-cutting a keyword mid-version would silently restate
 every historical month on that line — the same posts would produce a different
