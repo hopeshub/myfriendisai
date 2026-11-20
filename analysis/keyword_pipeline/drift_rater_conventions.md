@@ -93,3 +93,40 @@ same way too.
     are TP when the poster gives them with shame, alarm, worry or relief, or
     as a quitting milestone. They are FP when shared neutrally, in surveys,
     as product snark, or to describe healthy use.
+
+### Added 2026-11, after the November cycle
+
+The November raters split on these, and a blind calibration found no other
+disagreements large enough to matter (`docs/drift_2026-11_findings.md`).
+
+13. **Group recruitment.** Templated recruitment for a group, server or
+    campaign is FP under convention 5, even when its cause is on theme: the
+    same call to join, posted repeatedly, often with a rotating invite link.
+    This is the expression-versus-infrastructure line the project already
+    draws for its ambient tier. A member arguing for the cause in their own
+    words is judged on content.
+
+14. **Satire from inside.** A joke, parody or mock document written by a
+    member about their own community's practice (a satirical "AI marriage
+    FAQ" posted in a companion sub) is judged on what it is about, like any
+    other post: if the practice it jokes about is on theme, it is TP. Mockery
+    from outsiders is FP under convention 8.
+
+15. **Sceptics.** Convention 8 covers people arguing against the practice:
+    that members should not have AI companions at all. Convention 10 covers
+    people answering the theme's own question: whether an AI can have a soul,
+    whether it can be therapy, whether this is addiction. A sustained
+    sceptical answer to the theme's question is TP. An argument that members
+    are wrong to have companions, which does not engage the question, is FP.
+
+16. **Makers.** A member sharing something they made for their own companion
+    use (a script, an export reader, a self-hosted setup, an essay, a song)
+    is judged on content. A post whose main purpose is to get readers to
+    sign up for, download or buy a product or service is FP under
+    convention 5, including when it is the poster's own product and when a
+    personal story leads into the pitch.
+
+17. **Deleted bots, under rupture.** A bot removed by the platform (a policy
+    takedown, a purge, a filter change) is TP. A bot its creator deleted or
+    made private for their own reasons is FP: the loss is real, but it is not
+    a platform change. If the cause is not stated, use convention 7.
