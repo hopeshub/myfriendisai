@@ -72,20 +72,22 @@ jobs:
             exit 1
           fi
 
-      - name: Warn on high shell share (never fails)
+      - name: Warn on a rising shell share (never fails)
         run: |
           set -uo pipefail
           status=$(curl -fsS --max-time 30 --retry 3 --retry-all-errors --retry-delay 30 https://myfriendisai.com/status.json) || exit 0
-          # Keyword subs whose last-60-day posts are more than half archive
-          # shells ('[removed]'/'[deleted]' at capture). Those posts leave the
-          # measurable population, so a sub drifting past 50% is a methods flag,
-          # not an outage: a warning annotation, no email. Field added 2026-11;
-          # absent in older files.
-          over=$(echo "$status" | jq -r '(.shell_share_subs_over_50 // []) | join(", ")')
+          # Keyword subs whose share of archive shells ('[removed]'/'[deleted]'
+          # at capture) rose by 15+ points versus the previous 60 days. Those
+          # posts leave the measurable population, so a sharp rise is a methods
+          # flag, not an outage: a warning annotation, no email. The level is
+          # printed but not warned on, because some subs (r/ChaiApp) are
+          # chronically mostly shells. Fields added 2026-11; absent in older files.
           echo "Overall shell share (60d): $(echo "$status" | jq -r '.shell_share_60d_pct // "n/a"')%"
           echo "Highest: $(echo "$status" | jq -c '.shell_share_max_sub // null')"
-          if [ -n "$over" ]; then
-            echo "::warning::Keyword subs with >50% shells in the last 60 days: ${over}. Their posts mostly leave the measurable population; see theme_health.json shell_share and METHODOLOGY on shells."
+          echo "Above 50%: $(echo "$status" | jq -r '(.shell_share_subs_over_50 // []) | join(", ")')"
+          rising=$(echo "$status" | jq -r '(.shell_share_subs_rising // []) | map("\(.subreddit) \(.prev_pct)% -> \(.pct)%") | join("; ")')
+          if [ -n "$rising" ]; then
+            echo "::warning::Shell share rose 15+ points in the last 60 days: ${rising}. Those posts leave the measurable population; see theme_health.json shell_share."
           fi
           exit 0
 
