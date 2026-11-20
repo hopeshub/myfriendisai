@@ -12,12 +12,12 @@ export type ThemeId =
 export type ThemeMeta = {
   id: ThemeId;
   label: string;
-  emoji: string;
   color: string;
   tagline: string;
-  // A short, durable reading of the theme's trend shape — what the panel
-  // shows. Kept to structural observations (not last-week's number) so it
-  // stays true as the data updates.
+  // A short, durable reading of the theme's trend shape — what the atlas
+  // strip shows; read out as each strip's text description. Kept to
+  // structural observations (not last-week's number) so it stays true as the
+  // data updates.
   blurb: string;
   // A longer plain-language story for the theme's own page: what the line
   // does and why, anchored to events. Also kept durable — no week-specific
@@ -53,29 +53,26 @@ export const THEMES: ThemeMeta[] = [
   {
     id: "romance",
     label: "Romance",
-    emoji: "💕",
     color: ACTIVE_PALETTE.romance,
     tagline: "Language of love, dating, and romantic attachment",
     blurb:
       "Broad waves, not sharp spikes — and a floor: everyday partner talk goes uncaught.",
     story:
-      "Romantic language moves in slow, broad waves rather than sharp spikes, with no single moment behind it. The recent rise is real; much of the longer climb since 2023 is not — re-checked on posts that carry written text, it largely disappears. It is also the theme the keywords catch least well: most people describe a partner in ordinary words — “she said,” “my girlfriend” — that never trip an explicitly romantic keyword. The real level of this conversation runs well above the line.",
+      "Romantic language moves in slow, broad waves rather than sharp spikes, with no single moment behind it. Much of the recent rise reflects which communities are posting, as r/CharacterAI shrank and r/aipartners arrived, more than any change inside them. Much of the longer climb since 2023 does not hold either: re-checked on posts that carry written text, it largely disappears. It is also the theme the keywords catch least well: most people describe a partner in ordinary words — “she said,” “my girlfriend” — that never trip an explicitly romantic keyword. The real level of this conversation runs well above the line.",
   },
   {
     id: "sexual_erp",
     label: "Sex / ERP",
-    emoji: "🔞",
     color: ACTIVE_PALETTE.sexual_erp,
     tagline: "Language of sexual and erotic roleplay",
     blurb:
       "Dominated by one event — the Feb 2023 Replika ERP removal; quieter since.",
     story:
-      "This theme is defined by one moment. In February 2023 Replika abruptly removed erotic roleplay from its app, and the backlash was enormous — that single spike is the tallest feature on the chart. The line has been lower and steadier since, rising briefly whenever another platform changes its content rules. Part of the fall is compositional: r/replika carries most of this theme and shrank from most of the tracked corpus to one or two percent of it, so the pooled rate drops even where sex/ERP language inside r/replika stayed well above its pre-2023 level.",
+      "This theme is defined by one moment. In February 2023 Replika abruptly removed erotic roleplay from its app, and the backlash was enormous — that single spike is the tallest feature on the chart. The line has been lower and steadier since, rising briefly whenever another platform changes its content rules. Part of the fall is compositional: r/replika carries most of this theme and shrank from most of the tracked corpus to one or two percent of it, so the pooled rate drops even where sex/ERP language inside r/replika stayed well above its pre-2023 level. The keywords also catch less of it than they used to. In a hand-checked sample of 600 posts they found 9 of 16 sexual posts from 2023, most of them from the Replika crisis, and none of 14 from 2025–26, which mostly sit in other communities and use other words.",
   },
   {
     id: "consciousness",
     label: "Consciousness",
-    emoji: "🧠",
     color: ACTIVE_PALETTE.consciousness,
     tagline: "Language of sentience, awareness, and inner experience",
     blurb:
@@ -86,7 +83,6 @@ export const THEMES: ThemeMeta[] = [
   {
     id: "therapy",
     label: "Therapy",
-    emoji: "🫂",
     color: ACTIVE_PALETTE.therapy,
     tagline: "Language of mental health support and emotional care",
     blurb:
@@ -97,18 +93,16 @@ export const THEMES: ThemeMeta[] = [
   {
     id: "addiction",
     label: "Addiction",
-    emoji: "💊",
     color: ACTIVE_PALETTE.addiction,
     tagline: "Language of self-described dependency and compulsion",
     blurb:
-      "A steady climb, not an event spike — dependency language growing over time.",
+      "A steady climb inside communities, steepened in 2026 by a shift in who is posting.",
     story:
-      "Addiction is a steady climb rather than an event spike. Unlike themes that jump on a single platform change, dependency language grows slowly and continuously — a rising share of posts describing compulsive use, lost time, and attempts to cut back. Some of that climb is compositional, though: the recovery and quitting communities were founded across 2023–2024 and are dense with this vocabulary, so part of the rise is those rooms joining the tracked set, not addiction language increasing within it.",
+      "Addiction is a steady climb rather than an event spike. Unlike themes that jump on a single platform change, dependency language grows slowly and continuously — a rising share of posts describing compulsive use, lost time, and attempts to cut back. Some of that climb is compositional, though: the recovery and quitting communities were founded across 2023–2024 and are dense with this vocabulary, so part of the rise is those rooms joining the tracked set, not addiction language increasing within it. A second shift steepened the line in 2026. r/CharacterAI shrank from about two thirds of the counted posts to under half while the recovery rooms kept growing, so those rooms weigh more in the count. Most of 2026’s steep rise comes from that shift. Held at the late-2025 mix of communities, the rate rose about a quarter into early 2026 and has been level since.",
   },
   {
     id: "rupture",
     label: "Rupture",
-    emoji: "🥀",
     color: ACTIVE_PALETTE.rupture,
     tagline: "Language of loss and grief",
     blurb:
@@ -135,4 +129,5 @@ export const EVENTS: ThemeEvent[] = [
   { date: "2025-08-01", label: "GPT-5 replaces 4o", shortLabel: "GPT-5" },
   { date: "2026-02-01", label: "4o retired", shortLabel: "4o ret." },
   { date: "2026-05-12", label: "Rupture keywords expanded", shortLabel: "Rupture keywords", methodology: true },
+  { date: "2026-10-12", label: "Character.AI files for bankruptcy", shortLabel: "C.AI bankruptcy" },
 ];

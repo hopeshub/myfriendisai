@@ -133,7 +133,7 @@ export default async function SubredditPage({
       </p>
 
       <section id="activity" className="mt-8 scroll-mt-8">
-        <p className="text-xs text-[#7E8B9E] uppercase tracking-widest mb-3">
+        <p className="text-xs text-[#7E8B9E] mb-3">
           Monthly post volume
         </p>
         <CommunityActivityChart months={activity.months} values={activitySeries} />

@@ -13,7 +13,7 @@ import {
   redditPermalink,
   type ShowcaseEvent,
 } from "./eventShowcaseData";
-import { measure } from "./styles";
+import { measure, themeKey } from "./styles";
 import { loadThemeData } from "./themeData";
 import EventSparkline from "./EventSparkline";
 
@@ -81,7 +81,6 @@ function EventCard({
       style={{
         backgroundColor: "#15171E",
         border: "1px solid #2A2D3A",
-        borderLeft: `3px solid ${themeMeta(event.themes[0])?.color ?? "#94A3B8"}`,
         borderRadius: 8,
         padding: 20,
       }}
@@ -92,8 +91,6 @@ function EventCard({
           className="text-[14px] md:text-[12px]"
           style={{
             color: "#C2974D",
-            textTransform: "uppercase",
-            letterSpacing: "0.05em",
             flexShrink: 0,
           }}
         >
@@ -114,9 +111,7 @@ function EventCard({
               className="inline-flex items-center gap-1.5 text-[14px] md:text-[12px]"
               style={{ color: "#9AA7B8" }}
             >
-              <span aria-hidden className="text-[14px] md:text-[13px]">
-                {t?.emoji ?? "•"}
-              </span>
+              <span aria-hidden style={themeKey(t?.color ?? "#9AA7B8")} />
               {t?.label ?? id}
             </span>
           );

@@ -4,7 +4,6 @@ import { join } from "path";
 import { THEMES } from "../themes";
 import {
   fontSize,
-  sectionEyebrow,
   sectionHeading,
   introParagraph,
   bodyParagraph,
@@ -94,7 +93,6 @@ export default function About() {
     <div style={{ maxWidth: 720 }} className="mx-auto px-4 sm:px-6 py-10 sm:py-16">
       {/* Header */}
       <div className="mb-10">
-        <div style={sectionEyebrow}>About this project</div>
         <h1
           style={{ fontSize: fontSize.xxxl, fontWeight: 600 }}
           className="font-display text-foreground mb-2"
@@ -181,7 +179,6 @@ export default function About() {
             >
               {THEMES.map((t) => (
                 <li key={t.id} style={{ fontSize: fontSize.base, lineHeight: 1.6 }}>
-                  <span aria-hidden>{t.emoji}</span>{" "}
                   <span style={{ color: t.color, fontWeight: 500 }}>
                     {t.label}
                   </span>
@@ -455,11 +452,15 @@ export default function About() {
               communities were smaller then, or did not exist yet, and have
               grown since. Each line is measured against whatever communities
               existed at the time &mdash; so part of a long climb reflects the
-              tracked world widening, not only the conversation itself. Five
-              companion communities joined the set in May 2026 with their
+              tracked world widening, not only the conversation itself. It
+              works the other way too. As r/CharacterAI shrank in 2026, the
+              communities where addiction and romance language concentrate
+              became a larger share of the count, which steepens those lines
+              beyond any change inside the communities. Five companion
+              communities joined the set in May 2026 with their
               history backfilled, so there is no seam &mdash; but they are
               romance-heavy and now supply about one post in eleven: the romance
-              line for July 2026 reads 5.5 per thousand with them and 3.8
+              line for July 2026 reads 5.3 per thousand with them and 3.6
               without. Trust the broad direction of a line more than its exact
               path.
             </p>

@@ -167,7 +167,7 @@ export default function CommunitiesTable({
       <div className="overflow-x-auto">
         <table className="w-full text-left">
           <thead>
-            <tr className="text-sm md:text-xs uppercase tracking-wide border-b border-[#2A2D3A]">
+            <tr className="text-sm md:text-xs border-b border-[#2A2D3A]">
               <th className="pb-3 pr-4 font-medium text-[#7E8B9E]">Community</th>
               <th className="pb-3 pr-4 font-medium text-[#7E8B9E] hidden sm:table-cell">Activity</th>
               <th className="pb-3 pr-4 font-medium text-[#7E8B9E] hidden sm:table-cell">Tier</th>

@@ -6,15 +6,18 @@ import type { ThemeData } from "./themeData";
 import { useBreakpoint } from "./useBreakpoint";
 import { measure } from "./styles";
 
-// Lazy-loaded so Recharts is not in the homepage's initial JS bundle.
+// Lazy-loaded so the atlas is not in the homepage's initial JS bundle.
 // The chart measures its container width on the client and cannot
 // server-render at a real width anyway, so ssr:false loses nothing.
 const TrendAtlas = dynamic(() => import("./TrendAtlas"), {
   ssr: false,
-  // Responsive: six theme panels — 1 column on mobile, 2 on tablet, 3 on
-  // desktop — so the placeholder height must shrink as the grid widens.
+  // Holds the space of the default view (1Y, three events) so nothing below
+  // jumps when the chunk lands: six strips + marker band + axis, with the
+  // event legend above the stack on desktop and below it at ≤768px. Heights
+  // measured from the rendered atlas: the legend wraps an extra line below
+  // 360px and between 769 and 800px.
   loading: () => (
-    <div className="min-h-[1990px] md:min-h-[1110px] lg:min-h-[760px]" />
+    <div className="min-h-[815px] min-[360px]:min-h-[773px] min-[540px]:min-h-[725px] min-[769px]:min-h-[580px] min-[801px]:min-h-[563.5px]" />
   ),
 });
 
@@ -26,9 +29,8 @@ type Scope = "all" | "excl-cai";
 export default function TrendsExplorer({ themeData, themeDataExclCai }: Props) {
   const [timeRange, setTimeRange] = useState<TimeRange>("1Y");
   const [scope, setScope] = useState<Scope>("all");
-  const { bp: rawBp, isMobileStrip: rawMobileStrip } = useBreakpoint();
+  const { isMobileStrip: rawMobileStrip } = useBreakpoint();
   // Default to desktop during SSR/hydration to avoid layout flash
-  const bp = rawBp ?? "desktop";
   const isMobileStrip = rawMobileStrip ?? false;
 
   const activeData = scope === "all" ? themeData : themeDataExclCai;
@@ -88,7 +90,7 @@ export default function TrendsExplorer({ themeData, themeDataExclCai }: Props) {
         style={{ fontSize: isMobileStrip ? 14 : 12, color: "#7E8B9E", maxWidth: measure }}
       >
         {scope === "all"
-          ? "r/CharacterAI is the largest community in this set — 75–90% of every post counted here through most of 2025, and under half today — and it rises and falls on its own platform lifecycle. Switch it off to see each rate within the dedicated companionship communities."
+          ? "r/CharacterAI is the largest community in this set — 70–85% of every post counted here through most of 2025, and under half today — and it rises and falls on its own platform lifecycle. Switch it off to see each rate within the dedicated companionship communities."
           : "r/CharacterAI removed from both the keyword counts and the denominator. These are the rates within the dedicated companionship and recovery communities — most of the rises hold. With fewer posts to count, the therapy and addiction lines start later in this view: the earlier months exist but are too thin to chart."}
       </p>
 
@@ -112,24 +114,24 @@ export default function TrendsExplorer({ themeData, themeDataExclCai }: Props) {
         ))}
       </div>
 
-      {/* Trend Atlas — small-multiples grid. A plain section, not a
-          figure/role="img": the panels are links and must stay discoverable
-          in the accessibility tree (role="img" would collapse them into one
-          opaque image). */}
+      {/* Trend Atlas — six channels on one time axis. A plain section, not
+          a figure/role="img": the strips are links and must stay
+          discoverable in the accessibility tree (role="img" would collapse
+          them into one opaque image). */}
       <section aria-label="Trend atlas: six AI-companionship themes over time">
         <p className="sr-only">
-          Six small line charts, one per theme (romance, sex/erotic roleplay,
-          consciousness, therapy, addiction, rupture), each showing that
-          theme&apos;s rate of validated-keyword mentions per 1,000 posts over
-          time across AI-companionship Reddit communities. Each panel has its
-          own y-axis; line heights are not comparable between themes because
-          keyword detection sensitivity differs by theme. Each panel begins at
-          its own coverage-start date, and is a link to that theme&apos;s page.
+          Six line charts stacked on one shared time axis, one strip per theme
+          (romance, sex/erotic roleplay, consciousness, therapy, addiction,
+          rupture), each showing that theme&apos;s rate of validated-keyword
+          mentions per 1,000 posts by month across AI-companionship Reddit
+          communities. Each strip is scaled to its own range; line heights are
+          not comparable between themes because keyword detection sensitivity
+          differs by theme. Each strip begins at its own coverage-start date,
+          and is a link to that theme&apos;s page.
         </p>
         <TrendAtlas
           themeData={activeData}
           timeRange={timeRange}
-          bp={bp}
           isMobileStrip={isMobileStrip}
         />
       </section>
@@ -157,26 +159,27 @@ export default function TrendsExplorer({ themeData, themeDataExclCai }: Props) {
           }}
         >
           <li>
-            Each panel is one theme&apos;s rate of validated-keyword mentions
+            Each strip is one theme&apos;s rate of validated-keyword mentions
             per 1,000 posts, by month &mdash; counted by keyword, no AI
             classification.
           </li>
           <li>
-            The panels have independent scales; read shape and timing, not
-            height.
+            Each strip is scaled to itself, like the gain on a recorder: read
+            a line against its own past, never its height against another
+            strip.
           </li>
           <li>
             Every line is a floor. The keywords are precision-first &mdash;
             they miss far more theme-relevant posts than they catch.
           </li>
           <li>
-            The consciousness and therapy panels count only a few dozen posts a
+            The consciousness and therapy strips count only a few dozen posts a
             month, so a single month&apos;s rise or fall there is usually
             noise &mdash; read those two over half a year or more.
           </li>
           <li>
-            Platform events are marked on every panel as a shared time
-            reference &mdash; watch which lines move with them and which
+            Platform events are marked across all six strips as a shared
+            time reference &mdash; watch which lines move with them and which
             don&apos;t. Only rupture reliably does.
           </li>
         </ul>

@@ -104,13 +104,7 @@ export default function RecoveryChart({
         className="flex flex-wrap gap-x-4 gap-y-1"
         style={{ fontSize: 12, color: "#7E8B9E", marginBottom: 10 }}
       >
-        <span
-          style={{
-            textTransform: "uppercase",
-            letterSpacing: "0.05em",
-            fontSize: 11,
-          }}
-        >
+        <span style={{ fontSize: 11 }}>
           Events
         </span>
         {RECOVERY_EVENTS.map((ev, i) => (

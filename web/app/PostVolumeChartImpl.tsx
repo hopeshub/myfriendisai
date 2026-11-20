@@ -287,9 +287,7 @@ export default function PostVolumeChart({
           alignItems: "center",
         }}
       >
-        <span style={{ textTransform: "uppercase", letterSpacing: "0.05em" }}>
-          r/CharacterAI
-        </span>
+        <span>r/CharacterAI</span>
         {CAI_EVENTS.map((e) => (
           <span
             key={e.month}
