@@ -16,7 +16,7 @@ import { fontSize } from "../../styles";
 import { useBreakpoint } from "../../useBreakpoint";
 
 // A single line chart for one theme's page. Same honest series as the homepage
-// atlas panel (validated-keyword mentions per 1,000 posts, pooled by month), with
+// atlas strip (validated-keyword mentions per 1,000 posts, pooled by month), with
 // a time-range selector so a reader can zoom in. Events are marked with
 // numbered ticks and written out in full below the chart.
 

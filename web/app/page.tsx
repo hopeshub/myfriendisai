@@ -204,10 +204,10 @@ export default function Home() {
         </h2>
         <p style={{ ...intro, marginBottom: 16 }}>
           Six recurring themes, and how often each one&apos;s language surfaces
-          in posts across these communities, month by month. Each panel is
+          in posts across these communities, month by month. Each strip is
           scaled to mentions per 1,000 posts &mdash; a value of 8 means that
           roughly 8 of every 1,000 posts that month carried that theme&apos;s
-          keywords. Read each panel against itself: a line sits
+          keywords. Read each strip against itself: a line sits
           high when its theme is written in blunt, easily counted words, not
           because the experience behind it is more common.
         </p>
@@ -243,7 +243,7 @@ export default function Home() {
           mark a real belief &mdash; that something might actually be there.
           Then it spread into roleplay and Character.AI memes until it no
           longer marked belief at all, and it had to be dropped from the count.
-          It is part of why the consciousness panel above begins so late and
+          It is part of why the consciousness strip above begins so late and
           runs so thin: not because the question went away, but because the
           word that used to carry it stopped being able to point.
         </p>

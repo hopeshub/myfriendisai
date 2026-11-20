@@ -79,29 +79,6 @@ a:focus-visible {
   }
 }
 
-/* Mobile card scroll strip */
-.mobile-card-strip {
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  scroll-snap-type: x mandatory;
-  scrollbar-width: none;
-  padding: 0 16px;
-}
-
-.mobile-card-strip::-webkit-scrollbar {
-  display: none;
-}
-
-/* Side panel animation */
-@keyframes slideInRight {
-  from { transform: translateX(100%); }
-  to { transform: translateX(0); }
-}
-
-.side-panel {
-  animation: slideInRight 250ms ease-out;
-}
-
 /* Theme Health snapshot grid: single column on mobile, 2-col on tablet+.
    Prevents long values like "r/ChatGPTcomplaints (61%)" from wrapping
    awkwardly on iPhone-sized viewports. */
@@ -157,7 +134,7 @@ a:focus-visible {
 }
 
 /* Honour the OS "reduce motion" setting — neutralise all animation and
-   transition sitewide, including the .side-panel animation. */
+   transition sitewide. */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

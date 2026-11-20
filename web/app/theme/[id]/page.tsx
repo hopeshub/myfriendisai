@@ -15,7 +15,7 @@ import { fontSize, sectionEyebrow, themeKey } from "../../styles";
 // ── Per-theme page ───────────────────────────────────────────────────────────
 // The deeper "what is this and why" for one theme: a full-size chart, a plain-
 // language story anchored to the events, and a few real posts. Reached by
-// clicking a panel on the homepage atlas. Each theme page also shows its own
+// clicking a strip on the homepage atlas. Each theme page also shows its own
 // keyword set with per-keyword precision, so a reader can see exactly which
 // validated terms define the theme and how clean each one tested.
 

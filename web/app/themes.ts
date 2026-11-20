@@ -14,9 +14,10 @@ export type ThemeMeta = {
   label: string;
   color: string;
   tagline: string;
-  // A short, durable reading of the theme's trend shape — what the panel
-  // shows. Kept to structural observations (not last-week's number) so it
-  // stays true as the data updates.
+  // A short, durable reading of the theme's trend shape — what the atlas
+  // strip shows; read out as each strip's text description. Kept to
+  // structural observations (not last-week's number) so it stays true as the
+  // data updates.
   blurb: string;
   // A longer plain-language story for the theme's own page: what the line
   // does and why, anchored to events. Also kept durable — no week-specific
