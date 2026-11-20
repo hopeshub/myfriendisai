@@ -9,6 +9,7 @@ Usage:
 
 import hashlib
 import json
+import re
 import sys
 from pathlib import Path
 
@@ -27,6 +28,18 @@ def check(name, passed, detail=""):
     print(msg)
     if not passed:
         FAIL = True
+
+
+def build_failure_line(output):
+    """The line that best names a failed build: the first line mentioning an
+    error or failure, else the last non-empty line. (The last stderr line used
+    to be reported, and was often noise such as Next's "collapsed N duplicate
+    lines" note.)"""
+    lines = [ln.strip() for ln in output.splitlines() if ln.strip()]
+    for ln in lines:
+        if re.search(r"error|failed", ln, re.IGNORECASE):
+            return ln
+    return lines[-1] if lines else "no build output"
 
 
 def main():
@@ -217,12 +230,23 @@ def main():
     result = subprocess.run(
         ["npm", "run", "build"],
         cwd=ROOT / "web",
-        capture_output=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.STDOUT,  # one interleaved stream, in the order printed
         text=True,
         timeout=120,
     )
+    build_output = result.stdout or ""
+    # Keep the whole build output: the summary line below is one line, and the
+    # real cause is often elsewhere. Previous run kept as .prev, like the
+    # collection log.
+    log_path = ROOT / "logs" / "validate_build.log"
+    log_path.parent.mkdir(parents=True, exist_ok=True)
+    if log_path.exists():
+        log_path.replace(log_path.with_name(log_path.name + ".prev"))
+    log_path.write_text(build_output)
     check("next.js build", result.returncode == 0,
-          result.stderr.strip().split("\n")[-1] if result.returncode != 0 else "ok")
+          build_failure_line(build_output) + f" (full output: {log_path.relative_to(ROOT)})"
+          if result.returncode != 0 else "ok")
 
     # ── Summary ──
     print("\n" + "=" * 60)
