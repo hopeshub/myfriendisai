@@ -69,7 +69,7 @@ indistinguishable from ordinary human-relationship talk.
 
 ## 2. The corpus: which communities, and why
 
-**41 subreddits are configured; 39 are actively collected.** The list lives in
+**44 subreddits are configured; 42 are actively collected.** The list lives in
 `config/communities.yaml` in the repository.
 
 ### 2.1 Why a curated list at all
@@ -95,10 +95,10 @@ appear to mean.
 | Tier | Description | Count | In theme measurement? |
 |---|---|---|---|
 | **T0** — General AI | Communities where companionship discourse surfaces but is not the charter (r/ChatGPT, r/OpenAI, r/singularity, r/ClaudeAI, r/claudexplorers) | 5 | **No** — context only |
-| **T1** — Primary Companionship | AI companionship is the central topic (r/replika, r/CharacterAI, r/MyBoyfriendIsAI, r/BeyondThePromptAI, r/MyGirlfriendIsAI, r/AIRelationships, r/AICompanions, r/SoulmateAI, r/ChatGPTcomplaints, r/aipartners, r/ReplikaLovers, r/ILoveMyReplika, r/MyBoyfriendIsAI_Open, r/MySentientAI) | 14 | Yes |
+| **T1** — Primary Companionship | AI companionship is the central topic (r/replika, r/CharacterAI, r/MyBoyfriendIsAI, r/BeyondThePromptAI, r/MyGirlfriendIsAI, r/AIRelationships, r/AICompanions, r/SoulmateAI, r/ChatGPTcomplaints, r/aipartners, r/ReplikaLovers, r/ILoveMyReplika, r/MyBoyfriendIsAI_Open, r/MySentientAI, and r/therapyGPT, a context-only exclusion listed below) | 15 | Yes, except 1 |
 | **T2** — Platform-Specific | Communities for specific AI-companion products (r/KindroidAI, r/NomiAI, r/ChaiApp, r/Paradot, r/NectarAI, r/HeavenGF, and three explicitness-scope exclusions listed below) | 9 | Yes, except 3 |
 | **T3** — Recovery & Dependency | Quitting and peer support (r/Character_AI_Recovery, r/ChatbotAddiction, r/AI_Addiction, r/CharacterAIrunaways) | 4 | Yes |
-| **T4** — Ambient / Discourse Climate | Anti-AI and pro-AI cultural-expression communities, added 2026-05-20 (r/antiAI, r/FuckAI, r/ArtistHate, r/AIDangers, r/BetterOffline, r/trueantiAI, r/DefendingAIArt, r/ProAI, r/aiwars) | 9 | **No** — context only |
+| **T4** — Ambient / Discourse Climate | Anti-AI and pro-AI cultural-expression communities, added 2026-05-20 and 2026-11-20 (r/antiAI, r/FuckAI, r/ArtistHate, r/AIDangers, r/BetterOffline, r/trueantiAI, r/Ai_art_is_not_art, r/cogsuckers, r/DefendingAIArt, r/ProAI, r/aiwars) | 11 | **No** — context only |
 
 One name on the list looks out of place and is deliberate: **r/ChatGPTcomplaints**
 is tracked as a companion community because of what its members write, not what
@@ -132,9 +132,20 @@ removal is a flagship event the site is built to show. A community that is both
 explicit *and* companionship-centred is in; one that is explicit but not
 companionship-centred is out — for the same reason a non-AI community would be.
 
-**Excluded from keyword tracking, 2026-05-20:** all nine T4 communities, plus a
-hard `tier in (1,2,3)` gate in the loader as defence in depth. T4 is a
-secondary cultural-context view only.
+**Excluded from keyword tracking, 2026-05-20:** all T4 communities (nine then,
+eleven since 2026-11-20), plus a hard `tier in (1,2,3)` gate in the loader as
+defence in depth. T4 is a secondary cultural-context view only.
+
+**Excluded from keyword tracking, 2026-11-20:** r/therapyGPT (T1), where people
+use general models (ChatGPT, Gemini, Claude) as a confidant or therapist. It
+clears the companionship gate (44% on a 100-post open coding), and the therapy
+keywords are accurate there (91% precision on a 100-post sample). The reason is
+weight, not noise: its therapy rate is about 70 times the other communities',
+so from under 2% of the denominator it would supply about 40% of all therapy
+tags since its founding in April 2025, and the therapy line would largely track
+one community's posting volume. It is collected, shown in the community
+explorer, and kept out of the theme lines, the denominator and comment
+collection, like the three explicitness-scope exclusions above.
 
 ### 2.4 The T4 selection rule
 
@@ -158,7 +169,15 @@ anti-AI side and accelerationist movement communities on the pro-AI side.
 cluster of cultural-expression communities exists, how each is sized, and how
 each is moving. Read engagement, not a population estimate.
 
-The pro-AI/anti-AI asymmetry in the tier (6 anti, 2 pro, 1 arena) is honest
+Two anti-AI communities were added under the same gate on 2026-11-20:
+r/Ai_art_is_not_art (an anti-AI-art community about seven times the size of
+r/ArtistHate) and r/cogsuckers, whose target is AI companionship itself, framed
+as pathology — the companionship counter-public, following the same events as
+the companion communities from outside. The same re-scan rejected
+r/LatentSpaceClub and r/Pro_Ai_Art at stage 1 and admitted nothing on the
+pro-AI side.
+
+The pro-AI/anti-AI asymmetry in the tier (8 anti, 2 pro, 1 arena) is honest
 rather than artifactual: Reddit has more anti-AI advocacy *expression* than
 pro-AI, because pro-AI energy mostly lives in product communities whose charter
 is the product, not advocacy. Counting those as T4 would have failed the charter
@@ -662,40 +681,48 @@ points and removed September's drops. Those conventions are now printed in the
 header of every sample file, along with the theme's definition. October was
 classified under them and recorded.
 
-Five keywords measure below the 60% cut at post level in October. The
-last column is the keyword's first validation read:
+The October cycle wrote down the edge cases its raters had settled for
+themselves (conventions 8–12: outsiders, product senses, declining, repeated
+text, usage figures), and from November each sample shows the passage around
+the keyword rather than only the opening of a long post. **November therefore
+reads lower than October in every theme, and that is the instrument, not the
+corpus.** Samples are drawn from each keyword's whole history, so one month of
+new posts barely changes them. A blind re-rating of 28 of October's own sample
+files put the step at about two points from the new raters and about six from
+the added conventions: the same October posts scored 80.7% as recorded, 78.4%
+under October's rules with new raters, and 72.7% under November's rules,
+against 71.6% for the November cycle on the same keywords. The step falls
+mostly on therapy and sex/ERP comments. Read November onward against November.
+
+Ten keywords measure below the 60% cut at post level in November. The last
+column is the keyword's first validation read:
 
 | Keyword | Theme | Drift, post-level (n) | At validation |
 |---|---|---|---|
+| `ai therapy` | therapy | 46% (35) | 73% |
+| `not just an ai` | consciousness | 47% (19) | 60% |
 | `memory reset` | rupture | 50% (8) | 72% |
-| `ai therapy` | therapy | 51% (35) | 73% |
-| `not just an ai` | consciousness | 53% (19) | 60% |
+| `I was hooked` | addiction | 52% (50) | 81% |
+| `goodbye` | rupture | 52% (50) | 88% |
+| `as a therapist` | therapy | 54% (50) | 73% |
 | `memory wiped` | rupture | 55% (11) | 89% |
+| `we broke up` | romance | 56% (32) | 75% |
+| `tulpa` | consciousness | 59% (29) | 100% |
 | `lobotomies` | rupture | 59% (22) | 100% |
 
-All five are low-volume keywords. Each one's sample is close to its entire
-match history, so successive cycles mostly re-rate the same posts, and a
-handful of judgment calls moves the figure by ten points or more. `memory
-reset` names a button users press on purpose, which is outside the rupture
-definition. `ai therapy` is dominated by news links, research recruitment and a
-comedy genre (therapy sessions written *for* the AIs). `not just an ai` and
-`lobotomies` have sat between 44% and 68% in every cycle. `memory wiped` lost
-entries to transient bugs and users wiping their own companions.
+The five newly below the cut differ in kind:
+- `as a therapist` mostly moved with the rubric: on October's own posts it went from 82% to 62% under the new conventions. It catches complaints that a model "acts like a therapist", roleplay roles and human therapists.
+- `we broke up` was generous in October: re-rated under October's own rules it scores 56%, because most of its misses are breakups with human partners.
+- `I was hooked` is mostly first-impression enthusiasm ("I tried it and I was hooked").
+- `goodbye` catches users leaving for their own reasons, fiction and real-world grief.
+- `tulpa` catches the human, in-head sense, and one author writes a third of its posts.
 
-Four keywords flagged in August measure above the cut in October:
-`screen time` (68%), `I was hooked` (60%), `emotional support` (80%) and
-`therapeutic` (76%). The therapy theme is the least rater-stable. A blind
-re-rating of August's therapy samples under the conventions landed between the
-two cycles. It put `emotional support` at 70% and `therapeutic` at 64%, both
-still above the cut, and `ai therapy` at 58%, still below it. So read October's
-therapy figures as about five to ten points generous. Two edge cases drove the
-spread: the matched keyword falling outside the excerpt a rater saw, and
-complaints about a model's "therapy voice". Since 2026-10-24 the excerpt is
-centred on the keyword, and the second case has a written convention.
+The five carried over from October are low-volume, and each sample is close to its entire match history, so a handful of judgment calls moves the figure by ten points or more.
 
-Pooled post-level precision in October: addiction 88%, romance 89%,
-consciousness 88%, sexual_erp 88%, rupture 82%, therapy 81% (see the caveat
-above). Full findings: `docs/drift_2026-10_findings.md`.
+Pooled post-level precision in November: addiction 85%, romance 87%,
+sexual_erp 79%, consciousness 76%, rupture 74%, therapy 68%. Full findings:
+`docs/drift_2026-11_findings.md`; October's are in
+`docs/drift_2026-10_findings.md`.
 
 ### 8.2 What happens to a keyword that drifts
 
@@ -703,8 +730,14 @@ above). Full findings: `docs/drift_2026-10_findings.md`.
 bump.** It is not quietly dropped — it is named: in the table above, and on the
 site's theme page, where every keyword in a theme is listed with its validation
 precision and, since 2026-09-08, marked *drifting* with the figure from its
-latest post-level re-check whenever that re-check landed below 60%. All five
-above carry that mark.
+latest post-level re-check whenever that re-check landed below 60%. Every
+keyword in that table carries the mark.
+
+One exception, since November 2026: the mark needs a re-check of at least 15
+matches. Below that, a couple of calls swing a figure by ten points or more,
+so a keyword in the table above with a smaller n (in brackets) is listed here
+and its re-check figure is still published, but the theme page does not mark
+it.
 
 This is deliberate. Re-cutting a keyword mid-version would silently restate
 every historical month on that line — the same posts would produce a different
@@ -920,12 +953,12 @@ composite looks authoritative and is fragile.
    carry weight: intimacy, belief, dependence, and loss.
 10. **Post-level NSFW filtering** may cause slight undercounting within
     otherwise-accessible communities.
-11. **A few accounts carry more of a theme than you might expect, and two
-    platform accounts are excluded.** The most prolific 1% of authors account
+11. **A few accounts carry more of a theme than you might expect, and five
+    platform, moderator or seeding accounts are excluded.** The most prolific 1% of authors account
     for 5–11% of a theme's posts (May 2026 audit) — concentrated, but not
-    enough to make a theme one person's diary. Two accounts are excluded from
-    every count — numerator and denominator alike — under one rule: platform
-    or moderator announcement content is not community discourse. The first is
+    enough to make a theme one person's diary. Five accounts are excluded from
+    every count — numerator and denominator alike — under one rule: platform,
+    moderator or promotional template content is not community discourse. The first is
     a platform-operator account posting product announcements into the sex/ERP
     theme (`SoulmateAI_Dev`, 2023 Soulmate patch notes, about 0.8% of the
     theme; excluded May 2026). The second, found in the 2026-09-08 audit, is
@@ -935,7 +968,21 @@ composite looks authoritative and is fragile.
     cadence, 14–25% of the sex/ERP theme-months since late 2025, every one a
     false positive and every one of that account's theme tags. Excluded
     2026-09-08; the sex/ERP line runs lower from late 2025 as a result, which
-    is the correction, not a change in the discourse.
+    is the correction, not a change in the discourse. The third, found by the
+    November 2026 drift check, is the r/MyBoyfriendIsAI moderator account that
+    posts the sub's recurring threads. Since May 2026 its Weekly Image Thread
+    invitation has read *"A portrait, a steamy scene, something funny…"*, which
+    matched the keyword `steamy`: 12 template posts, 3–9% of the sex/ERP
+    theme-months from May to November 2026, every one a false positive.
+    Excluded November 2026. The account's other posts (mostly recurring threads
+    and event megathreads) leave with it; a few carried theme tags, so rupture
+    moves by at most 1.3% in any month, and therapy by 2.7% in one month (a
+    single post, May 2025). The fourth and fifth, excluded at the same time,
+    are the two accounts of a templated seeding ring that post into the
+    tracked communities (identical "What's something your AI companion…?"
+    prompts across accounts, the network behind r/AICompanionZone). None of
+    their 20 posts carried a theme tag, so the effect is denominator-only:
+    0.1–0.2% on every theme in October and November 2026.
 12. **Exact duplicates and crossposts are about 8% of the eligible corpus**
     (varying 3–9% by year) and about 2% of tagged posts. They are not
     de-duplicated. This wobbles the denominator slightly; it is not corrected.

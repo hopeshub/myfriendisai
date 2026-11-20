@@ -21,7 +21,7 @@ no titles, no usernames, no post IDs — no raw Reddit content of any kind.
 | File | Rows | What it is |
 |---|---|---|
 | `monthly_theme_counts.csv` / `.json` | 256 | Per theme per month: the published keyword-hit count, the corpus denominator, and the rate per 1,000 posts. |
-| `monthly_community_volumes.csv` / `.json` | 1,794 | Per tracked community per month: post volume, with its tier. |
+| `monthly_community_volumes.csv` / `.json` | 1,932 | Per tracked community per month: post volume, with its tier. |
 | `METHODOLOGY.md` | — | Standalone statement of scope, method, validation, and limits. |
 | `manifest.json` | — | Version, generation timestamp, per-file row counts and SHA-256 hashes. |
 | `index.html` | — | Directory listing, so the bundle URL opens in a browser. |
@@ -112,7 +112,7 @@ becomes reliable) through the last complete month.
 | `tier` | Direct | 0–4. See `METHODOLOGY.md` for what each tier is and why it exists. |
 | `tier_label` | Direct | Human-readable tier name. |
 | `category` | Direct | The community's category label as shown on the site. |
-| `in_theme_measurement` | Derived | `true` when the community counts toward `monthly_theme_counts` — i.e. tier 1–3 and not excluded from keyword tracking. T0 general-AI and T4 ambient communities are tracked for context only and are always `false`, as are the three explicitness-scope exclusions. In the JSON this is a real boolean; in the CSV it is the lowercase string `true` or `false`. |
+| `in_theme_measurement` | Derived | `true` when the community counts toward `monthly_theme_counts` — i.e. tier 1–3 and not excluded from keyword tracking. T0 general-AI and T4 ambient communities are tracked for context only and are always `false`, as are the three explicitness-scope exclusions and r/therapyGPT (context only since it was added in November 2026: it would otherwise supply about 40% of the therapy theme). In the JSON this is a real boolean; in the CSV it is the lowercase string `true` or `false`. |
 
 This table covers the communities currently being collected. Two communities
 that were tracked and later deactivated — r/HeavenGF (banned by Reddit, ~May
@@ -128,6 +128,7 @@ corpus and in the theme denominator, but do not appear here.
 | v1 | 2026-08-27 | First publication. |
 | v1.1 | 2026-09-08 | Population narrowed to **measurable posts**: posts recorded as removed or deleted leave every count and the per-1k denominator. The site's chart switched to the **pooled monthly rate**, so `rate_per_1k_charted` now equals `rate_per_1k`. `in_theme_measurement` is a real boolean in the JSON form. Numbers moved; the schema did not. |
 | v1.1 (data) | 2026-10-24 | Repair, not a method change: 1,991 posts missing from twelve collection holes between 2026-06-30 and 07-13 were restored from the archive (614 in r/CharacterAI, the only affected keyword community). July 2026 rates fell 1–5% (romance 5.54 → 5.27 per 1,000). |
+| v1.1 (data) | 2026-11 | Three more accounts excluded under the existing rule (moderator, platform or promotional template content is not community discourse): an r/MyBoyfriendIsAI moderator account whose weekly image-thread invitation contains "a steamy scene" and so counted as sex/ERP, and two accounts of a templated seeding ring. Sex/ERP rates from May 2026 fall roughly 3–9%; rupture moves at most 1.3% and therapy 2.7% in one month (one post, May 2025); the seeding accounts carried no tags and move every theme 0.1–0.2% in Oct–Nov 2026. |
 
 The bundle URL and file names stay `v1` — these are corrections to how the same
 quantities are computed, not a new set of quantities. `manifest.json` records
