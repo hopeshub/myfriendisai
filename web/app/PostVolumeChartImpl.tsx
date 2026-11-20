@@ -16,7 +16,7 @@ import type { CaiPoint, CompositionPoint } from "./themeData";
 import { fontSize, measure } from "./styles";
 import { useBreakpoint } from "./useBreakpoint";
 import { usePrefersReducedMotion } from "@/lib/usePrefersReducedMotion";
-import { C } from "@/app/styles";
+import { C, radius } from "@/app/styles";
 
 // ── §1 post-volume chart ─────────────────────────────────────────────────────
 // Two stacked charts. Top: r/CharacterAI alone — it is 55-85% of all volume by year and
@@ -81,7 +81,7 @@ function yearTicks(months: string[]): string[] {
 const tooltipBox: React.CSSProperties = {
   backgroundColor: C.bg,
   border: `1px solid ${C.grid}`,
-  borderRadius: 6,
+  borderRadius: radius(6),
   padding: "6px 9px",
   fontSize: 11,
 };

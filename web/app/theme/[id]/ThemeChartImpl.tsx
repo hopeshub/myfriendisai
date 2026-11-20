@@ -14,7 +14,7 @@ import MeasuredChart from "@/app/MeasuredChart";
 import { EVENTS } from "../../themes";
 import { fontSize } from "../../styles";
 import { useBreakpoint } from "../../useBreakpoint";
-import { C } from "@/app/styles";
+import { C, radius } from "@/app/styles";
 
 // A single line chart for one theme's page. Same honest series as the homepage
 // atlas strip (validated-keyword mentions per 1,000 posts, pooled by month), with
@@ -193,7 +193,7 @@ export default function ThemeChart({
                     style={{
                       backgroundColor: C.bg,
                       border: `1px solid ${C.grid}`,
-                      borderRadius: 6,
+                      borderRadius: radius(6),
                       padding: "4px 8px",
                       fontSize: fs(12),
                       whiteSpace: "nowrap",

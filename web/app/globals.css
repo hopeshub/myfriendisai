@@ -51,6 +51,13 @@ body {
 [data-theme="paper"] main li {
   font-family: var(--font-literata), Georgia, "Times New Roman", serif;
 }
+/* Cut-paper corners on cards, panels and controls (pills and circles keep
+   theirs: .rounded-full is not touched). */
+[data-theme="paper"] .rounded-md,
+[data-theme="paper"] .rounded-lg,
+[data-theme="paper"] .rounded-xl {
+  border-radius: 2px;
+}
 
 .recharts-cartesian-grid line {
   stroke: var(--c-grid);

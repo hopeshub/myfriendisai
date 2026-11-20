@@ -5,7 +5,7 @@ import dynamic from "next/dynamic";
 import type { ThemeData } from "./themeData";
 import { useBreakpoint } from "./useBreakpoint";
 import { measure } from "./styles";
-import { C } from "@/app/styles";
+import { C, SITE_THEME, radius } from "@/app/styles";
 
 // Lazy-loaded so the atlas is not in the homepage's initial JS bundle.
 // The chart measures its container width on the client and cannot
@@ -60,9 +60,9 @@ export default function TrendsExplorer({ themeData, themeDataExclCai }: Props) {
           style={{
             display: "inline-flex",
             padding: 2,
-            borderRadius: 8,
+            borderRadius: radius(8),
             border: `1px solid ${C.border}`,
-            backgroundColor: "#13151C",
+            backgroundColor: C.control,
           }}
         >
           {(
@@ -77,7 +77,8 @@ export default function TrendsExplorer({ themeData, themeDataExclCai }: Props) {
               aria-pressed={scope === s}
               className="min-h-11 md:min-h-0 px-3 py-1.5 text-sm md:text-xs font-medium rounded-md transition-colors"
               style={{
-                backgroundColor: scope === s ? "#252834" : "transparent",
+                backgroundColor: scope === s ? C.controlOn : "transparent",
+                boxShadow: scope === s && SITE_THEME === "paper" ? `inset 0 0 0 1px ${C.borderStrong}` : undefined,
                 color: scope === s ? C.heading : C.lead,
               }}
             >

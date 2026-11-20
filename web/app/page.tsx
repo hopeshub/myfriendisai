@@ -113,7 +113,7 @@ export default function Home() {
               <Link
                 key={t.id}
                 href={`/theme/${t.id}`}
-                className="inline-flex items-center gap-1.5 rounded-full border border-[var(--c-border)] px-3 py-1 min-h-11 sm:min-h-0 text-sm text-[var(--c-body)] transition-colors hover:border-[#3F4351] hover:bg-[var(--c-surface)] hover:text-[var(--c-heading)]"
+                className="inline-flex items-center gap-1.5 rounded-full border border-[var(--c-border)] px-3 py-1 min-h-11 sm:min-h-0 text-sm text-[var(--c-body)] transition-colors hover:border-[var(--c-hoverBorder)] hover:bg-[var(--c-surface)] hover:text-[var(--c-heading)]"
               >
                 <span aria-hidden style={themeKey(t.color)} />
                 {t.label}

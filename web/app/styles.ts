@@ -23,7 +23,7 @@ import type { CSSProperties } from "react";
 //
 // Revert to the dark site by changing this one line.
 export type SiteTheme = "dark" | "paper";
-export const SITE_THEME = "dark" as SiteTheme;
+export const SITE_THEME = "paper" as SiteTheme;
 
 export type Palette = {
   bg: string; surface: string; surface2: string;
@@ -35,6 +35,8 @@ export type Palette = {
   communityLine: string; metricA: string; metricB: string;
   alertBg: string; alertText: string;
   bandLabel: string; bandHalo: string;
+  control: string; controlOn: string; guide: string; hoverBorder: string;
+  hoverSurface: string; faint: string; metricC: string; ogMuted: string;
 };
 
 const DARK: Palette = {
@@ -47,6 +49,8 @@ const DARK: Palette = {
   communityLine: "#7C9CD0", metricA: "#e8692a", metricB: "#8b5cf6",
   alertBg: "#7f1d1d", alertText: "#fef2f2",
   bandLabel: "#F8FAFC", bandHalo: "#0F1117",
+  control: "#13151C", controlOn: "#252834", guide: "#1C1F28", hoverBorder: "#3F4351",
+  hoverSurface: "#1F2233", faint: "#3F4654", metricC: "#10b981", ogMuted: "rgba(255,255,255,0.5)",
 };
 
 // Chart-recorder paper. Ink is navy-black (#1F2433), never pure black; the
@@ -62,10 +66,19 @@ const PAPER: Palette = {
   communityLine: "#1F2433", metricA: "#1F2433", metricB: "#1F2433",
   alertBg: "#A8261F", alertText: "#FCFBF8",
   bandLabel: "#1F2433", bandHalo: "#FCFBF8",
+  control: "#F1EEE7", controlOn: "#FCFBF8", guide: "#F5DDD8", hoverBorder: "#B9B2A5",
+  hoverSurface: "#F1EEE7", faint: "#B7B1A6", metricC: "#1F2433", ogMuted: "#575D6B",
 };
 
 /** The active palette. */
 export const C: Palette = SITE_THEME === "paper" ? PAPER : DARK;
+
+/** Corner radius for cards, panels, tooltips and controls: as designed on the
+ *  dark theme, nearly square (cut paper) on the paper theme. Circles (event
+ *  markers, dots) don't use this. */
+export function radius(px: number): number {
+  return SITE_THEME === "paper" ? Math.min(px, 2) : px;
+}
 
 /** CSS custom properties for every role (`--c-bg`, `--c-lead`, …), written
  *  onto <html> by layout.tsx so Tailwind classes and globals.css can use them. */

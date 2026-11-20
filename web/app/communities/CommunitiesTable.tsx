@@ -6,6 +6,7 @@ import type { SubredditSummary, CommunityActivity } from "@/lib/types";
 import type { CommunityMetrics } from "@/lib/data";
 import { hasCommentAverage } from "@/lib/metrics";
 import Sparkline from "./Sparkline";
+import { SITE_THEME } from "@/app/styles";
 
 // Sort keys are the displayed values, not the raw export fields: posts/day is
 // a 7-day mean derived at build time, and avg comments is blank for the
@@ -41,18 +42,24 @@ const TIER_LABELS: Record<number, string> = {
   4: "Ambient",
 };
 
-const TIER_COLORS: Record<number, string> = {
+const TIER_COLORS_DARK: Record<number, string> = {
   0: "bg-slate-400/10 text-slate-300",
   1: "bg-blue-400/10 text-blue-300",
   2: "bg-violet-400/10 text-violet-300",
   3: "bg-red-400/10 text-red-300",
   4: "bg-amber-400/10 text-amber-300",
 };
+// Paper: one ink, a hairline rule; the label already names the tier.
+const PAPER_BADGE = "border border-[var(--c-borderStrong)] text-[var(--c-body)]";
+const TIER_COLORS: Record<number, string> =
+  SITE_THEME === "paper"
+    ? { 0: PAPER_BADGE, 1: PAPER_BADGE, 2: PAPER_BADGE, 3: PAPER_BADGE, 4: PAPER_BADGE }
+    : TIER_COLORS_DARK;
 
 function TierBadge({ tier }: { tier: number | null }) {
   if (tier == null) return null;
   return (
-    <span className={`inline-flex text-sm md:text-xs font-medium px-2 py-0.5 rounded-full ${TIER_COLORS[tier] ?? "bg-slate-400/10 text-slate-300"}`}>
+    <span className={`inline-flex text-sm md:text-xs font-medium px-2 py-0.5 rounded-full ${TIER_COLORS[tier] ?? TIER_COLORS[0]}`}>
       {TIER_LABELS[tier] ?? `Tier ${tier}`}
     </span>
   );

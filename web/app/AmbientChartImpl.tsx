@@ -16,7 +16,7 @@ import MeasuredChart from "@/app/MeasuredChart";
 import type { AmbientTopPoint, AmbientStackPoint } from "./themeData";
 import { measure } from "./styles";
 import { usePrefersReducedMotion } from "@/lib/usePrefersReducedMotion";
-import { C } from "@/app/styles";
+import { C, radius } from "@/app/styles";
 
 // ── §5 ambient-cluster chart ────────────────────────────────────────────────
 // Two stacked panels, modeled on §1. Top: r/aiwars alone — the all-sides
@@ -140,7 +140,7 @@ function yearTicks(months: string[]): string[] {
 const tooltipBox: React.CSSProperties = {
   backgroundColor: C.bg,
   border: `1px solid ${C.grid}`,
-  borderRadius: 6,
+  borderRadius: radius(6),
   padding: "6px 9px",
   fontSize: 11,
 };

@@ -13,7 +13,7 @@ import MeasuredChart from "@/app/MeasuredChart";
 import type { CommunityChartData, MonthPoint } from "@/lib/communityCharts";
 import { monthLabel, monthRange } from "@/lib/metrics";
 import { usePrefersReducedMotion } from "@/lib/usePrefersReducedMotion";
-import { C } from "@/app/styles";
+import { C, radius } from "@/app/styles";
 
 const MONTH_NAMES = [
   "Jan", "Feb", "Mar", "Apr", "May", "Jun",
@@ -151,7 +151,7 @@ function MetricChart({
                   fontSize: 11,
                   backgroundColor: C.bg,
                   borderColor: C.border,
-                  borderRadius: 6,
+                  borderRadius: radius(6),
                 }}
               />
               <Line
@@ -247,7 +247,7 @@ export default function Charts({
             monthly={data.scoreMonthly}
             label="Avg score per post"
             dataEndMonth={dataEndMonth}
-            color="#10b981"
+            color={C.metricC}
             markLiveListing
           />
         </div>

@@ -11,7 +11,7 @@ import {
 import ThemeChart from "./ThemeChart";
 import ThemeBackdrop from "./ThemeBackdrop";
 import { fontSize, sectionEyebrow, themeKey } from "../../styles";
-import { C } from "@/app/styles";
+import { C, radius } from "@/app/styles";
 
 // ── Per-theme page ───────────────────────────────────────────────────────────
 // The deeper "what is this and why" for one theme: a full-size chart, a plain-
@@ -290,7 +290,7 @@ export default async function ThemePage({
                     gap: 6,
                     backgroundColor: C.surface2,
                     border: `1px solid ${C.border}`,
-                    borderRadius: 6,
+                    borderRadius: radius(6),
                     padding: "3px 9px",
                     fontSize: fontSize.sm,
                   }}

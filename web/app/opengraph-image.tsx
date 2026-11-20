@@ -1,13 +1,14 @@
 import { ImageResponse } from "next/og";
 import siteMeta from "../data/site_meta.json";
 import subreddits from "../data/subreddits.json";
-import { C } from "@/app/styles";
+import { C, SITE_THEME } from "@/app/styles";
 
 export const runtime = "edge";
 export const alt = "My Friend Is AI — Tracking AI companion discourse on Reddit";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
+// On the paper theme every theme is drawn in the one navy ink (themes.ts).
 const THEMES = [
   { label: "Romance", color: "#FF69B4" },
   { label: "Sex / ERP", color: "#f87171" },
@@ -15,7 +16,7 @@ const THEMES = [
   { label: "Therapy", color: "#60A5FA" },
   { label: "Addiction", color: "#fd7112" },
   { label: "Rupture", color: "#22C55E" },
-];
+].map((t) => (SITE_THEME === "paper" ? { ...t, color: C.title } : t));
 
 // Read from the build-time data export so the counts cannot go stale.
 const POST_COUNT = `~${(siteMeta.total_posts / 1_000_000).toFixed(1)}M`;
@@ -47,7 +48,7 @@ export default async function Image() {
             marginBottom: 24,
           }}
         >
-          <span style={{ color: "rgba(255,255,255,0.5)", fontWeight: 300 }}>
+          <span style={{ color: C.ogMuted, fontWeight: 300 }}>
             My Friend Is
           </span>
           <span style={{ color: C.title, fontWeight: 700, marginLeft: 8 }}>

@@ -14,7 +14,7 @@ import MeasuredChart from "@/app/MeasuredChart";
 import type { RecoveryVolumePoint } from "./themeData";
 import { RECOVERY_COMMUNITIES, RECOVERY_EVENTS } from "./recoveryData";
 import { usePrefersReducedMotion } from "@/lib/usePrefersReducedMotion";
-import { C } from "@/app/styles";
+import { C, radius } from "@/app/styles";
 
 // Stacked monthly post volume across the two genuine recovery communities,
 // with minimalist Character.AI-specific event markers. The shape — flat near
@@ -188,7 +188,7 @@ export default function RecoveryChart({
                     style={{
                       backgroundColor: C.bg,
                       border: `1px solid ${C.grid}`,
-                      borderRadius: 6,
+                      borderRadius: radius(6),
                       padding: "6px 9px",
                       fontSize: 11,
                       lineHeight: 1.6,

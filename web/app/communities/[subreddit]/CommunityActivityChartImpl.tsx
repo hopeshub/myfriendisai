@@ -12,7 +12,7 @@ import {
 import MeasuredChart from "@/app/MeasuredChart";
 import { fromFirstActiveMonth } from "@/lib/metrics";
 import { usePrefersReducedMotion } from "@/lib/usePrefersReducedMotion";
-import { C } from "@/app/styles";
+import { C, radius } from "@/app/styles";
 
 // ── Community activity chart ─────────────────────────────────────────────────
 // The full-size version of the Communities-table sparkline: one community's
@@ -129,7 +129,7 @@ export default function CommunityActivityChart({
                   style={{
                     backgroundColor: C.bg,
                     border: `1px solid ${C.grid}`,
-                    borderRadius: 6,
+                    borderRadius: radius(6),
                     padding: "4px 8px",
                     fontSize: 11,
                     whiteSpace: "nowrap",

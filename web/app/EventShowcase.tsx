@@ -16,7 +16,7 @@ import {
 import { measure, themeKey } from "./styles";
 import { loadThemeData } from "./themeData";
 import EventSparkline from "./EventSparkline";
-import { C } from "@/app/styles";
+import { C, radius } from "@/app/styles";
 
 const MONTHS = [
   "Jan", "Feb", "Mar", "Apr", "May", "Jun",
@@ -82,7 +82,7 @@ function EventCard({
       style={{
         backgroundColor: C.surface,
         border: `1px solid ${C.border}`,
-        borderRadius: 8,
+        borderRadius: radius(8),
         padding: 20,
       }}
     >

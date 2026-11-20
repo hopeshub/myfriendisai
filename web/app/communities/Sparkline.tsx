@@ -32,7 +32,7 @@ export default function Sparkline({
   const peak = clean.length ? Math.max(...clean) : 0;
   if (clean.length < 2 || peak === 0) {
     return (
-      <span aria-hidden style={{ color: "#3F4654", fontSize: 12 }}>
+      <span aria-hidden style={{ color: C.faint, fontSize: 12 }}>
         —
       </span>
     );

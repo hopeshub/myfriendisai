@@ -5,7 +5,7 @@ import Link from "next/link";
 import type { ThemeData } from "./themeData";
 import { THEMES, EVENTS, type ThemeEvent, type ThemeId, type ThemeMeta } from "./themes";
 import { textColor } from "./styles";
-import { C } from "@/app/styles";
+import { C, radius } from "@/app/styles";
 
 // ── Trend Atlas: six channels ────────────────────────────────────────────────
 // The six themes as six wide, short strips stacked on ONE shared time axis,
@@ -41,9 +41,9 @@ const PAD_X = 6; // first/last month sit this far in from the plot edges
 const PAD_TOP = 8; // headroom above full scale, so a peak is never clipped
 const PAD_BOTTOM = 1.5; // zero sits on the rule that closes the strip
 
-// ── Colours — the site's existing dark palette ──────────────────────────────
+// ── Colours — palette roles (styles.ts) ──────────────────────────────
 const RULE = C.grid; // strip rules (also each strip's zero line)
-const GUIDE = "#1C1F28"; // very light chart-paper guides
+const GUIDE = C.guide; // very light chart-paper guides
 const EVENT = C.event;
 const EVENT_TEXT = C.eventText;
 const CURSOR = C.cursor;
@@ -459,7 +459,7 @@ function StripPlot({
           transform: flip ? "translateX(calc(-100% - 10px))" : "translateX(10px)",
           backgroundColor: BG,
           border: `1px solid ${RULE}`,
-          borderRadius: 6,
+          borderRadius: radius(6),
           padding: "3px 8px",
           fontSize: mobile ? 14 : 12,
           whiteSpace: "nowrap",
