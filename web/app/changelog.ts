@@ -19,6 +19,7 @@ export const CHANGELOG: ChangelogEntry[] = [
       "Character.AI’s bankruptcy filing on October 12, 2026 is now marked as an event. On the monthly chart it is a small bump. By week, r/CharacterAI’s rupture rate tripled in the week of the filing, before anything about the product had changed.",
       "The homepage line on r/replika emptying out now adds that part of the Replika conversation moved to Replika’s official subreddit, which this tracker doesn’t follow.",
       "Three more accounts are excluded from every count. One is r/MyBoyfriendIsAI’s moderator account, whose weekly image-thread invitation contains “a steamy scene” and so counted as sex/ERP; removing it lowers the sex/ERP line by about 3–9% from May 2026 on. That is the correction, not a change in the discourse. The other two belong to a ring that posts identical template prompts across communities; none of their posts was tagged.",
+      "Three communities were added as context: r/Ai_art_is_not_art and r/cogsuckers in the anti-AI cluster on the homepage, and r/therapyGPT, where people use general chatbots as a therapist. r/therapyGPT is kept out of the theme lines because, from under 2% of the posts, it would supply about 40% of the therapy line on its own. Each was added with its full history. No theme number changed.",
     ],
     recent: true,
   },
