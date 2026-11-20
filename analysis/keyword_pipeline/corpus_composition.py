@@ -19,9 +19,11 @@ Importing the definitions is what keeps it from drifting a third time.
 Run from the repo root:  python3 analysis/keyword_pipeline/corpus_composition.py
 """
 
+import json
 import sqlite3
 import sys
 from collections import defaultdict
+from datetime import datetime, timezone
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -31,18 +33,43 @@ from src.config import load_keyword_communities  # noqa: E402
 from src.db.operations import EXCLUDED_AUTHORS, measurable_post_where  # noqa: E402
 
 DB = ROOT / "data" / "tracker.db"
-LAST_COMPLETE_MONTH = "2026-10"         # November 2026 is still in progress
+KEYWORD_TRENDS = ROOT / "data" / "keyword_trends.json"
 VOLUME_FLOOR = 200                      # min posts/month for a sub to count in sub-equal
 
 THEMES = ["romance", "sexual_erp", "consciousness", "therapy", "addiction", "rupture"]
 
-# Published per-theme start month (coverage_start in data/keyword_trends.json).
-# The site shows each line only from here, so robustness is assessed over the
-# same span — not over noisy pre-publication data.
-COVERAGE_START = {
+
+def last_complete_month(now=None):
+    """The calendar month before `now` (UTC), as 'YYYY-MM'. The in-progress
+    month is left out everywhere on the site, so it is left out here."""
+    now = now or datetime.now(timezone.utc)
+    y, m = now.year, now.month - 1
+    if m == 0:
+        y, m = y - 1, 12
+    return f"{y:04d}-{m:02d}"
+
+
+# Values as published on 2026-11-18, used only if the export can't be read.
+_COVERAGE_START_FALLBACK = {
     "romance": "2022-12", "sexual_erp": "2022-08", "consciousness": "2025-04",
     "therapy": "2023-01", "addiction": "2023-01", "rupture": "2022-12",
 }
+
+
+def load_coverage_start(path=KEYWORD_TRENDS):
+    """Published per-theme start month, from `_coverage_start` in
+    data/keyword_trends.json (authoritative; it moves as the corpus grows).
+    The site shows each line only from here, so robustness is assessed over
+    the same span — not over noisy pre-publication data."""
+    try:
+        published = json.loads(Path(path).read_text())["_coverage_start"]
+        return {t: published[t][:7] for t in THEMES}
+    except (OSError, ValueError, KeyError, TypeError):
+        return dict(_COVERAGE_START_FALLBACK)
+
+
+LAST_COMPLETE_MONTH = last_complete_month()
+COVERAGE_START = load_coverage_start()
 
 
 def pearson(xs, ys):

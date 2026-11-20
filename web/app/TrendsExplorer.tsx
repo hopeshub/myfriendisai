@@ -13,9 +13,11 @@ const TrendAtlas = dynamic(() => import("./TrendAtlas"), {
   ssr: false,
   // Holds the space of the default view (1Y, three events) so nothing below
   // jumps when the chunk lands: six strips + marker band + axis, with the
-  // event legend above the stack on desktop and below it at ≤768px.
+  // event legend above the stack on desktop and below it at ≤768px. Heights
+  // measured from the rendered atlas: the legend wraps an extra line below
+  // 360px and between 769 and 800px.
   loading: () => (
-    <div className="min-h-[773px] min-[540px]:min-h-[725px] min-[769px]:min-h-[563.5px]" />
+    <div className="min-h-[815px] min-[360px]:min-h-[773px] min-[540px]:min-h-[725px] min-[769px]:min-h-[580px] min-[801px]:min-h-[563.5px]" />
   ),
 });
 

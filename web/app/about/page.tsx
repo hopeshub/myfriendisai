@@ -460,7 +460,7 @@ export default function About() {
               communities joined the set in May 2026 with their
               history backfilled, so there is no seam &mdash; but they are
               romance-heavy and now supply about one post in eleven: the romance
-              line for July 2026 reads 5.5 per thousand with them and 3.8
+              line for July 2026 reads 5.3 per thousand with them and 3.6
               without. Trust the broad direction of a line more than its exact
               path.
             </p>

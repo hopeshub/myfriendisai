@@ -1,6 +1,6 @@
 "use client";
 
-import { useLayoutEffect, useMemo, useState } from "react";
+import { useCallback, useLayoutEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import type { ThemeData } from "./themeData";
 import { THEMES, EVENTS, type ThemeEvent, type ThemeId, type ThemeMeta } from "./themes";
@@ -607,7 +607,11 @@ export default function TrendAtlas({
   /** ≤768px — gutter stacks above each strip; 14px mobile font floor. */
   isMobileStrip: boolean;
 }) {
-  const [hover, setHover] = useState<Hover>(null);
+  // The hovered month, tagged with the month domain it was set in (below).
+  const [hoverState, setHoverState] = useState<{ hover: Hover; domain: string }>({
+    hover: null,
+    domain: "",
+  });
   const [measureRef, plotW] = useWidth();
 
   // Each theme's monthly series and the shared month domain for the view.
@@ -673,9 +677,25 @@ export default function TrendAtlas({
 
   const xOf = xScale(n, plotW);
 
+  // A hover index only means something in the month domain it was set in.
+  // Changing the time range or scope reshapes `months` without moving the
+  // mouse, and a stale index pointed past the end of the shorter domain
+  // (months[readIdx] was undefined and the homepage fell to the error
+  // boundary). So a hover is tagged with its domain and ignored once the
+  // domain changes; the next pointer move sets a fresh one.
+  const domain = n ? `${months[0]}|${months[n - 1]}|${n}` : "";
+  const setHover = useCallback(
+    (h: Hover) => setHoverState({ hover: h, domain }),
+    [domain],
+  );
+  const liveHover: Hover =
+    hoverState.domain === domain && hoverState.hover && hoverState.hover.idx < n
+      ? hoverState.hover
+      : null;
+
   // The right-hand figures follow the cursor: the hovered month's values
   // across all six strips, or the latest month when nothing is hovered.
-  const readIdx = hover?.idx ?? n - 1;
+  const readIdx = liveHover?.idx ?? n - 1;
   const readMonth = n ? fmtMonth(months[readIdx]) : "";
   const fmtValue = (v: number | null) => (v == null ? "–" : v.toFixed(1));
 
@@ -715,7 +735,7 @@ export default function TrendAtlas({
               paddingBottom: 4,
               fontSize: 12,
               lineHeight: "16px",
-              color: hover ? textColor.body : textColor.caption,
+              color: liveHover ? textColor.body : textColor.caption,
               whiteSpace: "nowrap",
             }}
           >
@@ -739,7 +759,7 @@ export default function TrendAtlas({
             xOf={xOf}
             plotW={plotW}
             height={mobile ? STRIP_H_MOBILE : ROW_H - 1}
-            hover={hover}
+            hover={liveHover}
             onHover={setHover}
             mobile={mobile}
           />
