@@ -2,7 +2,7 @@
 
 import json
 import sqlite3
-from datetime import date
+from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 from typing import Optional
 
@@ -1142,6 +1142,114 @@ def export_keyword_trends_json(
     return path
 
 
+# Shell-share monitor (handoff D6, 2026-11). Arctic Shift records a post once,
+# within hours, and never re-crawls, so a post that was sitting in a mod queue
+# at capture is stored as a shell for good and leaves the measurable
+# population. The pooled rates stay unbiased only if held posts are
+# theme-random, and the share has risen in some keyword subs (r/KindroidAI
+# 17% -> 39%, Aug -> Oct 2026). This makes the share visible per sub every
+# collection instead of only in a one-off audit.
+#
+# The warning keys on a RISE, not a level: some subs are chronically mostly
+# shells (r/ChaiApp has been 70-90% removed in every archive month), so a
+# level alarm would fire every day and be ignored. A sub is flagged when its
+# share in the latest window is SHELL_SHARE_RISE_PTS or more above its share
+# in the window before, with enough posts in both to mean something.
+SHELL_SHARE_WINDOW_DAYS = 60
+SHELL_SHARE_HIGH_PCT = 50.0      # reported, not warned on
+SHELL_SHARE_RISE_PTS = 15.0      # warned on
+SHELL_SHARE_MIN_POSTS = 50       # per window (~25 a month); below this a share is noise
+
+
+def _shell_counts(conn, subreddits, start_epoch, end_epoch):
+    sub_ph = ",".join("?" * len(subreddits))
+    ea_ph = ",".join("?" * len(EXCLUDED_AUTHORS))
+    rows = conn.execute(
+        f"""SELECT subreddit,
+                   COUNT(*) AS n,
+                   SUM(CASE WHEN selftext IN ({_SHELL_BODIES_SQL}) THEN 1 ELSE 0 END) AS shells
+            FROM posts
+            WHERE subreddit IN ({sub_ph})
+              AND created_utc >= ? AND created_utc < ?
+              AND (author IS NULL OR author NOT IN ({ea_ph}))
+            GROUP BY subreddit""",
+        (*subreddits, start_epoch, end_epoch, *EXCLUDED_AUTHORS),
+    ).fetchall()
+    return {sub: (n, shells or 0) for sub, n, shells in rows}
+
+
+def _pct(shells, n):
+    return round(100 * shells / n, 1) if n else 0.0
+
+
+def shell_share_by_sub(
+    conn: sqlite3.Connection,
+    subreddits: "list[str]",
+    days: int = SHELL_SHARE_WINDOW_DAYS,
+    today: Optional[date] = None,
+) -> dict:
+    """Share of each sub's recent posts stored as shells ('[removed]'/'[deleted]').
+
+    Two back-to-back windows of `days` days ending at `today` (UTC): the
+    current one and the one before it. Excluded authors are left out, as
+    everywhere else in the published population; an empty body is not a
+    shell. Returns overall and per-sub counts for both windows, sorted by the
+    current share; `high` lists subs above SHELL_SHARE_HIGH_PCT now (context),
+    and `rising` lists subs whose share rose by SHELL_SHARE_RISE_PTS or more
+    with at least SHELL_SHARE_MIN_POSTS posts in each window (the warning).
+    """
+    end = today or date.today()
+    t_end = datetime.combine(end, datetime.min.time(), tzinfo=timezone.utc)
+    t_mid = t_end - timedelta(days=days)
+    t_start = t_mid - timedelta(days=days)
+    cur = _shell_counts(conn, subreddits, int(t_mid.timestamp()), int(t_end.timestamp()))
+    prev = _shell_counts(conn, subreddits, int(t_start.timestamp()), int(t_mid.timestamp()))
+
+    by_sub = []
+    for sub in sorted(set(cur) | set(prev)):
+        n, sh = cur.get(sub, (0, 0))
+        pn, psh = prev.get(sub, (0, 0))
+        by_sub.append({
+            "subreddit": sub,
+            "posts": n,
+            "shells": sh,
+            "pct": _pct(sh, n),
+            "prev_posts": pn,
+            "prev_pct": _pct(psh, pn),
+            "change_pts": round(_pct(sh, n) - _pct(psh, pn), 1) if n and pn else None,
+        })
+    by_sub.sort(key=lambda r: (-r["pct"], r["subreddit"]))
+
+    def enough(r):
+        return r["posts"] >= SHELL_SHARE_MIN_POSTS
+
+    total = sum(r["posts"] for r in by_sub)
+    total_shells = sum(r["shells"] for r in by_sub)
+    prev_total = sum(r["prev_posts"] for r in by_sub)
+    prev_shells = sum(prev.get(r["subreddit"], (0, 0))[1] for r in by_sub)
+    return {
+        "window_days": days,
+        "window_start": t_mid.date().isoformat(),
+        "prev_window_start": t_start.date().isoformat(),
+        "high_pct": SHELL_SHARE_HIGH_PCT,
+        "rise_pts": SHELL_SHARE_RISE_PTS,
+        "min_posts": SHELL_SHARE_MIN_POSTS,
+        "overall": {
+            "posts": total,
+            "shells": total_shells,
+            "pct": _pct(total_shells, total),
+            "prev_pct": _pct(prev_shells, prev_total),
+        },
+        "by_sub": by_sub,
+        "high": [r["subreddit"] for r in by_sub if enough(r) and r["pct"] > SHELL_SHARE_HIGH_PCT],
+        "rising": [
+            r["subreddit"] for r in by_sub
+            if enough(r) and r["prev_posts"] >= SHELL_SHARE_MIN_POSTS
+            and r["change_pts"] is not None and r["change_pts"] >= SHELL_SHARE_RISE_PTS
+        ],
+    }
+
+
 def export_theme_health_json(
     output_path: Optional[Path] = None,
     conn: Optional[sqlite3.Connection] = None,
@@ -1292,6 +1400,7 @@ def export_theme_health_json(
             "generated_at": date.today().isoformat(),
             "drift_last_updated": drift.get("last_updated"),
             "themes": out_themes,
+            "shell_share": shell_share_by_sub(_conn, T1_T3),
         }
         path.write_text(json.dumps(result, indent=2))
     finally:

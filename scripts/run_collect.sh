@@ -182,6 +182,32 @@ if push_pending:
 else:
     zero_comment_runs = prev_zero_comments
 
+# Shell share (handoff D6, 2026-11): per keyword sub, the share of the last 60
+# days' posts the archive captured as '[removed]'/'[deleted]' shells, and the
+# change from the 60 days before. Computed by export_theme_health_json() in
+# this run's export step; published so the GH Actions check can warn when a
+# sub's share RISES sharply (some subs are chronically mostly shells, so the
+# level alone is not a warning). Never fatal.
+shell_overall_pct = None
+shell_max = None
+shell_high = []
+shell_rising = []
+try:
+    shell = json.load(open("data/theme_health.json")).get("shell_share") or {}
+    shell_overall_pct = (shell.get("overall") or {}).get("pct")
+    by_sub = shell.get("by_sub") or []
+    if by_sub:
+        top = by_sub[0]
+        shell_max = {"subreddit": top["subreddit"], "pct": top["pct"], "posts": top["posts"]}
+    shell_high = list(shell.get("high") or [])
+    rising_set = set(shell.get("rising") or [])
+    shell_rising = [
+        {"subreddit": r["subreddit"], "pct": r["pct"], "prev_pct": r["prev_pct"]}
+        for r in by_sub if r["subreddit"] in rising_set
+    ]
+except Exception:
+    pass
+
 prev_consec = int(prev.get("consecutive_push_failures") or 0)
 prev_last_push = prev.get("last_successful_push")
 
@@ -226,6 +252,11 @@ out = {
     "consecutive_zero_comment_runs": zero_comment_runs,
     "drift_backlog_files": drift_backlog_files,
     "drift_backlog_days": drift_backlog_days,
+    # Added 2026-11 (shell-share monitor). Absent in older files.
+    "shell_share_60d_pct": shell_overall_pct,
+    "shell_share_max_sub": shell_max,
+    "shell_share_subs_over_50": shell_high,
+    "shell_share_subs_rising": shell_rising,
 }
 with open(status_path, "w") as f:
     json.dump(out, f, indent=2)
