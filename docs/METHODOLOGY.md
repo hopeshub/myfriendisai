@@ -69,7 +69,7 @@ indistinguishable from ordinary human-relationship talk.
 
 ## 2. The corpus: which communities, and why
 
-**41 subreddits are configured; 39 are actively collected.** The list lives in
+**44 subreddits are configured; 42 are actively collected.** The list lives in
 `config/communities.yaml` in the repository.
 
 ### 2.1 Why a curated list at all
@@ -95,10 +95,10 @@ appear to mean.
 | Tier | Description | Count | In theme measurement? |
 |---|---|---|---|
 | **T0** — General AI | Communities where companionship discourse surfaces but is not the charter (r/ChatGPT, r/OpenAI, r/singularity, r/ClaudeAI, r/claudexplorers) | 5 | **No** — context only |
-| **T1** — Primary Companionship | AI companionship is the central topic (r/replika, r/CharacterAI, r/MyBoyfriendIsAI, r/BeyondThePromptAI, r/MyGirlfriendIsAI, r/AIRelationships, r/AICompanions, r/SoulmateAI, r/ChatGPTcomplaints, r/aipartners, r/ReplikaLovers, r/ILoveMyReplika, r/MyBoyfriendIsAI_Open, r/MySentientAI) | 14 | Yes |
+| **T1** — Primary Companionship | AI companionship is the central topic (r/replika, r/CharacterAI, r/MyBoyfriendIsAI, r/BeyondThePromptAI, r/MyGirlfriendIsAI, r/AIRelationships, r/AICompanions, r/SoulmateAI, r/ChatGPTcomplaints, r/aipartners, r/ReplikaLovers, r/ILoveMyReplika, r/MyBoyfriendIsAI_Open, r/MySentientAI, and r/therapyGPT, a context-only exclusion listed below) | 15 | Yes, except 1 |
 | **T2** — Platform-Specific | Communities for specific AI-companion products (r/KindroidAI, r/NomiAI, r/ChaiApp, r/Paradot, r/NectarAI, r/HeavenGF, and three explicitness-scope exclusions listed below) | 9 | Yes, except 3 |
 | **T3** — Recovery & Dependency | Quitting and peer support (r/Character_AI_Recovery, r/ChatbotAddiction, r/AI_Addiction, r/CharacterAIrunaways) | 4 | Yes |
-| **T4** — Ambient / Discourse Climate | Anti-AI and pro-AI cultural-expression communities, added 2026-05-20 (r/antiAI, r/FuckAI, r/ArtistHate, r/AIDangers, r/BetterOffline, r/trueantiAI, r/DefendingAIArt, r/ProAI, r/aiwars) | 9 | **No** — context only |
+| **T4** — Ambient / Discourse Climate | Anti-AI and pro-AI cultural-expression communities, added 2026-05-20 and 2026-11-20 (r/antiAI, r/FuckAI, r/ArtistHate, r/AIDangers, r/BetterOffline, r/trueantiAI, r/Ai_art_is_not_art, r/cogsuckers, r/DefendingAIArt, r/ProAI, r/aiwars) | 11 | **No** — context only |
 
 One name on the list looks out of place and is deliberate: **r/ChatGPTcomplaints**
 is tracked as a companion community because of what its members write, not what
@@ -132,9 +132,20 @@ removal is a flagship event the site is built to show. A community that is both
 explicit *and* companionship-centred is in; one that is explicit but not
 companionship-centred is out — for the same reason a non-AI community would be.
 
-**Excluded from keyword tracking, 2026-05-20:** all nine T4 communities, plus a
-hard `tier in (1,2,3)` gate in the loader as defence in depth. T4 is a
-secondary cultural-context view only.
+**Excluded from keyword tracking, 2026-05-20:** all T4 communities (nine then,
+eleven since 2026-11-20), plus a hard `tier in (1,2,3)` gate in the loader as
+defence in depth. T4 is a secondary cultural-context view only.
+
+**Excluded from keyword tracking, 2026-11-20:** r/therapyGPT (T1), where people
+use general models (ChatGPT, Gemini, Claude) as a confidant or therapist. It
+clears the companionship gate (44% on a 100-post open coding), and the therapy
+keywords are accurate there (91% precision on a 100-post sample). The reason is
+weight, not noise: its therapy rate is about 70 times the other communities',
+so from under 2% of the denominator it would supply about 40% of all therapy
+tags since its founding in April 2025, and the therapy line would largely track
+one community's posting volume. It is collected, shown in the community
+explorer, and kept out of the theme lines, the denominator and comment
+collection, like the three explicitness-scope exclusions above.
 
 ### 2.4 The T4 selection rule
 
@@ -158,7 +169,15 @@ anti-AI side and accelerationist movement communities on the pro-AI side.
 cluster of cultural-expression communities exists, how each is sized, and how
 each is moving. Read engagement, not a population estimate.
 
-The pro-AI/anti-AI asymmetry in the tier (6 anti, 2 pro, 1 arena) is honest
+Two anti-AI communities were added under the same gate on 2026-11-20:
+r/Ai_art_is_not_art (an anti-AI-art community about seven times the size of
+r/ArtistHate) and r/cogsuckers, whose target is AI companionship itself, framed
+as pathology — the companionship counter-public, following the same events as
+the companion communities from outside. The same re-scan rejected
+r/LatentSpaceClub and r/Pro_Ai_Art at stage 1 and admitted nothing on the
+pro-AI side.
+
+The pro-AI/anti-AI asymmetry in the tier (8 anti, 2 pro, 1 arena) is honest
 rather than artifactual: Reddit has more anti-AI advocacy *expression* than
 pro-AI, because pro-AI energy mostly lives in product communities whose charter
 is the product, not advocacy. Counting those as T4 would have failed the charter
