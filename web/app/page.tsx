@@ -150,9 +150,11 @@ export default function Home() {
         </p>
         <p style={{ ...intro, marginBottom: 16 }}>
           The rest is a smaller world that has completely changed hands.
-          In 2023, AI-companion Reddit was, basically, r/replika. Replika
-          then emptied out &mdash; from 32,000 posts a year to under 5,000
-          &mdash; and a new generation rose to take its place, post for
+          In 2023, AI-companion Reddit was, basically, r/replika. r/replika
+          then emptied out &mdash; from 32,000 posts a year to under 5,000,
+          though part of that conversation moved to Replika&apos;s official
+          subreddit, which this tracker doesn&apos;t follow &mdash; and a new
+          generation rose to take its place, post for
           post: r/NomiAI, r/KindroidAI, r/ChaiApp, a born-in-2024
           r/MyBoyfriendIsAI. The total volume held; the names did not.
         </p>

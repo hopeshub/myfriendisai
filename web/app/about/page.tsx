@@ -455,8 +455,12 @@ export default function About() {
               communities were smaller then, or did not exist yet, and have
               grown since. Each line is measured against whatever communities
               existed at the time &mdash; so part of a long climb reflects the
-              tracked world widening, not only the conversation itself. Five
-              companion communities joined the set in May 2026 with their
+              tracked world widening, not only the conversation itself. It
+              works the other way too. As r/CharacterAI shrank in 2026, the
+              communities where addiction and romance language concentrate
+              became a larger share of the count, which steepens those lines
+              beyond any change inside the communities. Five companion
+              communities joined the set in May 2026 with their
               history backfilled, so there is no seam &mdash; but they are
               romance-heavy and now supply about one post in eleven: the romance
               line for July 2026 reads 5.5 per thousand with them and 3.8
