@@ -30,14 +30,28 @@ EXCLUDED_AUTHORS = (
     # threads (Weekly Image Thread, Tech Talk Monday, Saturday Suno, Q&A,
     # megathreads). Since May 2026 the Weekly Image Thread invitation reads
     # "A portrait, a steamy scene, something funny…", which the keyword
-    # `steamy` matches: 12 template posts, every one a false positive, 3-12%
-    # of the sex/ERP theme-months May-Nov 2026 (Arctic Shift text, keyword
-    # matcher re-run, 2026-11-20). Flagged two drift cycles running (Oct,
-    # Nov). Same rule: moderator announcement content is not community
-    # discourse. Also drops the account's ~200 other posts (mostly recurring
-    # threads) from the denominator, and its 12 rupture tags (event
-    # megathreads; <=1.3% of any rupture month). Added 2026-11.
+    # `steamy` matches: 12 template posts, every one a false positive, 3-9%
+    # of the sex/ERP theme-months May-Nov 2026 (June has none; real-DB
+    # before/after 2026-11-20, posted on PR #4). Flagged two drift cycles
+    # running (Oct, Nov). Same rule: moderator announcement content is not
+    # community discourse. The account's other 206 measurable posts leave
+    # with it: one GPT-5.2 review tagged sex/ERP (Dec 2025, -2.1%), one
+    # therapy post (May 2025, -2.7%), 10 rupture-tagged image threads and
+    # event megathreads (<=1.3% of any rupture month). Added 2026-11.
     "rawunfilteredchaos",
+    # A templated seeding ring (handoff D13, docs/refresh_2026-11/): the
+    # network that fills r/AICompanionZone, r/AItexting and r/AILounge with
+    # identical "What's something your AI companion...?" prompts across
+    # accounts. Of the 52 accounts with 6+ posts in its hub subs since Aug
+    # 2026, only these two post into tracked subs: Lonely-Equipment1897
+    # (19 measurable posts in r/MyBoyfriendIsAI_Open, r/aipartners and
+    # r/ChatbotAddiction, Oct-Nov 2026) and LeadershipExpert9030 (the
+    # r/AICompanionZone founder; 1 cross-posted welcome post). None tagged:
+    # denominator-only, +0.1-0.2% on every theme in Oct-Nov 2026. Hygiene
+    # under the same rule (promotional template content is not community
+    # discourse). Added 2026-11.
+    "Lonely-Equipment1897",
+    "LeadershipExpert9030",
 )
 
 

@@ -934,12 +934,12 @@ composite looks authoritative and is fragile.
    carry weight: intimacy, belief, dependence, and loss.
 10. **Post-level NSFW filtering** may cause slight undercounting within
     otherwise-accessible communities.
-11. **A few accounts carry more of a theme than you might expect, and three
-    platform or moderator accounts are excluded.** The most prolific 1% of authors account
+11. **A few accounts carry more of a theme than you might expect, and five
+    platform, moderator or seeding accounts are excluded.** The most prolific 1% of authors account
     for 5–11% of a theme's posts (May 2026 audit) — concentrated, but not
-    enough to make a theme one person's diary. Three accounts are excluded from
-    every count — numerator and denominator alike — under one rule: platform
-    or moderator announcement content is not community discourse. The first is
+    enough to make a theme one person's diary. Five accounts are excluded from
+    every count — numerator and denominator alike — under one rule: platform,
+    moderator or promotional template content is not community discourse. The first is
     a platform-operator account posting product announcements into the sex/ERP
     theme (`SoulmateAI_Dev`, 2023 Soulmate patch notes, about 0.8% of the
     theme; excluded May 2026). The second, found in the 2026-09-08 audit, is
@@ -953,11 +953,17 @@ composite looks authoritative and is fragile.
     November 2026 drift check, is the r/MyBoyfriendIsAI moderator account that
     posts the sub's recurring threads. Since May 2026 its Weekly Image Thread
     invitation has read *"A portrait, a steamy scene, something funny…"*, which
-    matched the keyword `steamy`: 12 template posts, 3–12% of the sex/ERP
+    matched the keyword `steamy`: 12 template posts, 3–9% of the sex/ERP
     theme-months from May to November 2026, every one a false positive.
-    Excluded November 2026; the account's other posts (mostly recurring threads
-    and event megathreads) leave the denominator with it, which moves no other
-    theme by more than about 1%.
+    Excluded November 2026. The account's other posts (mostly recurring threads
+    and event megathreads) leave with it; a few carried theme tags, so rupture
+    moves by at most 1.3% in any month, and therapy by 2.7% in one month (a
+    single post, May 2025). The fourth and fifth, excluded at the same time,
+    are the two accounts of a templated seeding ring that post into the
+    tracked communities (identical "What's something your AI companion…?"
+    prompts across accounts, the network behind r/AICompanionZone). None of
+    their 20 posts carried a theme tag, so the effect is denominator-only:
+    0.1–0.2% on every theme in October and November 2026.
 12. **Exact duplicates and crossposts are about 8% of the eligible corpus**
     (varying 3–9% by year) and about 2% of tagged posts. They are not
     de-duplicated. This wobbles the denominator slightly; it is not corrected.
