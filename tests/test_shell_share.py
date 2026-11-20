@@ -54,15 +54,15 @@ def _fill(conn, sub, day, n, shells):
 
 
 def test_current_and_previous_windows(conn):
-    _fill(conn, "KindroidAI", "2026-11-01", 40, 24)   # 60% now
-    _fill(conn, "KindroidAI", "2026-08-15", 40, 8)    # 20% before
+    _fill(conn, "KindroidAI", "2026-11-01", 60, 36)   # 60% now
+    _fill(conn, "KindroidAI", "2026-08-15", 60, 12)   # 20% before
     _fill(conn, "replika", "2026-11-01", 10, 1)
     out = ops.shell_share_by_sub(conn, ["KindroidAI", "replika"], days=60, today=TODAY)
     k = out["by_sub"][0]
     assert k["subreddit"] == "KindroidAI"
-    assert (k["posts"], k["shells"], k["pct"]) == (40, 24, 60.0)
-    assert (k["prev_posts"], k["prev_pct"], k["change_pts"]) == (40, 20.0, 40.0)
-    assert out["overall"]["posts"] == 50 and out["overall"]["shells"] == 25
+    assert (k["posts"], k["shells"], k["pct"]) == (60, 36, 60.0)
+    assert (k["prev_posts"], k["prev_pct"], k["change_pts"]) == (60, 20.0, 40.0)
+    assert out["overall"]["posts"] == 70 and out["overall"]["shells"] == 37
     assert out["overall"]["prev_pct"] == 20.0
     assert out["rising"] == ["KindroidAI"]
     assert out["high"] == ["KindroidAI"]
@@ -77,7 +77,7 @@ def test_chronically_high_sub_is_high_but_not_rising(conn):
 
 
 def test_rise_needs_enough_posts_in_both_windows(conn):
-    _fill(conn, "aipartners", "2026-11-01", 40, 30)
+    _fill(conn, "aipartners", "2026-11-01", 60, 45)
     _fill(conn, "aipartners", "2026-08-15", ops.SHELL_SHARE_MIN_POSTS - 1, 0)
     out = ops.shell_share_by_sub(conn, ["aipartners"], days=60, today=TODAY)
     assert out["by_sub"][0]["change_pts"] == 75.0

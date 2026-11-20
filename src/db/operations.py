@@ -1158,7 +1158,7 @@ def export_keyword_trends_json(
 SHELL_SHARE_WINDOW_DAYS = 60
 SHELL_SHARE_HIGH_PCT = 50.0      # reported, not warned on
 SHELL_SHARE_RISE_PTS = 15.0      # warned on
-SHELL_SHARE_MIN_POSTS = 30       # per window, below this a share is noise
+SHELL_SHARE_MIN_POSTS = 50       # per window (~25 a month); below this a share is noise
 
 
 def _shell_counts(conn, subreddits, start_epoch, end_epoch):
