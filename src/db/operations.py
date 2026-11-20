@@ -2,7 +2,7 @@
 
 import json
 import sqlite3
-from datetime import date
+from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 from typing import Optional
 
@@ -1142,6 +1142,78 @@ def export_keyword_trends_json(
     return path
 
 
+# Shell-share monitor (handoff D6, 2026-11). Arctic Shift records a post once,
+# within hours, and never re-crawls, so a post that was sitting in a mod queue
+# at capture is stored as a shell for good and leaves the measurable
+# population. The pooled rates stay unbiased only if held posts are
+# theme-random, and the share is rising in some keyword subs (r/KindroidAI
+# 17% -> 39%, Aug -> Oct 2026). This makes the share visible per sub every
+# collection instead of only in a one-off audit.
+SHELL_SHARE_WINDOW_DAYS = 60
+SHELL_SHARE_WARN_ABOVE = 0.50
+SHELL_SHARE_MIN_POSTS = 30  # below this a share is too noisy to warn on
+
+
+def shell_share_by_sub(
+    conn: sqlite3.Connection,
+    subreddits: "list[str]",
+    days: int = SHELL_SHARE_WINDOW_DAYS,
+    today: Optional[date] = None,
+) -> dict:
+    """Share of each sub's recent posts stored as shells ('[removed]'/'[deleted]').
+
+    Window: posts created in the `days` days before `today` (UTC). Excluded
+    authors are left out, as everywhere else in the published population.
+    Returns overall and per-sub counts, sorted by share, and the subs whose
+    share is above SHELL_SHARE_WARN_ABOVE with at least SHELL_SHARE_MIN_POSTS
+    posts in the window.
+    """
+    end = today or date.today()
+    start = datetime.combine(end - timedelta(days=days), datetime.min.time(), tzinfo=timezone.utc)
+    sub_ph = ",".join("?" * len(subreddits))
+    ea_ph = ",".join("?" * len(EXCLUDED_AUTHORS))
+    rows = conn.execute(
+        f"""SELECT subreddit,
+                   COUNT(*) AS n,
+                   SUM(CASE WHEN selftext IN ({_SHELL_BODIES_SQL}) THEN 1 ELSE 0 END) AS shells
+            FROM posts
+            WHERE subreddit IN ({sub_ph})
+              AND created_utc >= ?
+              AND (author IS NULL OR author NOT IN ({ea_ph}))
+            GROUP BY subreddit""",
+        (*subreddits, int(start.timestamp()), *EXCLUDED_AUTHORS),
+    ).fetchall()
+    by_sub = []
+    for sub, n, shells in rows:
+        shells = shells or 0
+        by_sub.append({
+            "subreddit": sub,
+            "posts": n,
+            "shells": shells,
+            "pct": round(100 * shells / n, 1) if n else 0.0,
+        })
+    by_sub.sort(key=lambda r: (-r["pct"], r["subreddit"]))
+    total = sum(r["posts"] for r in by_sub)
+    total_shells = sum(r["shells"] for r in by_sub)
+    over = [
+        r["subreddit"] for r in by_sub
+        if r["posts"] >= SHELL_SHARE_MIN_POSTS and r["pct"] > 100 * SHELL_SHARE_WARN_ABOVE
+    ]
+    return {
+        "window_days": days,
+        "window_start": start.date().isoformat(),
+        "warn_above_pct": round(100 * SHELL_SHARE_WARN_ABOVE, 1),
+        "min_posts_for_warning": SHELL_SHARE_MIN_POSTS,
+        "overall": {
+            "posts": total,
+            "shells": total_shells,
+            "pct": round(100 * total_shells / total, 1) if total else 0.0,
+        },
+        "by_sub": by_sub,
+        "over_threshold": over,
+    }
+
+
 def export_theme_health_json(
     output_path: Optional[Path] = None,
     conn: Optional[sqlite3.Connection] = None,
@@ -1292,6 +1364,7 @@ def export_theme_health_json(
             "generated_at": date.today().isoformat(),
             "drift_last_updated": drift.get("last_updated"),
             "themes": out_themes,
+            "shell_share": shell_share_by_sub(_conn, T1_T3),
         }
         path.write_text(json.dumps(result, indent=2))
     finally:
