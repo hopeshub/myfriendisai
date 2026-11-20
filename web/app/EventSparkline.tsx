@@ -1,3 +1,4 @@
+import { C } from "@/app/styles";
 // ── Event sparkline ──────────────────────────────────────────────────────────
 // A small theme-line trace for an event card: the relevant theme's monthly
 // per-1k rate, windowed ±6 months around the event, with the event month
@@ -47,7 +48,7 @@ export default function EventSparkline({
         y1={0}
         x2={evX}
         y2={H}
-        stroke="#C2974D"
+        stroke={C.event}
         strokeWidth={1}
         strokeDasharray="3 2"
         strokeOpacity={0.75}

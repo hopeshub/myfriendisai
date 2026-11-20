@@ -78,7 +78,7 @@ function SortButton({
           ? `Sort by ${label} — currently ${current.asc ? "ascending" : "descending"}`
           : `Sort by ${label}`
       }
-      className={`flex items-center gap-1 ml-auto py-2 min-h-11 md:min-h-0 text-sm md:text-xs hover:text-[#C8D0DC] transition-colors ${active ? "text-[#F8FAFC]" : "text-[#7E8B9E]"}`}
+      className={`flex items-center gap-1 ml-auto py-2 min-h-11 md:min-h-0 text-sm md:text-xs hover:text-[var(--c-body)] transition-colors ${active ? "text-[var(--c-title)]" : "text-[var(--c-caption)]"}`}
     >
       {label}
       <span aria-hidden className="text-sm md:text-[11px]">
@@ -155,8 +155,8 @@ export default function CommunitiesTable({
             onClick={() => setCategoryFilter(cat)}
             className={`text-sm md:text-xs px-3 py-2 md:py-1 min-h-11 md:min-h-0 rounded-full border transition-colors ${
               categoryFilter === cat
-                ? "bg-[#1A1D27] text-[#F8FAFC] border-[#2A2D3A]"
-                : "border-[#2A2D3A] text-[#9AA7B8] hover:border-[#475569]"
+                ? "bg-[var(--c-surface2)] text-[var(--c-title)] border-[var(--c-border)]"
+                : "border-[var(--c-border)] text-[var(--c-lead)] hover:border-[var(--c-cursor)]"
             }`}
           >
             {cat}
@@ -167,10 +167,10 @@ export default function CommunitiesTable({
       <div className="overflow-x-auto">
         <table className="w-full text-left">
           <thead>
-            <tr className="text-sm md:text-xs border-b border-[#2A2D3A]">
-              <th className="pb-3 pr-4 font-medium text-[#7E8B9E]">Community</th>
-              <th className="pb-3 pr-4 font-medium text-[#7E8B9E] hidden sm:table-cell">Activity</th>
-              <th className="pb-3 pr-4 font-medium text-[#7E8B9E] hidden sm:table-cell">Tier</th>
+            <tr className="text-sm md:text-xs border-b border-[var(--c-border)]">
+              <th className="pb-3 pr-4 font-medium text-[var(--c-caption)]">Community</th>
+              <th className="pb-3 pr-4 font-medium text-[var(--c-caption)] hidden sm:table-cell">Activity</th>
+              <th className="pb-3 pr-4 font-medium text-[var(--c-caption)] hidden sm:table-cell">Tier</th>
               <th className="pb-3 pr-4 font-medium text-right">
                 <SortButton label={subscribersLabel} sortKey="subscribers" current={sort} onSort={handleSort} />
               </th>
@@ -190,16 +190,16 @@ export default function CommunitiesTable({
           </thead>
           <tbody>
             {sorted.map((r) => (
-              <tr key={r.sub.subreddit} className="border-t border-[#2A2D3A] hover:bg-[#1A1D27] transition-colors">
+              <tr key={r.sub.subreddit} className="border-t border-[var(--c-border)] hover:bg-[var(--c-surface2)] transition-colors">
                 <td className="py-3 pr-4">
                   <Link
                     href={`/communities/${r.sub.subreddit}`}
-                    className="font-medium text-sm text-[#F8FAFC] hover:underline"
+                    className="font-medium text-sm text-[var(--c-title)] hover:underline"
                   >
                     r/{r.sub.subreddit}
                   </Link>
                   {r.sub.category && (
-                    <div className="text-sm md:text-xs text-[#7E8B9E] mt-0.5">{r.sub.category}</div>
+                    <div className="text-sm md:text-xs text-[var(--c-caption)] mt-0.5">{r.sub.category}</div>
                   )}
                 </td>
                 <td className="py-3 pr-4 hidden sm:table-cell">
@@ -215,16 +215,16 @@ export default function CommunitiesTable({
                   <TierBadge tier={r.sub.tier} />
                 </td>
                 <td
-                  className="py-3 pr-4 text-sm tabular-nums text-right text-[#C8D0DC]"
+                  className="py-3 pr-4 text-sm tabular-nums text-right text-[var(--c-body)]"
                   title={r.subscribersAsOf ? `Last collected ${r.subscribersAsOf}` : undefined}
                 >
                   {fmt(r.subscribers)}
                 </td>
-                <td className="py-3 pr-4 text-sm tabular-nums text-right text-[#C8D0DC]">{fmt(r.contributors)}</td>
-                <td className="py-3 pr-4 text-sm tabular-nums text-right text-[#C8D0DC] hidden sm:table-cell">{fmt(r.postsPerDay, 1)}</td>
-                <td className="py-3 pr-4 text-sm tabular-nums text-right text-[#C8D0DC] hidden md:table-cell">{fmt(r.avgComments, 1)}</td>
+                <td className="py-3 pr-4 text-sm tabular-nums text-right text-[var(--c-body)]">{fmt(r.contributors)}</td>
+                <td className="py-3 pr-4 text-sm tabular-nums text-right text-[var(--c-body)] hidden sm:table-cell">{fmt(r.postsPerDay, 1)}</td>
+                <td className="py-3 pr-4 text-sm tabular-nums text-right text-[var(--c-body)] hidden md:table-cell">{fmt(r.avgComments, 1)}</td>
                 <td
-                  className="py-3 text-sm tabular-nums text-right text-[#C8D0DC] hidden md:table-cell"
+                  className="py-3 text-sm tabular-nums text-right text-[var(--c-body)] hidden md:table-cell"
                   title={r.avgScoreAsOf ? `Last collected ${r.avgScoreAsOf}` : undefined}
                 >
                   {fmt(r.avgScore, 0)}
@@ -236,10 +236,10 @@ export default function CommunitiesTable({
       </div>
 
       {sorted.length === 0 && (
-        <p className="text-sm text-[#9AA7B8] py-8 text-center">No communities in this category.</p>
+        <p className="text-sm text-[var(--c-lead)] py-8 text-center">No communities in this category.</p>
       )}
 
-      <p className="mt-8 text-sm md:text-xs text-[#7E8B9E]">
+      <p className="mt-8 text-sm md:text-xs text-[var(--c-caption)]">
         <strong>Activity</strong>{" "}— monthly post volume, from each
         community&apos;s first month to the last complete one; each sparkline
         is on its own scale (read the shape, not the height).{" "}

@@ -6,6 +6,7 @@ import localFont from "next/font/local";
 import { Analytics } from "@vercel/analytics/next";
 import StaleDataBanner from "./StaleDataBanner";
 import "./globals.css";
+import { C, SITE_THEME, paletteCssVars } from "@/app/styles";
 
 // Fonts are self-hosted (app/fonts/, latin subset, from the @fontsource npm
 // packages; OFL texts alongside) so the build makes no network request. The
@@ -30,6 +31,34 @@ const newsreader = localFont({
   // A serif fallback, as next/font/google generated for Newsreader.
   adjustFontFallback: "Times New Roman",
 });
+
+// Paper theme (design step 3c): IBM Plex Sans Condensed for headings, labels,
+// navigation and chart text; Literata for running prose. Same self-hosting.
+const plexCondensed = localFont({
+  src: [
+    { path: "./fonts/ibm-plex-sans-condensed-latin-400-normal.woff2", weight: "400", style: "normal" },
+    { path: "./fonts/ibm-plex-sans-condensed-latin-400-italic.woff2", weight: "400", style: "italic" },
+    { path: "./fonts/ibm-plex-sans-condensed-latin-600-normal.woff2", weight: "600", style: "normal" },
+  ],
+  display: "swap",
+  variable: "--font-plex-condensed",
+  adjustFontFallback: "Arial",
+});
+
+const literata = localFont({
+  src: [
+    { path: "./fonts/literata-latin-wght-normal.woff2", weight: "200 900", style: "normal" },
+    { path: "./fonts/literata-latin-wght-italic.woff2", weight: "200 900", style: "italic" },
+  ],
+  display: "swap",
+  variable: "--font-literata",
+  adjustFontFallback: "Times New Roman",
+});
+
+const fontClasses =
+  SITE_THEME === "paper"
+    ? `${plexCondensed.variable} ${literata.variable}`
+    : `${inter.className} ${newsreader.variable}`;
 
 export const metadata: Metadata = {
   // `default` shows on the homepage (template is not applied to it); every
@@ -72,8 +101,8 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#0F1117",
-  colorScheme: "dark",
+  themeColor: C.bg,
+  colorScheme: SITE_THEME === "paper" ? "light" : "dark",
   width: "device-width",
   initialScale: 1,
 };
@@ -110,8 +139,8 @@ export default function RootLayout({
     : "present";
 
   return (
-    <html lang="en">
-      <body className={`antialiased ${inter.className} ${newsreader.variable}`}>
+    <html lang="en" data-theme={SITE_THEME} style={paletteCssVars as React.CSSProperties}>
+      <body className={`antialiased ${fontClasses}`}>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -148,9 +177,9 @@ export default function RootLayout({
               href="/"
               className="font-display text-lg tracking-tight whitespace-nowrap hover:opacity-80 transition-opacity"
             >
-              <span style={{ fontWeight: 400, color: "#9AA7B8", fontStyle: "normal" }}>My Friend Is</span>
+              <span style={{ fontWeight: 400, color: C.lead, fontStyle: "normal" }}>My Friend Is</span>
               {" "}
-              <span style={{ fontWeight: 600, color: "#F8FAFC", fontStyle: "normal" }}>AI</span>
+              <span style={{ fontWeight: 600, color: C.title, fontStyle: "normal" }}>AI</span>
             </Link>
             <nav aria-label="Primary" className="flex gap-6 text-sm text-muted">
               <Link

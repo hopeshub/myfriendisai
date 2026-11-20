@@ -1,11 +1,11 @@
 @import "tailwindcss";
 
 :root {
-  --background: #0F1117;
-  --foreground: #F8FAFC;
-  --muted: #9AA7B8;
-  --border: #2A2D3A;
-  --card: #1A1D27;
+  --background: var(--c-bg);
+  --foreground: var(--c-title);
+  --muted: var(--c-lead);
+  --border: var(--c-border);
+  --card: var(--c-surface2);
   /* Section label size (styles.ts `sectionEyebrow`): 12px on desktop,
      raised to the 14px mobile floor below. A variable, so the inline style
      object works unchanged in every server component that spreads it. */
@@ -36,12 +36,28 @@ body {
   font-family: var(--font-newsreader), Georgia, "Times New Roman", serif;
 }
 
+/* ── Paper theme (styles.ts SITE_THEME = "paper") ─────────────────────────
+   IBM Plex Sans Condensed carries every heading, label, control and chart
+   text; Literata carries running prose. Colours come from the --c-* roles
+   layout.tsx writes onto <html>. */
+[data-theme="paper"] body {
+  font-family: var(--font-plex-condensed), "Arial Narrow", Arial, sans-serif;
+}
+[data-theme="paper"] .font-display {
+  font-family: var(--font-plex-condensed), "Arial Narrow", Arial, sans-serif;
+  letter-spacing: -0.005em;
+}
+[data-theme="paper"] main p,
+[data-theme="paper"] main li {
+  font-family: var(--font-literata), Georgia, "Times New Roman", serif;
+}
+
 .recharts-cartesian-grid line {
-  stroke: #2A2D3A;
+  stroke: var(--c-grid);
 }
 
 .recharts-text {
-  fill: #7E8B9E;
+  fill: var(--c-caption);
   font-size: 12px;
 }
 
@@ -111,8 +127,8 @@ a:focus-visible {
   position: absolute;
   top: -40px;
   left: 0;
-  background: #F8FAFC;
-  color: #0F1117;
+  background: var(--c-title);
+  color: var(--c-bg);
   padding: 8px 16px;
   z-index: 100;
   text-decoration: none;

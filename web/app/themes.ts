@@ -1,6 +1,8 @@
 // Shared theme + event metadata for the chart (used by TrendsExplorer and
 // TrendAtlas). Kept in one place so the two components cannot drift apart.
 
+import { SITE_THEME } from "./styles";
+
 export type ThemeId =
   | "romance"
   | "sexual_erp"
@@ -46,8 +48,19 @@ const PALETTE_MUTED: Record<ThemeId, string> = {
   addiction: "#CF9A63",
   rupture: "#6FA98C",
 };
-// ↓↓↓  THE SWITCH — PALETTE_VIVID (original) or PALETTE_MUTED (desaturated)  ↓↓↓
-const ACTIVE_PALETTE = PALETTE_VIVID;
+// On the paper theme (styles.ts SITE_THEME) every theme is one navy ink, as on
+// a single-pen chart recorder: the strips are told apart by their names, and
+// colour is kept for platform events (red ink).
+const PALETTE_INK: Record<ThemeId, string> = {
+  romance: "#1F2433",
+  sexual_erp: "#1F2433",
+  consciousness: "#1F2433",
+  therapy: "#1F2433",
+  addiction: "#1F2433",
+  rupture: "#1F2433",
+};
+// ↓↓↓  THE SWITCH — PALETTE_VIVID (original) or PALETTE_MUTED (desaturated); paper uses PALETTE_INK  ↓↓↓
+const ACTIVE_PALETTE = SITE_THEME === "paper" ? PALETTE_INK : PALETTE_VIVID;
 
 export const THEMES: ThemeMeta[] = [
   {

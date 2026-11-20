@@ -14,6 +14,7 @@ import MeasuredChart from "@/app/MeasuredChart";
 import { EVENTS } from "../../themes";
 import { fontSize } from "../../styles";
 import { useBreakpoint } from "../../useBreakpoint";
+import { C } from "@/app/styles";
 
 // A single line chart for one theme's page. Same honest series as the homepage
 // atlas strip (validated-keyword mentions per 1,000 posts, pooled by month), with
@@ -97,7 +98,7 @@ export default function ThemeChart({
 
   if (!monthly.length) {
     return (
-      <div className="h-[240px] flex items-center justify-center text-sm text-[#7E8B9E]">
+      <div className="h-[240px] flex items-center justify-center text-sm text-[var(--c-caption)]">
         No data yet.
       </div>
     );
@@ -117,9 +118,9 @@ export default function ThemeChart({
             aria-label={`Show ${r === "ALL" ? "all time" : `last ${r}`}`}
             className="px-3 h-11 md:h-8 text-sm md:text-xs font-medium rounded-md transition-colors"
             style={{
-              backgroundColor: range === r ? "#0F1117" : "transparent",
-              color: range === r ? "#F8FAFC" : "#9AA7B8",
-              border: `1px solid ${range === r ? "#2A2D3A" : "transparent"}`,
+              backgroundColor: range === r ? C.bg : "transparent",
+              color: range === r ? C.title : C.lead,
+              border: `1px solid ${range === r ? C.grid : "transparent"}`,
             }}
           >
             {r}
@@ -142,22 +143,22 @@ export default function ThemeChart({
           >
             <CartesianGrid
               strokeDasharray="3 3"
-              stroke="#2A2D3A"
+              stroke={C.grid}
               vertical={false}
             />
             <XAxis
               dataKey="date"
               tickFormatter={fmtMonthShort}
-              stroke="#2A2D3A"
-              tick={{ fill: "#7E8B9E", fontSize: 12 }}
+              stroke={C.grid}
+              tick={{ fill: C.caption, fontSize: 12 }}
               tickLine={false}
-              axisLine={{ stroke: "#2A2D3A" }}
+              axisLine={{ stroke: C.grid }}
               minTickGap={48}
             />
             <YAxis
               width={44}
               stroke="transparent"
-              tick={{ fill: "#7E8B9E", fontSize: 12 }}
+              tick={{ fill: C.caption, fontSize: 12 }}
               tickLine={false}
               axisLine={false}
               domain={[0, "auto"]}
@@ -167,20 +168,20 @@ export default function ThemeChart({
               <ReferenceLine
                 key={e.date}
                 x={`${e.date.slice(0, 7)}-01`}
-                stroke="#C2974D"
+                stroke={C.event}
                 strokeOpacity={0.7}
                 strokeDasharray={e.methodology ? "2 3" : "5 3"}
                 strokeWidth={1}
                 label={{
                   value: String(e.num),
                   position: "top",
-                  fill: "#D4A862",
+                  fill: C.eventText,
                   fontSize: fs(12),
                 }}
               />
             ))}
             <Tooltip
-              cursor={{ stroke: "#475569", strokeWidth: 1 }}
+              cursor={{ stroke: C.cursor, strokeWidth: 1 }}
               animationDuration={140}
               animationEasing="ease-out"
               content={({ active, payload, label }) => {
@@ -190,22 +191,22 @@ export default function ThemeChart({
                 return (
                   <div
                     style={{
-                      backgroundColor: "#0F1117",
-                      border: "1px solid #2A2D3A",
+                      backgroundColor: C.bg,
+                      border: `1px solid ${C.grid}`,
                       borderRadius: 6,
                       padding: "4px 8px",
                       fontSize: fs(12),
                       whiteSpace: "nowrap",
                     }}
                   >
-                    <span style={{ color: "#9AA7B8" }}>
+                    <span style={{ color: C.lead }}>
                       {fmtMonth(label as string)}
                     </span>
-                    <span style={{ color: "#9AA7B8" }}>{"  ·  "}</span>
-                    <span style={{ color: "#F1F4F8", fontWeight: 600 }}>
+                    <span style={{ color: C.lead }}>{"  ·  "}</span>
+                    <span style={{ color: C.heading, fontWeight: 600 }}>
                       {(payload[0].value as number).toFixed(1)}
                     </span>
-                    <span style={{ color: "#9AA7B8" }}> per 1k posts</span>
+                    <span style={{ color: C.lead }}> per 1k posts</span>
                   </div>
                 );
               }}
@@ -224,7 +225,7 @@ export default function ThemeChart({
         )}
       </MeasuredChart>
 
-      <div style={{ fontSize: fs(11), color: "#7E8B9E", marginTop: 8 }}>
+      <div style={{ fontSize: fs(11), color: C.caption, marginTop: 8 }}>
         Validated-keyword mentions per 1,000 posts · by month · post text
         only
       </div>
@@ -235,7 +236,7 @@ export default function ThemeChart({
           style={{
             marginTop: 12,
             paddingTop: 10,
-            borderTop: "1px solid #1E293B",
+            borderTop: `1px solid ${C.borderSoft}`,
           }}
         >
           <div
@@ -249,7 +250,7 @@ export default function ThemeChart({
             <span
               style={{
                 fontSize: fs(11),
-                color: "#7E8B9E",
+                color: C.caption,
               }}
             >
               Events
@@ -277,19 +278,19 @@ export default function ThemeChart({
                     fontSize: fs(11),
                     fontWeight: 700,
                     flexShrink: 0,
-                    color: e.methodology ? "#D4A862" : "#0F1117",
-                    backgroundColor: e.methodology ? "transparent" : "#C2974D",
-                    border: e.methodology ? "1px dashed #C2974D" : "none",
+                    color: e.methodology ? C.eventText : C.bg,
+                    backgroundColor: e.methodology ? "transparent" : C.event,
+                    border: e.methodology ? `1px dashed ${C.event}` : "none",
                   }}
                 >
                   {e.num}
                 </span>
-                <span style={{ color: "#C8D0DC" }}>{e.label}</span>
+                <span style={{ color: C.body }}>{e.label}</span>
               </span>
             ))}
           </div>
           {hasMethodology && (
-            <div style={{ fontSize: fs(11), color: "#7E8B9E", marginTop: 7 }}>
+            <div style={{ fontSize: fs(11), color: C.caption, marginTop: 7 }}>
               A hollow marker is a change to our keyword set — a measurement
               change, not a real-world event.
             </div>

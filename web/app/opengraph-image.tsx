@@ -1,6 +1,7 @@
 import { ImageResponse } from "next/og";
 import siteMeta from "../data/site_meta.json";
 import subreddits from "../data/subreddits.json";
+import { C } from "@/app/styles";
 
 export const runtime = "edge";
 export const alt = "My Friend Is AI — Tracking AI companion discourse on Reddit";
@@ -27,7 +28,7 @@ export default async function Image() {
     (
       <div
         style={{
-          background: "#0F1117",
+          background: C.bg,
           width: "100%",
           height: "100%",
           display: "flex",
@@ -49,7 +50,7 @@ export default async function Image() {
           <span style={{ color: "rgba(255,255,255,0.5)", fontWeight: 300 }}>
             My Friend Is
           </span>
-          <span style={{ color: "#F8FAFC", fontWeight: 700, marginLeft: 8 }}>
+          <span style={{ color: C.title, fontWeight: 700, marginLeft: 8 }}>
             AI
           </span>
         </div>
@@ -59,7 +60,7 @@ export default async function Image() {
           style={{
             fontSize: 48,
             fontWeight: 600,
-            color: "#F8FAFC",
+            color: C.title,
             textAlign: "center",
             lineHeight: 1.2,
             marginBottom: 48,
@@ -79,7 +80,7 @@ export default async function Image() {
                 gap: 8,
                 padding: "10px 20px",
                 borderRadius: 8,
-                backgroundColor: "#1A1D27",
+                backgroundColor: C.surface2,
                 borderLeft: `3px solid ${t.color}`,
               }}
             >
@@ -96,7 +97,7 @@ export default async function Image() {
             position: "absolute",
             bottom: 40,
             fontSize: 18,
-            color: "#94A3B8",
+            color: C.leadAlt,
           }}
         >
           {`myfriendisai.com — ${POST_COUNT} posts collected · ${COMMUNITY_COUNT} Reddit communities tracked`}

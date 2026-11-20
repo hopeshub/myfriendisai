@@ -11,6 +11,7 @@ import {
 import ThemeChart from "./ThemeChart";
 import ThemeBackdrop from "./ThemeBackdrop";
 import { fontSize, sectionEyebrow, themeKey } from "../../styles";
+import { C } from "@/app/styles";
 
 // ── Per-theme page ───────────────────────────────────────────────────────────
 // The deeper "what is this and why" for one theme: a full-size chart, a plain-
@@ -188,7 +189,7 @@ export default async function ThemePage({
       <Link
         href="/"
         className="text-sm transition-colors"
-        style={{ color: "#9AA7B8" }}
+        style={{ color: C.lead }}
       >
         &larr; All themes
       </Link>
@@ -201,7 +202,7 @@ export default async function ThemePage({
         >
           {theme.label}
         </h1>
-        <p style={{ fontSize: fontSize.base, color: "#9AA7B8", marginTop: 6 }}>
+        <p style={{ fontSize: fontSize.base, color: C.lead, marginTop: 6 }}>
           {theme.tagline}
         </p>
       </div>
@@ -210,8 +211,8 @@ export default async function ThemePage({
       <div
         className="mt-5 rounded-xl theme-chart-breakout"
         style={{
-          backgroundColor: "#1A1D27",
-          border: "1px solid #2A2D3A",
+          backgroundColor: C.surface2,
+          border: `1px solid ${C.border}`,
           borderTop: `2px solid ${theme.color}`,
           padding: "18px 20px 16px",
         }}
@@ -224,7 +225,7 @@ export default async function ThemePage({
         style={{
           fontSize: fontSize.md,
           lineHeight: 1.7,
-          color: "#C8D0DC",
+          color: C.body,
           marginTop: 18,
         }}
       >
@@ -233,7 +234,7 @@ export default async function ThemePage({
 
       {/* Most active communities — one quiet line */}
       {topSubs.length > 0 && (
-        <p style={{ fontSize: fontSize.base, color: "#9AA7B8", marginTop: 16 }}>
+        <p style={{ fontSize: fontSize.base, color: C.lead, marginTop: 16 }}>
           Most of this theme&apos;s posts come from a few communities &mdash;{" "}
           {topSubs.map((s, i) => (
             <span key={s.name}>
@@ -241,11 +242,11 @@ export default async function ThemePage({
               <Link
                 href={`/communities/${s.name}`}
                 className="underline underline-offset-2"
-                style={{ color: "#C8D0DC" }}
+                style={{ color: C.body }}
               >
                 r/{s.name}
               </Link>
-              <span style={{ color: "#7E8B9E" }}> {s.pct}%</span>
+              <span style={{ color: C.caption }}> {s.pct}%</span>
             </span>
           ))}
           {" "}&mdash; so this line is a close reading of those rooms, not an
@@ -260,7 +261,7 @@ export default async function ThemePage({
           <p
             style={{
               fontSize: fontSize.sm,
-              color: "#7E8B9E",
+              color: C.caption,
               marginTop: 6,
               lineHeight: 1.6,
             }}
@@ -287,18 +288,18 @@ export default async function ThemePage({
                     display: "inline-flex",
                     alignItems: "baseline",
                     gap: 6,
-                    backgroundColor: "#1A1D27",
-                    border: "1px solid #2A2D3A",
+                    backgroundColor: C.surface2,
+                    border: `1px solid ${C.border}`,
                     borderRadius: 6,
                     padding: "3px 9px",
                     fontSize: fontSize.sm,
                   }}
                 >
-                  <span style={{ color: "#C8D0DC" }}>{kw.term}</span>
+                  <span style={{ color: C.body }}>{kw.term}</span>
                   {kw.precision != null && (
                     <span
                       title="Share of matches on-theme at the keyword's last full validation"
-                      style={{ color: "#7E8B9E" }}
+                      style={{ color: C.caption }}
                     >
                       {Math.round(kw.precision)}%
                       {/* Name the source when a second, lower figure follows,
@@ -309,7 +310,7 @@ export default async function ThemePage({
                   {kw.status && (
                     <span
                       style={{
-                        color: "#8A93A3",
+                        color: C.muted2,
                         fontStyle: "italic",
                         fontSize: fontSize.xs,
                       }}
@@ -325,7 +326,7 @@ export default async function ThemePage({
                     <span
                       title={`Monthly re-check${kw.drift_date ? ` (${kw.drift_date})` : ""}: ${Math.round(kw.drift_precision)}% of ${kw.drift_n ?? "sampled"} recent matches on-theme`}
                       style={{
-                        color: "#D4A862",
+                        color: C.eventText,
                         fontStyle: "italic",
                         fontSize: fontSize.xs,
                       }}
@@ -340,27 +341,27 @@ export default async function ThemePage({
             <p
               style={{
                 fontSize: fontSize.xs,
-                color: "#7E8B9E",
+                color: C.caption,
                 marginTop: 10,
                 lineHeight: 1.6,
               }}
             >
               A few keywords carry a note.{" "}
-              <em style={{ color: "#9AA7B8" }}>contested</em>{" "}
+              <em style={{ color: C.lead }}>contested</em>{" "}
               &mdash; an independent re-read didn&apos;t consistently agree its
               matches were on-theme, so its precision is less settled than the
               figure suggests.{" "}
-              <em style={{ color: "#9AA7B8" }}>judgment call</em>{" "}
+              <em style={{ color: C.lead }}>judgment call</em>{" "}
               &mdash; kept despite a score below the usual bar because its
               false matches are few and predictable.{" "}
-              <em style={{ color: "#9AA7B8" }}>low volume</em>{" "}
+              <em style={{ color: C.lead }}>low volume</em>{" "}
               &mdash; too few matches to score precisely.
             </p>
           )}
           <p
             style={{
               fontSize: fontSize.xs,
-              color: "#7E8B9E",
+              color: C.caption,
               marginTop: 10,
               lineHeight: 1.6,
             }}
@@ -369,7 +370,7 @@ export default async function ThemePage({
             validation (all completed by May 2026). A monthly re-check re-reads a sample of
             each keyword&apos;s recent matches; where the latest re-check read
             at least 15 matches and fell below 60%, the keyword is marked{" "}
-            <em style={{ color: "#D4A862" }}>drifting</em> with that figure,
+            <em style={{ color: C.eventText }}>drifting</em> with that figure,
             and its validation number is known to run high. A drifted keyword
             stays in the count until the next keyword-set revision, so the
             line is never re-cut quietly mid-version.
@@ -377,7 +378,7 @@ export default async function ThemePage({
           <p
             style={{
               fontSize: fontSize.xs,
-              color: "#7E8B9E",
+              color: C.caption,
               marginTop: 12,
               lineHeight: 1.6,
             }}
@@ -389,7 +390,7 @@ export default async function ThemePage({
             the theme. Read the line as a floor, not a full count.{" "}
             <a
               href="/about#verification"
-              style={{ color: "#9AA7B8", textDecoration: "underline" }}
+              style={{ color: C.lead, textDecoration: "underline" }}
             >
               How this is measured &rarr;
             </a>
@@ -403,7 +404,7 @@ export default async function ThemePage({
         <p
           style={{
             fontSize: fontSize.sm,
-            color: "#7E8B9E",
+            color: C.caption,
             marginTop: 6,
             lineHeight: 1.6,
           }}
@@ -431,7 +432,7 @@ export default async function ThemePage({
                   key={sp.id}
                   style={{
                     padding: "12px 0",
-                    borderTop: i > 0 ? "1px solid #1E293B" : undefined,
+                    borderTop: i > 0 ? `1px solid ${C.borderSoft}` : undefined,
                   }}
                 >
                   <a
@@ -439,7 +440,7 @@ export default async function ThemePage({
                     target="_blank"
                     rel="noopener noreferrer"
                     className="hover:underline underline-offset-2 transition-colors"
-                    style={{ fontSize: fontSize.base, color: "#C8D0DC" }}
+                    style={{ fontSize: fontSize.base, color: C.body }}
                   >
                     {inTitle
                       ? highlight(displayTitle, sp.matchedTerm, theme.color)
@@ -450,9 +451,9 @@ export default async function ThemePage({
                       style={{
                         fontSize: fontSize.sm,
                         lineHeight: 1.55,
-                        color: "#9AA7B8",
+                        color: C.lead,
                         marginTop: 5,
-                        borderLeft: "2px solid #2A2D3A",
+                        borderLeft: `2px solid ${C.border}`,
                         paddingLeft: 10,
                       }}
                     >
@@ -460,7 +461,7 @@ export default async function ThemePage({
                     </div>
                   )}
                   <div
-                    style={{ fontSize: fontSize.micro, color: "#7E8B9E", marginTop: 5 }}
+                    style={{ fontSize: fontSize.micro, color: C.caption, marginTop: 5 }}
                   >
                     r/{sp.subreddit} &middot; {fmtMonthYear(sp.date)}
                   </div>
@@ -469,14 +470,14 @@ export default async function ThemePage({
             })}
           </ul>
         ) : (
-          <p style={{ fontSize: fontSize.base, color: "#7E8B9E", marginTop: 6 }}>
+          <p style={{ fontSize: fontSize.base, color: C.caption, marginTop: 6 }}>
             No example posts available yet.
           </p>
         )}
         <p
           style={{
             fontSize: fontSize.xs,
-            color: "#7E8B9E",
+            color: C.caption,
             marginTop: 14,
             lineHeight: 1.6,
           }}
@@ -488,14 +489,14 @@ export default async function ThemePage({
             href="https://x.com/hopes_revenge"
             target="_blank"
             rel="noopener noreferrer"
-            style={{ color: "#9AA7B8", textDecoration: "underline" }}
+            style={{ color: C.lead, textDecoration: "underline" }}
           >
             message me
           </a>{" "}
           and it comes down.{" "}
           <a
             href="/about#verification"
-            style={{ color: "#9AA7B8", textDecoration: "underline" }}
+            style={{ color: C.lead, textDecoration: "underline" }}
           >
             How this is measured &rarr;
           </a>
@@ -508,7 +509,7 @@ export default async function ThemePage({
         style={{
           marginTop: 36,
           paddingTop: 18,
-          borderTop: "1px solid #1E293B",
+          borderTop: `1px solid ${C.borderSoft}`,
           display: "flex",
           flexWrap: "wrap",
           gap: "10px 18px",
@@ -537,7 +538,7 @@ export default async function ThemePage({
               className="transition-opacity hover:opacity-100"
               style={{
                 fontSize: fontSize.base,
-                color: "#9AA7B8",
+                color: C.lead,
                 opacity: 0.85,
                 display: "inline-flex",
                 alignItems: "center",

@@ -5,6 +5,7 @@ import Link from "next/link";
 import type { ThemeData } from "./themeData";
 import { THEMES, EVENTS, type ThemeEvent, type ThemeId, type ThemeMeta } from "./themes";
 import { textColor } from "./styles";
+import { C } from "@/app/styles";
 
 // ── Trend Atlas: six channels ────────────────────────────────────────────────
 // The six themes as six wide, short strips stacked on ONE shared time axis,
@@ -41,17 +42,17 @@ const PAD_TOP = 8; // headroom above full scale, so a peak is never clipped
 const PAD_BOTTOM = 1.5; // zero sits on the rule that closes the strip
 
 // ── Colours — the site's existing dark palette ──────────────────────────────
-const RULE = "#2A2D3A"; // strip rules (also each strip's zero line)
+const RULE = C.grid; // strip rules (also each strip's zero line)
 const GUIDE = "#1C1F28"; // very light chart-paper guides
-const EVENT = "#C2974D";
-const EVENT_TEXT = "#D4A862";
-const CURSOR = "#475569";
-const BG = "#0F1117";
+const EVENT = C.event;
+const EVENT_TEXT = C.eventText;
+const CURSOR = C.cursor;
+const BG = C.bg;
 // A strip's own background (it lightens on hover), for halos that must
 // match whatever is behind them. Set on each strip link below.
-const ROW_BG = "var(--strip-bg, #0F1117)";
+const ROW_BG = `var(--strip-bg, ${C.bg})`;
 const ROW_CLASS =
-  "group [--strip-bg:#0F1117] hover:[--strip-bg:#15171E] bg-[var(--strip-bg)] transition-colors";
+  "group [--strip-bg:var(--c-bg)] hover:[--strip-bg:var(--c-surface)] bg-[var(--strip-bg)] transition-colors";
 
 const MONTH_NAMES = [
   "Jan", "Feb", "Mar", "Apr", "May", "Jun",
@@ -839,7 +840,7 @@ export default function TrendAtlas({
                 {s.theme.label}
                 <span
                   aria-hidden
-                  className="transition-colors group-hover:text-[#C8D0DC]"
+                  className="transition-colors group-hover:text-[var(--c-body)]"
                   style={{ marginLeft: 6, fontSize: 13, fontWeight: 400, color: textColor.caption }}
                 >
                   &rarr;
