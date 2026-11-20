@@ -269,8 +269,11 @@ export default function About() {
               lens pointed where the words mean what they appear to mean. It is
               also why the large general-AI subreddits are tracked for size and
               activity but kept out of the theme lines. The same goes for the
-              nine anti-AI and pro-AI communities in the last section of the
-              homepage, and for three explicitly sexual product subreddits.
+              eleven anti-AI and pro-AI communities in the last section of the
+              homepage, for three explicitly sexual product subreddits, and
+              for r/therapyGPT, where people use general chatbots as a
+              therapist: its therapy talk is so dense that, from under 2% of
+              the posts, it would supply some 40% of the therapy line.
               About two dozen of the tracked communities feed the theme lines.
             </p>
             <p>

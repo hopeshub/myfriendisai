@@ -219,16 +219,17 @@ export function loadCommunityComposition(): CommunityComposition {
   const at = (sub: string, i: number) => activity[sub]?.[i] ?? 0;
 
   // "Other" = every community in the file that is not r/CharacterAI (its own
-  // panel), not one of the six named bands, not an NSFW sub dropped from
-  // keyword tracking, not a T0 general-AI sub, and not a T4 ambient
+  // panel), not one of the six named bands, not a sub dropped from keyword
+  // tracking (the three NSFW-scope subs, and r/therapyGPT — context only,
+  // 2026-11-20), not a T0 general-AI sub, and not a T4 ambient
   // discourse-climate sub. New keyword communities (T1/T2/T3) therefore fold
   // into "Other" automatically; ambient anti-AI/pro-AI subs do NOT — they
   // appear on /communities for context but never in the companion-volume
-  // composition.
+  // composition. A new exclude_from_keywords sub in T1-T3 must be added here.
   const namedOrExcluded = new Set([
     "CharacterAI", "replika", "ChaiApp", "NomiAI", "KindroidAI",
     "ChatGPTcomplaints", "MyBoyfriendIsAI",
-    "AIGirlfriend", "ChatGPTNSFW", "SpicyChatAI",
+    "AIGirlfriend", "ChatGPTNSFW", "SpicyChatAI", "therapyGPT",
     "ChatGPT", "OpenAI", "ClaudeAI", "claudexplorers", "singularity",
   ]);
   const ambientSubs = new Set(
@@ -312,6 +313,7 @@ export type AmbientTopPoint = {
 export type AmbientStackPoint = {
   month: string;
   antiAI: number;
+  Ai_art_is_not_art: number;
   DefendingAIArt: number;
   BetterOffline: number;
   ArtistHate: number;
@@ -346,6 +348,7 @@ export function loadAmbientCohort(): AmbientData {
   const stack: AmbientStackPoint[] = months.map((m, i) => ({
     month: m,
     antiAI: at("antiAI", i),
+    Ai_art_is_not_art: at("Ai_art_is_not_art", i),
     DefendingAIArt: at("DefendingAIArt", i),
     BetterOffline: at("BetterOffline", i),
     ArtistHate: at("ArtistHate", i),

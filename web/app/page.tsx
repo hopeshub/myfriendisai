@@ -332,7 +332,7 @@ export default function Home() {
         <p style={{ ...intro, marginBottom: 16 }}>
           Next door, a new cluster of communities has formed. Subreddits built
           to argue about AI as a cultural project barely existed in 2023;
-          the cluster&apos;s post volume rose 319% in 2025 alone, and
+          the cluster&apos;s post volume rose 350% in 2025 alone, and
           now runs at more than 10,000 posts a month. r/aiwars is the
           only all-sides debate floor; everyone else is a partisan room.
           r/antiAI didn&apos;t exist before March 2025; five months later
@@ -340,9 +340,12 @@ export default function Home() {
           cluster, and it has stayed there.
         </p>
         <p style={{ ...intro, marginBottom: 28 }}>
-          Almost none of it is about AI companionship. &ldquo;AI bros&rdquo;
-          appears in titles here well over ten times more often than
-          &ldquo;AI girlfriend.&rdquo; But the posture is the same one
+          Almost none of it is about AI companionship. The one room that is,
+          r/cogsuckers, is small &mdash; a few dozen posts a month &mdash; and
+          it exists to laugh at people who are &ldquo;a little too
+          obsessed&rdquo; with their AI companions. Across the cluster,
+          &ldquo;AI bros&rdquo; appears in titles well over ten times more
+          often than &ldquo;AI girlfriend.&rdquo; But the posture is the same one
           &mdash; that taking a chatbot seriously is a category mistake
           worth mocking &mdash; and it is the environment the communities
           on this site post into.

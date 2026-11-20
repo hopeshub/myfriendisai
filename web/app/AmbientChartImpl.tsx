@@ -19,9 +19,12 @@ import { usePrefersReducedMotion } from "@/lib/usePrefersReducedMotion";
 
 // ── §5 ambient-cluster chart ────────────────────────────────────────────────
 // Two stacked panels, modeled on §1. Top: r/aiwars alone — the all-sides
-// debate floor. Bottom: a 6-band stacked composition of the partisan rooms,
-// r/antiAI (the largest band since Aug 2025) at the base. r/trueantiAI and r/ProAI (both under 200/mo) are too small to
-// register as bands and are noted in the caption.
+// debate floor. Bottom: a 7-band stacked composition of the partisan rooms,
+// r/antiAI (the largest band since Aug 2025) at the base. r/trueantiAI,
+// r/ProAI and r/cogsuckers (each at most ~300/mo) are too small to register as
+// bands and are noted in the caption. r/Ai_art_is_not_art (added 2026-11-20)
+// sits directly on r/antiAI: its sky-blue keeps every adjacent pair at least
+// as far apart as before (dataviz validator, dark surface).
 //
 // Coloring is by sub identity (the §1 palette family), NOT by valence — the
 // site doesn't score the culture war. The closer line under the chart lands
@@ -71,6 +74,7 @@ const TOP_LINES: { key: keyof AmbientTopPoint; label: string; color: string }[] 
 type StackKey = keyof Omit<AmbientStackPoint, "month">;
 const STACK_BANDS: { key: StackKey; label: string; color: string }[] = [
   { key: "antiAI",          label: "r/antiAI",          color: "#C99B5A" }, // warm tan
+  { key: "Ai_art_is_not_art", label: "r/Ai_art_is_not_art", color: "#56A9C9" }, // sky blue
   { key: "ArtistHate",      label: "r/ArtistHate",      color: "#CC7E72" }, // coral
   { key: "DefendingAIArt",  label: "r/DefendingAIArt",  color: "#7BA98D" }, // sage
   { key: "BetterOffline",   label: "r/BetterOffline",   color: "#C77FA3" }, // pink
@@ -407,14 +411,14 @@ export default function AmbientChart({
         The partisan rooms
       </div>
       <div style={{ fontSize: 12, color: "#7E8B9E", marginBottom: 6 }}>
-        The cluster&apos;s six anti-AI and two pro-AI subs; the six largest
-        over the cluster&apos;s history are stacked here. r/antiAI (founded 2025) is now the largest; the
-        others fill in around it.
+        The cluster&apos;s eight anti-AI and two pro-AI subs; the seven
+        largest over the cluster&apos;s history are stacked here. r/antiAI
+        (founded 2025) is now the largest; the others fill in around it.
       </div>
       <MeasuredChart
         style={{ height: STACK_PANEL_HEIGHT }}
         role="img"
-        ariaLabel="Stacked area chart: monthly post volume of the partisan ambient subs — r/antiAI, r/ArtistHate, r/DefendingAIArt, r/BetterOffline, r/FuckAI, r/AIDangers — with r/antiAI as the dominant band growing from zero in early 2025."
+        ariaLabel="Stacked area chart: monthly post volume of the partisan ambient subs — r/antiAI, r/Ai_art_is_not_art, r/ArtistHate, r/DefendingAIArt, r/BetterOffline, r/FuckAI, r/AIDangers — with r/antiAI as the dominant band growing from zero in early 2025."
       >
         {({ width, height }) => (
           <AreaChart
@@ -699,10 +703,11 @@ export default function AmbientChart({
       >
         Monthly post volume. Each panel has its own scale; click a band to
         isolate it. The {"~"}% on AI companionship in each tooltip is from a
-        50-post sample per sub (May 2026). Two small communities in the cluster
-        &mdash; r/trueantiAI and r/ProAI, both under 200 posts a month
-        &mdash; are not drawn as bands here, but they are in the community
-        list.
+        50-post sample per sub (May 2026; r/Ai_art_is_not_art, added in
+        November 2026, was not sampled). Three small communities in the
+        cluster &mdash; r/trueantiAI, r/ProAI and r/cogsuckers, each at most
+        a few hundred posts in any month &mdash; are not drawn as bands here,
+        but they are in the community list.
       </p>
     </div>
   );

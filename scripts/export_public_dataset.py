@@ -374,7 +374,7 @@ becomes reliable) through the last complete month.
 | `tier` | Direct | 0–4. See `METHODOLOGY.md` for what each tier is and why it exists. |
 | `tier_label` | Direct | Human-readable tier name. |
 | `category` | Direct | The community's category label as shown on the site. |
-| `in_theme_measurement` | Derived | `true` when the community counts toward `monthly_theme_counts` — i.e. tier 1–3 and not excluded from keyword tracking. T0 general-AI and T4 ambient communities are tracked for context only and are always `false`, as are the three explicitness-scope exclusions. In the JSON this is a real boolean; in the CSV it is the lowercase string `true` or `false`. |
+| `in_theme_measurement` | Derived | `true` when the community counts toward `monthly_theme_counts` — i.e. tier 1–3 and not excluded from keyword tracking. T0 general-AI and T4 ambient communities are tracked for context only and are always `false`, as are the three explicitness-scope exclusions and r/therapyGPT (context only since it was added in November 2026: it would otherwise supply about 40% of the therapy theme). In the JSON this is a real boolean; in the CSV it is the lowercase string `true` or `false`. |
 
 This table covers the communities currently being collected. Two communities
 that were tracked and later deactivated — r/HeavenGF (banned by Reddit, ~May

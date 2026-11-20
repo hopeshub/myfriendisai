@@ -161,6 +161,19 @@ communities:
     is_active: true
     notes: "1.3K subscribers. Added 2026-05-18 (coverage refresh). Public, cross-platform mirror of the restricted r/MyBoyfriendIsAI; multilingual; ~71% companionship-relevant. Watch for cross-post overlap with r/MyBoyfriendIsAI."
 
+  # Added 2026-11-20 — November refresh (docs/refresh_2026-11/, handoff D2).
+  # Clears the companionship gate but is tracked as CONTEXT ONLY: on the
+  # theme lines it would become the therapy line (see notes). Backfilled from
+  # its first post (Apr 2025); exclude_from_keywords keeps it out of tagging,
+  # the theme lines, the per-1k denominator and comment collection.
+  - subreddit: therapyGPT
+    display_name: "r/therapyGPT"
+    tier: 1
+    category: "Primary Companionship"
+    is_active: true
+    exclude_from_keywords: true
+    notes: "10.3K subscribers (Arctic index, Jul 2025). Added 2026-11-20 (November refresh, handoff D2). People using general models (ChatGPT, Gemini, Claude) as confidant or therapist. Open-coding 2026-11 (~100 latest posts): 44% companionship-relevant (30–52% by borderline calls), above the 35% gate. exclude_from_keywords: the therapy keywords are accurate here (precision 91%, Wilson 84–95%, n=100) but its therapy rate is ~279/1k, ~70× the other communities', so it would supply 22–49% of each month's therapy tags (40% overall) from <2% of the denominator and the line would track this one sub's volume. A quarter of matches are moderator guides or AI-therapy-app promotion."
+
   # TODO: AISoulmates — blocked via .json (403), needs Redlib setup. ~8,200 members, culturally significant.
   # TODO: 4oforever — private, invite-only. Monitor for public access.
   # TODO: AIBoyfriends — blocked via .json (403), needs Redlib setup.
@@ -380,6 +393,29 @@ communities:
     is_active: true
     exclude_from_keywords: true
     notes: "653 subscribers. Added 2026-05-20 (sharpening pass). Sister sub of r/antiAI with stricter no-AI-content policy. Charter: 'No AI generated material of any sort should be posted unless there is contextual cause… such as an insightful critique.' Small but clean charter."
+
+  # Added 2026-11-20 — November refresh (docs/refresh_2026-11/, handoff D4):
+  # the locked two-stage gate applied as written. Both backfilled from their
+  # first post. Rejected in the same pass: r/LatentSpaceClub (stage 1 fail —
+  # creative hangout, no pro-AI argument; the AcceleratingAI shape),
+  # r/Pro_Ai_Art (stage 1 fail — AI-art gallery/self-promotion), r/aislop
+  # (stage 1 borderline fail — a fail-curation genre), r/AIwarsButBetter
+  # (passes, but small and adds little beyond r/aiwars).
+  - subreddit: Ai_art_is_not_art
+    display_name: "r/Ai_art_is_not_art"
+    tier: 4
+    category: "Ambient — Anti-AI"
+    is_active: true
+    exclude_from_keywords: true
+    notes: "13.8K subscribers (Arctic index, Sep 2025). Added 2026-11-20 (November refresh, handoff D4). Founded Jul 2025. Charter: 'An anti ai \"art\" community.' Two-stage gate: stage 1 pass (anti-AI-art charter), stage 2 pass (expression only — no coordination roles or organizing). ~1,100 posts in Oct 2026 (peak ~2,100 in Aug), about 7x r/ArtistHate."
+
+  - subreddit: cogsuckers
+    display_name: "r/cogsuckers"
+    tier: 4
+    category: "Ambient — Anti-AI"
+    is_active: true
+    exclude_from_keywords: true
+    notes: "5.8K subscribers (Arctic index, Sep 2025). Added 2026-11-20 (November refresh, handoff D4). Founded Aug 2025. Charter: 'A subreddit for sharing (or discussing) the folks a little *too* obsessed with LLMs, chatbots, and AI companions… we're here to laugh, and maybe question the future.' Two-stage gate: stage 1 passes narrowly (against AI companionship as a practice), stage 2 pass. ~80% of posts are about AI companionship: it is the companionship counter-public, following the same events as T1 (the 4o retirement, the Character.AI bankruptcy) from outside, framed as pathology ('AI psychosis'); traffic runs both ways ('now former cogsucker'). Filed under Anti-AI; a separate counter-public line would be a new category, not a gate change. 48 posts in Oct 2026 (peak 312, Nov 2025), ~34 comments/post."
 
   - subreddit: aiwars
     display_name: "r/aiwars"
