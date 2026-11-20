@@ -58,7 +58,7 @@ export const THEMES: ThemeMeta[] = [
     blurb:
       "Broad waves, not sharp spikes — and a floor: everyday partner talk goes uncaught.",
     story:
-      "Romantic language moves in slow, broad waves rather than sharp spikes, with no single moment behind it. Much of the recent rise reflects which communities are posting, as r/CharacterAI shrank and r/aipartners arrived, more than any change inside them. Much of the longer climb since 2023 does not hold either: re-checked on posts that carry written text, it largely disappears. It is also the theme the keywords catch least well: most people describe a partner in ordinary words — “she said,” “my girlfriend” — that never trip an explicitly romantic keyword. The real level of this conversation runs well above the line.",
+      "Romantic language moves in slow, broad waves rather than sharp spikes, with no single moment behind it. Part of the recent rise reflects which communities are posting, as r/CharacterAI shrank and r/aipartners arrived: held at the late-2025 mix of communities, the rate was roughly flat through September 2026 and rose only in October, on thin data. Much of the longer climb since 2023 does not hold up either: re-checked on posts that carry written text, it largely disappears. It is also the theme the keywords catch least well: most people describe a partner in ordinary words — “she said,” “my girlfriend” — that never trip an explicitly romantic keyword. The real level of this conversation runs well above the line.",
   },
   {
     id: "sexual_erp",

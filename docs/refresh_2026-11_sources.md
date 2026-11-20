@@ -36,3 +36,17 @@ Every figure the November 2026 copy states, with where it comes from. Most come 
 | Copy | Figure | Source |
 |---|---|---|
 | Romance July 2026 "5.3 per thousand with them and 3.6 without" (the May-2026 additions) | 5.27 (52 of 9,869) and 3.55 | 5.27 is from `keyword_trends.json`. 3.55 is the without-additions figure recorded in CLAUDE.md after the 2026-10-24 July-hole repair. The copy previously said 5.5 and 3.8, figures from before that repair |
+
+## Added 2026-11-20 (merges #4 and #8, and the review fixes)
+
+| Copy | Figure | Source |
+|---|---|---|
+| Romance story: "held at the late-2025 mix of communities, the rate was roughly flat through September 2026 and rose only in October, on thin data" | Held-mix romance per 1,000: 4.3 (Q4 2025), 4.7 (Q1 2026), 3.8 (Q2), 4.9 (Q3), 6.6 (Oct). Pooled: 4.3 → 7.0 (Q3) → 8.2 (Oct). Mix is 78% of the Q4→Q3 rise and 42% of the Q4→Oct rise | Shift-share on the database, read-only, 2026-11-20, weights = each community's Q4-2025 share of measurable posts (the method in the first section) |
+| Changelog: sex/ERP "about 3–9% from May 2026 on" (the excluded moderator account) | −6.6% (May), −4.0% (Jul), −2.6% (Aug), −8.2% (Sep), −6.0% (Oct, with the seeding ring); June untouched | Real-database before/after posted on PR #4; confirmed by the published export after the merge |
+| Homepage §5: cluster post volume "rose 350% in 2025 alone" | 17,440 measurable posts (2024) → 78,393 (2025) across the 11 T4 communities; 319% across the original nine | Trial export on a `VACUUM INTO` copy after the backfill, identical to the real backfill's counts |
+| §5: "more than 10,000 posts a month" | 16,732 / 17,417 / 15,552 (Aug–Oct 2026) | same |
+| §5: r/antiAI "topped every other community in the cluster, and it has stayed there" | Largest every month from Aug 2025 to Oct 2026, including the two new communities | same |
+| §5: "AI bros" in titles "well over ten times more often than 'AI girlfriend'" | 3,754 vs 140 titles (26.8×) across the 11 communities; 27.4× across the nine | same, case-insensitive substring match on titles |
+| §5: r/cogsuckers "a few dozen posts a month" | 29–69 measurable posts a month, Jun–Oct 2026 (peak 307, Nov 2025) | same |
+| r/ChaiApp page note: "about three in four from 2024 to early 2026, and more than 80% every month since May 2026 (90% in October)"; "about 2,000" submitted a month | Share stored as removed/deleted: 61–85% Jan 2024–Apr 2026; 83–90% May–Oct 2026 (97% in partial November). All posts: 1,750–2,939 a month, May–Oct 2026 | Database, read-only, 2026-11-20 |
+| r/therapyGPT page note and About page: "under 2% of the posts … about 40% of the therapy line" | 40% of therapy tags since April 2025 from under 2% of the denominator, had it been included | Refresh pass (handoff D2), full archive pull of r/therapyGPT |
