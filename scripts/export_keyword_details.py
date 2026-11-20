@@ -31,6 +31,24 @@ DRIFT_HISTORY_PATH = PROJECT_ROOT / "analysis" / "keyword_pipeline" / "drift_his
 # A keyword whose latest post-level re-check lands below this is shown as
 # "drifting" on its theme page. Same line as the validation CUT threshold.
 DRIFT_FLAG_BELOW = 0.60
+# ...but only when the re-check read enough matches for the figure to mean
+# something (CLAUDE.md item 17c, 2026-11). A low-volume keyword's sample is
+# nearly its whole match history, so a couple of calls on 8-11 posts move it
+# by ten points or more: `memory wiped` was chipped on 6 of 11, `memory
+# reset` on 4 of 8. Below this n the re-check is still exported (drift_n,
+# drift_precision) but the chip is not shown.
+DRIFT_FLAG_MIN_N = 15
+
+
+def is_drifting(check: "dict | None") -> bool:
+    """True when a post-level re-check is below DRIFT_FLAG_BELOW on at least
+    DRIFT_FLAG_MIN_N matches. `check` is a load_drift_checks() entry or None."""
+    if not check or check.get("precision") is None:
+        return False
+    n = check.get("n")
+    if n is None or n < DRIFT_FLAG_MIN_N:
+        return False
+    return check["precision"] < DRIFT_FLAG_BELOW * 100
 
 
 def load_drift_checks(path: Path = DRIFT_HISTORY_PATH) -> dict:
@@ -326,10 +344,7 @@ def build_keyword_details(
                     "drift_precision": drift.get(term.lower(), {}).get("precision"),
                     "drift_date": drift.get(term.lower(), {}).get("date"),
                     "drift_n": drift.get(term.lower(), {}).get("n"),
-                    "drifting": (
-                        drift.get(term.lower(), {}).get("precision") is not None
-                        and drift[term.lower()]["precision"] < DRIFT_FLAG_BELOW * 100
-                    ),
+                    "drifting": is_drifting(drift.get(term.lower())),
                     "sample_posts": [
                         {
                             "title": sp[0],
