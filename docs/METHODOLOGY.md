@@ -714,6 +714,12 @@ precision and, since 2026-09-08, marked *drifting* with the figure from its
 latest post-level re-check whenever that re-check landed below 60%. Every
 keyword in that table carries the mark.
 
+One exception, since November 2026: the mark needs a re-check of at least 15
+matches. Below that, a couple of calls swing a figure by ten points or more,
+so a keyword in the table above with a smaller n (in brackets) is listed here
+and its re-check figure is still published, but the theme page does not mark
+it.
+
 This is deliberate. Re-cutting a keyword mid-version would silently restate
 every historical month on that line — the same posts would produce a different
 number than they did last week, which is the exact property the no-model design
