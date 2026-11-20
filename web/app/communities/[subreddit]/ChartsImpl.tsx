@@ -77,7 +77,7 @@ function MetricChart({
 
   return (
     <div>
-      <p className="text-xs text-[#7E8B9E] uppercase tracking-widest mb-3">
+      <p className="text-xs text-[#7E8B9E] mb-3">
         {label}
       </p>
       {monthly.length === 0 ? (

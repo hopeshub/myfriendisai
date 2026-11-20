@@ -10,7 +10,7 @@ import {
 } from "../../themeData";
 import ThemeChart from "./ThemeChart";
 import ThemeBackdrop from "./ThemeBackdrop";
-import { fontSize, sectionEyebrow } from "../../styles";
+import { fontSize, sectionEyebrow, themeKey } from "../../styles";
 
 // ── Per-theme page ───────────────────────────────────────────────────────────
 // The deeper "what is this and why" for one theme: a full-size chart, a plain-
@@ -165,7 +165,7 @@ export async function generateMetadata({
   };
 }
 
-// Section eyebrow comes from the shared styles module.
+// Section label comes from the shared styles module.
 const SECTION_LABEL = sectionEyebrow;
 
 export default async function ThemePage({
@@ -199,9 +199,6 @@ export default async function ThemePage({
           className="font-display font-semibold flex items-center gap-2.5"
           style={{ fontSize: fontSize.xxxl, color: theme.color }}
         >
-          <span aria-hidden style={{ fontSize: fontSize.xxl }}>
-            {theme.emoji}
-          </span>
           {theme.label}
         </h1>
         <p style={{ fontSize: fontSize.base, color: "#9AA7B8", marginTop: 6 }}>
@@ -530,7 +527,7 @@ export default async function ThemePage({
                 gap: 6,
               }}
             >
-              <span aria-hidden>{t.emoji}</span>
+              <span aria-hidden style={themeKey(t.color)} />
               {t.label}
             </span>
           ) : (
@@ -547,7 +544,7 @@ export default async function ThemePage({
                 gap: 6,
               }}
             >
-              <span aria-hidden>{t.emoji}</span>
+              <span aria-hidden style={themeKey(t.color)} />
               {t.label}
             </Link>
           ),

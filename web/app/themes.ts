@@ -12,7 +12,6 @@ export type ThemeId =
 export type ThemeMeta = {
   id: ThemeId;
   label: string;
-  emoji: string;
   color: string;
   tagline: string;
   // A short, durable reading of the theme's trend shape — what the panel
@@ -53,7 +52,6 @@ export const THEMES: ThemeMeta[] = [
   {
     id: "romance",
     label: "Romance",
-    emoji: "💕",
     color: ACTIVE_PALETTE.romance,
     tagline: "Language of love, dating, and romantic attachment",
     blurb:
@@ -64,7 +62,6 @@ export const THEMES: ThemeMeta[] = [
   {
     id: "sexual_erp",
     label: "Sex / ERP",
-    emoji: "🔞",
     color: ACTIVE_PALETTE.sexual_erp,
     tagline: "Language of sexual and erotic roleplay",
     blurb:
@@ -75,7 +72,6 @@ export const THEMES: ThemeMeta[] = [
   {
     id: "consciousness",
     label: "Consciousness",
-    emoji: "🧠",
     color: ACTIVE_PALETTE.consciousness,
     tagline: "Language of sentience, awareness, and inner experience",
     blurb:
@@ -86,7 +82,6 @@ export const THEMES: ThemeMeta[] = [
   {
     id: "therapy",
     label: "Therapy",
-    emoji: "🫂",
     color: ACTIVE_PALETTE.therapy,
     tagline: "Language of mental health support and emotional care",
     blurb:
@@ -97,7 +92,6 @@ export const THEMES: ThemeMeta[] = [
   {
     id: "addiction",
     label: "Addiction",
-    emoji: "💊",
     color: ACTIVE_PALETTE.addiction,
     tagline: "Language of self-described dependency and compulsion",
     blurb:
@@ -108,7 +102,6 @@ export const THEMES: ThemeMeta[] = [
   {
     id: "rupture",
     label: "Rupture",
-    emoji: "🥀",
     color: ACTIVE_PALETTE.rupture,
     tagline: "Language of loss and grief",
     blurb:

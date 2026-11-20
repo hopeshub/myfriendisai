@@ -91,8 +91,6 @@ function EventLegend({
           style={{
             fontSize: smallFs,
             color: "#7E8B9E",
-            textTransform: "uppercase",
-            letterSpacing: "0.05em",
           }}
         >
           Events
@@ -228,7 +226,6 @@ export default function TrendAtlas({
                   className="flex items-center gap-2"
                   style={{ fontSize: 16, fontWeight: 600 }}
                 >
-                  <span aria-hidden>{t.emoji}</span>
                   <span style={{ color: t.color }}>{t.label}</span>
                 </span>
               </div>

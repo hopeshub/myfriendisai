@@ -51,27 +51,37 @@ export const textColor = {
 /** The reading measure — max line length (px) for all running text. */
 export const measure = 680;
 
-/** Small uppercase "eyebrow" label that sits above a section heading.
+/** Small sentence-case label for a block that has no heading of its own
+ *  (the theme list in the masthead, "The keywords" on a theme page). Not for
+ *  use above a heading: a label that only restates the heading is dropped.
  *  Size comes from the `--eyebrow-size` CSS variable (globals.css): fontSize.xs
  *  (12px) on desktop, 14px at ≤768px to hold the mobile font floor. */
 export const sectionEyebrow: CSSProperties = {
   fontSize: `var(--eyebrow-size, ${fontSize.xs}px)`,
   fontWeight: 500,
-  textTransform: "uppercase",
-  letterSpacing: "0.05em",
   color: "#8293A6",
   marginBottom: 8,
 };
 
-/** Section / sub-section heading (the line under the eyebrow). */
+/** Section / sub-section heading, sentence case (About page sections). */
 export const sectionHeading: CSSProperties = {
   fontSize: fontSize.base,
   fontWeight: 500,
-  textTransform: "uppercase",
-  letterSpacing: "0.05em",
   color: "#8293A6",
   marginBottom: 16,
 };
+
+/** Small square colour key for a theme, shown beside a theme name that is not
+ *  itself set in the theme's colour. (Replaced the per-theme emoji icons.) */
+export function themeKey(color: string): CSSProperties {
+  return {
+    display: "inline-block",
+    width: 8,
+    height: 8,
+    backgroundColor: color,
+    flexShrink: 0,
+  };
+}
 
 /** Intro / lead paragraph — the larger paragraph that opens a section. */
 export const introParagraph: CSSProperties = {

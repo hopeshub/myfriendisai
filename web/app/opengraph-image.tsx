@@ -8,12 +8,12 @@ export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
 const THEMES = [
-  { emoji: "\u{1F495}", label: "Romance", color: "#FF69B4" },
-  { emoji: "\u{1F51E}", label: "Sex / ERP", color: "#f87171" },
-  { emoji: "\u{1F9E0}", label: "Consciousness", color: "#C084FC" },
-  { emoji: "\u{1FAC2}", label: "Therapy", color: "#60A5FA" },
-  { emoji: "\u{1F48A}", label: "Addiction", color: "#fd7112" },
-  { emoji: "\u{1F940}", label: "Rupture", color: "#22C55E" },
+  { label: "Romance", color: "#FF69B4" },
+  { label: "Sex / ERP", color: "#f87171" },
+  { label: "Consciousness", color: "#C084FC" },
+  { label: "Therapy", color: "#60A5FA" },
+  { label: "Addiction", color: "#fd7112" },
+  { label: "Rupture", color: "#22C55E" },
 ];
 
 // Read from the build-time data export so the counts cannot go stale.
@@ -83,7 +83,6 @@ export default async function Image() {
                 borderLeft: `3px solid ${t.color}`,
               }}
             >
-              <span style={{ fontSize: 20 }}>{t.emoji}</span>
               <span style={{ fontSize: 18, color: t.color, fontWeight: 500 }}>
                 {t.label}
               </span>

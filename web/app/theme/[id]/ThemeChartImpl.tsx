@@ -250,8 +250,6 @@ export default function ThemeChart({
               style={{
                 fontSize: fs(11),
                 color: "#7E8B9E",
-                textTransform: "uppercase",
-                letterSpacing: "0.05em",
               }}
             >
               Events

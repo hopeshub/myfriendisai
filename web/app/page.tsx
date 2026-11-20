@@ -6,7 +6,7 @@ import RecoverySection from "./RecoverySection";
 import AmbientSection from "./AmbientSection";
 import { loadThemeData, loadCommunityComposition, loadRecoveryVolume } from "./themeData";
 import { THEMES } from "./themes";
-import { sectionEyebrow, introParagraph, measure } from "./styles";
+import { sectionEyebrow, introParagraph, measure, themeKey } from "./styles";
 import { CHANGELOG } from "./changelog";
 
 // ── Homepage ─────────────────────────────────────────────────────────────────
@@ -18,7 +18,7 @@ import { CHANGELOG } from "./changelog";
 //   §3 atlas  → how the six themes shift (direction-only; TrendsExplorer)
 // Post volume comes first to orient; events get the visual weight.
 
-// Section eyebrow + intro paragraph come from the shared styles module.
+// Label + intro paragraph come from the shared styles module.
 const sectionLabel = sectionEyebrow;
 const intro = introParagraph;
 
@@ -30,17 +30,14 @@ export default function Home() {
 
   return (
     <div className="max-w-[1080px] mx-auto px-4 sm:px-8 pt-10 sm:pt-14 pb-8">
-      {/* Masthead — one-time fade + rise, staggered ~80ms across the four
-          elements. Each element's resting CSS is its natural visible state,
-          so reduced-motion (duration→0) lands visible. */}
+      {/* Masthead */}
       <header className="mb-16">
         <h1
-          className="font-display text-[26px] sm:text-3xl lg:text-[32px] font-semibold text-[#F8FAFC] rise-in"
+          className="font-display text-[26px] sm:text-3xl lg:text-[32px] font-semibold text-[#F8FAFC]"
           style={{
             lineHeight: 1.2,
             marginBottom: 12,
             maxWidth: measure,
-            animationDelay: "0ms",
           }}
         >
           When the AI is the relationship, not the tool
@@ -48,7 +45,6 @@ export default function Home() {
         <ul style={{ listStyleType: "none", padding: 0, margin: 0, maxWidth: measure }}>
           {[
             {
-              delay: "80ms",
               fontWeight: 400,
               body: (
                 <>
@@ -60,7 +56,6 @@ export default function Home() {
               ),
             },
             {
-              delay: "160ms",
               fontWeight: 400,
               body: (
                 <>
@@ -71,7 +66,6 @@ export default function Home() {
               ),
             },
             {
-              delay: "240ms",
               fontWeight: 500,
               body: (
                 <>
@@ -84,7 +78,6 @@ export default function Home() {
           ].map((item, i) => (
             <li
               key={i}
-              className="rise-in"
               style={{
                 ...intro,
                 fontSize: 16,
@@ -93,7 +86,6 @@ export default function Home() {
                 marginTop: i === 0 ? 0 : 12,
                 paddingLeft: 18,
                 position: "relative",
-                animationDelay: item.delay,
               }}
             >
               <span
@@ -112,8 +104,7 @@ export default function Home() {
             scrolling the whole narrative. */}
         <nav
           aria-label="The six tracked themes"
-          className="rise-in"
-          style={{ marginTop: 24, maxWidth: measure, animationDelay: "320ms" }}
+          style={{ marginTop: 24, maxWidth: measure }}
         >
           <div style={{ ...sectionLabel, marginBottom: 8 }}>The six themes</div>
           <div className="flex flex-wrap gap-2">
@@ -123,7 +114,7 @@ export default function Home() {
                 href={`/theme/${t.id}`}
                 className="inline-flex items-center gap-1.5 rounded-full border border-[#2A2D3A] px-3 py-1 min-h-11 sm:min-h-0 text-sm text-[#C8D0DC] transition-colors hover:border-[#3F4351] hover:bg-[#15171E] hover:text-[#F1F4F8]"
               >
-                <span aria-hidden>{t.emoji}</span>
+                <span aria-hidden style={themeKey(t.color)} />
                 {t.label}
               </Link>
             ))}
@@ -134,7 +125,6 @@ export default function Home() {
       {/* §1 — Orientation: post volume */}
       <div className="mb-16">
         <section>
-        <div style={sectionLabel}>The communities</div>
         <h2
           className="font-display text-xl sm:text-2xl font-semibold text-[#F1F4F8]"
           style={{ marginBottom: 8, maxWidth: measure }}
@@ -175,7 +165,6 @@ export default function Home() {
       {/* §2 — Events */}
       <div className="mb-16">
         <section>
-        <div style={sectionLabel}>What happened</div>
         <h2
           className="font-display text-xl sm:text-2xl font-semibold text-[#F1F4F8]"
           style={{ marginBottom: 8, maxWidth: measure }}
@@ -207,7 +196,6 @@ export default function Home() {
       {/* §3 — The theme atlas */}
       <div className="mb-16">
         <section id="themes" className="scroll-mt-8">
-        <div style={sectionLabel}>The themes</div>
         <h2
           className="font-display text-xl sm:text-2xl font-semibold text-[#F1F4F8]"
           style={{ marginBottom: 8, maxWidth: measure }}
@@ -233,7 +221,6 @@ export default function Home() {
       {/* §3.5 — A word is not a fixed thing: how the instrument's words drift */}
       <div className="mb-16">
         <section>
-        <div style={sectionLabel}>The instrument</div>
         <h2
           className="font-display text-xl sm:text-2xl font-semibold text-[#F1F4F8]"
           style={{ marginBottom: 8, maxWidth: measure }}
@@ -313,7 +300,6 @@ export default function Home() {
       {/* §4 — The recovery counter-current */}
       <div>
         <section>
-        <div style={sectionLabel}>A counter-current</div>
         <h2
           className="font-display text-xl sm:text-2xl font-semibold text-[#F1F4F8]"
           style={{ marginBottom: 8, maxWidth: measure }}
@@ -337,7 +323,6 @@ export default function Home() {
           the closing disclosure fences what Reddit can and can't show. */}
       <div style={{ marginTop: 56 }}>
         <section>
-        <div style={sectionLabel}>The room next door</div>
         <h2
           className="font-display text-xl sm:text-2xl font-semibold text-[#F1F4F8]"
           style={{ marginBottom: 8, maxWidth: measure }}
