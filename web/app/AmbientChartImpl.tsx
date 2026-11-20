@@ -91,7 +91,7 @@ const STACK_LABEL: Record<string, string> = Object.fromEntries(
 // two labels into the data-space distance a ReferenceDot needs.
 const STACK_PANEL_HEIGHT = 240;
 const STACK_PLOT_HEIGHT = 210;
-const LABEL_LINE_PX = 13;
+const LABEL_LINE_PX = 16;
 // Chart margins that bound the plot horizontally: the y-axis reserve on the
 // left and the AreaChart's right margin.
 const Y_AXIS_WIDTH = 40;

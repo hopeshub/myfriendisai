@@ -95,12 +95,12 @@ All six themes remain below 0.9 on at least one reweighting (sub-equal correlati
 volume-weighted and read direction-only. No change to that posture. Romance (0.55 / 0.49)
 and consciousness (0.44 sub-equal) are the least robust to reweighting.
 
-## Pending changes that would move these figures
+## Changes merged after this run (2026-11-20)
 
 - **PR #4** (exclude `rawunfilteredchaos`, r/MyBoyfriendIsAI's recurring-thread moderator
-  account, plus two seeding-ring accounts) removes 12 template sex/ERP tags and ~11
+  account, plus two seeding-ring accounts) removed 12 template sex/ERP tags and ~11
   denominator posts a month from 2025 on. r/myboyfriendisai is not in sex/ERP's top 3, so
-  its top-3 share would rise by about 0.2 points; nothing above changes materially.
+  its top-3 share rises by about 0.2 points; nothing above changes materially.
 - **Community additions of 2026-11-20** (r/therapyGPT, r/Ai_art_is_not_art, r/cogsuckers) all
   carry `exclude_from_keywords: true` and do not enter this corpus.
 

@@ -65,6 +65,15 @@ export async function generateStaticParams() {
   return subreddits.map((s) => ({ subreddit: s.subreddit }));
 }
 
+// Reading notes for the few community pages whose chart would mislead on its
+// own. Figures checked against the database 2026-11-20.
+const COMMUNITY_NOTES: Record<string, string> = {
+  ChaiApp:
+    "Read this chart with care. Most posts here are recorded as removed or deleted before the archive can read them: about three in four from 2024 to early 2026, and more than 80% every month since May 2026 (90% in October). This site counts only posts whose text survived, so the line shows a few hundred posts a month, lately a few dozen, while people still submit about 2,000. Since late 2026 the community is close to unmeasurable here.",
+  therapyGPT:
+    "Tracked as context only. People here use general chatbots as a confidant or therapist, and therapy language is so dense that this one community, under 2% of the posts, would supply about 40% of the therapy line. It is kept out of the theme lines so that line does not follow one community's posting volume.",
+};
+
 export default async function SubredditPage({
   params,
 }: {
@@ -141,6 +150,11 @@ export default async function SubredditPage({
           Posts per month, from this community&apos;s first month to the last
           complete one &mdash; the longest-range view of its activity.
         </p>
+        {COMMUNITY_NOTES[subreddit] && (
+          <p className="text-sm text-[#C8D0DC] mt-4 max-w-2xl border-l-2 border-[#2A2D3A] pl-3">
+            {COMMUNITY_NOTES[subreddit]}
+          </p>
+        )}
       </section>
 
       <Charts
