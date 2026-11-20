@@ -2,23 +2,33 @@ import type { Metadata, Viewport } from "next";
 import Link from "next/link";
 import { readFileSync } from "fs";
 import { join } from "path";
-import { Inter, Newsreader } from "next/font/google";
+import localFont from "next/font/local";
 import { Analytics } from "@vercel/analytics/next";
 import StaleDataBanner from "./StaleDataBanner";
 import "./globals.css";
 
-const inter = Inter({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+// Fonts are self-hosted (app/fonts/, latin subset, from the @fontsource npm
+// packages; OFL texts alongside) so the build makes no network request. The
+// old next/font/google fetch could fail the pre-deploy build on a flaky
+// morning. Same families, weights and styles as before.
+const inter = localFont({
+  // Variable file; the 400–700 range matches the four weights requested from
+  // Google before, so weights outside it still snap to 400 or 700.
+  src: [{ path: "./fonts/inter-latin-wght-normal.woff2", weight: "400 700", style: "normal" }],
   display: "swap",
 });
 
-const newsreader = Newsreader({
-  subsets: ["latin"],
-  weight: ["400", "600"],
-  style: ["normal", "italic"],
+const newsreader = localFont({
+  src: [
+    { path: "./fonts/newsreader-latin-400-normal.woff2", weight: "400", style: "normal" },
+    { path: "./fonts/newsreader-latin-400-italic.woff2", weight: "400", style: "italic" },
+    { path: "./fonts/newsreader-latin-600-normal.woff2", weight: "600", style: "normal" },
+    { path: "./fonts/newsreader-latin-600-italic.woff2", weight: "600", style: "italic" },
+  ],
   display: "swap",
   variable: "--font-newsreader",
+  // A serif fallback, as next/font/google generated for Newsreader.
+  adjustFontFallback: "Times New Roman",
 });
 
 export const metadata: Metadata = {
