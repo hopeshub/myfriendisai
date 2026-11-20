@@ -390,6 +390,7 @@ corpus and in the theme denominator, but do not appear here.
 | v1 | 2026-08-27 | First publication. |
 | v1.1 | 2026-09-08 | Population narrowed to **measurable posts**: posts recorded as removed or deleted leave every count and the per-1k denominator. The site's chart switched to the **pooled monthly rate**, so `rate_per_1k_charted` now equals `rate_per_1k`. `in_theme_measurement` is a real boolean in the JSON form. Numbers moved; the schema did not. |
 | v1.1 (data) | 2026-10-24 | Repair, not a method change: 1,991 posts missing from twelve collection holes between 2026-06-30 and 07-13 were restored from the archive (614 in r/CharacterAI, the only affected keyword community). July 2026 rates fell 1–5% (romance 5.54 → 5.27 per 1,000). |
+| v1.1 (data) | 2026-11 | Three more accounts excluded under the existing rule (moderator, platform or promotional template content is not community discourse): an r/MyBoyfriendIsAI moderator account whose weekly image-thread invitation contains "a steamy scene" and so counted as sex/ERP, and two accounts of a templated seeding ring. Sex/ERP rates from May 2026 fall roughly 3–9%; rupture moves at most 1.3% and therapy 2.7% in one month (one post, May 2025); the seeding accounts carried no tags and move every theme 0.1–0.2% in Oct–Nov 2026. |
 
 The bundle URL and file names stay `v1` — these are corrections to how the same
 quantities are computed, not a new set of quantities. `manifest.json` records

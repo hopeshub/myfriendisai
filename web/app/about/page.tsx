@@ -197,9 +197,12 @@ export default function About() {
               whose meaning may have moved.
             </p>
             <p>
-              Two accounting notes. Platform staff accounts are excluded from
-              the counts &mdash; one app developer&apos;s patch notes were, by
-              themselves, close to 1% of the sex/ERP line. And no single poster
+              Two accounting notes. Platform staff accounts, moderator
+              accounts whose recurring thread templates happen to contain a
+              keyword, and accounts that seed identical template posts are
+              excluded from the counts &mdash; one app
+              developer&apos;s patch notes were, by themselves, close to 1% of
+              the sex/ERP line. And no single poster
               carries a theme: at the last check, the busiest 1% of authors
               accounted for 5&ndash;11% of a theme&apos;s posts.
             </p>

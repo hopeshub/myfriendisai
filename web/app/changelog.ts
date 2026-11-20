@@ -18,6 +18,7 @@ export const CHANGELOG: ChangelogEntry[] = [
       "The sex/ERP story now notes that the keywords catch less of that talk than they used to: in a hand-checked sample of 600 posts they found 9 of 16 sexual posts from 2023 and none of 14 from 2025–26. Part of that line’s long fall is the instrument.",
       "Character.AI’s bankruptcy filing on October 12, 2026 is now marked as an event. On the monthly chart it is a small bump. By week, r/CharacterAI’s rupture rate tripled in the week of the filing, before anything about the product had changed.",
       "The homepage line on r/replika emptying out now adds that part of the Replika conversation moved to Replika’s official subreddit, which this tracker doesn’t follow.",
+      "Three more accounts are excluded from every count. One is r/MyBoyfriendIsAI’s moderator account, whose weekly image-thread invitation contains “a steamy scene” and so counted as sex/ERP; removing it lowers the sex/ERP line by about 3–9% from May 2026 on. That is the correction, not a change in the discourse. The other two belong to a ring that posts identical template prompts across communities; none of their posts was tagged.",
     ],
     recent: true,
   },
