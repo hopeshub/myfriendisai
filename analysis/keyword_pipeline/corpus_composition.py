@@ -4,21 +4,34 @@
 Read-only analysis of how the curated subreddit corpus shapes the six theme
 lines. Spec: docs/corpus_composition_plan.md.
 
-Mirrors the published methodology: post-source tags only (source='post'),
-T1-T3 active subreddits, the one platform-dev author excluded. Monthly buckets.
+Mirrors the published population, by importing it rather than restating it:
+the keyword communities from config (load_keyword_communities(): T1-T3
+without exclude_from_keywords, deactivated subs' history included), post-source
+tags only (source='post'), measurable posts only (measurable_post_where()) and
+EXCLUDED_AUTHORS dropped, in both numerator and denominator. Monthly buckets,
+UTC, through LAST_COMPLETE_MONTH in every section.
+
+History: the 2026-05-16 and first 2026-08-27 runs ignored exclude_from_keywords;
+the 2026-11-19 re-run found the script still excluded one author of two,
+counted shells, kept only is_active subs and let B1 run into the partial month.
+Importing the definitions is what keeps it from drifting a third time.
 
 Run from the repo root:  python3 analysis/keyword_pipeline/corpus_composition.py
 """
 
-import re
 import sqlite3
+import sys
 from collections import defaultdict
 from pathlib import Path
 
-DB = Path(__file__).resolve().parents[2] / "data" / "tracker.db"
-COMMUNITIES_YAML = Path(__file__).resolve().parents[2] / "config" / "communities.yaml"
-EXCLUDED_AUTHORS = {"SoulmateAI_Dev"}   # mirrors src/db/operations.py
-LAST_COMPLETE_MONTH = "2026-07"         # August 2026 is still in progress
+ROOT = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(ROOT))
+
+from src.config import load_keyword_communities  # noqa: E402
+from src.db.operations import EXCLUDED_AUTHORS, measurable_post_where  # noqa: E402
+
+DB = ROOT / "data" / "tracker.db"
+LAST_COMPLETE_MONTH = "2026-10"         # November 2026 is still in progress
 VOLUME_FLOOR = 200                      # min posts/month for a sub to count in sub-equal
 
 THEMES = ["romance", "sexual_erp", "consciousness", "therapy", "addiction", "rupture"]
@@ -55,69 +68,55 @@ def months_between(start, end):
     return out
 
 
-def keyword_excluded_subs():
-    """Subs flagged exclude_from_keywords in communities.yaml, lowercased.
-
-    subreddit_config has no exclusion column, so without this filter the
-    corpus silently included r/AIGirlfriend, r/SpicyChatAI and r/ChatGPTNSFW's
-    pre-2026-05-18 tags — which the published exports exclude. (Found and
-    fixed 2026-08-27; the 2026-05-16 run had the same inflation.) Light line
-    parser instead of pyyaml so the script stays dependency-free.
-    """
-    excluded, current = set(), None
-    for line in COMMUNITIES_YAML.read_text().splitlines():
-        m = re.match(r"\s*-\s*subreddit:\s*[\"']?([A-Za-z0-9_]+)", line)
-        if m:
-            current = m.group(1).lower()
-        elif re.match(r"\s*exclude_from_keywords:\s*true", line) and current:
-            excluded.add(current)
-    return excluded
-
-
 def load(conn):
     """Return (tier, tagged, posts) keyed by lowercased subreddit.
 
-    tier:   sub -> tier (1/2/3), the T1-T3 active corpus
+    tier:   sub -> tier (1/2/3), the keyword corpus
     tagged: theme -> sub -> month -> distinct tagged-post count
-    posts:  sub -> month -> total post count
+    posts:  sub -> month -> measurable post count (the denominator)
+
+    The filters are the ones export_keyword_trends_json applies, so the counts
+    here sum to the published post-only series and _total_posts.
     """
-    excluded = keyword_excluded_subs()
-    tier = {}
-    for sub, t in conn.execute(
-        "SELECT subreddit, tier FROM subreddit_config "
-        "WHERE is_active=1 AND tier BETWEEN 1 AND 3"
-    ):
-        if sub.lower() not in excluded:
-            tier[sub.lower()] = t
-    corpus = set(tier)
+    communities = load_keyword_communities()
+    names = [c["subreddit"] for c in communities]
+    tier = {c["subreddit"].lower(): c["tier"] for c in communities}
+    sub_ph = ",".join("?" * len(names))
+    author_ph = ",".join("?" * len(EXCLUDED_AUTHORS))
 
     # Distinct tagged posts (post source only), deduped to (theme, sub, month, post).
     seen = set()
     tagged = {th: defaultdict(lambda: defaultdict(int)) for th in THEMES}
-    for cat, sub, pdate, pid, author in conn.execute(
-        "SELECT t.category, t.subreddit, t.post_date, t.post_id, p.author "
-        "FROM post_keyword_tags t JOIN posts p ON p.id = t.post_id "
-        "WHERE t.source='post'"
+    for cat, sub, pdate, pid in conn.execute(
+        f"SELECT t.category, t.subreddit, t.post_date, t.post_id "
+        f"FROM post_keyword_tags t JOIN posts p ON p.id = t.post_id "
+        f"WHERE t.source='post' AND t.subreddit IN ({sub_ph}) "
+        f"AND {measurable_post_where('p')} "
+        f"AND (p.author IS NULL OR p.author NOT IN ({author_ph}))",
+        (*names, *EXCLUDED_AUTHORS),
     ):
-        s = (sub or "").lower()
-        if s not in corpus or cat not in tagged or author in EXCLUDED_AUTHORS:
-            continue
         month = pdate[:7]
+        if cat not in tagged or month > LAST_COMPLETE_MONTH:
+            continue
+        s = sub.lower()
         key = (cat, s, month, pid)
         if key in seen:
             continue
         seen.add(key)
         tagged[cat][s][month] += 1
 
-    # Total posts per (sub, month) — the denominator population.
+    # Measurable posts per (sub, month) — the denominator population.
     posts = defaultdict(lambda: defaultdict(int))
     for sub, month, c in conn.execute(
-        "SELECT subreddit, strftime('%Y-%m', date(created_utc,'unixepoch')), COUNT(*) "
-        "FROM posts WHERE created_utc IS NOT NULL GROUP BY 1, 2"
+        f"SELECT subreddit, strftime('%Y-%m', date(created_utc,'unixepoch')), COUNT(*) "
+        f"FROM posts WHERE created_utc IS NOT NULL AND subreddit IN ({sub_ph}) "
+        f"AND {measurable_post_where('')} "
+        f"AND (author IS NULL OR author NOT IN ({author_ph})) "
+        f"GROUP BY 1, 2",
+        (*names, *EXCLUDED_AUTHORS),
     ):
-        s = (sub or "").lower()
-        if s in corpus and month and month <= LAST_COMPLETE_MONTH:
-            posts[s][month] += c
+        if month and month <= LAST_COMPLETE_MONTH:
+            posts[sub.lower()][month] += c
 
     return tier, tagged, posts
 
@@ -139,6 +138,7 @@ def vol_weighted(tagged_theme, posts, subs, window):
 
 # ── B1: composition matrix ───────────────────────────────────────────────────
 def b1(tier, tagged):
+    # All tagged months through LAST_COMPLETE_MONTH (load() applies the cap).
     print("\n=== B1. Composition matrix — where each theme's posts come from ===")
     for th in THEMES:
         per_sub = defaultdict(int)
@@ -263,7 +263,7 @@ def main():
         tier, tagged, posts = load(conn)
     finally:
         conn.close()
-    print(f"Corpus: {len(tier)} T1-T3 active subreddits | "
+    print(f"Corpus: {len(tier)} T1-T3 keyword subreddits (measurable posts) | "
           f"window ends {LAST_COMPLETE_MONTH}")
     b1(tier, tagged)
     b2(tier, posts)
