@@ -6,7 +6,7 @@ assumes no access to the live site, the repository, or any other document.*
 
 **Project:** My Friend Is AI — <https://myfriendisai.com>
 **Code and validation records:** <https://github.com/hopeshub/myfriendisai>
-**Document version:** 1.2 · 2026-09-08
+**Document version:** 1.2 · 2026-09-08, revised 2026-11-20
 **Instrument version:** keyword set v8 (92 keywords, locked)
 
 ---
@@ -179,8 +179,9 @@ pro-AI side.
 
 The pro-AI/anti-AI asymmetry in the tier (8 anti, 2 pro, 1 arena) is honest
 rather than artifactual: Reddit has more anti-AI advocacy *expression* than
-pro-AI, because pro-AI energy mostly lives in product communities whose charter
-is the product, not advocacy. Counting those as T4 would have failed the charter
+pro-AI, because pro-AI energy mostly lives in product communities and in
+AI-art practice communities, whose charter is the product or the practice, not
+advocacy. Counting those as T4 would have failed the charter
 test.
 
 ### 2.5 Communities that cannot be reached
@@ -236,7 +237,8 @@ population the theme counts are drawn from, and the volume figure on each
 community's page. About 18% of the posts in the measurement scope are shells.
 
 Two facts forced the decision. Shells are not spread evenly across communities:
-r/ChaiApp runs 70–85% removed posts in every archive month, so counting them
+r/ChaiApp runs 70–85% removed posts in most archive months (over 80% in every
+month since May 2026), so counting them
 made that community look like a large, quiet room rather than a heavily
 moderated one, and put 10,000 unreadable posts a year into the denominator
 every other community's rate is divided by. And their share depends on how the
@@ -253,6 +255,17 @@ why §9.3 is the caveat it is.
 
 Shells are still collected and still stored. Nothing is deleted from the
 corpus; shells are excluded from published counts.
+
+**Shell share is monitored per community (since November 2026).** The daily
+run records each keyword community's shell share over the last 60 days and the
+60 before, and raises a warning when a community's share rises 15 points or
+more on at least 50 posts in each window. A high level alone is not a warning:
+r/ChaiApp sits near 90%. On 2026-11-20 the overall share was 28% (22% in the
+window before), with the largest rises in r/MyGirlfriendIsAI (18% → 31%) and
+r/KindroidAI (26% → 34%). Excluding shells keeps the rates unbiased only if the
+posts moderators hold or remove are no more and no less likely than others to
+carry a theme's vocabulary; the monitor shows where that assumption is under
+the most strain.
 
 ---
 
