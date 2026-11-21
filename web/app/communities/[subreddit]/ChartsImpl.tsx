@@ -13,6 +13,7 @@ import MeasuredChart from "@/app/MeasuredChart";
 import type { CommunityChartData, MonthPoint } from "@/lib/communityCharts";
 import { monthLabel, monthRange } from "@/lib/metrics";
 import { usePrefersReducedMotion } from "@/lib/usePrefersReducedMotion";
+import { C, radius } from "@/app/styles";
 
 const MONTH_NAMES = [
   "Jan", "Feb", "Mar", "Apr", "May", "Jun",
@@ -49,7 +50,7 @@ function MetricChart({
   monthly,
   label,
   dataEndMonth,
-  color = "#7C9CD0",
+  color = C.communityLine,
   decimals = 0,
   markLiveListing = false,
 }: {
@@ -77,13 +78,13 @@ function MetricChart({
 
   return (
     <div>
-      <p className="text-xs text-[#7E8B9E] mb-3">
+      <p className="text-xs text-[var(--c-caption)] mb-3">
         {label}
       </p>
       {monthly.length === 0 ? (
-        <p className="text-sm text-[#7E8B9E]">Not collected for this community.</p>
+        <p className="text-sm text-[var(--c-caption)]">Not collected for this community.</p>
       ) : monthly.length < MIN_MONTHS_TO_CHART ? (
-        <p className="text-sm text-[#7E8B9E]">
+        <p className="text-sm text-[var(--c-caption)]">
           Not enough data to chart — collected only{" "}
           {monthRange(firstMonth + "-01", lastMonth + "-01")}.
         </p>
@@ -102,12 +103,12 @@ function MetricChart({
               margin={{ top: 4, right: 4, left: 0, bottom: 0 }}
               accessibilityLayer={false}
             >
-              <CartesianGrid strokeDasharray="3 3" stroke="#2A2D3A" />
+              <CartesianGrid strokeDasharray="3 3" stroke={C.border} />
               {showBand && (
                 <ReferenceArea
                   x1={LIVE_LISTING_BAND.x1}
                   x2={LIVE_LISTING_BAND.x2}
-                  fill="#94A3B8"
+                  fill={C.leadAlt}
                   fillOpacity={0.16}
                   stroke="none"
                   ifOverflow="extendDomain"
@@ -116,14 +117,14 @@ function MetricChart({
               <XAxis
                 dataKey="date"
                 tickFormatter={fmtTick}
-                tick={{ fontSize: 11, fill: "#7E8B9E" }}
+                tick={{ fontSize: 11, fill: C.caption }}
                 tickLine={false}
                 axisLine={false}
                 minTickGap={48}
                 tickMargin={8}
               />
               <YAxis
-                tick={{ fontSize: 11, fill: "#7E8B9E" }}
+                tick={{ fontSize: 11, fill: C.caption }}
                 tickLine={false}
                 axisLine={false}
                 width={50}
@@ -144,13 +145,13 @@ function MetricChart({
                     ? decimals > 0 ? v.toFixed(decimals) : fmt(v)
                     : String(v)
                 }
-                labelStyle={{ fontSize: 11, color: "#9AA7B8" }}
-                itemStyle={{ color: "#F1F4F8" }}
+                labelStyle={{ fontSize: 11, color: C.lead }}
+                itemStyle={{ color: C.heading }}
                 contentStyle={{
                   fontSize: 11,
-                  backgroundColor: "#0F1117",
-                  borderColor: "#2A2D3A",
-                  borderRadius: 6,
+                  backgroundColor: C.bg,
+                  borderColor: C.border,
+                  borderRadius: radius(6),
                 }}
               />
               <Line
@@ -169,7 +170,7 @@ function MetricChart({
           )}
           </MeasuredChart>
           {endsEarly && (
-            <p className="text-xs text-[#7E8B9E] mt-2">
+            <p className="text-xs text-[var(--c-caption)] mt-2">
               Ends {monthLabel(lastMonth)} — the last month this was collected.
             </p>
           )}
@@ -191,39 +192,39 @@ export default function Charts({
   subscribersAsOf: string | null;
 }) {
   if (!data) {
-    return <p className="text-sm text-[#9AA7B8]">No snapshot data yet.</p>;
+    return <p className="text-sm text-[var(--c-lead)]">No snapshot data yet.</p>;
   }
 
   const { dataEndMonth } = data;
 
   return (
     <>
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-8 p-6 bg-[#1A1D27] rounded-xl">
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-8 p-6 bg-[var(--c-surface2)] rounded-xl">
         <div>
-          <div className="text-2xl font-semibold tabular-nums text-[#F8FAFC]">{fmt(data.subscribers)}</div>
-          <div className="text-xs text-[#9AA7B8] mt-0.5">Subscribers</div>
+          <div className="text-2xl font-semibold tabular-nums text-[var(--c-title)]">{fmt(data.subscribers)}</div>
+          <div className="text-xs text-[var(--c-lead)] mt-0.5">Subscribers</div>
           {subscribersAsOf && (
-            <div className="text-xs text-[#7E8B9E] mt-0.5 whitespace-nowrap">
+            <div className="text-xs text-[var(--c-caption)] mt-0.5 whitespace-nowrap">
               last collected {subscribersAsOf}
             </div>
           )}
         </div>
         <div>
-          <div className="text-2xl font-semibold tabular-nums text-[#F8FAFC]">{fmt(data.contributors)}</div>
-          <div className="text-xs text-[#9AA7B8] mt-0.5">Contributors / week</div>
+          <div className="text-2xl font-semibold tabular-nums text-[var(--c-title)]">{fmt(data.contributors)}</div>
+          <div className="text-xs text-[var(--c-lead)] mt-0.5">Contributors / week</div>
         </div>
         <div>
-          <div className="text-2xl font-semibold tabular-nums text-[#F8FAFC]">{fmt(postsPerDay, 1)}</div>
-          <div className="text-xs text-[#9AA7B8] mt-0.5">Posts / day (7-day avg)</div>
+          <div className="text-2xl font-semibold tabular-nums text-[var(--c-title)]">{fmt(postsPerDay, 1)}</div>
+          <div className="text-xs text-[var(--c-lead)] mt-0.5">Posts / day (7-day avg)</div>
         </div>
         <div>
-          <div className="text-2xl font-semibold tabular-nums text-[#F8FAFC]">{fmt(data.avgComments, 1)}</div>
-          <div className="text-xs text-[#9AA7B8] mt-0.5">Avg comments / post</div>
+          <div className="text-2xl font-semibold tabular-nums text-[var(--c-title)]">{fmt(data.avgComments, 1)}</div>
+          <div className="text-xs text-[var(--c-lead)] mt-0.5">Avg comments / post</div>
         </div>
       </div>
 
       <div className="mt-10">
-        <p className="text-xs text-[#7E8B9E] mb-6">
+        <p className="text-xs text-[var(--c-caption)] mb-6">
           Monthly averages across the collected history — the current figures
           are in the cards above.
         </p>
@@ -232,13 +233,13 @@ export default function Charts({
             monthly={data.contributorsMonthly}
             label="Contributors / week"
             dataEndMonth={dataEndMonth}
-            color="#e8692a"
+            color={C.metricA}
           />
           <MetricChart
             monthly={data.commentsMonthly}
             label="Avg comments per post"
             dataEndMonth={dataEndMonth}
-            color="#8b5cf6"
+            color={C.metricB}
             decimals={1}
             markLiveListing
           />
@@ -246,7 +247,7 @@ export default function Charts({
             monthly={data.scoreMonthly}
             label="Avg score per post"
             dataEndMonth={dataEndMonth}
-            color="#10b981"
+            color={C.metricC}
             markLiveListing
           />
         </div>

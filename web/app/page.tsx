@@ -8,6 +8,7 @@ import { loadThemeData, loadCommunityComposition, loadRecoveryVolume } from "./t
 import { THEMES } from "./themes";
 import { sectionEyebrow, introParagraph, measure, themeKey } from "./styles";
 import { CHANGELOG } from "./changelog";
+import { C } from "@/app/styles";
 
 // ── Homepage ─────────────────────────────────────────────────────────────────
 // One scrollable narrative, top to bottom:
@@ -33,7 +34,7 @@ export default function Home() {
       {/* Masthead */}
       <header className="mb-16">
         <h1
-          className="font-display text-[26px] sm:text-3xl lg:text-[32px] font-semibold text-[#F8FAFC]"
+          className="font-display text-[26px] sm:text-3xl lg:text-[32px] font-semibold text-[var(--c-title)]"
           style={{
             lineHeight: 1.2,
             marginBottom: 12,
@@ -81,7 +82,7 @@ export default function Home() {
               style={{
                 ...intro,
                 fontSize: 16,
-                color: "#9AA7B8",
+                color: C.lead,
                 fontWeight: item.fontWeight,
                 marginTop: i === 0 ? 0 : 12,
                 paddingLeft: 18,
@@ -90,7 +91,7 @@ export default function Home() {
             >
               <span
                 aria-hidden
-                style={{ position: "absolute", left: 0, color: "#7E8B9E" }}
+                style={{ position: "absolute", left: 0, color: C.caption }}
               >
                 &bull;
               </span>
@@ -112,7 +113,7 @@ export default function Home() {
               <Link
                 key={t.id}
                 href={`/theme/${t.id}`}
-                className="inline-flex items-center gap-1.5 rounded-full border border-[#2A2D3A] px-3 py-1 min-h-11 sm:min-h-0 text-sm text-[#C8D0DC] transition-colors hover:border-[#3F4351] hover:bg-[#15171E] hover:text-[#F1F4F8]"
+                className="inline-flex items-center gap-1.5 rounded-full border border-[var(--c-border)] px-3 py-1 min-h-11 sm:min-h-0 text-sm text-[var(--c-body)] transition-colors hover:border-[var(--c-hoverBorder)] hover:bg-[var(--c-surface)] hover:text-[var(--c-heading)]"
               >
                 <span aria-hidden style={themeKey(t.color)} />
                 {t.label}
@@ -126,7 +127,7 @@ export default function Home() {
       <div className="mb-16">
         <section>
         <h2
-          className="font-display text-xl sm:text-2xl font-semibold text-[#F1F4F8]"
+          className="font-display text-xl sm:text-2xl font-semibold text-[var(--c-heading)]"
           style={{ marginBottom: 8, maxWidth: measure }}
         >
           The names keep changing
@@ -166,7 +167,7 @@ export default function Home() {
       <div className="mb-16">
         <section>
         <h2
-          className="font-display text-xl sm:text-2xl font-semibold text-[#F1F4F8]"
+          className="font-display text-xl sm:text-2xl font-semibold text-[var(--c-heading)]"
           style={{ marginBottom: 8, maxWidth: measure }}
         >
           The events that move the conversation
@@ -197,7 +198,7 @@ export default function Home() {
       <div className="mb-16">
         <section id="themes" className="scroll-mt-8">
         <h2
-          className="font-display text-xl sm:text-2xl font-semibold text-[#F1F4F8]"
+          className="font-display text-xl sm:text-2xl font-semibold text-[var(--c-heading)]"
           style={{ marginBottom: 8, maxWidth: measure }}
         >
           How the conversation shifts inside these communities
@@ -222,7 +223,7 @@ export default function Home() {
       <div className="mb-16">
         <section>
         <h2
-          className="font-display text-xl sm:text-2xl font-semibold text-[#F1F4F8]"
+          className="font-display text-xl sm:text-2xl font-semibold text-[var(--c-heading)]"
           style={{ marginBottom: 8, maxWidth: measure }}
         >
           A word is not a fixed thing
@@ -236,7 +237,7 @@ export default function Home() {
           like, four times.
         </p>
         <p style={{ ...intro, marginBottom: 16 }}>
-          <strong style={{ color: "#F1F4F8", fontWeight: 600 }}>
+          <strong style={{ color: C.heading, fontWeight: 600 }}>
             A word can come loose from what it names.
           </strong>{" "}
           &ldquo;Sentient&rdquo; was once the word people here reached for to
@@ -248,7 +249,7 @@ export default function Home() {
           word that used to carry it stopped being able to point.
         </p>
         <p style={{ ...intro, marginBottom: 16 }}>
-          <strong style={{ color: "#F1F4F8", fontWeight: 600 }}>
+          <strong style={{ color: C.heading, fontWeight: 600 }}>
             A word can hold its place and flip its charge.
           </strong>{" "}
           &ldquo;Therapeutic&rdquo; was a word for real help. Then, over a few
@@ -260,7 +261,7 @@ export default function Home() {
           way not to trust a word to hold still.
         </p>
         <p style={{ ...intro, marginBottom: 16 }}>
-          <strong style={{ color: "#F1F4F8", fontWeight: 600 }}>
+          <strong style={{ color: C.heading, fontWeight: 600 }}>
             Two words can name one behavior.
           </strong>{" "}
           &ldquo;It&apos;s my coping mechanism&rdquo; and &ldquo;I can&apos;t
@@ -276,7 +277,7 @@ export default function Home() {
           &mdash; and recorded unevenly.
         </p>
         <p style={{ ...intro, marginBottom: 16 }}>
-          <strong style={{ color: "#F1F4F8", fontWeight: 600 }}>
+          <strong style={{ color: C.heading, fontWeight: 600 }}>
             An event can happen in a register the words can&apos;t see.
           </strong>{" "}
           In April 2025, an OpenAI update changed GPT-4o&apos;s tone
@@ -301,7 +302,7 @@ export default function Home() {
       <div>
         <section>
         <h2
-          className="font-display text-xl sm:text-2xl font-semibold text-[#F1F4F8]"
+          className="font-display text-xl sm:text-2xl font-semibold text-[var(--c-heading)]"
           style={{ marginBottom: 8, maxWidth: measure }}
         >
           Calling it an addiction
@@ -324,7 +325,7 @@ export default function Home() {
       <div style={{ marginTop: 56 }}>
         <section>
         <h2
-          className="font-display text-xl sm:text-2xl font-semibold text-[#F1F4F8]"
+          className="font-display text-xl sm:text-2xl font-semibold text-[var(--c-heading)]"
           style={{ marginBottom: 8, maxWidth: measure }}
         >
           The argument is upstream
@@ -361,18 +362,18 @@ export default function Home() {
           style={{
             marginTop: 56,
             paddingTop: 20,
-            borderTop: "1px solid #2A2D3A",
+            borderTop: `1px solid ${C.border}`,
           }}
         >
           <p
             className="text-[14px] md:text-[13px]"
-            style={{ lineHeight: 1.6, color: "#7E8B9E" }}
+            style={{ lineHeight: 1.6, color: C.caption }}
           >
             Updated daily. Most recent change &mdash; {CHANGELOG[0].title} (
             {CHANGELOG[0].date}).{" "}
             <Link
               href="/about#changelog"
-              style={{ color: "#9AA7B8", textDecoration: "underline" }}
+              style={{ color: C.lead, textDecoration: "underline" }}
             >
               See what&apos;s changed
             </Link>

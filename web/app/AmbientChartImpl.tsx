@@ -16,6 +16,7 @@ import MeasuredChart from "@/app/MeasuredChart";
 import type { AmbientTopPoint, AmbientStackPoint } from "./themeData";
 import { measure } from "./styles";
 import { usePrefersReducedMotion } from "@/lib/usePrefersReducedMotion";
+import { C, radius } from "@/app/styles";
 
 // ── §5 ambient-cluster chart ────────────────────────────────────────────────
 // Two stacked panels, modeled on §1. Top: r/aiwars alone — the all-sides
@@ -137,9 +138,9 @@ function yearTicks(months: string[]): string[] {
 }
 
 const tooltipBox: React.CSSProperties = {
-  backgroundColor: "#0F1117",
-  border: "1px solid #2A2D3A",
-  borderRadius: 6,
+  backgroundColor: C.bg,
+  border: `1px solid ${C.grid}`,
+  borderRadius: radius(6),
   padding: "6px 9px",
   fontSize: 11,
 };
@@ -238,7 +239,7 @@ export default function AmbientChart({
     return (
       <div
         style={{ height: 300 }}
-        className="flex items-center justify-center text-sm text-[#7E8B9E]"
+        className="flex items-center justify-center text-sm text-[var(--c-caption)]"
       >
         No ambient-cluster data yet.
       </div>
@@ -246,8 +247,8 @@ export default function AmbientChart({
   }
 
   const axisProps = {
-    stroke: "#2A2D3A",
-    tick: { fill: "#7E8B9E", fontSize: 11 },
+    stroke: C.grid,
+    tick: { fill: C.caption, fontSize: 11 },
     tickLine: false,
   };
 
@@ -255,10 +256,10 @@ export default function AmbientChart({
   return (
     <div>
       {/* Top panel — r/aiwars alone (the explicit debate floor) */}
-      <div style={{ fontSize: 14, fontWeight: 600, color: "#F1F4F8" }}>
+      <div style={{ fontSize: 14, fontWeight: 600, color: C.heading }}>
         The debate floor
       </div>
-      <div style={{ fontSize: 12, color: "#7E8B9E", marginBottom: 6 }}>
+      <div style={{ fontSize: 12, color: C.caption, marginBottom: 6 }}>
         r/aiwars &mdash; the only community in the cluster whose charter is
         all-sides, not a side. Growing on the same curve as the partisans.
       </div>
@@ -275,31 +276,31 @@ export default function AmbientChart({
             margin={{ top: 14, right: 12, bottom: 2, left: 0 }}
             accessibilityLayer={false}
           >
-            <CartesianGrid strokeDasharray="3 3" stroke="#2A2D3A" vertical={false} />
+            <CartesianGrid strokeDasharray="3 3" stroke={C.grid} vertical={false} />
             <XAxis
               dataKey="month"
               ticks={ticks}
               interval={0}
               tickFormatter={(m: string) => m.slice(0, 4)}
-              axisLine={{ stroke: "#2A2D3A" }}
+              axisLine={{ stroke: C.grid }}
               {...axisProps}
             />
             <YAxis
               width={40}
               stroke="transparent"
-              tick={{ fill: "#7E8B9E", fontSize: 11 }}
+              tick={{ fill: C.caption, fontSize: 11 }}
               tickLine={false}
               axisLine={false}
               tickFormatter={fmtCount}
             />
             <Tooltip
-              cursor={{ stroke: "#475569", strokeWidth: 1 }}
+              cursor={{ stroke: C.cursor, strokeWidth: 1 }}
               animationDuration={140}
               content={({ active, payload, label }) => {
                 if (!active || !payload?.length) return null;
                 return (
                   <div style={tooltipBox}>
-                    <div style={{ color: "#9AA7B8", marginBottom: 4 }}>
+                    <div style={{ color: C.lead, marginBottom: 4 }}>
                       {fmtMonth(label as string)}
                     </div>
                     {payload.map((p) => {
@@ -309,7 +310,7 @@ export default function AmbientChart({
                         <div
                           key={k}
                           style={{
-                            color: "#C8D0DC",
+                            color: C.body,
                             lineHeight: 1.5,
                           }}
                         >
@@ -326,15 +327,15 @@ export default function AmbientChart({
                           <span style={{ fontWeight: 600 }}>
                             r/{k}
                           </span>
-                          <span style={{ color: "#9AA7B8" }}>{"  ·  "}</span>
+                          <span style={{ color: C.lead }}>{"  ·  "}</span>
                           <span style={{ fontWeight: 600 }}>
                             {((p.value as number) ?? 0).toLocaleString()}
                           </span>
-                          <span style={{ color: "#9AA7B8" }}> posts</span>
+                          <span style={{ color: C.lead }}> posts</span>
                           {density != null && (
                             <div
                               style={{
-                                color: "#7E8B9E",
+                                color: C.caption,
                                 fontStyle: "italic",
                                 marginLeft: 13,
                                 marginTop: 1,
@@ -371,7 +372,7 @@ export default function AmbientChart({
       <div
         style={{
           fontSize: 11,
-          color: "#7E8B9E",
+          color: C.caption,
           marginTop: 4,
           display: "flex",
           flexWrap: "wrap",
@@ -394,7 +395,7 @@ export default function AmbientChart({
                 backgroundColor: l.color,
               }}
             />
-            <span style={{ color: "#C8D0DC" }}>{l.label}</span>
+            <span style={{ color: C.body }}>{l.label}</span>
           </span>
         ))}
       </div>
@@ -404,13 +405,13 @@ export default function AmbientChart({
         style={{
           fontSize: 14,
           fontWeight: 600,
-          color: "#F1F4F8",
+          color: C.heading,
           marginTop: 28,
         }}
       >
         The partisan rooms
       </div>
-      <div style={{ fontSize: 12, color: "#7E8B9E", marginBottom: 6 }}>
+      <div style={{ fontSize: 12, color: C.caption, marginBottom: 6 }}>
         The cluster&apos;s eight anti-AI and two pro-AI subs; the seven
         largest over the cluster&apos;s history are stacked here. r/antiAI
         (founded 2025) is now the largest; the others fill in around it.
@@ -428,25 +429,25 @@ export default function AmbientChart({
             margin={{ top: 6, right: 12, bottom: 2, left: 0 }}
             accessibilityLayer={false}
           >
-            <CartesianGrid strokeDasharray="3 3" stroke="#2A2D3A" vertical={false} />
+            <CartesianGrid strokeDasharray="3 3" stroke={C.grid} vertical={false} />
             <XAxis
               dataKey="month"
               ticks={ticks}
               interval={0}
               tickFormatter={(m: string) => m.slice(0, 4)}
-              axisLine={{ stroke: "#2A2D3A" }}
+              axisLine={{ stroke: C.grid }}
               {...axisProps}
             />
             <YAxis
               width={40}
               stroke="transparent"
-              tick={{ fill: "#7E8B9E", fontSize: 11 }}
+              tick={{ fill: C.caption, fontSize: 11 }}
               tickLine={false}
               axisLine={false}
               tickFormatter={fmtCount}
             />
             <Tooltip
-              cursor={{ stroke: "#475569", strokeWidth: 1 }}
+              cursor={{ stroke: C.cursor, strokeWidth: 1 }}
               animationDuration={140}
               content={({ active, payload, label }) => {
                 if (!active || !payload?.length) return null;
@@ -456,7 +457,7 @@ export default function AmbientChart({
                 );
                 return (
                   <div style={tooltipBox}>
-                    <div style={{ color: "#9AA7B8", marginBottom: 4 }}>
+                    <div style={{ color: C.lead, marginBottom: 4 }}>
                       {fmtMonth(label as string)}
                     </div>
                     {[...payload].reverse().map((p) => {
@@ -467,7 +468,7 @@ export default function AmbientChart({
                         <div
                           key={k}
                           style={{
-                            color: isSel ? "#F1F4F8" : "#C8D0DC",
+                            color: isSel ? C.heading : C.body,
                             fontWeight: isSel ? 600 : 400,
                             opacity: selected !== null && !isSel ? 0.5 : 1,
                             lineHeight: 1.5,
@@ -500,7 +501,7 @@ export default function AmbientChart({
                           {density != null && (
                             <div
                               style={{
-                                color: "#7E8B9E",
+                                color: C.caption,
                                 fontStyle: "italic",
                                 fontWeight: 400,
                                 marginLeft: 13,
@@ -515,13 +516,13 @@ export default function AmbientChart({
                     })}
                     <div
                       style={{
-                        borderTop: "1px solid #2A2D3A",
+                        borderTop: `1px solid ${C.grid}`,
                         marginTop: 4,
                         paddingTop: 4,
                         display: "flex",
                         justifyContent: "space-between",
                         gap: 14,
-                        color: "#9AA7B8",
+                        color: C.lead,
                       }}
                     >
                       <span>Total</span>
@@ -579,10 +580,10 @@ export default function AmbientChart({
                   ifOverflow="extendDomain"
                   label={{
                     value: a.label,
-                    fill: "#F8FAFC",
+                    fill: C.title,
                     fontSize: 10,
                     fontWeight: 700,
-                    stroke: "#0F1117",
+                    stroke: C.bg,
                     strokeWidth: 3,
                     paintOrder: "stroke",
                     opacity: dimmed ? 0.15 : 0.95,
@@ -620,7 +621,7 @@ export default function AmbientChart({
                 alignItems: "center",
                 gap: 5,
                 fontSize: 11,
-                color: "#9AA7B8",
+                color: C.lead,
                 background: "none",
                 border: "none",
                 padding: "3px 4px",
@@ -650,7 +651,7 @@ export default function AmbientChart({
             marginTop: 2,
             textAlign: "center",
             fontSize: 11,
-            color: "#7E8B9E",
+            color: C.caption,
           }}
         >
           Isolating {STACK_LABEL[selected]} &mdash;{" "}
@@ -660,7 +661,7 @@ export default function AmbientChart({
             style={{
               background: "none",
               border: "none",
-              color: "#9AA7B8",
+              color: C.lead,
               textDecoration: "underline",
               cursor: "pointer",
               fontSize: 11,
@@ -677,7 +678,7 @@ export default function AmbientChart({
         style={{
           fontSize: 13,
           lineHeight: 1.6,
-          color: "#C8D0DC",
+          color: C.body,
           marginTop: 16,
           textAlign: "center",
           maxWidth: measure,
@@ -693,7 +694,7 @@ export default function AmbientChart({
       <p
         style={{
           fontSize: 11,
-          color: "#7E8B9E",
+          color: C.caption,
           marginTop: 8,
           textAlign: "center",
           maxWidth: measure,

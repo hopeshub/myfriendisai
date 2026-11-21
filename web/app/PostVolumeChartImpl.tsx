@@ -16,6 +16,7 @@ import type { CaiPoint, CompositionPoint } from "./themeData";
 import { fontSize, measure } from "./styles";
 import { useBreakpoint } from "./useBreakpoint";
 import { usePrefersReducedMotion } from "@/lib/usePrefersReducedMotion";
+import { C, radius } from "@/app/styles";
 
 // ── §1 post-volume chart ─────────────────────────────────────────────────────
 // Two stacked charts. Top: r/CharacterAI alone — it is 55-85% of all volume by year and
@@ -51,7 +52,7 @@ const BANDS: Band[] = [
   { key: "chai", label: "r/ChaiApp", color: "#6E9BC4" },
   { key: "chatgptcomplaints", label: "r/ChatGPTcomplaints", color: "#CC7E72" },
   { key: "myboyfriendisai", label: "r/MyBoyfriendIsAI", color: "#C77FA3" },
-  { key: "other", label: "Other communities", color: "#525A6B" },
+  { key: "other", label: "Other communities", color: C.otherBand },
 ];
 const BAND_LABEL: Record<string, string> = Object.fromEntries(
   BANDS.map((b) => [b.key, b.label]),
@@ -78,9 +79,9 @@ function yearTicks(months: string[]): string[] {
 }
 
 const tooltipBox: React.CSSProperties = {
-  backgroundColor: "#0F1117",
-  border: "1px solid #2A2D3A",
-  borderRadius: 6,
+  backgroundColor: C.bg,
+  border: `1px solid ${C.grid}`,
+  borderRadius: radius(6),
   padding: "6px 9px",
   fontSize: 11,
 };
@@ -132,7 +133,7 @@ export default function PostVolumeChart({
     return (
       <div
         style={{ height: 300 }}
-        className="flex items-center justify-center text-sm text-[#7E8B9E]"
+        className="flex items-center justify-center text-sm text-[var(--c-caption)]"
       >
         No post-volume data yet.
       </div>
@@ -140,8 +141,8 @@ export default function PostVolumeChart({
   }
 
   const axisProps = {
-    stroke: "#2A2D3A",
-    tick: { fill: "#7E8B9E", fontSize: 11 },
+    stroke: C.grid,
+    tick: { fill: C.caption, fontSize: 11 },
     tickLine: false,
   };
 
@@ -166,8 +167,8 @@ export default function PostVolumeChart({
           textAnchor="middle"
           fontSize={fs(10)}
           fontWeight={700}
-          fill="#F8FAFC"
-          stroke="#0F1117"
+          fill={C.title}
+          stroke={C.bg}
           strokeWidth={3}
           paintOrder="stroke"
           opacity={dimmed ? 0.15 : 0.95}
@@ -181,10 +182,10 @@ export default function PostVolumeChart({
   return (
     <div>
       {/* r/CharacterAI — on its own scale */}
-      <div style={{ fontSize: 14, fontWeight: 600, color: "#F1F4F8" }}>
+      <div style={{ fontSize: 14, fontWeight: 600, color: C.heading }}>
         r/CharacterAI
       </div>
-      <div style={{ fontSize: fs(12), color: "#7E8B9E", marginBottom: 6 }}>
+      <div style={{ fontSize: fs(12), color: C.caption, marginBottom: 6 }}>
         The mass-market giant — boomed to nearly 34k posts a month, then receded.
       </div>
       <MeasuredChart
@@ -202,29 +203,29 @@ export default function PostVolumeChart({
           >
             <defs>
               <linearGradient id="pv-cai" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor="#566173" stopOpacity={0.45} />
-                <stop offset="100%" stopColor="#566173" stopOpacity={0.04} />
+                <stop offset="0%" stopColor={C.neutralSeries} stopOpacity={0.45} />
+                <stop offset="100%" stopColor={C.neutralSeries} stopOpacity={0.04} />
               </linearGradient>
             </defs>
-            <CartesianGrid strokeDasharray="3 3" stroke="#2A2D3A" vertical={false} />
+            <CartesianGrid strokeDasharray="3 3" stroke={C.grid} vertical={false} />
             <XAxis
               dataKey="month"
               ticks={ticks}
               interval={0}
               tickFormatter={(m: string) => m.slice(0, 4)}
-              axisLine={{ stroke: "#2A2D3A" }}
+              axisLine={{ stroke: C.grid }}
               {...axisProps}
             />
             <YAxis
               width={40}
               stroke="transparent"
-              tick={{ fill: "#7E8B9E", fontSize: 11 }}
+              tick={{ fill: C.caption, fontSize: 11 }}
               tickLine={false}
               axisLine={false}
               tickFormatter={fmtCount}
             />
             <Tooltip
-              cursor={{ stroke: "#475569", strokeWidth: 1 }}
+              cursor={{ stroke: C.cursor, strokeWidth: 1 }}
               animationDuration={140}
               content={({ active, payload, label }) => {
                 if (!active || !payload?.length || payload[0].value == null) {
@@ -232,14 +233,14 @@ export default function PostVolumeChart({
                 }
                 return (
                   <div style={{ ...tooltipBox, fontSize: fs(11), whiteSpace: "nowrap" }}>
-                    <span style={{ color: "#9AA7B8" }}>
+                    <span style={{ color: C.lead }}>
                       {fmtMonth(label as string)}
                     </span>
-                    <span style={{ color: "#9AA7B8" }}>{"  ·  "}</span>
-                    <span style={{ color: "#F1F4F8", fontWeight: 600 }}>
+                    <span style={{ color: C.lead }}>{"  ·  "}</span>
+                    <span style={{ color: C.heading, fontWeight: 600 }}>
                       {(payload[0].value as number).toLocaleString()}
                     </span>
-                    <span style={{ color: "#9AA7B8" }}> posts</span>
+                    <span style={{ color: C.lead }}> posts</span>
                   </div>
                 );
               }}
@@ -247,7 +248,7 @@ export default function PostVolumeChart({
             <Area
               type="monotone"
               dataKey="value"
-              stroke="#566173"
+              stroke={C.neutralSeries}
               strokeWidth={2}
               fill="url(#pv-cai)"
               isAnimationActive={animate}
@@ -259,14 +260,14 @@ export default function PostVolumeChart({
               <ReferenceLine
                 key={e.month}
                 x={e.month}
-                stroke="#C2974D"
+                stroke={C.event}
                 strokeOpacity={0.5}
                 strokeDasharray="4 3"
                 strokeWidth={1}
                 label={{
                   value: String(e.n),
                   position: "top",
-                  fill: "#D4A862",
+                  fill: C.eventText,
                   fontSize: fs(11),
                   fontWeight: 700,
                 }}
@@ -278,7 +279,7 @@ export default function PostVolumeChart({
       <div
         style={{
           fontSize: fs(11),
-          color: "#7E8B9E",
+          color: C.caption,
           marginTop: 6,
           display: "flex",
           flexWrap: "wrap",
@@ -304,13 +305,13 @@ export default function PostVolumeChart({
                 borderRadius: 999,
                 fontSize: fs(10),
                 fontWeight: 700,
-                color: "#0F1117",
-                backgroundColor: "#C2974D",
+                color: C.bg,
+                backgroundColor: C.event,
               }}
             >
               {e.n}
             </span>
-            <span style={{ color: "#C8D0DC" }}>{e.label}</span>
+            <span style={{ color: C.body }}>{e.label}</span>
             <span>{fmtMonth(e.month)}</span>
           </span>
         ))}
@@ -321,13 +322,13 @@ export default function PostVolumeChart({
         style={{
           fontSize: 14,
           fontWeight: 600,
-          color: "#F1F4F8",
+          color: C.heading,
           marginTop: 20,
         }}
       >
         Every other community
       </div>
-      <div style={{ fontSize: fs(12), color: "#7E8B9E", marginBottom: 6 }}>
+      <div style={{ fontSize: fs(12), color: C.caption, marginBottom: 6 }}>
         A steady floor &mdash; but watch r/replika give way to a new generation.
       </div>
       <MeasuredChart
@@ -343,25 +344,25 @@ export default function PostVolumeChart({
             margin={{ top: 6, right: 8, bottom: 2, left: 0 }}
             accessibilityLayer={false}
           >
-            <CartesianGrid strokeDasharray="3 3" stroke="#2A2D3A" vertical={false} />
+            <CartesianGrid strokeDasharray="3 3" stroke={C.grid} vertical={false} />
             <XAxis
               dataKey="month"
               ticks={ticks}
               interval={0}
               tickFormatter={(m: string) => m.slice(0, 4)}
-              axisLine={{ stroke: "#2A2D3A" }}
+              axisLine={{ stroke: C.grid }}
               {...axisProps}
             />
             <YAxis
               width={40}
               stroke="transparent"
-              tick={{ fill: "#7E8B9E", fontSize: 11 }}
+              tick={{ fill: C.caption, fontSize: 11 }}
               tickLine={false}
               axisLine={false}
               tickFormatter={fmtCount}
             />
             <Tooltip
-              cursor={{ stroke: "#475569", strokeWidth: 1 }}
+              cursor={{ stroke: C.cursor, strokeWidth: 1 }}
               animationDuration={140}
               content={({ active, payload, label }) => {
                 if (!active || !payload?.length) return null;
@@ -371,7 +372,7 @@ export default function PostVolumeChart({
                 );
                 return (
                   <div style={{ ...tooltipBox, fontSize: fs(11) }}>
-                    <div style={{ color: "#9AA7B8", marginBottom: 4 }}>
+                    <div style={{ color: C.lead, marginBottom: 4 }}>
                       {fmtMonth(label as string)}
                     </div>
                     {[...payload].reverse().map((p) => {
@@ -383,7 +384,7 @@ export default function PostVolumeChart({
                             display: "flex",
                             justifyContent: "space-between",
                             gap: 14,
-                            color: isSel ? "#F1F4F8" : "#C8D0DC",
+                            color: isSel ? C.heading : C.body,
                             fontWeight: isSel ? 600 : 400,
                             opacity: selected !== null && !isSel ? 0.5 : 1,
                             lineHeight: 1.5,
@@ -410,13 +411,13 @@ export default function PostVolumeChart({
                     })}
                     <div
                       style={{
-                        borderTop: "1px solid #2A2D3A",
+                        borderTop: `1px solid ${C.grid}`,
                         marginTop: 4,
                         paddingTop: 4,
                         display: "flex",
                         justifyContent: "space-between",
                         gap: 14,
-                        color: "#9AA7B8",
+                        color: C.lead,
                       }}
                     >
                       <span>Total</span>
@@ -488,7 +489,7 @@ export default function PostVolumeChart({
                 gap: 5,
                 fontSize: fs(11),
                 minHeight: mobile ? 44 : undefined,
-                color: "#9AA7B8",
+                color: C.lead,
                 background: "none",
                 border: "none",
                 padding: "3px 4px",
@@ -518,7 +519,7 @@ export default function PostVolumeChart({
             marginTop: 2,
             textAlign: "center",
             fontSize: fs(11),
-            color: "#7E8B9E",
+            color: C.caption,
           }}
         >
           Isolating {BAND_LABEL[selected]} &mdash;{" "}
@@ -528,7 +529,7 @@ export default function PostVolumeChart({
             style={{
               background: "none",
               border: "none",
-              color: "#9AA7B8",
+              color: C.lead,
               textDecoration: "underline",
               cursor: "pointer",
               fontSize: fs(11),
@@ -548,7 +549,7 @@ export default function PostVolumeChart({
       <p
         style={{
           fontSize: fs(11),
-          color: "#7E8B9E",
+          color: C.caption,
           marginTop: 8,
           textAlign: "center",
           maxWidth: measure,

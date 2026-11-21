@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { C } from "@/app/styles";
 
 type Status = {
   last_collection: string | null;
@@ -38,8 +39,8 @@ export default function StaleDataBanner() {
     <div
       role="status"
       style={{
-        background: "#7f1d1d",
-        color: "#fef2f2",
+        background: C.alertBg,
+        color: C.alertText,
         padding: "8px 16px",
         textAlign: "center",
         fontSize: 14,

@@ -5,6 +5,7 @@ import dynamic from "next/dynamic";
 import type { ThemeData } from "./themeData";
 import { useBreakpoint } from "./useBreakpoint";
 import { measure } from "./styles";
+import { C, SITE_THEME, radius } from "@/app/styles";
 
 // Lazy-loaded so the atlas is not in the homepage's initial JS bundle.
 // The chart measures its container width on the client and cannot
@@ -50,7 +51,7 @@ export default function TrendsExplorer({ themeData, themeDataExclCai }: Props) {
           toggling r/CharacterAI is a core methodological choice, not a
           cosmetic option. */}
       <div className="flex items-center gap-2.5 mb-2 flex-wrap">
-        <span style={{ fontSize: isMobileStrip ? 14 : 12, color: "#7E8B9E" }}>
+        <span style={{ fontSize: isMobileStrip ? 14 : 12, color: C.caption }}>
           Communities:
         </span>
         <div
@@ -59,9 +60,9 @@ export default function TrendsExplorer({ themeData, themeDataExclCai }: Props) {
           style={{
             display: "inline-flex",
             padding: 2,
-            borderRadius: 8,
-            border: "1px solid #2A2D3A",
-            backgroundColor: "#13151C",
+            borderRadius: radius(8),
+            border: `1px solid ${C.border}`,
+            backgroundColor: C.control,
           }}
         >
           {(
@@ -76,8 +77,9 @@ export default function TrendsExplorer({ themeData, themeDataExclCai }: Props) {
               aria-pressed={scope === s}
               className="min-h-11 md:min-h-0 px-3 py-1.5 text-sm md:text-xs font-medium rounded-md transition-colors"
               style={{
-                backgroundColor: scope === s ? "#252834" : "transparent",
-                color: scope === s ? "#F1F4F8" : "#9AA7B8",
+                backgroundColor: scope === s ? C.controlOn : "transparent",
+                boxShadow: scope === s && SITE_THEME === "paper" ? `inset 0 0 0 1px ${C.borderStrong}` : undefined,
+                color: scope === s ? C.heading : C.lead,
               }}
             >
               {label}
@@ -87,7 +89,7 @@ export default function TrendsExplorer({ themeData, themeDataExclCai }: Props) {
       </div>
       <p
         className="mb-3"
-        style={{ fontSize: isMobileStrip ? 14 : 12, color: "#7E8B9E", maxWidth: measure }}
+        style={{ fontSize: isMobileStrip ? 14 : 12, color: C.caption, maxWidth: measure }}
       >
         {scope === "all"
           ? "r/CharacterAI is the largest community in this set — 70–85% of every post counted here through most of 2025, and under half today — and it rises and falls on its own platform lifecycle. Switch it off to see each rate within the dedicated companionship communities."
@@ -104,9 +106,9 @@ export default function TrendsExplorer({ themeData, themeDataExclCai }: Props) {
             aria-label={`Show ${range === "ALL" ? "all time" : `last ${range}`}`}
             className="flex-1 sm:flex-none h-11 md:h-auto px-3 py-1 text-sm md:text-xs font-medium rounded-md transition-colors"
             style={{
-              backgroundColor: timeRange === range ? "#1A1D27" : "transparent",
-              color: timeRange === range ? "#F1F4F8" : "#9AA7B8",
-              border: `1px solid ${timeRange === range ? "#2A2D3A" : "transparent"}`,
+              backgroundColor: timeRange === range ? C.surface2 : "transparent",
+              color: timeRange === range ? C.heading : C.lead,
+              border: `1px solid ${timeRange === range ? C.border : "transparent"}`,
             }}
           >
             {range}
@@ -141,7 +143,7 @@ export default function TrendsExplorer({ themeData, themeDataExclCai }: Props) {
       <div
         style={{
           fontSize: isMobileStrip ? 14 : 12,
-          color: "#7E8B9E",
+          color: C.caption,
           marginTop: 16,
           marginBottom: 8,
           maxWidth: measure,
@@ -186,7 +188,7 @@ export default function TrendsExplorer({ themeData, themeDataExclCai }: Props) {
         <p style={{ marginTop: 4 }}>
           <a
             href="/about#verification"
-            style={{ color: "#9AA7B8", textDecoration: "underline" }}
+            style={{ color: C.lead, textDecoration: "underline" }}
           >
             How this works, and how to read it
           </a>

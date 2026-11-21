@@ -9,6 +9,7 @@
 // community was founded would otherwise draw a long flat line and a cliff.
 
 import { fromFirstActiveMonth } from "@/lib/metrics";
+import { C } from "@/app/styles";
 
 // Below this monthly peak a community has too little volume for its shape to
 // mean anything — normalizing would turn an eight-posts-ever community into a
@@ -31,7 +32,7 @@ export default function Sparkline({
   const peak = clean.length ? Math.max(...clean) : 0;
   if (clean.length < 2 || peak === 0) {
     return (
-      <span aria-hidden style={{ color: "#3F4654", fontSize: 12 }}>
+      <span aria-hidden style={{ color: C.faint, fontSize: 12 }}>
         —
       </span>
     );
@@ -60,14 +61,14 @@ export default function Sparkline({
       <polyline
         points={points}
         fill="none"
-        stroke="#7C9CD0"
+        stroke={C.communityLine}
         strokeOpacity={lowVolume ? 0.3 : 1}
         strokeWidth={1.25}
         strokeLinejoin="round"
         strokeLinecap="round"
       />
       {!lowVolume && (
-        <circle cx={x(n - 1)} cy={y(clean[n - 1])} r={1.7} fill="#7C9CD0" />
+        <circle cx={x(n - 1)} cy={y(clean[n - 1])} r={1.7} fill={C.communityLine} />
       )}
     </svg>
   );

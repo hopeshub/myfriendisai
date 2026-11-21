@@ -9,6 +9,7 @@ import {
   bodyParagraph,
 } from "../styles";
 import { CHANGELOG } from "../changelog";
+import { C } from "@/app/styles";
 
 const ABOUT_DESCRIPTION =
   "How this project tracks AI-companionship discourse on Reddit — the method, its honest limits, and the data behind it.";
@@ -69,16 +70,16 @@ const sectionHeaderStyle = sectionHeading;
 const bodyStyle = bodyParagraph;
 
 const sectionStyle: React.CSSProperties = {
-  borderLeft: "1px solid #334155",
+  borderLeft: `1px solid ${C.borderStrong}`,
   paddingLeft: 24,
 };
 
-const leadStyle: React.CSSProperties = { color: "#F1F4F8", fontWeight: 600 };
+const leadStyle: React.CSSProperties = { color: C.heading, fontWeight: 600 };
 
 // Understated landmark subhead — a standalone bold line, not a big heading.
 const subheadStyle: React.CSSProperties = {
   fontWeight: 600,
-  color: "#F1F4F8",
+  color: C.heading,
   fontSize: fontSize.base,
 };
 
@@ -99,7 +100,7 @@ export default function About() {
         >
           Tracking how AI-companion communities talk
         </h1>
-        <p style={{ ...introParagraph, color: "#9AA7B8" }}>
+        <p style={{ ...introParagraph, color: C.lead }}>
           This project follows six recurring themes in Reddit&apos;s
           AI-companion communities &mdash; romance, addiction, rupture, and three
           others &mdash; and measures how often each one surfaces in posts. The
@@ -119,20 +120,20 @@ export default function About() {
           <div
             key={stat.label}
             className="rounded-lg"
-            style={{ backgroundColor: "#1A1D27", padding: "12px 10px" }}
+            style={{ backgroundColor: C.surface2, padding: "12px 10px" }}
           >
             <div
               style={{
                 fontSize: fontSize.xl,
                 fontWeight: 500,
-                color: "#F8FAFC",
+                color: C.title,
                 fontVariantNumeric: "tabular-nums",
               }}
             >
               {stat.value}
             </div>
             {/* text-[14px] md:text-[12px]: 14px mobile font floor (server component — no useBreakpoint). */}
-            <div className="text-[14px] md:text-[12px]" style={{ color: "#9AA7B8", marginTop: 2 }}>
+            <div className="text-[14px] md:text-[12px]" style={{ color: C.lead, marginTop: 2 }}>
               {stat.label}
             </div>
           </div>
@@ -182,7 +183,7 @@ export default function About() {
                   <span style={{ color: t.color, fontWeight: 500 }}>
                     {t.label}
                   </span>
-                  <span style={{ color: "#9AA7B8" }}> &mdash; {t.tagline}</span>
+                  <span style={{ color: C.lead }}> &mdash; {t.tagline}</span>
                 </li>
               ))}
             </ul>
@@ -404,7 +405,7 @@ export default function About() {
                     listStyleType: "none",
                   }}
                 >
-                  <span style={{ color: "#7E8B9E" }} className="mr-1.5">
+                  <span style={{ color: C.caption }} className="mr-1.5">
                     &bull;
                   </span>
                   {item}
@@ -591,7 +592,7 @@ export default function About() {
           <div className="relative" style={{ paddingLeft: 24 }}>
             <div
               className="absolute top-0 bottom-0"
-              style={{ left: 5, width: 1, backgroundColor: "#1E293B" }}
+              style={{ left: 5, width: 1, backgroundColor: C.borderSoft }}
             />
             <div className="space-y-6">
               {CHANGELOG.map((entry, i) => (
@@ -603,18 +604,18 @@ export default function About() {
                       top: 4,
                       width: 9,
                       height: 9,
-                      backgroundColor: entry.recent ? "#F59E0B" : "#334155",
-                      border: "2px solid #0F1117",
+                      backgroundColor: entry.recent ? C.highlight : C.borderStrong,
+                      border: `2px solid ${C.bg}`,
                     }}
                   />
-                  <div className="text-[14px] md:text-[12px]" style={{ color: "#F59E0B", marginBottom: 2 }}>
+                  <div className="text-[14px] md:text-[12px]" style={{ color: C.highlight, marginBottom: 2 }}>
                     {entry.date}
                   </div>
                   <div
                     style={{
                       fontSize: fontSize.base,
                       fontWeight: 500,
-                      color: "#F8FAFC",
+                      color: C.title,
                       marginBottom: 6,
                     }}
                   >
@@ -627,12 +628,12 @@ export default function About() {
                         className="text-[14px] md:text-[13px]"
                         style={{
                           lineHeight: 1.6,
-                          color: "#9AA7B8",
+                          color: C.lead,
                           paddingLeft: 12,
                           listStyleType: "none",
                         }}
                       >
-                        <span style={{ color: "#7E8B9E" }} className="mr-1.5">
+                        <span style={{ color: C.caption }} className="mr-1.5">
                           &bull;
                         </span>
                         {item}
@@ -646,7 +647,7 @@ export default function About() {
           <p
             className="text-[14px] md:text-[12px]"
             style={{
-              color: "#7E8B9E",
+              color: C.caption,
               marginTop: 20,
               paddingLeft: 24,
             }}

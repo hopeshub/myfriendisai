@@ -16,6 +16,7 @@
 import AmbientChart from "./AmbientChart";
 import { loadAmbientCohort } from "./themeData";
 import { measure } from "./styles";
+import { C } from "@/app/styles";
 
 export default function AmbientSection() {
   const data = loadAmbientCohort();
@@ -28,12 +29,12 @@ export default function AmbientSection() {
         style={{
           fontSize: 13,
           lineHeight: 1.7,
-          color: "#9AA7B8",
+          color: C.lead,
           marginTop: 28,
           maxWidth: measure,
         }}
       >
-        <span style={{ color: "#F1F4F8", fontWeight: 600 }}>
+        <span style={{ color: C.heading, fontWeight: 600 }}>
           What this is and isn&apos;t.
         </span>{" "}
         Engagement, not opinion &mdash; these communities take sides about AI
