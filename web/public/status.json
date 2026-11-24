@@ -1,20 +1,20 @@
 {
-  "last_collection": "2026-11-23T16:22:15Z",
-  "posts_collected": 845,
+  "last_collection": "2026-11-24T16:19:13Z",
+  "posts_collected": 826,
   "subreddits_ok": 42,
   "subreddits_total": 42,
   "collection_succeeded": true,
   "push_succeeded": null,
-  "last_successful_push": "2026-11-22T15:25:59Z",
+  "last_successful_push": "2026-11-23T16:22:22Z",
   "consecutive_push_failures": 0,
   "last_push_error": null,
-  "last_successful_backup": "2026-11-22T22:01:24Z",
-  "run_duration_seconds": 8529,
-  "arctic_throttle_events": 229,
-  "posts_inserted": 1640,
-  "comments_collected": 13332,
-  "shells_checked": 1245,
-  "shells_recovered": 2,
+  "last_successful_backup": "2026-11-23T22:01:25Z",
+  "run_duration_seconds": 8349,
+  "arctic_throttle_events": 222,
+  "posts_inserted": 1750,
+  "comments_collected": 14376,
+  "shells_checked": 1265,
+  "shells_recovered": 1,
   "shell_refresh_requests": 13,
   "consecutive_zero_comment_runs": 0,
   "drift_backlog_files": 0,
@@ -22,8 +22,8 @@
   "shell_share_60d_pct": 28.4,
   "shell_share_max_sub": {
     "subreddit": "ChaiApp",
-    "pct": 91.3,
-    "posts": 4555
+    "pct": 91.5,
+    "posts": 4539
   },
   "shell_share_subs_over_50": [
     "ChaiApp"
