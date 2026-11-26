@@ -16,6 +16,7 @@ import {
 import { measure, themeKey } from "./styles";
 import { loadThemeData } from "./themeData";
 import EventSparkline from "./EventSparkline";
+import { C, radius } from "@/app/styles";
 
 const MONTHS = [
   "Jan", "Feb", "Mar", "Apr", "May", "Jun",
@@ -79,9 +80,9 @@ function EventCard({
   return (
     <article
       style={{
-        backgroundColor: "#15171E",
-        border: "1px solid #2A2D3A",
-        borderRadius: 8,
+        backgroundColor: C.surface,
+        border: `1px solid ${C.border}`,
+        borderRadius: radius(8),
         padding: 20,
       }}
     >
@@ -90,13 +91,13 @@ function EventCard({
         <span
           className="text-[14px] md:text-[12px]"
           style={{
-            color: "#C2974D",
+            color: C.event,
             flexShrink: 0,
           }}
         >
           {event.dateLabel}
         </span>
-        <h3 style={{ fontSize: 18, fontWeight: 600, color: "#F1F4F8" }}>
+        <h3 style={{ fontSize: 18, fontWeight: 600, color: C.heading }}>
           {event.title}
         </h3>
       </div>
@@ -109,9 +110,9 @@ function EventCard({
             <span
               key={id}
               className="inline-flex items-center gap-1.5 text-[14px] md:text-[12px]"
-              style={{ color: "#9AA7B8" }}
+              style={{ color: C.lead }}
             >
-              <span aria-hidden style={themeKey(t?.color ?? "#9AA7B8")} />
+              <span aria-hidden style={themeKey(t?.color ?? C.lead)} />
               {t?.label ?? id}
             </span>
           );
@@ -123,7 +124,7 @@ function EventCard({
         style={{
           fontSize: 14,
           lineHeight: 1.7,
-          color: "#C8D0DC",
+          color: C.body,
           marginTop: 10,
           maxWidth: measure,
         }}
@@ -137,15 +138,15 @@ function EventCard({
           <EventSparkline
             values={spark.values}
             eventIndex={spark.eventIndex}
-            color={themeMeta(event.themes[0])?.color ?? "#9AA7B8"}
+            color={themeMeta(event.themes[0])?.color ?? C.lead}
           />
           <p
             className="text-[14px] md:text-[11px]"
-            style={{ color: "#7E8B9E", marginTop: 4, lineHeight: 1.5 }}
+            style={{ color: C.caption, marginTop: 4, lineHeight: 1.5 }}
           >
             <span
               style={{
-                color: themeMeta(event.themes[0])?.color ?? "#9AA7B8",
+                color: themeMeta(event.themes[0])?.color ?? C.lead,
                 fontWeight: 600,
               }}
             >
@@ -165,10 +166,10 @@ function EventCard({
             href={redditPermalink(p)}
             target="_blank"
             rel="noopener noreferrer"
-            className="group block rounded-lg transition-colors hover:bg-[#1A1D27]"
+            className="group block rounded-lg transition-colors hover:bg-[var(--c-surface2)]"
             style={{
-              backgroundColor: "#0F1117",
-              border: "1px solid #2A2D3A",
+              backgroundColor: C.bg,
+              border: `1px solid ${C.border}`,
               padding: 14,
             }}
           >
@@ -176,7 +177,7 @@ function EventCard({
               className="line-clamp-2 text-[14px] md:text-[13px]"
               style={{
                 fontWeight: 600,
-                color: "#F1F4F8",
+                color: C.heading,
                 lineHeight: 1.4,
               }}
             >
@@ -186,7 +187,7 @@ function EventCard({
               className="font-display line-clamp-4 text-[14px] md:text-[13px]"
               style={{
                 lineHeight: 1.6,
-                color: "#9AA7B8",
+                color: C.lead,
                 marginTop: 8,
                 fontStyle: "italic",
               }}
@@ -196,14 +197,14 @@ function EventCard({
             <div
               className="text-[14px] md:text-[11px]"
               style={{
-                color: "#7E8B9E",
+                color: C.caption,
                 marginTop: 10,
                 display: "flex",
                 gap: 8,
                 flexWrap: "wrap",
               }}
             >
-              <span className="group-hover:text-[#9AA7B8] transition-colors">
+              <span className="group-hover:text-[var(--c-lead)] transition-colors">
                 r/{p.subreddit}
               </span>
               <span>·</span>

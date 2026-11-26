@@ -114,44 +114,44 @@ export default async function SubredditPage({
   return (
     <div className="max-w-[1080px] mx-auto px-4 sm:px-8 py-8">
       <div className="mb-2">
-        <Link href="/communities" className="text-sm text-[#9AA7B8] hover:text-[#F8FAFC] transition-colors">
+        <Link href="/communities" className="text-sm text-[var(--c-lead)] hover:text-[var(--c-title)] transition-colors">
           ← Communities
         </Link>
       </div>
 
       <div className="flex items-start justify-between gap-4 flex-wrap">
         <div>
-          <h1 className="font-display text-3xl font-semibold tracking-tight text-[#F8FAFC]">r/{subreddit}</h1>
+          <h1 className="font-display text-3xl font-semibold tracking-tight text-[var(--c-title)]">r/{subreddit}</h1>
           {subtitle && (
-            <p className="text-[#9AA7B8] text-sm mt-1">{subtitle}</p>
+            <p className="text-[var(--c-lead)] text-sm mt-1">{subtitle}</p>
           )}
         </div>
         <a
           href={`https://reddit.com/r/${subreddit}`}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-xs text-[#9AA7B8] hover:text-[#F8FAFC] border border-[#2A2D3A] rounded-full px-3 py-1.5 transition-colors"
+          className="text-xs text-[var(--c-lead)] hover:text-[var(--c-title)] border border-[var(--c-border)] rounded-full px-3 py-1.5 transition-colors"
         >
           View on Reddit ↗
         </a>
       </div>
 
-      <p className="text-[#9AA7B8] text-sm mt-3 max-w-2xl">
+      <p className="text-[var(--c-lead)] text-sm mt-3 max-w-2xl">
         Engagement metrics for a single community &mdash; size and activity over
         time, shown as context.
       </p>
 
       <section id="activity" className="mt-8 scroll-mt-8">
-        <p className="text-xs text-[#7E8B9E] mb-3">
+        <p className="text-xs text-[var(--c-caption)] mb-3">
           Monthly post volume
         </p>
         <CommunityActivityChart months={activity.months} values={activitySeries} />
-        <p className="text-xs text-[#7E8B9E] mt-2 max-w-2xl">
+        <p className="text-xs text-[var(--c-caption)] mt-2 max-w-2xl">
           Posts per month, from this community&apos;s first month to the last
           complete one &mdash; the longest-range view of its activity.
         </p>
         {COMMUNITY_NOTES[subreddit] && (
-          <p className="text-sm text-[#C8D0DC] mt-4 max-w-2xl border-l-2 border-[#2A2D3A] pl-3">
+          <p className="text-sm text-[var(--c-body)] mt-4 max-w-2xl border-l-2 border-[var(--c-border)] pl-3">
             {COMMUNITY_NOTES[subreddit]}
           </p>
         )}
@@ -163,7 +163,7 @@ export default async function SubredditPage({
         subscribersAsOf={metrics.subscribersAsOf[subreddit] ?? null}
       />
 
-      <p className="mt-10 text-xs text-[#7E8B9E] border-t border-[#2A2D3A] pt-4">
+      <p className="mt-10 text-xs text-[var(--c-caption)] border-t border-[var(--c-border)] pt-4">
         <strong>Subscribers and Avg score</strong> — Direct (Reddit API),
         frozen at the date shown since Reddit closed unauthenticated access in
         May 2026.{" "}

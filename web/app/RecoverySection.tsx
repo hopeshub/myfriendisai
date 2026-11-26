@@ -7,6 +7,7 @@ import RecoveryChart from "./RecoveryChart";
 import { RECOVERY_POSTS, type RecoveryPost } from "./recoveryData";
 import type { RecoveryVolumePoint } from "./themeData";
 import { measure } from "./styles";
+import { C } from "@/app/styles";
 
 const MONTHS = [
   "Jan", "Feb", "Mar", "Apr", "May", "Jun",
@@ -33,7 +34,7 @@ export default function RecoverySection({
       <p
         className="text-[14px] md:text-[12px]"
         style={{
-          color: "#7E8B9E",
+          color: C.caption,
           marginTop: 8,
           marginBottom: 28,
           maxWidth: measure,
@@ -53,10 +54,10 @@ export default function RecoverySection({
             href={permalink(p)}
             target="_blank"
             rel="noopener noreferrer"
-            className="group block rounded-lg transition-colors hover:bg-[#1A1D27]"
+            className="group block rounded-lg transition-colors hover:bg-[var(--c-surface2)]"
             style={{
-              backgroundColor: "#15171E",
-              border: "1px solid #2A2D3A",
+              backgroundColor: C.surface,
+              border: `1px solid ${C.border}`,
               padding: 14,
             }}
           >
@@ -64,7 +65,7 @@ export default function RecoverySection({
               className="line-clamp-2 text-[14px] md:text-[13px]"
               style={{
                 fontWeight: 600,
-                color: "#F1F4F8",
+                color: C.heading,
                 lineHeight: 1.4,
               }}
             >
@@ -74,7 +75,7 @@ export default function RecoverySection({
               className="font-display line-clamp-4 text-[14px] md:text-[13px]"
               style={{
                 lineHeight: 1.6,
-                color: "#9AA7B8",
+                color: C.lead,
                 marginTop: 8,
                 fontStyle: "italic",
               }}
@@ -84,14 +85,14 @@ export default function RecoverySection({
             <div
               className="text-[14px] md:text-[11px]"
               style={{
-                color: "#7E8B9E",
+                color: C.caption,
                 marginTop: 10,
                 display: "flex",
                 gap: 8,
                 flexWrap: "wrap",
               }}
             >
-              <span className="group-hover:text-[#94A3B8] transition-colors">
+              <span className="group-hover:text-[var(--c-leadAlt)] transition-colors">
                 r/{p.subreddit}
               </span>
               <span>·</span>
@@ -111,11 +112,11 @@ export default function RecoverySection({
         className="text-[14px] md:text-[13px]"
         style={{
           lineHeight: 1.7,
-          color: "#9AA7B8",
+          color: C.lead,
           maxWidth: measure,
         }}
       >
-        <span style={{ color: "#F1F4F8", fontWeight: 600 }}>
+        <span style={{ color: C.heading, fontWeight: 600 }}>
           A note on scale.
         </span>{" "}
         These are small communities &mdash; together a few thousand posts a

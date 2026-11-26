@@ -14,6 +14,7 @@ import MeasuredChart from "@/app/MeasuredChart";
 import type { RecoveryVolumePoint } from "./themeData";
 import { RECOVERY_COMMUNITIES, RECOVERY_EVENTS } from "./recoveryData";
 import { usePrefersReducedMotion } from "@/lib/usePrefersReducedMotion";
+import { C, radius } from "@/app/styles";
 
 // Stacked monthly post volume across the two genuine recovery communities,
 // with minimalist Character.AI-specific event markers. The shape — flat near
@@ -74,7 +75,7 @@ export default function RecoveryChart({
     return (
       <div
         style={{ height: 220 }}
-        className="flex items-center justify-center text-sm text-[#7E8B9E]"
+        className="flex items-center justify-center text-sm text-[var(--c-caption)]"
       >
         No recovery-community data yet.
       </div>
@@ -88,7 +89,7 @@ export default function RecoveryChart({
     <div>
       <div
         className="flex flex-wrap gap-x-4 gap-y-1"
-        style={{ fontSize: 12, color: "#94A3B8", marginBottom: 8 }}
+        style={{ fontSize: 12, color: C.leadAlt, marginBottom: 8 }}
       >
         {RECOVERY_COMMUNITIES.map((rc) => (
           <span key={rc.sub}>
@@ -102,7 +103,7 @@ export default function RecoveryChart({
           and never clip or collide the way inline label text would. */}
       <div
         className="flex flex-wrap gap-x-4 gap-y-1"
-        style={{ fontSize: 12, color: "#7E8B9E", marginBottom: 10 }}
+        style={{ fontSize: 12, color: C.caption, marginBottom: 10 }}
       >
         <span style={{ fontSize: 11 }}>
           Events
@@ -123,13 +124,13 @@ export default function RecoveryChart({
                 borderRadius: 999,
                 fontSize: 10,
                 fontWeight: 700,
-                color: "#0F1117",
-                backgroundColor: "#C2974D",
+                color: C.bg,
+                backgroundColor: C.event,
               }}
             >
               {i + 1}
             </span>
-            <span style={{ color: "#C8D0DC" }}>{ev.label}</span>
+            <span style={{ color: C.body }}>{ev.label}</span>
             <span>{fmtMonth(ev.date)}</span>
           </span>
         ))}
@@ -150,7 +151,7 @@ export default function RecoveryChart({
           >
             <CartesianGrid
               strokeDasharray="3 3"
-              stroke="#2A2D3A"
+              stroke={C.grid}
               vertical={false}
             />
             <XAxis
@@ -158,15 +159,15 @@ export default function RecoveryChart({
               ticks={yearTicks}
               interval={0}
               tickFormatter={(m: string) => m.slice(0, 4)}
-              stroke="#2A2D3A"
-              tick={{ fill: "#7E8B9E", fontSize: 11 }}
+              stroke={C.grid}
+              tick={{ fill: C.caption, fontSize: 11 }}
               tickLine={false}
-              axisLine={{ stroke: "#2A2D3A" }}
+              axisLine={{ stroke: C.grid }}
             />
             <YAxis
               width={36}
               stroke="transparent"
-              tick={{ fill: "#7E8B9E", fontSize: 11 }}
+              tick={{ fill: C.caption, fontSize: 11 }}
               tickLine={false}
               axisLine={false}
               allowDecimals={false}
@@ -174,7 +175,7 @@ export default function RecoveryChart({
             <Tooltip
               animationDuration={140}
               animationEasing="ease-out"
-              cursor={{ stroke: "#475569", strokeWidth: 1 }}
+              cursor={{ stroke: C.cursor, strokeWidth: 1 }}
               content={({ active, payload, label }) => {
                 if (!active || !payload?.length) return null;
                 const total = payload.reduce(
@@ -185,15 +186,15 @@ export default function RecoveryChart({
                 return (
                   <div
                     style={{
-                      backgroundColor: "#0F1117",
-                      border: "1px solid #2A2D3A",
-                      borderRadius: 6,
+                      backgroundColor: C.bg,
+                      border: `1px solid ${C.grid}`,
+                      borderRadius: radius(6),
                       padding: "6px 9px",
                       fontSize: 11,
                       lineHeight: 1.6,
                     }}
                   >
-                    <div style={{ color: "#94A3B8", marginBottom: 2 }}>
+                    <div style={{ color: C.leadAlt, marginBottom: 2 }}>
                       {fmtMonth(label as string)}
                     </div>
                     {tooltipOrder.map((rc) => {
@@ -201,16 +202,16 @@ export default function RecoveryChart({
                         (payload.find((p) => p.dataKey === rc.sub)
                           ?.value as number) ?? 0;
                       return (
-                        <div key={rc.sub} style={{ color: "#CBD5E1" }}>
+                        <div key={rc.sub} style={{ color: C.body2 }}>
                           <Swatch color={rc.color} />
                           {rc.label}&nbsp;&nbsp;
-                          <span style={{ color: "#F8FAFC", fontWeight: 600 }}>
+                          <span style={{ color: C.title, fontWeight: 600 }}>
                             {v.toLocaleString()}
                           </span>
                         </div>
                       );
                     })}
-                    <div style={{ color: "#7E8B9E", marginTop: 2 }}>
+                    <div style={{ color: C.caption, marginTop: 2 }}>
                       total {total.toLocaleString()} posts
                     </div>
                   </div>
@@ -240,14 +241,14 @@ export default function RecoveryChart({
               <ReferenceLine
                 key={ev.date}
                 x={ev.date}
-                stroke="#C2974D"
+                stroke={C.event}
                 strokeOpacity={0.55}
                 strokeDasharray="4 3"
                 strokeWidth={1}
                 label={{
                   value: String(i + 1),
                   position: "top",
-                  fill: "#D4A862",
+                  fill: C.eventText,
                   fontSize: 11,
                   fontWeight: 700,
                 }}

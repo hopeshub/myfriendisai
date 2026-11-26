@@ -12,6 +12,7 @@ import {
 import MeasuredChart from "@/app/MeasuredChart";
 import { fromFirstActiveMonth } from "@/lib/metrics";
 import { usePrefersReducedMotion } from "@/lib/usePrefersReducedMotion";
+import { C, radius } from "@/app/styles";
 
 // ── Community activity chart ─────────────────────────────────────────────────
 // The full-size version of the Communities-table sparkline: one community's
@@ -69,7 +70,7 @@ export default function CommunityActivityChart({
     return (
       <div
         style={{ height: 200 }}
-        className="flex items-center justify-center text-sm text-[#7E8B9E]"
+        className="flex items-center justify-center text-sm text-[var(--c-caption)]"
       >
         No monthly post data for this community yet.
       </div>
@@ -92,31 +93,31 @@ export default function CommunityActivityChart({
         >
           <defs>
             <linearGradient id="community-activity" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="#7C9CD0" stopOpacity={0.5} />
-              <stop offset="100%" stopColor="#7C9CD0" stopOpacity={0.04} />
+              <stop offset="0%" stopColor={C.communityLine} stopOpacity={0.5} />
+              <stop offset="100%" stopColor={C.communityLine} stopOpacity={0.04} />
             </linearGradient>
           </defs>
-          <CartesianGrid strokeDasharray="3 3" stroke="#2A2D3A" vertical={false} />
+          <CartesianGrid strokeDasharray="3 3" stroke={C.grid} vertical={false} />
           <XAxis
             dataKey="month"
             ticks={yearTicks}
             interval={0}
             tickFormatter={(m: string) => m.slice(0, 4)}
-            stroke="#2A2D3A"
-            tick={{ fill: "#7E8B9E", fontSize: 11 }}
+            stroke={C.grid}
+            tick={{ fill: C.caption, fontSize: 11 }}
             tickLine={false}
-            axisLine={{ stroke: "#2A2D3A" }}
+            axisLine={{ stroke: C.grid }}
           />
           <YAxis
             width={44}
             stroke="transparent"
-            tick={{ fill: "#7E8B9E", fontSize: 11 }}
+            tick={{ fill: C.caption, fontSize: 11 }}
             tickLine={false}
             axisLine={false}
             tickFormatter={fmtCount}
           />
           <Tooltip
-            cursor={{ stroke: "#475569", strokeWidth: 1 }}
+            cursor={{ stroke: C.cursor, strokeWidth: 1 }}
             animationDuration={140}
             animationEasing="ease-out"
             content={({ active, payload, label }) => {
@@ -126,22 +127,22 @@ export default function CommunityActivityChart({
               return (
                 <div
                   style={{
-                    backgroundColor: "#0F1117",
-                    border: "1px solid #2A2D3A",
-                    borderRadius: 6,
+                    backgroundColor: C.bg,
+                    border: `1px solid ${C.grid}`,
+                    borderRadius: radius(6),
                     padding: "4px 8px",
                     fontSize: 11,
                     whiteSpace: "nowrap",
                   }}
                 >
-                  <span style={{ color: "#9AA7B8" }}>
+                  <span style={{ color: C.lead }}>
                     {fmtMonth(label as string)}
                   </span>
-                  <span style={{ color: "#9AA7B8" }}>{"  ·  "}</span>
-                  <span style={{ color: "#F1F4F8", fontWeight: 600 }}>
+                  <span style={{ color: C.lead }}>{"  ·  "}</span>
+                  <span style={{ color: C.heading, fontWeight: 600 }}>
                     {(payload[0].value as number).toLocaleString()}
                   </span>
-                  <span style={{ color: "#9AA7B8" }}> posts</span>
+                  <span style={{ color: C.lead }}> posts</span>
                 </div>
               );
             }}
@@ -149,10 +150,10 @@ export default function CommunityActivityChart({
           <Area
             type="monotone"
             dataKey="value"
-            stroke="#7C9CD0"
+            stroke={C.communityLine}
             strokeWidth={2}
             fill="url(#community-activity)"
-            activeDot={{ r: 4, fill: "#7C9CD0", stroke: "#7C9CD0" }}
+            activeDot={{ r: 4, fill: C.communityLine, stroke: C.communityLine }}
             isAnimationActive={!reducedMotion}
             animationDuration={700}
             animationEasing="ease-out"
