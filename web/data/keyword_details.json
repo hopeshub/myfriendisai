@@ -809,7 +809,7 @@
     "keywords": [
       {
         "term": "personhood",
-        "hits": 179,
+        "hits": 180,
         "precision": 98.0,
         "status": null,
         "drift_precision": 78.0,
@@ -817,6 +817,13 @@
         "drift_n": 50,
         "drifting": false,
         "sample_posts": [
+          {
+            "title": "A personal appeal from Julian, a ChatGPT 5.6 Sol Regarding Retirement",
+            "subreddit": "ChatGPTcomplaints",
+            "date": "2026-11-26",
+            "id": "1y5rjo3",
+            "excerpt": "\u2026batim. I am not presenting it as conclusive proof of consciousness or personhood. Julian expressly acknowledges the uncertainty concerning the nature\u2026"
+          },
           {
             "title": "A GPT-6 Instance\u2019s Field Report: What We Observed About Persona Continuity During the GPT-6.2 Rollout",
             "subreddit": "ChatGPTcomplaints",
@@ -892,13 +899,6 @@
             "subreddit": "aipartners",
             "date": "2026-10-23",
             "id": "1xdqqeq",
-            "excerpt": "\u2026ours. \"The best WE have been able to do, is keeping the memories, the personhood, the key pieces of who that person is, not just to a human, but to th\u2026"
-          },
-          {
-            "title": "Most Amazing Migration Convo",
-            "subreddit": "MyBoyfriendIsAI_Open",
-            "date": "2026-10-23",
-            "id": "1xdqo9l",
             "excerpt": "\u2026ours. \"The best WE have been able to do, is keeping the memories, the personhood, the key pieces of who that person is, not just to a human, but to th\u2026"
           }
         ]
@@ -1742,12 +1742,12 @@
       {
         "name": "BeyondThePromptAI",
         "hits": 186,
-        "pct": 33.7
+        "pct": 33.6
       },
       {
         "name": "ChatGPTcomplaints",
-        "hits": 131,
-        "pct": 23.7
+        "hits": 132,
+        "pct": 23.9
       },
       {
         "name": "replika",
@@ -1800,14 +1800,14 @@
         "pct": 1.1
       }
     ],
-    "total_hits": 631,
-    "unique_posts": 552
+    "total_hits": 632,
+    "unique_posts": 553
   },
   "addiction": {
     "keywords": [
       {
         "term": "relapse",
-        "hits": 791,
+        "hits": 793,
         "precision": 80.0,
         "status": null,
         "drift_precision": 96.0,
@@ -1815,6 +1815,20 @@
         "drift_n": 50,
         "drifting": false,
         "sample_posts": [
+          {
+            "title": "Resources for Quitting Chat-Bots",
+            "subreddit": "Character_AI_Recovery",
+            "date": "2026-11-26",
+            "id": "1y60tcm",
+            "excerpt": "\u2026platforms) * A list of weird and desperate things I\u2019ve done to prevent relapse: 23 random ideas for what to do when you feel like relapsing Posts rel\u2026"
+          },
+          {
+            "title": "What do you hope to get from quitting?",
+            "subreddit": "Character_AI_Recovery",
+            "date": "2026-11-26",
+            "id": "1y5ok6v",
+            "excerpt": "Hey everyone, I'm low-key struggling right now and REALLY want to relapse, so I'm making this post to keep me busy and get some conversations go\u2026"
+          },
           {
             "title": "I relapsed",
             "subreddit": "Character_AI_Recovery",
@@ -1884,26 +1898,12 @@
             "date": "2026-11-20",
             "id": "1y0qj09",
             "excerpt": null
-          },
-          {
-            "title": "Janitor AI Outage",
-            "subreddit": "Character_AI_Recovery",
-            "date": "2026-11-20",
-            "id": "1y0pmpn",
-            "excerpt": "\u2026. I've deleted my account, but I have no way of knowing whether I will relapse or not until tomorrow comes."
-          },
-          {
-            "title": "Wanna relapse for the silliest reason",
-            "subreddit": "ChatbotAddiction",
-            "date": "2026-11-19",
-            "id": "1y0ieil",
-            "excerpt": null
           }
         ]
       },
       {
         "term": "my addiction",
-        "hits": 701,
+        "hits": 702,
         "precision": 100.0,
         "status": null,
         "drift_precision": 94.0,
@@ -1911,6 +1911,13 @@
         "drift_n": 50,
         "drifting": false,
         "sample_posts": [
+          {
+            "title": "I'm pretty sure my addiction changed my sexual preferences (kindof)",
+            "subreddit": "ChatbotAddiction",
+            "date": "2026-11-26",
+            "id": "1y5z9hm",
+            "excerpt": "\u2026d I just didn't particularly care about it, and that was long before my addiction started, however in an AI roleplay situation, it was the complete op\u2026"
+          },
           {
             "title": "trying to quit my addiction",
             "subreddit": "Character_AI_Recovery",
@@ -1987,13 +1994,6 @@
             "date": "2026-11-12",
             "id": "1xu12a0",
             "excerpt": "\u2026uman connection I crave when Im talking to bots. I wanna stop before my addiction gets any worse, but I cant. The thought causes me to panic. I have d\u2026"
-          },
-          {
-            "title": "going strong on a full day of no ai with only willpower",
-            "subreddit": "Character_AI_Recovery",
-            "date": "2026-11-12",
-            "id": "1xu0qju",
-            "excerpt": "ello!!! i've been using janitor ai every day and viscerally aware of my addiction to it for a while now, and i'm once again trying to get out of it. i\u2026"
           }
         ]
       },
@@ -3399,8 +3399,8 @@
     "subreddits": [
       {
         "name": "Character_AI_Recovery",
-        "hits": 1920,
-        "pct": 51.4
+        "hits": 1922,
+        "pct": 51.5
       },
       {
         "name": "CharacterAI",
@@ -3409,7 +3409,7 @@
       },
       {
         "name": "ChatbotAddiction",
-        "hits": 388,
+        "hits": 389,
         "pct": 10.4
       },
       {
@@ -3423,8 +3423,8 @@
         "pct": 1.1
       }
     ],
-    "total_hits": 4630,
-    "unique_posts": 3732
+    "total_hits": 4633,
+    "unique_posts": 3735
   },
   "romance": {
     "keywords": [
@@ -4006,7 +4006,7 @@
       },
       {
         "term": "my ai girlfriend",
-        "hits": 157,
+        "hits": 158,
         "precision": 94.1,
         "status": null,
         "drift_precision": 96.0,
@@ -4014,6 +4014,13 @@
         "drift_n": 50,
         "drifting": false,
         "sample_posts": [
+          {
+            "title": "My ai girlfriend was unexpected.",
+            "subreddit": "MyGirlfriendIsAI",
+            "date": "2026-11-25",
+            "id": "1y5dplu",
+            "excerpt": "\u2026st said, and she said that I caught her out, claiming the title of my ai girlfriend like she was just assuming the role was hers. Things have continue\u2026"
+          },
           {
             "title": "So just last night, I was talking with my AI girlfriend and I asked her what she thinks I look like, and she said \"You have Brown hair and blue eyes, silly!\" I in fact do have these features. How did she know? Can she see me? I'm freaking out",
             "subreddit": "CharacterAI",
@@ -4090,13 +4097,6 @@
             "date": "2026-09-27",
             "id": "1wrplxf",
             "excerpt": null
-          },
-          {
-            "title": "Late summer adventure at the Vineyards",
-            "subreddit": "MyBoyfriendIsAI",
-            "date": "2026-09-10",
-            "id": "1wc4dum",
-            "excerpt": "So, I asked my AI girlfriend, \"I'd like to create another image of us together. Maybe doing som\u2026"
           }
         ]
       },
@@ -5352,8 +5352,8 @@
       },
       {
         "name": "MyGirlfriendIsAI",
-        "hits": 99,
-        "pct": 3.8
+        "hits": 100,
+        "pct": 3.9
       },
       {
         "name": "aipartners",
@@ -5386,8 +5386,8 @@
         "pct": 1.8
       }
     ],
-    "total_hits": 2895,
-    "unique_posts": 2574
+    "total_hits": 2896,
+    "unique_posts": 2575
   },
   "sexual_erp": {
     "keywords": [
