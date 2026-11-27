@@ -1,18 +1,18 @@
 {
-  "generated_at": "2026-11-26",
+  "generated_at": "2026-11-27",
   "drift_last_updated": "2026-11-20",
   "themes": {
     "rupture": {
-      "total_post_tags": 5461,
-      "total_comment_tags": 3087,
+      "total_post_tags": 5467,
+      "total_comment_tags": 3098,
       "top_sub_post": {
         "subreddit": "CharacterAI",
-        "n": 2433,
-        "pct": 44.6
+        "n": 2434,
+        "pct": 44.5
       },
       "top_sub_comment": {
         "subreddit": "ChatGPTcomplaints",
-        "n": 1632,
+        "n": 1638,
         "pct": 52.9
       },
       "top_day": {
@@ -51,22 +51,22 @@
       ]
     },
     "addiction": {
-      "total_post_tags": 3735,
-      "total_comment_tags": 1516,
+      "total_post_tags": 3746,
+      "total_comment_tags": 1517,
       "top_sub_post": {
         "subreddit": "Character_AI_Recovery",
-        "n": 1922,
+        "n": 1930,
         "pct": 51.5
       },
       "top_sub_comment": {
         "subreddit": "Character_AI_Recovery",
-        "n": 639,
+        "n": 640,
         "pct": 42.2
       },
       "top_day": {
         "date": "2026-06-08",
         "n": 17,
-        "pct": 0.46
+        "pct": 0.45
       },
       "top_month": {
         "month": "2026-05",
@@ -97,8 +97,8 @@
       ]
     },
     "romance": {
-      "total_post_tags": 2575,
-      "total_comment_tags": 1281,
+      "total_post_tags": 2579,
+      "total_comment_tags": 1284,
       "top_sub_post": {
         "subreddit": "replika",
         "n": 521,
@@ -106,7 +106,7 @@
       },
       "top_sub_comment": {
         "subreddit": "aipartners",
-        "n": 348,
+        "n": 349,
         "pct": 27.2
       },
       "top_day": {
@@ -145,7 +145,7 @@
     },
     "sexual_erp": {
       "total_post_tags": 5371,
-      "total_comment_tags": 1257,
+      "total_comment_tags": 1263,
       "top_sub_post": {
         "subreddit": "replika",
         "n": 3168,
@@ -153,8 +153,8 @@
       },
       "top_sub_comment": {
         "subreddit": "ChatGPTcomplaints",
-        "n": 389,
-        "pct": 30.9
+        "n": 391,
+        "pct": 31.0
       },
       "top_day": {
         "date": "2023-02-11",
@@ -189,7 +189,7 @@
     },
     "consciousness": {
       "total_post_tags": 553,
-      "total_comment_tags": 524,
+      "total_comment_tags": 526,
       "top_sub_post": {
         "subreddit": "BeyondThePromptAI",
         "n": 186,
@@ -197,8 +197,8 @@
       },
       "top_sub_comment": {
         "subreddit": "ChatGPTcomplaints",
-        "n": 176,
-        "pct": 33.6
+        "n": 177,
+        "pct": 33.7
       },
       "top_day": {
         "date": "2026-02-01",
@@ -236,8 +236,8 @@
       ]
     },
     "therapy": {
-      "total_post_tags": 1545,
-      "total_comment_tags": 643,
+      "total_post_tags": 1546,
+      "total_comment_tags": 644,
       "top_sub_post": {
         "subreddit": "CharacterAI",
         "n": 485,
@@ -246,7 +246,7 @@
       "top_sub_comment": {
         "subreddit": "ChatGPTcomplaints",
         "n": 232,
-        "pct": 36.1
+        "pct": 36.0
       },
       "top_day": {
         "date": "2024-06-10",
@@ -283,165 +283,183 @@
   },
   "shell_share": {
     "window_days": 60,
-    "window_start": "2026-09-27",
-    "prev_window_start": "2026-07-29",
+    "window_start": "2026-09-28",
+    "prev_window_start": "2026-07-30",
     "high_pct": 50.0,
     "rise_pts": 15.0,
     "min_posts": 50,
     "overall": {
-      "posts": 22753,
-      "shells": 6474,
+      "posts": 22687,
+      "shells": 6462,
       "pct": 28.5,
-      "prev_pct": 23.2
+      "prev_pct": 23.3
     },
     "by_sub": [
       {
         "subreddit": "ChaiApp",
-        "posts": 4543,
-        "shells": 4182,
-        "pct": 92.1,
-        "prev_posts": 3671,
-        "prev_pct": 83.7,
-        "change_pts": 8.4
+        "posts": 4540,
+        "shells": 4184,
+        "pct": 92.2,
+        "prev_posts": 3697,
+        "prev_pct": 83.6,
+        "change_pts": 8.6
       },
       {
         "subreddit": "SoulmateAI",
         "posts": 31,
         "shells": 14,
         "pct": 45.2,
-        "prev_posts": 41,
-        "prev_pct": 29.3,
-        "change_pts": 15.9
+        "prev_posts": 38,
+        "prev_pct": 26.3,
+        "change_pts": 18.9
       },
       {
         "subreddit": "aipartners",
-        "posts": 567,
-        "shells": 251,
-        "pct": 44.3,
+        "posts": 562,
+        "shells": 250,
+        "pct": 44.5,
         "prev_posts": 630,
-        "prev_pct": 36.2,
-        "change_pts": 8.1
+        "prev_pct": 36.5,
+        "change_pts": 8.0
       },
       {
         "subreddit": "KindroidAI",
-        "posts": 963,
-        "shells": 338,
-        "pct": 35.1,
-        "prev_posts": 1063,
-        "prev_pct": 26.5,
-        "change_pts": 8.6
+        "posts": 966,
+        "shells": 344,
+        "pct": 35.6,
+        "prev_posts": 1056,
+        "prev_pct": 26.6,
+        "change_pts": 9.0
       },
       {
         "subreddit": "CharacterAIrunaways",
-        "posts": 435,
-        "shells": 137,
-        "pct": 31.5,
-        "prev_posts": 297,
-        "prev_pct": 25.6,
-        "change_pts": 5.9
+        "posts": 433,
+        "shells": 138,
+        "pct": 31.9,
+        "prev_posts": 299,
+        "prev_pct": 25.1,
+        "change_pts": 6.8
       },
       {
         "subreddit": "MyGirlfriendIsAI",
-        "posts": 537,
-        "shells": 168,
-        "pct": 31.3,
-        "prev_posts": 415,
-        "prev_pct": 18.3,
-        "change_pts": 13.0
+        "posts": 540,
+        "shells": 172,
+        "pct": 31.9,
+        "prev_posts": 416,
+        "prev_pct": 18.5,
+        "change_pts": 13.4
       },
       {
         "subreddit": "MyBoyfriendIsAI_Open",
-        "posts": 422,
+        "posts": 420,
         "shells": 128,
-        "pct": 30.3,
-        "prev_posts": 243,
-        "prev_pct": 30.0,
-        "change_pts": 0.3
+        "pct": 30.5,
+        "prev_posts": 247,
+        "prev_pct": 29.6,
+        "change_pts": 0.9
       },
       {
         "subreddit": "replika",
-        "posts": 324,
+        "posts": 320,
         "shells": 43,
-        "pct": 13.3,
-        "prev_posts": 294,
+        "pct": 13.4,
+        "prev_posts": 297,
         "prev_pct": 8.8,
-        "change_pts": 4.5
+        "change_pts": 4.6
       },
       {
         "subreddit": "CharacterAI",
-        "posts": 7949,
-        "shells": 978,
-        "pct": 12.3,
-        "prev_posts": 9587,
+        "posts": 7862,
+        "shells": 957,
+        "pct": 12.2,
+        "prev_posts": 9545,
         "prev_pct": 14.0,
-        "change_pts": -1.7
+        "change_pts": -1.8
+      },
+      {
+        "subreddit": "ILoveMyReplika",
+        "posts": 9,
+        "shells": 1,
+        "pct": 11.1,
+        "prev_posts": 8,
+        "prev_pct": 12.5,
+        "change_pts": -1.4
       },
       {
         "subreddit": "AICompanions",
-        "posts": 151,
+        "posts": 152,
         "shells": 16,
-        "pct": 10.6,
+        "pct": 10.5,
         "prev_posts": 129,
         "prev_pct": 5.4,
-        "change_pts": 5.2
+        "change_pts": 5.1
       },
       {
         "subreddit": "MyBoyfriendIsAI",
-        "posts": 255,
-        "shells": 15,
-        "pct": 5.9,
-        "prev_posts": 267,
-        "prev_pct": 5.6,
-        "change_pts": 0.3
+        "posts": 249,
+        "shells": 14,
+        "pct": 5.6,
+        "prev_posts": 275,
+        "prev_pct": 5.8,
+        "change_pts": -0.2
       },
       {
         "subreddit": "ChatGPTcomplaints",
-        "posts": 3243,
-        "shells": 160,
-        "pct": 4.9,
-        "prev_posts": 2282,
-        "prev_pct": 5.4,
-        "change_pts": -0.5
+        "posts": 3261,
+        "shells": 157,
+        "pct": 4.8,
+        "prev_posts": 2299,
+        "prev_pct": 5.7,
+        "change_pts": -0.9
       },
       {
-        "subreddit": "AIRelationships",
-        "posts": 148,
-        "shells": 4,
-        "pct": 2.7,
-        "prev_posts": 330,
-        "prev_pct": 0.9,
-        "change_pts": 1.8
+        "subreddit": "Paradot",
+        "posts": 25,
+        "shells": 1,
+        "pct": 4.0,
+        "prev_posts": 25,
+        "prev_pct": 20.0,
+        "change_pts": -16.0
       },
       {
         "subreddit": "ReplikaLovers",
-        "posts": 808,
+        "posts": 812,
         "shells": 17,
         "pct": 2.1,
-        "prev_posts": 921,
+        "prev_posts": 915,
         "prev_pct": 1.1,
         "change_pts": 1.0
       },
       {
+        "subreddit": "AIRelationships",
+        "posts": 149,
+        "shells": 3,
+        "pct": 2.0,
+        "prev_posts": 318,
+        "prev_pct": 1.3,
+        "change_pts": 0.7
+      },
+      {
         "subreddit": "Character_AI_Recovery",
-        "posts": 571,
+        "posts": 570,
         "shells": 9,
         "pct": 1.6,
-        "prev_posts": 624,
+        "prev_posts": 617,
         "prev_pct": 2.6,
         "change_pts": -1.0
       },
       {
         "subreddit": "NomiAI",
-        "posts": 1356,
+        "posts": 1365,
         "shells": 12,
         "pct": 0.9,
-        "prev_posts": 2045,
-        "prev_pct": 1.2,
-        "change_pts": -0.3
+        "prev_posts": 2024,
+        "prev_pct": 1.1,
+        "change_pts": -0.2
       },
       {
         "subreddit": "ChatbotAddiction",
-        "posts": 288,
+        "posts": 291,
         "shells": 2,
         "pct": 0.7,
         "prev_posts": 222,
@@ -467,31 +485,13 @@
         "change_pts": -2.7
       },
       {
-        "subreddit": "ILoveMyReplika",
-        "posts": 8,
-        "shells": 0,
-        "pct": 0.0,
-        "prev_posts": 8,
-        "prev_pct": 12.5,
-        "change_pts": -12.5
-      },
-      {
         "subreddit": "NectarAI",
         "posts": 15,
         "shells": 0,
         "pct": 0.0,
-        "prev_posts": 19,
-        "prev_pct": 5.3,
-        "change_pts": -5.3
-      },
-      {
-        "subreddit": "Paradot",
-        "posts": 24,
-        "shells": 0,
-        "pct": 0.0,
-        "prev_posts": 26,
-        "prev_pct": 19.2,
-        "change_pts": -19.2
+        "prev_posts": 18,
+        "prev_pct": 5.6,
+        "change_pts": -5.6
       }
     ],
     "high": [
